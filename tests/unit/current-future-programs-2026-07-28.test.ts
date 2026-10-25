@@ -10,6 +10,8 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import { selectPublishedData } from '@/lib/data/publication'
+import { selectDiscoveryData } from '@/lib/data/discovery'
+import { identityAcceptanceLedgerSchema, identityFingerprint } from '@/lib/data/identity-acceptance'
 import { bundleSchema } from '@/lib/data/schema'
 
 const data = bundleSchema.parse({
@@ -36,6 +38,27 @@ const expandedProgramIds = [
   'program-bfsu-iclt-one-semester-spring-2027',
 ] as const
 
+const REVERIFIED_DHU_PROGRAM_ID = 'program-dhu-winter-chinese-2027'
+const REVERIFIED_DHU_SOURCE_IDS = [
+  'src-dhu-winter-chinese-2027',
+  'source-dhu-language-pedagogy-20261019',
+  'source-dhu-current-language-index-20261019',
+]
+// The newly reviewed awards intentionally omit links to these still-stale routes.
+// Keep their old fee assertions scoped to the original programme identities.
+const REVERIFIED_SCHOLARSHIPS = new Map([
+  ['scholarship-snnu-iclt-one-semester-spring-2027', {
+    universityId: 'uni-shaanxi-normal-university',
+    historicalProgramId: 'program-snnu-iclt-one-semester-spring-2027',
+    sourceId: 'source-snnu-iclt-spring2027-fresh-20261019',
+  }],
+  ['scholarship-blcu-iclt-one-semester-spring-2027', {
+    universityId: 'uni-beijing-language-and-culture-university',
+    historicalProgramId: 'program-blcu-iclt-one-semester-spring-2027',
+    sourceId: 'source-blcu-iclt-spring2027-fresh-20261019',
+  }],
+])
+
 describe('current future program expansion on 2026-07-28', () => {
   it('retains twelve grounded historical identities without publishing expired reviews', () => {
     const published = selectPublishedData(data, '2026-10-19')
@@ -44,8 +67,19 @@ describe('current future program expansion on 2026-07-28', () => {
     for (const id of expandedProgramIds) {
       const program = data.programs.find((item) => item.id === id)
       expect(program, id).toBeDefined()
-      expect(program?.status, id).toBe('stale')
-      expect(publishedIds.has(id), id).toBe(false)
+      if (id === REVERIFIED_DHU_PROGRAM_ID) {
+        expect(program?.status, id).toBe('verified')
+        expect(program?.verifiedAt, id).toBe('2026-10-19')
+        expect(program?.reviewAfter, id).toBe('2026-10-26')
+        expect(program?.sourceIds, id).toEqual(REVERIFIED_DHU_SOURCE_IDS)
+        expect(publishedIds.has(id), id).toBe(true)
+        expect(selectPublishedData(data, '2026-10-27').programs.some((item) => item.id === id))
+          .toBe(false)
+      } else {
+        expect(program?.status, id).toBe('stale')
+        expect(publishedIds.has(id), id).toBe(false)
+        expect(program?.name.ru).toBeTruthy()
+      }
       expect(
         data.sources.some(
           (source) => source.official
@@ -57,7 +91,6 @@ describe('current future program expansion on 2026-07-28', () => {
       ).toBe(true)
       expect(program?.name.en).toBeTruthy()
       expect(program?.name.zh).toBeTruthy()
-      expect(program?.name.ru).toBeTruthy()
     }
   })
 
@@ -99,12 +132,15 @@ describe('current future program expansion on 2026-07-28', () => {
       (item) => item.id === 'cycle-dhu-winter-chinese-2027',
     )
     expect(dhu).toMatchObject({
-      opensOn: '2026-07-10',
+      // July 10 is the brochure publication date, not an announced opening date.
+      opensOn: null,
       closesOn: '2026-11-30',
       tuitionCny: 3600,
       tuitionPeriod: 'program',
       applicationFeeCny: 600,
       evidenceBasis: 'cycle-specific',
+      verifiedAt: '2026-10-19',
+      sourceIds: REVERIFIED_DHU_SOURCE_IDS,
     })
   })
 
@@ -154,7 +190,14 @@ describe('current future program expansion on 2026-07-28', () => {
     }
   })
 
-  it('publishes nine school-specific future scholarships without treating coverage as list-price tuition', () => {
+  it('retains accepted award identities while hiding expired funding facts and preserving historical coverage separately from list-price tuition', () => {
+    const today = '2026-10-24'
+    const ledger = identityAcceptanceLedgerSchema.parse(JSON.parse(readFileSync(
+      resolve('content/data/identity-acceptances.json'), 'utf8',
+    )))
+    const before = JSON.stringify(data.scholarships)
+    const directory = selectDiscoveryData(data, today, ledger.entries)
+    const currentIds = new Set(selectPublishedData(data, today).scholarships.map(item => item.id))
     const octoberScholarshipIds = new Set([
       'scholarship-xmu-iclt-one-semester-spring-2027',
       'scholarship-xju-iclt-one-semester-spring-2027',
@@ -176,21 +219,50 @@ describe('current future program expansion on 2026-07-28', () => {
     expect(bfsu?.deadline).toBe('2026-12-30')
 
     for (const item of [...futureScholarships, bfsu!]) {
+      expect(item.reviewAfter < today, item.id).toBe(true)
+      expect(currentIds.has(item.id), item.id).toBe(false)
+      // Original official funding terms remain in the historical record. They
+      // neither become a current award offer nor imply zero list-price tuition.
       expect(item.coverage).toEqual({
         tuition: 'full',
         accommodation: 'full',
         insurance: true,
         stipendCnyPerMonth: 2500,
       })
+      const reverified = REVERIFIED_SCHOLARSHIPS.get(item.id)
+      const identity = directory.scholarships.find(candidate => candidate.id === item.id)
+      if (reverified) {
+        expect(item.status, item.id).toBe('stale')
+        expect(item.verifiedAt, item.id).toBe('2026-10-19')
+        expect(item.reviewAfter, item.id).toBe('2026-10-22')
+        expect(item.universityIds, item.id).toEqual([reverified.universityId])
+        expect(item.programIds, item.id).toEqual([])
+        expect(item.sourceIds, item.id).toContain(reverified.sourceId)
+        const acceptance = ledger.entries.find(entry => entry.entityType === 'scholarship' && entry.recordId === item.id)
+        expect(acceptance, item.id).toMatchObject({ identitySha256: identityFingerprint('scholarship', item) })
+        expect(identity, item.id).toMatchObject({ id: item.id, slug: item.slug, name: item.name, status: 'stale',
+          verifiedAt: item.verifiedAt, reviewAfter: item.reviewAfter,
+          coverage: { tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null },
+          deadline: null, applicationUrl: null, summary: null, programIds: [],
+          discovery: { identityAcceptedAt: acceptance?.acceptedAt, currentFacts: false, currentFieldPaths: [] } })
+        expect(identity?.eligibility, item.id).toBeUndefined()
+      } else {
+        // An old raw identity without a review receipt is not automatically
+        // admitted to the public directory when its factual review expires.
+        expect(identity, item.id).toBeUndefined()
+      }
+      const originalProgramId = reverified?.historicalProgramId ?? item.programIds[0]
       const cycle = data.admissionCycles.find(
-        (candidate) => candidate.programId === item.programIds[0],
+        (candidate) => candidate.programId === originalProgramId,
       )
+      expect(cycle, item.id).toBeDefined()
       if (item.id === 'scholarship-xmu-iclt-one-semester-spring-2027') {
         expect(cycle?.tuitionCny).toBe(13000)
       } else {
         expect(cycle?.tuitionCny).toBeNull()
       }
     }
+    expect(JSON.stringify(data.scholarships)).toBe(before)
   })
 
   it('preserves the existing Tianjin cycle identity while enriching its facts', () => {

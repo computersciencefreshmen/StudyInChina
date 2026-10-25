@@ -13,6 +13,7 @@ import { isIndexableCity } from '@/lib/seo/indexability'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
+export const dynamic = 'force-dynamic'
 
 const CITY_DETAIL_UNIVERSITY_LIMIT = 36
 

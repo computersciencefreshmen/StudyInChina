@@ -187,6 +187,8 @@ async function loadPipelineTables(database: D1Database): Promise<{
     },
     {
       label: 'official evidence',
+      // SQLite CROSS JOIN ... ON fixes the forward indexed lookup order while
+      // retaining the same inner-join predicates and publication guards.
       sql: `SELECT DISTINCT
             field.subject_record_id, field.field_path, field.locale, field.claim_id,
             evidence.evidence_role,
@@ -196,12 +198,12 @@ async function loadPipelineTables(database: D1Database): Promise<{
             fetch.completed_at AS checked_at,
             metadata.title AS source_title, metadata.publisher AS source_publisher
        FROM canonical_fields field
-       JOIN records record ON record.id = field.subject_record_id
-       JOIN claims claim ON claim.id = field.claim_id
-       JOIN claim_evidence evidence ON evidence.claim_id = claim.id
-       JOIN source_fragments fragment ON fragment.id = evidence.fragment_id
-       JOIN source_fetches fetch ON fetch.id = fragment.fetch_id
-       JOIN source_documents source ON source.id = fetch.source_id
+       CROSS JOIN records record ON record.id = field.subject_record_id
+       CROSS JOIN claims claim ON claim.id = field.claim_id
+       CROSS JOIN claim_evidence evidence ON evidence.claim_id = claim.id
+       CROSS JOIN source_fragments fragment ON fragment.id = evidence.fragment_id
+       CROSS JOIN source_fetches fetch ON fetch.id = fragment.fetch_id
+       CROSS JOIN source_documents source ON source.id = fetch.source_id
        LEFT JOIN publication_source_metadata metadata ON metadata.source_id = source.id
       WHERE ${ELIGIBLE_RECORD_FILTER}
         AND field.field_status = 'accepted'

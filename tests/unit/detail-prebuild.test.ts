@@ -187,7 +187,6 @@ describe('detail-page prebuild selection', () => {
   it('keeps beta locales out of build-time detail expansion', () => {
     const detailPages = [
       'src/app/[locale]/programs/[slug]/page.tsx',
-      'src/app/[locale]/scholarships/[slug]/page.tsx',
       'src/app/[locale]/universities/[slug]/page.tsx',
       'src/app/[locale]/cities/[slug]/page.tsx',
     ]

@@ -4,6 +4,7 @@ import type { PublicLocale } from '@/i18n/config'
 import { officialReferenceTuitionCopy } from '@/i18n/tuition-reference'
 import type { Messages } from '@/i18n/messages'
 import { getApplicationState, isCurrentOfficialReferenceTuition } from '@/lib/data/admission'
+import { hasCurrentDirectoryCycleDates, hasCurrentDirectoryField, hasCurrentDirectoryTuition, type DirectoryFieldRecord } from '@/lib/data/discovery-state'
 import { formatDate, formatTuition, localize } from '@/lib/data/format'
 import { formatProgramDuration } from '@/lib/data/duration'
 import { degreeLabels, disciplineLabels, languageLabel, regionLabels } from '@/lib/data/labels'
@@ -14,10 +15,12 @@ import { FavoriteButton } from './FavoriteButton'
 
 type ProgramWithFieldMeta = Program & {
   fieldMeta?: Record<string, FieldMeta>
+  discovery?: DirectoryFieldRecord['discovery']
 }
 
 type AdmissionCycleWithFieldMeta = AdmissionCycle & {
   fieldMeta?: Record<string, FieldMeta>
+  discovery?: DirectoryFieldRecord['discovery']
 }
 
 function isStaleRecord(
@@ -69,7 +72,7 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
   const programIsStale = isStaleRecord(program, today)
   const cycleIsStale = Boolean(cycle && isStaleRecord(cycle, today))
   const previousCycle = cycle?.dateStatus === 'previous-cycle-reference'
-  const dynamicFactsAreStale = programIsStale || cycleIsStale || previousCycle
+  const dynamicFactsAreStale = (programIsStale || cycleIsStale || previousCycle) && !hasCurrentDirectoryCycleDates(cycle, today)
   const hasCurrentConfirmedTuition = cycle?.tuitionCny != null
     && cycle.tuitionStatus === 'confirmed'
   const currentOfficialReference = !dynamicFactsAreStale && isCurrentOfficialReferenceTuition(cycle, today)
@@ -77,18 +80,19 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
     ? undefined
     : currentOfficialReference ? cycle : latestTuitionReference
   const tuitionStatus = resolveFactStatus({
-    fieldMeta: cycle?.fieldMeta?.tuitionCny,
-    stale: dynamicFactsAreStale,
+    fieldMeta: cycle?.discovery?.fieldMeta?.tuitionCny ?? cycle?.fieldMeta?.tuitionCny,
+    stale: dynamicFactsAreStale && !hasCurrentDirectoryTuition(cycle, today),
     value: hasCurrentConfirmedTuition ? cycle.tuitionCny : undefined,
   })
   const deadlineStatus = resolveFactStatus({
-    fieldMeta: cycle?.fieldMeta?.closesOn,
-    stale: dynamicFactsAreStale,
+    fieldMeta: cycle?.discovery?.fieldMeta?.closesOn ?? cycle?.fieldMeta?.closesOn,
+    stale: dynamicFactsAreStale && !(cycle && hasCurrentDirectoryField(cycle, 'closesOn', today)),
     value: cycle?.closesOn,
   })
   const durationStatus = resolveFactStatus({
-    fieldMeta: program.fieldMeta?.[program.durationText ? 'durationText' : 'durationMonths'],
-    stale: programIsStale,
+    fieldMeta: program.discovery?.fieldMeta?.[program.durationText ? 'durationText' : 'durationMonths']
+      ?? program.fieldMeta?.[program.durationText ? 'durationText' : 'durationMonths'],
+    stale: programIsStale && !hasCurrentDirectoryField(program, program.durationText ? 'durationText' : 'durationMonths', today),
     value: program.durationText ?? program.durationMonths,
   })
   const tuitionValue = !hasCurrentConfirmedTuition
@@ -99,7 +103,7 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
     : `${formatTuition(visibleTuitionReference, locale, periodLabels[visibleTuitionReference.tuitionPeriod || 'other'], messages.common.unknown)} · ${visibleTuitionReference.academicYear}`
   const durationValue = formatProgramDuration(program, locale, messages.common.months) ?? undefined
   const applicationState = getApplicationState(cycle, today)
-  const canApply = !dynamicFactsAreStale && program.status === 'verified' && (applicationState === 'open' || applicationState === 'rolling') && Boolean(program.applyUrl)
+  const canApply = !dynamicFactsAreStale && hasCurrentDirectoryField(program, 'applyUrl', today) && (applicationState === 'open' || applicationState === 'rolling') && Boolean(program.applyUrl)
   const stateLabels = {
     open: messages.common.openNow,
     upcoming: messages.programs.upcoming,

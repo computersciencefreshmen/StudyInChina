@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { ProgramExplorerV2 } from '@/components/features/ProgramExplorerV2'
+import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
 import { PageHero } from '@/components/ui'
 import { getMessages } from '@/i18n/messages'
 import { getTodayDate } from '@/lib/data/freshness'
@@ -48,6 +49,7 @@ export default async function ProgramsPage({
       meta={<><span>{messages.common.authoritativeNotice}</span></>}
     />
     <section className="atlas-container atlas-section">
+      <DiscoveryNotice locale={locale} />
       {result.total === 0 ? <div className="notice" data-testid="program-publication-note">{messages.programs.verificationNote}</div> : null}
       <ProgramExplorerV2 result={result} locale={locale} messages={messages} today={today} />
     </section>

@@ -1,0 +1,172 @@
+name: Publish checked cloud catalog candidates
+
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+# Share the canonical writer lock with the legacy workflow during cutover.
+concurrency:
+  group: autonomous-catalog-maintenance-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: vars.CATALOG_MAINTENANCE_MODE == 'cloud'
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+      CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+      CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Treat quota, seed and operator waits as normal
+        id: runtime
+        run: npm run maintenance:cloud -- runtime-gate
+      - name: Resume an applied publication before exporting another batch
+        id: resume
+        if: steps.runtime.outputs.can_recover == 'true'
+        run: npm run maintenance:cloud -- recover-publication
+      - name: Restore the exact applied commit for publication readback
+        if: steps.resume.outputs.pending_publication == 'true'
+        env:
+          SOURCE_COMMIT: ${{ steps.resume.outputs.source_commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]
+          git cat-file -e "${SOURCE_COMMIT}^{commit}"
+          git checkout --detach "$SOURCE_COMMIT"
+      - name: Download one immutable export and its exact evidence
+        id: download
+        if: steps.runtime.outputs.can_start == 'true' && steps.resume.outputs.pending_publication != 'true'
+        run: npm run maintenance:cloud -- download "$RUNNER_TEMP/maintenance-download"
+      - name: Prepare and locally stage only independently accepted changes
+        id: candidate
+        if: steps.download.outputs.has_export == 'true'
+        run: >-
+          npm run maintenance:prepare --
+          --download "$RUNNER_TEMP/maintenance-download"
+          --output "$RUNNER_TEMP/maintenance-candidate" --apply
+      - name: Acknowledge unchanged or held candidates without rebuilding unchanged facts
+        if: steps.download.outputs.has_export == 'true' && steps.candidate.outputs.changed == 'false' && steps.candidate.outputs.accepted_count == '0'
+        env:
+          RECEIPT: ${{ steps.candidate.outputs.receipt }}
+        run: npm run maintenance:prepare -- ack --receipt "$RECEIPT" --commit "$(git rev-parse HEAD)"
+      - name: Recover the original commit after a lost application acknowledgement
+        id: receipt_commit
+        if: steps.candidate.outputs.replayed == 'true' && steps.candidate.outputs.accepted_count != '0'
+        env:
+          RECEIPT: ${{ steps.candidate.outputs.receipt }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_commit="$(git log -1 --format=%H -- "$RECEIPT")"
+          [[ "$source_commit" =~ ^[a-f0-9]{40}$ ]] || { echo 'Canonical receipt has no committed provenance; held.'; exit 1; }
+          git checkout --detach "$source_commit"
+          echo "sha=$source_commit" >> "$GITHUB_OUTPUT"
+      - name: Validate candidate data and evidence before creating a commit
+        if: steps.candidate.outputs.changed == 'true'
+        run: |
+          npm run validate:data -- --directory-safe-expiry
+          npm run validate:directory
+          node node_modules/vitest/vitest.mjs run tests/unit/maintenance-identity-import.test.ts tests/unit/maintenance-scholarship-import.test.ts tests/unit/maintenance-field-import.test.ts tests/unit/field-verification.test.ts tests/unit/catalog-discovery.test.ts
+      - name: Publish a checked exact commit through the protected main branch
+        id: commit
+        if: steps.candidate.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          base_sha="$(git rev-parse HEAD)"
+          git fetch origin main --depth=1
+          [[ "$(git rev-parse origin/main)" == "$base_sha" ]] || { echo 'Main changed; candidate held for reconciliation.'; exit 1; }
+          branch="codex/cloud-catalog-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git switch -c "$branch"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- content/data/sources.json content/data/cities.json content/data/universities.json content/data/programs.json content/data/admission-cycles.json content/data/scholarships.json content/data/identity-acceptances.json content/data/identity-bindings.json content/data/field-verifications.json quality/maintenance/batches
+          git diff --cached --quiet && { echo 'Accepted changes have no semantic output; inspect the immutable receipt.'; exit 1; }
+          git commit -m 'data: apply evidence-checked cloud catalog batch'
+          candidate_sha="$(git rev-parse HEAD)"
+          git push origin "HEAD:refs/heads/$branch"
+          gh workflow run ci.yml --ref "$branch"
+          deadline=$((SECONDS + 1800))
+          passed=false
+          while (( SECONDS < deadline )); do
+            outcome="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?branch=${branch}&event=workflow_dispatch&per_page=20" --jq ".workflow_runs | map(select(.head_sha == \"${candidate_sha}\" and .head_branch == \"${branch}\")) | sort_by(.id) | last | if . == null or .status != \"completed\" then \"pending\" else .conclusion end")"
+            if [[ "$outcome" == 'success' ]]; then passed=true; break; fi
+            [[ "$outcome" == 'pending' ]] || { echo "Exact candidate CI ended with $outcome; main unchanged."; exit 1; }
+            sleep 20
+          done
+          [[ "$passed" == 'true' ]] || { echo 'Exact candidate CI timed out; main unchanged.'; exit 1; }
+          git fetch origin main --depth=1
+          [[ "$(git rev-parse origin/main)" == "$base_sha" ]] || { echo 'Main advanced; no rebase or untested replacement will be pushed.'; exit 1; }
+          git push origin "${candidate_sha}:refs/heads/main"
+          gh workflow run ci.yml --ref main
+          echo "sha=$candidate_sha" >> "$GITHUB_OUTPUT"
+      - name: Acknowledge canonical application separately from public publication
+        if: steps.commit.outputs.sha != '' || steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != ''
+        env:
+          RECEIPT: ${{ steps.candidate.outputs.receipt || steps.resume.outputs.receipt }}
+          SOURCE_COMMIT: ${{ steps.commit.outputs.sha || steps.resume.outputs.source_commit || steps.receipt_commit.outputs.sha }}
+        run: npm run maintenance:prepare -- ack --receipt "$RECEIPT" --commit "$SOURCE_COMMIT"
+      - name: Recover a missing main CI dispatch after an ambiguous push reply
+        if: steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_COMMIT: ${{ steps.resume.outputs.source_commit || steps.receipt_commit.outputs.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          if [[ "$(git rev-parse origin/main)" == "$SOURCE_COMMIT" ]]; then
+            count="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?branch=main&per_page=100" --jq ".workflow_runs | map(select(.head_sha == \"${SOURCE_COMMIT}\")) | length")"
+            if [[ "$count" == '0' ]]; then gh workflow run ci.yml --ref main; fi
+          fi
+      - name: Wait for protected promotion and verify stable exact content
+        if: steps.commit.outputs.sha != '' || steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != ''
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          SOURCE_COMMIT: ${{ steps.commit.outputs.sha || steps.resume.outputs.source_commit || steps.receipt_commit.outputs.sha }}
+          RECEIPT: ${{ steps.candidate.outputs.receipt || steps.resume.outputs.receipt }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          deadline=$((SECONDS + 1800))
+          while (( SECONDS < deadline )); do
+            if node --import tsx scripts/automation/verify-maintenance-publication.ts --receipt "$RECEIPT" --commit "$SOURCE_COMMIT" --output "$RUNNER_TEMP/maintenance-stable-proof.json" --ack; then exit 0; fi
+            sleep 30
+          done
+          echo 'Canonical commit exists, but stable publication is unconfirmed. Do not replay the batch.'
+          exit 1
+      - name: Preserve small review and publication receipts
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: cloud-catalog-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/maintenance-candidate/canonical-receipt.json
+            ${{ runner.temp }}/maintenance-candidate/identity-receipt.json
+            ${{ runner.temp }}/maintenance-candidate/scholarship-receipt.json
+            ${{ runner.temp }}/maintenance-candidate/field-receipt.json
+            ${{ runner.temp }}/maintenance-candidate/cycle-receipt.json
+            ${{ runner.temp }}/maintenance-candidate/cycle-field-receipt.json
+            ${{ runner.temp }}/maintenance-stable-proof.json
+          if-no-files-found: ignore
+          retention-days: 30

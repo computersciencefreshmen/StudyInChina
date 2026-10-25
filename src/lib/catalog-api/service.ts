@@ -2,6 +2,7 @@ import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
 import { getTodayDate } from '@/lib/data/freshness'
 import { classifyProgramField, isProgramField, programSearchKeywords } from '@/lib/data/fields'
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
+import { hasCurrentDirectoryCycleDates, hasCurrentDirectoryField, hasCurrentDirectoryTuition } from '@/lib/data/discovery-state'
 import { canonicalUniversitySlug } from '@/lib/data/slug-aliases'
 import { currentUniversityRankings, hasRankingFilters, matchesUniversityRankings, type RankingFilters } from '@/lib/data/rankings'
 import type {
@@ -27,7 +28,7 @@ import type {
 } from './types'
 import { AUTOMATED_COLLECTION_NOTICE } from './types'
 
-export type ListOptions = { cursor?: string; limit?: number }
+export type ListOptions = { cursor?: string; limit?: number; view?: 'directory'; evaluatedForDate?: string }
 
 export type InstitutionSort = 'default' | 'name' | 'programs-desc' | 'scholarships-desc'
 
@@ -262,6 +263,7 @@ export class CatalogApiService {
       applyUrl: program.applyUrl,
       languageRequirements: program.languageRequirements,
       details: program.details,
+      supplementaryDetails: program.supplementaryDetails,
     }, this.today)
     return {
       ...program,
@@ -273,6 +275,8 @@ export class CatalogApiService {
       applyUrl: knownValue(dynamicMeta, 'applyUrl', program.applyUrl),
       languageRequirements: knownValue(dynamicMeta, 'languageRequirements', program.languageRequirements),
       details: knownValue(dynamicMeta, 'details', program.details ?? null),
+      supplementaryDetails: 'discovery' in program ? program.supplementaryDetails
+        : knownValue(dynamicMeta, 'supplementaryDetails', program.supplementaryDetails ?? null) ?? undefined,
       programType: deriveProgramType(program),
       university: { id: university.id, slug: university.slug, name: university.name, rankings: university.rankings ? currentUniversityRankings(university, this.today) : undefined },
       officialSources: officialSourcesFor(program.sourceIds, this.bundle.sources),
@@ -353,6 +357,7 @@ export class CatalogApiService {
       deadline: scholarship.deadline,
       applicationUrl: scholarship.applicationUrl,
       summary: scholarship.summary,
+      eligibility: scholarship.eligibility,
     }, this.today)
     return {
       ...scholarship,
@@ -371,6 +376,7 @@ export class CatalogApiService {
       deadline: knownValue(dynamicMeta, 'deadline', scholarship.deadline),
       applicationUrl: knownValue(dynamicMeta, 'applicationUrl', scholarship.applicationUrl),
       summary: knownValue(dynamicMeta, 'summary', scholarship.summary),
+      eligibility: knownValue(dynamicMeta, 'eligibility', scholarship.eligibility ?? null) ?? undefined,
       officialSources: officialSourcesFor(scholarship.sourceIds, this.bundle.sources),
       fieldMeta: { ...identityMeta, ...dynamicMeta },
     }
@@ -424,13 +430,13 @@ export class CatalogApiService {
         || query.tuitionMin !== undefined || query.tuitionMax !== undefined,
       )
       const matchesCycle = !hasCycleFilters || cycles.some((cycle) => {
-        if (!hasCurrentFacts(cycle, this.today)) return false
-        const tuition = cycle.tuitionStatus === 'confirmed'
+        if (!hasCurrentFacts(cycle, this.today) && !('discovery' in cycle)) return false
+        const tuition = cycle.tuitionStatus === 'confirmed' && hasCurrentDirectoryTuition(cycle, this.today)
           ? cycle.tuitionCny
           : null
         return (!query.academicYear || cycle.academicYear === query.academicYear)
           && (!query.intake || cycle.intake === query.intake)
-          && (!query.applicationState || getApplicationState(cycle, this.today) === query.applicationState)
+          && (!query.applicationState || hasCurrentDirectoryCycleDates(cycle, this.today) && getApplicationState(cycle, this.today) === query.applicationState)
           && (query.tuitionMin === undefined || (tuition !== null && tuition >= query.tuitionMin))
           && (query.tuitionMax === undefined || (tuition !== null && tuition <= query.tuitionMax))
       })
@@ -443,9 +449,9 @@ export class CatalogApiService {
         && (!query.city || Boolean(city && matchesIdentity(city, query.city)))
         && (!query.type || deriveProgramType(program) === query.type)
         && (!query.degree || program.degreeLevel === query.degree)
-        && (!query.discipline || (hasCurrentFacts(program, this.today)
+        && (!query.discipline || (hasCurrentDirectoryField(program, 'discipline', this.today)
           && matchesProgramDiscipline(program, query.discipline)))
-        && (!query.language || (hasCurrentFacts(program, this.today)
+        && (!query.language || (hasCurrentDirectoryField(program, 'teachingLanguages', this.today)
           && program.teachingLanguages.some((item) => item.toLocaleLowerCase() === query.language?.toLocaleLowerCase())))
         && (!query.scholarship
           || (query.scholarship === 'linked' && scholarships.length > 0)
@@ -484,7 +490,7 @@ export class CatalogApiService {
     const uniqueIds = [...new Set(ids)]
     const programsById = new Map(this.bundle.programs.map((program) => [program.id, program]))
     const currentCycles = this.bundle.admissionCycles.filter(
-      (cycle) => hasCurrentFacts(cycle, this.today),
+      (cycle) => hasCurrentFacts(cycle, this.today) || 'discovery' in cycle,
     )
     const items = uniqueIds.flatMap((id) => {
       const program = programsById.get(id)
@@ -513,7 +519,7 @@ export class CatalogApiService {
     const hasRanks = hasRankingFilters(query)
     const filtered = this.bundle.scholarships.filter((scholarship) => {
       const factsAreCurrent = hasCurrentFacts(scholarship, this.today)
-      const institutions = factsAreCurrent
+      const institutions = factsAreCurrent || query.view === 'directory'
         ? this.bundle.universities.filter((item) => scholarship.universityIds.includes(item.id))
         : []
       const programs = factsAreCurrent

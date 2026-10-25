@@ -1,0 +1,62 @@
+name: Resume a protected production promotion after cloud recovery
+
+on:
+  schedule:
+    - cron: '34 * * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: catalog-maintenance-promotion-recovery-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    if: vars.CATALOG_MAINTENANCE_MODE == 'cloud'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Retry only the existing exact-main protected promotion
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          status_file="$RUNNER_TEMP/catalog-maintenance-status.json"
+          node --import tsx scripts/automation/catalog-maintenance-client.ts status > "$status_file"
+          if ! jq -e '.backend.state == "ready"' "$status_file" >/dev/null; then
+            echo 'Shared cloud backend has not recovered; leave promotion untouched.'
+            exit 0
+          fi
+          main_sha="$(git rev-parse HEAD)"
+          runs="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/vercel-production-alias.yml/runs?branch=main&per_page=30")"
+          # Never create an alias mutation here. The original workflow repeats
+          # exact-SHA CI, native deployment, writer lease, smoke and rollback gates.
+          if jq -e --arg sha "$main_sha" '.workflow_runs | any(.head_sha == $sha and (.status == "queued" or .status == "in_progress"))' <<< "$runs" >/dev/null; then
+            exit 0
+          fi
+          latest="$(jq -c --arg sha "$main_sha" '[.workflow_runs[] | select(.head_sha == $sha and .event == "deployment_status")] | sort_by(.id) | last // null' <<< "$runs")"
+          if [[ "$latest" == 'null' ]] || ! jq -e '.status == "completed" and (.conclusion == "failure" or .conclusion == "timed_out")' <<< "$latest" >/dev/null; then
+            exit 0
+          fi
+          if ! jq -e '.run_attempt < 3' <<< "$latest" >/dev/null; then
+            echo 'Protected promotion already retried twice; inspect its failure before another attempt.' >&2
+            exit 1
+          fi
+          run_id="$(jq -er '.id | select(type == "number")' <<< "$latest")"
+          gh run rerun "$run_id"
+          echo "Requested recovery of existing protected promotion run $run_id."

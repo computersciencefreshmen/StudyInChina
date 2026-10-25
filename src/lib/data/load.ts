@@ -6,6 +6,9 @@ import { getTodayDate } from './freshness'
 import { createCatalogRepository, type CatalogRepository } from '@/lib/catalog'
 import { bundleSchema } from './schema'
 import { selectPublishedData } from './publication'
+import { selectDiscoveryData } from './discovery'
+import { readIdentityAcceptances } from './identity-acceptance-store'
+import { readFieldVerifications } from './field-verification-store'
 import { isContentPreviewEnabled } from './preview'
 import type { DataBundle } from './types'
 import { canonicalUniversitySlug } from './slug-aliases'
@@ -41,7 +44,9 @@ function activeCatalogRepository(): CatalogRepository {
 const getRepositoryData = cache(async (today: string): Promise<DataBundle> => {
   const data = await activeCatalogRepository().getBundle()
   const previewEnabled = isContentPreviewEnabled(process.env)
-  return previewEnabled ? data : selectPublishedData(data, today)
+  return previewEnabled ? data : selectDiscoveryData(data, today,
+    activeCatalogRepository().mode === 'json' ? readIdentityAcceptances() : [],
+    activeCatalogRepository().mode === 'json' ? readFieldVerifications() : [])
 })
 
 /** Runtime page loader used by json, shadow, and d1 deployments. */

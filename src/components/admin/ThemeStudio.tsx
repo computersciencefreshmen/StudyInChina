@@ -41,7 +41,8 @@ export function ThemeStudio({ universities, counts }: { universities: ThemeUnive
   const [theme, setTheme] = useState<SiteTheme>(siteThemes[0])
   const [view, setView] = useState<'student' | 'admin'>('student')
   const [saved, setSaved] = useState('')
-  const variables = { ...themeVariables(theme), '--atlas-paper-bright': theme.surface, '--atlas-ink': theme.ink, '--atlas-line': theme.border, '--atlas-jade': theme.accent, '--atlas-jade-pale': theme.soft } as CSSProperties
+  const variables = { ...themeVariables(theme), '--atlas-paper-bright': theme.surface, '--atlas-ink': theme.ink, '--atlas-line': theme.border, '--atlas-jade': theme.accent,
+    '--atlas-jade-dark': theme.id === 'night' ? theme.accent : theme.ink, '--atlas-jade-pale': theme.soft } as CSSProperties
   function remember() {
     document.documentElement.dataset.theme = theme.id
     try { localStorage.setItem('studycn-theme', theme.id); setSaved(`已使用「${theme.name}」，你的浏览器会记住这个选择。`) }

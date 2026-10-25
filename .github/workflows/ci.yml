@@ -51,11 +51,30 @@ jobs:
       - name: Test full record audit
         run: npm run test:audit
 
-      - name: Validate content data
-        run: npm run validate:data
+      - name: Validate deadline evidence preservation and historical summaries
+        run: npm run test:deadline-review
 
-      - name: Enforce one public program per university
-        run: npm run check:program-coverage:strict
+      - name: Validate content data
+        run: npm run validate:data -- --directory-safe-expiry
+
+      - name: Validate accepted directory identities and safe current-field projection
+        run: npm run validate:directory -- --output "$RUNNER_TEMP/directory-integrity.json"
+
+      # Coverage is a measured delivery objective, not proof that each school
+      # currently admits students. Keep the gap visible without inventing offers.
+      - name: Report current-opportunity coverage without relabeling it as complete
+        run: npm run check:program-coverage -- --json "$RUNNER_TEMP/current-program-coverage.json"
+
+      - name: Preserve directory integrity and coverage evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: directory-quality-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/directory-integrity.json
+            ${{ runner.temp }}/current-program-coverage.json
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Validate D1 migrations and database integrity
         run: npm run validate:d1
@@ -81,6 +100,9 @@ jobs:
       - name: Run release builder Worker tests
         run: npm run test:release-builder
 
+      - name: Run cloud maintenance queue, quota and evidence tests
+        run: npm run test:catalog-maintenance
+
       - name: Validate ingestion Worker bundle and bindings
         run: npm run check:worker:ingestion
 
@@ -95,6 +117,9 @@ jobs:
 
       - name: Validate Catalog API Worker bundle and bindings
         run: npm run check:worker:catalog
+
+      - name: Validate cloud maintenance Worker bundle and bindings
+        run: npm run check:worker:maintenance
 
       - name: Build production application
         run: npm run build

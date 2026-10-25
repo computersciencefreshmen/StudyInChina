@@ -2,16 +2,10 @@ import { expect, test } from '@playwright/test'
 import { mockMapTiles } from './map-fixture'
 
 test.beforeEach(async ({ page }) => { await mockMapTiles(page) })
-import admissionCycles from '../../content/data/admission-cycles.json'
-import cities from '../../content/data/cities.json'
-import programs from '../../content/data/programs.json'
-import scholarships from '../../content/data/scholarships.json'
-import sources from '../../content/data/sources.json'
-import universities from '../../content/data/universities.json'
+import { TODAY, currentData, directoryData, rawData } from './catalog-fixture'
 import { getApplicationState, selectAdmissionCycle } from '../../src/lib/data/admission'
-import { getTodayDate, isCurrentVerifiedRecord } from '../../src/lib/data/freshness'
-import { selectPublishedData } from '../../src/lib/data/publication'
-import { bundleSchema } from '../../src/lib/data/schema'
+import { isCurrentVerifiedRecord } from '../../src/lib/data/freshness'
+import { getProgramDisplayDetails } from '../../src/lib/data/program-details'
 import { scholarshipAppliesToProgram } from '../../src/lib/data/scholarship-scope'
 import {
   getReleaseAnnouncement,
@@ -23,19 +17,12 @@ import { isIndexableProgram } from '../../src/lib/seo/indexability'
 const locales = ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const
 const coreRoutes = ['', 'universities', 'programs', 'scholarships', 'cities', 'guides'] as const
 const releaseAnnouncementTestTitle = 'new catalogue releases announce data and product changes once'
-const TODAY = getTodayDate()
-const publicData = selectPublishedData(bundleSchema.parse({
-  admissionCycles,
-  cities,
-  programs,
-  scholarships,
-  sources,
-  universities,
-}), TODAY)
-const freshCompleteFixture = publicData.programs
+const publicData = directoryData
+const groundedProgramFixture = currentData.programs
   .flatMap((program) => {
-    const cycle = selectAdmissionCycle(publicData.admissionCycles, program.id, TODAY)
-    return cycle && isIndexableProgram(program, publicData.admissionCycles, TODAY)
+    const cycle = selectAdmissionCycle(currentData.admissionCycles, program.id, TODAY)
+    const details = getProgramDisplayDetails(program)
+    return cycle && details && details.curriculumHighlights.length && details.eligibility.length && details.applicationMaterials.length
       ? [{ program, cycle, applicationState: getApplicationState(cycle, TODAY) }]
       : []
   })
@@ -69,9 +56,9 @@ test(releaseAnnouncementTestTitle, async ({ page }) => {
   const dialog = page.getByRole('dialog', { name: getReleaseAnnouncement('zh').copy.title })
   await expect(dialog).toBeVisible()
   await expect(page.getByRole('button', { name: '关闭更新' })).toBeFocused()
-  await expect(dialog.getByText(publicData.universities.length.toLocaleString('en-US'))).toBeVisible()
-  await expect(dialog.getByText(publicData.programs.length.toLocaleString('en-US'))).toBeVisible()
-  await expect(dialog.getByText(publicData.scholarships.length.toLocaleString('en-US'))).toBeVisible()
+  await expect(dialog.getByText(publicData.universities.length.toLocaleString('en-US'), { exact: true })).toBeVisible()
+  await expect(dialog.getByText(publicData.programs.length.toLocaleString('en-US'), { exact: true })).toBeVisible()
+  await expect(dialog.getByText(publicData.scholarships.length.toLocaleString('en-US'), { exact: true })).toBeVisible()
   await expect(page.getByRole('link', { name: '查看开放申请项目' }))
     .toHaveAttribute('href', '/zh/programs?applicationState=open')
 
@@ -107,7 +94,7 @@ for (const locale of locales) {
   })
 }
 
-test('the root route redirects using the accepted launch language', async ({ browser }) => {
+test('the public root opens English while explicit locale routes remain available', async ({ browser }) => {
   const context = await browser.newContext({
     locale: 'zh-CN',
     extraHTTPHeaders: { 'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8' },
@@ -115,7 +102,10 @@ test('the root route redirects using the accepted launch language', async ({ bro
   const page = await context.newPage()
 
   await page.goto('/', { waitUntil: 'domcontentloaded' })
+  await expect(page).toHaveURL(/\/en\/?$/)
+  await page.goto('/zh', { waitUntil: 'domcontentloaded' })
   await expect(page).toHaveURL(/\/zh\/?$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'zh')
 
   await context.close()
 })
@@ -149,14 +139,17 @@ test('preview locales redirect to the equivalent English route without publishin
 test('primary navigation opens the program catalogue', async ({ page }) => {
   await page.goto('/en', { waitUntil: 'domcontentloaded' })
 
-  const visibleProgramLink = page.locator('header a[href="/en/programs"]:visible')
+  const header = page.getByRole('banner')
+  await expect(header).toHaveCount(1)
+  const visibleProgramLink = header.locator('a[href="/en/programs"]:visible')
   if (await visibleProgramLink.count() === 0) {
-    await page.locator('details.atlas-site-header__mobile-menu > summary').click()
+    await header.locator('details.atlas-site-header__mobile-menu > summary').click()
   }
-  await page.locator('header a[href="/en/programs"]:visible').first().click()
+  await expect(visibleProgramLink).toHaveCount(1)
+  await visibleProgramLink.click()
 
   await expect(page).toHaveURL(/\/en\/programs\/?$/)
-  await expect(page.locator('[role="search"]')).toBeVisible()
+  await expect(page.getByRole('search')).toBeVisible()
 })
 
 test('the homepage exposes disciplines backed by the public program catalogue', async ({ page }) => {
@@ -220,34 +213,40 @@ test('the program catalogue exposes linked scholarships as a shareable evidence 
   await expect(page.locator('.record-card').first()).toBeVisible()
 })
 
-test('a thin verified program stays reachable but is excluded from search indexing', async ({ page }) => {
-  const response = await page.goto('/en/programs/tsinghua-university-computer-science-bachelor', { waitUntil: 'domcontentloaded' })
+test('an accepted thin program stays reachable but is excluded from search indexing', async ({ page }) => {
+  const program = publicData.programs.find(program => !getProgramDisplayDetails(program) && !isIndexableProgram(program, publicData.admissionCycles, TODAY))!
+  expect(program, 'the fixture must be a real accepted directory identity').toBeDefined()
+  const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
 
   expect(response?.ok()).toBe(true)
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
 })
 
 test('a stale program identity remains reachable while expired dynamic facts are withheld', async ({ page }) => {
-  const response = await page.goto('/en/programs/shanghai-jiao-tong-university-chinese-language-program-language', { waitUntil: 'domcontentloaded' })
+  const program = publicData.programs.find(program => program.status === 'stale')!
+  expect(program, 'only a genuinely accepted stale identity may remain routable').toBeDefined()
+  const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
 
   expect(response?.ok()).toBe(true)
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Long-term Chinese Language Course')
+  await expect(page.getByRole('heading', { level: 1 })).toContainText(program.name.en!)
   await expect(page.getByText(/Needs review/).first()).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Curriculum highlights', exact: true })).toHaveCount(0)
   await expect(page.getByRole('heading', { name: 'Eligibility', exact: true })).toHaveCount(0)
   await expect(page.getByRole('heading', { name: 'Application materials', exact: true })).toHaveCount(0)
   await expect(page.getByText('Opening soon', { exact: true })).toHaveCount(0)
-  await expect(page.getByText('Dec 15, 2026', { exact: true })).toHaveCount(0)
-  await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
+  for (const cycle of rawData.admissionCycles.filter(cycle => cycle.programId === program.id && cycle.closesOn)) {
+    await expect(page.locator(`[data-program-detail] time[datetime="${cycle.closesOn}"]`)).toHaveCount(0)
+  }
+  await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', program.programUrl)
   await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
 })
 
-test('a fresh complete program exposes grounded details and a state-aware official route', async ({ page }) => {
-  expect(freshCompleteFixture, 'at least one fresh complete program must remain public').toBeDefined()
-  if (!freshCompleteFixture) return
+test('a current program exposes its grounded detail fragments and a state-aware official route', async ({ page }) => {
+  expect(groundedProgramFixture, 'at least one current programme has proven detail fragments').toBeDefined()
+  if (!groundedProgramFixture) return
 
-  const { program, cycle, applicationState } = freshCompleteFixture
+  const { program, cycle, applicationState } = groundedProgramFixture
   expect(program.name.en, program.id).toBeTruthy()
   const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
 
@@ -256,7 +255,11 @@ test('a fresh complete program exposes grounded details and a state-aware offici
   await expect(page.getByRole('heading', { name: 'Curriculum highlights', exact: true })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Eligibility', exact: true })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Application materials', exact: true })).toBeVisible()
-  await expect(page.locator('meta[name="robots"]')).toHaveCount(0)
+  if (isIndexableProgram(program, publicData.admissionCycles, TODAY)) {
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0)
+  } else {
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
+  }
   await expect(page.getByRole('link', { name: /Official source/ }).first())
     .toHaveAttribute('href', program.programUrl)
   if (cycle.closesOn) {
@@ -291,7 +294,7 @@ test('scholarship deadline claims follow current evidence and never claim applic
     await expect(page.getByText('Needs review', { exact: true }).first()).toBeVisible()
     await expect(page.getByText('Deadline ahead', { exact: true })).toHaveCount(0)
     await expect(page.getByRole('link', { name: /Official application route/ })).toHaveCount(0)
-    const original = scholarships.find(item => item.id === scholarship.id)!
+    const original = rawData.scholarships.find(item => item.id === scholarship.id)!
     if (original.deadline) await expect(page.locator(`time[datetime="${original.deadline}"]`)).toHaveCount(0)
     await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', /^https:\/\//)
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
@@ -299,8 +302,18 @@ test('scholarship deadline claims follow current evidence and never claim applic
 })
 
 test('a draft program detail is not publicly routable', async ({ page }) => {
-  const response = await page.goto('/en/programs/tsinghua-university-business-administration-master', { waitUntil: 'domcontentloaded' })
+  const program = rawData.programs.find(program => program.status === 'draft')!
+  expect(program).toBeDefined()
+  const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
 
+  expect(response?.status()).toBe(404)
+  await expect(page.locator('main')).toBeVisible()
+})
+
+test('an unaccepted stale program identity is not revived by the directory', async ({ page }) => {
+  const program = rawData.programs.find(program => program.status === 'stale' && !publicData.programs.some(accepted => accepted.id === program.id))!
+  expect(program).toBeDefined()
+  const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
   expect(response?.status()).toBe(404)
   await expect(page.locator('main')).toBeVisible()
 })

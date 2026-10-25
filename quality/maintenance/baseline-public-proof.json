@@ -1,0 +1,4393 @@
+{
+  "pass": true,
+  "checkedAt": "2026-10-20T10:03:48.873Z",
+  "base": "https://studyinchina.vercel.app",
+  "prefix": "stable",
+  "today": "2026-10-20",
+  "sourcePlanSha256": "6d073909b0b0643d3dfbb97891b5ead484716590e85e7bf235dd263378090c13",
+  "smokeRunnerSha256": "c491bbd4c3651d6313efd28022907693bd4cf4e37087a2faa49345d1f3ba07f8",
+  "expectedInputSha256": "92a1e82a4fc36d542454a3625385e297d0ed8b94cc7578f6ad2bc900d63ee931",
+  "publicCounts": {
+    "sources": 728,
+    "cities": 62,
+    "universities": 255,
+    "programs": 783,
+    "admissionCycles": 783,
+    "scholarships": 7
+  },
+  "expectedInputManifest": {
+    "inputFile": "quality/recovery-20261020/release-rapid-2260e61-20261020/expected-input.json",
+    "inputSha256": "150decfdf472944e0e3759a38d6cd5516f35f0270b8735cd73de20ad2b91ab17",
+    "sourcePlanSha256": "6d073909b0b0643d3dfbb97891b5ead484716590e85e7bf235dd263378090c13",
+    "files": [
+      {
+        "path": ".tmp/rapid-2260e61-20261020-source/content/data/sources.json",
+        "sha256": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+        "bytes": 982063
+      },
+      {
+        "path": ".tmp/rapid-2260e61-20261020-source/content/data/cities.json",
+        "sha256": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+        "bytes": 58897
+      },
+      {
+        "path": ".tmp/rapid-2260e61-20261020-source/content/data/universities.json",
+        "sha256": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+        "bytes": 348043
+      },
+      {
+        "path": ".tmp/rapid-2260e61-20261020-source/content/data/programs.json",
+        "sha256": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+        "bytes": 7340694
+      },
+      {
+        "path": ".tmp/rapid-2260e61-20261020-source/content/data/admission-cycles.json",
+        "sha256": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+        "bytes": 2325560
+      },
+      {
+        "path": ".tmp/rapid-2260e61-20261020-source/content/data/scholarships.json",
+        "sha256": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83",
+        "bytes": 778660
+      }
+    ],
+    "batches": [
+      {
+        "path": "quality/recovery-20261019/rapid-expansion/tongji-szu/dhu/full-program-batch-approved-v2.json",
+        "sha256": "b1028fac473ca72658db5481fb9cac34413a1a9bafaeb548aeab6197bca9ed7d",
+        "bytes": 20252,
+        "batchId": "dhu-winter-chinese-2027-20261019-v2"
+      },
+      {
+        "path": "quality/recovery-20261019/rapid-expansion/tongji-szu/szu/full-program-batch-approved-v1.json",
+        "sha256": "25232dafda96744f124065cb7a15ccb30ec3abe6b6d1588cbe53402be5919f09",
+        "bytes": 340523,
+        "batchId": "szu-doctoral-spring-2027-fifteen-20261019-v1"
+      }
+    ],
+    "scholarshipBatches": [
+      {
+        "path": "quality/recovery-20261019/rapid-expansion/scholarships/szu/full-scholarship-batch-approved-v2.json",
+        "sha256": "3c49683f123f245bcaea4551ecf65f281e605f91c8ecf8a790c5766647a4e110",
+        "bytes": 48014,
+        "batchId": "szu-doctoral-scholarships-spring2027-20261019-v2"
+      },
+      {
+        "path": "quality/recovery-20261019/rapid-expansion/scholarships/iclt-first-three/full-scholarship-batch-approved-v1.json",
+        "sha256": "7614d5c02f47ef78901ce0c91df740bcfe2ab44feab9ede97c18648739f210f8",
+        "bytes": 46337,
+        "batchId": "iclt-three-school-spring2027-scholarships-20261019-v1"
+      },
+      {
+        "path": "quality/recovery-20261019/rapid-expansion/scholarships/tongji/full-scholarship-batch-approved-v1.json",
+        "sha256": "1df2204807d95b89006c49db7b06214cd9012ed2f91e40f895b3679a9250dd73",
+        "bytes": 14783,
+        "batchId": "tongji-iclt-scholarship-spring2027-20261019-v1"
+      }
+    ],
+    "supportPins": [
+      {
+        "path": "src/lib/data/schema.ts",
+        "sha256": "33fdd08f4c83f23ac91f9113dd456e6ec6b86888ddc0de8113dc19d11dc29976",
+        "bytes": 16578
+      },
+      {
+        "path": "src/lib/data/publication.ts",
+        "sha256": "86aa129778c490cb1b2742ebb1f66557b94310b5040aebc348cc3221f336f832",
+        "bytes": 2739
+      },
+      {
+        "path": "src/lib/data/format.ts",
+        "sha256": "01bc48529c86692c816f823ea51a456eda153247823ef70b0a26741494aa3e9f",
+        "bytes": 3199
+      },
+      {
+        "path": "src/lib/data/duration.ts",
+        "sha256": "b4afcecb39421c6066c50d46e8cae076d283a3122b3c487fd102db78c6adbe3b",
+        "bytes": 1422
+      },
+      {
+        "path": "src/lib/data/admission.ts",
+        "sha256": "da7f729cfdd85a974dece0f1fb73426d48d4be14d07eb06f70785e556d703fb6",
+        "bytes": 3217
+      },
+      {
+        "path": "src/lib/data/labels.ts",
+        "sha256": "d2124d7d55f007781431a4cf8db9722b4139cde0533c34a4f54bc6b7ec068d89",
+        "bytes": 4750
+      },
+      {
+        "path": "src/i18n/config.ts",
+        "sha256": "64b46e23f4ec6c6f933cdee506b31e6da6ff2540c33ae68e11f8569c566f22ad",
+        "bytes": 5810
+      },
+      {
+        "path": "src/i18n/messages.ts",
+        "sha256": "a50fe32474485df8a6af823ba2d0cc72f4061c4082fed320c869c52b1b0eea65",
+        "bytes": 94396
+      },
+      {
+        "path": "src/i18n/tuition-reference.ts",
+        "sha256": "202eaed07bc30de9e9e40ce7a2f958e166eafd1079d6dde95e9a70693824574f",
+        "bytes": 1266
+      },
+      {
+        "path": "src/i18n/release-announcement.ts",
+        "sha256": "33de964de03d8b412c240c075eb78f5b1bd1214b30d27834d9c16bb1c576a50b",
+        "bytes": 9153
+      },
+      {
+        "path": "content/data/program-localizations.json",
+        "sha256": "df7db79ec503d14cb6c28fd8eb59918b49054abf15e2efeb208dbf2de25205f8",
+        "bytes": 932449
+      },
+      {
+        "path": "src/lib/data/scholarship.ts",
+        "sha256": "9310e039dc67c21a02e4894a25de71d989109e7052d246e28cffe00636e4518f",
+        "bytes": 1731
+      }
+    ],
+    "normalizedCatalogSha256": "3122c3ad8e1f5086d7dc14c1c20a0c8de57905bd0e17c65ec326b6ebff96312b"
+  },
+  "checks": [
+    {
+      "route": "/api/v1/releases/current",
+      "pass": true,
+      "publicCounts": {
+        "sources": 728,
+        "cities": 62,
+        "universities": 255,
+        "programs": 783,
+        "admissionCycles": 783,
+        "scholarships": 7
+      },
+      "evaluatedForDate": "2026-10-20"
+    },
+    {
+      "route": "/api/v1/programs",
+      "pass": true,
+      "records": 783,
+      "exactIds": true,
+      "exactDurationRoundtrip": true
+    },
+    {
+      "route": "/api/v1/institutions",
+      "pass": true,
+      "records": 255,
+      "exactIds": true
+    },
+    {
+      "route": "/api/v1/scholarships",
+      "pass": true,
+      "records": 7,
+      "exactIds": true,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "university-pages",
+      "pass": true,
+      "records": 255,
+      "pending": 238
+    },
+    {
+      "route": "/en/programs/tsinghua-university-computer-science-bachelor",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "route": "/api/v1/programs/tsinghua-university-computer-science-bachelor",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "route": "/api/v1/programs/dhu-winter-chinese-2027/cycles",
+      "pass": true,
+      "programId": "program-dhu-winter-chinese-2027",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-information-and-communications-engineering-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-information-and-communications-engineering-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-optomechatronics-engineering-and-application-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-intelligent-system-and-manufacturing-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-electronic-science-and-technology-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-electronic-science-and-technology-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-computer-science-and-technology-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-computer-science-and-technology-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-architecture-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-architecture-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-mathematics-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-mathematics-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-civil-engineering-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-civil-engineering-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-optical-engineering-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-optical-engineering-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-physics-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-physics-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-chemistry-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-chemistry-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-biology-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-biology-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-integrated-circuit-engineering-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-integrated-circuit-engineering-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-artificial-intelligence-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-artificial-intelligence-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "/api/v1/programs/shenzhen-university-optoelectronic-information-engineering-doctorate/cycles",
+      "pass": true,
+      "programId": "program-shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "cycles": 1,
+      "reviewedFactsRoundtrip": true
+    },
+    {
+      "route": "city-university-project-navigation",
+      "pass": true,
+      "cityId": "city-shanghai",
+      "universityId": "uni-donghua-university",
+      "programId": "program-dhu-winter-chinese-2027",
+      "actualBrowserClicks": true
+    },
+    {
+      "route": "mobile-project",
+      "pass": true,
+      "geometries": [
+        {
+          "programId": "program-dhu-winter-chinese-2027",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-information-and-communications-engineering-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-electronic-science-and-technology-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-computer-science-and-technology-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-architecture-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-mathematics-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-civil-engineering-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-optical-engineering-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-physics-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-chemistry-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-biology-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-integrated-circuit-engineering-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-artificial-intelligence-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "programId": "program-shenzhen-university-optoelectronic-information-engineering-doctorate",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        }
+      ],
+      "records": 16,
+      "screenshot": "quality/recovery-20261020/release-rapid-2260e61-20261020/stable-smoke-v3/stable-project-mobile.png",
+      "screenshotSha256": "61112976c0b5be418c9c6f669aa2a553967cdb5f35f81f1c9b0d246b7cdcc65e",
+      "programId": "program-dhu-winter-chinese-2027"
+    }
+  ],
+  "universities": [
+    {
+      "route": "/en/universities/peking-university",
+      "pass": true,
+      "id": "uni-peking-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-foreign-studies-university",
+      "pass": true,
+      "id": "uni-beijing-foreign-studies-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-normal-university",
+      "pass": true,
+      "id": "uni-beijing-normal-university",
+      "currentPrograms": 1,
+      "pending": false,
+      "listedPrograms": 1
+    },
+    {
+      "route": "/en/universities/beijing-language-and-culture-university",
+      "pass": true,
+      "id": "uni-beijing-language-and-culture-university",
+      "currentPrograms": 2,
+      "pending": false,
+      "listedPrograms": 2
+    },
+    {
+      "route": "/en/universities/university-of-international-business-and-economics",
+      "pass": true,
+      "id": "uni-university-of-international-business-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/tsinghua-university",
+      "pass": true,
+      "id": "uni-tsinghua-university",
+      "currentPrograms": 34,
+      "pending": false,
+      "listedPrograms": 8
+    },
+    {
+      "route": "/en/universities/shanghai-jiao-tong-university",
+      "pass": true,
+      "id": "uni-shanghai-jiao-tong-university",
+      "currentPrograms": 2,
+      "pending": false,
+      "listedPrograms": 2
+    },
+    {
+      "route": "/en/universities/fudan-university",
+      "pass": true,
+      "id": "uni-fudan-university",
+      "currentPrograms": 1,
+      "pending": false,
+      "listedPrograms": 1
+    },
+    {
+      "route": "/en/universities/tongji-university",
+      "pass": true,
+      "id": "uni-tongji-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/east-china-normal-university",
+      "pass": true,
+      "id": "uni-east-china-normal-university",
+      "currentPrograms": 1,
+      "pending": false,
+      "listedPrograms": 1
+    },
+    {
+      "route": "/en/universities/shanghai-international-studies-university",
+      "pass": true,
+      "id": "uni-shanghai-international-studies-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/sun-yat-sen-university",
+      "pass": true,
+      "id": "uni-sun-yat-sen-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/south-china-university-of-technology",
+      "pass": true,
+      "id": "uni-south-china-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shenzhen-university",
+      "pass": true,
+      "id": "uni-shenzhen-university",
+      "currentPrograms": 15,
+      "pending": false,
+      "listedPrograms": 8
+    },
+    {
+      "route": "/en/universities/southern-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-southern-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-gongshang-university",
+      "pass": true,
+      "id": "uni-zhejiang-gongshang-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-university",
+      "pass": true,
+      "id": "uni-zhejiang-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/jinan-university",
+      "pass": true,
+      "id": "uni-jinan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-sci-tech-university",
+      "pass": true,
+      "id": "uni-zhejiang-sci-tech-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-normal-university",
+      "pass": true,
+      "id": "uni-nanjing-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-university",
+      "pass": true,
+      "id": "uni-nanjing-university",
+      "currentPrograms": 49,
+      "pending": false,
+      "listedPrograms": 8
+    },
+    {
+      "route": "/en/universities/wuhan-university",
+      "pass": true,
+      "id": "uni-wuhan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/southeast-university",
+      "pass": true,
+      "id": "uni-southeast-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/huazhong-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-huazhong-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-university-of-aeronautics-and-astronautics",
+      "pass": true,
+      "id": "uni-nanjing-university-of-aeronautics-and-astronautics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/central-china-normal-university",
+      "pass": true,
+      "id": "uni-central-china-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/wuhan-university-of-technology",
+      "pass": true,
+      "id": "uni-wuhan-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northwestern-polytechnical-university",
+      "pass": true,
+      "id": "uni-northwestern-polytechnical-university",
+      "currentPrograms": 90,
+      "pending": false,
+      "listedPrograms": 8
+    },
+    {
+      "route": "/en/universities/xian-jiaotong-university",
+      "pass": true,
+      "id": "uni-xian-jiaotong-university",
+      "currentPrograms": 2,
+      "pending": false,
+      "listedPrograms": 2
+    },
+    {
+      "route": "/en/universities/xidian-university",
+      "pass": true,
+      "id": "uni-xidian-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/sichuan-university",
+      "pass": true,
+      "id": "uni-sichuan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/southwestern-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-southwestern-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/university-of-electronic-science-and-technology-of-china",
+      "pass": true,
+      "id": "uni-university-of-electronic-science-and-technology-of-china",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/southwest-university",
+      "pass": true,
+      "id": "uni-southwest-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/tianjin-university",
+      "pass": true,
+      "id": "uni-tianjin-university",
+      "currentPrograms": 244,
+      "pending": false,
+      "listedPrograms": 8
+    },
+    {
+      "route": "/en/universities/chongqing-university",
+      "pass": true,
+      "id": "uni-chongqing-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nankai-university",
+      "pass": true,
+      "id": "uni-nankai-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/harbin-engineering-university",
+      "pass": true,
+      "id": "uni-harbin-engineering-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/heilongjiang-university",
+      "pass": true,
+      "id": "uni-heilongjiang-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/harbin-institute-of-technology",
+      "pass": true,
+      "id": "uni-harbin-institute-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-university-of-technology",
+      "pass": true,
+      "id": "uni-beijing-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/renmin-university-of-china",
+      "pass": true,
+      "id": "uni-renmin-university-of-china",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-jiaotong-university",
+      "pass": true,
+      "id": "uni-beijing-jiaotong-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beihang-university",
+      "pass": true,
+      "id": "uni-beihang-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/university-of-science-and-technology-beijing",
+      "pass": true,
+      "id": "uni-university-of-science-and-technology-beijing",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-institute-of-technology",
+      "pass": true,
+      "id": "uni-beijing-institute-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-university-of-chemical-technology",
+      "pass": true,
+      "id": "uni-beijing-university-of-chemical-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-agricultural-university",
+      "pass": true,
+      "id": "uni-china-agricultural-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-forestry-university",
+      "pass": true,
+      "id": "uni-beijing-forestry-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/central-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-central-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-university-of-chinese-medicine",
+      "pass": true,
+      "id": "uni-beijing-university-of-chinese-medicine",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-foreign-affairs-university",
+      "pass": true,
+      "id": "uni-china-foreign-affairs-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/communication-university-of-china",
+      "pass": true,
+      "id": "uni-communication-university-of-china",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-sport-university",
+      "pass": true,
+      "id": "uni-beijing-sport-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/central-conservatory-of-music",
+      "pass": true,
+      "id": "uni-central-conservatory-of-music",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-conservatory-of-music",
+      "pass": true,
+      "id": "uni-china-conservatory-of-music",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/minzu-university-of-china",
+      "pass": true,
+      "id": "uni-minzu-university-of-china",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-university-of-political-science-and-law",
+      "pass": true,
+      "id": "uni-china-university-of-political-science-and-law",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/tiangong-university",
+      "pass": true,
+      "id": "uni-tiangong-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/north-china-electric-power-university",
+      "pass": true,
+      "id": "uni-north-china-electric-power-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hebei-university-of-technology",
+      "pass": true,
+      "id": "uni-hebei-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/taiyuan-university-of-technology",
+      "pass": true,
+      "id": "uni-taiyuan-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanxi-university",
+      "pass": true,
+      "id": "uni-shanxi-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/tianjin-university-of-traditional-chinese-medicine",
+      "pass": true,
+      "id": "uni-tianjin-university-of-traditional-chinese-medicine",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/inner-mongolia-university",
+      "pass": true,
+      "id": "uni-inner-mongolia-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/liaoning-university",
+      "pass": true,
+      "id": "uni-liaoning-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/dalian-university-of-technology",
+      "pass": true,
+      "id": "uni-dalian-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northeastern-university-china",
+      "pass": true,
+      "id": "uni-northeastern-university-china",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/jilin-university",
+      "pass": true,
+      "id": "uni-jilin-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/yanbian-university",
+      "pass": true,
+      "id": "uni-yanbian-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northeast-agricultural-university",
+      "pass": true,
+      "id": "uni-northeast-agricultural-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northeast-forestry-university",
+      "pass": true,
+      "id": "uni-northeast-forestry-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/east-china-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-east-china-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/donghua-university",
+      "pass": true,
+      "id": "uni-donghua-university",
+      "currentPrograms": 1,
+      "pending": false,
+      "listedPrograms": 1
+    },
+    {
+      "route": "/en/universities/dalian-maritime-university",
+      "pass": true,
+      "id": "uni-dalian-maritime-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-ocean-university",
+      "pass": true,
+      "id": "uni-shanghai-ocean-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-shanghai-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-conservatory-of-music",
+      "pass": true,
+      "id": "uni-shanghai-conservatory-of-music",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-university-of-traditional-chinese-medicine",
+      "pass": true,
+      "id": "uni-shanghai-university-of-traditional-chinese-medicine",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-university-of-sport",
+      "pass": true,
+      "id": "uni-shanghai-university-of-sport",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/soochow-university",
+      "pass": true,
+      "id": "uni-soochow-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-university",
+      "pass": true,
+      "id": "uni-shanghai-university",
+      "currentPrograms": 1,
+      "pending": false,
+      "listedPrograms": 1
+    },
+    {
+      "route": "/en/universities/nanjing-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-nanjing-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-university-of-information-science-and-technology",
+      "pass": true,
+      "id": "uni-nanjing-university-of-information-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-university-of-posts-and-telecommunications",
+      "pass": true,
+      "id": "uni-nanjing-university-of-posts-and-telecommunications",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/jiangnan-university",
+      "pass": true,
+      "id": "uni-jiangnan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-university-of-mining-and-technology",
+      "pass": true,
+      "id": "uni-china-university-of-mining-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-forestry-university",
+      "pass": true,
+      "id": "uni-nanjing-forestry-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hohai-university",
+      "pass": true,
+      "id": "uni-hohai-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-agricultural-university",
+      "pass": true,
+      "id": "uni-nanjing-agricultural-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/anhui-university",
+      "pass": true,
+      "id": "uni-anhui-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-medical-university",
+      "pass": true,
+      "id": "uni-nanjing-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-academy-of-art",
+      "pass": true,
+      "id": "uni-china-academy-of-art",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-pharmaceutical-university",
+      "pass": true,
+      "id": "uni-china-pharmaceutical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/university-of-science-and-technology-of-china",
+      "pass": true,
+      "id": "uni-university-of-science-and-technology-of-china",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/xiamen-university",
+      "pass": true,
+      "id": "uni-xiamen-university",
+      "currentPrograms": 335,
+      "pending": false,
+      "listedPrograms": 8
+    },
+    {
+      "route": "/en/universities/fuzhou-university",
+      "pass": true,
+      "id": "uni-fuzhou-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanchang-university",
+      "pass": true,
+      "id": "uni-nanchang-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hefei-university-of-technology",
+      "pass": true,
+      "id": "uni-hefei-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shandong-university",
+      "pass": true,
+      "id": "uni-shandong-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/ocean-university-of-china",
+      "pass": true,
+      "id": "uni-ocean-university-of-china",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhengzhou-university",
+      "pass": true,
+      "id": "uni-zhengzhou-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-university-of-petroleum-east-china",
+      "pass": true,
+      "id": "uni-china-university-of-petroleum-east-china",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/huazhong-agricultural-university",
+      "pass": true,
+      "id": "uni-huazhong-agricultural-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/henan-university",
+      "pass": true,
+      "id": "uni-henan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhongnan-university-of-economics-and-law",
+      "pass": true,
+      "id": "uni-zhongnan-university-of-economics-and-law",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-university-of-geosciences-wuhan",
+      "pass": true,
+      "id": "uni-china-university-of-geosciences-wuhan",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/xiangtan-university",
+      "pass": true,
+      "id": "uni-xiangtan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/central-south-university",
+      "pass": true,
+      "id": "uni-central-south-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hunan-normal-university",
+      "pass": true,
+      "id": "uni-hunan-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangzhou-medical-university",
+      "pass": true,
+      "id": "uni-guangzhou-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/south-china-agricultural-university",
+      "pass": true,
+      "id": "uni-south-china-agricultural-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hunan-university",
+      "pass": true,
+      "id": "uni-hunan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/south-china-normal-university",
+      "pass": true,
+      "id": "uni-south-china-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northwest-a-and-f-university",
+      "pass": true,
+      "id": "uni-northwest-a-and-f-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/southwest-jiaotong-university",
+      "pass": true,
+      "id": "uni-southwest-jiaotong-university",
+      "currentPrograms": 2,
+      "pending": false,
+      "listedPrograms": 2
+    },
+    {
+      "route": "/en/universities/guangxi-university",
+      "pass": true,
+      "id": "uni-guangxi-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/lanzhou-university",
+      "pass": true,
+      "id": "uni-lanzhou-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hainan-university",
+      "pass": true,
+      "id": "uni-hainan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangdong-university-of-foreign-studies",
+      "pass": true,
+      "id": "uni-guangdong-university-of-foreign-studies",
+      "currentPrograms": 2,
+      "pending": false,
+      "listedPrograms": 2
+    },
+    {
+      "route": "/en/universities/xian-international-studies-university",
+      "pass": true,
+      "id": "uni-xian-international-studies-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-normal-university",
+      "pass": true,
+      "id": "uni-shanghai-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/wenzhou-medical-university",
+      "pass": true,
+      "id": "uni-wenzhou-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/changan-university",
+      "pass": true,
+      "id": "uni-changan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-audit-university",
+      "pass": true,
+      "id": "uni-nanjing-audit-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/wenzhou-kean-university",
+      "pass": true,
+      "id": "uni-wenzhou-kean-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-university-of-posts-and-telecommunications",
+      "pass": true,
+      "id": "uni-beijing-university-of-posts-and-telecommunications",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-chinese-medical-university",
+      "pass": true,
+      "id": "uni-zhejiang-chinese-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guizhou-university",
+      "pass": true,
+      "id": "uni-guizhou-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/tianjin-normal-university",
+      "pass": true,
+      "id": "uni-tianjin-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hangzhou-normal-university",
+      "pass": true,
+      "id": "uni-hangzhou-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/xinjiang-university",
+      "pass": true,
+      "id": "uni-xinjiang-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shaanxi-normal-university",
+      "pass": true,
+      "id": "uni-shaanxi-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-university-of-petroleum-beijing",
+      "pass": true,
+      "id": "uni-china-university-of-petroleum-beijing",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/chengdu-university-of-traditional-chinese-medicine",
+      "pass": true,
+      "id": "uni-chengdu-university-of-traditional-chinese-medicine",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/chongqing-university-of-posts-and-telecommunications",
+      "pass": true,
+      "id": "uni-chongqing-university-of-posts-and-telecommunications",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/chengdu-university-of-technology",
+      "pass": true,
+      "id": "uni-chengdu-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/yunnan-university",
+      "pass": true,
+      "id": "uni-yunnan-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/chongqing-medical-university",
+      "pass": true,
+      "id": "uni-chongqing-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/dalian-medical-university",
+      "pass": true,
+      "id": "uni-dalian-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/dongbei-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-dongbei-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/fujian-normal-university",
+      "pass": true,
+      "id": "uni-fujian-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangxi-medical-university",
+      "pass": true,
+      "id": "uni-guangxi-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northeast-normal-university",
+      "pass": true,
+      "id": "uni-northeast-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangzhou-university",
+      "pass": true,
+      "id": "uni-guangzhou-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/huaqiao-university",
+      "pass": true,
+      "id": "uni-huaqiao-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hangzhou-dianzi-university",
+      "pass": true,
+      "id": "uni-hangzhou-dianzi-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangzhou-university-of-chinese-medicine",
+      "pass": true,
+      "id": "uni-guangzhou-university-of-chinese-medicine",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/harbin-normal-university",
+      "pass": true,
+      "id": "uni-harbin-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guizhou-normal-university",
+      "pass": true,
+      "id": "uni-guizhou-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/qinghai-university",
+      "pass": true,
+      "id": "uni-qinghai-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/ningxia-university",
+      "pass": true,
+      "id": "uni-ningxia-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/ningbo-university",
+      "pass": true,
+      "id": "uni-ningbo-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/southern-medical-university",
+      "pass": true,
+      "id": "uni-southern-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/kunming-medical-university",
+      "pass": true,
+      "id": "uni-kunming-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/jiangsu-university",
+      "pass": true,
+      "id": "uni-jiangsu-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shandong-normal-university",
+      "pass": true,
+      "id": "uni-shandong-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-maritime-university",
+      "pass": true,
+      "id": "uni-shanghai-maritime-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/university-of-shanghai-for-science-and-technology",
+      "pass": true,
+      "id": "uni-university-of-shanghai-for-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-university-of-international-business-and-economics",
+      "pass": true,
+      "id": "uni-shanghai-university-of-international-business-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shantou-university",
+      "pass": true,
+      "id": "uni-shantou-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shenyang-pharmaceutical-university",
+      "pass": true,
+      "id": "uni-shenyang-pharmaceutical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shihezi-university",
+      "pass": true,
+      "id": "uni-shihezi-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/capital-normal-university",
+      "pass": true,
+      "id": "uni-capital-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/sichuan-agricultural-university",
+      "pass": true,
+      "id": "uni-sichuan-agricultural-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/capital-university-of-economics-and-business",
+      "pass": true,
+      "id": "uni-capital-university-of-economics-and-business",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/tianjin-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-tianjin-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/sichuan-international-studies-university",
+      "pass": true,
+      "id": "uni-sichuan-international-studies-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/sichuan-normal-university",
+      "pass": true,
+      "id": "uni-sichuan-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northwest-university",
+      "pass": true,
+      "id": "uni-northwest-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/tianjin-foreign-studies-university",
+      "pass": true,
+      "id": "uni-tianjin-foreign-studies-university",
+      "currentPrograms": 1,
+      "pending": false,
+      "listedPrograms": 1
+    },
+    {
+      "route": "/en/universities/tibet-university",
+      "pass": true,
+      "id": "uni-tibet-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/yunnan-normal-university",
+      "pass": true,
+      "id": "uni-yunnan-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/southwest-petroleum-university",
+      "pass": true,
+      "id": "uni-southwest-petroleum-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-jiliang-university",
+      "pass": true,
+      "id": "uni-china-jiliang-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-normal-university",
+      "pass": true,
+      "id": "uni-zhejiang-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-zhejiang-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/university-of-chinese-academy-of-sciences",
+      "pass": true,
+      "id": "uni-university-of-chinese-academy-of-sciences",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-university-of-geosciences-beijing",
+      "pass": true,
+      "id": "uni-china-university-of-geosciences-beijing",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-university-of-technology",
+      "pass": true,
+      "id": "uni-zhejiang-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/central-academy-of-fine-arts",
+      "pass": true,
+      "id": "uni-central-academy-of-fine-arts",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/central-academy-of-drama",
+      "pass": true,
+      "id": "uni-central-academy-of-drama",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/wenzhou-university",
+      "pass": true,
+      "id": "uni-wenzhou-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/china-university-of-mining-and-technology-beijing",
+      "pass": true,
+      "id": "uni-china-university-of-mining-and-technology-beijing",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/minnan-normal-university",
+      "pass": true,
+      "id": "uni-minnan-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/chongqing-normal-university",
+      "pass": true,
+      "id": "uni-chongqing-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/qingdao-university",
+      "pass": true,
+      "id": "uni-qingdao-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/university-of-jinan",
+      "pass": true,
+      "id": "uni-university-of-jinan",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hubei-university",
+      "pass": true,
+      "id": "uni-hubei-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-af-university",
+      "pass": true,
+      "id": "uni-zhejiang-af-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hebei-university",
+      "pass": true,
+      "id": "uni-hebei-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/yantai-university",
+      "pass": true,
+      "id": "uni-yantai-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/dalian-university-of-foreign-languages",
+      "pass": true,
+      "id": "uni-dalian-university-of-foreign-languages",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-institute-of-petrochemical-technology",
+      "pass": true,
+      "id": "uni-beijing-institute-of-petrochemical-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/anhui-medical-university",
+      "pass": true,
+      "id": "uni-anhui-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangdong-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-guangdong-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guilin-medical-university",
+      "pass": true,
+      "id": "uni-guilin-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/jiangsu-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-jiangsu-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guizhou-medical-university",
+      "pass": true,
+      "id": "uni-guizhou-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/kunming-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-kunming-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nantong-university",
+      "pass": true,
+      "id": "uni-nantong-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shandong-jianzhu-university",
+      "pass": true,
+      "id": "uni-shandong-jianzhu-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/qingdao-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-qingdao-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanxi-university-of-chinese-medicine",
+      "pass": true,
+      "id": "uni-shanxi-university-of-chinese-medicine",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/north-china-university-of-technology",
+      "pass": true,
+      "id": "uni-north-china-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/xinjiang-agricultural-university",
+      "pass": true,
+      "id": "uni-xinjiang-agricultural-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/jining-medical-university",
+      "pass": true,
+      "id": "uni-jining-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/xuzhou-medical-university",
+      "pass": true,
+      "id": "uni-xuzhou-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/yangzhou-university",
+      "pass": true,
+      "id": "uni-yangzhou-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/zhejiang-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-zhejiang-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/yunnan-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-yunnan-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/yangtze-university",
+      "pass": true,
+      "id": "uni-yangtze-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/dongguan-university-of-technology",
+      "pass": true,
+      "id": "uni-dongguan-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/fujian-medical-university",
+      "pass": true,
+      "id": "uni-fujian-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangdong-medical-university",
+      "pass": true,
+      "id": "uni-guangdong-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangxi-normal-university",
+      "pass": true,
+      "id": "uni-guangxi-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangxi-university-of-chinese-medicine",
+      "pass": true,
+      "id": "uni-guangxi-university-of-chinese-medicine",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guilin-university-of-electronic-technology",
+      "pass": true,
+      "id": "uni-guilin-university-of-electronic-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shenzhen-technology-university",
+      "pass": true,
+      "id": "uni-shenzhen-technology-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shandong-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-shandong-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-technology-and-business-university",
+      "pass": true,
+      "id": "uni-beijing-technology-and-business-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/east-china-university-of-political-science-and-law",
+      "pass": true,
+      "id": "uni-east-china-university-of-political-science-and-law",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/changsha-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-changsha-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/jiangxi-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-jiangxi-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-university-of-finance-and-economics",
+      "pass": true,
+      "id": "uni-nanjing-university-of-finance-and-economics",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-international-studies-university",
+      "pass": true,
+      "id": "uni-beijing-international-studies-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-lixin-university-of-accounting-and-finance",
+      "pass": true,
+      "id": "uni-shanghai-lixin-university-of-accounting-and-finance",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/wuhan-university-of-science-and-technology",
+      "pass": true,
+      "id": "uni-wuhan-university-of-science-and-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/beijing-wuzi-university",
+      "pass": true,
+      "id": "uni-beijing-wuzi-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/chengdu-university-of-information-technology",
+      "pass": true,
+      "id": "uni-chengdu-university-of-information-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hunan-university-of-technology-and-business",
+      "pass": true,
+      "id": "uni-hunan-university-of-technology-and-business",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/communication-university-of-zhejiang",
+      "pass": true,
+      "id": "uni-communication-university-of-zhejiang",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northwest-university-of-political-science-and-law",
+      "pass": true,
+      "id": "uni-northwest-university-of-political-science-and-law",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-university-of-electric-power",
+      "pass": true,
+      "id": "uni-shanghai-university-of-electric-power",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-university-of-political-science-and-law",
+      "pass": true,
+      "id": "uni-shanghai-university-of-political-science-and-law",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/wuhan-textile-university",
+      "pass": true,
+      "id": "uni-wuhan-textile-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hainan-normal-university",
+      "pass": true,
+      "id": "uni-hainan-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangxi-minzu-university",
+      "pass": true,
+      "id": "uni-guangxi-minzu-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/henan-normal-university",
+      "pass": true,
+      "id": "uni-henan-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/jiangxi-normal-university",
+      "pass": true,
+      "id": "uni-jiangxi-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/liaoning-normal-university",
+      "pass": true,
+      "id": "uni-liaoning-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/nanjing-tech-university",
+      "pass": true,
+      "id": "uni-nanjing-tech-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northwest-normal-university",
+      "pass": true,
+      "id": "uni-northwest-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shenyang-normal-university",
+      "pass": true,
+      "id": "uni-shenyang-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/xinjiang-normal-university",
+      "pass": true,
+      "id": "uni-xinjiang-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shanghai-theatre-academy",
+      "pass": true,
+      "id": "uni-shanghai-theatre-academy",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangdong-pharmaceutical-university",
+      "pass": true,
+      "id": "uni-guangdong-pharmaceutical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangzhou-academy-of-fine-arts",
+      "pass": true,
+      "id": "uni-guangzhou-academy-of-fine-arts",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/hebei-normal-university",
+      "pass": true,
+      "id": "uni-hebei-normal-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guilin-university-of-technology",
+      "pass": true,
+      "id": "uni-guilin-university-of-technology",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/guangdong-ocean-university",
+      "pass": true,
+      "id": "uni-guangdong-ocean-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/ningxia-medical-university",
+      "pass": true,
+      "id": "uni-ningxia-medical-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/northeast-electric-power-university",
+      "pass": true,
+      "id": "uni-northeast-electric-power-university",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/sichuan-fine-arts-institute",
+      "pass": true,
+      "id": "uni-sichuan-fine-arts-institute",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    },
+    {
+      "route": "/en/universities/shandong-university-of-traditional-chinese-medicine",
+      "pass": true,
+      "id": "uni-shandong-university-of-traditional-chinese-medicine",
+      "currentPrograms": 0,
+      "pending": true,
+      "listedPrograms": 0
+    }
+  ],
+  "details": [
+    {
+      "route": "/en/programs/shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/dhu-winter-chinese-2027",
+      "pass": true,
+      "programId": "program-dhu-winter-chinese-2027",
+      "locale": "en",
+      "eligibility": 3,
+      "applicationMaterials": 4,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "January 6 – January 26, 2027",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://english.dhu.edu.cn/_t1264/2021/0702/c5220a369798/page.psp",
+      "unknownOpeningSourceCta": true
+    },
+    {
+      "route": "/en/programs/shenzhen-university-information-and-communications-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-information-and-communications-engineering-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/dhu-winter-chinese-2027",
+      "pass": true,
+      "programId": "program-dhu-winter-chinese-2027",
+      "locale": "zh",
+      "eligibility": 3,
+      "applicationMaterials": 4,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "January 6 – January 26, 2027",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://english.dhu.edu.cn/_t1264/2021/0702/c5220a369798/page.psp",
+      "unknownOpeningSourceCta": true
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-information-and-communications-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-information-and-communications-engineering-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/dhu-winter-chinese-2027",
+      "pass": true,
+      "programId": "program-dhu-winter-chinese-2027",
+      "locale": "ru",
+      "eligibility": 3,
+      "applicationMaterials": 4,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "January 6 – January 26, 2027",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://english.dhu.edu.cn/_t1264/2021/0702/c5220a369798/page.psp",
+      "unknownOpeningSourceCta": true
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-information-and-communications-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-information-and-communications-engineering-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-information-and-communications-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-information-and-communications-engineering-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/dhu-winter-chinese-2027",
+      "pass": true,
+      "programId": "program-dhu-winter-chinese-2027",
+      "locale": "de",
+      "eligibility": 3,
+      "applicationMaterials": 4,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "January 6 – January 26, 2027",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://english.dhu.edu.cn/_t1264/2021/0702/c5220a369798/page.psp",
+      "unknownOpeningSourceCta": true
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/dhu-winter-chinese-2027",
+      "pass": true,
+      "programId": "program-dhu-winter-chinese-2027",
+      "locale": "fr",
+      "eligibility": 3,
+      "applicationMaterials": 4,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "January 6 – January 26, 2027",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://english.dhu.edu.cn/_t1264/2021/0702/c5220a369798/page.psp",
+      "unknownOpeningSourceCta": true
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-information-and-communications-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-information-and-communications-engineering-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optomechatronics-engineering-and-application-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/dhu-winter-chinese-2027",
+      "pass": true,
+      "programId": "program-dhu-winter-chinese-2027",
+      "locale": "es",
+      "eligibility": 3,
+      "applicationMaterials": 4,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "January 6 – January 26, 2027",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://english.dhu.edu.cn/_t1264/2021/0702/c5220a369798/page.psp",
+      "unknownOpeningSourceCta": true
+    },
+    {
+      "route": "/es/programs/shenzhen-university-information-and-communications-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-information-and-communications-engineering-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-computer-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-computer-science-and-technology-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-electronic-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-electronic-science-and-technology-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-computer-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-computer-science-and-technology-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-electronic-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-electronic-science-and-technology-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-computer-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-computer-science-and-technology-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-electronic-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-electronic-science-and-technology-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-computer-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-computer-science-and-technology-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-electronic-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-electronic-science-and-technology-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-computer-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-computer-science-and-technology-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-electronic-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-electronic-science-and-technology-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-computer-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-computer-science-and-technology-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-intelligent-system-and-manufacturing-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-electronic-science-and-technology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-electronic-science-and-technology-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-civil-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-civil-engineering-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-architecture-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-architecture-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-mathematics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-mathematics-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-civil-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-civil-engineering-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-architecture-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-architecture-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-mathematics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-mathematics-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-civil-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-civil-engineering-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-architecture-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-architecture-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-mathematics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-mathematics-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-civil-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-civil-engineering-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-architecture-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-architecture-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-mathematics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-mathematics-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-civil-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-civil-engineering-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-architecture-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-architecture-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-mathematics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-mathematics-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-civil-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-civil-engineering-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-architecture-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-architecture-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-mathematics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-mathematics-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-chemistry-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-chemistry-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-physics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-physics-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-optical-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optical-engineering-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-chemistry-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-chemistry-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-optical-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optical-engineering-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-physics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-physics-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-chemistry-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-chemistry-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-optical-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optical-engineering-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-physics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-physics-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-chemistry-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-chemistry-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-optical-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optical-engineering-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-physics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-physics-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-optical-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optical-engineering-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-physics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-physics-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-optical-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optical-engineering-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-chemistry-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-chemistry-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-physics-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-physics-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-chemistry-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-chemistry-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-biology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-biology-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-integrated-circuit-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-integrated-circuit-engineering-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-artificial-intelligence-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-artificial-intelligence-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-biology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-biology-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-integrated-circuit-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-integrated-circuit-engineering-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-artificial-intelligence-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-artificial-intelligence-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-integrated-circuit-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-integrated-circuit-engineering-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-biology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-biology-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-artificial-intelligence-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-artificial-intelligence-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-integrated-circuit-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-integrated-circuit-engineering-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-biology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-biology-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-artificial-intelligence-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-artificial-intelligence-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-integrated-circuit-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-integrated-circuit-engineering-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-biology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-biology-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-artificial-intelligence-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-artificial-intelligence-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-integrated-circuit-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-integrated-circuit-engineering-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-biology-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-biology-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-artificial-intelligence-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-artificial-intelligence-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/en/programs/shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "locale": "en",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 months",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/zh/programs/shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "locale": "zh",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 个月",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/ru/programs/shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "locale": "ru",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 месяцев",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/de/programs/shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "locale": "de",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 Monate",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/fr/programs/shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "locale": "fr",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 mois",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    },
+    {
+      "route": "/es/programs/shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "pass": true,
+      "programId": "program-shenzhen-university-optoelectronic-information-engineering-doctorate",
+      "locale": "es",
+      "eligibility": 4,
+      "applicationMaterials": 14,
+      "completeReviewedTextVisible": true,
+      "exactDuration": "48 meses",
+      "teachingLanguages": [
+        "English"
+      ],
+      "tuitionStatus": "confirmed",
+      "primaryHref": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10",
+      "unknownOpeningSourceCta": false
+    }
+  ],
+  "errors": [],
+  "consoleErrors": [],
+  "cleanup": [],
+  "scholarshipDetails": [
+    {
+      "route": "/en/scholarships/szu-liyuan-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-liyuan-doctoral-spring-2027",
+      "locale": "en",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/en/scholarships/szu-universiade-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-universiade-doctoral-spring-2027",
+      "locale": "en",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/en/scholarships/szu-guangdong-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-guangdong-doctoral-spring-2027",
+      "locale": "en",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/zh/scholarships/szu-liyuan-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-liyuan-doctoral-spring-2027",
+      "locale": "zh",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/zh/scholarships/szu-universiade-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-universiade-doctoral-spring-2027",
+      "locale": "zh",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/zh/scholarships/szu-guangdong-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-guangdong-doctoral-spring-2027",
+      "locale": "zh",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/ru/scholarships/szu-liyuan-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-liyuan-doctoral-spring-2027",
+      "locale": "ru",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/ru/scholarships/szu-universiade-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-universiade-doctoral-spring-2027",
+      "locale": "ru",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/ru/scholarships/szu-guangdong-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-guangdong-doctoral-spring-2027",
+      "locale": "ru",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/de/scholarships/szu-liyuan-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-liyuan-doctoral-spring-2027",
+      "locale": "de",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/de/scholarships/szu-universiade-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-universiade-doctoral-spring-2027",
+      "locale": "de",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/de/scholarships/szu-guangdong-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-guangdong-doctoral-spring-2027",
+      "locale": "de",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/fr/scholarships/szu-liyuan-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-liyuan-doctoral-spring-2027",
+      "locale": "fr",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/fr/scholarships/szu-universiade-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-universiade-doctoral-spring-2027",
+      "locale": "fr",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/fr/scholarships/szu-guangdong-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-guangdong-doctoral-spring-2027",
+      "locale": "fr",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/es/scholarships/szu-liyuan-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-liyuan-doctoral-spring-2027",
+      "locale": "es",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/es/scholarships/szu-universiade-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-universiade-doctoral-spring-2027",
+      "locale": "es",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/es/scholarships/szu-guangdong-doctoral-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-szu-guangdong-doctoral-spring-2027",
+      "locale": "es",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2027-03&lxslbm=10"
+    },
+    {
+      "route": "/en/scholarships/blcu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-blcu-iclt-one-semester-spring-2027",
+      "locale": "en",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/en/scholarships/shanghai-normal-iclt-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-shanghai-normal-iclt-spring-2027",
+      "locale": "en",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/en/scholarships/snnu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-snnu-iclt-one-semester-spring-2027",
+      "locale": "en",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://snnu.17gz.org/member/login.do"
+    },
+    {
+      "route": "/zh/scholarships/blcu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-blcu-iclt-one-semester-spring-2027",
+      "locale": "zh",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/zh/scholarships/shanghai-normal-iclt-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-shanghai-normal-iclt-spring-2027",
+      "locale": "zh",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/zh/scholarships/snnu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-snnu-iclt-one-semester-spring-2027",
+      "locale": "zh",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://snnu.17gz.org/member/login.do"
+    },
+    {
+      "route": "/ru/scholarships/blcu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-blcu-iclt-one-semester-spring-2027",
+      "locale": "ru",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/ru/scholarships/snnu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-snnu-iclt-one-semester-spring-2027",
+      "locale": "ru",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://snnu.17gz.org/member/login.do"
+    },
+    {
+      "route": "/ru/scholarships/shanghai-normal-iclt-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-shanghai-normal-iclt-spring-2027",
+      "locale": "ru",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/de/scholarships/blcu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-blcu-iclt-one-semester-spring-2027",
+      "locale": "de",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/fr/scholarships/blcu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-blcu-iclt-one-semester-spring-2027",
+      "locale": "fr",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/de/scholarships/snnu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-snnu-iclt-one-semester-spring-2027",
+      "locale": "de",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://snnu.17gz.org/member/login.do"
+    },
+    {
+      "route": "/de/scholarships/shanghai-normal-iclt-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-shanghai-normal-iclt-spring-2027",
+      "locale": "de",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/fr/scholarships/snnu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-snnu-iclt-one-semester-spring-2027",
+      "locale": "fr",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://snnu.17gz.org/member/login.do"
+    },
+    {
+      "route": "/es/scholarships/blcu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-blcu-iclt-one-semester-spring-2027",
+      "locale": "es",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/fr/scholarships/shanghai-normal-iclt-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-shanghai-normal-iclt-spring-2027",
+      "locale": "fr",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/es/scholarships/snnu-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-snnu-iclt-one-semester-spring-2027",
+      "locale": "es",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://snnu.17gz.org/member/login.do"
+    },
+    {
+      "route": "/es/scholarships/shanghai-normal-iclt-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-shanghai-normal-iclt-spring-2027",
+      "locale": "es",
+      "completeReviewedTextVisible": true,
+      "eligibility": 9,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/en/scholarships/tongji-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-tongji-iclt-one-semester-spring-2027",
+      "locale": "en",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/zh/scholarships/tongji-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-tongji-iclt-one-semester-spring-2027",
+      "locale": "zh",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/ru/scholarships/tongji-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-tongji-iclt-one-semester-spring-2027",
+      "locale": "ru",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/de/scholarships/tongji-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-tongji-iclt-one-semester-spring-2027",
+      "locale": "de",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/fr/scholarships/tongji-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-tongji-iclt-one-semester-spring-2027",
+      "locale": "fr",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    },
+    {
+      "route": "/es/scholarships/tongji-iclt-one-semester-spring-2027",
+      "pass": true,
+      "scholarshipId": "scholarship-tongji-iclt-one-semester-spring-2027",
+      "locale": "es",
+      "completeReviewedTextVisible": true,
+      "eligibility": 8,
+      "officialApplication": "https://www.chinese.cn/page/#/pcpage/project_detail"
+    }
+  ],
+  "completedAt": "2026-10-20T10:07:01.630Z"
+}

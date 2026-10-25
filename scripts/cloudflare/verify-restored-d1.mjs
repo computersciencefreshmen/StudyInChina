@@ -1,6 +1,7 @@
 import { readdirSync } from 'node:fs'
 import { basename, join, resolve } from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
+import { createHash } from 'node:crypto'
 
 const [stateDirectory, kind] = process.argv.slice(2)
 
@@ -39,6 +40,24 @@ const requiredTables =
         'ingestion_jobs',
         'ingestion_snapshots',
         'ingestion_candidates',
+        'maintenance_control',
+        'maintenance_schools',
+        'maintenance_sources',
+        'maintenance_source_schools',
+        'maintenance_jobs',
+        'maintenance_observations',
+        'maintenance_robots',
+        'maintenance_document_derivatives',
+        'maintenance_document_failures',
+        'maintenance_legacy_guards',
+        'maintenance_model_attempts',
+        'maintenance_proposals',
+        'maintenance_record_targets',
+        'maintenance_target_sources',
+        'maintenance_target_refreshes',
+        'maintenance_exports',
+        'maintenance_events',
+        'maintenance_transaction_guards',
       ]
 
 const markerTable = requiredTables[0]
@@ -196,6 +215,54 @@ try {
       ingestionJobs: counts.ingestion_jobs,
       ingestionSnapshots: counts.ingestion_snapshots,
       ingestionCandidates: counts.ingestion_candidates,
+    }
+    const controls = database.prepare('SELECT * FROM maintenance_control').all()
+    if (!controls.length) {
+      const hasState = requiredTables.filter(table => table.startsWith('maintenance_'))
+        .some(table => database.prepare(`SELECT COUNT(*) count FROM ${table}`).get().count > 0)
+      if (hasState) throw new Error('Pipeline maintenance state exists without its control checkpoint')
+      report.maintenance = { state: 'not_initialized', resumable: false, checkpointValidated: false,
+        evidenceObjectsVerified: false, durableObjectReservationsVerified: false }
+    } else {
+      if (controls.length !== 1 || controls[0].singleton !== 1) throw new Error('Pipeline maintenance restore has no unique control checkpoint')
+      const control = controls[0], hash = /^[a-f0-9]{64}$/u
+      for (const field of ['scope_sha256', 'input_catalog_sha256', 'seed_sha256', 'legacy_guard_sha256']) {
+        if (!hash.test(control[field])) throw new Error(`Pipeline maintenance control has invalid ${field}`)
+      }
+      const schools = database.prepare('SELECT university_id,scope_sha256 FROM maintenance_schools').all()
+      if (control.seed_complete && (schools.length !== 272 || schools.some(row => row.scope_sha256 !== control.scope_sha256)
+          || control.seed_offset !== control.seed_total)) throw new Error('Pipeline completed maintenance seed is incomplete or has a different scope')
+      let canary
+      try { canary = JSON.parse(control.canary_json) } catch { throw new Error('Pipeline maintenance canary is invalid JSON') }
+      if (!Array.isArray(canary) || new Set(canary).size !== canary.length || canary.some(id => !schools.some(school => school.university_id === id))) {
+        throw new Error('Pipeline maintenance canary is outside the restored school scope')
+      }
+      const invalidJobs = database.prepare("SELECT COUNT(*) count FROM maintenance_jobs WHERE (status='running' AND (lease_token IS NULL OR lease_until IS NULL)) OR (status<>'running' AND (lease_token IS NOT NULL OR lease_until IS NOT NULL))").get().count
+      if (invalidJobs) throw new Error('Pipeline maintenance jobs have inconsistent lease state')
+      const invalidAttempts = database.prepare("SELECT COUNT(*) count FROM maintenance_model_attempts WHERE status='completed' AND (output_key IS NULL OR output_sha256 IS NULL)").get().count
+      if (invalidAttempts) throw new Error('Pipeline completed model attempts have missing immutable artifact references')
+      if (database.prepare('SELECT COUNT(*) count FROM maintenance_transaction_guards').get().count) throw new Error('Pipeline maintenance transaction fences were not cleanly committed')
+      for (const row of database.prepare("SELECT * FROM maintenance_exports WHERE status IN('applied','published','rejected')").all()) {
+        let ack
+        try { ack = JSON.parse(row.acknowledgement_json) } catch { throw new Error('Pipeline maintenance publication acknowledgement is invalid JSON') }
+        const checksum = createHash('sha256').update(row.acknowledgement_json ?? '').digest('hex')
+        if (!ack || checksum !== row.acknowledgement_sha256 || ack.batchId !== row.batch_id || ack.outcome !== row.status
+            || !/^([a-f0-9]{40}|[a-f0-9]{64})$/u.test(ack.sourceCommit ?? '') || !hash.test(ack.receiptSha256 ?? '')
+            || !hash.test(ack.newInputCatalogSha256 ?? '') || !Array.isArray(ack.acceptedProposalIds) || !Array.isArray(ack.heldProposalIds)
+            || row.status === 'published' && (!/^dpl_[a-zA-Z0-9]{1,100}$/u.test(ack.deploymentId ?? '') || !hash.test(ack.stableProofSha256 ?? ''))) {
+          throw new Error('Pipeline maintenance publication acknowledgement failed its checksum or publication contract')
+        }
+      }
+      report.maintenance = {
+        state: 'checkpoint_validated', resumable: false, checkpointValidated: true,
+        seedComplete: Boolean(control.seed_complete), schools: schools.length,
+        jobs: database.prepare('SELECT status,COUNT(*) count FROM maintenance_jobs GROUP BY status').all(),
+        modelAttempts: database.prepare('SELECT status,COUNT(*) count FROM maintenance_model_attempts GROUP BY status').all(),
+        exports: database.prepare('SELECT status,COUNT(*) count FROM maintenance_exports GROUP BY status').all(),
+        legacyGuards: database.prepare('SELECT COUNT(*) count FROM maintenance_legacy_guards').get().count,
+        evidenceObjectsVerified: false, durableObjectReservationsVerified: false,
+        safety: 'Unknown and send_started reservations are preserved; do not replay them after restore.',
+      }
     }
   }
 

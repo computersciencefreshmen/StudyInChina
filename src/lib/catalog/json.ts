@@ -9,6 +9,10 @@ import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import { CatalogApiService } from '@/lib/catalog-api/service'
 import { selectPublishedData } from '@/lib/data/publication'
+import { selectDiscoveryData } from '@/lib/data/discovery'
+import { readIdentityAcceptances } from '@/lib/data/identity-acceptance-store'
+import { readFieldVerifications } from '@/lib/data/field-verification-store'
+import { directoryRevision } from './directory-revision'
 import { selectLatestTuitionReference } from '@/lib/data/admission'
 import {
   parseProgramCatalogFilters,
@@ -84,7 +88,7 @@ function queryFingerprint(
     .filter(([key, value]) => (
       key !== 'cursor'
       && key !== 'limit'
-      && key !== 'today'
+      && (key !== 'today' || query.view === 'directory')
       && value !== undefined
     ))
     .sort(([left], [right]) => left.localeCompare(right))
@@ -99,6 +103,12 @@ function requestedPage(
     ? decodeJsonListCursor(query.cursor, resource, queryFingerprint(resource, query))
     : 1
 }
+
+function projectDirectory(raw: DataBundle, today: string) {
+  const identities = readIdentityAcceptances(), fields = readFieldVerifications()
+  return { data: selectDiscoveryData(raw, today, identities, fields), revision: directoryRevision(raw, today, identities, fields) }
+}
+
 export class JsonCatalogRepository implements CatalogRepository {
   readonly mode = 'json' as const
   private bundlePromise: Promise<DataBundle> | undefined
@@ -153,7 +163,10 @@ export class JsonCatalogRepository implements CatalogRepository {
     query: CatalogInstitutionListQuery = {},
   ): Promise<CatalogInstitutionListPage> {
     const today = query.today ?? getTodayDate()
-    const data = selectCatalogApiData(await this.getBundle(), today)
+    const rawData = await this.getBundle()
+    const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
+    if (directory) query = { ...query, today, directoryRevision: directory.revision }
+    const data = directory?.data ?? selectCatalogApiData(rawData, today)
     const limit = listLimit(query.limit)
     const page = requestedPage('institutions', query)
     const requestedQuery = query.q?.trim() ?? ''
@@ -246,7 +259,7 @@ export class JsonCatalogRepository implements CatalogRepository {
       nextCursor,
       total: items.length,
       facets: { cities },
-      release: { ...deriveCatalogRelease(data), evaluatedForDate: today },
+      release: { ...deriveCatalogRelease(data), evaluatedForDate: today, ...(directory ? { directoryRevision: directory.revision } : {}) },
     }
   }
 
@@ -254,11 +267,13 @@ export class JsonCatalogRepository implements CatalogRepository {
   async listPrograms(query: CatalogProgramListQuery = {}): Promise<CatalogProgramListPage> {
     const today = query.today ?? getTodayDate()
     const rawData = await this.getBundle()
-    const data = selectPublishedData(rawData, today)
+    const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
+    if (directory) query = { ...query, today, directoryRevision: directory.revision }
+    const data = directory?.data ?? selectPublishedData(rawData, today)
     const officialSourceIds = new Set(
       rawData.sources.filter((source) => source.official).map((source) => source.id),
     )
-    const officialTuitionReferenceCycles = rawData.admissionCycles.filter(
+    const officialTuitionReferenceCycles = (query.view === 'directory' ? data.admissionCycles : rawData.admissionCycles).filter(
       (cycle) => cycle.sourceIds.some((sourceId) => officialSourceIds.has(sourceId)),
     )
     const currentScholarships = data.scholarships.filter((item) => item.status === 'verified')
@@ -322,7 +337,7 @@ export class JsonCatalogRepository implements CatalogRepository {
         universities: result.universityOptions,
         cities: result.cityOptions,
       },
-      release: { ...deriveCatalogRelease(data), evaluatedForDate: today },
+      release: { ...deriveCatalogRelease(data), evaluatedForDate: today, ...(directory ? { directoryRevision: directory.revision } : {}) },
     }
   }
 
@@ -330,7 +345,10 @@ export class JsonCatalogRepository implements CatalogRepository {
     query: CatalogScholarshipListQuery = {},
   ): Promise<CatalogScholarshipListPage> {
     const today = query.today ?? getTodayDate()
-    const published = selectPublishedData(await this.getBundle(), today)
+    const rawData = await this.getBundle()
+    const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
+    if (directory) query = { ...query, today, directoryRevision: directory.revision }
+    const published = directory?.data ?? selectPublishedData(rawData, today)
     const data = query.provider || query.program
       ? {
         ...published,
@@ -367,7 +385,7 @@ export class JsonCatalogRepository implements CatalogRepository {
       nextCursor,
       total: result.total,
       facets: { universities: result.universityOptions },
-      release: { ...deriveCatalogRelease(published), evaluatedForDate: today },
+      release: { ...deriveCatalogRelease(published), evaluatedForDate: today, ...(directory ? { directoryRevision: directory.revision } : {}) },
     }
   }
 

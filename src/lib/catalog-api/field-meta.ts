@@ -1,7 +1,7 @@
 import type { AuditMeta, Source } from '@/lib/data/types'
 import type { FactStatus, FieldMeta, OfficialSourceLink } from './types'
 
-type RecordWithAudit = AuditMeta & { sourceIds: string[] }
+type RecordWithAudit = AuditMeta & { sourceIds: string[]; discovery?: { currentFieldPaths: string[]; fieldMeta?: Record<string, FieldMeta> } }
 
 function isStale(record: RecordWithAudit, today: string) {
   return record.status === 'stale' || record.reviewAfter < today
@@ -26,7 +26,11 @@ export function fieldMetaFor(
   today: string,
   emptyStatus: FactStatus = 'officially_not_announced',
   staleSensitive = true,
+  fieldPath?: string,
 ): FieldMeta {
+  const verifiedField = fieldPath && staleSensitive && record.discovery?.currentFieldPaths.includes(fieldPath)
+    ? record.discovery.fieldMeta?.[fieldPath] : undefined
+  if (verifiedField) return verifiedField
   const officialSource = sources.find(
     (source) => source.official && record.sourceIds.includes(source.id),
   )
@@ -63,6 +67,7 @@ export function fieldMetaMap(
         today,
         emptyStatuses[field],
         staleSensitive,
+        field,
       ),
     ]),
   )

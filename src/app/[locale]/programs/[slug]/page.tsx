@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { connection } from 'next/server'
 import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
+import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
 import { FavoriteButton } from '@/components/features/FavoriteButton'
 import { FollowUpdates } from '@/components/features/FollowUpdates'
 import { ProgramCard } from '@/components/features/RecordCards'
@@ -28,6 +29,8 @@ import { pageMetadata, requireLocale } from '@/lib/site'
 import styles from './ProgramDetail.module.css'
 
 export const dynamicParams = true
+// Directory identities remain routable even when the current prebuild set is empty.
+export const dynamic = 'force-dynamic'
 
 export function generateStaticParams() {
   const data = getData()
@@ -152,6 +155,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         />}
       />
       <div className="atlas-container">
+        <DiscoveryNotice locale={locale} />
         <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
       </div>
       <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail>
@@ -338,6 +342,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     />
 
     <div className="atlas-container">
+      <DiscoveryNotice locale={locale} />
       <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
     </div>
     <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail>
