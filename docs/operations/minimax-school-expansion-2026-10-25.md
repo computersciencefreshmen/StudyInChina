@@ -28,6 +28,8 @@ Cloud rollout uses this priority only after its existing inspection, publication
 
 The next cohort begins with Harbin Institute of Technology, Sun Yat-sen University, University of Science and Technology of China, Jinan University, Hangzhou Dianzi University and Southwest University. Official URLs in the queue remain collection leads; historical STOP/unknown reservations must still be checked before each model request.
 
+The [next-20 source preflight receipt](../../quality/maintenance/2026-10-25/next-20-source-preflight.json) records actual checks of 40 approved leads. Seventeen schools yielded 33 complete source bodies, including five PDFs. Sun Yat-sen University was held on robots HTTP 403, USTC on an HTTPS-to-HTTP redirect, and Wuhan University of Technology on a robots connection timeout. These checks performed no model calls or programme acceptance. The corrected evidence archive is in the existing R2 snapshot bucket under `maintenance/preflight/school-expansion-2026-10-25/e01b6616297f086b2333e733d9c47488c198ed2f0480cdb1ff721be7b4a32634.tar.gz`; its 2,726,991 bytes were downloaded again and SHA-256 checked. The earlier invalid transport diagnostic is excluded from this archive.
+
 ## Temporary execution staging
 
 The cloud ledger's allowance prevented paid work from starting. The temporary local adapter uses the production capture, admission, extraction and validation engines, backed by fsynced SQLite journals and immutable evidence blobs. It preserves the full 3,509-entry historical guard ledger and checks its exact immutable cloud seed before a new execution. Credentials stay outside repository files and reports.
