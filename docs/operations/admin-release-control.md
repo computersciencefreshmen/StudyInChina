@@ -6,7 +6,7 @@ The workbench's **版本与回滚** section reads real catalog releases and the 
 
 - The Next `/api/admin/releases` route requires the existing signed administrator session. POST additionally requires the existing exact-origin check and a bounded, strict typed JSON request. No browser-supplied alias, URL, executable, file path or credential is accepted.
 - The server proxies the existing `ADMIN_TELEMETRY_URL`/`ADMIN_TELEMETRY_TOKEN` transport to `/internal/v1/admin-releases`. That private Worker endpoint uses the bearer credential and returns `private, no-store` responses.
-- Deployment history is an immutable registration of exact READY deployment IDs, project identity, deployment URL, commit SHA and proof digest. The withdrawn `dpl_CJMi3PjUjKSeL7oRFRgNvDyC5vqf` is rejected by both Worker and actuator. A registry refresh cannot change or silently drop a registered version.
+- Deployment history is an immutable registration of exact READY deployment IDs, project identity, deployment URL, commit SHA and proof digest. The withdrawn `dpl_CJMi3PjUjKSeL7oRFRgNvDyC5vqf` is rejected by both Worker and actuator. An ordinary registry refresh cannot change or silently drop a registered version. Explicit capacity compaction keeps a bounded active index while preserving permanent history as described below.
 - Set `ADMIN_RELEASE_CONTROL_ENABLED=true` independently in the Next server and catalog Worker only after the common writer has been deployed and configured. The committed defaults are false. Registry observation must be no older than 30 seconds to accept a new command; a stale or disconnected registry keeps controls unavailable.
 - Apply additive catalog migration `0012_admin_release_rollback.sql` for independent D1 data rollback. Missing catalog migrations disable that subsection and leave real deployment history visible.
 
@@ -22,6 +22,7 @@ The private machine interface is:
 GET /internal/v1/admin-releases?writer=1
   -> { state, registrySha256, controlEnabled }
 PUT { action: "sync-registry", registry }
+PUT { action: "compact-registry", expectedCurrentId, expectedRevision, expectedRegistrySha256 }
 PUT { action: "reserve-promotion", request }
 PUT { action: "claim", commandId }
 PUT { action: "result", commandId, result }
@@ -29,6 +30,10 @@ PUT { action: "result", commandId, result }
 ```
 
 `registrySha256` is SHA-256 of exact `JSON.stringify(state.registry)` after contract parsing. Administrator POST accepts only a registered target ID, exact expected current ID, revision, registry digest, command UUID and reason. A claim is admitted once; a second claim fails closed. A successful result must echo the exact previous and target IDs from actual alias readback. A failed result unlocks only when the previous deployment is still confirmed online. An uncertain result permanently blocks automatic progression until an operator reconciles the immutable command and actual provider state; there is no automatic retry or expiry-based unlock.
+
+The active registry holds at most 20 versions. At capacity, the publisher requests the explicit compaction action before registering another version. Only the server chooses the oldest non-current entry, after checking the fixed project/alias, exact current ID/revision/digest, absence of unresolved commands and all 20 immutable version receipts. It removes one entry from the active index, preserves every historical object and actual Vercel deployment, and advances the R2 state through ETag CAS. Compaction does not refresh `observedAt`: index maintenance is not a new provider observation.
+
+`admin-releases/archives/<operationId>/proposed.json` records intended compaction; a completed record is written only after successful state CAS. A lost reply is resolved by reading the exact 20-to-19 transition without resending the action. The client verifies the retained metadata and unchanged current deployment before continuing. Archived deployments retain their per-version receipts and previous registry snapshots. They are outside the active rollback selector; recovery of an older version requires deliberate requalification and registration, rather than an unguarded alias write. No remote compaction is performed merely to test this path below capacity.
 
 `scripts/operations/admin-deployment-actuator.ts` uses the operator's existing local Vercel CLI login. Its local immutable reservation is recorded before alias assignment. It checks deployment ownership, project, READY/production state, registered URL, exact expected current alias immediately before mutation, and exact target after mutation. A lost response is never admitted as another assignment. The cloud service and browser never receive the Vercel credential.
 
@@ -39,6 +44,10 @@ The actuator must leave `deployment-promotion` commands to the GitHub owner and 
 `.github/workflows/vercel-production-alias.yml` retains its successful exact-commit CI gate, current-main checks, immutable-deployment smoke, stable-alias smoke and candidate-failure compensation. Before either existing alias write, it invokes `scripts/operations/github-release-writer.ts` to reserve/claim the common writer and confirm the exact current alias. The same claimed operation guards compensation back to its saved previous deployment; it refuses to overwrite an unrelated external target.
 
 Configure repository secrets `ADMIN_TELEMETRY_URL` and `ADMIN_TELEMETRY_TOKEN` in addition to the existing `VERCEL_TOKEN`. Missing shared-writer credentials or unavailable control fail the workflow before alias mutation. Dependency installation receives no deployment or private transport credentials. The helper uses typed request objects; neither shell interpolation nor logs contain a JSON credential payload. Sanitized operation/guard/result JSON is retained in a GitHub artifact, and completion is appended to private R2.
+
+Alias transport uses the fixed project's team-scoped [Vercel alias APIs](https://vercel.com/docs/rest-api/aliases/assign-an-alias), without requiring a CLI personal-user lookup or exporting a local login. The same repository token passed project/deployment reads in the 2026-10-25 production workflow, while CLI 58 failed its user lookup with HTTP404. This distinction does not establish write permission or successful publication; the protected writer and stable readback still decide those outcomes.
+
+Before each alias POST, the helper saves an immutable send-started receipt. Timeout, server failure, malformed response or a crash without a definite result keeps mutation status pending. The failure trap records an uncertain writer outcome and does not blindly repeat or compensate the request: one early readback of the old alias cannot rule out a late provider commit. Definitive responses still use the existing guarded compensation and final readback. These receipts are retained with the operation artifact for reconciliation.
 
 Vercel's alias endpoint has no native compare-and-swap parameter ([official API](https://vercel.com/docs/rest-api/aliases/assign-an-alias)). This design serializes participating writers and performs exact read checks plus post-write readback. It cannot make an unrelated manual Vercel operation atomic with the private queue. Keep every automated alias writer on this shared path. Until the new workflow is active on the branch used by Actions, the previous direct writer remains an external concurrency risk.
 

@@ -45,6 +45,8 @@ export type DeploymentWriterState = z.infer<typeof deploymentWriterStateSchema>
 export type DeploymentWriterCommand = NonNullable<DeploymentWriterState['command']>
 
 export const deploymentMachineRequestSchema = z.discriminatedUnion('action', [
+  z.object({ action: z.literal('compact-registry'), expectedCurrentId: deploymentId,
+    expectedRevision: z.number().int().nonnegative().safe(), expectedRegistrySha256: sha }).strict(),
   z.object({ action: z.literal('sync-registry'), registry: deploymentRegistrySchema }).strict(),
   z.object({ action: z.literal('claim'), commandId: z.string().uuid() }).strict(),
   z.object({ action: z.literal('result'), commandId: z.string().uuid(), result: deploymentOutcomeSchema }).strict(),
