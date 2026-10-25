@@ -3,8 +3,8 @@ import { mkdtemp,rm,writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { describe,expect,it,vi } from 'vitest'
-import { assignGithubAlias,createVercelAliasClients,currentGithubAliasTarget,githubAliasMutationStatus,type GithubWriterClients,type PromotionOperation,type AliasAttemptReceipt } from '../../scripts/operations/github-release-writer'
-import { deploymentWriterCommandSchema } from '../../src/lib/admin/deployment-release-contract'
+import { assignGithubAlias,createVercelAliasClients,currentGithubAliasTarget,githubAliasMutationStatus,reserveGithubPromotion,type GithubWriterClients,type PromotionOperation,type AliasAttemptReceipt } from '../../scripts/operations/github-release-writer'
+import { deploymentWriterCommandSchema,type DeploymentWriterState } from '../../src/lib/admin/deployment-release-contract'
 
 const project='prj_AgYJcsuat4kmLiinlvcBbZsYY3cg',owner='team_o5qghzfTOk24QwoYANzJ8hNH',alias='studyinchina.vercel.app',time='2026-10-25T00:00:00.000Z'
 function fixture(){
@@ -15,6 +15,84 @@ function fixture(){
   const receipts:AliasAttemptReceipt[]=[],hooks={beforeSend:vi.fn(async()=>{}),saveResult:vi.fn(async(receipt:AliasAttemptReceipt)=>{receipts.push(receipt)})}
   return{operation,clients,hooks,receipts}
 }
+
+function reservationFixture(count=20,registered=false){
+  const f=fixture(),previous=f.operation.registry.versions[0],target=f.operation.registry.versions[1]
+  const state:DeploymentWriterState={version:1,registry:{...f.operation.registry,versions:[previous,...Array.from({length:count-1},(_,index)=>({...previous,
+    id:`dpl_history${String(index).padStart(8,'0')}`,deploymentUrl:`https://studyinchina-history-${index}.vercel.app/`,
+    registeredAt:new Date(Date.parse(time)-(index+1)*86_400_000).toISOString()}))]},command:null,recentCommands:[]}
+  if(registered)state.registry.versions[state.registry.versions.length-1]=target
+  const clients:GithubWriterClients={...f.clients,metadata:vi.fn(async id=>id===f.operation.target.id||id===f.operation.target.url?f.operation.target:f.operation.previous),
+    writer:vi.fn(async(method,payload)=>{
+      if(method==='GET')return{controlEnabled:true,registrySha256:createHash('sha256').update(JSON.stringify(state.registry)).digest('hex'),state:structuredClone(state)}
+      if(payload?.action==='compact-registry'){
+        const oldest=state.registry.versions.filter(value=>value.id!==state.registry.currentId).sort((a,b)=>Date.parse(a.createdAt)-Date.parse(b.createdAt)||Date.parse(a.registeredAt)-Date.parse(b.registeredAt)||(a.id<b.id?-1:a.id>b.id?1:0))[0]
+        state.registry={...state.registry,revision:state.registry.revision+1,versions:state.registry.versions.filter(value=>value.id!==oldest.id)}
+        return{ok:true}
+      }
+      if(payload?.action==='sync-registry'){state.registry={...payload.registry,revision:payload.registry.revision+1};return{ok:true}}
+      if(payload?.action==='reserve-promotion'){
+        const request=payload.request
+        state.command=deploymentWriterCommandSchema.parse({commandId:request.commandId,targetId:request.targetId,expectedCurrentId:request.expectedCurrentId,
+          expectedRevision:request.expectedRevision,expectedRegistrySha256:request.expectedRegistrySha256,reason:request.reason,
+          action:'deployment-promotion',status:'pending',requestedAt:time,updatedAt:time,result:null})
+        return{ok:true,result:state.command}
+      }
+      if(payload?.action==='claim'){state.command={...state.command!,status:'claimed'};return{ok:true,result:state.command}}
+      throw new Error('unexpected request')
+    })}
+  return{...f,clients,state}
+}
+
+describe('bounded hot-registry capacity during promotion reservation',()=>{
+  it('requests one server-selected archive with exact CAS then re-reads before registering a 21st deployment',async()=>{
+    const f=reservationFixture(),before=structuredClone(f.state.registry),expectedHash=createHash('sha256').update(JSON.stringify(before)).digest('hex')
+    const operation=await reserveGithubPromotion(f.clients,`https://${f.operation.target.url}`,'b'.repeat(40),Date.parse(time))
+    const writes=vi.mocked(f.clients.writer).mock.calls.filter(([method])=>method==='PUT').map(([,payload])=>payload!)
+    expect(writes[0]).toEqual({action:'compact-registry',expectedCurrentId:before.currentId,expectedRevision:before.revision,expectedRegistrySha256:expectedHash})
+    expect(writes.filter(value=>value.action==='compact-registry')).toHaveLength(1)
+    expect(operation.registry.versions).toHaveLength(20)
+    expect(operation.registry.currentId).toBe(before.currentId)
+    expect(operation.registry.versions.some(value=>value.id===f.operation.target.id)).toBe(true)
+    expect(f.clients.assignAlias).not.toHaveBeenCalled()
+  })
+  it('recovers a lost compaction response by one state read, without repeating the metadata action',async()=>{
+    const f=reservationFixture(),writer=f.clients.writer
+    f.clients.writer=vi.fn(async(method,payload)=>{const result=await writer(method,payload);if(payload?.action==='compact-registry')throw new Error('reply lost after commit');return result})
+    await expect(reserveGithubPromotion(f.clients,`https://${f.operation.target.url}`,'b'.repeat(40),Date.parse(time))).resolves.toMatchObject({previous:{id:f.operation.previous.id}})
+    expect(vi.mocked(f.clients.writer).mock.calls.filter(([,payload])=>payload?.action==='compact-registry')).toHaveLength(1)
+  })
+  it('matches server numeric-time and codepoint ordering for equivalent ISO precision and mixed-case IDs',async()=>{
+    const f=reservationFixture()
+    Object.assign(f.state.registry.versions[1],{id:'dpl_AAAAAAAA',createdAt:'2026-10-24T00:00:00Z',registeredAt:'2026-10-24T00:00:00.000Z'})
+    Object.assign(f.state.registry.versions[2],{id:'dpl_aaaaaaaa',createdAt:'2026-10-24T00:00:00.000Z',registeredAt:'2026-10-24T00:00:00Z'})
+    const operation=await reserveGithubPromotion(f.clients,`https://${f.operation.target.url}`,'b'.repeat(40),Date.parse(time))
+    expect(operation.registry.versions.some(value=>value.id==='dpl_AAAAAAAA')).toBe(false)
+    expect(operation.registry.versions.some(value=>value.id==='dpl_aaaaaaaa')).toBe(true)
+  })
+  it.each(['no-capacity','wrong-revision','changed-observation','changed-current','wrong-archive','rewritten-history','busy','recent-unknown'] as const)('stops before registration when compaction readback has %s',async fault=>{
+    const f=reservationFixture(),writer=f.clients.writer,before=structuredClone(f.state.registry)
+    f.clients.writer=vi.fn(async(method,payload)=>{const result=await writer(method,payload);if(payload?.action==='compact-registry'){
+      if(fault==='no-capacity')f.state.registry=before
+      if(fault==='wrong-revision')f.state.registry.revision++
+      if(fault==='changed-observation')f.state.registry.observedAt='2026-10-26T00:00:00.000Z'
+      if(fault==='changed-current')f.state.registry.currentId=f.state.registry.versions[1].id
+      if(fault==='wrong-archive')f.state.registry.versions=before.versions.filter(value=>value.id!==before.versions[1].id)
+      if(fault==='rewritten-history')f.state.registry.versions[1].proofSha256='f'.repeat(64)
+      if(fault==='busy')f.state.command=f.operation.command
+      if(fault==='recent-unknown')f.state.recentCommands=[{...f.operation.command,status:'uncertain'}]
+    }return result})
+    await expect(reserveGithubPromotion(f.clients,`https://${f.operation.target.url}`,'b'.repeat(40),Date.parse(time))).rejects.toThrow('release_compaction_unconfirmed')
+    expect(vi.mocked(f.clients.writer).mock.calls.some(([,payload])=>payload?.action==='sync-registry'||payload?.action==='reserve-promotion')).toBe(false)
+    expect(f.clients.assignAlias).not.toHaveBeenCalled()
+  })
+  it('does not archive when capacity is available or the exact target is already in the hot registry',async()=>{
+    for(const f of [reservationFixture(19),reservationFixture(20,true)]){
+      await reserveGithubPromotion(f.clients,`https://${f.operation.target.url}`,'b'.repeat(40),Date.parse(time))
+      expect(vi.mocked(f.clients.writer).mock.calls.some(([,payload])=>payload?.action==='compact-registry')).toBe(false)
+    }
+  })
+})
 describe('fixed-project REST alias transport',()=>{
   it('reads the fixed alias then qualifies its immutable deployment without using account/user APIs',async()=>{
     const f=fixture(),calls:string[]=[],fetcher=vi.fn(async(input:RequestInfo|URL)=>{const url=new URL(String(input));calls.push(url.href);expect(url.searchParams.get('teamId')).toBe(owner);return Response.json(url.pathname.startsWith('/v4/aliases/')?{alias,projectId:project,deploymentId:f.operation.previous.id}:f.operation.previous)})

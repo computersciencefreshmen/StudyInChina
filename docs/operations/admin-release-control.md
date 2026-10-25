@@ -6,7 +6,7 @@ The workbench's **版本与回滚** section reads real catalog releases and the 
 
 - The Next `/api/admin/releases` route requires the existing signed administrator session. POST additionally requires the existing exact-origin check and a bounded, strict typed JSON request. No browser-supplied alias, URL, executable, file path or credential is accepted.
 - The server proxies the existing `ADMIN_TELEMETRY_URL`/`ADMIN_TELEMETRY_TOKEN` transport to `/internal/v1/admin-releases`. That private Worker endpoint uses the bearer credential and returns `private, no-store` responses.
-- Deployment history is an immutable registration of exact READY deployment IDs, project identity, deployment URL, commit SHA and proof digest. The withdrawn `dpl_CJMi3PjUjKSeL7oRFRgNvDyC5vqf` is rejected by both Worker and actuator. A registry refresh cannot change or silently drop a registered version.
+- Deployment history is an immutable registration of exact READY deployment IDs, project identity, deployment URL, commit SHA and proof digest. The withdrawn `dpl_CJMi3PjUjKSeL7oRFRgNvDyC5vqf` is rejected by both Worker and actuator. An ordinary registry refresh cannot change or silently drop a registered version. Explicit capacity compaction keeps a bounded active index while preserving permanent history as described below.
 - Set `ADMIN_RELEASE_CONTROL_ENABLED=true` independently in the Next server and catalog Worker only after the common writer has been deployed and configured. The committed defaults are false. Registry observation must be no older than 30 seconds to accept a new command; a stale or disconnected registry keeps controls unavailable.
 - Apply additive catalog migration `0012_admin_release_rollback.sql` for independent D1 data rollback. Missing catalog migrations disable that subsection and leave real deployment history visible.
 
@@ -22,6 +22,7 @@ The private machine interface is:
 GET /internal/v1/admin-releases?writer=1
   -> { state, registrySha256, controlEnabled }
 PUT { action: "sync-registry", registry }
+PUT { action: "compact-registry", expectedCurrentId, expectedRevision, expectedRegistrySha256 }
 PUT { action: "reserve-promotion", request }
 PUT { action: "claim", commandId }
 PUT { action: "result", commandId, result }
@@ -29,6 +30,10 @@ PUT { action: "result", commandId, result }
 ```
 
 `registrySha256` is SHA-256 of exact `JSON.stringify(state.registry)` after contract parsing. Administrator POST accepts only a registered target ID, exact expected current ID, revision, registry digest, command UUID and reason. A claim is admitted once; a second claim fails closed. A successful result must echo the exact previous and target IDs from actual alias readback. A failed result unlocks only when the previous deployment is still confirmed online. An uncertain result permanently blocks automatic progression until an operator reconciles the immutable command and actual provider state; there is no automatic retry or expiry-based unlock.
+
+The active registry holds at most 20 versions. At capacity, the publisher requests the explicit compaction action before registering another version. Only the server chooses the oldest non-current entry, after checking the fixed project/alias, exact current ID/revision/digest, absence of unresolved commands and all 20 immutable version receipts. It removes one entry from the active index, preserves every historical object and actual Vercel deployment, and advances the R2 state through ETag CAS. Compaction does not refresh `observedAt`: index maintenance is not a new provider observation.
+
+`admin-releases/archives/<operationId>/proposed.json` records intended compaction; a completed record is written only after successful state CAS. A lost reply is resolved by reading the exact 20-to-19 transition without resending the action. The client verifies the retained metadata and unchanged current deployment before continuing. Archived deployments retain their per-version receipts and previous registry snapshots. They are outside the active rollback selector; recovery of an older version requires deliberate requalification and registration, rather than an unguarded alias write. No remote compaction is performed merely to test this path below capacity.
 
 `scripts/operations/admin-deployment-actuator.ts` uses the operator's existing local Vercel CLI login. Its local immutable reservation is recorded before alias assignment. It checks deployment ownership, project, READY/production state, registered URL, exact expected current alias immediately before mutation, and exact target after mutation. A lost response is never admitted as another assignment. The cloud service and browser never receive the Vercel credential.
 

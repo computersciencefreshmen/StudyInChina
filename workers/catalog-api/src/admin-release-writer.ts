@@ -21,6 +21,7 @@ export async function readReleaseWriter(env: CatalogApiEnv) {
   return { state: deploymentWriterStateSchema.parse(JSON.parse(text)), etag: object.etag }
 }
 const blocking = (command: DeploymentWriterCommand | null) => command && ['pending', 'claimed', 'uncertain'].includes(command.status)
+const COMPACT_PROJECT = 'prj_AgYJcsuat4kmLiinlvcBbZsYY3cg', COMPACT_ALIAS = 'studyinchina.vercel.app'
 async function immutableReceipt(env: CatalogApiEnv, key: string, value: unknown) {
   if (!env.RELEASES_BUCKET.put) throw new ReleaseControlError('release_backend_unavailable', 503)
   const content = JSON.stringify(value)
@@ -76,6 +77,37 @@ export async function updateDeploymentWriter(env: CatalogApiEnv, raw: Deployment
   const request = deploymentMachineRequestSchema.parse(raw)
   if (request.action === 'reserve-promotion') return reserveDeploymentWriter(env, request.request, 'deployment-promotion', now)
   const previous = await readReleaseWriter(env)
+  if(request.action==='compact-registry'){
+    if(env.ADMIN_RELEASE_CONTROL_ENABLED!=='true')throw new ReleaseControlError('release_control_disabled',503)
+    if(!previous)throw new ReleaseControlError('release_backend_unavailable',503)
+    const {registry}=previous.state
+    if(registry.projectId!==COMPACT_PROJECT||registry.alias!==COMPACT_ALIAS)throw new ReleaseControlError('release_conflict')
+    if(blocking(previous.state.command)||previous.state.recentCommands.some(blocking))throw new ReleaseControlError('release_writer_busy')
+    const previousRegistrySha256=await releaseDigest(JSON.stringify(registry))
+    if(registry.currentId!==request.expectedCurrentId||registry.revision!==request.expectedRevision||previousRegistrySha256!==request.expectedRegistrySha256||registry.revision>=Number.MAX_SAFE_INTEGER)throw new ReleaseControlError('release_conflict')
+    if(registry.versions.length!==20)throw new ReleaseControlError('release_compaction_not_required')
+    // Archiving must never turn an unproved registration into a trusted history.
+    // Every immutable version receipt remains at its original key, unchanged.
+    await Promise.all(registry.versions.map(async version=>{
+      const receipt=await env.RELEASES_BUCKET.get(`admin-releases/versions/${version.id}.json`)
+      if(!receipt?.text||receipt.size===undefined||receipt.size>ADMIN_RELEASE_MAX_BYTES||await receipt.text()!==JSON.stringify(version))throw new ReleaseControlError('release_receipt_conflict')
+    }))
+    const archived=registry.versions.filter(version=>version.id!==registry.currentId).sort((a,b)=>Date.parse(a.createdAt)-Date.parse(b.createdAt)||Date.parse(a.registeredAt)-Date.parse(b.registeredAt)||(a.id<b.id?-1:a.id>b.id?1:0))[0]
+    if(!archived)throw new ReleaseControlError('release_compaction_not_required')
+    // Keep observedAt: changing an index is not a fresh observation of Vercel.
+    const revised={...registry,revision:registry.revision+1,versions:registry.versions.filter(version=>version.id!==archived.id)}
+    const registrySha256=await releaseDigest(JSON.stringify(revised)),operationId=await releaseDigest(JSON.stringify(request)),prefix=`admin-releases/archives/${operationId}`
+    const proposedKey=`${prefix}/proposed.json`,completedKey=`${prefix}/completed.json`
+    const proposed={version:1,action:'compact-registry',operationId,previousRegistrySha256,registrySha256,expectedCurrentId:registry.currentId,previousRevision:registry.revision,nextRevision:revised.revision,archivedVersion:archived,versionReceiptKey:`admin-releases/versions/${archived.id}.json`,sourceObservedAt:registry.observedAt,status:'proposed'}
+    await immutableReceipt(env,proposedKey,proposed)
+    await saveWriter(env,previous,{...previous.state,registry:revised})
+    // A proposed receipt alone proves no change. Only the successful state CAS
+    // permits a completed record. A lost completion may be reconciled by GET19;
+    // retrying the original revision cannot remove a second version.
+    await immutableReceipt(env,`admin-releases/registry/${registrySha256}.json`,revised)
+    await immutableReceipt(env,completedKey,{...proposed,status:'completed',completedAt:new Date(now).toISOString()})
+    return{compacted:true,archivedVersionId:archived.id,previousRegistrySha256,registrySha256,state:{...previous.state,registry:revised},archive:{operationId,proposedKey,completedKey}}
+  }
   if (request.action === 'sync-registry') {
     const registry = request.registry
     if (registry.versions.some(version => WITHDRAWN_DEPLOYMENTS.has(version.id))) throw new ReleaseControlError('release_not_available', 400)

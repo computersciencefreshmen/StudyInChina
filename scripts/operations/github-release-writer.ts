@@ -31,7 +31,7 @@ async function currentWriter(clients: GithubWriterClients) {
 }
 export async function reserveGithubPromotion(clients: GithubWriterClients, deploymentUrl: string, deploymentSha: string, now = Date.now()): Promise<PromotionOperation> {
   if (!/^https:\/\/studyinchina-[a-z0-9-]+\.vercel\.app\/?$/.test(deploymentUrl) || !/^[a-f0-9]{40}$/.test(deploymentSha)) throw new Error('release_input_invalid')
-  const initial = await currentWriter(clients)
+  let initial = await currentWriter(clients)
   if (initial.state.command && ['pending', 'claimed', 'uncertain'].includes(initial.state.command.status)) throw new Error('release_writer_busy')
   const target = await clients.metadata(new URL(deploymentUrl).hostname)
   qualify(target, new URL(deploymentUrl).hostname)
@@ -42,6 +42,28 @@ export async function reserveGithubPromotion(clients: GithubWriterClients, deplo
   if (!initial.state.registry.versions.some(version => version.id === previous.id && version.deploymentUrl === `https://${previous.url}/`)) throw new Error('release_previous_unregistered')
   const version = initial.state.registry.versions.find(value => value.id === target.id)
   if (version && (version.deploymentUrl !== `https://${target.url}/` || version.commitSha !== target.commitSha || version.createdAt !== new Date(target.createdAt).toISOString())) throw new Error('release_registration_conflict')
+  if (!version && initial.state.registry.versions.length === 20) {
+    const beforeCompaction = initial.state.registry
+    try {
+      await clients.writer('PUT', { action: 'compact-registry', expectedCurrentId: beforeCompaction.currentId,
+        expectedRevision: beforeCompaction.revision, expectedRegistrySha256: initial.registrySha256 })
+    } catch {
+      // Metadata-only compaction can have committed before its reply was lost.
+      // Never resend it; confirm the one permitted transition with a fresh read.
+    }
+    const compacted = await currentWriter(clients), registry = compacted.state.registry
+    const oldest = beforeCompaction.versions.filter(value => value.id !== previous.id)
+      .sort((left, right) => Date.parse(left.createdAt) - Date.parse(right.createdAt) || Date.parse(left.registeredAt) - Date.parse(right.registeredAt)
+        || (left.id < right.id ? -1 : left.id > right.id ? 1 : 0))[0]
+    const retainedIds = new Set(registry.versions.map(value => value.id))
+    const removed = beforeCompaction.versions.filter(value => !retainedIds.has(value.id))
+    if (registry.currentId !== previous.id || registry.revision !== beforeCompaction.revision + 1 || registry.observedAt !== beforeCompaction.observedAt
+      || compacted.state.command && ['pending', 'claimed', 'uncertain'].includes(compacted.state.command.status)
+      || compacted.state.recentCommands.some(command => ['pending', 'claimed', 'uncertain'].includes(command.status))
+      || registry.versions.length !== 19 || removed.length !== 1 || removed[0].id !== oldest.id
+      || registry.versions.some(value => !beforeCompaction.versions.some(old => old.id === value.id && digest(old) === digest(value)))) throw new Error('release_compaction_unconfirmed')
+    initial = compacted
+  }
   const stamp = new Date(now).toISOString()
   const proofSha256 = digest({ operation: 'github-ready-production-registration-v1', target, deploymentSha })
   const versions = version ? initial.state.registry.versions : [...initial.state.registry.versions, { id: target.id, projectId: PROJECT, ready: true as const,
