@@ -10,6 +10,31 @@ const token = 'test-only-secret-that-is-never-a-real-account-token'
 const environment = { CATALOG_MAINTENANCE_URL: 'https://maintenance-fixture.example.workers.dev', CATALOG_MAINTENANCE_TOKEN: token }
 
 describe('maintenance bridge HTTP boundary', () => {
+  it.each(['/offline-fence', '/offline-handoff?batchId=offline-fixture_2026'])('allows the authenticated read-only status path %s', async path => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(new Response('{"ok":true}'))
+    const client = maintenanceClientFromEnvironment(environment, fetcher)
+    expect(await client.json(path)).toEqual({ ok: true })
+    expect(fetcher).toHaveBeenCalledTimes(1)
+    expect(String(fetcher.mock.calls[0][0])).toBe(`${environment.CATALOG_MAINTENANCE_URL}${path}`)
+    expect(fetcher.mock.calls[0][1]).toMatchObject({ method: 'GET', headers: { Authorization: `Bearer ${token}` }, redirect: 'error' })
+  })
+
+  it('rejects handoff traversal, extra query parameters and mutation methods before sending credentials', async () => {
+    const fetcher = vi.fn<typeof fetch>(), client = maintenanceClientFromEnvironment(environment, fetcher)
+    for (const path of ['/offline-fence/../controls', '/offline-fence?extra=1', '/offline-fence/acquire',
+      '/offline-fence/release', '/offline-handoff', '/offline-handoff?batchId=', '/offline-handoff?batchId=../controls',
+      '/offline-handoff?batchId=%2e%2e%2fcontrols', '/offline-handoff?batchId=ok&extra=1',
+      '/offline-handoff?batchId=ok&batchId=other', '/offline-handoff?batchId=ok#fragment',
+      `/offline-handoff?batchId=${'a'.repeat(102)}`]) {
+      await expect(client.json(path)).rejects.toThrow('maintenance_endpoint_rejected')
+    }
+    for (const path of ['/offline-fence', '/offline-handoff?batchId=ok']) {
+      await expect(client.json(path, 'POST')).rejects.toThrow('maintenance_endpoint_rejected')
+      await expect(client.json(path, 'GET', {})).rejects.toThrow('maintenance_endpoint_rejected')
+    }
+    expect(fetcher).not.toHaveBeenCalled()
+  })
+
   it('keeps normal quota and seed waits quiet while refusing an unknown backend failure', async () => {
     const client = { json: vi.fn(), artifact: vi.fn() }
     client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait' }, control: null })

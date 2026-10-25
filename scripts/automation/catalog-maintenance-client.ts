@@ -30,7 +30,9 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    const handoffRead = method === 'GET' && body === undefined
+      && /^\/(?:offline-fence|offline-handoff\?batchId=[a-zA-Z0-9_-]{1,101})$/u.test(path)
+    if (!handoffRead && !/^\/(?:status|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     try {
       const response = await fetcher(url, { method, headers: { Authorization: `Bearer ${token}`, ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },

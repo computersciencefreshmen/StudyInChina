@@ -6,6 +6,7 @@ import { loadSnapshot, type CapturedSnapshot } from './capture'
 import { runGuardedModelRequest } from './model-client'
 import { control, sourceSchools } from './repository'
 import { persistProposals } from './proposals'
+import { retainProvenLocalizedNames } from './official-names'
 import { MaintenanceError, type JobRow, type MaintenanceEnv, type SchoolRow, type SourceRow } from './types'
 import { canonical, digest, nowIso, record } from './util'
 
@@ -34,15 +35,13 @@ export function parseScholarshipIdentities(output: unknown, text: string, school
     const institutionQuote = input.institutionEvidence.quote
     if (!schoolName || !Object.values(schoolName).some(name => typeof name === 'string'
       && normalizeEvidenceText(institutionQuote).includes(normalizeEvidenceText(name)))) continue
-    const name = record(input.name)
-    if (!name || !Object.keys(name).length || Object.keys(name).some(locale => !['en', 'zh'].includes(locale))
-      || Object.values(name).some(value => typeof value !== 'string' || !value.trim() || value.length > 240)) continue
+    const locatedFields = input.fieldEvidence.filter(field => located(field, text) && typeof record(field)?.fieldPath === 'string') as ExtractedScholarship['fieldEvidence']
+    const { name, fieldEvidence: fields } = retainProvenLocalizedNames(input.name, locatedFields)
+    if (!Object.keys(name).length) continue
     if (/^(?:scholarships?|funding|financial (?:aid|support)|grants?)(?: and (?:grants?|scholarships?))?$/iu.test(String(name.en ?? ''))
       || /^(?:奖学金|助学金|奖助学金|资助|奖学金介绍|奖学金项目)$/u.test(String(name.zh ?? ''))) continue
     if (!Object.values(name).every(name => /scholarship|grant|fellowship|award|奖学金|助学金|奖助|资助|奖励金/iu.test(String(name)))) continue
-    const fields = input.fieldEvidence.filter(field => located(field, text) && typeof record(field)?.fieldPath === 'string') as ExtractedScholarship['fieldEvidence']
-    if (!Object.entries(name).every(([locale, name]) => fields.some(field => field.fieldPath === `name.${locale}`
-      && normalizeEvidenceText(field.quote).includes(normalizeEvidenceText(String(name))))) || !fields.some(field => field.fieldPath === 'providerType')) continue
+    if (!fields.some(field => field.fieldPath === 'providerType')) continue
     const scholarshipUrl = String(input.scholarshipUrl ?? '')
     try { assertSafeSourceUrl(scholarshipUrl, hosts) } catch { continue }
     if (scholarshipUrl !== snapshot.finalUrl) continue
@@ -97,7 +96,9 @@ export async function extractScholarshipIdentities(env: MaintenanceEnv, job: Job
   for (const award of first) {
     const evidence = (quote: LocatedQuote) => ({ sourceId: row.source_id, url: snapshot.finalUrl, snapshotSha256: snapshot.rawSha256, objectKey: snapshot.rawKey, ...quote })
     const agreed = second.has(canonical(core(award)))
-    const proposal: MaintenanceProposal = { id: `maintenance-scholarship-${await digest(`${row.source_id}:${snapshot.rawSha256}:${canonical(core(award))}`)}`,
+    // Parsing may improve without sending a new request. Append a fresh audit
+    // candidate while preserving older held candidates and every paid reservation.
+    const proposal: MaintenanceProposal = { id: `maintenance-scholarship-${await digest(`${row.source_id}:${snapshot.rawSha256}:${canonical(core(award))}:parser-v2`)}`,
       universityId: award.universityId, entityType: 'scholarship', recordId: null, operation: 'create',
       fields: { name: award.name, providerType: award.providerType, scholarshipUrl: award.scholarshipUrl,
         internationalAdmissionsEvidence: evidence(award.internationalEvidence), institutionEvidence: evidence(award.institutionEvidence) },

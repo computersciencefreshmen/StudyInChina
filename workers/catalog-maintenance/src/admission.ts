@@ -7,7 +7,8 @@ import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson 
 
 export type PlanQuota = { checkedAt: string; fiveHourRemaining: number; weeklyRemaining: number; fiveHourStart: string; fiveHourReset: string; weeklyStart: string; weeklyReset: string }
 type Permit = { token: string; host?: string; lane?: string; expiresAt: number }
-type GateState = { fetches: Permit[]; models: Permit[]; nextHost: Record<string,number>; successes: number; cooldownUntil: number;modelLimit:number }
+export type OfflineFence={batchId:string;phase:'active'|'held_for_handoff'|'completed';tokenSha256:string;scopeRegistrySha256:string;inputCatalogSha256:string;acquiredAt:string;manifestSha256:string|null;releaseRequestedAt:string|null;seedSha256?:string;legacyGuardSha256?:string;sourceManifestSha256?:string;handoffAckSha256?:string}
+type GateState = { fetches: Permit[]; models: Permit[]; nextHost: Record<string,number>; successes: number; cooldownUntil: number;modelLimit:number;offlineFence?:OfflineFence }
 type Reservation = { state: 'send_started'|'completed'|'unknown'|'known_failed'; attemptId: string; requestSha256: string; result?: ModelResult;retryable?:boolean;notBefore?:number;attemptCount?:number }
 const initial = (): GateState => ({fetches:[],models:[],nextHost:{},successes:0,cooldownUntil:0,modelLimit:2})
 const ENDPOINTS=new Set(['https://api.minimaxi.com/anthropic','https://api.minimax.cn/anthropic','https://api.minimax.io/anthropic'])
@@ -61,10 +62,17 @@ export class ModelAdmission {
     try {
       const path=new URL(request.url).pathname,raw=record(await requestJson(request,1024*1024))
       if(!raw) return json({ok:false,error:'invalid_request'},400)
+      if(path==='/offline-fence/status'){
+        const gate=await this.state.storage.get<GateState>('gate')??initial()
+        return json({ok:true,fence:gate.offlineFence??null,activeFetches:gate.fetches.length,activeModels:gate.models.length})
+      }
+      if(path==='/offline-fence/acquire'||path==='/offline-fence/release')return await this.offlineFence(path,raw)
+      if(path==='/offline-fence/adopt'||path==='/offline-fence/complete-handoff')return await this.offlineHandoff(path,raw)
       if(path==='/fetch/acquire') {
         const host=String(raw.host??'')
         if(!/^[a-z0-9.-]{3,253}$/.test(host)||!host.includes('.')||host.includes('..')) return json({ok:false,error:'invalid_host'},400)
-        const permit=await this.mutate(state=>{const now=Date.now();if(state.fetches.length>=8||state.fetches.some(p=>p.host===host)||(state.nextHost[host]??0)>now)return null;const next={token:crypto.randomUUID(),host,expiresAt:now+120000};state.fetches.push(next);return next})
+        const permit=await this.mutate(state=>{const now=Date.now();if(state.offlineFence)return'offline-fenced' as const;if(state.fetches.length>=8||state.fetches.some(p=>p.host===host)||(state.nextHost[host]??0)>now)return null;const next={token:crypto.randomUUID(),host,expiresAt:now+120000};state.fetches.push(next);return next})
+        if(permit==='offline-fenced')return json({ok:false,error:'fetch_capacity_offline_fenced',retryAfter:300},429)
         return permit?json({ok:true,token:permit.token}):json({ok:false,error:'fetch_capacity_or_host_cooldown',retryAfter:30},429)
       }
       if(path==='/fetch/release') {
@@ -84,7 +92,77 @@ export class ModelAdmission {
       return json({ok:false,error:'invalid_or_unavailable_admission'},400)
     }
   }
+  private async offlineHandoff(path:string,raw:Record<string,unknown>):Promise<Response>{
+    if(typeof raw.batchId!=='string'||!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,100}$/.test(raw.batchId)||!HASH.test(String(raw.tokenSha256))||!HASH.test(String(raw.manifestSha256)))return json({ok:false,error:'offline_handoff_request_invalid'},400)
+    const gate=await this.state.storage.get<GateState>('gate')??initial(),historyKey=`offline-fence:${raw.batchId}`,history=await this.state.storage.get<OfflineFence>(historyKey),fence=gate.offlineFence
+    if(path.endsWith('/complete-handoff')&&history?.phase==='completed'&&history.tokenSha256===raw.tokenSha256&&history.manifestSha256===raw.manifestSha256&&history.handoffAckSha256===raw.acknowledgementSha256)return json({ok:true,released:true,reused:true})
+    if(!fence||fence.batchId!==raw.batchId||fence.phase!=='held_for_handoff'||fence.tokenSha256!==raw.tokenSha256||fence.manifestSha256!==raw.manifestSha256)return json({ok:false,error:'offline_handoff_fence_mismatch'},409)
+    const adoptionKey=`offline-adoption:${raw.batchId}`
+    if(path.endsWith('/adopt')){
+      if(!Array.isArray(raw.requests)||raw.requests.length>8)return json({ok:false,error:'offline_handoff_requests_invalid'},400)
+      const imports:Array<{key:string;metadata:Record<string,unknown>;reservation:Reservation}>=[]
+      for(const value of raw.requests){
+        const r=record(value)
+        if(!r||Object.keys(r).some(key=>!['reservationKey','state','attemptId','requestSha256','retryable','notBefore','attemptCount'].includes(key))||!HASH.test(String(r.reservationKey))||!HASH.test(String(r.requestSha256))||typeof r.attemptId!=='string'||!['completed','known_failed','unknown','send_started'].includes(String(r.state))||r.retryable!==undefined&&typeof r.retryable!=='boolean'||r.notBefore!==undefined&&(!Number.isSafeInteger(r.notBefore)||Number(r.notBefore)<0)||r.attemptCount!==undefined&&(!Number.isSafeInteger(r.attemptCount)||Number(r.attemptCount)<1))return json({ok:false,error:'offline_handoff_requests_invalid'},400)
+        const row=await this.env.PIPELINE_DB.prepare('SELECT * FROM maintenance_model_attempts WHERE attempt_id=?').bind(r.attemptId).first<Record<string,unknown>>()
+        if(!row||row.reservation_key!==r.reservationKey||row.request_sha256!==r.requestSha256||row.status!==r.state&&!(r.state==='unknown'&&['send_started','reserved'].includes(String(row.status))))return json({ok:false,error:'offline_handoff_attempt_mismatch'},409)
+        let reservation:Reservation={state:r.state==='send_started'?'unknown':r.state as Reservation['state'],attemptId:r.attemptId,requestSha256:String(r.requestSha256)}
+        if(r.state==='completed'){
+          const key=`maintenance/models/${r.reservationKey}/${row.output_sha256}.json`
+          if(row.output_key!==key||!HASH.test(String(row.output_sha256)))return json({ok:false,error:'offline_handoff_model_artifact_invalid'},409)
+          const artifact=await this.env.SNAPSHOTS_BUCKET.get(key)
+          if(!artifact||artifact.size!==undefined&&artifact.size>2*1024*1024)return json({ok:false,error:'offline_handoff_model_artifact_invalid'},409)
+          const bytes=await artifact.arrayBuffer();if(await digest(bytes)!==row.output_sha256)return json({ok:false,error:'offline_handoff_model_artifact_invalid'},409)
+          const parsed=record(JSON.parse(new TextDecoder().decode(bytes)))
+          if(!parsed||parsed.attemptId!==r.attemptId||parsed.reservationKey!==r.reservationKey||parsed.requestSha256!==r.requestSha256||parsed.sourceId!==row.source_id||parsed.snapshotSha256!==row.snapshot_sha256||parsed.pass!==row.pass||parsed.model!=='MiniMax-M3'||!Object.hasOwn(parsed,'output'))return json({ok:false,error:'offline_handoff_model_artifact_invalid'},409)
+          reservation={...reservation,result:{attemptId:r.attemptId,output:parsed.output,artifactKey:key,artifactSha256:String(row.output_sha256),reused:false}}
+        }else for(const key of ['retryable','notBefore','attemptCount']as const)if(r[key]!==undefined)Object.assign(reservation,{[key]:r[key]})
+        imports.push({key:`request:${r.reservationKey}`,metadata:r,reservation})
+      }
+      const adopted=await this.state.storage.transaction(async txn=>{
+        const current=await txn.get<GateState>('gate')??initial(),held=current.offlineFence;if(!held||held.batchId!==raw.batchId||held.manifestSha256!==raw.manifestSha256)throw new Error('offline_handoff_fence_mismatch')
+        const adopted=await txn.get<Record<string,Record<string,unknown>>>(adoptionKey)??{}
+        for(const item of imports){const prior=await txn.get<Reservation>(item.key);if(prior&&canonical(prior)!==canonical(item.reservation))throw new Error('offline_handoff_reservation_conflict');if(adopted[item.key]&&canonical(adopted[item.key])!==canonical(item.metadata))throw new Error('offline_handoff_reservation_conflict')}
+        for(const item of imports){await txn.put(item.key,item.reservation);adopted[item.key]=item.metadata}await txn.put(adoptionKey,adopted);return Object.keys(adopted).length
+      })
+      return json({ok:true,adopted})
+    }
+    if(!HASH.test(String(raw.acknowledgementSha256)))return json({ok:false,error:'offline_handoff_ack_invalid'},400)
+    const ack=await this.env.PIPELINE_DB.prepare("SELECT details_json FROM maintenance_events WHERE event_id=? AND kind='offline_handoff_applied'").bind(`offline-handoff-${raw.batchId}`).first<{details_json:string}>()
+    if(!ack||await digest(ack.details_json)!==raw.acknowledgementSha256)return json({ok:false,error:'offline_handoff_ack_missing'},409)
+    const proof=record(JSON.parse(ack.details_json)),adopted=await this.state.storage.get<Record<string,Record<string,unknown>>>(adoptionKey)??{},requests=Object.values(adopted).sort((a,b)=>String(a.reservationKey).localeCompare(String(b.reservationKey)))
+    if(!proof||proof.batchId!==raw.batchId||proof.manifestSha256!==raw.manifestSha256||proof.tokenSha256!==raw.tokenSha256||proof.requestReservationsSha256!==await digest(canonical(requests))||proof.requestReservationCount!==requests.length)return json({ok:false,error:'offline_handoff_ack_invalid'},409)
+    await this.state.storage.transaction(async txn=>{const current=await txn.get<GateState>('gate')??initial(),held=current.offlineFence;if(!held||held.batchId!==raw.batchId||held.manifestSha256!==raw.manifestSha256||current.models.length||current.fetches.length)throw new Error('offline_handoff_fence_mismatch');await txn.put(historyKey,{...held,phase:'completed',handoffAckSha256:raw.acknowledgementSha256});delete current.offlineFence;await txn.put('gate',current)})
+    return json({ok:true,released:true,reused:false})
+  }
+  private async offlineFence(path:string,raw:Record<string,unknown>):Promise<Response>{
+    const acquire=path.endsWith('/acquire'),allowed=acquire?['batchId','token','scopeRegistrySha256','inputCatalogSha256','seedSha256','legacyGuardSha256','sourceManifestSha256']:['batchId','token','manifestSha256','acknowledgedManifestSha256']
+    if(Object.keys(raw).some(key=>!allowed.includes(key))||typeof raw.batchId!=='string'||!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,100}$/.test(raw.batchId)||!HASH.test(String(raw.token)))return json({ok:false,error:'offline_fence_request_invalid'},400)
+    if(acquire&&(raw.scopeRegistrySha256!==this.env.SCOPE_REGISTRY_SHA256||!HASH.test(String(raw.scopeRegistrySha256))||!HASH.test(String(raw.inputCatalogSha256))))return json({ok:false,error:'offline_fence_scope_invalid'},409)
+    if(acquire&&['seedSha256','legacyGuardSha256','sourceManifestSha256'].some(field=>raw[field]!==undefined&&!HASH.test(String(raw[field]))))return json({ok:false,error:'offline_fence_pin_invalid'},400)
+    if(!acquire&&(!HASH.test(String(raw.manifestSha256))||raw.acknowledgedManifestSha256!==raw.manifestSha256))return json({ok:false,error:'offline_fence_manifest_invalid'},400)
+    const tokenSha256=await digest(String(raw.token)),key=`offline-fence:${raw.batchId}`
+    const result=await this.state.storage.transaction(async txn=>{
+      const gate=await txn.get<GateState>('gate')??initial(),history=await txn.get<OfflineFence>(key),old=gate.offlineFence
+      if(acquire){
+        if(old){if(old.batchId===raw.batchId&&old.tokenSha256===tokenSha256&&old.scopeRegistrySha256===raw.scopeRegistrySha256&&old.inputCatalogSha256===raw.inputCatalogSha256&&['seedSha256','legacyGuardSha256','sourceManifestSha256'].every(field=>old[field as keyof OfflineFence]===raw[field]))return{ok:true,fence:old,reused:true};return{ok:false,error:'offline_fence_already_held'}}
+        if(history)return{ok:false,error:'offline_fence_batch_closed'}
+        // Retain even expired permits until normal reconciliation drains them;
+        // expiry alone cannot prove a model request was never sent.
+        if(gate.models.length||gate.fetches.length)return{ok:false,error:'offline_fence_active_capacity'}
+        const fence:OfflineFence={batchId:raw.batchId as string,phase:'active',tokenSha256,scopeRegistrySha256:raw.scopeRegistrySha256 as string,inputCatalogSha256:raw.inputCatalogSha256 as string,acquiredAt:nowIso(),manifestSha256:null,releaseRequestedAt:null}
+        for(const field of ['seedSha256','legacyGuardSha256','sourceManifestSha256']as const)if(typeof raw[field]==='string')fence[field]=raw[field]
+        gate.offlineFence=fence;await txn.put('gate',gate);await txn.put(key,fence);return{ok:true,fence,reused:false}
+      }
+      if(!old||!history||old.batchId!==raw.batchId||old.tokenSha256!==tokenSha256||history.tokenSha256!==tokenSha256)return{ok:false,error:'offline_fence_ownership_invalid'}
+      if(old.manifestSha256&&old.manifestSha256!==raw.manifestSha256)return{ok:false,error:'offline_fence_manifest_conflict'}
+      const fence:OfflineFence={...old,phase:'held_for_handoff',manifestSha256:raw.manifestSha256 as string,releaseRequestedAt:old.releaseRequestedAt??nowIso()}
+      gate.offlineFence=fence;await txn.put('gate',gate);await txn.put(key,fence);return{ok:true,fence,released:false,handoffRequired:true}
+    })
+    return json(result,result.ok?200:409)
+  }
   private async run(input:ModelRequest):Promise<Response> {
+    if((await this.state.storage.get<GateState>('gate'))?.offlineFence)return json({ok:false,error:'model_capacity_offline_fenced',retryAfter:300},429)
     const cfg=await control(this.env)
     if(this.env.MAINTENANCE_ENABLED!=='true'||!cfg?.enabled||!cfg.models_enabled||!cfg.seed_complete||!HASH.test(cfg.legacy_guard_sha256)) return json({ok:false,error:'model_lane_disabled'},409)
     const base=this.env.MINIMAX_ANTHROPIC_BASE??'https://api.minimaxi.com/anthropic'
@@ -125,6 +203,7 @@ export class ModelAdmission {
       const current=await txn.get<Reservation>(key)
       if(current&&(current.state!=='known_failed'||!current.retryable||(current.notBefore??0)>Date.now()||current.requestSha256!==requestSha256))return false
       const gate=await txn.get<GateState>('gate')??initial(),now=Date.now();gate.models=gate.models.filter(p=>p.expiresAt>now)
+      if(gate.offlineFence)return false
       const target=admission.low?1:Math.min(4,Math.max(1,Number(this.env.MODEL_CONCURRENCY)||4),gate.modelLimit??2)
       const expansionLimit=urgent?.count?Math.max(1,target-1):target
       if(gate.cooldownUntil>now||gate.models.length>=target||input.lane==='expansion'&&gate.models.filter(p=>p.lane==='expansion').length>=expansionLimit)return false

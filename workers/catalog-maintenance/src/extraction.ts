@@ -4,6 +4,7 @@ import { assertSafeSourceUrl } from '../../ingestion/src/security'
 import { loadSnapshot, type CapturedSnapshot } from './capture'
 import { control, sourceSchools } from './repository'
 import { persistProposals } from './proposals'
+import { retainProvenLocalizedNames } from './official-names'
 import type { JobRow, MaintenanceEnv, ModelResult, SchoolRow, SourceRow } from './types'
 import { MaintenanceError } from './types'
 import { canonical, digest, gateRequest, HASH, nowIso, record } from './util'
@@ -24,11 +25,11 @@ export function parsePrograms(output:unknown,text:string,schools:SchoolRow[],row
   for(const item of programs) {
     const raw=record(item)
     if(!raw||!schools.some(s=>s.university_id===raw.universityId)||!validQuote(raw.evidence,text)||!validQuote(raw.internationalEvidence,text)||!/international|foreign|国际|外国|留学/iu.test(raw.internationalEvidence.quote)||!Array.isArray(raw.fieldEvidence))continue
-    const name=record(raw.name),degree=String(raw.degreeLevel),type=String(raw.programType)
-    if(!name||Object.keys(name).some(key=>!['en','zh'].includes(key))||!Object.keys(name).length||Object.values(name).some(value=>typeof value!=='string'||!value.trim()||value.length>240))continue
+    const degree=String(raw.degreeLevel),type=String(raw.programType)
+    const locatedFields=raw.fieldEvidence.filter(e=>validQuote(e,text)&&typeof record(e)?.fieldPath==='string')as ExtractedProgram['fieldEvidence']
+    const {name,fieldEvidence:fields}=retainProvenLocalizedNames(raw.name,locatedFields)
+    if(!Object.keys(name).length)continue
     if(/^(?:(?:international|undergraduate|postgraduate|graduate)\s+)*(?:degree\s+)?(?:programs?|programmes?|catalog(?:ue)?|admissions?)$/iu.test(String(name.en??''))||/^(?:本科|硕士|博士)?(?:招生简章|专业目录|专业列表)$/u.test(String(name.zh??'')))continue
-    const fields=raw.fieldEvidence.filter(e=>validQuote(e,text)) as ExtractedProgram['fieldEvidence']
-    if(!Object.entries(name).every(([locale,value])=>fields.some(e=>e.fieldPath===`name.${locale}`&&normalizeEvidenceText(e.quote).includes(normalizeEvidenceText(String(value))))))continue
     const degreeEvidence=fields.find(e=>e.fieldPath==='degreeLevel')
     const degreeWords:Record<string,RegExp>={bachelor:/bachelor|undergraduate|本科|学士/iu,master:/master|硕士/iu,doctorate:/doctor|ph\.?d|博士/iu,language:/language|汉语|中文|语言/iu,foundation:/foundation|pre.?university|预科/iu,other:/visiting|exchange|short.?term|访学|交换|短期/iu}
     if(!degreeEvidence||!degreeWords[degree]?.test(degreeEvidence.quote))continue
@@ -89,7 +90,9 @@ export async function extractIdentities(env:MaintenanceEnv,job:JobRow,row:Source
     const shape=programIdentityFieldsSchema.safeParse(fields)
     if(!shape.success){held++;continue}
     const agreed=secondKeys.has(canonical(identityCore(program)))
-    const proposal:MaintenanceProposal={id:`maintenance-${await digest(`${row.source_id}:${snapshot.rawSha256}:${canonical(identityCore(program))}`)}`,universityId:program.universityId,entityType:'program',recordId:null,operation:'create',fields:shape.data,
+    // A parser-only re-evaluation must not overwrite an older held candidate or
+    // change the payload/reservation that produced the saved model answers.
+    const proposal:MaintenanceProposal={id:`maintenance-${await digest(`${row.source_id}:${snapshot.rawSha256}:${canonical(identityCore(program))}:parser-v2`)}`,universityId:program.universityId,entityType:'program',recordId:null,operation:'create',fields:shape.data,
       source:{id:row.source_id,url:snapshot.finalUrl,snapshotSha256:snapshot.rawSha256,objectKey:snapshot.rawKey,checkedAt:snapshot.checkedAt,contentType:snapshot.contentType,...program.evidence,...(snapshot.textArtifact?{textArtifact:snapshot.textArtifact}:{})},
       fieldEvidence:program.fieldEvidence.map(e=>({...evidence(e),fieldPath:e.fieldPath})),scope:{year:null,intake:null},extractionAttemptId:primary.attemptId,status:agreed?'ready':'held',warnings:agreed?[]:['independent_identity_disagreement']}
     const candidateSha256=await proposalContentSha256(proposal)

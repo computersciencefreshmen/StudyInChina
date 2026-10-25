@@ -15,10 +15,12 @@ import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob,
 import type { MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
 import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus } from './runtime'
-import { after, authorized, HASH, json, nowIso, requestJson } from './util'
+import { after, authorized, gateRequest, HASH, json, nowIso, requestJson } from './util'
+import { uploadOfflineArtifact,uploadOfflineManifest,processOfflineHandoff,offlineHandoffMessage,offlineHandoffStatus } from './offline-handoff'
 
 export { ModelAdmission }
 export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessage):Promise<void> {
+  if(offlineHandoffMessage(message)){await processOfflineHandoff(env,message.offlineHandoffBatchId!,message.offlineHandoffSha256!);return}
   if(message?.version===1&&message.bootstrapUploadSha256&&HASH.test(message.bootstrapUploadSha256)){await preparePendingBootstrap(env,message.bootstrapUploadSha256);return}
   if(message?.version===1&&message.bootstrapSeedSha256&&HASH.test(message.bootstrapSeedSha256)){await resumeBootstrapSeed(env,message.bootstrapSeedSha256);return}
   if(message?.version===1&&message.discoveryManifestSha256&&HASH.test(message.discoveryManifestSha256)){await processDiscoveryFrontier(env,message.discoveryManifestSha256,message.discoveryOffset??0);return}
@@ -79,6 +81,11 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   if(url.pathname==='/health'&&request.method==='GET')return json({ok:true,service:'studyinchina-catalog-maintenance',version:'1.0.0',publicationPerformed:false})
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
   try {
+    if(url.pathname==='/offline-fence'&&request.method==='GET')return gateRequest(env,'/offline-fence/status',{})
+    if(['/offline-fence/acquire','/offline-fence/release'].includes(url.pathname)&&request.method==='POST')return gateRequest(env,url.pathname,await requestJson(request,4096))
+    if(url.pathname==='/offline-handoff/artifact'&&request.method==='POST')return json(await uploadOfflineArtifact(env,request))
+    if(url.pathname==='/offline-handoff/manifest'&&request.method==='POST')return json(await uploadOfflineManifest(env,request))
+    if(url.pathname==='/offline-handoff'&&request.method==='GET')return json(await offlineHandoffStatus(env,url.searchParams.get('batchId')??''))
     if(url.pathname==='/seed'&&request.method==='POST')return json(await seed(env,await requestJson(request,8*1024*1024),Date.now(),true))
     if(url.pathname==='/bootstrap'&&request.method==='POST')return json(await registerBootstrapRequest(env,request))
     if(url.pathname==='/controls'&&request.method==='POST')return json(await setControls(env,await requestJson(request,32768)))

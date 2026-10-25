@@ -2,6 +2,7 @@ import { control,enqueueDue,seed,setControls,status,validateSeed,type Seed } fro
 import type { BucketObject,MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { backendState as backendCode,backendErrorKind } from './backend-errors'
+import { enqueuePendingOfflineHandoff } from './offline-handoff'
 import { canonical,digest,HASH,nowIso,record } from './util'
 
 const POINTER='maintenance/bootstrap-pending/initial.v1.json'
@@ -90,6 +91,7 @@ async function saveTick(env:MaintenanceEnv,tick:RuntimeTick){
 export async function runCloudTick(env:MaintenanceEnv){
   const tick:RuntimeTick={format:'studyinchina.cloud-maintenance-tick',version:1,tickId:crypto.randomUUID(),observedAt:nowIso(),state:'disabled',code:'not_observed',queued:null,seedComplete:null,targetsComplete:null,modelsEnabled:null,canarySchoolCount:null,retryAt:null}
   try{
+    await enqueuePendingOfflineHandoff(env)
     const pointer=await bootstrapPointer(env)
     if(!pointer){const uploaded=await readObject(env,UPLOAD_POINTER);if(uploaded){const pending=JSON.parse(uploaded.text)as UploadPointer;await env.MAINTENANCE_QUEUE.send({version:1,jobId:pending.rawSha256,bootstrapUploadSha256:pending.rawSha256})}}
     let cfg=await control(env)
