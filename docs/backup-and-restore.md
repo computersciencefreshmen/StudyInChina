@@ -22,7 +22,9 @@ Catalog 使用 FTS5；Wrangler 不能把包含虚拟表的 D1 直接导出为完
 
 ## GitHub Actions configuration
 
-Daily backup requires repository secrets `CLOUDFLARE_D1_BACKUP_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. The token is restricted to D1 Read and write access to the private `studyinchina-backups` Bucket.
+截至 2026-10-25 的本次 GitHub 配置核查：repository 有 `CLOUDFLARE_ACCOUNT_ID`，但缺少 `CLOUDFLARE_D1_BACKUP_TOKEN`；受保护的 `cloudflare-restore-drill` Environment 缺少 `CLOUDFLARE_D1_RESTORE_TOKEN`。10 月 23 日、24 日最近两次每日备份均失败。因此当前备份和恢复能力**未验收**，不得宣称满足 RPO/RTO。不要将本机 Wrangler OAuth 复制为长期备份凭据。
+
+Daily backup requires repository secrets `CLOUDFLARE_D1_BACKUP_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. Limit the dedicated token to the intended account/databases and private `studyinchina-backups` Bucket. Its actual permissions must pass metadata lookup, ordinary-table discovery/query, D1 export and private R2 upload/readback preflight. Do not assume that the permission label “D1 Read” alone proves all these capabilities, or broaden permissions without a concrete failed capability check.
 
 Quarterly restore uses the protected `cloudflare-restore-drill` Environment. Its `CLOUDFLARE_D1_RESTORE_TOKEN` Environment secret has read-only access to that Bucket and is never shared with daily backup. Enable a required reviewer for this Environment.
 
@@ -66,6 +68,10 @@ npm run cloudflare:restore-drill -- -BackupDirectory C:\secure\studyinchina-back
 4. `PRAGMA integrity_check` 返回且仅返回 `ok`。
 5. Catalog 和 Pipeline 的核心表存在。
 6. Catalog 有且仅有一个当前 Release，状态为 `active`，并且学校、项目、项目周期和奖学金计数均大于零。
+
+Pipeline 校验器现在还要求当前迁移的全部 `maintenance_*` 持久表。合法的空维护库报告 `maintenance.state=not_initialized`、`resumable=false`，允许旧业务核心恢复成功，但不能作为维护系统已恢复的证明；已有维护行却缺 control checkpoint 时失败。存在 checkpoint 时校验 scope、已完成 seed 的 272 校数量、canary、job lease 状态、completed 模型产物指针以及 applied/published 回执校验值与发布证明。`unknown` 和 `send_started` 预留只保留并报告，不能为恢复而清空或自动重放。
+
+每日 SQL 表导出会自动包含维护台账，但其中的 R2 key 只是引用，不包含原始官网、PDF/OCR、模型输出或审核证据对象。现有流程没有证明这些历史对象的独立备份/恢复，也没有恢复 Durable Object 中的发送预留和 Queue 消息。D1 报告明确标记 `evidenceObjectsVerified=false`、`durableObjectReservationsVerified=false`、`resumable=false`；恢复后必须另行核对这些证据及预留，再决定是否恢复执行。这次加强是本地恢复契约和测试，未操作生产或新增凭据。
 
 报告只记录校验结果、哈希、行数摘要和隔离数据库名称，不包含 SQL 或原始数据。
 

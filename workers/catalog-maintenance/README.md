@@ -173,8 +173,13 @@ batches and target-refresh readiness. An empty queue or HTTP200 is insufficient.
 Alerts should be quiet on unchanged state and report meaningful progress,
 stalls, unknown outcomes or required review.
 
-The existing Pipeline D1/R2 backup policy applies to these tables and artifacts.
-Verify real backup readback and restoration independently. Queue delivery is
+Ordinary maintenance D1 tables are included by backup table discovery, and the
+restore verifier checks their checkpoint/lease/reservation/publication contracts.
+An uninitialized checkpoint is reported explicitly, never as maintenance recovery.
+Current backup/restore GitHub credentials are missing and recent backups failed;
+this capability is not accepted. D1 SQL does not include R2 evidence objects,
+Durable Object reservations or Queue messages. Their recovery remains separately
+unverified; see `docs/backup-and-restore.md`. Queue delivery is
 at-least-once; job claims, SQL cursor fences, immutable proposal IDs and model
 reservations provide replay safety. Preserve failed/unknown receipts and the
 previous stable deployment. Do not clear locks/reservations or bypass the

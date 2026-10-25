@@ -56,9 +56,9 @@ test(releaseAnnouncementTestTitle, async ({ page }) => {
   const dialog = page.getByRole('dialog', { name: getReleaseAnnouncement('zh').copy.title })
   await expect(dialog).toBeVisible()
   await expect(page.getByRole('button', { name: '关闭更新' })).toBeFocused()
-  await expect(dialog.getByText(publicData.universities.length.toLocaleString('en-US'))).toBeVisible()
-  await expect(dialog.getByText(publicData.programs.length.toLocaleString('en-US'))).toBeVisible()
-  await expect(dialog.getByText(publicData.scholarships.length.toLocaleString('en-US'))).toBeVisible()
+  await expect(dialog.getByText(publicData.universities.length.toLocaleString('en-US'), { exact: true })).toBeVisible()
+  await expect(dialog.getByText(publicData.programs.length.toLocaleString('en-US'), { exact: true })).toBeVisible()
+  await expect(dialog.getByText(publicData.scholarships.length.toLocaleString('en-US'), { exact: true })).toBeVisible()
   await expect(page.getByRole('link', { name: '查看开放申请项目' }))
     .toHaveAttribute('href', '/zh/programs?applicationState=open')
 
