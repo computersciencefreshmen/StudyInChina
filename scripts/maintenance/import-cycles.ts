@@ -99,7 +99,8 @@ export async function importAdmissionCycleCandidates(options: {
         const entry: FieldVerification = { entityType: 'admissionCycle', recordId: id, recordScopeSha256: cycleScopeSha256,
           fieldPath: patch.fieldPath, value: patch.value, valueSha256: fieldValueSha256(patch.value), factStatus: patch.factStatus,
           sourceId, sourceUrl: source.url, snapshotSha256: evidence.snapshotSha256, objectKey: evidence.objectKey,
-          locator: evidence.locator, quote: evidence.quote, verifiedAt: proposal.review!.reviewedAt, reviewAfter: fieldReviewDate(cycle, day),
+          // A new intake uses the source observation's window, even when reviewed or delivered later.
+          locator: evidence.locator, quote: evidence.quote, verifiedAt: proposal.source.checkedAt, reviewAfter: fieldReviewDate(cycle, checkedDay),
           review: { method: proposal.review!.method === 'human' ? 'independent' : 'dual-model', reviewerId: proposal.review!.reviewerId },
           receiptPath: options.fieldReceiptPath, receiptSha256: '0'.repeat(64) }
         if (!validateFieldVerification(valid, entry, day)) throw new Error(`new_cycle_invalid_leaf:${patch.fieldPath}`)

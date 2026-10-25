@@ -38,19 +38,19 @@ async function fixture(year = '2028-2029') {
     inputCatalogSha256: await catalogSha256(bundle), scopeRegistrySha256: scope.sha256, createdAt: capturedAt, proposals: [proposal] }
   const batch: CandidateExport = { ...content, sha256: '0'.repeat(64) }
   const artifacts = new Map<string, Uint8Array>([[evidence.objectKey, bytes]])
-  const seal = async (reviewedFields: unknown = proposal.fields) => {
+  const seal = async (reviewedFields: unknown = proposal.fields, reviewedAt = capturedAt) => {
     for (const item of batch.proposals) {
       const candidateSha256 = await proposalContentSha256(item), key = `reviews/${item.id}.json`
       const receipt = new TextEncoder().encode(JSON.stringify({ candidateSha256, reviewAttemptId: 'intake-independent', decision: 'approved', agreedCycleFields: item === proposal ? reviewedFields : item.fields }))
       artifacts.set(key, receipt)
-      item.review = { decision: 'approved', reviewerId: 'independent:intake-review', method: 'independent_model', reviewedAt: capturedAt,
+      item.review = { decision: 'approved', reviewerId: 'independent:intake-review', method: 'independent_model', reviewedAt,
         candidateSha256, snapshotSha256, checks: { internationalScope: true, concreteProgram: true, evidenceLocated: true },
         reviewAttemptId: 'intake-independent', artifactKey: key, reviewArtifactSha256: hash(receipt) }
     }
     batch.inputCatalogSha256 = await catalogSha256(bundle); batch.sha256 = await exportContentSha256(batch)
   }
   await seal()
-  const run = (identities: IdentityAcceptance[] = []) => importAdmissionCycleCandidates({ bundle, scope, batch, identities, acceptedAt: now,
+  const run = (identities: IdentityAcceptance[] = [], acceptedAt = now) => importAdmissionCycleCandidates({ bundle, scope, batch, identities, acceptedAt,
     cycleReceiptPath: 'quality/cycle-receipt.json', fieldReceiptPath: 'quality/cycle-field-receipt.json', readArtifact: async key => {
       const bytes = artifacts.get(key); if (!bytes) throw Error('Artifact missing'); return bytes
     } })
@@ -58,6 +58,34 @@ async function fixture(year = '2028-2029') {
 }
 
 describe('new annual admission-cycle import', () => {
+  it('holds a new intake whose source is ten days old even when independent review happened today', async () => {
+    const f = await fixture(); f.proposal.source.checkedAt = '2026-10-14T00:00:00.000Z'; await f.seal(undefined, now)
+    const result = await f.run()
+    expect(result.cycleReceipt.held).toEqual([{ proposalId: f.proposal.id, reason: 'new_cycle_invalid_leaf:opensOn' }])
+    expect(result.cycleReceipt.accepted).toEqual([])
+    expect(result.fieldReceipt.accepted).toEqual([])
+    expect(result.fieldReceipt.fieldBindings).toEqual([])
+    expect(result.entries).toEqual([])
+    expect(result.bundle).toEqual(f.bundle)
+    expect(result.cycleReceipt.outputCatalogSha256).toBe(result.cycleReceipt.beforeCatalogSha256)
+  })
+  it('keeps the source-day as-of time on new-cycle leaves when independently reviewed the following day', async () => {
+    const f = await fixture(); f.proposal.source.checkedAt = '2026-10-25T00:00:00.000Z'; await f.seal(undefined, '2026-10-26T00:00:00.000Z')
+    const result = await f.run([], '2026-10-26T02:00:00.000Z')
+    expect(result.cycleReceipt.held).toEqual([])
+    expect(result.entries).toHaveLength(3)
+    expect(result.entries.every(entry => entry.verifiedAt === f.proposal.source.checkedAt && entry.reviewAfter === '2026-11-01')).toBe(true)
+    expect(result.bundle.admissionCycles.at(-1)).toMatchObject({ status: 'stale', verifiedAt: '2026-10-25', reviewAfter: '2026-10-25' })
+    expect(result.bundle.programs).toEqual(f.bundle.programs)
+    expect(result.bundle.admissionCycles.slice(0, -1)).toEqual(f.bundle.admissionCycles)
+    expect(f.proposal.review!.reviewedAt).toBe('2026-10-26T00:00:00.000Z')
+  })
+  it('still holds future source observations and future independent reviews', async () => {
+    const f = await fixture(); f.proposal.source.checkedAt = '2026-10-25T00:00:00.000Z'; await f.seal()
+    expect((await f.run()).cycleReceipt.held[0].reason).toBe('new_cycle_future_evidence')
+    f.proposal.source.checkedAt = capturedAt; await f.seal(undefined, '2026-10-25T00:00:00.000Z')
+    expect((await f.run()).cycleReceipt.held[0].reason).toBe('new_cycle_future_evidence')
+  })
   it('creates a new scoped cycle and only proven fields, preserving every older record and audit date', async () => {
     const f = await fixture(), result = await f.run()
     expect(result.cycleReceipt.held).toEqual([])

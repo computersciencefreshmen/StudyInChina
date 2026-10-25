@@ -55,15 +55,17 @@ export async function captureSource(env:MaintenanceEnv,job:JobRow,row:SourceRow,
     const signal=AbortSignal.timeout(20000)
     // A complete body is deliberately retained. An HTTP304 or link-health check
     // alone does not renew factual review dates or certify an old extraction.
-    const fetched=await fetchWithValidatedRedirects(fetcher,url,{allowedHosts:[url.hostname]},{headers:{'user-agent':userAgent,accept:'text/html,application/pdf,text/plain;q=0.8'},signal},3,5000).catch(()=>{throw new MaintenanceError('source_fetch_failed',3600)})
+    const fetched=await fetchWithValidatedRedirects(fetcher,url,{allowedHosts:[url.hostname]},{headers:{'user-agent':userAgent,accept:'text/html,application/json,application/pdf,text/plain;q=0.8'},signal},3,5000).catch(()=>{throw new MaintenanceError('source_fetch_failed',3600)})
     if(!fetched.response.ok){await fetched.response.body?.cancel();throw new MaintenanceError(`source_http_${fetched.response.status}`,[429,500,502,503,504].includes(fetched.response.status)?3600:null)}
     const contentType=fetched.response.headers.get('content-type')??'application/octet-stream'
     const bytes=await readBoundedBody(fetched.response,/^application\/pdf/i.test(contentType)?10*1024*1024:2*1024*1024,signal),rawSha256=await digest(bytes)
     const rawKey=`maintenance/snapshots/${row.source_id}/${rawSha256}.bin`,checkedAt=nowIso()
     await env.SNAPSHOTS_BUCKET.put(rawKey,bytes,{httpMetadata:{contentType}})
-    const textSupported=/^(?:text\/(?:html|plain)|application\/xhtml\+xml)/i.test(contentType)
+    const jsonSupported=/^application\/(?:json|[a-z0-9!#$&^_.+-]+\+json)(?:\s*;|$)/i.test(contentType)
+    const textSupported=/^(?:text\/(?:html|plain)|application\/xhtml\+xml)/i.test(contentType)||jsonSupported
     let text:string|null=null,parserCandidates:unknown[]=[],html:string|null=null
-    if(textSupported){html=decodeOfficialBody(bytes,contentType);text=normalizeEvidenceText(/html/i.test(contentType)?htmlToText(html):html);if(!text.trim())throw new MaintenanceError('empty_official_text')}
+    if(jsonSupported){const charset=/charset\s*=\s*["']?\s*([a-zA-Z0-9_-]+)/i.exec(contentType)?.[1]??'utf-8';text=new TextDecoder(charset,{fatal:true}).decode(bytes);if(!text.trim())throw new MaintenanceError('empty_official_text')}
+    else if(textSupported){html=decodeOfficialBody(bytes,contentType);text=normalizeEvidenceText(/html/i.test(contentType)?htmlToText(html):html);if(!text.trim())throw new MaintenanceError('empty_official_text')}
     if(html&&/html/i.test(contentType))parserCandidates=parseOfficialCatalogHtml(html,{sourceUrl:fetched.finalUrl,allowedHosts:hosts,sourceCategory:row.category as SourceCategory,expectedKind:'auto',maxCandidates:500})
     let textSha256=text===null?null:await digest(text),canonicalSha256=textSha256??rawSha256,textKey=text===null?null:`maintenance/text/${row.source_id}/${textSha256}.txt`
     if(textKey&&text!==null)await env.SNAPSHOTS_BUCKET.put(textKey,text,{httpMetadata:{contentType:'text/plain;charset=utf-8'}})

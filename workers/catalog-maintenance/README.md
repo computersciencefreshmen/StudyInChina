@@ -50,6 +50,10 @@ outputs and produce a newly dated leaf-field receipt. This never renews unrelate
 fields or whole-record audit dates. PDFs require checksum-bound Poppler/OCR text;
 unreadable documents enter a durable review state rather than repeatedly starving
 the document queue.
+Official `application/json` and structured `application/*+json` sources enter the
+same text/evidence pipeline with their full decoded JSON and original raw bytes.
+They do not receive rule-approved facts or HTML link extraction. Existing full-
+document partition limits still apply; unsupported binary formats remain held.
 
 The finite eight-job dispatch pool contains candidates from both expansion and
 maintenance before selection. During the first actual school-check round, ten
@@ -67,6 +71,7 @@ whole-record dates.
 ```powershell
 node --import tsx --test workers/catalog-maintenance/tests/maintenance.test.ts workers/catalog-maintenance/tests/runtime.test.ts workers/catalog-maintenance/tests/discovery.test.ts workers/catalog-maintenance/tests/proposals.test.ts workers/catalog-maintenance/tests/school-progress.test.ts
 node --import tsx --test workers/catalog-maintenance/tests/rollout.test.ts workers/catalog-maintenance/tests/export-batches.test.ts workers/catalog-maintenance/tests/scheduling.test.ts workers/catalog-maintenance/tests/cadence.test.ts workers/catalog-maintenance/tests/scheduling-integration.test.ts
+node --import tsx --test workers/catalog-maintenance/tests/capture-formats.test.ts
 node node_modules/vitest/vitest.mjs run tests/unit/maintenance-field-engine.test.ts tests/unit/maintenance-documents.test.ts tests/unit/maintenance-cycle-engine.test.ts tests/unit/maintenance-scholarship-engine.test.ts
 node node_modules/typescript/bin/tsc --project workers/catalog-maintenance/tsconfig.json --pretty false
 node node_modules/eslint/bin/eslint.js workers/catalog-maintenance --max-warnings=0

@@ -128,7 +128,8 @@ export async function importFieldCandidates(options: {
         const verification: FieldVerification = { entityType, recordId: target.id, recordScopeSha256: fields.recordScopeSha256,
           fieldPath: patch.fieldPath, value: patch.value, valueSha256: fieldValueSha256(patch.value), factStatus: patch.factStatus,
           sourceId, sourceUrl: source.url, snapshotSha256: evidence.snapshotSha256, objectKey: evidence.objectKey, locator: evidence.locator, quote: evidence.quote,
-          verifiedAt: proposal.review!.reviewedAt, reviewAfter: reviewDate(target, today),
+          // Independent review and delivery cannot renew an older official observation.
+          verifiedAt: proposal.source.checkedAt, reviewAfter: reviewDate(target, getTodayDate(new Date(proposal.source.checkedAt))),
           review: { method: proposal.review!.method === 'human' ? 'independent' : 'dual-model', reviewerId: proposal.review!.reviewerId },
           receiptPath: options.receiptPath, receiptSha256: '0'.repeat(64) }
         if (!validateFieldVerification(validBundle, verification, today)) throw new Error(`field_value_or_window_invalid:${patch.fieldPath}`)
