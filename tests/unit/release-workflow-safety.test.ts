@@ -47,9 +47,10 @@ describe('production release workflow safety', () => {
     const rollbackTrap = transaction.indexOf('trap rollback_on_failure EXIT')
     const previousTarget = transaction.indexOf('previous_target="$(current_stable_target)"')
     const finalMainCheck = transaction.indexOf('final_main_sha=')
+    const promotionGuard = transaction.indexOf('github-release-writer.ts guard promote')
     const mutationArmed = transaction.indexOf('mutation_attempted=true')
     const candidateAliasSet = transaction.indexOf(
-      'npx --yes vercel@58.0.0 alias set',
+      'node --import tsx scripts/operations/github-release-writer.ts assign promote',
       mutationArmed,
     )
     const postPromotionCheck = transaction.indexOf('post_promotion_main_sha=')
@@ -58,21 +59,24 @@ describe('production release workflow safety', () => {
     )
     const transactionCommit = transaction.indexOf('transaction_committed=true')
     const rollbackAliasSet = transaction.indexOf(
-      'npx --yes vercel@58.0.0 alias set',
+      'node --import tsx scripts/operations/github-release-writer.ts assign compensate',
       rollbackFunction,
     )
+    const compensationGuard = transaction.indexOf('github-release-writer.ts guard compensate', rollbackFunction)
 
     expect(transactionStart).toBeGreaterThan(-1)
     expect(rollbackFunction).toBeGreaterThan(-1)
     expect(rollbackTrap).toBeGreaterThan(rollbackFunction)
     expect(previousTarget).toBeGreaterThan(rollbackTrap)
     expect(finalMainCheck).toBeGreaterThan(previousTarget)
-    expect(mutationArmed).toBeGreaterThan(finalMainCheck)
+    expect(promotionGuard).toBeGreaterThan(finalMainCheck)
+    expect(mutationArmed).toBeGreaterThan(promotionGuard)
     expect(candidateAliasSet).toBeGreaterThan(mutationArmed)
     expect(postPromotionCheck).toBeGreaterThan(candidateAliasSet)
     expect(stableSmoke).toBeGreaterThan(postPromotionCheck)
     expect(transactionCommit).toBeGreaterThan(stableSmoke)
-    expect(rollbackAliasSet).toBeGreaterThan(rollbackFunction)
+    expect(compensationGuard).toBeGreaterThan(rollbackFunction)
+    expect(rollbackAliasSet).toBeGreaterThan(compensationGuard)
     expect(rollbackAliasSet).toBeLessThan(rollbackTrap)
     expect(transaction).toContain('${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/git/ref/heads/main')
     expect(transaction).toContain('"${previous_target}"')
@@ -81,7 +85,11 @@ describe('production release workflow safety', () => {
     expect(transaction).toContain('Stable alias rollback verification failed')
     expect(transaction).toContain('restored_target="$(current_stable_target || true)"')
     expect(transaction).toContain('"${restored_target}" == "${previous_target}"')
-    expect(transaction.match(/vercel@58\.0\.0 alias set/gu)).toHaveLength(2)
+    expect(transaction).toContain('node --import tsx scripts/operations/github-release-writer.ts current-target')
+    expect(transaction.match(/github-release-writer\.ts assign (?:promote|compensate)/gu)).toHaveLength(2)
+    expect(transaction).toContain("jq -e '.mutationRequired == true' .github-release-writer/guard-compensate.json")
+    expect(transaction).toContain('github-release-writer.ts finish uncertain || true')
+    expect(transaction).not.toMatch(/\b(?:npx|vercel@)[^\n]*\balias\s+(?:list|set)\b/u)
   })
 
   it('fails closed when the stable-alias credential is unavailable', () => {
@@ -96,6 +104,22 @@ describe('production release workflow safety', () => {
     expect(credentialBlock).toContain('::error title=Stable production alias was not promoted')
     expect(credentialBlock).toContain('exit 1')
     expect(credentialBlock).not.toContain('::warning::')
+  })
+
+  it('blocks compensation and preserves an uncertain writer when an assignment may still be in flight', () => {
+    const workflow = readWorkflow('vercel-production-alias.yml')
+    const rollback = workflow.indexOf('rollback_on_failure()')
+    const statusCheck = workflow.indexOf('github-release-writer.ts mutation-status', rollback)
+    const compensationGuard = workflow.indexOf('github-release-writer.ts guard compensate', rollback)
+    const unknownGate = workflow.slice(statusCheck, compensationGuard)
+
+    expect(statusCheck).toBeGreaterThan(rollback)
+    expect(compensationGuard).toBeGreaterThan(statusCheck)
+    expect(unknownGate).toContain('"${assignment_status}" != \'safe\'')
+    expect(unknownGate).toContain('github-release-writer.ts finish uncertain || true')
+    expect(unknownGate).toContain('Automatic compensation is blocked')
+    expect(unknownGate).toContain('exit 1')
+    expect(unknownGate).not.toContain('github-release-writer.ts assign compensate')
   })
 
   it('smoke-tests the immutable deployment before the fail-closed stable-alias transaction', () => {

@@ -263,16 +263,7 @@ jobs:
           }
 
           current_stable_target() {
-            npx --yes vercel@58.0.0 alias list \
-              --format json \
-              --limit 100 \
-              --scope henry-yangs-projects-c9706eac \
-              | jq -er '
-                  [.aliases[] | select(.alias == "studyinchina.vercel.app")] as $matches
-                  | if ($matches | length) == 1 then $matches[0].url
-                    else error("stable alias must have exactly one current target")
-                    end
-                '
+            node --import tsx scripts/operations/github-release-writer.ts current-target
           }
 
           rollback_on_failure() {
@@ -288,6 +279,14 @@ jobs:
               exit "${status}"
             fi
 
+            # A timed-out assignment may still arrive after one stale alias readback.
+            # Keep the durable writer blocked instead of sending a competing rollback.
+            if ! assignment_status="$(node --import tsx scripts/operations/github-release-writer.ts mutation-status)" || [[ "${assignment_status}" != 'safe' ]]; then
+              node --import tsx scripts/operations/github-release-writer.ts finish uncertain || true
+              echo '::error title=Stable alias assignment outcome unknown::An assignment may still be in flight. Automatic compensation is blocked; reconcile the immutable attempt and actual alias before any further write.'
+              exit 1
+            fi
+
             echo "::error title=Stable alias transaction failed::Rolling studyinchina.vercel.app back to ${previous_target}."
             if ! node --import tsx scripts/operations/github-release-writer.ts guard compensate; then
               node --import tsx scripts/operations/github-release-writer.ts finish uncertain || true
@@ -295,10 +294,7 @@ jobs:
               exit 1
             fi
             if jq -e '.mutationRequired == true' .github-release-writer/guard-compensate.json >/dev/null; then
-              if ! npx --yes vercel@58.0.0 alias set \
-                "${previous_target}" \
-                studyinchina.vercel.app \
-                --scope henry-yangs-projects-c9706eac; then
+              if ! node --import tsx scripts/operations/github-release-writer.ts assign compensate; then
                 node --import tsx scripts/operations/github-release-writer.ts finish uncertain || true
                 echo '::error title=Stable alias rollback failed::The previous target could not be restored; immediate operator action is required.'
                 exit 1
@@ -345,10 +341,7 @@ jobs:
 
           node --import tsx scripts/operations/github-release-writer.ts guard promote
           mutation_attempted=true
-          npx --yes vercel@58.0.0 alias set \
-            "${DEPLOYMENT_URL}" \
-            studyinchina.vercel.app \
-            --scope henry-yangs-projects-c9706eac
+          node --import tsx scripts/operations/github-release-writer.ts assign promote
 
           post_promotion_main_sha="$(github_main_sha || true)"
           if ! [[ "${post_promotion_main_sha}" =~ ^[0-9a-f]{40}$ ]] || [[ "${post_promotion_main_sha}" != "${DEPLOYMENT_SHA}" ]]; then
