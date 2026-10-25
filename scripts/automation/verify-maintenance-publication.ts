@@ -115,7 +115,8 @@ export async function publishMaintenanceProof(options: {
   }
   if (options.acknowledge) await options.acknowledge({ batchId: options.receipt.batchId, outcome: 'published', receiptSha256: options.receipt.sha256,
     sourceCommit: proof.sourceCommit, newInputCatalogSha256: options.receipt.outputCatalogSha256, acceptedProposalIds: options.receipt.acceptedProposalIds,
-    heldProposalIds: options.receipt.held.map(entry => entry.proposalId), deploymentId: proof.deploymentId, stableProofSha256: proof.sha256 })
+    heldProposalIds: options.receipt.held.map(entry => entry.proposalId), deploymentId: proof.deploymentId, stableProofSha256: proof.sha256,
+    ...(options.receipt.unchangedProposalIds?.length ? { unchangedProposalIds: options.receipt.unchangedProposalIds } : {}) })
   return proof
 }
 async function main() {

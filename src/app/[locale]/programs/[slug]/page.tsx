@@ -29,6 +29,8 @@ import { pageMetadata, requireLocale } from '@/lib/site'
 import styles from './ProgramDetail.module.css'
 
 export const dynamicParams = true
+// Directory identities remain routable even when the current prebuild set is empty.
+export const dynamic = 'force-dynamic'
 
 export function generateStaticParams() {
   const data = getData()

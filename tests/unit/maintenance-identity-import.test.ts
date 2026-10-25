@@ -93,7 +93,9 @@ describe('fixed school scope and reviewed identity importing', () => {
     const result = await run()
     expect(result.receipt.held).toEqual([])
     expect(result.bundle.programs).toHaveLength(bundle.programs.length)
-    expect(result.bundle.programs.find(program => program.id === existing.id)).toEqual(existing)
+    const updated = result.bundle.programs.find(program => program.id === existing.id)!
+    expect({ ...updated, sourceIds: existing.sourceIds }).toEqual(existing)
+    expect(updated.sourceIds).toEqual(expect.arrayContaining(existing.sourceIds))
     expect(result.acceptances.entries[0].recordId).toBe(existing.id)
   })
 

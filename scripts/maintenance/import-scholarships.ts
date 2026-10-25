@@ -6,13 +6,14 @@ import { identityAcceptanceLedgerSchema, identityFingerprint, type IdentityAccep
 import { catalogSha256 } from './build-scope'
 import { canonicalJson, exportContentSha256, maintenanceCandidateExportSchema, maintenanceScopeSchema, scopeContentSha256,
   type MaintenanceProposal, type MaintenanceScope } from './contracts'
-import { verifyReviewedProposalEvidence, type IdentityBindings } from './import-identities'
+import { hasAcceptedIdentityWithOfficialUrl, verifyReviewedProposalEvidence, type IdentityBindings } from './import-identities'
 import { scholarshipIdentityFieldsSchema, type ScholarshipIdentityFields } from './scholarship-contracts'
 
 export type ScholarshipIdentityImportReceipt = {
   format: 'studyinchina.scholarship-identity-import-receipt'; formatVersion: 1; batchId: string; batchSha256: string;
   scopeRegistrySha256: string; inputCatalogSha256: string; beforeCatalogSha256: string; outputCatalogSha256: string; acceptedAt: string;
   accepted: Array<{ proposalId: string; recordId: string; canonicalKey: string; action: 'created' | 'identity_accepted' }>;
+  unchanged?: Array<{ proposalId: string; recordId: string; reason: 'identity_and_official_source_unchanged' }>;
   held: Array<{ proposalId: string; reason: string }>; sha256: string;
 }
 const hash = (value: string) => createHash('sha256').update(value).digest('hex')
@@ -79,6 +80,7 @@ export async function importScholarshipIdentities(options: {
   if (!Number.isFinite(+acceptedAt) || acceptedAt.toISOString() !== options.acceptedAt) throw Error('acceptedAt must be a canonical ISO timestamp')
   const bundle = structuredClone(original), schools = new Map(scope.schools.map(school => [school.universityId, school]))
   const accepted: ScholarshipIdentityImportReceipt['accepted'] = [], held: ScholarshipIdentityImportReceipt['held'] = []
+  const unchanged: NonNullable<ScholarshipIdentityImportReceipt['unchanged']> = []
   const pending: Array<{ record: Scholarship; reviewer: string }> = []
   for (const proposal of batch.proposals.filter(proposal => proposal.entityType === 'scholarship' && 'scholarshipUrl' in proposal.fields)) {
     try {
@@ -103,6 +105,10 @@ export async function importScholarshipIdentities(options: {
       }
       if (record?.status === 'draft' || record?.status === 'archived') throw Error('draft_or_archived_identity_requires_separate_promotion')
       if (bound && record && bound.recordId !== record.id) throw Error('canonical_scholarship_key_already_bound')
+      if (record && hasAcceptedIdentityWithOfficialUrl(bundle, acceptances, 'scholarship', record, proposal.source.url, options.acceptedAt)) {
+        unchanged.push({ proposalId: proposal.id, recordId: record.id, reason: 'identity_and_official_source_unchanged' })
+        continue
+      }
       const action = record ? 'identity_accepted' as const : 'created' as const
       const sourceId = `src-maintenance-scholarship-${hash(proposal.source.url).slice(0, 24)}`, checkedDay = getTodayDate(new Date(proposal.source.checkedAt))
       const source: Source = { id: sourceId, url: proposal.source.url, title: `Official scholarship information — ${school.name.en ?? school.name.zh ?? school.universityId}`,
@@ -118,6 +124,9 @@ export async function importScholarshipIdentities(options: {
         bundle.scholarships.push(record)
       }
       if (!existingSource) bundle.sources.push(source)
+      if (!record.sourceIds.some(id => bundle.sources.find(source => source.id === id)?.url === proposal.source.url)) {
+        record.sourceIds = [...record.sourceIds, sourceId]
+      }
       if (!bound) bindings.entries.push({ canonicalKey, recordId: record.id, aliases })
       else bound.aliases = [...new Set([...bound.aliases, ...aliases])].sort()
       accepted.push({ proposalId: proposal.id, recordId: record.id, canonicalKey, action })
@@ -127,7 +136,7 @@ export async function importScholarshipIdentities(options: {
   const validated = bundleSchema.parse(bundle)
   const content: Omit<ScholarshipIdentityImportReceipt, 'sha256'> = { format: 'studyinchina.scholarship-identity-import-receipt', formatVersion: 1,
     batchId: batch.batchId, batchSha256: batch.sha256, scopeRegistrySha256: scope.sha256, inputCatalogSha256: inputHash, beforeCatalogSha256: beforeHash,
-    outputCatalogSha256: await catalogSha256(validated), acceptedAt: options.acceptedAt, accepted, held }
+    outputCatalogSha256: await catalogSha256(validated), acceptedAt: options.acceptedAt, accepted, unchanged, held }
   const receipt = { ...content, sha256: hash(canonicalJson(content)) }
   for (const { record, reviewer } of pending) {
     const entry = { entityType: 'scholarship' as const, recordId: record.id, identitySha256: identityFingerprint('scholarship', record), sourceIds: record.sourceIds,

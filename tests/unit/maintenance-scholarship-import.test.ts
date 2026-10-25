@@ -65,7 +65,9 @@ describe('reviewed scholarship identity importing', () => {
     const f = await fixture(true), result = await f.run()
     expect(result.receipt.held).toEqual([])
     expect(result.bundle.scholarships).toHaveLength(bundle.scholarships.length)
-    expect(result.bundle.scholarships.find(record => record.id === f.existing.id)).toEqual(f.existing)
+    const updated = result.bundle.scholarships.find(record => record.id === f.existing.id)!
+    expect({ ...updated, sourceIds: f.existing.sourceIds }).toEqual(f.existing)
+    expect(updated.sourceIds).toEqual(expect.arrayContaining(f.existing.sourceIds))
     expect(result.acceptances.entries[0].recordId).toBe(f.existing.id)
     expect(result.acceptances.entries[0].receiptSha256).toBe(result.receipt.sha256)
   })

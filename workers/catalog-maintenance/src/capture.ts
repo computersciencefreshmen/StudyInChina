@@ -6,6 +6,7 @@ import { assertSafeSourceUrl, fetchWithValidatedRedirects } from '../../ingestio
 import type { SourceCategory } from '../../ingestion/src/types'
 import { queueExtraction } from './repository'
 import { discoverSourceLinks } from './discovery'
+import { captureCadence } from './cadence'
 import type { JobRow, MaintenanceEnv, SourceRow } from './types'
 import { MaintenanceError } from './types'
 import { after, canonical, digest, gateRequest, nowIso, record } from './util'
@@ -41,7 +42,7 @@ export async function captureSource(env:MaintenanceEnv,job:JobRow,row:SourceRow,
     let robots=cached
     if(!robots) {
       const signal=AbortSignal.timeout(20000),robotsUrl=new URL('/robots.txt',url)
-      const fetched=await fetchWithValidatedRedirects(fetcher,robotsUrl,{allowedHosts:[url.hostname]},{headers:{'user-agent':userAgent},signal},3,5000)
+      const fetched=await fetchWithValidatedRedirects(fetcher,robotsUrl,{allowedHosts:[url.hostname]},{headers:{'user-agent':userAgent},signal},3,5000).catch(()=>{throw new MaintenanceError('robots_fetch_failed',3600)})
       const status=fetched.response.status
       const body=status===200?new TextDecoder().decode(await readBoundedBody(fetched.response,256*1024,signal)):null
       if(status!==200)await fetched.response.body?.cancel()
@@ -54,7 +55,7 @@ export async function captureSource(env:MaintenanceEnv,job:JobRow,row:SourceRow,
     const signal=AbortSignal.timeout(20000)
     // A complete body is deliberately retained. An HTTP304 or link-health check
     // alone does not renew factual review dates or certify an old extraction.
-    const fetched=await fetchWithValidatedRedirects(fetcher,url,{allowedHosts:[url.hostname]},{headers:{'user-agent':userAgent,accept:'text/html,application/pdf,text/plain;q=0.8'},signal},3,5000)
+    const fetched=await fetchWithValidatedRedirects(fetcher,url,{allowedHosts:[url.hostname]},{headers:{'user-agent':userAgent,accept:'text/html,application/pdf,text/plain;q=0.8'},signal},3,5000).catch(()=>{throw new MaintenanceError('source_fetch_failed',3600)})
     if(!fetched.response.ok){await fetched.response.body?.cancel();throw new MaintenanceError(`source_http_${fetched.response.status}`,[429,500,502,503,504].includes(fetched.response.status)?3600:null)}
     const contentType=fetched.response.headers.get('content-type')??'application/octet-stream'
     const bytes=await readBoundedBody(fetched.response,/^application\/pdf/i.test(contentType)?10*1024*1024:2*1024*1024,signal),rawSha256=await digest(bytes)
@@ -74,9 +75,11 @@ export async function captureSource(env:MaintenanceEnv,job:JobRow,row:SourceRow,
     // remains immutable; the new observation records the actual later check.
     if(!await env.SNAPSHOTS_BUCKET.get(key))await env.SNAPSHOTS_BUCKET.put(key,canonical(snapshot),{httpMetadata:{contentType:'application/json'}})
     const unchanged=row.canonical_sha256===canonicalSha256
+    const targetFields=(await env.PIPELINE_DB.prepare('SELECT t.fields_json FROM maintenance_record_targets t JOIN maintenance_target_sources x ON x.target_id=t.target_id WHERE x.source_id=? AND t.active=1').bind(row.source_id).all<{fields_json:string}>()).results??[]
+    const cadence=captureCadence(row,targetFields.map(target=>JSON.parse(target.fields_json)as Record<string,unknown>),Date.parse(checkedAt))
     await env.PIPELINE_DB.batch([
       env.PIPELINE_DB.prepare('INSERT OR IGNORE INTO maintenance_observations VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(await digest(`${job.job_id}:${rawSha256}`),job.job_id,row.source_id,checkedAt,fetched.finalUrl.href,fetched.response.status,rawSha256,canonicalSha256,key,contentType,hasExtractionText?(unchanged?'unchanged':'captured'):'rich_document_pending',parserCandidates.length),
-      env.PIPELINE_DB.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=?,snapshot_key=?,etag=?,last_attempt_at=?,last_success_at=?,failures=0,error_code=NULL,due_at=? WHERE source_id=?').bind(rawSha256,canonicalSha256,key,fetched.response.headers.get('etag'),checkedAt,checkedAt,after(row.interval_hours*3600000),row.source_id),
+      env.PIPELINE_DB.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=?,snapshot_key=?,etag=?,last_attempt_at=?,last_success_at=?,failures=0,error_code=NULL,due_at=? WHERE source_id=?').bind(rawSha256,canonicalSha256,key,fetched.response.headers.get('etag'),checkedAt,checkedAt,after(cadence.intervalHours*3600000,Date.parse(checkedAt)),row.source_id),
       env.PIPELINE_DB.prepare('UPDATE maintenance_schools SET last_attempt_at=? WHERE university_id IN(SELECT university_id FROM maintenance_source_schools WHERE source_id=?)').bind(checkedAt,row.source_id),
     ])
     if(hasExtractionText)await queueExtraction(env,row,rawSha256,key)

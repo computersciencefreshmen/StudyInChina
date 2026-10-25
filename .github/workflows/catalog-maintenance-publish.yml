@@ -58,7 +58,7 @@ jobs:
           npm run maintenance:prepare --
           --download "$RUNNER_TEMP/maintenance-download"
           --output "$RUNNER_TEMP/maintenance-candidate" --apply
-      - name: Record a rejected export without publishing unchanged facts
+      - name: Acknowledge unchanged or held candidates without rebuilding unchanged facts
         if: steps.download.outputs.has_export == 'true' && steps.candidate.outputs.changed == 'false' && steps.candidate.outputs.accepted_count == '0'
         env:
           RECEIPT: ${{ steps.candidate.outputs.receipt }}
@@ -78,7 +78,7 @@ jobs:
       - name: Validate candidate data and evidence before creating a commit
         if: steps.candidate.outputs.changed == 'true'
         run: |
-          npm run validate:data
+          npm run validate:data -- --directory-safe-expiry
           npm run validate:directory
           node node_modules/vitest/vitest.mjs run tests/unit/maintenance-identity-import.test.ts tests/unit/maintenance-scholarship-import.test.ts tests/unit/maintenance-field-import.test.ts tests/unit/field-verification.test.ts tests/unit/catalog-discovery.test.ts
       - name: Publish a checked exact commit through the protected main branch

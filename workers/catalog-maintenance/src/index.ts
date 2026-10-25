@@ -7,6 +7,7 @@ import { discoverAdmissionCycles } from './cycle-discovery'
 import { processDiscoveryFrontier } from './discovery'
 import { loadSnapshot } from './capture'
 import { persistProposals } from './proposals'
+import { evaluateRollout,rolloutStatus } from './rollout'
 import { acceptDocumentDerivative,listPendingDocuments } from './documents'
 import { listSchoolProgress,submitSchoolReconciliation } from './school-progress'
 import { acknowledge, prepareExport, readExport } from './exports'
@@ -81,6 +82,8 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/seed'&&request.method==='POST')return json(await seed(env,await requestJson(request,8*1024*1024),Date.now(),true))
     if(url.pathname==='/bootstrap'&&request.method==='POST')return json(await registerBootstrapRequest(env,request))
     if(url.pathname==='/controls'&&request.method==='POST')return json(await setControls(env,await requestJson(request,32768)))
+    if(url.pathname==='/rollout'&&request.method==='GET')return json(await rolloutStatus(env))
+    if(url.pathname==='/rollout'&&request.method==='POST')return json(await evaluateRollout(env,await requestJson(request,4096)))
     if(url.pathname==='/targets'&&request.method==='POST')return json(await refreshTargets(env,await requestJson(request,8*1024*1024),true))
     if(url.pathname==='/documents'&&request.method==='GET')return json(await listPendingDocuments(env))
     if(url.pathname==='/documents'&&request.method==='POST')return json(await acceptDocumentDerivative(env,await requestJson(request,3*1024*1024)))

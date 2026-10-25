@@ -22,6 +22,7 @@ export type CanonicalMaintenanceReceipt = {
   inputCatalogSha256: string; outputCatalogSha256: string; acceptedAt: string; acceptedProposalIds: string[];
   held: Array<{ proposalId: string; reason: string }>; identityReceiptSha256: string; scholarshipReceiptSha256: string; fieldReceiptSha256: string;
   cycleReceiptSha256?: string; cycleFieldReceiptSha256?: string;
+  unchangedProposalIds?: string[];
   sha256: string
 }
 
@@ -59,13 +60,17 @@ export async function prepareMaintenanceCatalog(options: { root: string; downloa
   const fields = await importFieldCandidates({ bundle: cycles.bundle, inputBundle: baseline.bundle, scope, batch, acceptedAt: options.acceptedAt,
     receiptPath: receiptRelative.replace('canonical-receipt', 'field-receipt'), entries: cycles.entries, readArtifact })
   const acceptedIds = new Set([...identities.receipt.accepted, ...scholarships.receipt.accepted, ...cycles.cycleReceipt.accepted, ...fields.receipt.accepted].map(entry => entry.proposalId))
+  const unchangedIds = new Set([...(identities.receipt.unchanged ?? []), ...(scholarships.receipt.unchanged ?? [])]
+    .map(entry => entry.proposalId).filter(id => !acceptedIds.has(id)))
   const reasons = new Map([...identities.receipt.held, ...scholarships.receipt.held, ...cycles.cycleReceipt.held, ...fields.receipt.held].map(entry => [entry.proposalId, entry.reason]))
-  const held = batch.proposals.filter(proposal => !acceptedIds.has(proposal.id)).map(proposal => ({ proposalId: proposal.id, reason: reasons.get(proposal.id) ?? 'unsupported_proposal_type' }))
+  const held = batch.proposals.filter(proposal => !acceptedIds.has(proposal.id)).map(proposal => ({ proposalId: proposal.id,
+    reason: unchangedIds.has(proposal.id) ? 'identity_and_official_source_unchanged' : reasons.get(proposal.id) ?? 'unsupported_proposal_type' }))
   const content: Omit<CanonicalMaintenanceReceipt, 'sha256'> = { format: 'studyinchina.canonical-maintenance-receipt', formatVersion: 1,
     batchId: batch.batchId, batchSha256: batch.sha256, scopeRegistrySha256: scope.sha256, inputCatalogSha256: await catalogSha256(baseline.bundle),
     outputCatalogSha256: await catalogSha256(fields.bundle), acceptedAt: options.acceptedAt, acceptedProposalIds: [...acceptedIds].sort(), held,
     identityReceiptSha256: identities.receipt.sha256, scholarshipReceiptSha256: scholarships.receipt.sha256, fieldReceiptSha256: fields.receipt.sha256,
-    cycleReceiptSha256: cycles.cycleReceipt.sha256, cycleFieldReceiptSha256: cycles.fieldReceipt.sha256 }
+    cycleReceiptSha256: cycles.cycleReceipt.sha256, cycleFieldReceiptSha256: cycles.fieldReceipt.sha256,
+    unchangedProposalIds: [...unchangedIds].sort() }
   const receipt: CanonicalMaintenanceReceipt = { ...content, sha256: digest(content) }
   const candidateFiles: Record<string, unknown> = { 'candidate-bundle.json': fields.bundle, 'identity-acceptances.json': scholarships.acceptances,
     'identity-bindings.json': scholarships.bindings, 'field-verifications.json': { schemaVersion: 1, entries: fields.entries },
@@ -97,7 +102,8 @@ export async function acknowledgeCanonicalMaintenance(root: string, receiptPath:
   if (await catalogSha256(current) !== receipt.outputCatalogSha256) throw new Error('maintenance_canonical_ack_hash_changed')
   const client = maintenanceClientFromEnvironment(process.env)
   const result = await client.json('/ack', 'POST', { batchId: receipt.batchId, outcome: receipt.acceptedProposalIds.length ? 'applied' : 'rejected', receiptSha256: receipt.sha256, sourceCommit,
-    newInputCatalogSha256: receipt.outputCatalogSha256, acceptedProposalIds: receipt.acceptedProposalIds, heldProposalIds: receipt.held.map(entry => entry.proposalId) })
+    newInputCatalogSha256: receipt.outputCatalogSha256, acceptedProposalIds: receipt.acceptedProposalIds, heldProposalIds: receipt.held.map(entry => entry.proposalId),
+    ...(receipt.unchangedProposalIds?.length ? { unchangedProposalIds: receipt.unchangedProposalIds } : {}) })
   const scope = maintenanceScopeSchema.parse(read(join(root, 'content/maintenance/scope-272.v1.json')))
   if (receipt.acceptedProposalIds.length) await client.json('/targets', 'POST', { inputCatalogSha256: receipt.outputCatalogSha256, recordTargets: buildMaintenanceTargets(current, scope) })
   return result
@@ -110,6 +116,7 @@ async function main() {
   if (!args.includes('--download') || !args.includes('--output')) throw new Error('Usage: prepare-maintenance-catalog.ts --download <directory> --output <candidate-directory> [--apply] | ack --receipt <file> --commit <sha>')
   const result = await prepareMaintenanceCatalog({ root: process.cwd(), downloadDirectory: value('--download'), outputDirectory: value('--output'), acceptedAt: new Date().toISOString(), apply: args.includes('--apply') })
   console.log(JSON.stringify({ batchId: result.receipt.batchId, accepted: result.receipt.acceptedProposalIds.length, held: result.receipt.held.length,
+    unchanged: result.receipt.unchangedProposalIds?.length ?? 0,
     changed: result.changed, replayed: result.replayed, receiptSha256: result.receipt.sha256 }))
   if (process.env.GITHUB_OUTPUT) writeFileSync(process.env.GITHUB_OUTPUT,
     `changed=${result.changed}\nreplayed=${result.replayed}\naccepted_count=${result.receipt.acceptedProposalIds.length}\nreceipt=${result.receiptPath}\n`, { flag: 'a' })

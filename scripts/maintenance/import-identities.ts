@@ -3,7 +3,7 @@ import { mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs'
 import { isAbsolute, relative, resolve, sep } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { JSDOM } from 'jsdom'
-import type { DataBundle, Program, Source } from '../../src/lib/data/types'
+import type { DataBundle, Program, Scholarship, Source } from '../../src/lib/data/types'
 import { bundleSchema } from '../../src/lib/data/schema'
 import { htmlToText } from '../../workers/ingestion/src/rules'
 import { identityAcceptanceLedgerSchema, identityFingerprint, type IdentityAcceptanceLedger } from '../../src/lib/data/identity-acceptance'
@@ -20,6 +20,7 @@ export type IdentityImportReceipt = {
   format: 'studyinchina.identity-import-receipt'; formatVersion: 1; batchId: string; batchSha256: string;
   scopeRegistrySha256: string; inputCatalogSha256: string; outputCatalogSha256: string;
   acceptedAt: string; accepted: Array<{ proposalId: string; recordId: string; canonicalKey: string; action: 'created' | 'identity_accepted' }>;
+  unchanged?: Array<{ proposalId: string; recordId: string; reason: 'identity_and_official_source_unchanged' }>;
   held: Array<{ proposalId: string; reason: string }>; sha256: string;
 }
 
@@ -29,6 +30,19 @@ const normalizedText = (value: string): string => value.normalize('NFKC').replac
 const schoolDay = (timestamp: string): string => new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit',
 }).format(new Date(timestamp))
+
+/** A successful re-read can be an operational observation without becoming a new public fact. */
+export function hasAcceptedIdentityWithOfficialUrl(bundle: DataBundle, ledger: IdentityAcceptanceLedger,
+  entityType: 'program' | 'scholarship', record: Program | Scholarship, url: string, acceptedAt: string): boolean {
+  if (record.status === 'draft' || record.status === 'archived' || record.verifiedAt > schoolDay(acceptedAt)) return false
+  const official = new Map(bundle.sources.filter(source => source.official).map(source => [source.id, source]))
+  if (!record.sourceIds.length || !record.sourceIds.every(id => official.has(id))) return false
+  if (!record.sourceIds.some(id => official.get(id)?.url === url)) return false
+  const fingerprint = identityFingerprint(entityType, record)
+  return ledger.entries.some(entry => entry.entityType === entityType && entry.recordId === record.id
+    && entry.identitySha256 === fingerprint && new Date(entry.acceptedAt) <= new Date(acceptedAt)
+    && entry.sourceIds.length > 0 && entry.sourceIds.every(id => record.sourceIds.includes(id) && official.has(id)))
+}
 
 export function canonicalProgramIdentityKey(universityId: string, fields: ProgramIdentityFields): string {
   const identity = fields.officialProgramCode
@@ -192,6 +206,7 @@ export async function importIdentityCandidates(options: {
   if (!Number.isFinite(acceptedAt.valueOf()) || acceptedAt.toISOString() !== options.acceptedAt) throw new Error('acceptedAt must be a canonical ISO timestamp')
   const bundle = structuredClone(original)
   const accepted: IdentityImportReceipt['accepted'] = []
+  const unchanged: NonNullable<IdentityImportReceipt['unchanged']> = []
   const held: IdentityImportReceipt['held'] = []
   const pendingAcceptances: Array<{ record: Program; reviewer: string }> = []
   const schools = new Map(scope.schools.map(school => [school.universityId, school]))
@@ -231,6 +246,10 @@ export async function importIdentityCandidates(options: {
       const action = record ? 'identity_accepted' as const : 'created' as const
       if (!record && fields.programUrl !== proposal.source.url) throw new Error('new_identity_program_url_requires_matching_source')
       if (bound && record && bound.recordId !== record.id) throw new Error('canonical_key_already_bound_to_another_record')
+      if (record && hasAcceptedIdentityWithOfficialUrl(bundle, acceptances, 'program', record, proposal.source.url, options.acceptedAt)) {
+        unchanged.push({ proposalId: proposal.id, recordId: record.id, reason: 'identity_and_official_source_unchanged' })
+        continue
+      }
       const date = schoolDay(proposal.source.checkedAt)
       const sourceId = `src-maintenance-identity-${sha256(proposal.source.url).slice(0, 24)}`
       const source: Source = {
@@ -251,6 +270,9 @@ export async function importIdentityCandidates(options: {
       }
       // Existing canonical facts and audit dates are never renewed by an identity-only review.
       if (!bundle.sources.some(item => item.id === sourceId)) bundle.sources.push(source)
+      if (!record.sourceIds.some(id => bundle.sources.find(source => source.id === id)?.url === proposal.source.url)) {
+        record.sourceIds = [...record.sourceIds, sourceId]
+      }
       if (!bound) bindings.entries.push({ canonicalKey: key, recordId: record.id, aliases })
       else bound.aliases = [...new Set([...bound.aliases, ...aliases])].sort()
       accepted.push({ proposalId: proposal.id, recordId: record.id, canonicalKey: key, action })
@@ -263,7 +285,7 @@ export async function importIdentityCandidates(options: {
   const receiptContent: Omit<IdentityImportReceipt, 'sha256'> = {
     format: 'studyinchina.identity-import-receipt', formatVersion: 1,
     batchId: batch.batchId, batchSha256: batch.sha256, scopeRegistrySha256: scope.sha256,
-    inputCatalogSha256: inputHash, outputCatalogSha256: await catalogSha256(validated), acceptedAt: options.acceptedAt, accepted, held,
+    inputCatalogSha256: inputHash, outputCatalogSha256: await catalogSha256(validated), acceptedAt: options.acceptedAt, accepted, unchanged, held,
   }
   const receipt = { ...receiptContent, sha256: sha256(canonicalJson(receiptContent)) }
   for (const { record, reviewer } of pendingAcceptances) {

@@ -51,10 +51,22 @@ fields or whole-record audit dates. PDFs require checksum-bound Poppler/OCR text
 unreadable documents enter a durable review state rather than repeatedly starving
 the document queue.
 
+The finite eight-job dispatch pool contains candidates from both expansion and
+maintenance before selection. During the first actual school-check round, ten
+15-minute ticks reserve 56 expansion/24 maintenance slots; afterwards they reserve
+24/56. Urgent priorities run first and either lane borrows idle slots. Rechecking
+a successfully captured source uses maintenance capacity. Acquisition scheduling
+uses old canonical deadline scalars only as hints: a future deadline within seven
+days caps the next successful capture at 24 hours, within 45 days at 72 hours,
+and other active targets at 168 hours. Unlinked catalogues use 720 hours; stable
+contacts/profiles retain 2160 hours. These hints never renew factual evidence or
+whole-record dates.
+
 ## Local verification
 
 ```powershell
 node --import tsx --test workers/catalog-maintenance/tests/maintenance.test.ts workers/catalog-maintenance/tests/runtime.test.ts workers/catalog-maintenance/tests/discovery.test.ts workers/catalog-maintenance/tests/proposals.test.ts workers/catalog-maintenance/tests/school-progress.test.ts
+node --import tsx --test workers/catalog-maintenance/tests/rollout.test.ts workers/catalog-maintenance/tests/export-batches.test.ts workers/catalog-maintenance/tests/scheduling.test.ts workers/catalog-maintenance/tests/cadence.test.ts workers/catalog-maintenance/tests/scheduling-integration.test.ts
 node node_modules/vitest/vitest.mjs run tests/unit/maintenance-field-engine.test.ts tests/unit/maintenance-documents.test.ts tests/unit/maintenance-cycle-engine.test.ts tests/unit/maintenance-scholarship-engine.test.ts
 node node_modules/typescript/bin/tsc --project workers/catalog-maintenance/tsconfig.json --pretty false
 node node_modules/eslint/bin/eslint.js workers/catalog-maintenance --max-warnings=0
@@ -95,7 +107,8 @@ passing dry-run is a local bundle/binding check, not a production deployment.
    preserves the explicitly authorized `modelsEnabled:true`. Empty canary means
    all 272 schools and is rejected on initial activation.
 5. Read back first-five source, candidate, independent review, importer and public
-   release evidence. Only then change the canary to the full fixed scope. Routine
+   release evidence. The authenticated rollout evaluator below expands the canary
+   by at most 20 schools only after its evidence gates pass. Routine
    passing proposals may publish automatically; access failures, conflicts,
    unsupported fields and unknown model outcomes remain review work.
 6. Configure the GitHub maintenance publisher against this Worker. It should poll
@@ -117,6 +130,10 @@ no credential values and disable caching.
   receipt proves durable pending intent, not validated data or activation.
 - `POST /controls`: `{expectedRevision,legacyGuardSha256,enabled,modelsEnabled,
   canaryUniversityIds?:string[]|null}`. `null`/`[]` means full scope after canary.
+- `GET /rollout`: current revision, active/new batch, immutable evidence references
+  and exact holding reasons. `POST /rollout`: `{expectedRevision}` re-evaluates and
+  atomically advances only an eligible batch. Every evaluation has an R2 decision
+  receipt. A quota wait or an operator pause never resumes the lane automatically.
 - `GET /status`: persisted progress, source observations, target/guard counts,
   model outcomes and lane flags. `/health` alone proves none of these.
 - `POST /tick`: request the bounded scheduler and persist a real R2 runtime receipt.
@@ -129,9 +146,12 @@ no credential values and disable caching.
   the consumer must independently verify every snapshot/text/review checksum.
 - `POST /ack`: `{batchId,outcome:'applied'|'published'|'rejected',receiptSha256,
   sourceCommit,newInputCatalogSha256,acceptedProposalIds,heldProposalIds,
-  deploymentId?,stableProofSha256?}`. Proposal partitions must cover the exact
+  unchangedProposalIds?,deploymentId?,stableProofSha256?}`. Proposal partitions must cover the exact
   export. `applied` records a canonical commit, **not** a public release. `published`
   requires the same applied commit/receipt/partition and exact stable proof.
+  The optional unchanged IDs must be a duplicate-free subset of held IDs. They
+  become consumed without requeueing a review conflict; the same set is required
+  in the later published acknowledgement. Old acknowledgements default to `[]`.
 - `POST /targets`: `{inputCatalogSha256,recordTargets}` after an applied canonical
   commit. The hash must match the Worker control head. This stages a resumable
   target refresh; current-field admission waits for `targets_complete=1`. Removed
@@ -211,3 +231,22 @@ statements, with at most 70 bound values per statement. A failing final chunk
 rolls back the entire candidate batch rather than silently retaining only its
 first programmes. The surrounding capture/review job remains durably retryable
 under its existing outcome and model-reservation rules.
+
+## Automatic staged rollout
+
+The first five schools each need a real saved snapshot or an explicit durable
+robots/source acquisition blocker with its next due date. Seed registration,
+capacity waiting and internal execution errors do not qualify. At least one
+batch from this maintenance system must have a checksum-bound published
+acknowledgement containing its canonical commit, deployment ID and stable proof.
+Unknown model/job outcomes, unfinished publication, incomplete targets, expired
+leases or conflicting leases hold the current stage.
+
+Once eligible, each committed decision adds the 20 least-recently attempted
+remaining schools (the last batch has seven). The newly admitted batch must have
+first-inspection evidence before another batch is admitted. R2 receipts and an
+atomic D1 `rollout_advanced` event bind the progression to its previous scope;
+an orphan `advance_proposed` R2 object does not prove a committed change. When
+all 272 schools have actual first-inspection evidence, the canary becomes `[]`.
+This does not mark their official catalogues fully reconciled. The revision CAS
+and safety checks execute in one transaction, preserving a racing manual pause.

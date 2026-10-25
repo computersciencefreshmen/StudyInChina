@@ -18,7 +18,7 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    if (!/^\/(?:status|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     try {
       const response = await fetcher(url, { method, headers: { Authorization: `Bearer ${token}`, ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },
@@ -77,7 +77,8 @@ export async function recoverPendingMaintenancePublication(client: MaintenanceCl
     || receipt.inputCatalogSha256 !== pending.inputCatalogSha256 || receipt.scopeRegistrySha256 !== pending.scopeRegistrySha256
     || receipt.outputCatalogSha256 !== ack.newInputCatalogSha256
     || canonicalJson([...receipt.acceptedProposalIds].sort()) !== canonicalJson(ack.acceptedProposalIds)
-    || canonicalJson(receipt.held.map(entry => entry.proposalId).sort()) !== canonicalJson(ack.heldProposalIds)) throw new Error('maintenance_publication_receipt_changed')
+    || canonicalJson(receipt.held.map(entry => entry.proposalId).sort()) !== canonicalJson(ack.heldProposalIds)
+    || canonicalJson([...(receipt.unchangedProposalIds ?? [])].sort()) !== canonicalJson(ack.unchangedProposalIds ?? [])) throw new Error('maintenance_publication_receipt_changed')
   return { batchId: pending.batchId, sourceCommit: ack.sourceCommit, receiptPath }
 }
 
@@ -116,7 +117,14 @@ async function main() {
       `pending_publication=${Boolean(pending)}\n${pending ? `source_commit=${pending.sourceCommit}\nreceipt=${pending.receiptPath}\n` : ''}`, { flag: 'a' })
     console.log(JSON.stringify({ pendingPublication: Boolean(pending), batchId: pending?.batchId ?? null })); return
   }
-  if (['status', 'schools'].includes(action) && !value) { console.log(JSON.stringify(await client.json(`/${action}`))); return }
+  if (['status', 'schools', 'rollout'].includes(action) && !value) { console.log(JSON.stringify(await client.json(`/${action}`))); return }
+  if (action === 'advance-rollout' && !value) {
+    const status = await client.json('/status') as { backend?: { state?: string }; control?: { revision?: number; enabled?: number; models_enabled?: number } }
+    if (status.backend?.state !== 'ready' || !status.control?.enabled || !status.control.models_enabled || !Number.isSafeInteger(status.control.revision)) {
+      console.log(JSON.stringify({ advanced: false, reason: 'backend_or_operator_gate_not_ready' })); return
+    }
+    console.log(JSON.stringify(await client.json('/rollout', 'POST', { expectedRevision: status.control.revision }))); return
+  }
   if (action === 'download' && value) {
     const batch = await downloadMaintenanceExport(client, value)
     if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT, `has_export=${Boolean(batch)}\n`, { flag: 'a' })

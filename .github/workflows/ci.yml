@@ -55,7 +55,7 @@ jobs:
         run: npm run test:deadline-review
 
       - name: Validate content data
-        run: npm run validate:data
+        run: npm run validate:data -- --directory-safe-expiry
 
       - name: Validate accepted directory identities and safe current-field projection
         run: npm run validate:directory -- --output "$RUNNER_TEMP/directory-integrity.json"

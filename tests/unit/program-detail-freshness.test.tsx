@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { connection } from 'next/server'
-import ProgramDetailPage, { generateMetadata as programMetadata } from '@/app/[locale]/programs/[slug]/page'
-import UniversityDetailPage, { generateMetadata as universityMetadata } from '@/app/[locale]/universities/[slug]/page'
+import ProgramDetailPage, { dynamic as programRendering, generateMetadata as programMetadata } from '@/app/[locale]/programs/[slug]/page'
+import UniversityDetailPage, { dynamic as universityRendering, generateMetadata as universityMetadata } from '@/app/[locale]/universities/[slug]/page'
 import ScholarshipDetailPage, { dynamic as scholarshipRendering, generateMetadata as scholarshipMetadata } from '@/app/[locale]/scholarships/[slug]/page'
 import { getCatalogData } from '@/lib/data/load'
 import * as freshness from '@/lib/data/freshness'
@@ -37,6 +37,10 @@ beforeEach(() => {
   vi.spyOn(freshness, 'getTodayDate').mockReturnValue('2026-08-10')
 })
 afterEach(() => { vi.restoreAllMocks() })
+
+it('keeps directory detail routes request-rendered after all current records leave the prebuild set', () => {
+  expect([programRendering, universityRendering, scholarshipRendering]).toEqual(['force-dynamic', 'force-dynamic', 'force-dynamic'])
+})
 
 describe('program detail evidence and freshness', () => {
   it('renders an accepted award identity at request time when there are no current awards', async () => {

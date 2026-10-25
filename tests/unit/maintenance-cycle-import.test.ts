@@ -16,8 +16,12 @@ let original: DataBundle, scope: MaintenanceScope
 beforeAll(async () => { vi.stubGlobal('crypto', webcrypto); original = loadMaintenanceBundle(process.cwd()); scope = await buildMaintenanceScope(original, { scopeId: 'new-intake-test', createdAt: capturedAt }) })
 
 async function fixture(year = '2028-2029') {
-  const bundle = structuredClone(original)
-  const program = selectPublishedData(bundle, '2026-10-24').programs.find(program => program.degreeLevel === 'master' && program.name.en)!
+  const selected = selectPublishedData(original, '2026-10-24').programs.find(program => program.degreeLevel === 'master' && program.name.en)!
+  // This suite tests one parent's year/scope isolation, not full-catalogue throughput.
+  // Keep the fixed 272-school registry while avoiding repeated parsing of 2,057 rich programmes.
+  const bundle = structuredClone({ ...original, programs: [selected],
+    admissionCycles: original.admissionCycles.filter(cycle => cycle.programId === selected.id), scholarships: [] })
+  const program = bundle.programs[0]
   const school = scope.schools.find(school => school.universityId === program.universityId)!
   const intakeYear = year.slice(0, 4), opensOn = `${Number(intakeYear) - 1}-11-01`, closesOn = `${intakeYear}-04-30`
   const text = `International students: Master ${program.name.en}. Autumn ${intakeYear} admissions for Master ${program.name.en}. Application opens ${opensOn}; application deadline ${closesOn}.`

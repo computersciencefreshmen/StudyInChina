@@ -21,6 +21,7 @@ import { serializeJsonLd } from '@/lib/seo/json-ld'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
+export const dynamic = 'force-dynamic'
 
 export function generateStaticParams() {
   const slugs = selectUniversityPrebuildSlugs(getData())

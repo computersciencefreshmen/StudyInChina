@@ -4,6 +4,8 @@ import type { Control, JobRow, LegacyGuard, MaintenanceEnv, RecordTarget, School
 import { MaintenanceError } from './types'
 import { after, canonical, digest, HASH, ID, nowIso, record } from './util'
 import { coalesceOperations,type SqlOperation } from './sql-plan'
+import { selectScheduledJobs } from './scheduling'
+import { captureCadence } from './cadence'
 
 export async function control(env: MaintenanceEnv): Promise<Control | null> {
   return env.PIPELINE_DB.prepare('SELECT * FROM maintenance_control WHERE singleton=1').first<Control>()
@@ -128,7 +130,8 @@ export async function setControls(env: MaintenanceEnv, value: unknown, now = Dat
   if(raw.enabled&&env.SCOPE_REGISTRY_SHA256!==old.scope_sha256)throw new MaintenanceError('activation_requires_exact_scope_pin')
   const canary=raw.canaryUniversityIds===undefined?JSON.parse(old.canary_json) as string[]:raw.canaryUniversityIds===null?[]:raw.canaryUniversityIds
   if(!Array.isArray(canary)||canary.length>272||new Set(canary).size!==canary.length||canary.some(id=>typeof id!=='string'||!ID.test(id)))throw new MaintenanceError('invalid_canary_scope')
-  for(const id of canary)if(!await env.PIPELINE_DB.prepare('SELECT university_id FROM maintenance_schools WHERE university_id=?').bind(id).first())throw new MaintenanceError('canary_school_not_seeded')
+  const known=await env.PIPELINE_DB.prepare('SELECT COUNT(*) count FROM maintenance_schools s JOIN json_each(?) chosen ON chosen.value=s.university_id WHERE s.scope_sha256=?').bind(JSON.stringify(canary),old.scope_sha256).first<{count:number}>()
+  if(known?.count!==canary.length)throw new MaintenanceError('canary_school_not_seeded')
   if(raw.enabled&&old.revision===0&&!canary.length)throw new MaintenanceError('initial_canary_required')
   const result = await env.PIPELINE_DB.prepare('UPDATE maintenance_control SET enabled=?,models_enabled=?,canary_json=?,revision=revision+1,updated_at=? WHERE singleton=1 AND revision=?').bind(raw.enabled?1:0,raw.modelsEnabled?1:0,JSON.stringify(canary),nowIso(now),old.revision).run()
   if (result.meta?.changes !== 1) throw new MaintenanceError('control_revision_conflict')
@@ -142,15 +145,19 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
   if(cfg&&!cfg.seed_complete&&cfg.seed_plan_sha256){await env.MAINTENANCE_QUEUE.send({version:1,jobId:cfg.seed_sha256,seedSha256:cfg.seed_sha256});return{enabled:false,queued:1}}
   if(cfg&&!cfg.targets_complete){const refresh=await env.PIPELINE_DB.prepare("SELECT refresh_sha256 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=? ORDER BY created_at DESC LIMIT 1").bind(cfg.input_catalog_sha256).first<{refresh_sha256:string}>();if(refresh){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refresh.refresh_sha256,targetRefreshSha256:refresh.refresh_sha256});return{enabled:false,queued:1}}}
   if (env.MAINTENANCE_ENABLED !== 'true' || !cfg?.enabled || !cfg.seed_complete) return {enabled:false,queued:0}
-  const candidates = (await env.PIPELINE_DB.prepare(`SELECT s.*,(SELECT json_group_array(university_id) FROM maintenance_source_schools WHERE source_id=s.source_id) school_ids_json FROM maintenance_sources s WHERE s.enabled=1 AND s.due_at<=? AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=s.source_id)) AND NOT EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.source_id=s.source_id AND j.stage='capture' AND j.status IN('queued','running','retry')) ORDER BY COALESCE((SELECT MIN(COALESCE(u.last_attempt_at,'')) FROM maintenance_schools u JOIN maintenance_source_schools x ON x.university_id=u.university_id WHERE x.source_id=s.source_id),''),COALESCE(s.last_attempt_at,''),s.due_at,s.source_id LIMIT 40`).bind(nowIso(now),cfg.canary_json,cfg.canary_json).all<SourceRow&{school_ids_json:string}>()).results ?? []
+  const candidates = (await env.PIPELINE_DB.prepare(`SELECT s.*,(SELECT json_group_array(university_id) FROM maintenance_source_schools WHERE source_id=s.source_id) school_ids_json,(SELECT json_group_array(json_object('closesOn',json_extract(t.fields_json,'$.closesOn'),'deadline',json_extract(t.fields_json,'$.deadline'))) FROM maintenance_record_targets t JOIN maintenance_target_sources x ON x.target_id=t.target_id WHERE x.source_id=s.source_id AND t.active=1) scheduling_fields_json FROM maintenance_sources s WHERE s.enabled=1 AND s.due_at<=? AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=s.source_id)) AND NOT EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.source_id=s.source_id AND j.stage='capture' AND j.status IN('queued','running','retry')) ORDER BY COALESCE((SELECT MIN(COALESCE(u.last_attempt_at,'')) FROM maintenance_schools u JOIN maintenance_source_schools x ON x.university_id=u.university_id WHERE x.source_id=s.source_id),''),COALESCE(s.last_attempt_at,''),s.due_at,s.source_id LIMIT 40`).bind(nowIso(now),cfg.canary_json,cfg.canary_json).all<SourceRow&{school_ids_json:string;scheduling_fields_json:string}>()).results ?? []
   const due:SourceRow[]=[],selectedSchools=new Set<string>()
   for(const row of candidates){const ids=JSON.parse(row.school_ids_json)as string[];if(ids.some(id=>selectedSchools.has(id)))continue;ids.forEach(id=>selectedSchools.add(id));due.push(row);if(due.length>=8)break}
   for (const row of due) {
     const id = await digest(`capture:${row.source_id}:${row.due_at}`)
-    await env.PIPELINE_DB.prepare("INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,due_at,created_at,updated_at) VALUES(?,?,'capture','queued',?,?,?)").bind(id,row.source_id,nowIso(now),nowIso(now),nowIso(now)).run()
+    const fields=JSON.parse((row as SourceRow&{scheduling_fields_json:string}).scheduling_fields_json)as Array<Record<string,unknown>>,priority=captureCadence(row,fields,now).priority===0?0:10
+    await env.PIPELINE_DB.prepare("INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at) VALUES(?,?,'capture','queued',?,?,?,?)").bind(id,row.source_id,priority,nowIso(now),nowIso(now),nowIso(now)).run()
   }
   // A crash after persist/before send leaves a due job for the next tick.
-  const jobs = (await env.PIPELINE_DB.prepare("SELECT * FROM maintenance_jobs j WHERE status IN('queued','retry') AND due_at<=? AND (enqueued_at IS NULL OR enqueued_at<?) AND (stage='capture' OR ?=1) AND (stage<>'maintain' OR ?=1) AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=j.source_id)) ORDER BY priority,due_at LIMIT 8").bind(nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete,cfg.canary_json,cfg.canary_json).all<JobRow>()).results ?? []
+  const pool = (await env.PIPELINE_DB.prepare("WITH eligible AS(SELECT j.*,s.last_success_at source_last_success_at,CASE WHEN j.stage='maintain' OR(j.stage='capture' AND s.last_success_at IS NOT NULL) THEN 1 ELSE 0 END maintenance_lane FROM maintenance_jobs j JOIN maintenance_sources s ON s.source_id=j.source_id WHERE j.status IN('queued','retry') AND j.due_at<=? AND (j.enqueued_at IS NULL OR j.enqueued_at<?) AND (j.stage='capture' OR ?=1) AND (j.stage<>'maintain' OR ?=1) AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=j.source_id))),ranked AS(SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane ORDER BY priority,due_at,job_id) lane_order FROM eligible) SELECT * FROM ranked WHERE lane_order<=40 ORDER BY priority,due_at,job_id LIMIT 80").bind(nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete,cfg.canary_json,cfg.canary_json).all<JobRow&{source_last_success_at:string|null}>()).results ?? []
+  const round=await env.PIPELINE_DB.prepare('SELECT COUNT(*) schools,SUM(last_attempt_at IS NOT NULL) attempted FROM maintenance_schools WHERE scope_sha256=?').bind(cfg.scope_sha256).first<{schools:number;attempted:number}>()
+  const firstRoundComplete=Boolean(round?.schools===272&&round.attempted===272)
+  const jobs=selectScheduledJobs(pool,{limit:8,firstRoundComplete,now})
   let queued = 0
   for (const job of jobs) {
     await env.MAINTENANCE_QUEUE.send({version:1,jobId:job.job_id})
@@ -158,7 +165,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
   }
   // Read-only fetches may be retried after a lost lease. A model send cannot.
   await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET status=CASE WHEN stage='capture' THEN 'retry' ELSE 'unknown' END,error_code='execution_lease_expired',lease_token=NULL,lease_until=NULL,due_at=?,enqueued_at=NULL,updated_at=? WHERE status='running' AND lease_until<?").bind(after(60000,now),nowIso(now),nowIso(now)).run()
-  await event(env,'scheduler_tick',{queued,discoveredDueSources:due.length},now)
+  await event(env,'scheduler_tick',{queued,discoveredDueSources:due.length,firstRoundComplete,maintenanceShare:firstRoundComplete?0.7:0.3},now)
   return {enabled:true,queued}
 }
 export async function claimJob(env: MaintenanceEnv,id:string,now=Date.now()):Promise<JobRow|null> {
@@ -174,11 +181,11 @@ export async function queueExtraction(env:MaintenanceEnv,row:SourceRow,snapshotS
   const hasAward=categories.some(category=>['university_scholarship','faculty_scholarship','government_scholarship'].includes(category))
   const stages=hasAward&&categories.every(category=>category.includes('scholarship'))?['award']:hasAward?['extract','award']:['extract']
   for(const stage of stages){const id=await digest(`${stage}:${row.source_id}:${snapshotSha256}:identity-v1`);await env.PIPELINE_DB.prepare("INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,due_at,created_at,updated_at,snapshot_sha256,snapshot_key) VALUES(?,?,?,'queued',?,?,?,?,?)").bind(id,row.source_id,stage,nowIso(now),nowIso(now),nowIso(now),snapshotSha256,key).run()}
-  const cfg=await control(env),targets=cfg?.targets_complete?await recordTargets(env,row.source_id):[],operations:SqlOperation[]=[]
+  const cfg=await control(env),targets=cfg?.targets_complete?await recordTargets(env,row.source_id):[],operations:SqlOperation[]=[],priority=captureCadence(row,targets.map(target=>target.fields),now).priority===0?0:1
   for(let index=0;index<targets.length;index+=20) {
     const chunk=targets.slice(index,index+20),pins=chunk.map(t=>({id:`${t.entityType}:${t.recordId}`,sha256:t.recordScopeSha256}))
     const maintenanceId=await digest(`maintain:${row.source_id}:${snapshotSha256}:${nowIso(now).slice(0,10)}:${canonical(pins)}:fields-v1`)
-    operations.push({sql:"INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json) VALUES(?,?,'maintain','queued',1,?,?,?,?,?,?)",values:[maintenanceId,row.source_id,nowIso(now),nowIso(now),nowIso(now),snapshotSha256,key,canonical(pins)]})
+    operations.push({sql:"INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json) VALUES(?,?,'maintain','queued',?,?,?,?,?,?,?)",values:[maintenanceId,row.source_id,priority,nowIso(now),nowIso(now),nowIso(now),snapshotSha256,key,canonical(pins)]})
   }
   const programs=targets.filter(target=>target.entityType==='program')
   for(let index=0;index<programs.length;index+=10){const chunk=programs.slice(index,index+10),pins=chunk.map(target=>({id:`program:${target.recordId}`,sha256:target.recordScopeSha256})),id=await digest(`cycle-discovery:${row.source_id}:${snapshotSha256}:${canonical(pins)}:v1`);operations.push({sql:"INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json) VALUES(?,?,'maintain','queued',2,?,?,?,?,?,?)",values:[id,row.source_id,nowIso(now),nowIso(now),nowIso(now),snapshotSha256,key,canonical({kind:'cycle-discovery',targets:pins})]})}
