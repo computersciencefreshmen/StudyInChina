@@ -145,7 +145,7 @@ if (/secrets\.CLOUDFLARE_(?:API|D1_BACKUP)_TOKEN/u.test(restore)) {
 }
 requirePattern(
   alias,
-  /vercel@58\.0\.0 alias set/,
+  /node --import tsx scripts\/operations\/github-release-writer\.ts assign promote/,
   'Successful main deployments must support stable Vercel alias promotion.',
 )
 requirePattern(
@@ -175,7 +175,7 @@ if (aliasPromotionStart < 0) {
 const aliasPromotionBlock = alias.slice(aliasPromotionStart)
 requirePattern(
   aliasPromotionBlock,
-  /alias list[\s\S]*rollback_on_failure\(\)[\s\S]*vercel@58\.0\.0 alias set[\s\S]*previous_target[\s\S]*trap rollback_on_failure EXIT[\s\S]*previous_target=[\s\S]*final_main_sha=[\s\S]*mutation_attempted=true[\s\S]*vercel@58\.0\.0 alias set[\s\S]*DEPLOYMENT_URL[\s\S]*post_promotion_main_sha=[\s\S]*studyinchina\.vercel\.app\/api\/v1\/releases\/current[\s\S]*transaction_committed=true/,
+  /github-release-writer\.ts current-target[\s\S]*rollback_on_failure\(\)[\s\S]*github-release-writer\.ts assign compensate[\s\S]*previous_target[\s\S]*trap rollback_on_failure EXIT[\s\S]*previous_target=[\s\S]*final_main_sha=[\s\S]*github-release-writer\.ts guard promote[\s\S]*mutation_attempted=true[\s\S]*github-release-writer\.ts assign promote[\s\S]*post_promotion_main_sha=[\s\S]*studyinchina\.vercel\.app\/api\/v1\/releases\/current[\s\S]*transaction_committed=true/,
   'Alias mutation must capture the previous target, recheck main immediately, and retain a rollback path.',
 )
 requirePattern(
@@ -193,8 +193,16 @@ requirePattern(
   /Stable alias rollback failed[\s\S]*Stable alias rollback verification failed/,
   'Alias mutation must retain explicit rollback and rollback-verification failure paths.',
 )
-if ((aliasPromotionBlock.match(/vercel@58\.0\.0 alias set/gu) ?? []).length !== 2) {
+if ((aliasPromotionBlock.match(/github-release-writer\.ts assign (?:promote|compensate)/gu) ?? []).length !== 2) {
   throw new Error('The alias mutation step must contain one promotion and one rollback command.')
+}
+requirePattern(
+  aliasPromotionBlock,
+  /github-release-writer\.ts mutation-status[\s\S]*assignment_status[\s\S]*github-release-writer\.ts finish uncertain[\s\S]*exit 1[\s\S]*github-release-writer\.ts guard compensate/,
+  'An unresolved alias send must block compensation and preserve the uncertain writer.',
+)
+if (/vercel@[^\s]+ alias (?:set|list)/u.test(aliasPromotionBlock)) {
+  throw new Error('Alias transport must use the fixed-resource guarded REST helper instead of CLI user lookup.')
 }
 requirePattern(
   alias,
