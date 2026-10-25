@@ -142,11 +142,11 @@ describe('production release workflow safety', () => {
     expect(workflow.slice(immutableSmoke, transaction)).toContain(
       '${DEPLOYMENT_URL%/}/api/v1/releases/current',
     )
-    expect(workflow.slice(immutableSmoke, transaction)).toContain('.data.deploymentSha == $sha')
-    expect(workflow.slice(transaction)).toContain('.data.deploymentSha == $sha')
-    expect(workflow.slice(transaction)).toContain(
-      '.data.publicCounts.programs | type == "number" and . > 0',
-    )
+    const checker = 'node scripts/operations/check-release-smoke.mjs "${DEPLOYMENT_SHA}"'
+    expect(workflow.slice(immutableSmoke, transaction)).toContain(checker)
+    expect(workflow.slice(transaction)).toContain(checker)
+    expect(workflow.match(/node scripts\/operations\/check-release-smoke\.mjs "\$\{DEPLOYMENT_SHA\}"/gu)).toHaveLength(2)
+    expect(workflow).not.toContain('.data.publicCounts.programs | type == "number" and . > 0')
     expect(workflow.slice(stableSmoke)).toContain('transaction_committed=true')
   })
 
@@ -181,10 +181,8 @@ describe('production release workflow safety', () => {
     expect(block).not.toMatch(/GITHUB_ENV|GITHUB_OUTPUT|\btee\b/u)
     expect(block).toContain('set -euo pipefail')
     expect(block).toContain('--connect-timeout 10 --max-time 30')
-    expect(block).toContain('jq -e --arg sha "${DEPLOYMENT_SHA}"')
-    expect(block).toContain('.data.deploymentSha == $sha')
-    expect(block).toContain('.data.id | type == "string" and length > 0')
-    expect(block).toContain('.data.publicCounts.programs | type == "number" and . > 0')
+    expect(block).toContain('| node scripts/operations/check-release-smoke.mjs "${DEPLOYMENT_SHA}"')
+    expect(block).not.toContain('--import tsx')
     expect(block).toContain('the stable alias was not changed.')
     expect(block).toContain('exit 1')
   })

@@ -206,14 +206,30 @@ if (/vercel@[^\s]+ alias (?:set|list)/u.test(aliasPromotionBlock)) {
 }
 requirePattern(
   alias,
-  /\.data\.deploymentSha == \$sha[\s\S]*Promote stable production alias[\s\S]*\.data\.deploymentSha == \$sha/,
+  /node scripts\/operations\/check-release-smoke\.mjs "\$\{DEPLOYMENT_SHA\}"[\s\S]*Promote stable production alias[\s\S]*node scripts\/operations\/check-release-smoke\.mjs "\$\{DEPLOYMENT_SHA\}"/,
   'Immutable and stable release smokes must prove the exact deployment SHA.',
 )
-requirePattern(
-  aliasPromotionBlock,
-  /\.data\.publicCounts\.programs \| type == "number" and \. > 0/,
-  'The stable release smoke must reject an empty or non-numeric public program count.',
-)
+if ((alias.match(/\| node scripts\/operations\/check-release-smoke\.mjs "\$\{DEPLOYMENT_SHA\}"/gu) ?? []).length !== 2) {
+  throw new Error('Both release smokes must pipe their response through the dependency-free exact-SHA directory checker.')
+}
+const { assertReleaseSmoke, chinaCalendarDay } = await import('./operations/check-release-smoke.mjs')
+const smokeSha = 'a'.repeat(40)
+const smokeFixture = { data: { id: 'maintenance-validation', deploymentSha: smokeSha, evaluatedForDate: chinaCalendarDay(), directoryRevision: 'd'.repeat(64),
+  directoryCounts: { programs: 783 }, publicCounts: { programs: 0 }, currentOpportunityCounts: { programs: 0 } } }
+assertReleaseSmoke(smokeFixture, smokeSha)
+for (const data of [
+  { ...smokeFixture.data, deploymentSha: 'b'.repeat(40) },
+  { ...smokeFixture.data, directoryCounts: { programs: 0 } },
+  { ...smokeFixture.data, directoryCounts: undefined, rawCounts: { programs: 2057 } },
+  { ...smokeFixture.data, publicCounts: { programs: -1 } },
+  { ...smokeFixture.data, currentOpportunityCounts: { programs: '0' } },
+  { ...smokeFixture.data, directoryRevision: undefined },
+  { ...smokeFixture.data, evaluatedForDate: '2000-01-01' },
+]) {
+  let rejected = false
+  try { assertReleaseSmoke({ data }, smokeSha) } catch { rejected = true }
+  if (!rejected) throw new Error('Release smoke must reject invalid commit, date, directory identity, or projected counts.')
+}
 requirePattern(
   alias,
   /api\/v1\/releases\/current/,
