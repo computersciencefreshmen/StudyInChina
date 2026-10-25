@@ -208,10 +208,7 @@ jobs:
             if printf 'header = "x-vercel-protection-bypass: %s"\n' "${bypass_secret}" | curl --config - --fail --silent --show-error \
               --connect-timeout 10 --max-time 30 \
               "${release_api}" \
-              | jq -e --arg sha "${DEPLOYMENT_SHA}" \
-                '.data.deploymentSha == $sha
-                  and (.data.id | type == "string" and length > 0)
-                  and (.data.publicCounts.programs | type == "number" and . > 0)' >/dev/null; then
+              | node scripts/operations/check-release-smoke.mjs "${DEPLOYMENT_SHA}"; then
               unset bypass_secret
               exit 0
             fi
@@ -352,10 +349,7 @@ jobs:
           for attempt in 1 2 3 4 5 6; do
             if curl --fail --silent --show-error \
               https://studyinchina.vercel.app/api/v1/releases/current \
-              | jq -e --arg sha "${DEPLOYMENT_SHA}" \
-                '.data.deploymentSha == $sha
-                  and (.data.id | type == "string" and length > 0)
-                  and (.data.publicCounts.programs | type == "number" and . > 0)' >/dev/null; then
+              | node scripts/operations/check-release-smoke.mjs "${DEPLOYMENT_SHA}"; then
               node --import tsx scripts/operations/github-release-writer.ts finish completed
               transaction_committed=true
               echo "::notice title=Stable alias promotion verified::studyinchina.vercel.app serves deployment ${DEPLOYMENT_SHA}."

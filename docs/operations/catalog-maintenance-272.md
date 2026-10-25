@@ -74,6 +74,8 @@ Worker 使用独占租约防止同一个任务被两个消费者执行。全局�
 
 实现已通过 [PR41](https://github.com/computersciencefreshmen/StudyInChina/pull/41) 合并。候选与合并提交的完整 CI 均通过，包含 1,787 项单元测试、68 项维护 Worker 测试和 104 项浏览器测试。云端调度已启用，首次调度、文档与发布检查均实际运行并保留等待状态；[首次调度回执](https://github.com/computersciencefreshmen/StudyInChina/actions/runs/40164736295) 明确记录 `waiting_for_seed` 与 `quota_wait`。服务报告下一次 D1 重置为 2026-10-26 00:00 UTC（北京时间 08:00）。这份回执不表示首次学校检查、模型执行或完整对账已经成功。
 
+目录首次上线由 [PR42](https://github.com/computersciencefreshmen/StudyInChina/pull/42) 的发布修复贯通：[受保护发布成功](https://github.com/computersciencefreshmen/StudyInChina/actions/runs/40167234064)，稳定域名回读到提交 `45a0a8c`。全部分页精确核对 255 所学校、783 个项目身份和 7 个奖学金身份，另核对七个过期奖学金的中英文详情共 14 页，未恢复旧截止日。该初始化目录发布与后续五校真实候选批次发布分开验收。候选和稳定站点使用统一的发布检查：安全目录必须非空，而当前事实与机会可以因过期而为零，原统计和过滤规则保持不变。
+
 10 月 25 日复核时，共享 D1 读取额度仍已耗尽。过去七天的查询分析显示，旧发布构建器的一条全量证据查询平均每次读取约 710 万行；免费额度是每天 500 万行。当前补丁保持证据筛选和输出不变，固定为沿现有索引正向关联。真实读量是否下降、当天资源是否够用，必须在额度恢复后回测，不能仅凭本地执行计划认定已解决。[D1 计费和配额说明](https://developers.cloudflare.com/d1/platform/pricing/)
 
 维护服务已经通过私有、限长并脱敏的诊断快照确认该错误的原文确实为每日读取限额耗尽；通用的 `7500`、缺表和 SQL 错误不会再误报为正常配额等待。诊断对象只在认证后的管理接口可取，公开接口不返回内部错误文本。
