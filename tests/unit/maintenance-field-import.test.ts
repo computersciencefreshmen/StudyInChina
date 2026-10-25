@@ -9,7 +9,15 @@ import type { DataBundle } from '../../src/lib/data/types'
 const now = '2026-10-24T02:00:00.000Z', capturedAt = '2026-10-24T00:00:00.000Z'
 const sha = (value: string | Uint8Array) => createHash('sha256').update(value).digest('hex')
 let bundle: DataBundle, scope: MaintenanceScope
-beforeAll(async () => { vi.stubGlobal('crypto', webcrypto); bundle = loadMaintenanceBundle(process.cwd()); scope = await buildMaintenanceScope(bundle, { scopeId: 'field-tests', createdAt: capturedAt }) })
+beforeAll(async () => {
+  vi.stubGlobal('crypto', webcrypto)
+  const original = loadMaintenanceBundle(process.cwd())
+  scope = await buildMaintenanceScope(original, { scopeId: 'field-tests', createdAt: capturedAt })
+  const cycle = original.admissionCycles.find(cycle => cycle.status === 'verified' && cycle.academicYear === '2027-2028' && cycle.intake === 'autumn')!
+  // Keep the complete fixed school/scope contract, but parse only the tested parent's data per import.
+  bundle = { ...original, programs: original.programs.filter(program => program.id === cycle.programId),
+    admissionCycles: original.admissionCycles.filter(item => item.programId === cycle.programId), scholarships: [] }
+})
 
 async function fixture(sourceText?: string | ((degree: string) => string), closesOn = '2027-09-30') {
   const cycle = bundle.admissionCycles.find(cycle => cycle.status === 'verified' && cycle.academicYear === '2027-2028' && cycle.intake === 'autumn')!

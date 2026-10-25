@@ -3,13 +3,30 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { basename, dirname, join, resolve } from 'node:path'
-import { candidateArtifactKeys, downloadMaintenanceExport, maintenanceClientFromEnvironment, recoverPendingMaintenancePublication } from '../../scripts/automation/catalog-maintenance-client'
+import { candidateArtifactKeys, downloadMaintenanceExport, maintenanceClientFromEnvironment, maintenanceRuntimeGate, recoverPendingMaintenancePublication } from '../../scripts/automation/catalog-maintenance-client'
 import { canonicalJson, maintenanceCandidateExportSchema } from '../../scripts/maintenance/contracts'
 
 const token = 'test-only-secret-that-is-never-a-real-account-token'
 const environment = { CATALOG_MAINTENANCE_URL: 'https://maintenance-fixture.example.workers.dev', CATALOG_MAINTENANCE_TOKEN: token }
 
 describe('maintenance bridge HTTP boundary', () => {
+  it('keeps normal quota and seed waits quiet while refusing an unknown backend failure', async () => {
+    const client = { json: vi.fn(), artifact: vi.fn() }
+    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait' }, control: null })
+    expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, canRecover: false, reason: 'quota_wait' })
+    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'ready' }, control: null })
+    expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, canRecover: false, reason: 'seed_not_ready' })
+    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'backend_unavailable' } })
+    await expect(maintenanceRuntimeGate(client)).rejects.toThrow('maintenance_backend_unavailable')
+  })
+  it('allows prior publication recovery during an operator pause but blocks new work and unfinished targets', async () => {
+    const client = { json: vi.fn().mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'ready' },
+      enabled: false, control: { seed_complete: 1, targets_complete: 1 } }), artifact: vi.fn() }
+    expect(await maintenanceRuntimeGate(client)).toMatchObject({ canRecover: true, canStart: false, reason: 'operator_pause' })
+    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'ready' }, enabled: true,
+      control: { seed_complete: 1, targets_complete: 0 } })
+    expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, reason: 'targets_not_ready' })
+  })
   it('treats an empty 204 export queue as normal and never creates a fake batch', async () => {
     const fetcher = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 204 }))
     const client = maintenanceClientFromEnvironment(environment, fetcher)

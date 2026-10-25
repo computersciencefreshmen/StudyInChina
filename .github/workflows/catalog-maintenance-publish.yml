@@ -34,8 +34,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Treat quota, seed and operator waits as normal
+        id: runtime
+        run: npm run maintenance:cloud -- runtime-gate
       - name: Resume an applied publication before exporting another batch
         id: resume
+        if: steps.runtime.outputs.can_recover == 'true'
         run: npm run maintenance:cloud -- recover-publication
       - name: Restore the exact applied commit for publication readback
         if: steps.resume.outputs.pending_publication == 'true'
@@ -49,7 +53,7 @@ jobs:
           git checkout --detach "$SOURCE_COMMIT"
       - name: Download one immutable export and its exact evidence
         id: download
-        if: steps.resume.outputs.pending_publication != 'true'
+        if: steps.runtime.outputs.can_start == 'true' && steps.resume.outputs.pending_publication != 'true'
         run: npm run maintenance:cloud -- download "$RUNNER_TEMP/maintenance-download"
       - name: Prepare and locally stage only independently accepted changes
         id: candidate

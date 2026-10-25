@@ -9,6 +9,18 @@ export type MaintenanceClient = {
   json(path: string, method?: 'GET' | 'POST', body?: unknown): Promise<unknown>
   artifact(key: string): Promise<Uint8Array>
 }
+
+/** A known shared-quota or initial-seed wait is normal, not a failed export. */
+export async function maintenanceRuntimeGate(client: MaintenanceClient) {
+  const status = await client.json('/status') as { format?: string; backend?: { state?: string }; enabled?: boolean;
+    control?: { seed_complete?: number; targets_complete?: number } | null }
+  if (status.format !== 'studyinchina.cloud-maintenance-status') throw new Error('maintenance_runtime_status_invalid')
+  if (status.backend?.state === 'quota_wait') return { canRecover: false, canStart: false, reason: 'quota_wait' }
+  if (status.backend?.state !== 'ready') throw new Error('maintenance_backend_unavailable')
+  const canRecover = status.control?.seed_complete === 1
+  return { canRecover, canStart: canRecover && status.enabled === true && status.control?.targets_complete === 1,
+    reason: !canRecover ? 'seed_not_ready' : !status.enabled ? 'operator_pause' : status.control?.targets_complete !== 1 ? 'targets_not_ready' : 'ready' }
+}
 export function maintenanceClientFromEnvironment(environment: Record<string, string | undefined>, fetcher: typeof fetch = fetch): MaintenanceClient {
   let origin: URL
   try { origin = new URL(environment.CATALOG_MAINTENANCE_URL ?? '') } catch { throw new Error('maintenance_configuration_unavailable') }
@@ -118,12 +130,19 @@ async function main() {
     console.log(JSON.stringify({ pendingPublication: Boolean(pending), batchId: pending?.batchId ?? null })); return
   }
   if (['status', 'schools', 'rollout'].includes(action) && !value) { console.log(JSON.stringify(await client.json(`/${action}`))); return }
+  if (action === 'runtime-gate' && !value) {
+    const gate = await maintenanceRuntimeGate(client)
+    if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT,
+      `can_recover=${gate.canRecover}\ncan_start=${gate.canStart}\nreason=${gate.reason}\n`, { flag: 'a' })
+    console.log(JSON.stringify(gate)); return
+  }
   if (action === 'advance-rollout' && !value) {
-    const status = await client.json('/status') as { backend?: { state?: string }; control?: { revision?: number; enabled?: number; models_enabled?: number } }
-    if (status.backend?.state !== 'ready' || !status.control?.enabled || !status.control.models_enabled || !Number.isSafeInteger(status.control.revision)) {
-      console.log(JSON.stringify({ advanced: false, reason: 'backend_or_operator_gate_not_ready' })); return
+    const state = await client.json('/rollout') as { format?: string; backendState?: string; state?: string; expectedRevision?: number; reasons?: string[] }
+    if (state.format !== 'studyinchina.maintenance-rollout') throw new Error('maintenance_rollout_status_invalid')
+    if (state.backendState !== 'ready' || state.state !== 'eligible' || !Number.isSafeInteger(state.expectedRevision)) {
+      console.log(JSON.stringify({ advanced: false, reasons: state.reasons ?? ['rollout_not_ready'] })); return
     }
-    console.log(JSON.stringify(await client.json('/rollout', 'POST', { expectedRevision: status.control.revision }))); return
+    console.log(JSON.stringify(await client.json('/rollout', 'POST', { expectedRevision: state.expectedRevision }))); return
   }
   if (action === 'download' && value) {
     const batch = await downloadMaintenanceExport(client, value)

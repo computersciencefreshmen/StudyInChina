@@ -30,9 +30,14 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Wait quietly for shared quota and source readiness
+        id: runtime
+        run: npm run maintenance:cloud -- runtime-gate
       - name: Install deterministic PDF and OCR tools
+        if: steps.runtime.outputs.can_start == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-chi-sim
       - name: Process at most five checksum-bound official documents
+        if: steps.runtime.outputs.can_start == 'true'
         run: node --import tsx scripts/automation/process-maintenance-documents.ts --limit 5
