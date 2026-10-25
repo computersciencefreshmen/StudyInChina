@@ -53,4 +53,4 @@ The execution command requires the existing pinned seed, verified source manifes
 - A rejected quote or unsupported translated name remains excluded. Per-locale validation can retain another independently supported official name.
 - New scholarship identities do not automatically establish annual amounts, deadlines or programme applicability. This batch leaves scholarship outputs staged for later review while school coverage takes priority.
 
-Verification includes the real 12-candidate importer check, 77 Worker regressions, durable storage and upload recovery tests, scope-safe school ranking tests, TypeScript and ESLint. Stable website publication and the seven-day unattended maintenance soak remain unverified.
+Verification includes the real 12-candidate importer check, 1,883 unit tests (one existing skip), 79 Worker regressions, TypeScript and ESLint. The final Worker deployment `b37f74e1-4ceb-4149-be5a-670576948972` also holds global operation permits during export, read and acknowledgement, preventing a prepared batch from escaping before handoff completes. Stable website publication and the seven-day unattended maintenance soak remain unverified.

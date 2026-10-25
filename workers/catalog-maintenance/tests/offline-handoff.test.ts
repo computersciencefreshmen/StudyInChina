@@ -6,10 +6,12 @@ import { offlineHandoffSchema,OFFLINE_TABLES,type OfflineHandoff } from '../src/
 import { control,seed,setControls,source } from '../src/repository'
 import { canonical,digest,gateRequest } from '../src/util'
 import { runCloudTick } from '../src/runtime'
+import { acknowledge,prepareExport,readExport } from '../src/exports'
+import { exportContentSha256,type MaintenanceProposal } from '../../../scripts/maintenance/contracts'
 import { makeEnv,seedInput,TEST_CATALOG,TEST_GUARDS,TEST_SCOPE } from './fixture'
 
 const token='f'.repeat(64),batchId='offline-handoff-test'
-async function fixture(includeUnknown=true){
+async function fixture(includeUnknown=true,withExport=false){
   let network=0;const f=makeEnv(async()=>{network++;throw new Error('must use cache, never call provider')})
   await seed(f.env,seedInput());await setControls(f.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:true,canaryUniversityIds:['uni-000']})
   const cfg=(await control(f.env))!,sourceId=await digest('https://test.edu.cn/catalog'),checkedAt=new Date(Date.now()-1000).toISOString(),dueAt=new Date(Date.now()+86400000).toISOString(),raw='Official international Bachelor Computer Science catalogue 2027',rawSha=await digest(raw),rawKey=`maintenance/snapshots/${sourceId}/${rawSha}.bin`,snapshotKey=`maintenance/snapshots/${sourceId}/${rawSha}.json`,textKey=`maintenance/text/${sourceId}/${rawSha}.txt`
@@ -22,6 +24,12 @@ async function fixture(includeUnknown=true){
   rows.maintenance_jobs.push({job_id:'offline-job',source_id:sourceId,stage:'extract',status:'done',priority:10,due_at:checkedAt,created_at:checkedAt,updated_at:checkedAt,attempt:1,lease_token:null,lease_until:null,snapshot_sha256:rawSha,snapshot_key:snapshotKey,error_code:null,enqueued_at:null,target_ids_json:null})
   const base={source_id:sourceId,snapshot_sha256:rawSha,pass:'primary' as const,model:'MiniMax-M3' as const,started_at:checkedAt,completed_at:checkedAt,usage_json:null,quota_json:'{}'}
   rows.maintenance_model_attempts.push({...base,reservation_key:reservationKey,attempt_id:'complete-attempt',request_sha256:requestSha,status:'completed',output_key:modelKey,output_sha256:artifactSha,error_code:null},{...base,reservation_key:unknownKey,attempt_id:'unknown-attempt',request_sha256:unknownSha,status:'unknown',output_key:null,output_sha256:null,error_code:'model_outcome_unknown'})
+  if(withExport){
+    const proposal:MaintenanceProposal={id:'offline-proposal',universityId:'uni-000',entityType:'program',recordId:null,operation:'create',fields:{name:{en:'Computer Science'}},source:{id:sourceId,url:sourceRow.url,snapshotSha256:rawSha,objectKey:rawKey,checkedAt,contentType:'text/plain',quote:raw,locator:'text:document'},fieldEvidence:[{sourceId,url:sourceRow.url,snapshotSha256:rawSha,objectKey:rawKey,quote:raw,locator:'text:document',fieldPath:'name.en'}],scope:{year:null,intake:null},status:'ready',warnings:[]}
+    const content={format:'studyinchina.maintenance-candidate-export' as const,formatVersion:1 as const,batchId:'offline-export',inputCatalogSha256:TEST_CATALOG,scopeRegistrySha256:TEST_SCOPE,createdAt:checkedAt,proposals:[proposal]},batch={...content,sha256:await exportContentSha256(content)},key=`maintenance/exports/${content.batchId}/${batch.sha256}.json`;bodies.set(key,canonical(batch))
+    rows.maintenance_proposals.push({proposal_id:proposal.id,university_id:'uni-000',source_id:sourceId,snapshot_sha256:rawSha,status:'exported',proposal_json:canonical(proposal),created_at:checkedAt,export_id:content.batchId,acknowledgement_sha256:null})
+    rows.maintenance_exports.push({batch_id:content.batchId,input_catalog_sha256:TEST_CATALOG,scope_sha256:TEST_SCOPE,object_key:key,sha256:batch.sha256,created_at:checkedAt,status:'prepared',acknowledgement_sha256:null,acknowledgement_json:null})
+  }
   const manifest=offlineHandoffSchema.parse({format:'studyinchina.offline-maintenance-handoff',version:1,batchId,scopeRegistrySha256:TEST_SCOPE,inputCatalogSha256:TEST_CATALOG,seedSha256:cfg.seed_sha256,legacyGuardSha256:TEST_GUARDS,artifacts:await Promise.all([...bodies].map(async([objectKey,body])=>({objectKey,sha256:await digest(body),byteLength:new TextEncoder().encode(body).length}))),tableRows:rows,requestReservations:[{reservationKey,state:'completed',attemptId:'complete-attempt',requestSha256:requestSha},{reservationKey:unknownKey,state:'unknown',attemptId:'unknown-attempt',requestSha256:unknownSha,retryable:false}]})
   if(!includeUnknown){manifest.tableRows.maintenance_model_attempts=manifest.tableRows.maintenance_model_attempts.filter(row=>row.status!=='unknown');manifest.requestReservations=manifest.requestReservations.filter(row=>row.state!=='unknown')}
   await gateRequest(f.env,'/offline-fence/acquire',{batchId,token,scopeRegistrySha256:TEST_SCOPE,inputCatalogSha256:TEST_CATALOG})
@@ -42,6 +50,23 @@ test('full staged handoff imports exact rows, preserves done/unknown, adopts cac
     const cached=await gateRequest(f.env,'/model/run',f.modelInput);assert.equal(cached.status,200);assert.equal((await cached.json()).reused,true)
     assert.equal(f.network(),0)
     const request={batchId,token,scopeRegistrySha256:TEST_SCOPE,inputCatalogSha256:TEST_CATALOG};assert.equal((await gateRequest(f.env,'/offline-fence/acquire',request)).status,409)
+  }finally{f.db.sqlite.close()}
+})
+test('a staged prepared export stays invisible and cannot change the catalogue before final handoff acknowledgement',async()=>{
+  const f=await fixture(false,true)
+  try{
+    await f.stage();let steps=0
+    while(!f.db.sqlite.prepare("SELECT batch_id FROM maintenance_exports WHERE batch_id='offline-export'").get()){assert.ok(steps++<20);await processMessage(f.env,f.messages.shift()!)}
+    assert.equal((await(await gateRequest(f.env,'/offline-fence/status',{})).json()).fence.phase,'held_for_handoff')
+    const ack={batchId:'offline-export',outcome:'applied',receiptSha256:'6'.repeat(64),sourceCommit:'7'.repeat(40),newInputCatalogSha256:'8'.repeat(64),acceptedProposalIds:['offline-proposal'],heldProposalIds:[]}
+    await assert.rejects(prepareExport(f.env,{limit:100}),/offline_handoff_wait/);await assert.rejects(readExport(f.env,'offline-export'),/offline_handoff_wait/);await assert.rejects(acknowledge(f.env,ack),/offline_handoff_wait/)
+    const headers={authorization:`Bearer ${f.env.MAINTENANCE_ADMIN_TOKEN}`,'content-type':'application/json'}
+    const prepare=await handleFetch(new Request('https://worker/exports',{method:'POST',headers,body:'{}'}),f.env);assert.equal(prepare.status,204);assert.equal(prepare.headers.get('retry-after'),'300')
+    assert.equal((await handleFetch(new Request('https://worker/exports/offline-export',{headers}),f.env)).status,429)
+    assert.equal((await handleFetch(new Request('https://worker/ack',{method:'POST',headers,body:JSON.stringify(ack)}),f.env)).status,429)
+    assert.equal((await control(f.env))!.input_catalog_sha256,TEST_CATALOG);assert.equal((await control(f.env))!.targets_complete,1)
+    await f.drain();assert.equal((await prepareExport(f.env,{limit:100})).batchId,'offline-export');assert.equal((await readExport(f.env,'offline-export')).proposals.length,1)
+    await acknowledge(f.env,ack);assert.equal((await control(f.env))!.input_catalog_sha256,ack.newInputCatalogSha256)
   }finally{f.db.sqlite.close()}
 })
 test('unresolved offline sends remain unknown and block the same evidence even after prompt/reservation changes',async()=>{

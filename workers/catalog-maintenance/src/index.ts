@@ -122,7 +122,9 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     return json({ok:false,error:'not_found'},404)
   } catch(error) {
     const code=error instanceof MaintenanceError?error.code:'request_invalid_or_backend_unavailable'
-    if(code==='no_ready_proposals'||code==='export_cadence_wait')return new Response(null,{status:204,headers:{'cache-control':'no-store'}})
+    const exportWait=code==='offline_handoff_wait'||code==='export_capacity_wait'
+    if(code==='no_ready_proposals'||code==='export_cadence_wait'||exportWait&&url.pathname==='/exports'&&request.method==='POST')return new Response(null,{status:204,headers:{'cache-control':'no-store',...(exportWait?{'retry-after':'300'}:{})}})
+    if(exportWait)return new Response(JSON.stringify({ok:false,error:code,retryAfter:300}),{status:429,headers:{'content-type':'application/json','cache-control':'no-store','retry-after':'300','x-content-type-options':'nosniff'}})
     return json({ok:false,error:code},code==='export_not_found'?404:409)
   }
 }

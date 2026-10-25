@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import type { MaintenanceProposal } from '../../../scripts/maintenance/contracts'
-import { acknowledge,prepareExport } from '../src/exports'
+import { acknowledge,prepareExport,readExport } from '../src/exports'
 import { persistProposals } from '../src/proposals'
 import { seed } from '../src/repository'
-import { digest } from '../src/util'
-import { makeEnv,seedInput,TEST_CATALOG } from './fixture'
+import { digest,gateRequest } from '../src/util'
+import { makeEnv,seedInput,TEST_CATALOG,TEST_SCOPE } from './fixture'
 
 async function fixture(){
   const f=makeEnv();await seed(f.env,seedInput())
@@ -25,6 +25,20 @@ test('100 candidates prepare/apply/publish in bounded SQL while unchanged receip
     await assert.rejects(acknowledge(f.env,{...ack,outcome:'published',unchangedProposalIds:[],deploymentId:'dpl_valid',stableProofSha256:'5'.repeat(64)}),/published_ack_must_match_applied_commit/)
     const published={...ack,outcome:'published',deploymentId:'dpl_valid',stableProofSha256:'5'.repeat(64)}
     f.reset();await acknowledge(f.env,published);assert.ok(f.queries()<50);assert.equal(f.db.sqlite.prepare('SELECT status FROM maintenance_exports').get()?.status,'published');assert.equal((await acknowledge(f.env,published)).reused,true)
+  }finally{f.db.sqlite.close()}
+})
+test('export claim, read and acknowledgement hold a global permit against a racing offline-fence acquisition',async()=>{
+  const f=await fixture(),acquire={batchId:'export-race-fence',token:'f'.repeat(64),scopeRegistrySha256:TEST_SCOPE,inputCatalogSha256:TEST_CATALOG},statuses:number[]=[],put=f.bucket.put.bind(f.bucket),get=f.bucket.get.bind(f.bucket)
+  try{
+    f.bucket.put=async(key,body,options)=>{if(key.startsWith('maintenance/exports/'))statuses.push((await gateRequest(f.env,'/offline-fence/acquire',acquire)).status);return put(key,body,options)}
+    const prepared=await prepareExport(f.env,{limit:100})
+    f.bucket.get=async key=>{if(key.startsWith('maintenance/exports/'))statuses.push((await gateRequest(f.env,'/offline-fence/acquire',acquire)).status);return get(key)}
+    await readExport(f.env,prepared.batchId)
+    await acknowledge(f.env,{batchId:prepared.batchId,outcome:'applied',receiptSha256:'2'.repeat(64),sourceCommit:'3'.repeat(40),newInputCatalogSha256:'4'.repeat(64),acceptedProposalIds:f.proposals.map(proposal=>proposal.id),heldProposalIds:[]})
+    assert.deepEqual(statuses,[409,409,409]);assert.equal((await(await gateRequest(f.env,'/offline-fence/status',{})).json()).activeFetches,0)
+    await assert.rejects(readExport(f.env,'missing-export'),/export_not_found/);await assert.rejects(acknowledge(f.env,{}),/invalid_acknowledgement/)
+    assert.equal((await(await gateRequest(f.env,'/offline-fence/status',{})).json()).activeFetches,0)
+    assert.equal((await gateRequest(f.env,'/offline-fence/acquire',{...acquire,inputCatalogSha256:'4'.repeat(64)})).status,200)
   }finally{f.db.sqlite.close()}
 })
 test('all unchanged candidates can reject without requeueing them as review conflicts',async()=>{

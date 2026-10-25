@@ -2,10 +2,23 @@ import { exportContentSha256, maintenanceCandidateExportSchema, type CandidateEx
 import { control, event } from './repository'
 import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
-import { canonical, digest, HASH, ID, nowIso, record } from './util'
+import { canonical, digest, gateRequest, HASH, ID, nowIso, record } from './util'
 
 type ExportRow={batch_id:string;input_catalog_sha256:string;scope_sha256:string;object_key:string;sha256:string;created_at:string;status:'prepared'|'applied'|'published'|'rejected';acknowledgement_sha256:string|null;acknowledgement_json:string|null}
-export async function readExport(env:MaintenanceEnv,id:string):Promise<CandidateExport> {
+/** A writer operation holds an existing global fetch permit, without fetching
+ * this internal host. Offline acquisition requires zero permits, so it cannot
+ * slip between an export's admission and its D1 claim/acknowledgement CAS. */
+async function withExportPermit<T>(env:MaintenanceEnv,operation:()=>Promise<T>):Promise<T>{
+  let permit:Record<string,unknown>|null=null
+  try{
+    const response=await gateRequest(env,'/fetch/acquire',{host:`export-${crypto.randomUUID()}.maintenance.internal`})
+    permit=record(await response.json())
+    if(!response.ok||permit?.ok!==true||typeof permit.token!=='string')throw new MaintenanceError(permit?.error==='fetch_capacity_offline_fenced'?'offline_handoff_wait':'export_capacity_wait',300)
+  }catch(error){if(error instanceof MaintenanceError)throw error;throw new MaintenanceError('offline_handoff_wait',300)}
+  try{return await operation()}finally{await gateRequest(env,'/fetch/release',{token:permit.token})}
+}
+export function readExport(env:MaintenanceEnv,id:string):Promise<CandidateExport>{return withExportPermit(env,()=>readExportData(env,id))}
+async function readExportData(env:MaintenanceEnv,id:string):Promise<CandidateExport> {
   if(!ID.test(id))throw new MaintenanceError('invalid_export_id')
   const row=await env.PIPELINE_DB.prepare('SELECT * FROM maintenance_exports WHERE batch_id=?').bind(id).first<ExportRow>()
   if(!row)throw new MaintenanceError('export_not_found')
@@ -15,13 +28,14 @@ export async function readExport(env:MaintenanceEnv,id:string):Promise<Candidate
   if(batch.sha256!==row.sha256||await exportContentSha256(batch)!==row.sha256)throw new MaintenanceError('export_checksum_mismatch')
   return batch
 }
-export async function prepareExport(env:MaintenanceEnv,value:unknown):Promise<{batchId:string;sha256:string;proposalCount:number;reused:boolean}> {
+export function prepareExport(env:MaintenanceEnv,value:unknown):Promise<{batchId:string;sha256:string;proposalCount:number;reused:boolean}>{return withExportPermit(env,()=>prepareExportData(env,value))}
+async function prepareExportData(env:MaintenanceEnv,value:unknown):Promise<{batchId:string;sha256:string;proposalCount:number;reused:boolean}> {
   const raw=record(value),limit=raw?.limit??50
   if(!Number.isSafeInteger(limit)||Number(limit)<1||Number(limit)>100)throw new MaintenanceError('invalid_export_limit')
   const cfg=await control(env)
   if(!cfg?.seed_complete)throw new MaintenanceError('seed_not_ready')
   const pending=await env.PIPELINE_DB.prepare("SELECT batch_id FROM maintenance_exports WHERE status='prepared' ORDER BY created_at LIMIT 1").first<{batch_id:string}>()
-  if(pending){const batch=await readExport(env,pending.batch_id);return{batchId:batch.batchId,sha256:batch.sha256,proposalCount:batch.proposals.length,reused:true}}
+  if(pending){const batch=await readExportData(env,pending.batch_id);return{batchId:batch.batchId,sha256:batch.sha256,proposalCount:batch.proposals.length,reused:true}}
   await env.PIPELINE_DB.prepare("UPDATE maintenance_proposals SET status='held' WHERE status='ready' AND EXISTS(SELECT 1 FROM maintenance_sources s WHERE s.source_id=maintenance_proposals.source_id AND s.raw_sha256 IS NOT NULL AND s.raw_sha256<>maintenance_proposals.snapshot_sha256)").run()
   const available=(await env.PIPELINE_DB.prepare("SELECT proposal_id,proposal_json FROM maintenance_proposals WHERE status='ready' ORDER BY created_at,proposal_id LIMIT 1000").all<{proposal_id:string;proposal_json:string}>()).results??[]
   if(!available.length)throw new MaintenanceError('no_ready_proposals')
@@ -45,12 +59,13 @@ export async function prepareExport(env:MaintenanceEnv,value:unknown):Promise<{b
   await event(env,'export_prepared',{batchId,sha256:batch.sha256,proposalCount:proposals.length})
   return{batchId,sha256:batch.sha256,proposalCount:proposals.length,reused:false}
 }
-export async function acknowledge(env:MaintenanceEnv,value:unknown) {
+export function acknowledge(env:MaintenanceEnv,value:unknown){return withExportPermit(env,()=>acknowledgeData(env,value))}
+async function acknowledgeData(env:MaintenanceEnv,value:unknown) {
   const raw=record(value)
   if(!raw||!ID.test(String(raw.batchId))||!['applied','published','rejected'].includes(String(raw.outcome))||!HASH.test(String(raw.receiptSha256))||!HASH.test(String(raw.newInputCatalogSha256))||!/^([a-f0-9]{40}|[a-f0-9]{64})$/.test(String(raw.sourceCommit))||!Array.isArray(raw.acceptedProposalIds)||!Array.isArray(raw.heldProposalIds)||raw.unchangedProposalIds!==undefined&&!Array.isArray(raw.unchangedProposalIds)||[...raw.acceptedProposalIds,...raw.heldProposalIds,...(Array.isArray(raw.unchangedProposalIds)?raw.unchangedProposalIds:[])].some(id=>typeof id!=='string'||!ID.test(id)))throw new MaintenanceError('invalid_acknowledgement')
   const row=await env.PIPELINE_DB.prepare('SELECT * FROM maintenance_exports WHERE batch_id=?').bind(raw.batchId).first<ExportRow>(),cfg=await control(env)
   if(!row||!cfg)throw new MaintenanceError('export_not_found')
-  const batch=await readExport(env,row.batch_id),accepted=raw.acceptedProposalIds as string[],held=raw.heldProposalIds as string[],unchanged=(raw.unchangedProposalIds??[])as string[],ids=[...accepted,...held]
+  const batch=await readExportData(env,row.batch_id),accepted=raw.acceptedProposalIds as string[],held=raw.heldProposalIds as string[],unchanged=(raw.unchangedProposalIds??[])as string[],ids=[...accepted,...held]
   if(new Set(ids).size!==ids.length||ids.length!==batch.proposals.length||ids.some(id=>!batch.proposals.some(proposal=>proposal.id===id)))throw new MaintenanceError('acknowledgement_partition_mismatch')
   if(new Set(unchanged).size!==unchanged.length||unchanged.some(id=>!held.includes(id)))throw new MaintenanceError('unchanged_partition_must_be_held_subset')
   const ack={batchId:row.batch_id,outcome:String(raw.outcome),receiptSha256:String(raw.receiptSha256),sourceCommit:String(raw.sourceCommit),newInputCatalogSha256:String(raw.newInputCatalogSha256),acceptedProposalIds:[...accepted].sort(),heldProposalIds:[...held].sort(),unchangedProposalIds:[...unchanged].sort(),deploymentId:typeof raw.deploymentId==='string'?raw.deploymentId:null,stableProofSha256:typeof raw.stableProofSha256==='string'?raw.stableProofSha256:null}
