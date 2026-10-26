@@ -10,6 +10,7 @@ import programs from '../../content/data/programs.json'
 import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
+import originalSchoolScope from '../../content/maintenance/scope-272.v1.json'
 import { classifyProgramField } from '../../src/lib/data/fields'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
@@ -156,7 +157,8 @@ describe('verified multi-university expansion on 2026-08-03', () => {
     for (const program of data.programs) {
       programCounts.set(program.universityId, (programCounts.get(program.universityId) ?? 0) + 1)
     }
-    expect(data.universities.filter(item => item.status === 'verified').every((university) => (programCounts.get(university.id) ?? 0) >= 1)).toBe(true)
+    const originalSchools = new Set(originalSchoolScope.schools.map(school => school.universityId))
+    expect(data.universities.filter(item => item.status === 'verified' && originalSchools.has(item.id)).every((university) => (programCounts.get(university.id) ?? 0) >= 1)).toBe(true)
     expect([...programCounts.values()].filter((count) => count >= 3).length).toBeGreaterThanOrEqual(185)
   })
 

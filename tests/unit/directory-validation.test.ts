@@ -86,6 +86,13 @@ describe('directory integrity gate', () => {
     expect(result.coverageComplete).toBe(false)
     expect(result.notice).toContain('does not certify complete school catalogues')
   })
+  it('permits additional school identities while preserving every original maintenance school', async () => {
+    const f = validatorFixture(), added = { ...bundle.universities[0], id: 'uni-additional-official-school', slug: 'additional-official-school' }
+    vi.mocked(scopeModule.loadMaintenanceBundle).mockReturnValue({ ...bundle, universities: [...bundle.universities, added] })
+    expect((await validateDirectory(f.root, date)).cohortSchools).toBe(272)
+    vi.mocked(scopeModule.loadMaintenanceBundle).mockReturnValue({ ...bundle, universities: [...bundle.universities.slice(1), added] })
+    await expect(validateDirectory(f.root, date)).rejects.toThrow('directory_fixed_cohort_changed')
+  })
   it.each(['duplicate', 'changed-identity', 'changed-receipt', 'outside-path', 'changed-scope'])(
     'rejects %s instead of treating a broken trust ledger as complete', async kind => {
       const f = validatorFixture()

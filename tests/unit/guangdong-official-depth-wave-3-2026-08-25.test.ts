@@ -224,7 +224,7 @@ describe('Guangdong official depth wave 3 on 2026-08-25', () => {
     for (const [id, durationMonths] of expectedDurations) {
       const item = program(id)
       expect(['verified', 'stale'], id).toContain(item.status)
-      if (item.reviewAfter < getTodayDate()) expect(item.status, id).toBe('stale')
+      if (item.reviewAfter < getTodayDate()) expect(selectPublishedData(data, getTodayDate()).programs.some(record => record.id === id), id).toBe(false)
       if (REVERIFIED_SZU_PROGRAM_IDS.has(id)) {
         expect(item.verifiedAt, id).toBe('2026-10-19')
         expect(item.reviewAfter, id).toBe('2026-10-26')

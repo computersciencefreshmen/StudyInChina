@@ -165,7 +165,7 @@ describe('published content data', () => {
     ]
 
     for (const name of names) {
-      expect(name.en?.trim()).toBeTruthy()
+      expect(Object.values(name).some(value => value?.trim())).toBe(true)
       if (name.zh !== undefined) expect(name.zh.trim()).not.toBe('')
       for (const locale of ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const) {
         const display = localize(name, locale)

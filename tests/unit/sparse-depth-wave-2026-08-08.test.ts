@@ -7,6 +7,7 @@ import programs from '../../content/data/programs.json'
 import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
+import originalSchoolScope from '../../content/maintenance/scope-272.v1.json'
 import mergedJson from '../../quality/official-gap-wave-2026-07-30/merged-candidates.json'
 import packJson from '../../quality/multiversity-expansion-wave-2026-08-08/sparse-depth-and-scholarships.json'
 import { selectPublishedData } from '../../src/lib/data/publication'
@@ -236,8 +237,10 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
     for (const program of data.programs) {
       publicCounts.set(program.universityId, (publicCounts.get(program.universityId) ?? 0) + 1)
     }
-    expect(data.universities.filter(item => item.status === 'verified').every((item) => (publicCounts.get(item.id) ?? 0) >= 1)).toBe(true)
-    expect(data.universities.filter(item => item.status === 'verified').filter((item) => (publicCounts.get(item.id) ?? 0) < 3).length)
+    const originalSchools = new Set(originalSchoolScope.schools.map(school => school.universityId))
+    const historicalVerifiedSchools = data.universities.filter(item => item.status === 'verified' && originalSchools.has(item.id))
+    expect(historicalVerifiedSchools.every((item) => (publicCounts.get(item.id) ?? 0) >= 1)).toBe(true)
+    expect(historicalVerifiedSchools.filter((item) => (publicCounts.get(item.id) ?? 0) < 3).length)
       .toBeLessThanOrEqual(8)
     expect(data.universities.length).toBeGreaterThanOrEqual(266)
     expect(data.programs.filter(

@@ -73,6 +73,13 @@ describe('fixed school scope and reviewed identity importing', () => {
     await expect(buildMaintenanceScope({ ...bundle, universities: bundle.universities.slice(1) }, { scopeId: 'bad', createdAt: capturedAt }))
       .rejects.toThrow('exactly 272')
   })
+  it('keeps the original maintenance cohort when new school identities enter the directory', async () => {
+    const added = { ...bundle.universities[0], id: 'uni-added-school', slug: 'added-school' }
+    const expanded = await buildMaintenanceScope({ ...bundle, universities: [...bundle.universities, added] }, { scopeId: 'expanded-directory', createdAt: capturedAt })
+    expect(expanded.schools).toHaveLength(272)
+    expect(expanded.schools.map(school => school.universityId)).toEqual(scope.schools.map(school => school.universityId))
+    expect(expanded.schools.some(school => school.universityId === added.id)).toBe(false)
+  })
 
   it('adds only an identity and preserves every existing record, public ID and cycle', async () => {
     const { run } = await fixture()

@@ -17,7 +17,7 @@ function readOptional(path: string, fallback: unknown) { return existsSync(path)
 export async function validateDirectory(root: string, today = getTodayDate()) {
   const bundle = loadMaintenanceBundle(root), dataDirectory = join(root, 'content/data')
   const scope = maintenanceScopeSchema.parse(read(join(root, 'content/maintenance/scope-272.v1.json')))
-  if (scope.sha256 !== await scopeContentSha256(scope) || bundle.universities.length !== 272
+  if (scope.sha256 !== await scopeContentSha256(scope) || bundle.universities.length < 272
     || scope.schools.some(school => !bundle.universities.some(university => university.id === school.universityId))) throw new Error('directory_fixed_cohort_changed')
   const identities = identityAcceptanceLedgerSchema.parse(readOptional(join(dataDirectory, 'identity-acceptances.json'), { schemaVersion: 1, entries: [] })).entries
   const fields = fieldVerificationLedgerSchema.parse(readOptional(join(dataDirectory, 'field-verifications.json'), { schemaVersion: 1, entries: [] })).entries
