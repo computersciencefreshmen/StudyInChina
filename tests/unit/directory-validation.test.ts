@@ -7,7 +7,7 @@ import * as scopeModule from '../../scripts/maintenance/build-scope'
 import * as snapshotModule from '../../scripts/automation/apply-catalog-snapshot'
 import { bootstrapDirectoryIdentities } from '../../scripts/automation/bootstrap-directory-identities'
 import { validateDirectory } from '../../scripts/quality/validate-directory'
-import { canonicalIdentityJson, identityFingerprint } from '@/lib/data/identity-acceptance'
+import { canonicalIdentityJson, identityFingerprint, type IdentityAcceptance } from '@/lib/data/identity-acceptance'
 import { selectPublishedData } from '@/lib/data/publication'
 import type { DataBundle } from '@/lib/data/types'
 import type { MaintenanceScope } from '../../scripts/maintenance/contracts'
@@ -44,6 +44,28 @@ function validatorFixture() {
   write(join(data, 'identity-acceptances.json'), { schemaVersion: 1, entries: [entry] })
   vi.spyOn(scopeModule, 'loadMaintenanceBundle').mockReturnValue(bundle)
   return { root, data, entry, receipt }
+}
+function additionalSchoolFixture(options: { schoolStatus?: DataBundle['universities'][number]['status']; programStatus?: DataBundle['programs'][number]['status'];
+  includeProgram?: boolean; acceptProgram?: boolean; programAtOriginalSchool?: boolean } = {}) {
+  const f = validatorFixture(), published = selectPublishedData(bundle, date)
+  const original = bundle.universities.find(university => published.universities.some(record => record.id === university.id))!
+  const added = { ...original, id: 'uni-additional-official-school', slug: 'additional-official-school',
+    status: options.schoolStatus ?? 'stale' as const, verifiedAt: '2026-10-01', reviewAfter: '2026-10-02' }
+  const program = { ...bundle.programs[0], id: 'program-additional-school', slug: 'additional-school-program',
+    universityId: options.programAtOriginalSchool ? original.id : added.id,
+    status: options.programStatus ?? 'stale' as const, verifiedAt: '2026-10-01', reviewAfter: '2026-10-02' }
+  const originalIds = new Set(scope.schools.map(school => school.universityId))
+  // Keep the pinned school cohort, but only the one programme relevant to this guard.
+  const fixture: DataBundle = { ...bundle, universities: [...bundle.universities.filter(university => originalIds.has(university.id)), added],
+    programs: options.includeProgram === false ? [] : [program], admissionCycles: [], scholarships: [] }
+  const entries: IdentityAcceptance[] = [{ entityType: 'university', recordId: added.id, identitySha256: identityFingerprint('university', added),
+    sourceIds: added.sourceIds, acceptedAt, reviewer: 'fixture-reviewer', receiptPath: 'quality/review.json', receiptSha256: f.receipt.sha256 }]
+  if (options.includeProgram !== false && options.acceptProgram !== false) entries.push({ entityType: 'program', recordId: program.id,
+    identitySha256: identityFingerprint('program', program), sourceIds: program.sourceIds, acceptedAt, reviewer: 'fixture-reviewer',
+    receiptPath: 'quality/review.json', receiptSha256: f.receipt.sha256 })
+  write(join(f.data, 'identity-acceptances.json'), { schemaVersion: 1, entries })
+  vi.mocked(scopeModule.loadMaintenanceBundle).mockReturnValue(fixture)
+  return { ...f, fixture, added, program, entries }
 }
 function bootstrapFixture() {
   const root = temporaryRoot(), baseline = snapshotModule.readCatalogSnapshotBaseline(join(process.cwd(), 'content/data'))
@@ -86,13 +108,32 @@ describe('directory integrity gate', () => {
     expect(result.coverageComplete).toBe(false)
     expect(result.notice).toContain('does not certify complete school catalogues')
   })
-  it('permits additional school identities while preserving every original maintenance school', async () => {
-    const f = validatorFixture(), added = { ...bundle.universities[0], id: 'uni-additional-official-school', slug: 'additional-official-school' }
-    vi.mocked(scopeModule.loadMaintenanceBundle).mockReturnValue({ ...bundle, universities: [...bundle.universities, added] })
-    expect((await validateDirectory(f.root, date)).cohortSchools).toBe(272)
-    vi.mocked(scopeModule.loadMaintenanceBundle).mockReturnValue({ ...bundle, universities: [...bundle.universities.slice(1), added] })
+  it('permits a new school with a visible accepted programme while preserving every original maintenance school', async () => {
+    const f = additionalSchoolFixture(), result = await validateDirectory(f.root, date)
+    expect(result.cohortSchools).toBe(272)
+    expect(result.directoryCounts.programs).toBe(1)
+    expect(result.schoolCoverage.directoryWithPrograms).toBe(1)
+    vi.mocked(scopeModule.loadMaintenanceBundle).mockReturnValue({ ...f.fixture, universities: f.fixture.universities.filter(university => university.id !== scope.schools[0].universityId) })
     await expect(validateDirectory(f.root, date)).rejects.toThrow('directory_fixed_cohort_changed')
   })
+  it('allows a draft school to remain pending without any programme', async () => {
+    const f = additionalSchoolFixture({ schoolStatus: 'draft', includeProgram: false }), result = await validateDirectory(f.root, date)
+    expect(result.integrityPassed).toBe(true)
+    expect(result.directoryCounts.programs).toBe(0)
+  })
+  it('rejects a verified new public school with no programme', async () => {
+    const f = additionalSchoolFixture({ schoolStatus: 'verified', includeProgram: false })
+    f.added.verifiedAt = date
+    f.added.reviewAfter = '2026-10-25'
+    await expect(validateDirectory(f.root, date)).rejects.toThrow('directory_new_school_requires_program')
+  })
+  it.each(['raw-unaccepted', 'draft', 'archived', 'other-school'] as const)(
+    'does not count a %s programme toward a new school', async kind => {
+      const f = additionalSchoolFixture({ acceptProgram: kind !== 'raw-unaccepted',
+        ...(kind === 'draft' || kind === 'archived' ? { programStatus: kind } : {}), programAtOriginalSchool: kind === 'other-school' })
+      expect(f.fixture.programs).toHaveLength(1)
+      await expect(validateDirectory(f.root, date)).rejects.toThrow('directory_new_school_requires_program')
+    })
   it.each(['duplicate', 'changed-identity', 'changed-receipt', 'outside-path', 'changed-scope'])(
     'rejects %s instead of treating a broken trust ledger as complete', async kind => {
       const f = validatorFixture()

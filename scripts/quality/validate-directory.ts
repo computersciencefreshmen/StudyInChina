@@ -66,6 +66,9 @@ export async function validateDirectory(root: string, today = getTodayDate()) {
   if (/"(?:receiptPath|objectKey|promptSha256|reviewerId|quote)"\s*:/u.test(JSON.stringify(directory))) throw new Error('directory_private_provenance_leak')
   const bySchool = new Map(directory.universities.map(university => [university.id, 0]))
   for (const program of directory.programs) bySchool.set(program.universityId, (bySchool.get(program.universityId) ?? 0) + 1)
+  const originalSchoolIds = new Set(scope.schools.map(school => school.universityId))
+  if (directory.universities.some(university => !originalSchoolIds.has(university.id)
+    && (bySchool.get(university.id) ?? 0) < 1)) throw new Error('directory_new_school_requires_program')
   const allProgramCount = new Map(bundle.universities.map(university => [university.id, 0]))
   for (const program of bundle.programs) allProgramCount.set(program.universityId, (allProgramCount.get(program.universityId) ?? 0) + 1)
   return { format: 'studyinchina.directory-validation', formatVersion: 1, evaluatedForDate: today,

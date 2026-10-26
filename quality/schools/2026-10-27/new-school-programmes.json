@@ -1,0 +1,2642 @@
+{
+  "format": "studyinchina.new-school-programme-acceptance",
+  "formatVersion": 1,
+  "acceptedAt": "2026-10-26T16:33:20.092Z",
+  "evaluatedForDate": "2026-10-27",
+  "addedSchoolCount": 23,
+  "addedProgrammeCount": 23,
+  "schoolIdentityReceiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+  "manifests": [
+    {
+      "region": "beijing",
+      "manifestSha256": "491b345d0e09de285db1318cf61b5d23aa21fe04444b290cd295e071e11e081b"
+    },
+    {
+      "region": "shanghai",
+      "manifestSha256": "479ce312acce966d8732f72939fe559355e9bb40191d53383df105f9bdec20c8"
+    },
+    {
+      "region": "jiangzhe",
+      "manifestSha256": "0b90a1180ca6866ce1403abfffc57836633827b3a4feb9a33eefbcbac92f1669"
+    }
+  ],
+  "policy": {
+    "scope": "new schools outside original 272, each with an official named programme",
+    "acceptance": "programme identity and international-student applicability only",
+    "dynamicFields": "unverified fees, dates, conditions, application channels and teaching languages are absent",
+    "completeness": "one verified programme per new school is minimum coverage, not complete catalogue reconciliation",
+    "modelsUsedForThisReceipt": false
+  },
+  "accepted": [
+    {
+      "recordId": "program-4111010012-bachelor-40719f36298a2fa96d0a",
+      "universityId": "uni-moe-4111010012",
+      "schoolNameZh": "北京服装学院",
+      "name": {
+        "en": "Fashion Design"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://gjy.bift.edu.cn/zsxx/6e3639c5d7b04bb080a6cd4f9e1e1dcf.htm",
+      "catalogueYear": 2026,
+      "identitySha256": "98afbfe7fae382c45fcfb9aa2406089a239e87bed7db252d712be0644a63675e",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-fe6c6fed5aca1c02a8b00171"
+      ],
+      "sources": [
+        {
+          "url": "https://gjy.bift.edu.cn/zsxx/6e3639c5d7b04bb080a6cd4f9e1e1dcf.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:33.829Z",
+          "contentType": "text/html",
+          "rawSha256": "70e9fb77188bb0958b37ffd478c3b7bc5550d6e709aa45f434867e8b7102b126",
+          "byteLength": 54040,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/70e9fb77188bb0958b37ffd478c3b7bc5550d6e709aa45f434867e8b7102b126.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/bdad265c69ed2f5955640c32c7118069a4f2fc6f4297572fb62f0c78a84b18f3.text.gz",
+          "textSha256": "bdad265c69ed2f5955640c32c7118069a4f2fc6f4297572fb62f0c78a84b18f3",
+          "textByteLength": 16268,
+          "textDerivation": "production decodeMaintenanceHtml + htmlToText + normalizeEvidenceText"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "nameQuote",
+          "url": "https://gjy.bift.edu.cn/zsxx/6e3639c5d7b04bb080a6cd4f9e1e1dcf.htm",
+          "rawSha256": "70e9fb77188bb0958b37ffd478c3b7bc5550d6e709aa45f434867e8b7102b126",
+          "quote": "Fashion Design",
+          "locator": {
+            "original": {
+              "start": 718,
+              "end": 732
+            },
+            "start": 718,
+            "end": 732,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "bdad265c69ed2f5955640c32c7118069a4f2fc6f4297572fb62f0c78a84b18f3"
+        },
+        {
+          "field": "degreeQuote",
+          "url": "https://gjy.bift.edu.cn/zsxx/6e3639c5d7b04bb080a6cd4f9e1e1dcf.htm",
+          "rawSha256": "70e9fb77188bb0958b37ffd478c3b7bc5550d6e709aa45f434867e8b7102b126",
+          "quote": "bachelor’s degree programs in Fashion Design",
+          "locator": {
+            "original": {
+              "start": 688,
+              "end": 732
+            },
+            "start": 688,
+            "end": 732,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "bdad265c69ed2f5955640c32c7118069a4f2fc6f4297572fb62f0c78a84b18f3"
+        },
+        {
+          "field": "intlQuote",
+          "url": "https://gjy.bift.edu.cn/zsxx/6e3639c5d7b04bb080a6cd4f9e1e1dcf.htm",
+          "rawSha256": "70e9fb77188bb0958b37ffd478c3b7bc5550d6e709aa45f434867e8b7102b126",
+          "quote": "Applicants must be foreign citizens holding a valid passport",
+          "locator": {
+            "original": {
+              "start": 1935,
+              "end": 1995
+            },
+            "start": 1935,
+            "end": 1995,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "bdad265c69ed2f5955640c32c7118069a4f2fc6f4297572fb62f0c78a84b18f3"
+        }
+      ],
+      "notes": [
+        "The 2026 prospectus explicitly names this bachelor programme in its SIE offering history; no current intake availability or current annual catalogue completeness is asserted."
+      ]
+    },
+    {
+      "recordId": "program-4111010015-bachelor-a6b3a3d2d752b27bb958",
+      "universityId": "uni-moe-4111010015",
+      "schoolNameZh": "北京印刷学院",
+      "name": {
+        "en": "Mechanical Engineering"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://sie.bigc.edu.cn/study/bachelor/engineering/d27329dc81d846f09955d6c265f005d9.htm",
+      "catalogueYear": 2026,
+      "identitySha256": "b24389c5b175d7329411e5a437a2820e4de88f40d486620fd90224e43ebd7e7a",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-7af0ebc4b7db29946829f3eb",
+        "src-new-school-program-e1a824b26f0d5f44a4b67c95"
+      ],
+      "sources": [
+        {
+          "url": "https://sie.bigc.edu.cn/study/bachelor/engineering/d27329dc81d846f09955d6c265f005d9.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:29.037Z",
+          "contentType": "text/html",
+          "rawSha256": "84a31f3ec25ec8a0e3fb8361652ac33e6920f96c540b4b6e881294727201e4bc",
+          "byteLength": 23312,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/84a31f3ec25ec8a0e3fb8361652ac33e6920f96c540b4b6e881294727201e4bc.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/497e8f8252fc2482e6074afe8dd66709f04148c3b3b47c78b36067c33be7da8c.text.gz",
+          "textSha256": "497e8f8252fc2482e6074afe8dd66709f04148c3b3b47c78b36067c33be7da8c",
+          "textByteLength": 2521,
+          "textDerivation": "production decodeMaintenanceHtml + htmlToText + normalizeEvidenceText"
+        },
+        {
+          "url": "https://sie.bigc.edu.cn/docs/2025-12/70efe5390846454f8a3dfc4bc845cf9d.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:29.599Z",
+          "contentType": "application/pdf",
+          "rawSha256": "83855c3067a17cd463de68ef99055b401e01cc6513866c56cb2d50fb406a0ae9",
+          "byteLength": 174017,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/83855c3067a17cd463de68ef99055b401e01cc6513866c56cb2d50fb406a0ae9.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/e18e1120b2fa3f1b5f1191c1400d62fa255b092e1262e74d5f04748211a7ecb0.text.gz",
+          "textSha256": "e18e1120b2fa3f1b5f1191c1400d62fa255b092e1262e74d5f04748211a7ecb0",
+          "textByteLength": 8843,
+          "textDerivation": "pdfplumber extract_text(layout=True), page separators retained in .layout.txt; compact=NFKC then whitespace normalization",
+          "layoutEvidence": {
+            "evidencePath": "quality/schools/2026-10-27/programme-evidence/56eae218b76c1ee5852bfe2f8ed67617f65cfdc6b760d35b691842012081626e.layout.gz",
+            "sha256": "56eae218b76c1ee5852bfe2f8ed67617f65cfdc6b760d35b691842012081626e",
+            "byteLength": 29444
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "field": "nameQuote",
+          "url": "https://sie.bigc.edu.cn/study/bachelor/engineering/d27329dc81d846f09955d6c265f005d9.htm",
+          "rawSha256": "84a31f3ec25ec8a0e3fb8361652ac33e6920f96c540b4b6e881294727201e4bc",
+          "quote": "Mechanical Engineering",
+          "locator": {
+            "original": {
+              "start": 266,
+              "end": 288
+            },
+            "start": 266,
+            "end": 288,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "497e8f8252fc2482e6074afe8dd66709f04148c3b3b47c78b36067c33be7da8c"
+        },
+        {
+          "field": "degreeQuote",
+          "url": "https://sie.bigc.edu.cn/docs/2025-12/70efe5390846454f8a3dfc4bc845cf9d.pdf",
+          "rawSha256": "83855c3067a17cd463de68ef99055b401e01cc6513866c56cb2d50fb406a0ae9",
+          "quote": "Admission Guide for Bachelor Programs",
+          "locator": {
+            "original": {
+              "start": 0,
+              "end": 37,
+              "layoutTextFile": "texts/83855c3067a17cd463de68ef99055b401e01cc6513866c56cb2d50fb406a0ae9.layout.txt"
+            },
+            "start": 0,
+            "end": 37,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "e18e1120b2fa3f1b5f1191c1400d62fa255b092e1262e74d5f04748211a7ecb0"
+        },
+        {
+          "field": "intlQuote",
+          "url": "https://sie.bigc.edu.cn/docs/2025-12/70efe5390846454f8a3dfc4bc845cf9d.pdf",
+          "rawSha256": "83855c3067a17cd463de68ef99055b401e01cc6513866c56cb2d50fb406a0ae9",
+          "quote": "Beijing International Students Belt & Road Initiative",
+          "locator": {
+            "original": {
+              "start": 492,
+              "end": 545,
+              "layoutTextFile": "texts/83855c3067a17cd463de68ef99055b401e01cc6513866c56cb2d50fb406a0ae9.layout.txt"
+            },
+            "start": 492,
+            "end": 545,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "e18e1120b2fa3f1b5f1191c1400d62fa255b092e1262e74d5f04748211a7ecb0"
+        }
+      ],
+      "notes": [
+        "The 2026 bachelor guide lists MechanicalEngineering as a concrete table row; the official dedicated bachelor-programme page supplies the correctly spaced exact programme name."
+      ]
+    },
+    {
+      "recordId": "program-4111010020-bachelor-628af2865abeb4434f77",
+      "universityId": "uni-moe-4111010020",
+      "schoolNameZh": "北京农学院",
+      "name": {
+        "zh": "园艺"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://zkxy.bua.edu.cn/info/1041/6969.htm",
+      "catalogueYear": null,
+      "identitySha256": "936c3de48eeea5bace99916fa693b17f34c1abdafc4844e3ad48474a2541cccb",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-f8282aa4d4139df13c46299c",
+        "src-new-school-program-f1bb7de777f7c34a4624df19"
+      ],
+      "sources": [
+        {
+          "url": "https://english.bua.edu.cn/lnternational_Students/Application.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:30.365Z",
+          "contentType": "text/html",
+          "rawSha256": "54c8e8e927ec6c95c0f7388fe2fb6383e795520e4d59ea57434654bec7f62e57",
+          "byteLength": 16601,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/54c8e8e927ec6c95c0f7388fe2fb6383e795520e4d59ea57434654bec7f62e57.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/b6a09038c1508e7072fa3bafa84af17b553c77273bf78f9753cae9eaea6d1185.text.gz",
+          "textSha256": "b6a09038c1508e7072fa3bafa84af17b553c77273bf78f9753cae9eaea6d1185",
+          "textByteLength": 2126,
+          "textDerivation": "production decodeMaintenanceHtml + htmlToText + normalizeEvidenceText"
+        },
+        {
+          "url": "https://zkxy.bua.edu.cn/info/1041/6969.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:20:19.463Z",
+          "contentType": "text/html",
+          "rawSha256": "1d62e4b6bab32c0a3c31a06b5d53f4e8d5b97229743aa6b5e95b9ac68dba5d67",
+          "byteLength": 32032,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/1d62e4b6bab32c0a3c31a06b5d53f4e8d5b97229743aa6b5e95b9ac68dba5d67.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/e99c2cd4e95431aadbb064438d3763a7e58ea66fd58ef367dd120489f667c968.text.gz",
+          "textSha256": "e99c2cd4e95431aadbb064438d3763a7e58ea66fd58ef367dd120489f667c968",
+          "textByteLength": 8837,
+          "textDerivation": "production decodeMaintenanceHtml + htmlToText + normalizeEvidenceText"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "nameQuote",
+          "url": "https://zkxy.bua.edu.cn/info/1041/6969.htm",
+          "rawSha256": "1d62e4b6bab32c0a3c31a06b5d53f4e8d5b97229743aa6b5e95b9ac68dba5d67",
+          "quote": "专业名称及专业代码:园艺(090102)",
+          "locator": {
+            "original": {
+              "start": 333,
+              "end": 353
+            },
+            "start": 333,
+            "end": 353,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "e99c2cd4e95431aadbb064438d3763a7e58ea66fd58ef367dd120489f667c968"
+        },
+        {
+          "field": "degreeQuote",
+          "url": "https://zkxy.bua.edu.cn/info/1041/6969.htm",
+          "rawSha256": "1d62e4b6bab32c0a3c31a06b5d53f4e8d5b97229743aa6b5e95b9ac68dba5d67",
+          "quote": "授予农学学士学位",
+          "locator": {
+            "original": {
+              "start": 2901,
+              "end": 2909
+            },
+            "start": 2901,
+            "end": 2909,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "e99c2cd4e95431aadbb064438d3763a7e58ea66fd58ef367dd120489f667c968"
+        },
+        {
+          "field": "intlQuote",
+          "url": "https://english.bua.edu.cn/lnternational_Students/Application.htm",
+          "rawSha256": "54c8e8e927ec6c95c0f7388fe2fb6383e795520e4d59ea57434654bec7f62e57",
+          "quote": "All the programs at BUA are open for application of international students.",
+          "locator": {
+            "original": {
+              "start": 784,
+              "end": 859
+            },
+            "start": 784,
+            "end": 859,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "b6a09038c1508e7072fa3bafa84af17b553c77273bf78f9753cae9eaea6d1185"
+        }
+      ],
+      "notes": [
+        "Programme identity and bachelor degree come from the official 2025-07-05 curriculum. International eligibility uses the official undated explicit all-programmes scope. This does not establish a 2026/2027 intake or an open application window."
+      ]
+    },
+    {
+      "recordId": "program-4111010025-bachelor-ea9e4faacca63b7c4b3e",
+      "universityId": "uni-moe-4111010025",
+      "schoolNameZh": "首都医科大学",
+      "name": {
+        "en": "Clinical Medicine"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://gjxy.ccmu.edu.cn/docs/2026-01/378e3b986a874a54b3f7eca368a4bb22.rar",
+      "catalogueYear": 2026,
+      "identitySha256": "5d9cab5bb63b8ff3317a57d18f8c1bfb005c7de161282d142faabb2ae47cada4",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-d067b27b7ce56c45bdd3aadd"
+      ],
+      "sources": [
+        {
+          "url": "https://gjxy.ccmu.edu.cn/docs/2026-01/378e3b986a874a54b3f7eca368a4bb22.rar",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:30.607Z",
+          "contentType": "application/x-rar-compressed",
+          "rawSha256": "41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3",
+          "byteLength": 788035,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/d4a00358ba2ca63e9fb716e9c57d2757c164cbd72b07d06550a2b8d5c8c43ed3.text.gz",
+          "textSha256": "d4a00358ba2ca63e9fb716e9c57d2757c164cbd72b07d06550a2b8d5c8c43ed3",
+          "textByteLength": 8086,
+          "textDerivation": "pdfplumber extract_text(layout=True), page separators retained in .layout.txt; compact=NFKC then whitespace normalization",
+          "layoutEvidence": {
+            "evidencePath": "quality/schools/2026-10-27/programme-evidence/760fc42d3c7d5f8a95a57d931423536edda0fc5148ac9352d6a27c4c0233a44c.layout.gz",
+            "sha256": "760fc42d3c7d5f8a95a57d931423536edda0fc5148ac9352d6a27c4c0233a44c",
+            "byteLength": 22927
+          },
+          "archiveMember": "2026 International Undergraduate Medical Program Admission Information/2026 International Undergraduate Medical Program Admission Information.pdf",
+          "memberEvidence": {
+            "evidencePath": "quality/schools/2026-10-27/programme-evidence/0e9483fbf26016b359b3db3e913346104ace68a3966fb7f1c1a3be98a036701e.member.gz",
+            "sha256": "0e9483fbf26016b359b3db3e913346104ace68a3966fb7f1c1a3be98a036701e",
+            "byteLength": 137060
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "field": "nameQuote",
+          "url": "https://gjxy.ccmu.edu.cn/docs/2026-01/378e3b986a874a54b3f7eca368a4bb22.rar",
+          "rawSha256": "41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3",
+          "quote": "Clinical Medicine Major (English-Taught)",
+          "locator": {
+            "original": {
+              "start": 50,
+              "end": 90,
+              "layoutTextFile": "texts/41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3.layout.txt",
+              "archiveMember": "2026 International Undergraduate Medical Program Admission Information/2026 International Undergraduate Medical Program Admission Information.pdf"
+            },
+            "start": 50,
+            "end": 90,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "d4a00358ba2ca63e9fb716e9c57d2757c164cbd72b07d06550a2b8d5c8c43ed3"
+        },
+        {
+          "field": "degreeQuote",
+          "url": "https://gjxy.ccmu.edu.cn/docs/2026-01/378e3b986a874a54b3f7eca368a4bb22.rar",
+          "rawSha256": "41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3",
+          "quote": "Bachelor of Medicine",
+          "locator": {
+            "original": {
+              "start": 594,
+              "end": 614,
+              "layoutTextFile": "texts/41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3.layout.txt",
+              "archiveMember": "2026 International Undergraduate Medical Program Admission Information/2026 International Undergraduate Medical Program Admission Information.pdf"
+            },
+            "start": 594,
+            "end": 614,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "d4a00358ba2ca63e9fb716e9c57d2757c164cbd72b07d06550a2b8d5c8c43ed3"
+        },
+        {
+          "field": "intlQuote",
+          "url": "https://gjxy.ccmu.edu.cn/docs/2026-01/378e3b986a874a54b3f7eca368a4bb22.rar",
+          "rawSha256": "41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3",
+          "quote": "Applicants must be non-Chinese citizens with a valid passport",
+          "locator": {
+            "original": {
+              "start": 949,
+              "end": 1010,
+              "layoutTextFile": "texts/41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3.layout.txt",
+              "archiveMember": "2026 International Undergraduate Medical Program Admission Information/2026 International Undergraduate Medical Program Admission Information.pdf"
+            },
+            "start": 949,
+            "end": 1010,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "d4a00358ba2ca63e9fb716e9c57d2757c164cbd72b07d06550a2b8d5c8c43ed3"
+        }
+      ],
+      "notes": [
+        "Exact named PDF extracted from the official 2026 RAR; both immutable RAR and extracted member hashes are recorded."
+      ]
+    },
+    {
+      "recordId": "program-4111010029-language-738e4daa6eb4e7d0b6b9",
+      "universityId": "uni-moe-4111010029",
+      "schoolNameZh": "首都体育学院",
+      "name": {
+        "zh": "汉语",
+        "en": "Chinese language"
+      },
+      "degreeLevel": "language",
+      "programUrl": "https://sie-lb.cupes.edu.cn/docs/2023-03/a0067253dc134e008b4845c3c169df5a.pdf",
+      "catalogueYear": null,
+      "identitySha256": "7e31794a81888dc211b6a89124e6543d95f65ab242a7db0ef70492d8dd2760c5",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-3d5ae065dbdfbd84939a021a"
+      ],
+      "sources": [
+        {
+          "url": "https://sie-lb.cupes.edu.cn/docs/2023-03/a0067253dc134e008b4845c3c169df5a.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:39.773Z",
+          "contentType": "application/pdf",
+          "rawSha256": "b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76",
+          "byteLength": 274614,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/65aed782204dc6567341e45f0926d5d0c159b890dc1d4518089f44fa9a13486d.text.gz",
+          "textSha256": "65aed782204dc6567341e45f0926d5d0c159b890dc1d4518089f44fa9a13486d",
+          "textByteLength": 5221,
+          "textDerivation": "pdfplumber extract_text(layout=True), page separators retained in .layout.txt; compact=NFKC then whitespace normalization",
+          "layoutEvidence": {
+            "evidencePath": "quality/schools/2026-10-27/programme-evidence/ad1c5d27e2e6ccf4e651a1f08d8ad88d8a358413408749b3f88e5c07530eaa07.layout.gz",
+            "sha256": "ad1c5d27e2e6ccf4e651a1f08d8ad88d8a358413408749b3f88e5c07530eaa07",
+            "byteLength": 29974
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "field": "nameQuote",
+          "url": "https://sie-lb.cupes.edu.cn/docs/2023-03/a0067253dc134e008b4845c3c169df5a.pdf",
+          "rawSha256": "b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76",
+          "quote": "语言生 Education 汉语 Language Chinese language Student",
+          "locator": {
+            "original": {
+              "start": 197,
+              "end": 247,
+              "layoutTextFile": "texts/b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76.layout.txt"
+            },
+            "start": 197,
+            "end": 247,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "65aed782204dc6567341e45f0926d5d0c159b890dc1d4518089f44fa9a13486d"
+        },
+        {
+          "field": "degreeQuote",
+          "url": "https://sie-lb.cupes.edu.cn/docs/2023-03/a0067253dc134e008b4845c3c169df5a.pdf",
+          "rawSha256": "b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76",
+          "quote": "首都体育学院招收来华留学非学历生招生简章",
+          "locator": {
+            "original": {
+              "start": 0,
+              "end": 20,
+              "layoutTextFile": "texts/b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76.layout.txt"
+            },
+            "start": 0,
+            "end": 20,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "65aed782204dc6567341e45f0926d5d0c159b890dc1d4518089f44fa9a13486d"
+        },
+        {
+          "field": "intlQuote",
+          "url": "https://sie-lb.cupes.edu.cn/docs/2023-03/a0067253dc134e008b4845c3c169df5a.pdf",
+          "rawSha256": "b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76",
+          "quote": "持 有效外国护照的非中国籍公民",
+          "locator": {
+            "original": {
+              "start": 465,
+              "end": 480,
+              "layoutTextFile": "texts/b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76.layout.txt"
+            },
+            "start": 465,
+            "end": 480,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "65aed782204dc6567341e45f0926d5d0c159b890dc1d4518089f44fa9a13486d"
+        }
+      ],
+      "notes": [
+        "Official non-degree language-student row; distinct from the preparatory-student row. PDF path dates to 2023-03 and no current intake year is asserted."
+      ]
+    },
+    {
+      "recordId": "program-4111010049-master-c3b8666ede089041fa91",
+      "universityId": "uni-moe-4111010049",
+      "schoolNameZh": "中国戏曲学院",
+      "name": {
+        "zh": "戏曲表演研究",
+        "en": "Chinese Opera Performance Studies (Research Program)"
+      },
+      "degreeLevel": "master",
+      "programUrl": "https://www.nacta.edu.cn/xwgg/zsxx/lxszs/11f444989cf341169e6ff5155b79c33d.htm",
+      "catalogueYear": 2026,
+      "identitySha256": "8979e523bf149c3482ed463cfbd0b523a2e4f30e3df94a0ac1d27d78cacff491",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-66940ba7fc84004144edffa3",
+        "src-new-school-program-7bd65a4c2acf1be9ee085318"
+      ],
+      "sources": [
+        {
+          "url": "https://www.nacta.edu.cn/docs//2025-12/f1ad331eeb154131ab9d6e6aa470a86a.docx",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:34.054Z",
+          "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "rawSha256": "8af208dc113b70f63284c48470aa71a57dfb7d96fcb073f2e55881d5ea5ed476",
+          "byteLength": 39660,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/8af208dc113b70f63284c48470aa71a57dfb7d96fcb073f2e55881d5ea5ed476.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/729921e2b8299f3c7ddd0f71e5f850b16beddd4434ab5bbf99b4451e8865c28d.text.gz",
+          "textSha256": "729921e2b8299f3c7ddd0f71e5f850b16beddd4434ab5bbf99b4451e8865c28d",
+          "textByteLength": 18989,
+          "textDerivation": "ZIP word/document.xml paragraph text in original order"
+        },
+        {
+          "url": "https://www.nacta.edu.cn/xwgg/zsxx/lxszs/11f444989cf341169e6ff5155b79c33d.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T15:46:50.452Z",
+          "contentType": "text/html",
+          "rawSha256": "a991d279d9f17bfc7af6aff01db81076769c34c374e02f0ff6e1f5dc443c592b",
+          "byteLength": 48708,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/a991d279d9f17bfc7af6aff01db81076769c34c374e02f0ff6e1f5dc443c592b.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/23693607447819626b834c0f64f0789334b79b3184549fb95b213aa34d6c4f5b.text.gz",
+          "textSha256": "23693607447819626b834c0f64f0789334b79b3184549fb95b213aa34d6c4f5b",
+          "textByteLength": 17278,
+          "textDerivation": "production htmlToText saved source capture"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "nameQuote",
+          "url": "https://www.nacta.edu.cn/docs//2025-12/f1ad331eeb154131ab9d6e6aa470a86a.docx",
+          "rawSha256": "8af208dc113b70f63284c48470aa71a57dfb7d96fcb073f2e55881d5ea5ed476",
+          "quote": "戏曲表演研究",
+          "locator": {
+            "original": {
+              "start": 1014,
+              "end": 1020
+            },
+            "start": 1014,
+            "end": 1020,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "729921e2b8299f3c7ddd0f71e5f850b16beddd4434ab5bbf99b4451e8865c28d"
+        },
+        {
+          "field": "degreeQuote",
+          "url": "https://www.nacta.edu.cn/docs//2025-12/f1ad331eeb154131ab9d6e6aa470a86a.docx",
+          "rawSha256": "8af208dc113b70f63284c48470aa71a57dfb7d96fcb073f2e55881d5ea5ed476",
+          "quote": "2026/2027 Academic Year Master's Degree Program Admission Requirements",
+          "locator": {
+            "original": {
+              "start": 31,
+              "end": 101
+            },
+            "start": 31,
+            "end": 101,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "729921e2b8299f3c7ddd0f71e5f850b16beddd4434ab5bbf99b4451e8865c28d"
+        },
+        {
+          "field": "intlQuote",
+          "url": "https://www.nacta.edu.cn/xwgg/zsxx/lxszs/11f444989cf341169e6ff5155b79c33d.htm",
+          "rawSha256": "a991d279d9f17bfc7af6aff01db81076769c34c374e02f0ff6e1f5dc443c592b",
+          "quote": "现面向全球非中国籍人士招收2026级来华留学硕士研究生",
+          "locator": {
+            "original": {
+              "start": 715,
+              "end": 742
+            },
+            "start": 715,
+            "end": 742,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "23693607447819626b834c0f64f0789334b79b3184549fb95b213aa34d6c4f5b"
+        }
+      ],
+      "notes": [
+        "The 2026/27 programme appendix explicitly refers back to the same admissions prospectus for the other requirements; its exact download URL is present in the captured prospectus HTML.",
+        "Raw DOCX table1 header explicitly says 专业名称 / Program; row2 names 戏曲表演研究 / Chinese Opera Performance Studies (Research Program), not a 研究方向 column. No national discipline code is supplied or inferred."
+      ],
+      "tableSemanticsEvidence": {
+        "evidencePath": "quality/schools/2026-10-27/programme-evidence/feb2d7de743e859048bab03007bf937fee8472bc1c87bd53ebd543f378d4da88.table-proof.gz",
+        "sha256": "feb2d7de743e859048bab03007bf937fee8472bc1c87bd53ebd543f378d4da88",
+        "byteLength": 11426
+      }
+    },
+    {
+      "recordId": "program-4111010051-bachelor-9ed3764e35dab487f029",
+      "universityId": "uni-moe-4111010051",
+      "schoolNameZh": "北京舞蹈学院",
+      "name": {
+        "zh": "舞蹈表演",
+        "en": "Dance Performance"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://www.bda.edu.cn/docs/2026-01/1b42386c06994a2e8762114328684b26.pdf",
+      "catalogueYear": 2026,
+      "identitySha256": "27a574b8dfa5b122cc09b70d5da017bdacf01e66a6a492dda78ef4fe267e80b1",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-5d0213391a137cd87117af12",
+        "src-new-school-program-0555251e04903e509a18dc8c"
+      ],
+      "sources": [
+        {
+          "url": "https://international.bda.edu.cn/docs/20211126110635919872.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:37.139Z",
+          "contentType": "application/pdf",
+          "rawSha256": "9395cae2250747552752ee5a71c61133238665f3311ce3f4bdc139ca1a95566c",
+          "byteLength": 329774,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/9395cae2250747552752ee5a71c61133238665f3311ce3f4bdc139ca1a95566c.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/eb20f660572f12821427fb9cfc538bdf5314fc983fdcbe5f39a2a7cb7d1fba3e.text.gz",
+          "textSha256": "eb20f660572f12821427fb9cfc538bdf5314fc983fdcbe5f39a2a7cb7d1fba3e",
+          "textByteLength": 24426,
+          "textDerivation": "pdfplumber extract_text(layout=True), page separators retained in .layout.txt; compact=NFKC then whitespace normalization",
+          "layoutEvidence": {
+            "evidencePath": "quality/schools/2026-10-27/programme-evidence/98dcbaeeed6fb5ccd03fe1a1265b085d659c77af133f3f8e4f077d919cfafb1c.layout.gz",
+            "sha256": "98dcbaeeed6fb5ccd03fe1a1265b085d659c77af133f3f8e4f077d919cfafb1c",
+            "byteLength": 72512
+          }
+        },
+        {
+          "url": "https://www.bda.edu.cn/docs/2026-01/1b42386c06994a2e8762114328684b26.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:27:10.204Z",
+          "contentType": "application/pdf",
+          "rawSha256": "8a63251712e3fea17154d4011f52e97cad8dbdfbf23ee8a6ce9b58fe6a8d8f4f",
+          "byteLength": 701882,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/8a63251712e3fea17154d4011f52e97cad8dbdfbf23ee8a6ce9b58fe6a8d8f4f.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/57ca201cb85e02b9865b8367092c4a8e76bc51d72e845c52893cc4b590a736a9.text.gz",
+          "textSha256": "57ca201cb85e02b9865b8367092c4a8e76bc51d72e845c52893cc4b590a736a9",
+          "textByteLength": 43188,
+          "textDerivation": "pdfplumber extract_text(layout=True); compact=NFKC then whitespace normalization",
+          "layoutEvidence": {
+            "evidencePath": "quality/schools/2026-10-27/programme-evidence/b67668feebfde9f7fa74adccfeded6e10f224e20e978d162b7448cb2b9d984ab.layout.gz",
+            "sha256": "b67668feebfde9f7fa74adccfeded6e10f224e20e978d162b7448cb2b9d984ab",
+            "byteLength": 140959
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "field": "nameQuote",
+          "url": "https://www.bda.edu.cn/docs/2026-01/1b42386c06994a2e8762114328684b26.pdf",
+          "rawSha256": "8a63251712e3fea17154d4011f52e97cad8dbdfbf23ee8a6ce9b58fe6a8d8f4f",
+          "quote": "申请舞蹈表演专业",
+          "locator": {
+            "original": {
+              "start": 15867,
+              "end": 15875,
+              "page": 19,
+              "layoutTextFile": "bda-current/2026-undergraduate.layout.txt"
+            },
+            "start": 15867,
+            "end": 15875,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "57ca201cb85e02b9865b8367092c4a8e76bc51d72e845c52893cc4b590a736a9"
+        },
+        {
+          "field": "degreeQuote",
+          "url": "https://www.bda.edu.cn/docs/2026-01/1b42386c06994a2e8762114328684b26.pdf",
+          "rawSha256": "8a63251712e3fea17154d4011f52e97cad8dbdfbf23ee8a6ce9b58fe6a8d8f4f",
+          "quote": "将被我院作为本科生录取",
+          "locator": {
+            "original": {
+              "start": 15825,
+              "end": 15836,
+              "page": 19,
+              "layoutTextFile": "bda-current/2026-undergraduate.layout.txt"
+            },
+            "start": 15825,
+            "end": 15836,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "57ca201cb85e02b9865b8367092c4a8e76bc51d72e845c52893cc4b590a736a9"
+        },
+        {
+          "field": "intlQuote",
+          "url": "https://www.bda.edu.cn/docs/2026-01/1b42386c06994a2e8762114328684b26.pdf",
+          "rawSha256": "8a63251712e3fea17154d4011f52e97cad8dbdfbf23ee8a6ce9b58fe6a8d8f4f",
+          "quote": "外籍考生申请进入我校本科阶段学习",
+          "locator": {
+            "original": {
+              "start": 15165,
+              "end": 15181,
+              "page": 19,
+              "layoutTextFile": "bda-current/2026-undergraduate.layout.txt"
+            },
+            "start": 15165,
+            "end": 15181,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "57ca201cb85e02b9865b8367092c4a8e76bc51d72e845c52893cc4b590a736a9"
+        }
+      ],
+      "notes": [
+        "2026 official undergraduate prospectus page19 explicitly pairs Dance Performance with foreign-applicant bachelor admission; page3 states programme code130204. Retain one programme identity rather than separate identities for dance concentrations. English name remains exact in the independently captured international guideline.",
+        "2026 intake application deadline has already passed; no current open application window is asserted."
+      ]
+    },
+    {
+      "recordId": "program-4111011417-bachelor-af427ecdfdaf20bcb7ff",
+      "universityId": "uni-moe-4111011417",
+      "schoolNameZh": "北京联合大学",
+      "name": {
+        "en": "Tourism Management"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://english.buu.edu.cn/col/col33919/index.html",
+      "catalogueYear": null,
+      "identitySha256": "78d70a38606ba71df97a221d0fe7f3eebd7fb5585eeed1a1bb0c7499ffc29179",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-bdaf533a0250d85a04c72d63"
+      ],
+      "sources": [
+        {
+          "url": "https://english.buu.edu.cn/col/col33919/index.html",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:22:07.420Z",
+          "contentType": "text/html",
+          "rawSha256": "6fc42763e1b692d412775c137dda51394377eb597fc3d8beb95aabe62b499d30",
+          "byteLength": 17085,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/6fc42763e1b692d412775c137dda51394377eb597fc3d8beb95aabe62b499d30.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/63af2605f0eed18cf009a7f7689471b1976873a24f3669eb17a45188f1031252.text.gz",
+          "textSha256": "63af2605f0eed18cf009a7f7689471b1976873a24f3669eb17a45188f1031252",
+          "textByteLength": 7445,
+          "textDerivation": "production decodeMaintenanceHtml + htmlToText + normalizeEvidenceText"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "nameQuote",
+          "url": "https://english.buu.edu.cn/col/col33919/index.html",
+          "rawSha256": "6fc42763e1b692d412775c137dda51394377eb597fc3d8beb95aabe62b499d30",
+          "quote": "Tourism Management",
+          "locator": {
+            "original": {
+              "start": 2461,
+              "end": 2479
+            },
+            "start": 2461,
+            "end": 2479,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "63af2605f0eed18cf009a7f7689471b1976873a24f3669eb17a45188f1031252"
+        },
+        {
+          "field": "degreeQuote",
+          "url": "https://english.buu.edu.cn/col/col33919/index.html",
+          "rawSha256": "6fc42763e1b692d412775c137dda51394377eb597fc3d8beb95aabe62b499d30",
+          "quote": "The applicant seeking a bachelor’s degree",
+          "locator": {
+            "original": {
+              "start": 3810,
+              "end": 3851
+            },
+            "start": 3810,
+            "end": 3851,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "63af2605f0eed18cf009a7f7689471b1976873a24f3669eb17a45188f1031252"
+        },
+        {
+          "field": "intlQuote",
+          "url": "https://english.buu.edu.cn/col/col33919/index.html",
+          "rawSha256": "6fc42763e1b692d412775c137dda51394377eb597fc3d8beb95aabe62b499d30",
+          "quote": "The applicant must be a citizen of foreign nationality",
+          "locator": {
+            "original": {
+              "start": 3571,
+              "end": 3625
+            },
+            "start": 3571,
+            "end": 3625,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "63af2605f0eed18cf009a7f7689471b1976873a24f3669eb17a45188f1031252"
+        }
+      ],
+      "notes": [
+        "Official international undergraduate programme table and foreign-national eligibility are on the same page. This is inbound student admission, not the unrelated 2026 outbound Chinese-teacher volunteer notice. No current year/window is inferred."
+      ]
+    },
+    {
+      "recordId": "program-4131010262-bachelor-089e9d61da4f7cb7c684",
+      "universityId": "uni-moe-4131010262",
+      "schoolNameZh": "上海健康医学院",
+      "name": {
+        "zh": "护理学",
+        "en": "Nursing"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://iec.sumhs.edu.cn/66/26/c1629a288294/page.htm",
+      "catalogueYear": 2025,
+      "identitySha256": "1dbf010a33d91d7754d45821c1f1a1f39bfb13e375478fb1b6ff2c05bb7605b0",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-92bec6bd8d2e85e6acc52158",
+        "src-new-school-program-b58650ab55c38e69ae64a48f",
+        "src-new-school-program-a28f7d674607d57399f34a8d"
+      ],
+      "sources": [
+        {
+          "url": "https://iec.sumhs.edu.cn/66/26/c1629a288294/page.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:19:43.417Z",
+          "contentType": "text/html",
+          "rawSha256": "55d8a4c6c470c21814f2333ad0bf3ad67b3c0e5ce30159d1e7ccdc01aa652010",
+          "byteLength": 10501,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/55d8a4c6c470c21814f2333ad0bf3ad67b3c0e5ce30159d1e7ccdc01aa652010.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/ddcaa7975460c378036b6b9f275b05f26ec0dda6e3b481343c43039367fadab3.text.gz",
+          "textSha256": "ddcaa7975460c378036b6b9f275b05f26ec0dda6e3b481343c43039367fadab3",
+          "textByteLength": 553,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        },
+        {
+          "url": "https://iec.sumhs.edu.cn/_upload/article/files/68/58/2c31ae9c4720ac26a090fa23b0e1/9aae03cc-234e-426c-b482-e7e532b78e68.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:21:19.623Z",
+          "contentType": "application/pdf",
+          "rawSha256": "916bb48abe028199fc45fff2fba18d1e203334699720149ac43125320c96f83d",
+          "byteLength": 423325,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/916bb48abe028199fc45fff2fba18d1e203334699720149ac43125320c96f83d.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/2e6e093984bbf2c1e518ca1d5bd3817a7eb032a03a6fc8cee4bbef1e3ae81e88.text.gz",
+          "textSha256": "2e6e093984bbf2c1e518ca1d5bd3817a7eb032a03a6fc8cee4bbef1e3ae81e88",
+          "textByteLength": 51418,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        },
+        {
+          "url": "https://iec.sumhs.edu.cn/_upload/article/files/bc/37/221a17f34f95a421890ae877ddf6/23a2a8f3-bcb4-4ce4-8863-668bfdade101.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:21:19.624Z",
+          "contentType": "application/pdf",
+          "rawSha256": "a5d79956858f82feb157f2ef5384ccab4f36cadecc1bb189912984abcb1416e3",
+          "byteLength": 580713,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/a5d79956858f82feb157f2ef5384ccab4f36cadecc1bb189912984abcb1416e3.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/7fa996d9fe90a2c6e22c86e3a6d9d42c91daadb71eae1b40999ac926c992f4f3.text.gz",
+          "textSha256": "7fa996d9fe90a2c6e22c86e3a6d9d42c91daadb71eae1b40999ac926c992f4f3",
+          "textByteLength": 66702,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name.zh",
+          "url": "https://iec.sumhs.edu.cn/_upload/article/files/68/58/2c31ae9c4720ac26a090fa23b0e1/9aae03cc-234e-426c-b482-e7e532b78e68.pdf",
+          "rawSha256": "916bb48abe028199fc45fff2fba18d1e203334699720149ac43125320c96f83d",
+          "quote": "六、护理学（含全英语护理专业）",
+          "locator": {
+            "original": "page:12",
+            "start": 12423,
+            "end": 12438,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "2e6e093984bbf2c1e518ca1d5bd3817a7eb032a03a6fc8cee4bbef1e3ae81e88"
+        },
+        {
+          "field": "name.en",
+          "url": "https://iec.sumhs.edu.cn/_upload/article/files/bc/37/221a17f34f95a421890ae877ddf6/23a2a8f3-bcb4-4ce4-8863-668bfdade101.pdf",
+          "rawSha256": "a5d79956858f82feb157f2ef5384ccab4f36cadecc1bb189912984abcb1416e3",
+          "quote": "6. Nursing (Including English-taught major)",
+          "locator": {
+            "original": "page:11",
+            "start": 1708,
+            "end": 1751,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "7fa996d9fe90a2c6e22c86e3a6d9d42c91daadb71eae1b40999ac926c992f4f3"
+        },
+        {
+          "field": "degreeLevel",
+          "url": "https://iec.sumhs.edu.cn/_upload/article/files/bc/37/221a17f34f95a421890ae877ddf6/23a2a8f3-bcb4-4ce4-8863-668bfdade101.pdf",
+          "rawSha256": "a5d79956858f82feb157f2ef5384ccab4f36cadecc1bb189912984abcb1416e3",
+          "quote": "Undergraduate（English-taught for Nursing only）",
+          "locator": {
+            "original": "page:23",
+            "start": 58576,
+            "end": 58622,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "7fa996d9fe90a2c6e22c86e3a6d9d42c91daadb71eae1b40999ac926c992f4f3"
+        },
+        {
+          "field": "internationalAudience",
+          "url": "https://iec.sumhs.edu.cn/_upload/article/files/bc/37/221a17f34f95a421890ae877ddf6/23a2a8f3-bcb4-4ce4-8863-668bfdade101.pdf",
+          "rawSha256": "a5d79956858f82feb157f2ef5384ccab4f36cadecc1bb189912984abcb1416e3",
+          "quote": "Implementation Rules for the Enrollment of International Students of SUMHS（2025）",
+          "locator": {
+            "original": "page:23",
+            "start": 3306,
+            "end": 3386,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "7fa996d9fe90a2c6e22c86e3a6d9d42c91daadb71eae1b40999ac926c992f4f3"
+        }
+      ],
+      "notes": [
+        "New2025 official PDF used; no2018catalogue fallback.",
+        "English-taught Nursing explicitly scoped in international-student rules."
+      ]
+    },
+    {
+      "recordId": "program-4131010856-bachelor-69719a006cffb4723324",
+      "universityId": "uni-moe-4131010856",
+      "schoolNameZh": "上海工程技术大学",
+      "name": {
+        "en": "Artificial Intelligence"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://infopub.sues.edu.cn/ca/27/c171a51751/page.htm",
+      "catalogueYear": 2025,
+      "identitySha256": "e7efdd53488b0a434d3a8649fb955815c78c25c899147ffb961b7b453c35b37d",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-26374454be87f9d9ce7b3c23"
+      ],
+      "sources": [
+        {
+          "url": "https://infopub.sues.edu.cn/ca/27/c171a51751/page.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:15.501Z",
+          "contentType": "text/html",
+          "rawSha256": "1fa6dc375082a0ca2ab7a1009f18171be6684fdde3da937864a7f9f8e88c91dd",
+          "byteLength": 76810,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/1fa6dc375082a0ca2ab7a1009f18171be6684fdde3da937864a7f9f8e88c91dd.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/5dc7da826113532e4388d769e928fad7f56fca0839bcd1add07d74c7b50c158f.text.gz",
+          "textSha256": "5dc7da826113532e4388d769e928fad7f56fca0839bcd1add07d74c7b50c158f",
+          "textByteLength": 9395,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name.en",
+          "url": "https://infopub.sues.edu.cn/ca/27/c171a51751/page.htm",
+          "rawSha256": "1fa6dc375082a0ca2ab7a1009f18171be6684fdde3da937864a7f9f8e88c91dd",
+          "quote": "Artificial Intelligence",
+          "locator": {
+            "original": "text:document",
+            "start": 613,
+            "end": 636,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "5dc7da826113532e4388d769e928fad7f56fca0839bcd1add07d74c7b50c158f"
+        },
+        {
+          "field": "degreeLevel_and_internationalAudience",
+          "url": "https://infopub.sues.edu.cn/ca/27/c171a51751/page.htm",
+          "rawSha256": "1fa6dc375082a0ca2ab7a1009f18171be6684fdde3da937864a7f9f8e88c91dd",
+          "quote": "Currently, there are four English-taught undergraduate programs for international students, including International Economics & Trade, Artificial Intelligence,Textile Engineering, and Medicinal Chemistry.",
+          "locator": {
+            "original": "text:document",
+            "start": 478,
+            "end": 682,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "5dc7da826113532e4388d769e928fad7f56fca0839bcd1add07d74c7b50c158f"
+        }
+      ],
+      "notes": [
+        "Historical2025 programme identity; no current open application inferred."
+      ]
+    },
+    {
+      "recordId": "program-4131011458-master-7ce71833b17253fe49eb",
+      "universityId": "uni-moe-4131011458",
+      "schoolNameZh": "上海电机学院",
+      "name": {
+        "zh": "国际中文教育"
+      },
+      "degreeLevel": "master",
+      "programUrl": "https://ies.sdju.edu.cn/2025/0225/c8725a142380/page.htm",
+      "catalogueYear": 2025,
+      "identitySha256": "8b2e24c9ee119e29a96d200014b4acfb9a072dd95ca219bb52c3289a3d69b448",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-36bf6f718937e9942460cb36"
+      ],
+      "sources": [
+        {
+          "url": "https://ies.sdju.edu.cn/2025/0225/c8725a142380/page.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:17.306Z",
+          "contentType": "text/html",
+          "rawSha256": "858e1961348a81fa272b2beedd720cf885be59f4e3d98bba0cab5141981bfdef",
+          "byteLength": 103140,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/858e1961348a81fa272b2beedd720cf885be59f4e3d98bba0cab5141981bfdef.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/51320ed154f0d27e7934c26b1d9d54e2feec3fb9772583f87f40932f25b05685.text.gz",
+          "textSha256": "51320ed154f0d27e7934c26b1d9d54e2feec3fb9772583f87f40932f25b05685",
+          "textByteLength": 10362,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name.zh_and_degreeLevel",
+          "url": "https://ies.sdju.edu.cn/2025/0225/c8725a142380/page.htm",
+          "rawSha256": "858e1961348a81fa272b2beedd720cf885be59f4e3d98bba0cab5141981bfdef",
+          "quote": "上海电机学院国际中文教育硕士专业学位点",
+          "locator": {
+            "original": "text:document",
+            "start": 855,
+            "end": 874,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "51320ed154f0d27e7934c26b1d9d54e2feec3fb9772583f87f40932f25b05685"
+        },
+        {
+          "field": "internationalAudience",
+          "url": "https://ies.sdju.edu.cn/2025/0225/c8725a142380/page.htm",
+          "rawSha256": "858e1961348a81fa272b2beedd720cf885be59f4e3d98bba0cab5141981bfdef",
+          "quote": "非中国籍公民，身心健康",
+          "locator": {
+            "original": "text:document",
+            "start": 1617,
+            "end": 1628,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "51320ed154f0d27e7934c26b1d9d54e2feec3fb9772583f87f40932f25b05685"
+        }
+      ],
+      "notes": [
+        "2025 international Chinese Education master official guide; no2026/27 opportunity inferred."
+      ]
+    },
+    {
+      "recordId": "program-4131012044-bachelor-a868920158666b81ea87",
+      "universityId": "uni-moe-4131012044",
+      "schoolNameZh": "上海第二工业大学",
+      "name": {
+        "zh": "国际商务",
+        "en": "International Business"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://lxs.sspu.edu.cn/2025/1208/c735a166628/page.htm",
+      "catalogueYear": 2026,
+      "identitySha256": "5fb01659857d6bb9fe4ca61ce5135857fca5f5e563388535b661d8a21072e659",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-6f2defea95870ca09791bc22"
+      ],
+      "sources": [
+        {
+          "url": "https://lxs.sspu.edu.cn/2025/1208/c735a166628/page.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:17.384Z",
+          "contentType": "text/html",
+          "rawSha256": "8f51aaff4fc312b757ed66c975f7a8acf18fbd415a26f94c0beed1f0e6c4ade6",
+          "byteLength": 135799,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/8f51aaff4fc312b757ed66c975f7a8acf18fbd415a26f94c0beed1f0e6c4ade6.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/11f3d389ba06e89c55c7d2832196a14d5fcb8a3125ddb31ebd4c4b73fe9b8bec.text.gz",
+          "textSha256": "11f3d389ba06e89c55c7d2832196a14d5fcb8a3125ddb31ebd4c4b73fe9b8bec",
+          "textByteLength": 13969,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name.zh",
+          "url": "https://lxs.sspu.edu.cn/2025/1208/c735a166628/page.htm",
+          "rawSha256": "8f51aaff4fc312b757ed66c975f7a8acf18fbd415a26f94c0beed1f0e6c4ade6",
+          "quote": "18国际商务英文经济与管理学院",
+          "locator": {
+            "original": "text:document",
+            "start": 3047,
+            "end": 3062,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "11f3d389ba06e89c55c7d2832196a14d5fcb8a3125ddb31ebd4c4b73fe9b8bec"
+        },
+        {
+          "field": "name.en",
+          "url": "https://lxs.sspu.edu.cn/2025/1208/c735a166628/page.htm",
+          "rawSha256": "8f51aaff4fc312b757ed66c975f7a8acf18fbd415a26f94c0beed1f0e6c4ade6",
+          "quote": "I. International Business",
+          "locator": {
+            "original": "text:document",
+            "start": 3280,
+            "end": 3305,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "11f3d389ba06e89c55c7d2832196a14d5fcb8a3125ddb31ebd4c4b73fe9b8bec"
+        },
+        {
+          "field": "degreeLevel_and_internationalAudience",
+          "url": "https://lxs.sspu.edu.cn/2025/1208/c735a166628/page.htm",
+          "rawSha256": "8f51aaff4fc312b757ed66c975f7a8acf18fbd415a26f94c0beed1f0e6c4ade6",
+          "quote": "上海第二工业大学目前有26个中文授课本科专业招收外国留学生，并且为外国留学生开设了4个英文授课的本科专业。",
+          "locator": {
+            "original": "text:document",
+            "start": 1169,
+            "end": 1222,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "11f3d389ba06e89c55c7d2832196a14d5fcb8a3125ddb31ebd4c4b73fe9b8bec"
+        }
+      ],
+      "notes": [
+        "Actual numbered undergraduate-major row linked to international-student guide."
+      ]
+    },
+    {
+      "recordId": "program-4131012050-bachelor-73b5d59987f40eee2ab2",
+      "universityId": "uni-moe-4131012050",
+      "schoolNameZh": "上海商学院",
+      "name": {
+        "zh": "工商管理"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://iec.sbs.edu.cn/Web/Show/2335",
+      "catalogueYear": 2026,
+      "identitySha256": "6bf41191ab0709b99c13bc1d0093ccecb6faab0e838e8d3fec9235fc30927874",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-f3f78c93245ccb2589c51925"
+      ],
+      "sources": [
+        {
+          "url": "https://iec.sbs.edu.cn/Web/Show/2335",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:18:17.508Z",
+          "contentType": "text/html; charset=utf-8",
+          "rawSha256": "1e8959e6d5c1ee7d02b4a97d4d6c197244d949d55d709b2d7cf605d893a1a712",
+          "byteLength": 27581,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/1e8959e6d5c1ee7d02b4a97d4d6c197244d949d55d709b2d7cf605d893a1a712.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/b76b08278d16ea6002a250776d6b636acb09dff38cde58ea616a8e1e3131cf41.text.gz",
+          "textSha256": "b76b08278d16ea6002a250776d6b636acb09dff38cde58ea616a8e1e3131cf41",
+          "textByteLength": 5492,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name.zh",
+          "url": "https://iec.sbs.edu.cn/Web/Show/2335",
+          "rawSha256": "1e8959e6d5c1ee7d02b4a97d4d6c197244d949d55d709b2d7cf605d893a1a712",
+          "quote": "学院名称 专业名称 工商管理学院 工商管理",
+          "locator": {
+            "original": "text:document",
+            "start": 291,
+            "end": 312,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "b76b08278d16ea6002a250776d6b636acb09dff38cde58ea616a8e1e3131cf41"
+        },
+        {
+          "field": "degreeLevel",
+          "url": "https://iec.sbs.edu.cn/Web/Show/2335",
+          "rawSha256": "1e8959e6d5c1ee7d02b4a97d4d6c197244d949d55d709b2d7cf605d893a1a712",
+          "quote": "上海商学院2026年外国留学生本科学习项目（英文授课）申请流程",
+          "locator": {
+            "original": "text:document",
+            "start": 220,
+            "end": 251,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "b76b08278d16ea6002a250776d6b636acb09dff38cde58ea616a8e1e3131cf41"
+        },
+        {
+          "field": "internationalAudience",
+          "url": "https://iec.sbs.edu.cn/Web/Show/2335",
+          "rawSha256": "1e8959e6d5c1ee7d02b4a97d4d6c197244d949d55d709b2d7cf605d893a1a712",
+          "quote": "申请本科项目的申请人必须是非中国公民。",
+          "locator": {
+            "original": "text:document",
+            "start": 821,
+            "end": 840,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "b76b08278d16ea6002a250776d6b636acb09dff38cde58ea616a8e1e3131cf41"
+        }
+      ],
+      "notes": [
+        "The concrete major is 工商管理, not the generic undergraduate admission heading."
+      ]
+    },
+    {
+      "recordId": "program-4131012799-bachelor-4df8cf4e6b92a6150b87",
+      "universityId": "uni-moe-4131012799",
+      "schoolNameZh": "上海建桥学院",
+      "name": {
+        "zh": "视觉传达设计"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://i.gench.edu.cn/2026/0911/c5590a185685/page.htm",
+      "catalogueYear": 2026,
+      "identitySha256": "2f02cf3d382d895db7a25dabc51e14406ba20c30215cefa751fd88d14d89b336",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-a715183bebccc9d68947cca8",
+        "src-new-school-program-93fcfd96579c0d25075b1930",
+        "src-new-school-program-d51011c25f5068af642e92bb"
+      ],
+      "sources": [
+        {
+          "url": "https://i.gench.edu.cn/2026/0911/c5590a185685/page.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:22:23.369Z",
+          "contentType": "text/html",
+          "rawSha256": "2f895049fda0cf8c02e4371c8fb2f32677b75ec9d96e112acd2ad98d1faef24b",
+          "byteLength": 33802,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/2f895049fda0cf8c02e4371c8fb2f32677b75ec9d96e112acd2ad98d1faef24b.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/6e260e2c2ce1fd6bd695a4653418e4fcd029675322c24bdbce6aa497622f855a.text.gz",
+          "textSha256": "6e260e2c2ce1fd6bd695a4653418e4fcd029675322c24bdbce6aa497622f855a",
+          "textByteLength": 1534,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        },
+        {
+          "url": "https://www.gench.edu.cn/2026/0911/c3362a185682/page.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:22:23.379Z",
+          "contentType": "text/html",
+          "rawSha256": "0dfb2ceb450293841c3d6abb58b3805af2205e40b4bf47e8a343c5f7b72250ce",
+          "byteLength": 193737,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/0dfb2ceb450293841c3d6abb58b3805af2205e40b4bf47e8a343c5f7b72250ce.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/ab5a50b7d4ad028ab41c19620466d87e714eb12206be3f601057ebe918565307.text.gz",
+          "textSha256": "ab5a50b7d4ad028ab41c19620466d87e714eb12206be3f601057ebe918565307",
+          "textByteLength": 8731,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        },
+        {
+          "url": "https://i.gench.edu.cn/_upload/article/images/40/9e/af2b9b3a48709959f11802625f31/5f625217-8220-464d-9b67-6ed1054a2442.png",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:23:32.706Z",
+          "contentType": "image/png",
+          "rawSha256": "e297be574004e406d47e5adfef6b5c2cc6fcf3e1e6265ac456ad6cf33edd010a",
+          "byteLength": 890938,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/e297be574004e406d47e5adfef6b5c2cc6fcf3e1e6265ac456ad6cf33edd010a.raw.gz"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name.zh",
+          "url": "https://i.gench.edu.cn/_upload/article/images/40/9e/af2b9b3a48709959f11802625f31/5f625217-8220-464d-9b67-6ed1054a2442.png",
+          "rawSha256": "e297be574004e406d47e5adfef6b5c2cc6fcf3e1e6265ac456ad6cf33edd010a",
+          "quote": "视觉传达设计（全英文）",
+          "locator": "image:left-page-heading",
+          "validation": "visual reading of archived original image",
+          "textSha256": null
+        },
+        {
+          "field": "degreeLevel",
+          "url": "https://i.gench.edu.cn/_upload/article/images/40/9e/af2b9b3a48709959f11802625f31/5f625217-8220-464d-9b67-6ed1054a2442.png",
+          "rawSha256": "e297be574004e406d47e5adfef6b5c2cc6fcf3e1e6265ac456ad6cf33edd010a",
+          "quote": "艺术学学士",
+          "locator": "image:left-page-top-right-degree-label",
+          "validation": "visual reading of archived original image",
+          "textSha256": null
+        },
+        {
+          "field": "internationalAudienceHeader",
+          "url": "https://www.gench.edu.cn/2026/0911/c3362a185682/page.htm",
+          "rawSha256": "0dfb2ceb450293841c3d6abb58b3805af2205e40b4bf47e8a343c5f7b72250ce",
+          "quote": "2025-2026学年上海建桥学院国际学生（含短期国际交换生）一览表",
+          "locator": {
+            "original": "text:document",
+            "start": 2494,
+            "end": 2528,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "ab5a50b7d4ad028ab41c19620466d87e714eb12206be3f601057ebe918565307"
+        },
+        {
+          "field": "internationalAudience",
+          "url": "https://www.gench.edu.cn/2026/0911/c3362a185682/page.htm",
+          "rawSha256": "0dfb2ceb450293841c3d6abb58b3805af2205e40b4bf47e8a343c5f7b72250ce",
+          "quote": "学历生外语与国际教育学院视觉传达设计24",
+          "locator": {
+            "original": "text:document",
+            "start": 2541,
+            "end": 2561,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "ab5a50b7d4ad028ab41c19620466d87e714eb12206be3f601057ebe918565307"
+        }
+      ],
+      "notes": [
+        "Official2026 guide embeds the preserved PNG; degree visually explicit, not inferred from four-year duration.",
+        "Same official site records24 international degree students in the exact named programme.",
+        "Image evidence requires review capable of reading the original image; do not relabel this as machine OCR."
+      ]
+    },
+    {
+      "recordId": "program-4131016404-bachelor-f0064a8371bc26a24e26",
+      "universityId": "uni-moe-4131016404",
+      "schoolNameZh": "上海纽约大学",
+      "name": {
+        "en": "Computer Science"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://shanghai.nyu.edu/content/computer-science",
+      "catalogueYear": null,
+      "identitySha256": "323311a72aee8418b435194376b469ab1c2c44d2f1470d8d7b625672d1f7121d",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-e4bf51f97154b2ef1ff3b4ae",
+        "src-new-school-program-44ed95579cfc34420b93fcf9",
+        "src-new-school-program-a26e6714ad7bd356cf52def0"
+      ],
+      "sources": [
+        {
+          "url": "https://shanghai.nyu.edu/undergraduate-admissions",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:19:45.119Z",
+          "contentType": "text/html; charset=UTF-8",
+          "rawSha256": "025f1d6c9841361451955068b155a3a1d358d873fe97528ce5a9eb223ed675ae",
+          "byteLength": 63649,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/025f1d6c9841361451955068b155a3a1d358d873fe97528ce5a9eb223ed675ae.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/c746291e0cf15d50fcd577d4a61b42e97b58b0ca3d7d1915dad4e9bfad56b7b0.text.gz",
+          "textSha256": "c746291e0cf15d50fcd577d4a61b42e97b58b0ca3d7d1915dad4e9bfad56b7b0",
+          "textByteLength": 7412,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        },
+        {
+          "url": "https://shanghai.nyu.edu/content/computer-science",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:19:45.095Z",
+          "contentType": "text/html; charset=UTF-8",
+          "rawSha256": "145cbf552edda1baa2d720c34b9eebdfac7416b8bfa770fbdb2d189357da165c",
+          "byteLength": 106149,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/145cbf552edda1baa2d720c34b9eebdfac7416b8bfa770fbdb2d189357da165c.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/c034a0e1c04f516753ac6b4b871df029a815892a08bb25d9121de7c71f208459.text.gz",
+          "textSha256": "c034a0e1c04f516753ac6b4b871df029a815892a08bb25d9121de7c71f208459",
+          "textByteLength": 14953,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        },
+        {
+          "url": "https://shanghai.nyu.edu/cn/page/zhao-sheng-zheng-ce",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T15:44:16.896Z",
+          "contentType": "text/html; charset=UTF-8",
+          "rawSha256": "08811d0ded214e67f8c90b2c5b6d4c1d7fefef73d5e0be05fe5ddf22a21c42e0",
+          "byteLength": 55105,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/08811d0ded214e67f8c90b2c5b6d4c1d7fefef73d5e0be05fe5ddf22a21c42e0.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/971af656cd7b36404e15f5b9271416bb3febc22de0abf8c1d8001f890c724fb7.text.gz",
+          "textSha256": "971af656cd7b36404e15f5b9271416bb3febc22de0abf8c1d8001f890c724fb7",
+          "textByteLength": 8769,
+          "textDerivation": "saved source text; whitespace normalised for quotation checks"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name.en_and_degreeLevel",
+          "url": "https://shanghai.nyu.edu/content/computer-science",
+          "rawSha256": "145cbf552edda1baa2d720c34b9eebdfac7416b8bfa770fbdb2d189357da165c",
+          "quote": "The Bachelor of Science in Computer Science is a rigorous program",
+          "locator": {
+            "original": "text:document",
+            "start": 6826,
+            "end": 6891,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "c034a0e1c04f516753ac6b4b871df029a815892a08bb25d9121de7c71f208459"
+        },
+        {
+          "field": "internationalAudience",
+          "url": "https://shanghai.nyu.edu/cn/page/zhao-sheng-zheng-ce",
+          "rawSha256": "08811d0ded214e67f8c90b2c5b6d4c1d7fefef73d5e0be05fe5ddf22a21c42e0",
+          "quote": "所有非中国籍申请人申请上海纽约大学，按国际学生招生流程进行。",
+          "locator": {
+            "original": "text:document",
+            "start": 703,
+            "end": 733,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "971af656cd7b36404e15f5b9271416bb3febc22de0abf8c1d8001f890c724fb7"
+        },
+        {
+          "field": "campusWideUndergraduateApplicability",
+          "url": "https://shanghai.nyu.edu/undergraduate-admissions",
+          "rawSha256": "025f1d6c9841361451955068b155a3a1d358d873fe97528ce5a9eb223ed675ae",
+          "quote": "Students complete a core curriculum in the liberal arts and sciences before choosing among 19 majors",
+          "locator": {
+            "original": "text:document",
+            "start": 4578,
+            "end": 4678,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "c746291e0cf15d50fcd577d4a61b42e97b58b0ca3d7d1915dad4e9bfad56b7b0"
+        },
+        {
+          "field": "internationalAdmissionsRoute",
+          "url": "https://shanghai.nyu.edu/undergraduate-admissions",
+          "rawSha256": "025f1d6c9841361451955068b155a3a1d358d873fe97528ce5a9eb223ed675ae",
+          "quote": "Ready to Apply?US & International",
+          "locator": {
+            "original": "text:document",
+            "start": 5954,
+            "end": 5987,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "c746291e0cf15d50fcd577d4a61b42e97b58b0ca3d7d1915dad4e9bfad56b7b0"
+        }
+      ],
+      "notes": [
+        "Campus-wide international undergraduate policy joined to the actual Computer Science BSc page; no inference from English website alone.",
+        "Current programme page explicitly links2026-2027 academic bulletin; this does not assert a currently open admissions cycle."
+      ]
+    },
+    {
+      "recordId": "program-4132010332-doctorate-5b40a3846024fc6e21d7",
+      "universityId": "uni-moe-4132010332",
+      "schoolNameZh": "苏州科技大学",
+      "name": {
+        "zh": "环境工程",
+        "en": "Environmental Engineering"
+      },
+      "degreeLevel": "doctorate",
+      "programUrl": "https://iso.usts.edu.cn/info/1029/1185.htm",
+      "catalogueYear": 2026,
+      "identitySha256": "8ef599262e39d918f73cf57381157025ce536468f75a83d6ac8c92d80078cd73",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-5a4a0f1a72b17ea165f09346"
+      ],
+      "sources": [
+        {
+          "url": "https://iso.usts.edu.cn/info/1029/1185.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:20:28.290Z",
+          "contentType": null,
+          "rawSha256": "fc864c4b61a5bf4b402bc951e140c72711e47c22ed145d8d049af17d06ec589f",
+          "byteLength": 213709,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/fc864c4b61a5bf4b402bc951e140c72711e47c22ed145d8d049af17d06ec589f.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/ed0e5a680a4feefcbf4b7e4fb9c1309cbb7ed8b9710ab28774ac786db1327bb1.text.gz",
+          "textSha256": "ed0e5a680a4feefcbf4b7e4fb9c1309cbb7ed8b9710ab28774ac786db1327bb1",
+          "textByteLength": 102725,
+          "textDerivation": "html-dom-text"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name",
+          "url": "https://iso.usts.edu.cn/info/1029/1185.htm",
+          "rawSha256": "fc864c4b61a5bf4b402bc951e140c72711e47c22ed145d8d049af17d06ec589f",
+          "quote": "环境工程 Environmental Engineering",
+          "locator": {
+            "original": "text:offset:4268:4298",
+            "start": 4268,
+            "end": 4298,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "ed0e5a680a4feefcbf4b7e4fb9c1309cbb7ed8b9710ab28774ac786db1327bb1"
+        },
+        {
+          "field": "degreeOrCategory",
+          "url": "https://iso.usts.edu.cn/info/1029/1185.htm",
+          "rawSha256": "fc864c4b61a5bf4b402bc951e140c72711e47c22ed145d8d049af17d06ec589f",
+          "quote": "博士研究生 PhD",
+          "locator": {
+            "original": "text:offset:4249:4258",
+            "start": 4249,
+            "end": 4258,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "ed0e5a680a4feefcbf4b7e4fb9c1309cbb7ed8b9710ab28774ac786db1327bb1"
+        },
+        {
+          "field": "internationalAdmissions",
+          "url": "https://iso.usts.edu.cn/info/1029/1185.htm",
+          "rawSha256": "fc864c4b61a5bf4b402bc951e140c72711e47c22ed145d8d049af17d06ec589f",
+          "quote": "2026年苏州科技大学TSP项目国际硕士、博士研究生招生简章（TSP）",
+          "locator": {
+            "original": "text:offset:212:247",
+            "start": 212,
+            "end": 247,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "ed0e5a680a4feefcbf4b7e4fb9c1309cbb7ed8b9710ab28774ac786db1327bb1"
+        },
+        {
+          "field": "year",
+          "url": "https://iso.usts.edu.cn/info/1029/1185.htm",
+          "rawSha256": "fc864c4b61a5bf4b402bc951e140c72711e47c22ed145d8d049af17d06ec589f",
+          "quote": "2026年苏州科技大学TSP项目国际硕士、博士研究生招生简章（TSP）",
+          "locator": {
+            "original": "text:offset:212:247",
+            "start": 212,
+            "end": 247,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "ed0e5a680a4feefcbf4b7e4fb9c1309cbb7ed8b9710ab28774ac786db1327bb1"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "recordId": "program-4132010331-bachelor-e174d3d81d8913d711c1",
+      "universityId": "uni-moe-4132010331",
+      "schoolNameZh": "南京艺术学院",
+      "name": {
+        "zh": "绘画",
+        "en": "Painting"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://gjy.nua.edu.cn/_upload/article/files/45/64/03b3edab4070b3c748ab9210038f/b8de8c95-9f4b-4423-9d02-1affc7480de9.pdf",
+      "catalogueYear": 2026,
+      "identitySha256": "b1c7a08a96a3ac202f75a661b6cf65b6fa2310738ff3895d6e33e87d9212793a",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-c16144ac9a0b5db2f7a0440f",
+        "src-new-school-program-a55d85810ab46abbdc674a1e"
+      ],
+      "sources": [
+        {
+          "url": "https://gjy.nua.edu.cn/_upload/article/files/45/64/03b3edab4070b3c748ab9210038f/b8de8c95-9f4b-4423-9d02-1affc7480de9.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:22:41.806Z",
+          "contentType": null,
+          "rawSha256": "eab790110624aa174a6c2d73b5bce544568d6c40670bd0ac4cb9decd5126eeed",
+          "byteLength": 208378,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/eab790110624aa174a6c2d73b5bce544568d6c40670bd0ac4cb9decd5126eeed.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/aa4bb0e3309de8d78f03421ae51e26444fd7371a2f971f7f0e6383bcb07daf6e.text.gz",
+          "textSha256": "aa4bb0e3309de8d78f03421ae51e26444fd7371a2f971f7f0e6383bcb07daf6e",
+          "textByteLength": 21159,
+          "textDerivation": "pypdf"
+        },
+        {
+          "url": "https://gjy.nua.edu.cn/2026/0108/c887a119345/pagem.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:22:41.806Z",
+          "contentType": "text/html",
+          "rawSha256": "a87728976959763a60683aec1b62ea4f92737a74796a4b440f010d4b29b44a91",
+          "byteLength": 18040,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/a87728976959763a60683aec1b62ea4f92737a74796a4b440f010d4b29b44a91.raw.gz"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name",
+          "url": "https://gjy.nua.edu.cn/_upload/article/files/45/64/03b3edab4070b3c748ab9210038f/b8de8c95-9f4b-4423-9d02-1affc7480de9.pdf",
+          "rawSha256": "eab790110624aa174a6c2d73b5bce544568d6c40670bd0ac4cb9decd5126eeed",
+          "quote": "绘画\r\n                 Painting",
+          "locator": {
+            "original": "page 1",
+            "start": 508,
+            "end": 537,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "aa4bb0e3309de8d78f03421ae51e26444fd7371a2f971f7f0e6383bcb07daf6e"
+        },
+        {
+          "field": "degreeOrCategory",
+          "url": "https://gjy.nua.edu.cn/_upload/article/files/45/64/03b3edab4070b3c748ab9210038f/b8de8c95-9f4b-4423-9d02-1affc7480de9.pdf",
+          "rawSha256": "eab790110624aa174a6c2d73b5bce544568d6c40670bd0ac4cb9decd5126eeed",
+          "quote": "Bachelor Programs for International Applicants, 2026",
+          "locator": {
+            "original": "page 1",
+            "start": 176,
+            "end": 228,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "aa4bb0e3309de8d78f03421ae51e26444fd7371a2f971f7f0e6383bcb07daf6e"
+        },
+        {
+          "field": "internationalAdmissions",
+          "url": "https://gjy.nua.edu.cn/_upload/article/files/45/64/03b3edab4070b3c748ab9210038f/b8de8c95-9f4b-4423-9d02-1affc7480de9.pdf",
+          "rawSha256": "eab790110624aa174a6c2d73b5bce544568d6c40670bd0ac4cb9decd5126eeed",
+          "quote": "Bachelor Programs for International Applicants, 2026",
+          "locator": {
+            "original": "page 1",
+            "start": 176,
+            "end": 228,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "aa4bb0e3309de8d78f03421ae51e26444fd7371a2f971f7f0e6383bcb07daf6e"
+        },
+        {
+          "field": "year",
+          "url": "https://gjy.nua.edu.cn/_upload/article/files/45/64/03b3edab4070b3c748ab9210038f/b8de8c95-9f4b-4423-9d02-1affc7480de9.pdf",
+          "rawSha256": "eab790110624aa174a6c2d73b5bce544568d6c40670bd0ac4cb9decd5126eeed",
+          "quote": "2026年南京艺术学院国际学生本科招生专业目录",
+          "locator": {
+            "original": "page 1",
+            "start": 35,
+            "end": 58,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "aa4bb0e3309de8d78f03421ae51e26444fd7371a2f971f7f0e6383bcb07daf6e"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "recordId": "program-4132011276-bachelor-f922c400c73e27090c55",
+      "universityId": "uni-moe-4132011276",
+      "schoolNameZh": "南京工程学院",
+      "name": {
+        "en": "Mechanical Engineering"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://sie.njit.edu.cn/__local/9/5B/CE/C06BD314E38B48802B563858337_0CA7D607_E3CEA.pdf",
+      "catalogueYear": 2025,
+      "identitySha256": "34961eb3ef324c1b9f34d77e171cf71e3ec18c4b18182cfaf055305e1cbc8c2b",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-00df0eb310f95d804cd1c076"
+      ],
+      "sources": [
+        {
+          "url": "https://sie.njit.edu.cn/__local/9/5B/CE/C06BD314E38B48802B563858337_0CA7D607_E3CEA.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:22:41.795Z",
+          "contentType": null,
+          "rawSha256": "b2908447bc080bf4799595be41dd8361c51913dde8a4ce4b5147cfcebd227477",
+          "byteLength": 933098,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/b2908447bc080bf4799595be41dd8361c51913dde8a4ce4b5147cfcebd227477.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/14211ecd926273975a269865064b23c382bfcfba0180ee14fde554f38d830fd7.text.gz",
+          "textSha256": "14211ecd926273975a269865064b23c382bfcfba0180ee14fde554f38d830fd7",
+          "textByteLength": 12919,
+          "textDerivation": "pypdf"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name",
+          "url": "https://sie.njit.edu.cn/__local/9/5B/CE/C06BD314E38B48802B563858337_0CA7D607_E3CEA.pdf",
+          "rawSha256": "b2908447bc080bf4799595be41dd8361c51913dde8a4ce4b5147cfcebd227477",
+          "quote": "Mechanical \r\nEngineering 4",
+          "locator": {
+            "original": "page 1",
+            "start": 2042,
+            "end": 2068,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "14211ecd926273975a269865064b23c382bfcfba0180ee14fde554f38d830fd7"
+        },
+        {
+          "field": "degreeOrCategory",
+          "url": "https://sie.njit.edu.cn/__local/9/5B/CE/C06BD314E38B48802B563858337_0CA7D607_E3CEA.pdf",
+          "rawSha256": "b2908447bc080bf4799595be41dd8361c51913dde8a4ce4b5147cfcebd227477",
+          "quote": "1.1 English-Instructed Bachelor’s Programs",
+          "locator": {
+            "original": "page 1",
+            "start": 1899,
+            "end": 1941,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "14211ecd926273975a269865064b23c382bfcfba0180ee14fde554f38d830fd7"
+        },
+        {
+          "field": "internationalAdmissions",
+          "url": "https://sie.njit.edu.cn/__local/9/5B/CE/C06BD314E38B48802B563858337_0CA7D607_E3CEA.pdf",
+          "rawSha256": "b2908447bc080bf4799595be41dd8361c51913dde8a4ce4b5147cfcebd227477",
+          "quote": "2025 International Student Admission Prospectus of Nanjing \r\nInstitute of Technology (Undergraduate Programs)",
+          "locator": {
+            "original": "page 1",
+            "start": 12,
+            "end": 121,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "14211ecd926273975a269865064b23c382bfcfba0180ee14fde554f38d830fd7"
+        },
+        {
+          "field": "year",
+          "url": "https://sie.njit.edu.cn/__local/9/5B/CE/C06BD314E38B48802B563858337_0CA7D607_E3CEA.pdf",
+          "rawSha256": "b2908447bc080bf4799595be41dd8361c51913dde8a4ce4b5147cfcebd227477",
+          "quote": "2025 International Student Admission Prospectus",
+          "locator": {
+            "original": "page 1",
+            "start": 12,
+            "end": 59,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "14211ecd926273975a269865064b23c382bfcfba0180ee14fde554f38d830fd7"
+        }
+      ],
+      "notes": [
+        "Official source is a 2025 catalogue; no 2026/2027 cycle or open-application claim is made."
+      ]
+    },
+    {
+      "recordId": "program-4133013021-bachelor-08eb0062791aaa09f0ee",
+      "universityId": "uni-moe-4133013021",
+      "schoolNameZh": "浙大城市学院",
+      "name": {
+        "en": "Architecture"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://english.hzcu.edu.cn/Admission/Undergradute_Degree_Programs.htm",
+      "catalogueYear": 2026,
+      "identitySha256": "8100ccd21098c132285b5046386a97cd582ee0e16a5490bc269540fe7ab8398b",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-3ce29de12e4e9cb9c02e2e35"
+      ],
+      "sources": [
+        {
+          "url": "https://english.hzcu.edu.cn/Admission/Undergradute_Degree_Programs.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:20:30.158Z",
+          "contentType": null,
+          "rawSha256": "7ffc6622aa84a2bf06fee8de9e834d513c46036b616f123ae322b8d53d1173de",
+          "byteLength": 41692,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/7ffc6622aa84a2bf06fee8de9e834d513c46036b616f123ae322b8d53d1173de.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/19faae393aaddf6060ed15aa5a367feae34fd421ec6a563dc9ce7fa59dfca0bd.text.gz",
+          "textSha256": "19faae393aaddf6060ed15aa5a367feae34fd421ec6a563dc9ce7fa59dfca0bd",
+          "textByteLength": 7120,
+          "textDerivation": "html-dom-text"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name",
+          "url": "https://english.hzcu.edu.cn/Admission/Undergradute_Degree_Programs.htm",
+          "rawSha256": "7ffc6622aa84a2bf06fee8de9e834d513c46036b616f123ae322b8d53d1173de",
+          "quote": "Architecture（English-taught, 5 years）",
+          "locator": {
+            "original": "text:offset:3600:3637",
+            "start": 3600,
+            "end": 3637,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "19faae393aaddf6060ed15aa5a367feae34fd421ec6a563dc9ce7fa59dfca0bd"
+        },
+        {
+          "field": "degreeOrCategory",
+          "url": "https://english.hzcu.edu.cn/Admission/Undergradute_Degree_Programs.htm",
+          "rawSha256": "7ffc6622aa84a2bf06fee8de9e834d513c46036b616f123ae322b8d53d1173de",
+          "quote": "2026 Undergraduate Degree Programs",
+          "locator": {
+            "original": "text:offset:2068:2102",
+            "start": 2068,
+            "end": 2102,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "19faae393aaddf6060ed15aa5a367feae34fd421ec6a563dc9ce7fa59dfca0bd"
+        },
+        {
+          "field": "internationalAdmissions",
+          "url": "https://english.hzcu.edu.cn/Admission/Undergradute_Degree_Programs.htm",
+          "rawSha256": "7ffc6622aa84a2bf06fee8de9e834d513c46036b616f123ae322b8d53d1173de",
+          "quote": "Foreign citizens holding valid foreign passports",
+          "locator": {
+            "original": "text:offset:3761:3809",
+            "start": 3761,
+            "end": 3809,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "19faae393aaddf6060ed15aa5a367feae34fd421ec6a563dc9ce7fa59dfca0bd"
+        },
+        {
+          "field": "year",
+          "url": "https://english.hzcu.edu.cn/Admission/Undergradute_Degree_Programs.htm",
+          "rawSha256": "7ffc6622aa84a2bf06fee8de9e834d513c46036b616f123ae322b8d53d1173de",
+          "quote": "2026 Undergraduate Degree Programs",
+          "locator": {
+            "original": "text:offset:2068:2102",
+            "start": 2068,
+            "end": 2102,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "19faae393aaddf6060ed15aa5a367feae34fd421ec6a563dc9ce7fa59dfca0bd"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "recordId": "program-4133013022-bachelor-acc459cb60e96b475378",
+      "universityId": "uni-moe-4133013022",
+      "schoolNameZh": "浙大宁波理工学院",
+      "name": {
+        "zh": "国际经济与贸易"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://wyxy.nbt.edu.cn/virtual_attach_file.vsb?afc=eoRUyPLlUPnz-8LhR78UmlPLNnkoRA3fUNQ2ozfRollbLN-0gihFp2hmCIa0USysUSysU1yPMmV2M8LPLlUiMmf7MzCZMzMRLRC8oRM2UmWFnmVfUzNsn7MFLmA2L4LJv2nto4OeoD6/qjN0qIbtpYyPLz9Pg4-aMz-JqdBnx&oid=2050227168&tid=1181&nid=2052&e=.pdf",
+      "catalogueYear": 2026,
+      "identitySha256": "5d265a39f41878a4243c97ff3b4dc5bce39c1a6a81158a92de37579bfbde7d75",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-1b2e6f367667b6f815dda6d7",
+        "src-new-school-program-828ad30e93ead87bbce0f143"
+      ],
+      "sources": [
+        {
+          "url": "https://wyxy.nbt.edu.cn/virtual_attach_file.vsb?afc=eoRUyPLlUPnz-8LhR78UmlPLNnkoRA3fUNQ2ozfRollbLN-0gihFp2hmCIa0USysUSysU1yPMmV2M8LPLlUiMmf7MzCZMzMRLRC8oRM2UmWFnmVfUzNsn7MFLmA2L4LJv2nto4OeoD6/qjN0qIbtpYyPLz9Pg4-aMz-JqdBnx&oid=2050227168&tid=1181&nid=2052&e=.pdf",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:22:51.034Z",
+          "contentType": null,
+          "rawSha256": "9cedad341b513deee3ebb003a01d07e967301c22e80223198930bbe623d0cb07",
+          "byteLength": 167731,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/9cedad341b513deee3ebb003a01d07e967301c22e80223198930bbe623d0cb07.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/15f8347e359494843455140934a2909bfa152242f4b334cc908b66ac9bfb1497.text.gz",
+          "textSha256": "15f8347e359494843455140934a2909bfa152242f4b334cc908b66ac9bfb1497",
+          "textByteLength": 9862,
+          "textDerivation": "pypdf"
+        },
+        {
+          "url": "https://wyxy.nbt.edu.cn/gjjy2026/info/1181/2052.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:22:51.034Z",
+          "contentType": "text/html",
+          "rawSha256": "e892ee7527ea0d63ab99f83653184b3069557904e54af7a6071d521c9959f7c2",
+          "byteLength": 24020,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/e892ee7527ea0d63ab99f83653184b3069557904e54af7a6071d521c9959f7c2.raw.gz"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name",
+          "url": "https://wyxy.nbt.edu.cn/virtual_attach_file.vsb?afc=eoRUyPLlUPnz-8LhR78UmlPLNnkoRA3fUNQ2ozfRollbLN-0gihFp2hmCIa0USysUSysU1yPMmV2M8LPLlUiMmf7MzCZMzMRLRC8oRM2UmWFnmVfUzNsn7MFLmA2L4LJv2nto4OeoD6/qjN0qIbtpYyPLz9Pg4-aMz-JqdBnx&oid=2050227168&tid=1181&nid=2052&e=.pdf",
+          "rawSha256": "9cedad341b513deee3ebb003a01d07e967301c22e80223198930bbe623d0cb07",
+          "quote": "国际经济与贸易",
+          "locator": {
+            "original": "page 1",
+            "start": 466,
+            "end": 473,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "15f8347e359494843455140934a2909bfa152242f4b334cc908b66ac9bfb1497"
+        },
+        {
+          "field": "degreeOrCategory",
+          "url": "https://wyxy.nbt.edu.cn/virtual_attach_file.vsb?afc=eoRUyPLlUPnz-8LhR78UmlPLNnkoRA3fUNQ2ozfRollbLN-0gihFp2hmCIa0USysUSysU1yPMmV2M8LPLlUiMmf7MzCZMzMRLRC8oRM2UmWFnmVfUzNsn7MFLmA2L4LJv2nto4OeoD6/qjN0qIbtpYyPLz9Pg4-aMz-JqdBnx&oid=2050227168&tid=1181&nid=2052&e=.pdf",
+          "rawSha256": "9cedad341b513deee3ebb003a01d07e967301c22e80223198930bbe623d0cb07",
+          "quote": "浙大宁波理工学院        2026年国际学生（本科生）",
+          "locator": {
+            "original": "page 1",
+            "start": 2,
+            "end": 32,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "15f8347e359494843455140934a2909bfa152242f4b334cc908b66ac9bfb1497"
+        },
+        {
+          "field": "internationalAdmissions",
+          "url": "https://wyxy.nbt.edu.cn/virtual_attach_file.vsb?afc=eoRUyPLlUPnz-8LhR78UmlPLNnkoRA3fUNQ2ozfRollbLN-0gihFp2hmCIa0USysUSysU1yPMmV2M8LPLlUiMmf7MzCZMzMRLRC8oRM2UmWFnmVfUzNsn7MFLmA2L4LJv2nto4OeoD6/qjN0qIbtpYyPLz9Pg4-aMz-JqdBnx&oid=2050227168&tid=1181&nid=2052&e=.pdf",
+          "rawSha256": "9cedad341b513deee3ebb003a01d07e967301c22e80223198930bbe623d0cb07",
+          "quote": "持外国有效普通护照的非中\r\n\r\n国籍公民",
+          "locator": {
+            "original": "page 2",
+            "start": 920,
+            "end": 940,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "15f8347e359494843455140934a2909bfa152242f4b334cc908b66ac9bfb1497"
+        },
+        {
+          "field": "year",
+          "url": "https://wyxy.nbt.edu.cn/virtual_attach_file.vsb?afc=eoRUyPLlUPnz-8LhR78UmlPLNnkoRA3fUNQ2ozfRollbLN-0gihFp2hmCIa0USysUSysU1yPMmV2M8LPLlUiMmf7MzCZMzMRLRC8oRM2UmWFnmVfUzNsn7MFLmA2L4LJv2nto4OeoD6/qjN0qIbtpYyPLz9Pg4-aMz-JqdBnx&oid=2050227168&tid=1181&nid=2052&e=.pdf",
+          "rawSha256": "9cedad341b513deee3ebb003a01d07e967301c22e80223198930bbe623d0cb07",
+          "quote": "2026年国际学生（本科生）",
+          "locator": {
+            "original": "page 1",
+            "start": 18,
+            "end": 32,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "15f8347e359494843455140934a2909bfa152242f4b334cc908b66ac9bfb1497"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "recordId": "program-4132013573-bachelor-d269af4257e792d68ac3",
+      "universityId": "uni-moe-4132013573",
+      "schoolNameZh": "金陵科技学院",
+      "name": {
+        "zh": "国际经济与贸易",
+        "en": "International Economics and Trade"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://zsb.jit.edu.cn/c5/20260407/i1412.phtml",
+      "catalogueYear": 2026,
+      "identitySha256": "393f467ab1e6d8fdc7b19d9ab55628cd7aa8bd93e04b6cfe4215bdd3441c6e2d",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-e0216f89e8584ed07b8fd55d"
+      ],
+      "sources": [
+        {
+          "url": "https://zsb.jit.edu.cn/c5/20260407/i1412.phtml",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T15:46:09.666Z",
+          "contentType": null,
+          "rawSha256": "10276be4933631bb34cba4250ad6bb9b2fb802441cda34772c232d12e2cfbe9f",
+          "byteLength": 61980,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/10276be4933631bb34cba4250ad6bb9b2fb802441cda34772c232d12e2cfbe9f.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/eb0b1a50794f2bf02c7ac670a9413c03050204ab5b99b71112dab58fe9fc1cfb.text.gz",
+          "textSha256": "eb0b1a50794f2bf02c7ac670a9413c03050204ab5b99b71112dab58fe9fc1cfb",
+          "textByteLength": 19655,
+          "textDerivation": "html-dom-text"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name",
+          "url": "https://zsb.jit.edu.cn/c5/20260407/i1412.phtml",
+          "rawSha256": "10276be4933631bb34cba4250ad6bb9b2fb802441cda34772c232d12e2cfbe9f",
+          "quote": "国际经济与贸易International Economics and Trade",
+          "locator": {
+            "original": "text:offset:3636:3676",
+            "start": 3636,
+            "end": 3676,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "eb0b1a50794f2bf02c7ac670a9413c03050204ab5b99b71112dab58fe9fc1cfb"
+        },
+        {
+          "field": "degreeOrCategory",
+          "url": "https://zsb.jit.edu.cn/c5/20260407/i1412.phtml",
+          "rawSha256": "10276be4933631bb34cba4250ad6bb9b2fb802441cda34772c232d12e2cfbe9f",
+          "quote": "本科专业 Undergraduate Programs",
+          "locator": {
+            "original": "text:offset:3523:3550",
+            "start": 3523,
+            "end": 3550,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "eb0b1a50794f2bf02c7ac670a9413c03050204ab5b99b71112dab58fe9fc1cfb"
+        },
+        {
+          "field": "internationalAdmissions",
+          "url": "https://zsb.jit.edu.cn/c5/20260407/i1412.phtml",
+          "rawSha256": "10276be4933631bb34cba4250ad6bb9b2fb802441cda34772c232d12e2cfbe9f",
+          "quote": "申请人须是持外国护照的非中国籍公民",
+          "locator": {
+            "original": "text:offset:2326:2343",
+            "start": 2326,
+            "end": 2343,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "eb0b1a50794f2bf02c7ac670a9413c03050204ab5b99b71112dab58fe9fc1cfb"
+        },
+        {
+          "field": "year",
+          "url": "https://zsb.jit.edu.cn/c5/20260407/i1412.phtml",
+          "rawSha256": "10276be4933631bb34cba4250ad6bb9b2fb802441cda34772c232d12e2cfbe9f",
+          "quote": "2026年金陵科技学院来华留学本科生招生简章",
+          "locator": {
+            "original": "text:offset:86:108",
+            "start": 86,
+            "end": 108,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "eb0b1a50794f2bf02c7ac670a9413c03050204ab5b99b71112dab58fe9fc1cfb"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "recordId": "program-4133011842-bachelor-65390e8d89b8545deece",
+      "universityId": "uni-moe-4133011842",
+      "schoolNameZh": "浙江树人学院",
+      "name": {
+        "en": "Chinese Language and Literature"
+      },
+      "degreeLevel": "bachelor",
+      "programUrl": "https://english.zjsru.edu.cn/info/1124/3737.htm",
+      "catalogueYear": null,
+      "identitySha256": "bd61e26b4cd8fe651d60bb7f4aa945ce22c0ebefe440ad24d7e0e697aefed66e",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-9d5c650bd1eaeb0de35f3134"
+      ],
+      "sources": [
+        {
+          "url": "https://english.zjsru.edu.cn/info/1124/3737.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T16:20:30.161Z",
+          "contentType": null,
+          "rawSha256": "16a215873bd69663859fea29165edfc17d291ed0cb6f860a0cb4ff2a35a6f588",
+          "byteLength": 49784,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/16a215873bd69663859fea29165edfc17d291ed0cb6f860a0cb4ff2a35a6f588.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/2b5169e1a45d3adaa73537a73c7ec1429d15ec1905ae059f96752ca8262fc931.text.gz",
+          "textSha256": "2b5169e1a45d3adaa73537a73c7ec1429d15ec1905ae059f96752ca8262fc931",
+          "textByteLength": 5087,
+          "textDerivation": "html-dom-text"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name",
+          "url": "https://english.zjsru.edu.cn/info/1124/3737.htm",
+          "rawSha256": "16a215873bd69663859fea29165edfc17d291ed0cb6f860a0cb4ff2a35a6f588",
+          "quote": "Chinese Language and Literature",
+          "locator": {
+            "original": "text:offset:2842:2873",
+            "start": 2842,
+            "end": 2873,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "2b5169e1a45d3adaa73537a73c7ec1429d15ec1905ae059f96752ca8262fc931"
+        },
+        {
+          "field": "degreeOrCategory",
+          "url": "https://english.zjsru.edu.cn/info/1124/3737.htm",
+          "rawSha256": "16a215873bd69663859fea29165edfc17d291ed0cb6f860a0cb4ff2a35a6f588",
+          "quote": "School of Humanity and Foreign Languages·Chinese Language and Literature·International Chinese Language Education·Network and New MediaBachelorYXQ31000School of Economics and Management·International Economics & Trade (Tea Culture Trade Direction)·International Business·Business AdministrationBachelorYXQ31000",
+          "locator": {
+            "original": "text:offset:3338:3648",
+            "start": 3338,
+            "end": 3648,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "2b5169e1a45d3adaa73537a73c7ec1429d15ec1905ae059f96752ca8262fc931"
+        },
+        {
+          "field": "internationalAdmissions",
+          "url": "https://english.zjsru.edu.cn/info/1124/3737.htm",
+          "rawSha256": "16a215873bd69663859fea29165edfc17d291ed0cb6f860a0cb4ff2a35a6f588",
+          "quote": "Programs for International Students",
+          "locator": {
+            "original": "text:offset:2176:2211",
+            "start": 2176,
+            "end": 2211,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "2b5169e1a45d3adaa73537a73c7ec1429d15ec1905ae059f96752ca8262fc931"
+        }
+      ],
+      "notes": [
+        "Official programme table is currently accessible under international admissions; page publication shows 2023-11-20, but no academic intake year is stated."
+      ]
+    },
+    {
+      "recordId": "program-4133010876-language-ed92040d9370c23bbd6d",
+      "universityId": "uni-moe-4133010876",
+      "schoolNameZh": "浙江万里学院",
+      "name": {
+        "en": "Chinese Language Program"
+      },
+      "degreeLevel": "language",
+      "programUrl": "https://en.zwu.edu.cn/Internationalstudents/list.htm",
+      "catalogueYear": null,
+      "identitySha256": "0eead1a95ec56898ba5a386d1b1fd0ae4f1b251a265264a10674eaf87c99c700",
+      "verificationScope": "identity",
+      "currentOpportunityVerified": false,
+      "catalogueReconciled": false,
+      "sourceIds": [
+        "src-new-school-program-73c2f52ccaae315ff85f9cfa",
+        "src-new-school-program-2e2a6c3a275f5834f51bc7c1"
+      ],
+      "sources": [
+        {
+          "url": "https://en.zwu.edu.cn/Internationalstudents/list.htm",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T15:51:39.589Z",
+          "contentType": null,
+          "rawSha256": "fbc857b142fa63aacca8cf6ed86a4ccf8ef577ef4c59f959db5165a9006fc2b4",
+          "byteLength": 28511,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/fbc857b142fa63aacca8cf6ed86a4ccf8ef577ef4c59f959db5165a9006fc2b4.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/85ffe3990a67c3e6d86f808ddabc08af087f4cccbc15c7bc2d21d3c37d2622fe.text.gz",
+          "textSha256": "85ffe3990a67c3e6d86f808ddabc08af087f4cccbc15c7bc2d21d3c37d2622fe",
+          "textByteLength": 2727,
+          "textDerivation": "html-dom-text"
+        },
+        {
+          "url": "https://en.zwu.edu.cn/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-26T15:50:26.033Z",
+          "contentType": null,
+          "rawSha256": "02478963075106a0be04adf6e1cabab41805d82cad3efa1b0807dbed502cad19",
+          "byteLength": 74993,
+          "evidencePath": "quality/schools/2026-10-27/programme-evidence/02478963075106a0be04adf6e1cabab41805d82cad3efa1b0807dbed502cad19.raw.gz",
+          "textEvidencePath": "quality/schools/2026-10-27/programme-evidence/ecd22a50a958b1fcc5c80e7c9549d29e2ddd52553e363cf3302b45dba5336007.text.gz",
+          "textSha256": "ecd22a50a958b1fcc5c80e7c9549d29e2ddd52553e363cf3302b45dba5336007",
+          "textByteLength": 3634,
+          "textDerivation": "html-dom-text"
+        }
+      ],
+      "evidence": [
+        {
+          "field": "name",
+          "url": "https://en.zwu.edu.cn/Internationalstudents/list.htm",
+          "rawSha256": "fbc857b142fa63aacca8cf6ed86a4ccf8ef577ef4c59f959db5165a9006fc2b4",
+          "quote": "Chinese Language ProgramThis program is designed for students who are keen to learn Chinese language.",
+          "locator": {
+            "original": "text:offset:925:1026",
+            "start": 925,
+            "end": 1026,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "85ffe3990a67c3e6d86f808ddabc08af087f4cccbc15c7bc2d21d3c37d2622fe"
+        },
+        {
+          "field": "degreeOrCategory",
+          "url": "https://en.zwu.edu.cn/Internationalstudents/list.htm",
+          "rawSha256": "fbc857b142fa63aacca8cf6ed86a4ccf8ef577ef4c59f959db5165a9006fc2b4",
+          "quote": "Chinese language program1-2 yearsCertificate",
+          "locator": {
+            "original": "text:offset:1643:1687",
+            "start": 1643,
+            "end": 1687,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "85ffe3990a67c3e6d86f808ddabc08af087f4cccbc15c7bc2d21d3c37d2622fe"
+        },
+        {
+          "field": "internationalAdmissions",
+          "url": "https://en.zwu.edu.cn/",
+          "rawSha256": "02478963075106a0be04adf6e1cabab41805d82cad3efa1b0807dbed502cad19",
+          "quote": "International Students",
+          "locator": {
+            "original": "text:offset:3193:3215",
+            "start": 3193,
+            "end": 3215,
+            "matching": "exact substring"
+          },
+          "validation": "verified saved source text",
+          "textSha256": "ecd22a50a958b1fcc5c80e7c9549d29e2ddd52553e363cf3302b45dba5336007"
+        }
+      ],
+      "notes": [
+        "Named language/certificate programme, not a bachelor degree. Official English homepage explicitly links International Students to this exact programme page; no academic intake year is stated."
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/70e9fb77188bb0958b37ffd478c3b7bc5550d6e709aa45f434867e8b7102b126.raw.gz",
+      "sha256": "70e9fb77188bb0958b37ffd478c3b7bc5550d6e709aa45f434867e8b7102b126",
+      "byteLength": 54040
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/bdad265c69ed2f5955640c32c7118069a4f2fc6f4297572fb62f0c78a84b18f3.text.gz",
+      "sha256": "bdad265c69ed2f5955640c32c7118069a4f2fc6f4297572fb62f0c78a84b18f3",
+      "byteLength": 16268
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/84a31f3ec25ec8a0e3fb8361652ac33e6920f96c540b4b6e881294727201e4bc.raw.gz",
+      "sha256": "84a31f3ec25ec8a0e3fb8361652ac33e6920f96c540b4b6e881294727201e4bc",
+      "byteLength": 23312
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/497e8f8252fc2482e6074afe8dd66709f04148c3b3b47c78b36067c33be7da8c.text.gz",
+      "sha256": "497e8f8252fc2482e6074afe8dd66709f04148c3b3b47c78b36067c33be7da8c",
+      "byteLength": 2521
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/83855c3067a17cd463de68ef99055b401e01cc6513866c56cb2d50fb406a0ae9.raw.gz",
+      "sha256": "83855c3067a17cd463de68ef99055b401e01cc6513866c56cb2d50fb406a0ae9",
+      "byteLength": 174017
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/e18e1120b2fa3f1b5f1191c1400d62fa255b092e1262e74d5f04748211a7ecb0.text.gz",
+      "sha256": "e18e1120b2fa3f1b5f1191c1400d62fa255b092e1262e74d5f04748211a7ecb0",
+      "byteLength": 8843
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/56eae218b76c1ee5852bfe2f8ed67617f65cfdc6b760d35b691842012081626e.layout.gz",
+      "sha256": "56eae218b76c1ee5852bfe2f8ed67617f65cfdc6b760d35b691842012081626e",
+      "byteLength": 29444
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/54c8e8e927ec6c95c0f7388fe2fb6383e795520e4d59ea57434654bec7f62e57.raw.gz",
+      "sha256": "54c8e8e927ec6c95c0f7388fe2fb6383e795520e4d59ea57434654bec7f62e57",
+      "byteLength": 16601
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/b6a09038c1508e7072fa3bafa84af17b553c77273bf78f9753cae9eaea6d1185.text.gz",
+      "sha256": "b6a09038c1508e7072fa3bafa84af17b553c77273bf78f9753cae9eaea6d1185",
+      "byteLength": 2126
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/1d62e4b6bab32c0a3c31a06b5d53f4e8d5b97229743aa6b5e95b9ac68dba5d67.raw.gz",
+      "sha256": "1d62e4b6bab32c0a3c31a06b5d53f4e8d5b97229743aa6b5e95b9ac68dba5d67",
+      "byteLength": 32032
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/e99c2cd4e95431aadbb064438d3763a7e58ea66fd58ef367dd120489f667c968.text.gz",
+      "sha256": "e99c2cd4e95431aadbb064438d3763a7e58ea66fd58ef367dd120489f667c968",
+      "byteLength": 8837
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3.raw.gz",
+      "sha256": "41d74e0053b23f079155012d8eb615dab82083fa9a01b64e63b12b7eb24860a3",
+      "byteLength": 788035
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/d4a00358ba2ca63e9fb716e9c57d2757c164cbd72b07d06550a2b8d5c8c43ed3.text.gz",
+      "sha256": "d4a00358ba2ca63e9fb716e9c57d2757c164cbd72b07d06550a2b8d5c8c43ed3",
+      "byteLength": 8086
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/760fc42d3c7d5f8a95a57d931423536edda0fc5148ac9352d6a27c4c0233a44c.layout.gz",
+      "sha256": "760fc42d3c7d5f8a95a57d931423536edda0fc5148ac9352d6a27c4c0233a44c",
+      "byteLength": 22927
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/0e9483fbf26016b359b3db3e913346104ace68a3966fb7f1c1a3be98a036701e.member.gz",
+      "sha256": "0e9483fbf26016b359b3db3e913346104ace68a3966fb7f1c1a3be98a036701e",
+      "byteLength": 137060
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76.raw.gz",
+      "sha256": "b012d44a2428f83da988646f2f8899db2520024e6abc7b99ec3e5b8df9d8df76",
+      "byteLength": 274614
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/65aed782204dc6567341e45f0926d5d0c159b890dc1d4518089f44fa9a13486d.text.gz",
+      "sha256": "65aed782204dc6567341e45f0926d5d0c159b890dc1d4518089f44fa9a13486d",
+      "byteLength": 5221
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/ad1c5d27e2e6ccf4e651a1f08d8ad88d8a358413408749b3f88e5c07530eaa07.layout.gz",
+      "sha256": "ad1c5d27e2e6ccf4e651a1f08d8ad88d8a358413408749b3f88e5c07530eaa07",
+      "byteLength": 29974
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/8af208dc113b70f63284c48470aa71a57dfb7d96fcb073f2e55881d5ea5ed476.raw.gz",
+      "sha256": "8af208dc113b70f63284c48470aa71a57dfb7d96fcb073f2e55881d5ea5ed476",
+      "byteLength": 39660
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/729921e2b8299f3c7ddd0f71e5f850b16beddd4434ab5bbf99b4451e8865c28d.text.gz",
+      "sha256": "729921e2b8299f3c7ddd0f71e5f850b16beddd4434ab5bbf99b4451e8865c28d",
+      "byteLength": 18989
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/a991d279d9f17bfc7af6aff01db81076769c34c374e02f0ff6e1f5dc443c592b.raw.gz",
+      "sha256": "a991d279d9f17bfc7af6aff01db81076769c34c374e02f0ff6e1f5dc443c592b",
+      "byteLength": 48708
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/23693607447819626b834c0f64f0789334b79b3184549fb95b213aa34d6c4f5b.text.gz",
+      "sha256": "23693607447819626b834c0f64f0789334b79b3184549fb95b213aa34d6c4f5b",
+      "byteLength": 17278
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/feb2d7de743e859048bab03007bf937fee8472bc1c87bd53ebd543f378d4da88.table-proof.gz",
+      "sha256": "feb2d7de743e859048bab03007bf937fee8472bc1c87bd53ebd543f378d4da88",
+      "byteLength": 11426
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/9395cae2250747552752ee5a71c61133238665f3311ce3f4bdc139ca1a95566c.raw.gz",
+      "sha256": "9395cae2250747552752ee5a71c61133238665f3311ce3f4bdc139ca1a95566c",
+      "byteLength": 329774
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/eb20f660572f12821427fb9cfc538bdf5314fc983fdcbe5f39a2a7cb7d1fba3e.text.gz",
+      "sha256": "eb20f660572f12821427fb9cfc538bdf5314fc983fdcbe5f39a2a7cb7d1fba3e",
+      "byteLength": 24426
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/98dcbaeeed6fb5ccd03fe1a1265b085d659c77af133f3f8e4f077d919cfafb1c.layout.gz",
+      "sha256": "98dcbaeeed6fb5ccd03fe1a1265b085d659c77af133f3f8e4f077d919cfafb1c",
+      "byteLength": 72512
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/8a63251712e3fea17154d4011f52e97cad8dbdfbf23ee8a6ce9b58fe6a8d8f4f.raw.gz",
+      "sha256": "8a63251712e3fea17154d4011f52e97cad8dbdfbf23ee8a6ce9b58fe6a8d8f4f",
+      "byteLength": 701882
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/57ca201cb85e02b9865b8367092c4a8e76bc51d72e845c52893cc4b590a736a9.text.gz",
+      "sha256": "57ca201cb85e02b9865b8367092c4a8e76bc51d72e845c52893cc4b590a736a9",
+      "byteLength": 43188
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/b67668feebfde9f7fa74adccfeded6e10f224e20e978d162b7448cb2b9d984ab.layout.gz",
+      "sha256": "b67668feebfde9f7fa74adccfeded6e10f224e20e978d162b7448cb2b9d984ab",
+      "byteLength": 140959
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/6fc42763e1b692d412775c137dda51394377eb597fc3d8beb95aabe62b499d30.raw.gz",
+      "sha256": "6fc42763e1b692d412775c137dda51394377eb597fc3d8beb95aabe62b499d30",
+      "byteLength": 17085
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/63af2605f0eed18cf009a7f7689471b1976873a24f3669eb17a45188f1031252.text.gz",
+      "sha256": "63af2605f0eed18cf009a7f7689471b1976873a24f3669eb17a45188f1031252",
+      "byteLength": 7445
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/55d8a4c6c470c21814f2333ad0bf3ad67b3c0e5ce30159d1e7ccdc01aa652010.raw.gz",
+      "sha256": "55d8a4c6c470c21814f2333ad0bf3ad67b3c0e5ce30159d1e7ccdc01aa652010",
+      "byteLength": 10501
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/ddcaa7975460c378036b6b9f275b05f26ec0dda6e3b481343c43039367fadab3.text.gz",
+      "sha256": "ddcaa7975460c378036b6b9f275b05f26ec0dda6e3b481343c43039367fadab3",
+      "byteLength": 553
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/916bb48abe028199fc45fff2fba18d1e203334699720149ac43125320c96f83d.raw.gz",
+      "sha256": "916bb48abe028199fc45fff2fba18d1e203334699720149ac43125320c96f83d",
+      "byteLength": 423325
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/2e6e093984bbf2c1e518ca1d5bd3817a7eb032a03a6fc8cee4bbef1e3ae81e88.text.gz",
+      "sha256": "2e6e093984bbf2c1e518ca1d5bd3817a7eb032a03a6fc8cee4bbef1e3ae81e88",
+      "byteLength": 51418
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/a5d79956858f82feb157f2ef5384ccab4f36cadecc1bb189912984abcb1416e3.raw.gz",
+      "sha256": "a5d79956858f82feb157f2ef5384ccab4f36cadecc1bb189912984abcb1416e3",
+      "byteLength": 580713
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/7fa996d9fe90a2c6e22c86e3a6d9d42c91daadb71eae1b40999ac926c992f4f3.text.gz",
+      "sha256": "7fa996d9fe90a2c6e22c86e3a6d9d42c91daadb71eae1b40999ac926c992f4f3",
+      "byteLength": 66702
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/1fa6dc375082a0ca2ab7a1009f18171be6684fdde3da937864a7f9f8e88c91dd.raw.gz",
+      "sha256": "1fa6dc375082a0ca2ab7a1009f18171be6684fdde3da937864a7f9f8e88c91dd",
+      "byteLength": 76810
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/5dc7da826113532e4388d769e928fad7f56fca0839bcd1add07d74c7b50c158f.text.gz",
+      "sha256": "5dc7da826113532e4388d769e928fad7f56fca0839bcd1add07d74c7b50c158f",
+      "byteLength": 9395
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/858e1961348a81fa272b2beedd720cf885be59f4e3d98bba0cab5141981bfdef.raw.gz",
+      "sha256": "858e1961348a81fa272b2beedd720cf885be59f4e3d98bba0cab5141981bfdef",
+      "byteLength": 103140
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/51320ed154f0d27e7934c26b1d9d54e2feec3fb9772583f87f40932f25b05685.text.gz",
+      "sha256": "51320ed154f0d27e7934c26b1d9d54e2feec3fb9772583f87f40932f25b05685",
+      "byteLength": 10362
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/8f51aaff4fc312b757ed66c975f7a8acf18fbd415a26f94c0beed1f0e6c4ade6.raw.gz",
+      "sha256": "8f51aaff4fc312b757ed66c975f7a8acf18fbd415a26f94c0beed1f0e6c4ade6",
+      "byteLength": 135799
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/11f3d389ba06e89c55c7d2832196a14d5fcb8a3125ddb31ebd4c4b73fe9b8bec.text.gz",
+      "sha256": "11f3d389ba06e89c55c7d2832196a14d5fcb8a3125ddb31ebd4c4b73fe9b8bec",
+      "byteLength": 13969
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/1e8959e6d5c1ee7d02b4a97d4d6c197244d949d55d709b2d7cf605d893a1a712.raw.gz",
+      "sha256": "1e8959e6d5c1ee7d02b4a97d4d6c197244d949d55d709b2d7cf605d893a1a712",
+      "byteLength": 27581
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/b76b08278d16ea6002a250776d6b636acb09dff38cde58ea616a8e1e3131cf41.text.gz",
+      "sha256": "b76b08278d16ea6002a250776d6b636acb09dff38cde58ea616a8e1e3131cf41",
+      "byteLength": 5492
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/2f895049fda0cf8c02e4371c8fb2f32677b75ec9d96e112acd2ad98d1faef24b.raw.gz",
+      "sha256": "2f895049fda0cf8c02e4371c8fb2f32677b75ec9d96e112acd2ad98d1faef24b",
+      "byteLength": 33802
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/6e260e2c2ce1fd6bd695a4653418e4fcd029675322c24bdbce6aa497622f855a.text.gz",
+      "sha256": "6e260e2c2ce1fd6bd695a4653418e4fcd029675322c24bdbce6aa497622f855a",
+      "byteLength": 1534
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/0dfb2ceb450293841c3d6abb58b3805af2205e40b4bf47e8a343c5f7b72250ce.raw.gz",
+      "sha256": "0dfb2ceb450293841c3d6abb58b3805af2205e40b4bf47e8a343c5f7b72250ce",
+      "byteLength": 193737
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/ab5a50b7d4ad028ab41c19620466d87e714eb12206be3f601057ebe918565307.text.gz",
+      "sha256": "ab5a50b7d4ad028ab41c19620466d87e714eb12206be3f601057ebe918565307",
+      "byteLength": 8731
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/e297be574004e406d47e5adfef6b5c2cc6fcf3e1e6265ac456ad6cf33edd010a.raw.gz",
+      "sha256": "e297be574004e406d47e5adfef6b5c2cc6fcf3e1e6265ac456ad6cf33edd010a",
+      "byteLength": 890938
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/025f1d6c9841361451955068b155a3a1d358d873fe97528ce5a9eb223ed675ae.raw.gz",
+      "sha256": "025f1d6c9841361451955068b155a3a1d358d873fe97528ce5a9eb223ed675ae",
+      "byteLength": 63649
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/c746291e0cf15d50fcd577d4a61b42e97b58b0ca3d7d1915dad4e9bfad56b7b0.text.gz",
+      "sha256": "c746291e0cf15d50fcd577d4a61b42e97b58b0ca3d7d1915dad4e9bfad56b7b0",
+      "byteLength": 7412
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/145cbf552edda1baa2d720c34b9eebdfac7416b8bfa770fbdb2d189357da165c.raw.gz",
+      "sha256": "145cbf552edda1baa2d720c34b9eebdfac7416b8bfa770fbdb2d189357da165c",
+      "byteLength": 106149
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/c034a0e1c04f516753ac6b4b871df029a815892a08bb25d9121de7c71f208459.text.gz",
+      "sha256": "c034a0e1c04f516753ac6b4b871df029a815892a08bb25d9121de7c71f208459",
+      "byteLength": 14953
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/08811d0ded214e67f8c90b2c5b6d4c1d7fefef73d5e0be05fe5ddf22a21c42e0.raw.gz",
+      "sha256": "08811d0ded214e67f8c90b2c5b6d4c1d7fefef73d5e0be05fe5ddf22a21c42e0",
+      "byteLength": 55105
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/971af656cd7b36404e15f5b9271416bb3febc22de0abf8c1d8001f890c724fb7.text.gz",
+      "sha256": "971af656cd7b36404e15f5b9271416bb3febc22de0abf8c1d8001f890c724fb7",
+      "byteLength": 8769
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/fc864c4b61a5bf4b402bc951e140c72711e47c22ed145d8d049af17d06ec589f.raw.gz",
+      "sha256": "fc864c4b61a5bf4b402bc951e140c72711e47c22ed145d8d049af17d06ec589f",
+      "byteLength": 213709
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/ed0e5a680a4feefcbf4b7e4fb9c1309cbb7ed8b9710ab28774ac786db1327bb1.text.gz",
+      "sha256": "ed0e5a680a4feefcbf4b7e4fb9c1309cbb7ed8b9710ab28774ac786db1327bb1",
+      "byteLength": 102725
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/eab790110624aa174a6c2d73b5bce544568d6c40670bd0ac4cb9decd5126eeed.raw.gz",
+      "sha256": "eab790110624aa174a6c2d73b5bce544568d6c40670bd0ac4cb9decd5126eeed",
+      "byteLength": 208378
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/aa4bb0e3309de8d78f03421ae51e26444fd7371a2f971f7f0e6383bcb07daf6e.text.gz",
+      "sha256": "aa4bb0e3309de8d78f03421ae51e26444fd7371a2f971f7f0e6383bcb07daf6e",
+      "byteLength": 21159
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/a87728976959763a60683aec1b62ea4f92737a74796a4b440f010d4b29b44a91.raw.gz",
+      "sha256": "a87728976959763a60683aec1b62ea4f92737a74796a4b440f010d4b29b44a91",
+      "byteLength": 18040
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/b2908447bc080bf4799595be41dd8361c51913dde8a4ce4b5147cfcebd227477.raw.gz",
+      "sha256": "b2908447bc080bf4799595be41dd8361c51913dde8a4ce4b5147cfcebd227477",
+      "byteLength": 933098
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/14211ecd926273975a269865064b23c382bfcfba0180ee14fde554f38d830fd7.text.gz",
+      "sha256": "14211ecd926273975a269865064b23c382bfcfba0180ee14fde554f38d830fd7",
+      "byteLength": 12919
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/7ffc6622aa84a2bf06fee8de9e834d513c46036b616f123ae322b8d53d1173de.raw.gz",
+      "sha256": "7ffc6622aa84a2bf06fee8de9e834d513c46036b616f123ae322b8d53d1173de",
+      "byteLength": 41692
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/19faae393aaddf6060ed15aa5a367feae34fd421ec6a563dc9ce7fa59dfca0bd.text.gz",
+      "sha256": "19faae393aaddf6060ed15aa5a367feae34fd421ec6a563dc9ce7fa59dfca0bd",
+      "byteLength": 7120
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/9cedad341b513deee3ebb003a01d07e967301c22e80223198930bbe623d0cb07.raw.gz",
+      "sha256": "9cedad341b513deee3ebb003a01d07e967301c22e80223198930bbe623d0cb07",
+      "byteLength": 167731
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/15f8347e359494843455140934a2909bfa152242f4b334cc908b66ac9bfb1497.text.gz",
+      "sha256": "15f8347e359494843455140934a2909bfa152242f4b334cc908b66ac9bfb1497",
+      "byteLength": 9862
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/e892ee7527ea0d63ab99f83653184b3069557904e54af7a6071d521c9959f7c2.raw.gz",
+      "sha256": "e892ee7527ea0d63ab99f83653184b3069557904e54af7a6071d521c9959f7c2",
+      "byteLength": 24020
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/10276be4933631bb34cba4250ad6bb9b2fb802441cda34772c232d12e2cfbe9f.raw.gz",
+      "sha256": "10276be4933631bb34cba4250ad6bb9b2fb802441cda34772c232d12e2cfbe9f",
+      "byteLength": 61980
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/eb0b1a50794f2bf02c7ac670a9413c03050204ab5b99b71112dab58fe9fc1cfb.text.gz",
+      "sha256": "eb0b1a50794f2bf02c7ac670a9413c03050204ab5b99b71112dab58fe9fc1cfb",
+      "byteLength": 19655
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/16a215873bd69663859fea29165edfc17d291ed0cb6f860a0cb4ff2a35a6f588.raw.gz",
+      "sha256": "16a215873bd69663859fea29165edfc17d291ed0cb6f860a0cb4ff2a35a6f588",
+      "byteLength": 49784
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/2b5169e1a45d3adaa73537a73c7ec1429d15ec1905ae059f96752ca8262fc931.text.gz",
+      "sha256": "2b5169e1a45d3adaa73537a73c7ec1429d15ec1905ae059f96752ca8262fc931",
+      "byteLength": 5087
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/fbc857b142fa63aacca8cf6ed86a4ccf8ef577ef4c59f959db5165a9006fc2b4.raw.gz",
+      "sha256": "fbc857b142fa63aacca8cf6ed86a4ccf8ef577ef4c59f959db5165a9006fc2b4",
+      "byteLength": 28511
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/85ffe3990a67c3e6d86f808ddabc08af087f4cccbc15c7bc2d21d3c37d2622fe.text.gz",
+      "sha256": "85ffe3990a67c3e6d86f808ddabc08af087f4cccbc15c7bc2d21d3c37d2622fe",
+      "byteLength": 2727
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/02478963075106a0be04adf6e1cabab41805d82cad3efa1b0807dbed502cad19.raw.gz",
+      "sha256": "02478963075106a0be04adf6e1cabab41805d82cad3efa1b0807dbed502cad19",
+      "byteLength": 74993
+    },
+    {
+      "evidencePath": "quality/schools/2026-10-27/programme-evidence/ecd22a50a958b1fcc5c80e7c9549d29e2ddd52553e363cf3302b45dba5336007.text.gz",
+      "sha256": "ecd22a50a958b1fcc5c80e7c9549d29e2ddd52553e363cf3302b45dba5336007",
+      "byteLength": 3634
+    }
+  ],
+  "sha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433"
+}

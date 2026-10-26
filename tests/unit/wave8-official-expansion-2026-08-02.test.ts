@@ -10,6 +10,7 @@ import programs from '../../content/data/programs.json'
 import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
+import originalScope from '../../content/maintenance/scope-272.v1.json'
 import { findSemanticProgramDuplicates } from '../../scripts/quality/check-program-coverage'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
@@ -110,11 +111,12 @@ describe('official catalog expansion wave 8 on 2026-08-02', () => {
   })
 
   it('retains the historical inventory singleton bound without claiming present coverage', () => {
+    const originalIds = new Set(originalScope.schools.map(school => school.universityId))
     const counts = new Map<string, number>()
     for (const program of data.programs) {
       counts.set(program.universityId, (counts.get(program.universityId) ?? 0) + 1)
     }
-    expect(data.universities.filter((university) => (counts.get(university.id) ?? 0) === 1).length)
+    expect(data.universities.filter((university) => originalIds.has(university.id) && (counts.get(university.id) ?? 0) === 1).length)
       .toBeLessThanOrEqual(2)
   })
 
