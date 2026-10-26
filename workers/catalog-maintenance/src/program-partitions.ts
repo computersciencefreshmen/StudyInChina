@@ -39,3 +39,16 @@ export async function programPartitionInput(text: string, fullTextSha256: string
 export function namesBelongToPartition(name: { en?: string; zh?: string }, targetText: string | null): boolean {
   return targetText === null || Object.values(name).every(value => normalizeEvidenceText(targetText).includes(normalizeEvidenceText(value)))
 }
+
+/** Hints preserve readable row cells from noisy PDF text. Models must still
+ * independently prove every emitted name, degree and admissions scope. */
+export function programPartitionRowHints(targetText: string | null, rowNumbers: number[] = []) {
+  if (targetText === null) return []
+  const rows = [...targetText.matchAll(/(?:^|\s)(\d{1,3})\s+([\p{Script=Han}][\p{Script=Han}·]{1,30})(?=\s|$)/gu)]
+  return rows.flatMap((match, index) => {
+    if (!rowNumbers.includes(Number(match[1])) || /^(?:全日制|学术学位|专业学位|硕士|博士|中文|英文)$/u.test(match[2])) return []
+    const row = targetText.slice(match.index, rows[index + 1]?.index ?? targetText.length)
+    const degreeLevel = /博士|Ph\.?D\.?/iu.test(row) ? 'doctorate' : /硕士|\bMaster\b/iu.test(row) ? 'master' : null
+    return [{ kind: 'numbered-program-row', name: match[2], degreeLevel, rowNumber: Number(match[1]) }]
+  })
+}

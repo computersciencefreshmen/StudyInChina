@@ -9,6 +9,7 @@ import { ModelAdmission } from '../../workers/catalog-maintenance/src/admission'
 import { processMessage } from '../../workers/catalog-maintenance/src/index'
 import { control, seed, setControls } from '../../workers/catalog-maintenance/src/repository'
 import { prepareExport, readExport } from '../../workers/catalog-maintenance/src/exports'
+import { promoteProgramPartitions } from '../../workers/catalog-maintenance/src/program-partition-queue'
 import { canonical, digest, nowIso, record } from '../../workers/catalog-maintenance/src/util'
 import { assertSafeSourceUrl } from '../../workers/ingestion/src/security'
 import type { MaintenanceEnv } from '../../workers/catalog-maintenance/src/types'
@@ -19,6 +20,7 @@ export async function runLocalMaintenance(options: {
   directory: string; seedFile: string; sourceFile: string; workerUrl: string; adminToken: string;
   execute: boolean; maxJobs?: number; reparseCompletedPrograms?: boolean; reparseUniversityIds?: string[];
   programExtractionContractVersion?: string; programsOnly?: boolean; deferExport?: boolean;
+  resumeProgramPartitions?: boolean;
 }) {
   const directory = resolve(options.directory)
   if (!options.execute) throw new Error('explicit_execute_required')
@@ -143,6 +145,7 @@ export async function runLocalMaintenance(options: {
     }
     let processed = 0
     for (; processed < (options.maxJobs ?? 40); processed++) {
+      if (options.resumeProgramPartitions) await promoteProgramPartitions(env, selectedIds)
       const job = await runtime.db.prepare(`SELECT job_id,stage,source_id FROM maintenance_jobs WHERE source_id IN(${selectedIds.map(() => '?').join(',')})${options.programsOnly ? " AND stage IN('capture','extract')" : ''} AND status IN('queued','retry') AND due_at<=? ORDER BY CASE stage WHEN 'capture' THEN 0 WHEN 'award' THEN 1 WHEN 'extract' THEN 2 ELSE 3 END,created_at LIMIT 1`)
         .bind(...selectedIds, nowIso()).first<{ job_id: string; stage: string; source_id: string }>()
       if (!job) break
@@ -185,7 +188,8 @@ async function main() {
     execute: args.includes('--execute'), maxJobs: option('--max-jobs') ? Number(option('--max-jobs')) : undefined,
     reparseCompletedPrograms: args.includes('--reparse-completed-programs'),
     programExtractionContractVersion: option('--program-extraction-contract-version'),
-    programsOnly: args.includes('--programs-only'), deferExport: args.includes('--defer-export') })
+    programsOnly: args.includes('--programs-only'), deferExport: args.includes('--defer-export'),
+    resumeProgramPartitions: args.includes('--resume-program-partitions') })
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch(() => {
   console.error('local_maintenance_failed; inspect the durable journal and report without replaying unknown sends')

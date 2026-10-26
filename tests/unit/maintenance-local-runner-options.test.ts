@@ -6,12 +6,13 @@ import { basename, dirname, join, resolve } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { MaintenanceEnv } from '../../workers/catalog-maintenance/src/types'
 
-const mocked = vi.hoisted(() => ({ open: vi.fn(), quota: vi.fn(), seed: vi.fn(), control: vi.fn(), controls: vi.fn(), process: vi.fn(), prepare: vi.fn(), read: vi.fn() }))
+const mocked = vi.hoisted(() => ({ open: vi.fn(), quota: vi.fn(), seed: vi.fn(), control: vi.fn(), controls: vi.fn(), process: vi.fn(), prepare: vi.fn(), read: vi.fn(), promote: vi.fn() }))
 vi.mock('../../scripts/maintenance/local-runtime', () => ({ openLocalRuntime: mocked.open }))
 vi.mock('../../scripts/ingestion/minimax-quota', () => ({ getCcSwitchQuotaConfig: mocked.quota }))
 vi.mock('../../workers/catalog-maintenance/src/repository', () => ({ seed: mocked.seed, control: mocked.control, setControls: mocked.controls }))
 vi.mock('../../workers/catalog-maintenance/src/index', () => ({ processMessage: mocked.process }))
 vi.mock('../../workers/catalog-maintenance/src/exports', () => ({ prepareExport: mocked.prepare, readExport: mocked.read }))
+vi.mock('../../workers/catalog-maintenance/src/program-partition-queue', () => ({ promoteProgramPartitions: mocked.promote }))
 import { runLocalMaintenance } from '../../scripts/maintenance/run-local-maintenance'
 
 const roots: string[] = [], hash = (value: string) => createHash('sha256').update(value).digest('hex'), pin = 'a'.repeat(64)
@@ -46,6 +47,7 @@ async function fixture() {
   mocked.process.mockImplementation(async (_env: MaintenanceEnv, message: { jobId: string }) => { jobs.find(job => job.job_id === message.jobId)!.status = 'done' })
   mocked.prepare.mockResolvedValue({ batchId: 'fixture-export', proposalCount: 2, sha256: pin })
   mocked.read.mockResolvedValue({ batchId: 'fixture-export', proposals: [] })
+  mocked.promote.mockResolvedValue({ promoted: 0, jobIds: [] })
   let fence: Record<string, unknown> | null = null
   const fetcher = vi.fn<typeof fetch>(async (input, init) => {
     const url = new URL(String(input))
@@ -90,6 +92,7 @@ describe('explicit local programme batch options', () => {
     expect(mocked.prepare).toHaveBeenCalledOnce()
     expect(mocked.read).toHaveBeenCalledOnce()
     expect(report.processed).toBe(4)
+    expect(mocked.promote).not.toHaveBeenCalled()
     expect(existsSync(join(f.directory, 'download/export.json'))).toBe(true)
   })
 
@@ -108,5 +111,14 @@ describe('explicit local programme batch options', () => {
     expect(mocked.open).not.toHaveBeenCalled()
     expect(mocked.quota).not.toHaveBeenCalled()
     expect(f.fetcher).not.toHaveBeenCalled()
+  })
+
+  it('resumes waiting programme parts only when explicitly enabled, and stops when nothing is runnable', async () => {
+    const f = await fixture()
+    const report = await runLocalMaintenance({ ...f.options, resumeProgramPartitions: true, programsOnly: true, deferExport: true })
+    expect(report.processed).toBe(2)
+    expect(mocked.promote).toHaveBeenCalledTimes(3)
+    expect(mocked.promote.mock.calls.every(([, ids]) => ids.length === 1 && ids[0] === f.jobs[0].source_id)).toBe(true)
+    expect(mocked.process).toHaveBeenCalledTimes(2)
   })
 })

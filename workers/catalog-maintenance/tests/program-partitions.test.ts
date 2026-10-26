@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { namesBelongToPartition, programPartitionInput } from '../src/program-partitions'
+import { namesBelongToPartition, programPartitionInput, programPartitionRowHints } from '../src/program-partitions'
 import { canonical, digest } from '../src/util'
 
 const text = 'International students: bachelor catalogue.\n1 Accounting\n2 Biology\n'
@@ -33,4 +33,12 @@ test('absence of an explicit partition retains the complete original source with
   assert.equal(input.text.length, 50001)
   assert.equal(input.metadata, null)
   assert.equal(namesBelongToPartition({ en: 'unpartitioned' }, null), true)
+})
+test('numbered row hints copy only readable cells within the explicitly targeted row numbers', () => {
+  const rows = '1 比较教育学 英文/English 博士/Ph.D. 学术学位 2 比较教育学 中文/Chinese 硕士/Master 3 高等教育学 English 博士/Ph.D.'
+  assert.deepEqual(programPartitionRowHints(rows, [1, 2]), [
+    { kind: 'numbered-program-row', name: '比较教育学', degreeLevel: 'doctorate', rowNumber: 1 },
+    { kind: 'numbered-program-row', name: '比较教育学', degreeLevel: 'master', rowNumber: 2 },
+  ])
+  assert.deepEqual(programPartitionRowHints(null, [1]), [])
 })
