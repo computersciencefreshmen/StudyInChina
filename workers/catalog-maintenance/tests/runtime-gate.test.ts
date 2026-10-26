@@ -28,8 +28,9 @@ test('authenticated runtime gate reads exactly one control checkpoint without ag
     assert.equal(body.control?.seed_complete, 1)
     assert.equal(body.control?.targets_complete, 1)
     assert.equal(sql.length, 1)
-    assert.match(sql[0], /^SELECT scope_sha256,input_catalog_sha256,seed_sha256,legacy_guard_sha256,enabled,models_enabled,seed_complete,targets_complete,revision FROM maintenance_control WHERE singleton=1$/)
-    assert.deepEqual(Object.keys(body.control!).sort(), ['scope_sha256','input_catalog_sha256','seed_sha256','legacy_guard_sha256','enabled','models_enabled','seed_complete','targets_complete','revision'].sort())
+    assert.match(sql[0], /^SELECT scope_sha256,input_catalog_sha256,seed_sha256,legacy_guard_sha256,enabled,models_enabled,seed_complete,targets_complete,canary_json,revision FROM maintenance_control WHERE singleton=1$/)
+    assert.deepEqual(Object.keys(body.control!).sort(), ['scope_sha256','input_catalog_sha256','seed_sha256','legacy_guard_sha256','enabled','models_enabled','seed_complete','targets_complete','canary_json','revision'].sort())
+    assert.deepEqual(JSON.parse(body.control!.canary_json), seedInput().schools.slice(0, 5).map(school => school.universityId))
     const plan = f.db.sqlite.prepare(`EXPLAIN QUERY PLAN ${sql[0]}`).all()
     assert.ok(plan.some(row => /SEARCH maintenance_control USING INTEGER PRIMARY KEY/.test(String(row.detail))))
   } finally { f.db.sqlite.close() }

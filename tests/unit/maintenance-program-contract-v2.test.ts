@@ -95,6 +95,14 @@ describe('explicit programme extraction contract v2', () => {
     expect(f.proposals).toEqual([])
   })
 
+  it('persists one proposal for repeated teaching-track identities without weakening the batch duplicate guard', async () => {
+    const f = fixture(); f.env.PROGRAM_EXTRACTION_CONTRACT_VERSION = '2'
+    f.output(() => ({ programs: [programme(), programme()] }))
+    expect(await extractIdentities(f.env, f.job, f.row)).toEqual({ ready: 1, held: 0 })
+    expect(f.proposals).toHaveLength(1)
+    expect(f.requests).toHaveLength(2)
+  })
+
   it('holds real independent disagreements and keeps v2 candidate IDs separate from v1 history', async () => {
     const f = fixture(); await extractIdentities(f.env, f.job, f.row)
     const old = f.proposals[0], oldReservation = f.requests[0].reservationKey

@@ -32,6 +32,7 @@ export function parsePrograms(output:unknown,text:string,schools:SchoolRow[],row
   const programs=record(output)?.programs
   if(!Array.isArray(programs)||programs.length>100)throw new MaintenanceError('model_program_schema_invalid')
   const accepted:ExtractedProgram[]=[],hosts=JSON.parse(row.allowed_hosts_json)as string[]
+  const identities=new Set<string>()
   const urls=new Set([snapshot.sourceUrl,snapshot.finalUrl,...snapshot.parserCandidates.flatMap(value=>{const r=record(value);return typeof r?.officialUrl==='string'?[r.officialUrl]:[]})])
   for(const item of programs) {
     const raw=record(item)
@@ -59,6 +60,11 @@ export function parsePrograms(output:unknown,text:string,schools:SchoolRow[],row
     const program:ExtractedProgram={universityId:String(universityId),name:name as ExtractedProgram['name'],degreeLevel:degree,programType:type,programUrl,evidence:{quote:raw.evidence.quote,locator:'text:document'},internationalEvidence:{quote:raw.internationalEvidence.quote,locator:'text:document'},fieldEvidence:fields.map(e=>({...e,locator:'text:document'}))}
     if(typeof raw.officialProgramCode==='string'&&fields.some(e=>e.fieldPath==='officialProgramCode'&&e.quote.includes(raw.officialProgramCode as string)))program.officialProgramCode=raw.officialProgramCode
     if(typeof raw.departmentCode==='string'&&fields.some(e=>e.fieldPath==='departmentCode'&&e.quote.includes(raw.departmentCode as string)))program.departmentCode=raw.departmentCode
+    // Repeated teaching-language rows can describe one identity. Collapse only
+    // the complete validated core and retain the first located evidence.
+    const key=canonical(identityCore(program))
+    if(identities.has(key))continue
+    identities.add(key)
     accepted.push(program)
   }
   return accepted

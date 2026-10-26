@@ -243,8 +243,11 @@ export class ModelAdmission {
       if(prior.requestSha256!==requestSha256) return json({ok:false,error:'reservation_content_conflict'},409)
       if(prior.state==='completed'&&prior.result) return json({ok:true,...prior.result,reused:true})
       if(prior.state!=='known_failed'||!prior.retryable)return json({ok:false,error:'prior_model_outcome_requires_review'},409)
-      if((prior.notBefore??0)>Date.now())return json({ok:false,error:'model_http_429',retryAfter:Math.ceil(((prior.notBefore??0)-Date.now())/1000)},429)
     }
+    // Parser revalidation may consume only an exact completed cached result.
+    // A miss must not query quota, create a reservation, or reach any paid send.
+    if(this.env.MINIMAX_COMPLETED_CACHE_ONLY==='true')return json({ok:false,error:'model_completed_cache_required'},409)
+    if(prior&&(prior.notBefore??0)>Date.now())return json({ok:false,error:'model_http_429',retryAfter:Math.ceil(((prior.notBefore??0)-Date.now())/1000)},429)
     // Quota queries do not execute a model. Every admission refreshes the official
     // shared account windows; unrelated applications may consume the same plan.
     const quota=await fetchPlanQuota(this.env,this.fetcher)

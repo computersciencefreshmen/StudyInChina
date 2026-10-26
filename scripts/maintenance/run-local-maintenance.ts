@@ -20,7 +20,7 @@ export async function runLocalMaintenance(options: {
   directory: string; seedFile: string; sourceFile: string; workerUrl: string; adminToken: string;
   execute: boolean; maxJobs?: number; reparseCompletedPrograms?: boolean; reparseUniversityIds?: string[];
   programExtractionContractVersion?: string; programsOnly?: boolean; deferExport?: boolean;
-  resumeProgramPartitions?: boolean;
+  resumeProgramPartitions?: boolean; completedCacheOnly?: boolean;
 }) {
   const directory = resolve(options.directory)
   if (!options.execute) throw new Error('explicit_execute_required')
@@ -61,6 +61,7 @@ export async function runLocalMaintenance(options: {
       MINIMAX_SUBSCRIPTION_KEY: config.key, MINIMAX_MODEL: 'MiniMax-M3', MINIMAX_ANTHROPIC_BASE: base,
       MAINTENANCE_ENABLED: 'true', SCOPE_REGISTRY_SHA256: scope.sha256, MODEL_CONCURRENCY: '2',
       MINIMAX_CREDIT_FALLBACK_DISABLED: 'false',
+      ...(options.completedCacheOnly ? { MINIMAX_COMPLETED_CACHE_ONLY: 'true' } : {}),
       ...(options.programExtractionContractVersion === undefined ? {} : { PROGRAM_EXTRACTION_CONTRACT_VERSION: options.programExtractionContractVersion }),
     }
     await seed(env, seedInput)
@@ -189,7 +190,7 @@ async function main() {
     reparseCompletedPrograms: args.includes('--reparse-completed-programs'),
     programExtractionContractVersion: option('--program-extraction-contract-version'),
     programsOnly: args.includes('--programs-only'), deferExport: args.includes('--defer-export'),
-    resumeProgramPartitions: args.includes('--resume-program-partitions') })
+    resumeProgramPartitions: args.includes('--resume-program-partitions'), completedCacheOnly: args.includes('--completed-cache-only') })
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch(() => {
   console.error('local_maintenance_failed; inspect the durable journal and report without replaying unknown sends')

@@ -24,6 +24,7 @@ export type MaintenanceEnv = {
   SCOPE_REGISTRY_SHA256?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;
   USER_AGENT?: string; FETCH_CONCURRENCY?: string; MODEL_CONCURRENCY?: string;
   PROGRAM_EXTRACTION_CONTRACT_VERSION?: string;
+  MINIMAX_COMPLETED_CACHE_ONLY?: string;
 }
 export type Control = {
   singleton: number; scope_sha256: string; input_catalog_sha256: string; seed_sha256: string;

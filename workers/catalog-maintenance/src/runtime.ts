@@ -156,8 +156,8 @@ export async function runtimeStatus(env:MaintenanceEnv){
 export async function runtimeGate(env:MaintenanceEnv){
   const base={format:'studyinchina.cloud-maintenance-runtime-gate',version:1,observedAt:nowIso(),fullHealthChecked:false}
   try{
-    type Checkpoint=Pick<Control,'scope_sha256'|'input_catalog_sha256'|'seed_sha256'|'legacy_guard_sha256'|'enabled'|'models_enabled'|'seed_complete'|'targets_complete'|'revision'>
-    const checkpoint=await env.PIPELINE_DB.prepare('SELECT scope_sha256,input_catalog_sha256,seed_sha256,legacy_guard_sha256,enabled,models_enabled,seed_complete,targets_complete,revision FROM maintenance_control WHERE singleton=1').first<Checkpoint>()
+    type Checkpoint=Pick<Control,'scope_sha256'|'input_catalog_sha256'|'seed_sha256'|'legacy_guard_sha256'|'enabled'|'models_enabled'|'seed_complete'|'targets_complete'|'canary_json'|'revision'>
+    const checkpoint=await env.PIPELINE_DB.prepare('SELECT scope_sha256,input_catalog_sha256,seed_sha256,legacy_guard_sha256,enabled,models_enabled,seed_complete,targets_complete,canary_json,revision FROM maintenance_control WHERE singleton=1').first<Checkpoint>()
     const scopeMatches=Boolean(checkpoint&&HASH.test(checkpoint.scope_sha256)&&checkpoint.scope_sha256===env.SCOPE_REGISTRY_SHA256)
     return{...base,backend:{state:'ready',retryAt:null,errorKind:null},enabled:env.MAINTENANCE_ENABLED==='true'&&checkpoint?.enabled===1&&scopeMatches,scopeMatches,control:checkpoint}
   }catch(error){const state=backendCode(error);return{...base,backend:{state,retryAt:state==='quota_wait'?nextD1Reset():null,errorKind:backendErrorKind(error)},enabled:false,scopeMatches:false,control:null}}
