@@ -14,11 +14,13 @@ import { acknowledge, prepareExport, readExport } from './exports'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
 import type { MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
-import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus } from './runtime'
-import { after, authorized, HASH, json, nowIso, requestJson } from './util'
+import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus,runtimeGate } from './runtime'
+import { after, authorized, gateRequest, HASH, json, nowIso, requestJson } from './util'
+import { uploadOfflineArtifact,uploadOfflineManifest,processOfflineHandoff,offlineHandoffMessage,offlineHandoffStatus,reopenOfflineHandoff } from './offline-handoff'
 
 export { ModelAdmission }
 export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessage):Promise<void> {
+  if(offlineHandoffMessage(message)){await processOfflineHandoff(env,message.offlineHandoffBatchId!,message.offlineHandoffSha256!);return}
   if(message?.version===1&&message.bootstrapUploadSha256&&HASH.test(message.bootstrapUploadSha256)){await preparePendingBootstrap(env,message.bootstrapUploadSha256);return}
   if(message?.version===1&&message.bootstrapSeedSha256&&HASH.test(message.bootstrapSeedSha256)){await resumeBootstrapSeed(env,message.bootstrapSeedSha256);return}
   if(message?.version===1&&message.discoveryManifestSha256&&HASH.test(message.discoveryManifestSha256)){await processDiscoveryFrontier(env,message.discoveryManifestSha256,message.discoveryOffset??0);return}
@@ -79,6 +81,12 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   if(url.pathname==='/health'&&request.method==='GET')return json({ok:true,service:'studyinchina-catalog-maintenance',version:'1.0.0',publicationPerformed:false})
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
   try {
+    if(url.pathname==='/offline-fence'&&request.method==='GET')return gateRequest(env,'/offline-fence/status',{})
+    if(['/offline-fence/acquire','/offline-fence/release'].includes(url.pathname)&&request.method==='POST')return gateRequest(env,url.pathname,await requestJson(request,4096))
+    if(url.pathname==='/offline-fence/reopen'&&request.method==='POST')return json(await reopenOfflineHandoff(env,await requestJson(request,4096)))
+    if(url.pathname==='/offline-handoff/artifact'&&request.method==='POST')return json(await uploadOfflineArtifact(env,request))
+    if(url.pathname==='/offline-handoff/manifest'&&request.method==='POST')return json(await uploadOfflineManifest(env,request))
+    if(url.pathname==='/offline-handoff'&&request.method==='GET')return json(await offlineHandoffStatus(env,url.searchParams.get('batchId')??''))
     if(url.pathname==='/seed'&&request.method==='POST')return json(await seed(env,await requestJson(request,8*1024*1024),Date.now(),true))
     if(url.pathname==='/bootstrap'&&request.method==='POST')return json(await registerBootstrapRequest(env,request))
     if(url.pathname==='/controls'&&request.method==='POST')return json(await setControls(env,await requestJson(request,32768)))
@@ -88,6 +96,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/documents'&&request.method==='GET')return json(await listPendingDocuments(env))
     if(url.pathname==='/documents'&&request.method==='POST')return json(await acceptDocumentDerivative(env,await requestJson(request,3*1024*1024)))
     if(url.pathname==='/status'&&request.method==='GET')return json(await runtimeStatus(env))
+    if(url.pathname==='/runtime-gate'&&request.method==='GET'&&!url.search)return json(await runtimeGate(env))
     if(url.pathname==='/schools'&&request.method==='GET')return json(await listSchoolProgress(env))
     if(url.pathname==='/reconciliations'&&request.method==='POST')return json(await submitSchoolReconciliation(env,await requestJson(request,256*1024)))
     if(url.pathname==='/publications'&&request.method==='GET') {
@@ -104,7 +113,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/ack'&&request.method==='POST')return json(await acknowledge(env,await requestJson(request,65536)))
     if(url.pathname==='/artifacts'&&request.method==='GET') {
       const key=url.searchParams.get('key')??''
-      if(!/^maintenance\/[a-zA-Z0-9/_-]+(?:\.[a-zA-Z0-9]+)?$/.test(key)||key.includes('..'))throw new MaintenanceError('artifact_key_invalid')
+      if(!/^maintenance\/[a-zA-Z0-9/_-]+(?:\.[a-zA-Z0-9]+)*$/.test(key)||key.includes('..'))throw new MaintenanceError('artifact_key_invalid')
       const object=await env.SNAPSHOTS_BUCKET.get(key)
       if(!object)return json({ok:false,error:'artifact_not_found'},404)
       if(object.size!==undefined&&object.size>10*1024*1024)throw new MaintenanceError('artifact_too_large')
@@ -115,7 +124,9 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     return json({ok:false,error:'not_found'},404)
   } catch(error) {
     const code=error instanceof MaintenanceError?error.code:'request_invalid_or_backend_unavailable'
-    if(code==='no_ready_proposals'||code==='export_cadence_wait')return new Response(null,{status:204,headers:{'cache-control':'no-store'}})
+    const exportWait=code==='offline_handoff_wait'||code==='export_capacity_wait'
+    if(code==='no_ready_proposals'||code==='export_cadence_wait'||exportWait&&url.pathname==='/exports'&&request.method==='POST')return new Response(null,{status:204,headers:{'cache-control':'no-store',...(exportWait?{'retry-after':'300'}:{})}})
+    if(exportWait)return new Response(JSON.stringify({ok:false,error:code,retryAfter:300}),{status:429,headers:{'content-type':'application/json','cache-control':'no-store','retry-after':'300','x-content-type-options':'nosniff'}})
     return json({ok:false,error:code},code==='export_not_found'?404:409)
   }
 }

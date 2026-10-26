@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it, vi } from 'vitest'
 import { extractScholarshipIdentities, parseScholarshipIdentities, type ScholarshipIdentityModelRunner } from '../../workers/catalog-maintenance/src/scholarship-identities'
 import type { CapturedSnapshot } from '../../workers/catalog-maintenance/src/capture'
 import type { JobRow, MaintenanceEnv, ModelRequest, SchoolRow, SourceRow } from '../../workers/catalog-maintenance/src/types'
-import type { MaintenanceProposal } from '../../scripts/maintenance/contracts'
+import { canonicalJson, type MaintenanceProposal } from '../../scripts/maintenance/contracts'
 
 beforeAll(() => vi.stubGlobal('crypto', webcrypto))
 const hash = (value: string) => createHash('sha256').update(value).digest('hex')
@@ -108,6 +108,44 @@ describe('document-level international scholarship identity discovery', () => {
       if (kind === 'uncaptured-url') value.scholarshipUrl = 'https://example.edu.cn/different-page'
       expect(parseScholarshipIdentities({ scholarships: [value] }, text, [school], f.row, f.snapshot)).toEqual([])
     }
+  })
+
+  it('retains a proven English award while dropping an unsupported translation or English copy in zh', () => {
+    const f = setup()
+    for (const zh of ['示例校长奖学金', award().name.en]) {
+      const value = { ...award(), name: { ...award().name, zh },
+        fieldEvidence: [...award().fieldEvidence, { fieldPath: 'name.zh', quote: award().name.en, locator: 'document' }] }
+      const parsed = parseScholarshipIdentities({ scholarships: [value] }, text, [school], f.row, f.snapshot)
+      expect(parsed).toHaveLength(1)
+      expect(parsed[0].name).toEqual(award().name)
+      expect(parsed[0].fieldEvidence.some(field => field.fieldPath === 'name.zh')).toBe(false)
+    }
+  })
+
+  it('does not repair spacing in names or relax the full institution affiliation requirement', () => {
+    const f = setup()
+    const value = award()
+    value.name.en = 'Example President-Scholarship'
+    expect(parseScholarshipIdentities({ scholarships: [value] }, text, [school], f.row, f.snapshot)).toEqual([])
+    const alias = award()
+    alias.institutionEvidence.quote = alias.name.en
+    expect(parseScholarshipIdentities({ scholarships: [alias] }, text, [school], f.row, f.snapshot)).toEqual([])
+  })
+
+  it('appends parser-v2 candidates without overwriting a held legacy candidate or changing reservations', async () => {
+    const f = setup(), mock = model()
+    await extractScholarshipIdentities(f.env, f.job, f.row, mock.runner)
+    const current = f.proposals[0]
+    const core = { universityId: school.university_id, name: award().name, providerType: 'university', scholarshipUrl: url }
+    const legacy = { ...current, id: `maintenance-scholarship-${hash(`${sourceId}:${f.snapshot.rawSha256}:${canonicalJson(core)}`)}`, status: 'held' as const }
+    f.proposals.splice(0, 1, legacy)
+    await extractScholarshipIdentities(f.env, f.job, f.row, mock.runner)
+    expect(f.proposals).toHaveLength(2)
+    expect(f.proposals[0]).toBe(legacy)
+    expect(f.proposals[1].id).toBe(current.id)
+    expect(f.proposals[1].id).not.toBe(legacy.id)
+    expect(mock.requests[0].reservationKey).toBe(mock.requests[2].reservationKey)
+    expect(mock.requests[1].reservationKey).toBe(mock.requests[3].reservationKey)
   })
 
   it('fails before model requests on mismatched saved bytes or overlarge unpartitioned documents', async () => {

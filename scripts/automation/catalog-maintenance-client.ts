@@ -1,8 +1,9 @@
 import { createHash } from 'node:crypto'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, resolve, relative, isAbsolute } from 'node:path'
-import { pathToFileURL } from 'node:url'
-import { maintenanceCandidateExportSchema, exportContentSha256, canonicalJson, type CandidateExport } from '../maintenance/contracts'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+import { z } from 'zod'
+import { maintenanceCandidateExportSchema, exportContentSha256, canonicalJson, maintenanceScopeSchema, type CandidateExport } from '../maintenance/contracts'
 import type { CanonicalMaintenanceReceipt } from './prepare-maintenance-catalog'
 
 export type MaintenanceClient = {
@@ -12,14 +13,78 @@ export type MaintenanceClient = {
 
 /** A known shared-quota or initial-seed wait is normal, not a failed export. */
 export async function maintenanceRuntimeGate(client: MaintenanceClient) {
-  const status = await client.json('/status') as { format?: string; backend?: { state?: string }; enabled?: boolean;
-    control?: { seed_complete?: number; targets_complete?: number } | null }
-  if (status.format !== 'studyinchina.cloud-maintenance-status') throw new Error('maintenance_runtime_status_invalid')
+  const status = await client.json('/runtime-gate') as { format?: string; version?: number; fullHealthChecked?: boolean;
+    backend?: { state?: string }; enabled?: boolean; scopeMatches?: boolean;
+    control?: { scope_sha256?: string; input_catalog_sha256?: string; seed_sha256?: string; legacy_guard_sha256?: string;
+      revision?: number; seed_complete?: number; targets_complete?: number } | null }
+  if (status?.format !== 'studyinchina.cloud-maintenance-runtime-gate' || status.version !== 1 || status.fullHealthChecked !== false) throw new Error('maintenance_runtime_status_invalid')
   if (status.backend?.state === 'quota_wait') return { canRecover: false, canStart: false, reason: 'quota_wait' }
   if (status.backend?.state !== 'ready') throw new Error('maintenance_backend_unavailable')
+  if (status.control) {
+    if (status.scopeMatches !== true) return { canRecover: false, canStart: false, reason: 'scope_pin_mismatch' }
+    if (![status.control.scope_sha256,status.control.input_catalog_sha256,status.control.seed_sha256,status.control.legacy_guard_sha256].every(value => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value))
+      || !Number.isSafeInteger(status.control.revision) || Number(status.control.revision) < 0
+      || ![0,1].includes(Number(status.control.seed_complete)) || ![0,1].includes(Number(status.control.targets_complete))) throw new Error('maintenance_runtime_status_invalid')
+  }
   const canRecover = status.control?.seed_complete === 1
   return { canRecover, canStart: canRecover && status.enabled === true && status.control?.targets_complete === 1,
     reason: !canRecover ? 'seed_not_ready' : !status.enabled ? 'operator_pause' : status.control?.targets_complete !== 1 ? 'targets_not_ready' : 'ready' }
+}
+
+const INTENT_SCOPE='c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316'
+const INTENT_GUARDS='d86ec443468e22aa292235311751d0abcc6de30f4119024b3d8c2582b4198838'
+const INITIAL_CANARY=['uni-peking-university','uni-tsinghua-university','uni-zhejiang-university','uni-northwestern-polytechnical-university','uni-beijing-language-and-culture-university']
+const sameIds=(left:string[],right:string[])=>canonicalJson([...left].sort())===canonicalJson([...right].sort())
+export const maintenanceScopeIntentSchema=z.object({format:z.literal('studyinchina.maintenance-scope-intent'),version:z.literal(1),expectedRevision:z.literal(1),
+  scopeRegistrySha256:z.literal(INTENT_SCOPE),legacyGuardSha256:z.literal(INTENT_GUARDS),previousCanaryUniversityIds:z.array(z.string()).length(5),
+  desiredCanaryUniversityIds:z.array(z.string()).length(25),enabled:z.literal(true),modelsEnabled:z.literal(true)}).strict().refine(value=>
+  new Set(value.previousCanaryUniversityIds).size===5&&sameIds(value.previousCanaryUniversityIds,INITIAL_CANARY)
+  &&new Set(value.desiredCanaryUniversityIds).size===25&&value.previousCanaryUniversityIds.every(id=>value.desiredCanaryUniversityIds.includes(id)),
+'Scope intent must preserve the exact initial five schools and add twenty unique schools')
+
+/** Reconcile one versioned intent; never repeat an ambiguous POST within a run. */
+export async function activateMaintenanceScopeIntent(client:MaintenanceClient,value:unknown){
+  const parsed=maintenanceScopeIntentSchema.safeParse(value)
+  if(!parsed.success)throw new Error('maintenance_scope_intent_invalid')
+  const scopePath=import.meta.url.startsWith('file:')?resolve(dirname(fileURLToPath(import.meta.url)),'../../content/maintenance/scope-272.v1.json'):resolve('content/maintenance/scope-272.v1.json')
+  const intent=parsed.data,scope=maintenanceScopeSchema.parse(JSON.parse(await readFile(scopePath,'utf8')))
+  const {sha256,...scopeContent}=scope
+  if(sha256!==INTENT_SCOPE||createHash('sha256').update(canonicalJson(scopeContent)).digest('hex')!==INTENT_SCOPE)throw new Error('maintenance_scope_intent_registry_invalid')
+  const ids=new Set(scope.schools.map(school=>school.universityId))
+  if(intent.desiredCanaryUniversityIds.some(id=>!ids.has(id)))throw new Error('maintenance_scope_intent_school_unknown')
+  const base={format:'studyinchina.maintenance-scope-intent-result',version:1,intentSha256:createHash('sha256').update(canonicalJson(intent)).digest('hex'),observedAt:new Date().toISOString()}
+  type Observation={state:'pending'|'held'|'satisfied'|'eligible';reason:string;observedRevision:number|null}
+  const observe=async():Promise<Observation>=>{
+    let raw:unknown
+    try{raw=await client.json('/runtime-gate')}catch{return{state:'pending',reason:'runtime_gate_unavailable',observedRevision:null}}
+    const result=raw as {format?:string;version?:number;fullHealthChecked?:boolean;backend?:{state?:string};enabled?:boolean;scopeMatches?:boolean;
+      control?:{scope_sha256?:string;legacy_guard_sha256?:string;input_catalog_sha256?:string;seed_sha256?:string;revision?:number;enabled?:number;models_enabled?:number;seed_complete?:number;targets_complete?:number;canary_json?:string}|null}
+    if(result?.format!=='studyinchina.cloud-maintenance-runtime-gate'||result.version!==1||result.fullHealthChecked!==false)return{state:'held',reason:'runtime_gate_invalid',observedRevision:null}
+    if(result.backend?.state==='quota_wait')return{state:'pending',reason:'quota_wait',observedRevision:null}
+    if(result.backend?.state!=='ready')return{state:'pending',reason:'backend_unavailable',observedRevision:null}
+    const cfg=result.control
+    if(!cfg)return{state:'pending',reason:'seed_not_ready',observedRevision:null}
+    const revision=Number.isSafeInteger(cfg.revision)&&Number(cfg.revision)>=0?Number(cfg.revision):null
+    const out=(state:Observation['state'],reason:string):Observation=>({state,reason,observedRevision:revision})
+    if(!result.scopeMatches||cfg.scope_sha256!==intent.scopeRegistrySha256)return out('held','scope_pin_mismatch')
+    if(cfg.legacy_guard_sha256!==intent.legacyGuardSha256)return out('held','legacy_guard_pin_mismatch')
+    if(revision===null||![cfg.input_catalog_sha256,cfg.seed_sha256].every(pin=>typeof pin==='string'&&/^[a-f0-9]{64}$/u.test(pin)))return out('held','runtime_gate_invalid')
+    if(cfg.enabled!==1||cfg.models_enabled!==1||result.enabled!==true)return out('held','operator_pause_preserved')
+    if(cfg.seed_complete!==1||cfg.targets_complete!==1)return out('pending','seed_or_targets_not_ready')
+    let canary:unknown
+    try{canary=JSON.parse(String(cfg.canary_json))}catch{return out('held','canary_state_invalid')}
+    if(!Array.isArray(canary)||canary.length>272||new Set(canary).size!==canary.length||canary.some(id=>typeof id!=='string'||!ids.has(id)))return out('held','canary_state_invalid')
+    if(sameIds(canary,intent.desiredCanaryUniversityIds))return out('satisfied','desired_scope_observed')
+    if(revision!==intent.expectedRevision)return out('held','control_revision_changed')
+    if(!sameIds(canary,intent.previousCanaryUniversityIds))return out('held','previous_scope_changed')
+    return out('eligible','exact_previous_checkpoint_observed')
+  }
+  const before=await observe()
+  if(before.state!=='eligible')return{...base,...before,postAttempted:false}
+  try{await client.json('/controls','POST',{expectedRevision:intent.expectedRevision,legacyGuardSha256:intent.legacyGuardSha256,enabled:true,modelsEnabled:true,canaryUniversityIds:intent.desiredCanaryUniversityIds})}catch{/* Reconcile once; a lost response is never permission to resend. */}
+  const after=await observe()
+  return after.state==='satisfied'||after.state==='held'?{...base,...after,postAttempted:true}
+    :{...base,state:'pending' as const,reason:'activation_outcome_unknown',observedRevision:after.observedRevision,postAttempted:true}
 }
 export function maintenanceClientFromEnvironment(environment: Record<string, string | undefined>, fetcher: typeof fetch = fetch): MaintenanceClient {
   let origin: URL
@@ -30,7 +95,10 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    const handoffRead = method === 'GET' && body === undefined
+      && /^\/(?:offline-fence|offline-handoff\?batchId=[a-zA-Z0-9_-]{1,101})$/u.test(path)
+    const runtimeGateRead = path === '/runtime-gate' && method === 'GET' && body === undefined
+    if (!handoffRead && !runtimeGateRead && !/^\/(?:status|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     try {
       const response = await fetcher(url, { method, headers: { Authorization: `Bearer ${token}`, ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },
@@ -136,6 +204,7 @@ async function main() {
       `can_recover=${gate.canRecover}\ncan_start=${gate.canStart}\nreason=${gate.reason}\n`, { flag: 'a' })
     console.log(JSON.stringify(gate)); return
   }
+  if(action==='activate-scope-intent'&&value){console.log(JSON.stringify(await activateMaintenanceScopeIntent(client,JSON.parse(await readFile(resolve(value),'utf8')))));return}
   if (action === 'advance-rollout' && !value) {
     const state = await client.json('/rollout') as { format?: string; backendState?: string; state?: string; expectedRevision?: number; reasons?: string[] }
     if (state.format !== 'studyinchina.maintenance-rollout') throw new Error('maintenance_rollout_status_invalid')
@@ -155,7 +224,7 @@ async function main() {
     console.log(JSON.stringify(result)); return
   }
   if (action === 'tick' && !value) { console.log(JSON.stringify(await client.json('/tick', 'POST', {}))); return }
-  throw new Error('Usage: catalog-maintenance-client.ts status | schools | tick | recover-publication | download <directory> | seed|targets|controls|ack|reconciliations <body.json>')
+  throw new Error('Usage: catalog-maintenance-client.ts status | schools | tick | recover-publication | activate-scope-intent <file> | download <directory> | seed|targets|controls|ack|reconciliations <body.json>')
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href)
   main().catch(error => { console.error(error instanceof Error && error.message.startsWith('maintenance_') ? error.message : 'maintenance_command_failed'); process.exitCode = 1 })

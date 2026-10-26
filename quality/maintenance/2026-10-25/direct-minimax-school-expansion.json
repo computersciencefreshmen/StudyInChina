@@ -1,0 +1,194 @@
+{
+  "format": "studyinchina.direct-minimax-school-expansion-receipt",
+  "version": 1,
+  "observedAt": "2026-10-25T07:08:15.209Z",
+  "baselineCommit": "a27210e318dedeb05307c4a267dc7fdabda887a2",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "seedSha256": "b1e4b976d1ef5af2995b1d4e683c1b8f7489228d1b0060628c810cf78675239c",
+  "legacyGuardSha256": "d86ec443468e22aa292235311751d0abcc6de30f4119024b3d8c2582b4198838",
+  "schoolScope": 272,
+  "priority": "schools-without-accepted-directory-programmes-first",
+  "sources": [
+    {
+      "universityId": "uni-northwestern-polytechnical-university",
+      "url": "https://studyat.nwpu.edu.cn/info/1009/10571.htm"
+    },
+    {
+      "universityId": "uni-peking-university",
+      "url": "https://www.isd.pku.edu.cn/cn/detail.php?id=839"
+    },
+    {
+      "universityId": "uni-beijing-language-and-culture-university",
+      "url": "https://admission.blcu.edu.cn/60/list.htm"
+    },
+    {
+      "universityId": "uni-northwestern-polytechnical-university",
+      "url": "https://studyat.nwpu.edu.cn/info/1011/2120.htm"
+    }
+  ],
+  "model": "MiniMax-M3",
+  "subscriptionOnly": true,
+  "attempts": [
+    {
+      "status": "completed",
+      "count": 6
+    }
+  ],
+  "paidRequestsRepeatedDuringReparse": 0,
+  "tokens": {
+    "input": 19010,
+    "output": 8671
+  },
+  "independentCanonicalValidation": {
+    "batchId": "maintenance-eed42d72-246a-4d52-a616-a5d50c584b1f",
+    "accepted": 12,
+    "held": 0,
+    "receiptSha256": "b337d452df69710fbb2e5cba053047aa08ac64e7d3351e2fb7eaab98dd023761",
+    "outputCatalogSha256": "5e89889f241e34c92fdcd356f2ac86359f3752442dcc6d0217399c18b63fe884",
+    "programmeIdentities": [
+      {
+        "recordId": "program-a712f73c46146d5027763d4e",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:internationalmasterofpublicadministrationimpaprogram"
+      },
+      {
+        "recordId": "program-1467383e7a021ea86dc02b98",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:globalmasterinmanagementmim"
+      },
+      {
+        "recordId": "program-b983c2b0cf84e21ea1e349e6",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:mbaprogram"
+      },
+      {
+        "recordId": "program-bdb4f5fede43fd22267f9377",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:pkusciencespomasterrsquosdegreeprograminsustainabledevelopmentandinternationalrelations"
+      },
+      {
+        "recordId": "program-bb2d162fc14755c967746945",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|doctorate|degree|name:phdprograminthehistoryandtheoryofart"
+      },
+      {
+        "recordId": "program-18fd984b847d62187e3dddf2",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:masterrsquosdegreeinchinastudies"
+      },
+      {
+        "recordId": "program-199da0467d9bfb922633c44d",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:masterinpublicpolicymppprogram"
+      },
+      {
+        "recordId": "program-da8cb8eb5bddca3d95b38ad9",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|doctorate|degree|name:phdprogramininformationscience"
+      },
+      {
+        "recordId": "program-9f268d5d09371ca78eba4016",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:masterrsquosdegreeprogramininternationalaffairsmiaprogram"
+      },
+      {
+        "recordId": "program-ff4c672c9e5ddf0cbefaac2e",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:pkulsedoublemasterrsquosdegreeprogramininternationalaffairs"
+      },
+      {
+        "recordId": "program-695cbc9fd8a61abe6dfb8eea",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:masteroflawllmprograminchineselaw"
+      },
+      {
+        "recordId": "program-828851b1e9bbdd5aa8371e9f",
+        "action": "created",
+        "canonicalKey": "uni-peking-university|master|degree|name:pkulsedoublemasterrsquosdegreeinenvironmentalpolicytechnologyandhealth"
+      }
+    ]
+  },
+  "currentCanonicalCoverage": {
+    "cohort": 272,
+    "directory": 255,
+    "withDirectoryPrograms": 17,
+    "withCurrentOpportunities": 9,
+    "withoutDirectoryPrograms": 255,
+    "parentIdentityPending": 17,
+    "directoryProgrammes": 783,
+    "directoryScholarships": 7,
+    "programs": 738,
+    "admissionCycles": 738,
+    "scholarships": 0
+  },
+  "acceptedCandidatePreview": {
+    "cohort": 272,
+    "directory": 255,
+    "withDirectoryPrograms": 18,
+    "withCurrentOpportunities": 9,
+    "withoutDirectoryPrograms": 254,
+    "parentIdentityPending": 17,
+    "directoryProgrammes": 795,
+    "directoryScholarships": 7,
+    "programs": 738,
+    "admissionCycles": 738,
+    "scholarships": 0
+  },
+  "nextCohort": [
+    "uni-harbin-institute-of-technology",
+    "uni-sun-yat-sen-university",
+    "uni-university-of-science-and-technology-of-china",
+    "uni-jinan-university",
+    "uni-hangzhou-dianzi-university",
+    "uni-southwest-university",
+    "uni-shanghai-normal-university",
+    "uni-beijing-foreign-studies-university",
+    "uni-beijing-institute-of-technology",
+    "uni-guilin-medical-university",
+    "uni-jilin-university",
+    "uni-northeast-normal-university",
+    "uni-shanghai-maritime-university",
+    "uni-south-china-university-of-technology",
+    "uni-southwestern-university-of-finance-and-economics",
+    "uni-wuhan-university-of-technology",
+    "uni-xian-international-studies-university",
+    "uni-zhejiang-gongshang-university",
+    "uni-zhejiang-normal-university",
+    "uni-anhui-university"
+  ],
+  "nationalDiscoveryBacklog": {
+    "registryAvailable": true,
+    "registryAsOf": "2026-06-17",
+    "sourceYear": 2026,
+    "totalNationalIdentities": 3196,
+    "matchedFixedCohort": 272,
+    "beyondFixedScopeCandidates": 2924,
+    "categories": {
+      "adult-higher-education": 244,
+      "bachelor-level": 1140,
+      "higher-vocational-junior-college": 1540
+    },
+    "addedToFixedScope": 0
+  },
+  "cloud": {
+    "batchId": "offline-d341d867-61fa-4c8b-8dfb-7e712c09c5ee",
+    "manifestSha256": "691edeb2d46c0e34fd998e34981bd03c16a63d6c417e9c0f69c2396296f6e8de",
+    "byteLength": 178135,
+    "artifactCount": 57,
+    "rowCount": 62,
+    "requestReservationCount": 6,
+    "transportUploaded": true,
+    "manifestReadBack": true,
+    "importedIntoD1": false,
+    "canonicalPublished": false,
+    "backendState": "quota_wait",
+    "retryAt": "2026-10-26T00:00:00Z",
+    "maintenanceWorkerVersion": "1f7e5c11-485a-4c4b-b9b9-efb8c6f91f1c"
+  },
+  "completeness": {
+    "firstInspectionComplete": false,
+    "officialDirectoryReconciliationComplete": false,
+    "all272Covered": false
+  },
+  "sha256": "ea70f2610c10629b6b5ab464bbdec7ab3f83fad279465801b96d117afcb0fdaa"
+}

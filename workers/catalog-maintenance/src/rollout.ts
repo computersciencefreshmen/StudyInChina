@@ -3,6 +3,7 @@ import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { backendState as backend } from './backend-errors'
 import { canonical,digest,HASH,nowIso,record } from './util'
+import { orderSchoolExpansionCandidates } from './school-priority'
 
 type School={university_id:string;last_attempt_at:string|null}
 type Inspection={university_id:string;source_id:string;url:string;due_at:string;last_attempt_at:string;kind:'captured'|'blocked';observation_id:string|null;checked_at:string|null;raw_sha256:string|null;snapshot_key:string|null;job_id:string|null;error_code:string|null}
@@ -51,7 +52,7 @@ export async function rolloutStatus(env:MaintenanceEnv,now=Date.now()):Promise<R
     if(!cfg.seed_complete||!cfg.targets_complete)result.reasons.push('seed_or_targets_incomplete')
     if(cfg.scope_sha256!==env.SCOPE_REGISTRY_SHA256||!HASH.test(cfg.scope_sha256))result.reasons.push('scope_pin_mismatch')
     if(result.reasons.length)return result
-    const schools=(await env.PIPELINE_DB.prepare('SELECT university_id,last_attempt_at FROM maintenance_schools WHERE scope_sha256=? ORDER BY COALESCE(last_attempt_at,\'\'),university_id').bind(cfg.scope_sha256).all<School>()).results??[]
+    const schools=orderSchoolExpansionCandidates((await env.PIPELINE_DB.prepare('SELECT university_id,last_attempt_at FROM maintenance_schools WHERE scope_sha256=? ORDER BY COALESCE(last_attempt_at,\'\'),university_id').bind(cfg.scope_sha256).all<School>()).results??[],cfg.scope_sha256)
     const ids=new Set(schools.map(school=>school.university_id))
     if(schools.length!==272||ids.size!==272||!Array.isArray(current)||new Set(current).size!==current.length||current.some(id=>!ids.has(id))){result.reasons.push('seeded_scope_unproven');return result}
     if(!current.length){result.state='full_scope';return result}

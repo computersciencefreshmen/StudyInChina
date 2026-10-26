@@ -20,13 +20,13 @@ beforeAll(async () => {
   scope = await buildMaintenanceScope(bundle, { scopeId: 'test-fixed-272', createdAt: capturedAt })
 })
 
-async function fixture(options: { existing?: boolean; degree?: 'bachelor' | 'master'; batchId?: string } = {}) {
+async function fixture(options: { existing?: boolean; degree?: 'bachelor' | 'master'; batchId?: string; internationalQuote?: string } = {}) {
   const school = scope.schools.find(school => school.originalStatus === 'verified')!
   const existing = bundle.programs.find(program => program.universityId === school.universityId && program.status === 'stale')!
   const name = options.existing ? { en: existing.name.en!, zh: existing.name.zh! }
     : { en: 'Evidence Bound Computing', zh: '证据约束计算' }
   const degreeLevel = options.existing ? existing.degreeLevel : options.degree ?? 'master'
-  const text = `International students are eligible for individual application. ${degreeLevel} ${name.en} ${name.zh} official code EBC-001.`
+  const text = `${options.internationalQuote ?? 'International students are eligible for individual application.'} ${degreeLevel} ${name.en} ${name.zh} official code EBC-001.`
   const bytes = new TextEncoder().encode(text)
   const snapshotSha256 = hash(bytes)
   const url = `https://${school.officialHosts[0]}/maintenance-catalogue-test.txt`
@@ -86,6 +86,18 @@ describe('fixed school scope and reviewed identity importing', () => {
     expect(record).toMatchObject({ verificationScope: 'identity', teachingLanguages: [], durationMonths: null, applyUrl: null, languageRequirements: [] })
     expect(result.acceptances.entries[0].recordId).toBe(record.id)
     expect(result.acceptances.entries[0].receiptSha256).toBe(result.receipt.sha256)
+  })
+
+  it('uses the same exact nationality evidence scope check as programme extraction', async () => {
+    const eligible = await fixture({ internationalQuote: 'Applicants must be N on-Chinese citizens with a valid passport.' })
+    const result = await eligible.run()
+    expect(result.receipt.accepted).toHaveLength(1)
+    expect(result.receipt.held).toEqual([])
+    expect(result.bundle.admissionCycles).toEqual(bundle.admissionCycles)
+    const domestic = await fixture({ internationalQuote: 'Applicants must be Chinese citizens.' })
+    expect((await domestic.run()).receipt.held[0].reason).toBe('international_admissions_scope_unproven')
+    const internship = await fixture({ internationalQuote: 'The degree includes an international internship.' })
+    expect((await internship.run()).receipt.held[0].reason).toBe('international_admissions_scope_unproven')
   })
 
   it('accepts an existing stale identity without renewing raw audit dates or dynamic facts', async () => {

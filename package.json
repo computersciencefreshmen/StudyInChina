@@ -81,6 +81,10 @@
     "maintenance:bootstrap": "tsx scripts/automation/build-maintenance-bootstrap.ts",
     "maintenance:cloud": "tsx scripts/automation/catalog-maintenance-client.ts",
     "maintenance:prepare": "tsx scripts/automation/prepare-maintenance-catalog.ts",
+    "maintenance:school-queue": "tsx scripts/maintenance/build-school-expansion-queue.ts",
+    "maintenance:local": "tsx scripts/maintenance/run-local-maintenance.ts",
+    "maintenance:continue": "tsx scripts/maintenance/continue-local-maintenance.ts",
+    "maintenance:stage": "tsx scripts/maintenance/stage-local-handoff.ts",
     "test:catalog-maintenance": "tsx --test workers/catalog-maintenance/tests/*.test.ts",
     "check:worker:maintenance": "wrangler deploy --dry-run --config workers/catalog-maintenance/wrangler.jsonc",
     "test:automation": "vitest run tests/unit/automation-"
