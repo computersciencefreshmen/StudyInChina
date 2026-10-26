@@ -1,5 +1,5 @@
 import { control,enqueueDue,seed,setControls,status,validateSeed,type Seed } from './repository'
-import type { BucketObject,MaintenanceEnv } from './types'
+import type { BucketObject,Control,MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { backendState as backendCode,backendErrorKind } from './backend-errors'
 import { enqueuePendingOfflineHandoff } from './offline-handoff'
@@ -149,4 +149,16 @@ export async function runtimeStatus(env:MaintenanceEnv){
     try{const text=canonical({format:'studyinchina.private-status-diagnostic',version:1,observedAt,operation:'fixed-status-sql',errorKind,message});diagnosticSha256=await digest(text);const key=`maintenance/diagnostics/status/${diagnosticSha256}.json`;await env.SNAPSHOTS_BUCKET.put(key,text,{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}});diagnosticKey=key}catch{diagnosticSha256=null}
     return{format:'studyinchina.cloud-maintenance-status',version:1,observedAt,enabled:false,modelEnabled:false,scopeCount:null,control:null,jobs:null,proposals:null,sources:null,modelAttempts:null,coverage:null,websiteBackendChanged:false,...runtime,backend:{state,retryAt:state==='quota_wait'?nextD1Reset():null,errorKind,diagnosticKey,diagnosticSha256},productionRunningClaim:false}
   }
+}
+
+/** A control checkpoint read, not an aggregate health assessment. Publication
+ * still acquires the authoritative export permit and validates its own CAS. */
+export async function runtimeGate(env:MaintenanceEnv){
+  const base={format:'studyinchina.cloud-maintenance-runtime-gate',version:1,observedAt:nowIso(),fullHealthChecked:false}
+  try{
+    type Checkpoint=Pick<Control,'scope_sha256'|'input_catalog_sha256'|'seed_sha256'|'legacy_guard_sha256'|'enabled'|'models_enabled'|'seed_complete'|'targets_complete'|'revision'>
+    const checkpoint=await env.PIPELINE_DB.prepare('SELECT scope_sha256,input_catalog_sha256,seed_sha256,legacy_guard_sha256,enabled,models_enabled,seed_complete,targets_complete,revision FROM maintenance_control WHERE singleton=1').first<Checkpoint>()
+    const scopeMatches=Boolean(checkpoint&&HASH.test(checkpoint.scope_sha256)&&checkpoint.scope_sha256===env.SCOPE_REGISTRY_SHA256)
+    return{...base,backend:{state:'ready',retryAt:null,errorKind:null},enabled:env.MAINTENANCE_ENABLED==='true'&&checkpoint?.enabled===1&&scopeMatches,scopeMatches,control:checkpoint}
+  }catch(error){const state=backendCode(error);return{...base,backend:{state,retryAt:state==='quota_wait'?nextD1Reset():null,errorKind:backendErrorKind(error)},enabled:false,scopeMatches:false,control:null}}
 }

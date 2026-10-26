@@ -12,11 +12,19 @@ export type MaintenanceClient = {
 
 /** A known shared-quota or initial-seed wait is normal, not a failed export. */
 export async function maintenanceRuntimeGate(client: MaintenanceClient) {
-  const status = await client.json('/status') as { format?: string; backend?: { state?: string }; enabled?: boolean;
-    control?: { seed_complete?: number; targets_complete?: number } | null }
-  if (status.format !== 'studyinchina.cloud-maintenance-status') throw new Error('maintenance_runtime_status_invalid')
+  const status = await client.json('/runtime-gate') as { format?: string; version?: number; fullHealthChecked?: boolean;
+    backend?: { state?: string }; enabled?: boolean; scopeMatches?: boolean;
+    control?: { scope_sha256?: string; input_catalog_sha256?: string; seed_sha256?: string; legacy_guard_sha256?: string;
+      revision?: number; seed_complete?: number; targets_complete?: number } | null }
+  if (status?.format !== 'studyinchina.cloud-maintenance-runtime-gate' || status.version !== 1 || status.fullHealthChecked !== false) throw new Error('maintenance_runtime_status_invalid')
   if (status.backend?.state === 'quota_wait') return { canRecover: false, canStart: false, reason: 'quota_wait' }
   if (status.backend?.state !== 'ready') throw new Error('maintenance_backend_unavailable')
+  if (status.control) {
+    if (status.scopeMatches !== true) return { canRecover: false, canStart: false, reason: 'scope_pin_mismatch' }
+    if (![status.control.scope_sha256,status.control.input_catalog_sha256,status.control.seed_sha256,status.control.legacy_guard_sha256].every(value => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value))
+      || !Number.isSafeInteger(status.control.revision) || Number(status.control.revision) < 0
+      || ![0,1].includes(Number(status.control.seed_complete)) || ![0,1].includes(Number(status.control.targets_complete))) throw new Error('maintenance_runtime_status_invalid')
+  }
   const canRecover = status.control?.seed_complete === 1
   return { canRecover, canStart: canRecover && status.enabled === true && status.control?.targets_complete === 1,
     reason: !canRecover ? 'seed_not_ready' : !status.enabled ? 'operator_pause' : status.control?.targets_complete !== 1 ? 'targets_not_ready' : 'ready' }
@@ -32,7 +40,8 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
     const handoffRead = method === 'GET' && body === undefined
       && /^\/(?:offline-fence|offline-handoff\?batchId=[a-zA-Z0-9_-]{1,101})$/u.test(path)
-    if (!handoffRead && !/^\/(?:status|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    const runtimeGateRead = path === '/runtime-gate' && method === 'GET' && body === undefined
+    if (!handoffRead && !runtimeGateRead && !/^\/(?:status|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     try {
       const response = await fetcher(url, { method, headers: { Authorization: `Bearer ${token}`, ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },

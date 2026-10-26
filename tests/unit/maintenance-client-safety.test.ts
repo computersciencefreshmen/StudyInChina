@@ -8,6 +8,9 @@ import { canonicalJson, maintenanceCandidateExportSchema } from '../../scripts/m
 
 const token = 'test-only-secret-that-is-never-a-real-account-token'
 const environment = { CATALOG_MAINTENANCE_URL: 'https://maintenance-fixture.example.workers.dev', CATALOG_MAINTENANCE_TOKEN: token }
+const gateFixture = { format: 'studyinchina.cloud-maintenance-runtime-gate', version: 1, fullHealthChecked: false, scopeMatches: true,
+  backend: { state: 'ready' }, enabled: true, control: { scope_sha256: 'a'.repeat(64), input_catalog_sha256: 'b'.repeat(64),
+    seed_sha256: 'c'.repeat(64), legacy_guard_sha256: 'd'.repeat(64), revision: 1, seed_complete: 1, targets_complete: 1 } }
 
 describe('maintenance bridge HTTP boundary', () => {
   it.each(['/offline-fence', '/offline-handoff?batchId=offline-fixture_2026'])('allows the authenticated read-only status path %s', async path => {
@@ -37,20 +40,40 @@ describe('maintenance bridge HTTP boundary', () => {
 
   it('keeps normal quota and seed waits quiet while refusing an unknown backend failure', async () => {
     const client = { json: vi.fn(), artifact: vi.fn() }
-    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait' }, control: null })
+    client.json.mockResolvedValue({ ...gateFixture, backend: { state: 'quota_wait' }, control: null })
     expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, canRecover: false, reason: 'quota_wait' })
-    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'ready' }, control: null })
+    client.json.mockResolvedValue({ ...gateFixture, control: null })
     expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, canRecover: false, reason: 'seed_not_ready' })
-    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'backend_unavailable' } })
+    client.json.mockResolvedValue({ ...gateFixture, backend: { state: 'backend_unavailable' } })
     await expect(maintenanceRuntimeGate(client)).rejects.toThrow('maintenance_backend_unavailable')
   })
   it('allows prior publication recovery during an operator pause but blocks new work and unfinished targets', async () => {
-    const client = { json: vi.fn().mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'ready' },
-      enabled: false, control: { seed_complete: 1, targets_complete: 1 } }), artifact: vi.fn() }
+    const client = { json: vi.fn().mockResolvedValue({ ...gateFixture, enabled: false }), artifact: vi.fn() }
     expect(await maintenanceRuntimeGate(client)).toMatchObject({ canRecover: true, canStart: false, reason: 'operator_pause' })
-    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'ready' }, enabled: true,
-      control: { seed_complete: 1, targets_complete: 0 } })
+    client.json.mockResolvedValue({ ...gateFixture, control: { ...gateFixture.control, targets_complete: 0 } })
     expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, reason: 'targets_not_ready' })
+  })
+  it('uses only the singleton gate, rejects wrong scope and never silently falls back to full status', async () => {
+    const client = { json: vi.fn().mockResolvedValue(gateFixture), artifact: vi.fn() }
+    expect(await maintenanceRuntimeGate(client)).toEqual({ canRecover: true, canStart: true, reason: 'ready' })
+    expect(client.json).toHaveBeenCalledExactlyOnceWith('/runtime-gate')
+    client.json.mockResolvedValue({ ...gateFixture, scopeMatches: false })
+    expect(await maintenanceRuntimeGate(client)).toEqual({ canRecover: false, canStart: false, reason: 'scope_pin_mismatch' })
+    client.json.mockRejectedValue(new Error('gate_unavailable'))
+    await expect(maintenanceRuntimeGate(client)).rejects.toThrow('gate_unavailable')
+    expect(client.json.mock.calls.every(([path]) => path === '/runtime-gate')).toBe(true)
+  })
+  it('allows only a fixed GET for the runtime gate and rejects old full-status payloads', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(new Response(JSON.stringify(gateFixture)))
+    const client = maintenanceClientFromEnvironment(environment, fetcher)
+    expect(await client.json('/runtime-gate')).toEqual(gateFixture)
+    for (const path of ['/runtime-gate?extra=1', '/runtime-gate/../controls', '/runtime-gate#fragment']) {
+      await expect(client.json(path)).rejects.toThrow('maintenance_endpoint_rejected')
+    }
+    await expect(client.json('/runtime-gate', 'POST')).rejects.toThrow('maintenance_endpoint_rejected')
+    await expect(client.json('/runtime-gate', 'GET', {})).rejects.toThrow('maintenance_endpoint_rejected')
+    expect(fetcher).toHaveBeenCalledTimes(1)
+    await expect(maintenanceRuntimeGate({ json: vi.fn().mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status' }), artifact: vi.fn() })).rejects.toThrow('maintenance_runtime_status_invalid')
   })
   it('treats an empty 204 export queue as normal and never creates a fake batch', async () => {
     const fetcher = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 204 }))

@@ -14,7 +14,7 @@ import { acknowledge, prepareExport, readExport } from './exports'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
 import type { MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
-import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus } from './runtime'
+import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus,runtimeGate } from './runtime'
 import { after, authorized, gateRequest, HASH, json, nowIso, requestJson } from './util'
 import { uploadOfflineArtifact,uploadOfflineManifest,processOfflineHandoff,offlineHandoffMessage,offlineHandoffStatus,reopenOfflineHandoff } from './offline-handoff'
 
@@ -96,6 +96,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/documents'&&request.method==='GET')return json(await listPendingDocuments(env))
     if(url.pathname==='/documents'&&request.method==='POST')return json(await acceptDocumentDerivative(env,await requestJson(request,3*1024*1024)))
     if(url.pathname==='/status'&&request.method==='GET')return json(await runtimeStatus(env))
+    if(url.pathname==='/runtime-gate'&&request.method==='GET'&&!url.search)return json(await runtimeGate(env))
     if(url.pathname==='/schools'&&request.method==='GET')return json(await listSchoolProgress(env))
     if(url.pathname==='/reconciliations'&&request.method==='POST')return json(await submitSchoolReconciliation(env,await requestJson(request,256*1024)))
     if(url.pathname==='/publications'&&request.method==='GET') {

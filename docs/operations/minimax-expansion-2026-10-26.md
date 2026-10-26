@@ -1,0 +1,13 @@
+# MiniMax programme expansion: 26 October 2026
+
+The maintenance pipeline uses official source snapshots, subscription-only MiniMax M3 extraction, an independent evidence review, and the existing single canonical writer. A successful model request or an accepted preview is not a publication receipt.
+
+The first new six-page batch captured SWUFE, SCUT and Jilin sources. Seven model requests completed with no unknown outcomes. Nine SCUT master's candidates remain held because the independent response did not locate international admission evidence. SWUFE exposed a programme parser false negative: its exact source quote says `N on-Chinese citizens`, which the old keyword check rejected. The programme-only scope helper now recognises explicit non-Chinese citizenship; quoted location, identity, degree and independent review checks still apply. Malformed nested Jilin responses remain rejected. Saved responses are retained for exact cache reuse.
+
+Large PDF catalogues use explicit views into an immutable full text derivative. Each view pins the complete derivative hash and exact nonoverlapping UTF-16 ranges for context and target rows. Both model passes see the same view independently. Names must occur in target rows; quotations must occur both in the view and the full saved derivative. A partition does not certify a school, a catalogue, or the truth of operator-supplied page/row labels. Completeness still requires the separate reconciliation process. Unpartitioned oversized inputs remain held.
+
+Six fixed indexes were applied to the live pipeline D1 using migration 0020; all six succeeded. The scheduler's reverse source lookup previously required a repeated binding scan. Query Insights also showed substantial reads from existing canonical/ingestion queries, so the indexes are not evidence that maintenance was the sole or dominant quota consumer. No billing settings were changed, and no migration-ledger rows were fabricated. The migration is idempotent when normal migration registration resumes.
+
+`GET /runtime-gate` reads one pinned control checkpoint instead of collecting all dashboard counts. It explicitly reports `fullHealthChecked: false`. A matching, seeded checkpoint permits the writer to attempt its own authoritative lock and parent-version checks; it does not waive them. Real quota failures still wait. Full diagnostics and aggregate status retain their separate meaning.
+
+Offline continuation remains permitted only before any cloud handoff row has begun. The old manifest, all model reservations and blobs remain immutable. The global coordinator retires the old handoff atomically before admitting the new superset. A failed or ambiguous reopening cannot authorise another paid request.

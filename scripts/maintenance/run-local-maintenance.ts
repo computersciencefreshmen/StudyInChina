@@ -18,9 +18,11 @@ import { openLocalRuntime } from './local-runtime'
 export async function runLocalMaintenance(options: {
   directory: string; seedFile: string; sourceFile: string; workerUrl: string; adminToken: string;
   execute: boolean; maxJobs?: number; reparseCompletedPrograms?: boolean; reparseUniversityIds?: string[];
+  programExtractionContractVersion?: string; programsOnly?: boolean; deferExport?: boolean;
 }) {
   const directory = resolve(options.directory)
   if (!options.execute) throw new Error('explicit_execute_required')
+  if (options.programExtractionContractVersion !== undefined && !['1', '2'].includes(options.programExtractionContractVersion)) throw new Error('invalid_program_extraction_contract_version')
   if (existsSync(join(directory, 'continuation-incomplete.json'))) throw new Error('offline_continuation_clone_incomplete')
   if (!Number.isSafeInteger(options.maxJobs ?? 40) || (options.maxJobs ?? 40) < 1 || (options.maxJobs ?? 40) > 200) throw new Error('invalid_local_job_limit')
   if (existsSync(join(directory, 'handoff.json'))) throw new Error('offline_batch_frozen_for_handoff')
@@ -57,6 +59,7 @@ export async function runLocalMaintenance(options: {
       MINIMAX_SUBSCRIPTION_KEY: config.key, MINIMAX_MODEL: 'MiniMax-M3', MINIMAX_ANTHROPIC_BASE: base,
       MAINTENANCE_ENABLED: 'true', SCOPE_REGISTRY_SHA256: scope.sha256, MODEL_CONCURRENCY: '2',
       MINIMAX_CREDIT_FALLBACK_DISABLED: 'false',
+      ...(options.programExtractionContractVersion === undefined ? {} : { PROGRAM_EXTRACTION_CONTRACT_VERSION: options.programExtractionContractVersion }),
     }
     await seed(env, seedInput)
     const cfg = await control(env)
@@ -140,7 +143,7 @@ export async function runLocalMaintenance(options: {
     }
     let processed = 0
     for (; processed < (options.maxJobs ?? 40); processed++) {
-      const job = await runtime.db.prepare(`SELECT job_id,stage,source_id FROM maintenance_jobs WHERE source_id IN(${selectedIds.map(() => '?').join(',')}) AND status IN('queued','retry') AND due_at<=? ORDER BY CASE stage WHEN 'capture' THEN 0 WHEN 'award' THEN 1 WHEN 'extract' THEN 2 ELSE 3 END,created_at LIMIT 1`)
+      const job = await runtime.db.prepare(`SELECT job_id,stage,source_id FROM maintenance_jobs WHERE source_id IN(${selectedIds.map(() => '?').join(',')})${options.programsOnly ? " AND stage IN('capture','extract')" : ''} AND status IN('queued','retry') AND due_at<=? ORDER BY CASE stage WHEN 'capture' THEN 0 WHEN 'award' THEN 1 WHEN 'extract' THEN 2 ELSE 3 END,created_at LIMIT 1`)
         .bind(...selectedIds, nowIso()).first<{ job_id: string; stage: string; source_id: string }>()
       if (!job) break
       await assertFence()
@@ -155,7 +158,7 @@ export async function runLocalMaintenance(options: {
       cloudFenceHeld: true, canonicalPublished: false }
     writeFileSync(join(directory, 'report.json'), JSON.stringify(report, null, 2) + '\n')
     const ready = await runtime.db.prepare("SELECT COUNT(*) count FROM maintenance_proposals WHERE status='ready'").first<{ count: number }>()
-    if (ready?.count) {
+    if (ready?.count && !options.deferExport) {
       const exported = await prepareExport(env, { limit: 100 }), batch = await readExport(env, exported.batchId)
       const download = join(directory, 'download'); mkdirSync(join(download, 'artifacts'), { recursive: true })
       writeFileSync(join(download, 'export.json'), canonical(batch) + '\n')
@@ -180,7 +183,9 @@ async function main() {
     sourceFile: option('--sources') ?? 'scripts/maintenance/pilot-sources.json',
     workerUrl: process.env.CATALOG_MAINTENANCE_URL ?? '', adminToken: process.env.CATALOG_MAINTENANCE_TOKEN ?? '',
     execute: args.includes('--execute'), maxJobs: option('--max-jobs') ? Number(option('--max-jobs')) : undefined,
-    reparseCompletedPrograms: args.includes('--reparse-completed-programs') })
+    reparseCompletedPrograms: args.includes('--reparse-completed-programs'),
+    programExtractionContractVersion: option('--program-extraction-contract-version'),
+    programsOnly: args.includes('--programs-only'), deferExport: args.includes('--defer-export') })
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch(() => {
   console.error('local_maintenance_failed; inspect the durable journal and report without replaying unknown sends')
