@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
-import { pathToFileURL } from 'node:url'
+import { pathToFileURL, fileURLToPath } from 'node:url'
 import type { DataBundle, Source } from '../../src/lib/data/types'
 import { bundleSchema } from '../../src/lib/data/schema'
 import { loadSourceManifestFiles, validateSourceManifests, type SourceManifestRecord } from '../source-manifest-registry'
@@ -16,13 +16,25 @@ export const FIXED_SCHOOL_COUNT = 272
 export async function buildMaintenanceScope(bundle: DataBundle, options: {
   scopeId: string; createdAt: string; manifests?: SourceManifestRecord[]
 }): Promise<MaintenanceScope> {
-  if (bundle.universities.length !== FIXED_SCHOOL_COUNT) {
-    throw new Error(`Fixed scope requires exactly ${FIXED_SCHOOL_COUNT} raw schools; found ${bundle.universities.length}`)
+  let universities = bundle.universities
+  // The original maintenance cohort stays pinned when the public school
+  // directory grows. New institutions must not replace any original member.
+  if (universities.length > FIXED_SCHOOL_COUNT) {
+    const scopePath = import.meta.url.startsWith('file:')
+      ? resolve(dirname(fileURLToPath(import.meta.url)), '../../content/maintenance/scope-272.v1.json')
+      : join(process.cwd(), 'content/maintenance/scope-272.v1.json')
+    const pinned = maintenanceScopeSchema.parse(JSON.parse(readFileSync(scopePath, 'utf8')))
+    if (pinned.sha256 !== await scopeContentSha256(pinned)) throw new Error('Fixed scope registry checksum mismatch')
+    const originalIds = new Set(pinned.schools.map(school => school.universityId))
+    universities = universities.filter(university => originalIds.has(university.id))
   }
-  const ids = new Set(bundle.universities.map(university => university.id))
+  if (universities.length !== FIXED_SCHOOL_COUNT) {
+    throw new Error(`Fixed scope requires exactly ${FIXED_SCHOOL_COUNT} original schools; found ${universities.length}`)
+  }
+  const ids = new Set(universities.map(university => university.id))
   if (ids.size !== FIXED_SCHOOL_COUNT) throw new Error('Fixed scope contains duplicate school IDs')
   const sources = new Map(bundle.sources.map(source => [source.id, source]))
-  const schools = bundle.universities.map(university => {
+  const schools = universities.map(university => {
     const hostFamily = (value: string) => {
       const hostname = new URL(value).hostname.toLowerCase().replace(/^www\./u, '')
       return /\.(?:edu|ac)\.cn$/u.test(hostname) ? hostname.split('.').slice(-3).join('.') : hostname

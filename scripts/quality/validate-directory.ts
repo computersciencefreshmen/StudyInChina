@@ -17,7 +17,7 @@ function readOptional(path: string, fallback: unknown) { return existsSync(path)
 export async function validateDirectory(root: string, today = getTodayDate()) {
   const bundle = loadMaintenanceBundle(root), dataDirectory = join(root, 'content/data')
   const scope = maintenanceScopeSchema.parse(read(join(root, 'content/maintenance/scope-272.v1.json')))
-  if (scope.sha256 !== await scopeContentSha256(scope) || bundle.universities.length !== 272
+  if (scope.sha256 !== await scopeContentSha256(scope) || bundle.universities.length < 272
     || scope.schools.some(school => !bundle.universities.some(university => university.id === school.universityId))) throw new Error('directory_fixed_cohort_changed')
   const identities = identityAcceptanceLedgerSchema.parse(readOptional(join(dataDirectory, 'identity-acceptances.json'), { schemaVersion: 1, entries: [] })).entries
   const fields = fieldVerificationLedgerSchema.parse(readOptional(join(dataDirectory, 'field-verifications.json'), { schemaVersion: 1, entries: [] })).entries
@@ -66,6 +66,9 @@ export async function validateDirectory(root: string, today = getTodayDate()) {
   if (/"(?:receiptPath|objectKey|promptSha256|reviewerId|quote)"\s*:/u.test(JSON.stringify(directory))) throw new Error('directory_private_provenance_leak')
   const bySchool = new Map(directory.universities.map(university => [university.id, 0]))
   for (const program of directory.programs) bySchool.set(program.universityId, (bySchool.get(program.universityId) ?? 0) + 1)
+  const originalSchoolIds = new Set(scope.schools.map(school => school.universityId))
+  if (directory.universities.some(university => !originalSchoolIds.has(university.id)
+    && (bySchool.get(university.id) ?? 0) < 1)) throw new Error('directory_new_school_requires_program')
   const allProgramCount = new Map(bundle.universities.map(university => [university.id, 0]))
   for (const program of bundle.programs) allProgramCount.set(program.universityId, (allProgramCount.get(program.universityId) ?? 0) + 1)
   return { format: 'studyinchina.directory-validation', formatVersion: 1, evaluatedForDate: today,

@@ -242,9 +242,40 @@ test('a stale program identity remains reachable while expired dynamic facts are
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
 })
 
-test('a current program exposes its grounded detail fragments and a state-aware official route', async ({ page }) => {
-  expect(groundedProgramFixture, 'at least one current programme has proven detail fragments').toBeDefined()
-  if (!groundedProgramFixture) return
+test('program detail fragments and official routes follow current evidence', async ({ page }) => {
+  if (!groundedProgramFixture) {
+    // Real evidence can expire between releases. Test its withdrawal on an accepted
+    // identity rather than requiring yesterday's application facts to remain current.
+    const expiredFixture = rawData.programs.flatMap((original) => {
+      const details = original.details ?? original.supplementaryDetails
+      const program = publicData.programs.find(program => program.id === original.id && program.status === 'stale')
+      return program && original.reviewAfter < TODAY && original.verifiedAt <= original.reviewAfter
+        && details?.curriculumHighlights?.length && details.eligibility?.length && details.applicationMaterials?.length
+        ? [{ program, original, details }] : []
+    }).sort((left, right) => right.original.reviewAfter.localeCompare(left.original.reviewAfter)
+      || left.program.slug.localeCompare(right.program.slug))[0]
+    expect(expiredFixture, 'an accepted identity must retain real expired grounded fragments for the withdrawal check').toBeDefined()
+    const { program, original, details } = expiredFixture!
+    expect(currentData.programs.some(current => current.id === program.id)).toBe(false)
+    expect(getProgramDisplayDetails(program, TODAY)).toBeUndefined()
+    expect(original.reviewAfter < TODAY).toBe(true)
+    const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
+
+    expect(response?.ok()).toBe(true)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(program.name.en!)
+    await expect(page.locator('[data-discovery-notice]')).toContainText('A catalogue entry does not mean applications are open.')
+    await expect(page.getByText(/Needs review/).first()).toBeVisible()
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
+    for (const heading of ['Curriculum highlights', 'Eligibility', 'Application materials']) {
+      await expect(page.getByRole('heading', { name: heading, exact: true })).toHaveCount(0)
+    }
+    for (const fragment of [...details.curriculumHighlights!, ...details.eligibility!, ...details.applicationMaterials!]) {
+      if (fragment.en) await expect(page.locator('[data-program-detail]').getByText(fragment.en, { exact: true })).toHaveCount(0)
+    }
+    await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', program.programUrl)
+    await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
+    return
+  }
 
   const { program, cycle, applicationState } = groundedProgramFixture
   expect(program.name.en, program.id).toBeTruthy()
