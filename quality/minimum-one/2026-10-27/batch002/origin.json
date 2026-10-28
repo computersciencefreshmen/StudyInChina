@@ -1,0 +1,72 @@
+{
+  "format": "studyinchina.minimum-one-reviewed-identity-origins",
+  "version": 1,
+  "batchId": "minimum-one-2026-10-27-batch002-af9d1825",
+  "sourceJournal": "local-005",
+  "currentBaseRevalidation": true,
+  "originalHistoryModified": false,
+  "modelCalls": 0,
+  "sourceManifestSha256": "e80e7eeb06fd6249cf706e64b800289c65b4afaa5cca4ae6f31f52fdeb78dba2",
+  "readyRowsSnapshotSha256": "b1645c65b029feba7c322dda28bd7af186e2c7aad42baecd00a654b01a1deaac",
+  "origins": [
+    {
+      "proposalId": "maintenance-8d6ab51b65a9a8e86ac721aefe87f3ae4af118564bb49f180014ac7024c35a50",
+      "universityId": "uni-xian-international-studies-university",
+      "method": "independent_model",
+      "reviewerId": "minimax-independent:fd1dc72e-6749-4a42-af1e-3c2a13eb2c53",
+      "originalJournal": "local-005",
+      "originalProposalCanonicalSha256": "30d3507d44674e139d89bca3b748b0aa612e371d136f4ac6ff9b14cbaaa17509",
+      "proposalContentSha256": "c63576d403d97d404eb23d3557a4d8f3d1140e5cb43169b0e3fae403d8eb69cb",
+      "originalTableStatus": "ready",
+      "originalExportId": null,
+      "originalCreatedAt": "2026-10-27T04:17:16.068Z",
+      "reviewArtifactKey": "maintenance/reviews/maintenance-8d6ab51b65a9a8e86ac721aefe87f3ae4af118564bb49f180014ac7024c35a50/213313b7fa0ae6a48a70fa45995c9bc6331932e22e481f220d2f5be61c050773.json",
+      "reviewArtifactSha256": "213313b7fa0ae6a48a70fa45995c9bc6331932e22e481f220d2f5be61c050773",
+      "attempts": [
+        {
+          "role": "primary",
+          "attemptId": "6bd48fe6-5cb9-4df6-9c1b-ec122099d5aa",
+          "status": "completed",
+          "model": "MiniMax-M3",
+          "sourceId": "db81e27e850ce642c32bb058fa54a0b9dd58ed55c7300e08109e12370363a418",
+          "snapshotSha256": "a4cd778dc2bbe7dd285a9008efe83816d30a90e0d5c67ecd538652ea14cb9c0a",
+          "objectKey": "maintenance/models/07accd5e85e8775695bf27d7ff38ce7b6c2da96666d38254db388c3ba275c99e/33a861d73daaaee55b8142b6dcc6a87617f85e17ae38d821f9adf6d2fa1f3936.json",
+          "sha256": "33a861d73daaaee55b8142b6dcc6a87617f85e17ae38d821f9adf6d2fa1f3936",
+          "reservationKey": "07accd5e85e8775695bf27d7ff38ce7b6c2da96666d38254db388c3ba275c99e",
+          "requestSha256": "ea80969594fd27ee62ec4134d666bb91019247c4608b91404399d304cb20f55b",
+          "startedAt": "2026-10-27T04:16:59.035Z",
+          "completedAt": "2026-10-27T04:17:07.825Z"
+        },
+        {
+          "role": "independent-review",
+          "attemptId": "fd1dc72e-6749-4a42-af1e-3c2a13eb2c53",
+          "status": "completed",
+          "model": "MiniMax-M3",
+          "sourceId": "db81e27e850ce642c32bb058fa54a0b9dd58ed55c7300e08109e12370363a418",
+          "snapshotSha256": "a4cd778dc2bbe7dd285a9008efe83816d30a90e0d5c67ecd538652ea14cb9c0a",
+          "objectKey": "maintenance/models/94a6c7754e1ee839eccc98fa06a9f94dea3502a71fd1554659dff57b39cec721/7c4f9d8a58e8a4c641e4ad11a410f408993f3929206ecad4635af5cd9a4f1673.json",
+          "sha256": "7c4f9d8a58e8a4c641e4ad11a410f408993f3929206ecad4635af5cd9a4f1673",
+          "reservationKey": "94a6c7754e1ee839eccc98fa06a9f94dea3502a71fd1554659dff57b39cec721",
+          "requestSha256": "938554c9e27006e743552b789cf09ff063470098d0b5a2c91bbd2a20958e32af",
+          "startedAt": "2026-10-27T04:17:10.980Z",
+          "completedAt": "2026-10-27T04:17:16.051Z"
+        }
+      ]
+    },
+    {
+      "proposalId": "maintenance-127574c9d8fe2d34efbe7445cbe3507ea15f99c2a3dbb83c5c76076b86aaf1cc",
+      "universityId": "uni-shanghai-international-studies-university",
+      "method": "deterministic",
+      "reviewerId": "deterministic:sisu-hongkou-undergraduate-list-v1",
+      "originalJournal": "local-005",
+      "originalProposalCanonicalSha256": "e27bbb826708653f82feac841f768b4be43b5224dace79bce69136e4ae4e833d",
+      "proposalContentSha256": "7efb8b2f5bdbf8b018a2d781f188f2f8ac9e2d67bc033d6abaf14e08c68b5564",
+      "originalTableStatus": "ready",
+      "originalExportId": null,
+      "originalCreatedAt": "2026-10-27T04:42:40.431Z",
+      "reviewArtifactKey": "maintenance/reviews/sisu-hongkou-undergraduate-list-v1/7c4aff4b36cf986a19e4a9502a0f653a1ca90f7fca780f0ca98fd4a4a02281cd.json",
+      "reviewArtifactSha256": "6dd22b8eab9256f865c77a048f39d54b9f57e2bcb64d199d369001ef2158bd6b",
+      "attempts": []
+    }
+  ]
+}
