@@ -1,0 +1,239 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch003-8573885b",
+  "inputCatalogSha256": "0021384256c9a5ab6c1479ed8cb055ea4f848666199445e76c92ebbc4ebc617c",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-28T15:54:50.419Z",
+  "proposals": [
+    {
+      "id": "maintenance-0de52fc6163070863646d060cbcb1c1fe9bfa4df4b2cd4adbebe761882c54b0e",
+      "universityId": "uni-nanjing-university-of-aeronautics-and-astronautics",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/d23677435593bc023db6187a1cbb2a54615cae4f219c1c5fd3d1a685264f648a/86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64.bin",
+          "quote": "Application Eligibility Non-Chinese citizens 17-25 years old",
+          "snapshotSha256": "86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64",
+          "sourceId": "d23677435593bc023db6187a1cbb2a54615cae4f219c1c5fd3d1a685264f648a",
+          "url": "https://cie.nuaa.edu.cn/2025/1121/c16499a388281/page.htm"
+        },
+        "name": {
+          "en": "Aeronautical Engineering"
+        },
+        "programType": "degree",
+        "programUrl": "https://cie.nuaa.edu.cn/2025/1121/c16499a388281/page.htm"
+      },
+      "source": {
+        "url": "https://cie.nuaa.edu.cn/2025/1121/c16499a388281/page.htm",
+        "snapshotSha256": "86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64",
+        "objectKey": "maintenance/snapshots/d23677435593bc023db6187a1cbb2a54615cae4f219c1c5fd3d1a685264f648a/86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64.bin",
+        "locator": "text:document",
+        "quote": "NUAA currently offers 6 international undergraduate programs instructed in both English and Chinese with duration of 4 years. Qualified graduates are awarded graduation diploma and bachelor degree.",
+        "id": "d23677435593bc023db6187a1cbb2a54615cae4f219c1c5fd3d1a685264f648a",
+        "checkedAt": "2026-10-27T05:27:23.928Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "d23677435593bc023db6187a1cbb2a54615cae4f219c1c5fd3d1a685264f648a",
+          "url": "https://cie.nuaa.edu.cn/2025/1121/c16499a388281/page.htm",
+          "snapshotSha256": "86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64",
+          "objectKey": "maintenance/snapshots/d23677435593bc023db6187a1cbb2a54615cae4f219c1c5fd3d1a685264f648a/86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64.bin",
+          "locator": "text:document",
+          "quote": "Aeronautical Engineering",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "d23677435593bc023db6187a1cbb2a54615cae4f219c1c5fd3d1a685264f648a",
+          "url": "https://cie.nuaa.edu.cn/2025/1121/c16499a388281/page.htm",
+          "snapshotSha256": "86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64",
+          "objectKey": "maintenance/snapshots/d23677435593bc023db6187a1cbb2a54615cae4f219c1c5fd3d1a685264f648a/86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64.bin",
+          "locator": "text:document",
+          "quote": "Qualified graduates are awarded graduation diploma and bachelor degree.",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "d97749b5-2eec-4cbd-a0ba-4c5c54ec4e3d",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:e22ef91b-857f-4eb4-8dc6-f8a096992cad",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T15:53:07.977Z",
+        "candidateSha256": "6968c58dc929f123fb7229b795fcc1b8cb19bc7e9d702ee25422d73035e524fc",
+        "snapshotSha256": "86cb5f4c176d962b75e85e82fe7c704d2830f1abf8bc6f993dbdeb44541b2d64",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "e22ef91b-857f-4eb4-8dc6-f8a096992cad",
+        "artifactKey": "maintenance/reviews/maintenance-0de52fc6163070863646d060cbcb1c1fe9bfa4df4b2cd4adbebe761882c54b0e/a6b022f2d0a55113cceb1e50ddb7bf4c6b3ba0a1bf27e080c25c876bf9bda6de.json",
+        "reviewArtifactSha256": "a6b022f2d0a55113cceb1e50ddb7bf4c6b3ba0a1bf27e080c25c876bf9bda6de"
+      }
+    },
+    {
+      "id": "maintenance-80b4dceec57b9ef44a7a5f981d4fe099f0c836a3ebcc3c9c6036f4a1be30d26a",
+      "universityId": "uni-huazhong-university-of-science-and-technology",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "language",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/7f6360052369a72fc7b43e9ad2132b5d3876ed7c82a78f838cd454976830a1b3/820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429.bin",
+          "quote": "1. Be non-Chinese citizens and hold a valid foreign passport;",
+          "snapshotSha256": "820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429",
+          "sourceId": "7f6360052369a72fc7b43e9ad2132b5d3876ed7c82a78f838cd454976830a1b3",
+          "url": "https://iso.hust.edu.cn/info/1194/4644.htm"
+        },
+        "name": {
+          "en": "Long-term Chinese Language Program"
+        },
+        "programType": "language",
+        "programUrl": "https://iso.hust.edu.cn/info/1194/4644.htm"
+      },
+      "source": {
+        "url": "https://iso.hust.edu.cn/info/1194/4644.htm",
+        "snapshotSha256": "820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429",
+        "objectKey": "maintenance/snapshots/7f6360052369a72fc7b43e9ad2132b5d3876ed7c82a78f838cd454976830a1b3/820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429.bin",
+        "locator": "text:document",
+        "quote": "Long-term Chinese Language Program",
+        "id": "7f6360052369a72fc7b43e9ad2132b5d3876ed7c82a78f838cd454976830a1b3",
+        "checkedAt": "2026-10-27T05:27:54.015Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "7f6360052369a72fc7b43e9ad2132b5d3876ed7c82a78f838cd454976830a1b3",
+          "url": "https://iso.hust.edu.cn/info/1194/4644.htm",
+          "snapshotSha256": "820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429",
+          "objectKey": "maintenance/snapshots/7f6360052369a72fc7b43e9ad2132b5d3876ed7c82a78f838cd454976830a1b3/820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429.bin",
+          "locator": "text:document",
+          "quote": "Long-term Chinese Language Program",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "7f6360052369a72fc7b43e9ad2132b5d3876ed7c82a78f838cd454976830a1b3",
+          "url": "https://iso.hust.edu.cn/info/1194/4644.htm",
+          "snapshotSha256": "820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429",
+          "objectKey": "maintenance/snapshots/7f6360052369a72fc7b43e9ad2132b5d3876ed7c82a78f838cd454976830a1b3/820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429.bin",
+          "locator": "text:document",
+          "quote": "(One Semester/One Academic Year) This program provides structured Chinese language courses across six proficiency levels (A to F)",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "794d17ea-70fe-4d02-b7b0-81eda955f785",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:30061353-475f-4a5b-a9fb-9073e0560066",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T15:53:23.029Z",
+        "candidateSha256": "2fed04625af86505621d3d2910ec3dc69f9a70f3b9507f97df5859a6a4b1e05e",
+        "snapshotSha256": "820633c0608bdcb0b6ea46db6b16994a3df883b7830ac117f43841a5eb285429",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "30061353-475f-4a5b-a9fb-9073e0560066",
+        "artifactKey": "maintenance/reviews/maintenance-80b4dceec57b9ef44a7a5f981d4fe099f0c836a3ebcc3c9c6036f4a1be30d26a/07ac774d350040ad5ae886779c48a5d2d1b3f1e27b80c70d47e9f0624009e578.json",
+        "reviewArtifactSha256": "07ac774d350040ad5ae886779c48a5d2d1b3f1e27b80c70d47e9f0624009e578"
+      }
+    },
+    {
+      "id": "maintenance-2c8b6e71534177ca261a5f5dea8306820d952620c80b8e36f1d2e5b8ac94d53c",
+      "universityId": "uni-shenyang-normal-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/116515689250796c7d2cf17ec1d258a28fe652dfbc2287f2bf5f25452854ca6c/ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30.bin",
+          "quote": "非中国籍公民,身体健康。",
+          "snapshotSha256": "ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30",
+          "sourceId": "116515689250796c7d2cf17ec1d258a28fe652dfbc2287f2bf5f25452854ca6c",
+          "url": "https://cie.synu.edu.cn/2026/0415/c5760a112914/page.htm"
+        },
+        "name": {
+          "zh": "汉语国际教育"
+        },
+        "programType": "degree",
+        "programUrl": "https://cie.synu.edu.cn/2026/0415/c5760a112914/page.htm"
+      },
+      "source": {
+        "url": "https://cie.synu.edu.cn/2026/0415/c5760a112914/page.htm",
+        "snapshotSha256": "ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30",
+        "objectKey": "maintenance/snapshots/116515689250796c7d2cf17ec1d258a28fe652dfbc2287f2bf5f25452854ca6c/ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30.bin",
+        "locator": "text:document",
+        "quote": "2026年沈阳师范大学国际中文教师奖学金本科生招生简章",
+        "id": "116515689250796c7d2cf17ec1d258a28fe652dfbc2287f2bf5f25452854ca6c",
+        "checkedAt": "2026-10-27T05:29:15.886Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "116515689250796c7d2cf17ec1d258a28fe652dfbc2287f2bf5f25452854ca6c",
+          "url": "https://cie.synu.edu.cn/2026/0415/c5760a112914/page.htm",
+          "snapshotSha256": "ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30",
+          "objectKey": "maintenance/snapshots/116515689250796c7d2cf17ec1d258a28fe652dfbc2287f2bf5f25452854ca6c/ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30.bin",
+          "locator": "text:document",
+          "quote": "汉语国际教育",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "116515689250796c7d2cf17ec1d258a28fe652dfbc2287f2bf5f25452854ca6c",
+          "url": "https://cie.synu.edu.cn/2026/0415/c5760a112914/page.htm",
+          "snapshotSha256": "ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30",
+          "objectKey": "maintenance/snapshots/116515689250796c7d2cf17ec1d258a28fe652dfbc2287f2bf5f25452854ca6c/ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30.bin",
+          "locator": "text:document",
+          "quote": "奖学金类别:汉语专业本科(合作)/BKHY",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "3d83a6f5-72c2-434d-b7ca-3949d383997c",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:7cbb1ee5-885b-4b01-a56a-8f13a96c6c6e",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T15:53:59.591Z",
+        "candidateSha256": "6a3e147420e0eac25f4cb5861eadebef51b95bbe7950333474e47057f1638b36",
+        "snapshotSha256": "ec10e33c77e1f8bb4ee10984d889b39f122f4cf068ad85ee9969bf24c9477e30",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "7cbb1ee5-885b-4b01-a56a-8f13a96c6c6e",
+        "artifactKey": "maintenance/reviews/maintenance-2c8b6e71534177ca261a5f5dea8306820d952620c80b8e36f1d2e5b8ac94d53c/813b8c1c74cbac97367d85fd0d58290414d867a8499b427d4b10d61e3de025df.json",
+        "reviewArtifactSha256": "813b8c1c74cbac97367d85fd0d58290414d867a8499b427d4b10d61e3de025df"
+      }
+    }
+  ],
+  "sha256": "bab0815e74718aadc99b37bfc54dfa64be0bd992ab615e57eff913fe3175a359"
+}

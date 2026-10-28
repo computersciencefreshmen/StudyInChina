@@ -7,10 +7,17 @@ import * as catalogApiRuntime from '@/lib/catalog-api/runtime'
 import { CatalogApiService, releaseFromBundle } from '@/lib/catalog-api/service'
 import { getTodayDate } from '@/lib/data/freshness'
 
-afterEach(() => vi.restoreAllMocks())
+afterEach(() => {
+  vi.restoreAllMocks()
+  vi.useRealTimers()
+})
 
 describe('catalog API routes', () => {
   it('serves only publication-gated records with cache policy and release metadata', async () => {
+    // The shared cache intentionally shrinks before Shanghai midnight. Keep
+    // this ordinary daytime contract independent of the CI runner's clock.
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-10-28T04:00:00Z'))
     const response = await listPrograms(new Request('https://example.test/api/v1/programs?limit=1'))
     const body = await response.json()
 
@@ -25,6 +32,17 @@ describe('catalog API routes', () => {
     }
     expect(body.data[0].fieldMeta.programUrl.officialUrl).toMatch(/^https:\/\//)
     expect(body.meta.release.id).toMatch(/^json:/)
+  })
+
+  it('does not cache publication-gated records past Shanghai midnight', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-10-28T15:59:56Z'))
+    const response = await listPrograms(new Request('https://example.test/api/v1/programs?limit=1'))
+
+    expect(response.status).toBe(200)
+    expect(response.headers.get('cache-control')).toBe(
+      'public, max-age=4, s-maxage=4, stale-while-revalidate=0, must-revalidate',
+    )
   })
 
   it('exposes the linked-scholarship program filter through the compatibility API', async () => {

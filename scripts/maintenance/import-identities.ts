@@ -6,6 +6,7 @@ import { JSDOM } from 'jsdom'
 import type { DataBundle, Program, Scholarship, Source } from '../../src/lib/data/types'
 import { bundleSchema } from '../../src/lib/data/schema'
 import { htmlToText } from '../../workers/ingestion/src/rules'
+import { hasProgramInternationalScopeEvidence } from '../../workers/catalog-maintenance/src/program-international-scope'
 import { identityAcceptanceLedgerSchema, identityFingerprint, type IdentityAcceptanceLedger } from '../../src/lib/data/identity-acceptance'
 import { catalogSha256, loadMaintenanceBundle } from './build-scope'
 import {
@@ -174,7 +175,7 @@ async function verifyProposalEvidence(proposal: MaintenanceProposal, fields: Pro
     if (code && !proposal.fieldEvidence.some(evidence => evidence.fieldPath === field
       && normalizedText(evidence.quote).includes(normalizedText(code)))) throw new Error(`official_code_evidence_missing:${field}`)
   }
-  if (!/international|foreign|国际|外国|留学/iu.test(fields.internationalAdmissionsEvidence.quote)) throw new Error('international_admissions_scope_unproven')
+  if (!hasProgramInternationalScopeEvidence(fields.internationalAdmissionsEvidence.quote)) throw new Error('international_admissions_scope_unproven')
   if (/^(?:international\s+)?(?:undergraduate|bachelor'?s?|master'?s?|doctoral|phd)\s+(?:degree\s+)?programs?$/iu.test(fields.name.en ?? '')) {
     throw new Error('generic_catalog_heading_is_not_program')
   }
