@@ -1,0 +1,391 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch004-92031180",
+  "inputCatalogSha256": "81b9f46d72e4a174377d02dfcb6a5f933f6263f0c3f10e2d58195a9228df453e",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-28T16:25:36.686Z",
+  "proposals": [
+    {
+      "id": "maintenance-a1996dfe0d063bb30d3fa4d78d5ede80eb038d2899217b7ab5913080514d7180",
+      "universityId": "uni-zhejiang-sci-tech-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/da61c24f6b25c42a9c62fa21af888f8b519dddd7434d2952d56ad1b221392245/052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779.bin",
+          "quote": "面向母语为非汉语的外国公民,结合学校理工科背景,以汉语语言技能训练为核心、应用汉语为特色,培养汉语听、说、读、写、译能力突出,系统掌握中国语言文学知识,熟悉中国国情与文化,跨文化交际能力强的复合型应用型人才,毕业后可从事汉语相关的商贸、旅游、媒体、教育、科技传播与交流等工作。",
+          "snapshotSha256": "052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779",
+          "sourceId": "da61c24f6b25c42a9c62fa21af888f8b519dddd7434d2952d56ad1b221392245",
+          "url": "https://admission.zstu.edu.cn/home/CollegeSubInfo/38"
+        },
+        "name": {
+          "zh": "汉语言文学"
+        },
+        "programType": "degree",
+        "programUrl": "https://admission.zstu.edu.cn/home/CollegeSubInfo/38"
+      },
+      "source": {
+        "url": "https://admission.zstu.edu.cn/home/CollegeSubInfo/38",
+        "snapshotSha256": "052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779",
+        "objectKey": "maintenance/snapshots/da61c24f6b25c42a9c62fa21af888f8b519dddd7434d2952d56ad1b221392245/052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779.bin",
+        "locator": "text:document",
+        "quote": "浙江理工大学本科生招生 汉语言文学 专业申请指南 校级优势学科",
+        "id": "da61c24f6b25c42a9c62fa21af888f8b519dddd7434d2952d56ad1b221392245",
+        "checkedAt": "2026-10-28T16:07:00.401Z",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "da61c24f6b25c42a9c62fa21af888f8b519dddd7434d2952d56ad1b221392245",
+          "url": "https://admission.zstu.edu.cn/home/CollegeSubInfo/38",
+          "snapshotSha256": "052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779",
+          "objectKey": "maintenance/snapshots/da61c24f6b25c42a9c62fa21af888f8b519dddd7434d2952d56ad1b221392245/052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779.bin",
+          "locator": "text:document",
+          "quote": "汉语言文学",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "da61c24f6b25c42a9c62fa21af888f8b519dddd7434d2952d56ad1b221392245",
+          "url": "https://admission.zstu.edu.cn/home/CollegeSubInfo/38",
+          "snapshotSha256": "052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779",
+          "objectKey": "maintenance/snapshots/da61c24f6b25c42a9c62fa21af888f8b519dddd7434d2952d56ad1b221392245/052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779.bin",
+          "locator": "text:document",
+          "quote": "浙江理工大学本科生招生 汉语言文学 专业申请指南 校级优势学科",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "89deb59d-7c3f-4e6b-b15f-25ac64f387fc",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:1bbe1bbf-4b6e-4c44-b669-1c72a91cf382",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:14:46.935Z",
+        "candidateSha256": "24d471cf47366e215192fcd1dcaa070883c748d08cddb107e6ce5708b41c64e9",
+        "snapshotSha256": "052a1825727836f4b5dab582651e85a2f7b900cf490918b16b01744e86fc3779",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "1bbe1bbf-4b6e-4c44-b669-1c72a91cf382",
+        "artifactKey": "maintenance/reviews/maintenance-a1996dfe0d063bb30d3fa4d78d5ede80eb038d2899217b7ab5913080514d7180/21e714fc1fff94a9655eb5a5bf0be2d8895754c3017f6d3d7e64b602889d0df3.json",
+        "reviewArtifactSha256": "21e714fc1fff94a9655eb5a5bf0be2d8895754c3017f6d3d7e64b602889d0df3"
+      }
+    },
+    {
+      "id": "maintenance-26d9a538b7d528e4ce8d92850974b4c565d8e3c00c0f68eace17725077bbf983",
+      "universityId": "uni-guangxi-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/83146a7d454a23e71e25d8d597282103d7f748945e43d959852a5baa68b9be9d/bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab.bin",
+          "quote": "Admission to China Southern Power Grid Company Scholarship of Guangxi University in Electrical Engineering and Automation 2025 (For International Students)",
+          "snapshotSha256": "bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab",
+          "sourceId": "83146a7d454a23e71e25d8d597282103d7f748945e43d959852a5baa68b9be9d",
+          "url": "https://www.gxu.edu.cn/en/info/1214/3289.htm"
+        },
+        "name": {
+          "en": "Electrical Engineering and Automation"
+        },
+        "programType": "degree",
+        "programUrl": "https://www.gxu.edu.cn/en/info/1214/3289.htm"
+      },
+      "source": {
+        "url": "https://www.gxu.edu.cn/en/info/1214/3289.htm",
+        "snapshotSha256": "bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab",
+        "objectKey": "maintenance/snapshots/83146a7d454a23e71e25d8d597282103d7f748945e43d959852a5baa68b9be9d/bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab.bin",
+        "locator": "text:document",
+        "quote": "Bachelor Electrical Engineering and Automation 4 years 1 year 1+4 years Full-time",
+        "id": "83146a7d454a23e71e25d8d597282103d7f748945e43d959852a5baa68b9be9d",
+        "checkedAt": "2026-10-28T16:08:58.203Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "83146a7d454a23e71e25d8d597282103d7f748945e43d959852a5baa68b9be9d",
+          "url": "https://www.gxu.edu.cn/en/info/1214/3289.htm",
+          "snapshotSha256": "bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab",
+          "objectKey": "maintenance/snapshots/83146a7d454a23e71e25d8d597282103d7f748945e43d959852a5baa68b9be9d/bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab.bin",
+          "locator": "text:document",
+          "quote": "Electrical Engineering and Automation",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "83146a7d454a23e71e25d8d597282103d7f748945e43d959852a5baa68b9be9d",
+          "url": "https://www.gxu.edu.cn/en/info/1214/3289.htm",
+          "snapshotSha256": "bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab",
+          "objectKey": "maintenance/snapshots/83146a7d454a23e71e25d8d597282103d7f748945e43d959852a5baa68b9be9d/bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab.bin",
+          "locator": "text:document",
+          "quote": "Bachelor Electrical Engineering and Automation",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "1d5b669e-7996-44ea-b28c-c5c54ec72a3e",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:2c38793c-2564-4643-9707-7a480e7e8286",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:15:34.561Z",
+        "candidateSha256": "6df3216cf9207f8901e1005dae703ee85d4dc4d6f710a659540b68f7ea97ca8a",
+        "snapshotSha256": "bae7c98626a05b93cf33805cef745d06f3282be3cd30df03274e5bf7f65932ab",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "2c38793c-2564-4643-9707-7a480e7e8286",
+        "artifactKey": "maintenance/reviews/maintenance-26d9a538b7d528e4ce8d92850974b4c565d8e3c00c0f68eace17725077bbf983/6d03178807b61b0d0293a67612670a7c04a5ff55bff94250910ef8cba1ecf17c.json",
+        "reviewArtifactSha256": "6d03178807b61b0d0293a67612670a7c04a5ff55bff94250910ef8cba1ecf17c"
+      }
+    },
+    {
+      "id": "maintenance-c0573e788c9dcaa8ebf07a68de749a0f3027c2d8d8b16c7ef2c63d5d5e3d329a",
+      "universityId": "uni-capital-university-of-economics-and-business",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/6be0a52d421c6af3938f35d2ce307859e857d9a790b4ff106d3528893e547d40/3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402.bin",
+          "quote": "All the bachelor programs of CUEB are open to foreign applicants who wish to pursue the bachelor degree (taught in either Chinese or English).",
+          "snapshotSha256": "3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402",
+          "sourceId": "6be0a52d421c6af3938f35d2ce307859e857d9a790b4ff106d3528893e547d40",
+          "url": "https://sie.cueb.edu.cn/Eng/programs/degreeprograms/bachelordegreeprograms/index.htm"
+        },
+        "name": {
+          "en": "Business Administration"
+        },
+        "programType": "degree",
+        "programUrl": "https://sie.cueb.edu.cn/Eng/programs/degreeprograms/bachelordegreeprograms/index.htm"
+      },
+      "source": {
+        "url": "https://sie.cueb.edu.cn/Eng/programs/degreeprograms/bachelordegreeprograms/index.htm",
+        "snapshotSha256": "3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402",
+        "objectKey": "maintenance/snapshots/6be0a52d421c6af3938f35d2ce307859e857d9a790b4ff106d3528893e547d40/3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402.bin",
+        "locator": "text:document",
+        "quote": "1.Business Administration",
+        "id": "6be0a52d421c6af3938f35d2ce307859e857d9a790b4ff106d3528893e547d40",
+        "checkedAt": "2026-10-28T16:09:10.209Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "6be0a52d421c6af3938f35d2ce307859e857d9a790b4ff106d3528893e547d40",
+          "url": "https://sie.cueb.edu.cn/Eng/programs/degreeprograms/bachelordegreeprograms/index.htm",
+          "snapshotSha256": "3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402",
+          "objectKey": "maintenance/snapshots/6be0a52d421c6af3938f35d2ce307859e857d9a790b4ff106d3528893e547d40/3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402.bin",
+          "locator": "text:document",
+          "quote": "Business Administration",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "6be0a52d421c6af3938f35d2ce307859e857d9a790b4ff106d3528893e547d40",
+          "url": "https://sie.cueb.edu.cn/Eng/programs/degreeprograms/bachelordegreeprograms/index.htm",
+          "snapshotSha256": "3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402",
+          "objectKey": "maintenance/snapshots/6be0a52d421c6af3938f35d2ce307859e857d9a790b4ff106d3528893e547d40/3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402.bin",
+          "locator": "text:document",
+          "quote": "All the bachelor programs of CUEB are open to foreign applicants who wish to pursue the bachelor degree (taught in either Chinese or English).",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "9d66aba3-8e63-4994-80a0-d960e94d0ebf",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:24a60bef-609b-4d7d-983f-865ce9ce2c39",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:15:42.882Z",
+        "candidateSha256": "49fd74a30e3a98671648ef2436c1ed925c6921270e6e5525c19de5aa146b272f",
+        "snapshotSha256": "3e4186d5deb71996c1994e5b21f12e02d301f8b2833792e136acc26617b13402",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "24a60bef-609b-4d7d-983f-865ce9ce2c39",
+        "artifactKey": "maintenance/reviews/maintenance-c0573e788c9dcaa8ebf07a68de749a0f3027c2d8d8b16c7ef2c63d5d5e3d329a/f020e133d3e10b7858107a1999c5e1c4399c9ef9ae56e99a5178870d07c02ec0.json",
+        "reviewArtifactSha256": "f020e133d3e10b7858107a1999c5e1c4399c9ef9ae56e99a5178870d07c02ec0"
+      }
+    },
+    {
+      "id": "maintenance-93696c93551b22f5424d6085bbc01289d68b3052ce332cb0b264ccdcc2cf16a6",
+      "universityId": "uni-nankai-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "master",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/084fb25ec01e3fb2e8e9003f0d3990bb03d2e137d06073daf207ad6cf19d079d/c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096.bin",
+          "quote": "the Center for Language Education and Cooperation (CLEC) has established the International Chinese Language Teachers Scholarship (hereinafter referred to as the Scholarship) for eligible Chinese language teachers outside of China.",
+          "snapshotSha256": "c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096",
+          "sourceId": "084fb25ec01e3fb2e8e9003f0d3990bb03d2e137d06073daf207ad6cf19d079d",
+          "url": "https://ensie.nankai.edu.cn/info/1043/1317.htm"
+        },
+        "name": {
+          "en": "International Chinese Language Education"
+        },
+        "programType": "degree",
+        "programUrl": "https://ensie.nankai.edu.cn/info/1043/1317.htm"
+      },
+      "source": {
+        "url": "https://ensie.nankai.edu.cn/info/1043/1317.htm",
+        "snapshotSha256": "c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096",
+        "objectKey": "maintenance/snapshots/084fb25ec01e3fb2e8e9003f0d3990bb03d2e137d06073daf207ad6cf19d079d/c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096.bin",
+        "locator": "text:document",
+        "quote": "Master's Degree in International Chinese Language Education",
+        "id": "084fb25ec01e3fb2e8e9003f0d3990bb03d2e137d06073daf207ad6cf19d079d",
+        "checkedAt": "2026-10-27T05:27:10.699Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "084fb25ec01e3fb2e8e9003f0d3990bb03d2e137d06073daf207ad6cf19d079d",
+          "url": "https://ensie.nankai.edu.cn/info/1043/1317.htm",
+          "snapshotSha256": "c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096",
+          "objectKey": "maintenance/snapshots/084fb25ec01e3fb2e8e9003f0d3990bb03d2e137d06073daf207ad6cf19d079d/c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096.bin",
+          "locator": "text:document",
+          "quote": "International Chinese Language Education",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "084fb25ec01e3fb2e8e9003f0d3990bb03d2e137d06073daf207ad6cf19d079d",
+          "url": "https://ensie.nankai.edu.cn/info/1043/1317.htm",
+          "snapshotSha256": "c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096",
+          "objectKey": "maintenance/snapshots/084fb25ec01e3fb2e8e9003f0d3990bb03d2e137d06073daf207ad6cf19d079d/c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096.bin",
+          "locator": "text:document",
+          "quote": "Master's Degree in International Chinese Language Education",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "974817c7-b7a6-4aec-a1b9-bd8f26075e42",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:49d31252-4419-4d87-b743-554d301c6dcc",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:18:42.163Z",
+        "candidateSha256": "aded41bea512914486124944851f35379bdd5181b71792d5a32fc36a98067de3",
+        "snapshotSha256": "c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "49d31252-4419-4d87-b743-554d301c6dcc",
+        "artifactKey": "maintenance/reviews/maintenance-93696c93551b22f5424d6085bbc01289d68b3052ce332cb0b264ccdcc2cf16a6/79adba8e572c4fd8bef692bafd163109f3710085d9f7500b254e5a8eefc0afad.json",
+        "reviewArtifactSha256": "79adba8e572c4fd8bef692bafd163109f3710085d9f7500b254e5a8eefc0afad"
+      }
+    },
+    {
+      "id": "maintenance-ac65615f32a569760554e96202547cf51b908e28fceaf8c09630cde586454230",
+      "universityId": "uni-xinjiang-normal-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/ee3afd911c0661bd37f6810f8250a5330b940d1a663dbef614764e7caf0989ed/4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c.bin",
+          "quote": "非中国籍公民,身体健康,遵守中国法律法规及学校规章制度",
+          "snapshotSha256": "4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c",
+          "sourceId": "ee3afd911c0661bd37f6810f8250a5330b940d1a663dbef614764e7caf0989ed",
+          "url": "https://gjc.xjnu.edu.cn/info/1211/2171.htm"
+        },
+        "name": {
+          "zh": "国际经济与贸易"
+        },
+        "programType": "degree",
+        "programUrl": "https://gjc.xjnu.edu.cn/info/1211/2171.htm"
+      },
+      "source": {
+        "url": "https://gjc.xjnu.edu.cn/info/1211/2171.htm",
+        "snapshotSha256": "4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c",
+        "objectKey": "maintenance/snapshots/ee3afd911c0661bd37f6810f8250a5330b940d1a663dbef614764e7caf0989ed/4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c.bin",
+        "locator": "text:document",
+        "quote": "国际经济与贸易(本科)",
+        "id": "ee3afd911c0661bd37f6810f8250a5330b940d1a663dbef614764e7caf0989ed",
+        "checkedAt": "2026-10-27T05:28:53.004Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "ee3afd911c0661bd37f6810f8250a5330b940d1a663dbef614764e7caf0989ed",
+          "url": "https://gjc.xjnu.edu.cn/info/1211/2171.htm",
+          "snapshotSha256": "4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c",
+          "objectKey": "maintenance/snapshots/ee3afd911c0661bd37f6810f8250a5330b940d1a663dbef614764e7caf0989ed/4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c.bin",
+          "locator": "text:document",
+          "quote": "国际经济与贸易",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "ee3afd911c0661bd37f6810f8250a5330b940d1a663dbef614764e7caf0989ed",
+          "url": "https://gjc.xjnu.edu.cn/info/1211/2171.htm",
+          "snapshotSha256": "4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c",
+          "objectKey": "maintenance/snapshots/ee3afd911c0661bd37f6810f8250a5330b940d1a663dbef614764e7caf0989ed/4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c.bin",
+          "locator": "text:document",
+          "quote": "国际经济与贸易(本科)",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "46fc6e61-ee9b-49ef-8da5-35f8e67383cb",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:482cb70e-afc3-4c67-aab4-f7b34681ed56",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:18:48.527Z",
+        "candidateSha256": "8846f5420b944793e40a21b9e1d86e16c9d6a4bbf4fc8388d174f94fb2f46c4f",
+        "snapshotSha256": "4bd93570b557e73ec12480b8fcc013bc3e3124a4e6a7e13e3da84edb0880f73c",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "482cb70e-afc3-4c67-aab4-f7b34681ed56",
+        "artifactKey": "maintenance/reviews/maintenance-ac65615f32a569760554e96202547cf51b908e28fceaf8c09630cde586454230/91b9ec9877e63cbe3e8dd49532bbdb29220eddb28d3670abd517014147426842.json",
+        "reviewArtifactSha256": "91b9ec9877e63cbe3e8dd49532bbdb29220eddb28d3670abd517014147426842"
+      }
+    }
+  ],
+  "sha256": "d8b60e6599ed56c077b72ae077b59006215da3e9f8df3b9a01a4193f1b7e45de"
+}
