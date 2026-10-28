@@ -1,0 +1,96 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch006-ca643ec0",
+  "inputCatalogSha256": "25eb75af85b633518fada8fff233fe80c707067fa39df1b6447561bbfeb3a2d0",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-28T16:45:47.474Z",
+  "proposals": [
+    {
+      "id": "maintenance-d8a411564b4841dcdd9b2d2353a2a7d535e065961ca16d4985263eeae3d6dc59",
+      "universityId": "uni-zhejiang-normal-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f/1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad.bin",
+          "quote": "汉语言(仅招留学生)",
+          "snapshotSha256": "1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad",
+          "sourceId": "5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f",
+          "url": "https://www.zjnu.edu.cn/4010/list.htm"
+        },
+        "name": {
+          "zh": "汉语言(仅招留学生)"
+        },
+        "programType": "degree",
+        "programUrl": "https://www.zjnu.edu.cn/4010/list.htm"
+      },
+      "source": {
+        "url": "https://www.zjnu.edu.cn/4010/list.htm",
+        "snapshotSha256": "1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad",
+        "objectKey": "maintenance/snapshots/5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f/1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad.bin",
+        "locator": "text:document",
+        "quote": "国际文化与教育学院 050102 汉语言(仅招留学生) 文学",
+        "id": "5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f",
+        "checkedAt": "2026-10-28T16:30:44.562Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f",
+          "url": "https://www.zjnu.edu.cn/4010/list.htm",
+          "snapshotSha256": "1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad",
+          "objectKey": "maintenance/snapshots/5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f/1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad.bin",
+          "locator": "text:document",
+          "quote": "汉语言(仅招留学生)",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f",
+          "url": "https://www.zjnu.edu.cn/4010/list.htm",
+          "snapshotSha256": "1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad",
+          "objectKey": "maintenance/snapshots/5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f/1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad.bin",
+          "locator": "text:document",
+          "quote": "首页 人才培养 本科专业",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f",
+          "url": "https://www.zjnu.edu.cn/4010/list.htm",
+          "snapshotSha256": "1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad",
+          "objectKey": "maintenance/snapshots/5d77183dcc9350316b2902149c3ea5a74fce808394f940ca2865c9a87ea7121f/1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad.bin",
+          "locator": "text:document",
+          "quote": "所在学院 专业代码 专业名称 学位授予门类 级别",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "82c9235d-3d5c-42ac-b6d4-1946cef40316",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:1e9edbfb-72f8-48c0-9353-c32b3fe4459a",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:43:32.325Z",
+        "candidateSha256": "e7a7cf536995b5e7c2dbd98659f7e5382196de9f8d4fb0f4badfa41c2bab6369",
+        "snapshotSha256": "1cbfc2c483882c61971ca88299eb9b01135c8cdd41911da39e5d53e7ce01a6ad",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "1e9edbfb-72f8-48c0-9353-c32b3fe4459a",
+        "artifactKey": "maintenance/reviews/maintenance-d8a411564b4841dcdd9b2d2353a2a7d535e065961ca16d4985263eeae3d6dc59/10e62dd5c17a5fecdcbcae1c532920bd8c89874bfab621ff17bf6a8e077ec9d9.json",
+        "reviewArtifactSha256": "10e62dd5c17a5fecdcbcae1c532920bd8c89874bfab621ff17bf6a8e077ec9d9"
+      }
+    }
+  ],
+  "sha256": "584c2133b4bfd805e16484b6c3bab5bcce1f32a5315431327f6628cfeb788607"
+}
