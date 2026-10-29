@@ -1,0 +1,250 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch018-c9817e0a",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "5d38d66786a24dd3c84a343420f348a15479420e56be9e66fa2ad7788c6fc200",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\root-approved-wave9-more-manifest-001.json",
+    "sha256": "f6ce17ca0a8267c06e82568cac4f131f70e1e40e18f4635a476ba7eacf519f0d"
+  },
+  "formalImporterSha256": "213e5a3de16825898676fc04773feed297b434ee1cd2a716594b06dd7b495acb",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-b05256a89ab9482f1d54c714a9009beba582593d8abc5e27",
+      "universityId": "uni-shenzhen-technology-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "8dc7f3a587ef393d48afb8b666980e184e4f02c0864c9d7d4467aefe022b87df",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\sztu-017-001\\independent-review.json",
+        "sha256": "37412ea8dafe49a6bc27f005916969eab1acf3ce72b039bd3c5e074631b2b792"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-b05256a89ab9482f1d54c714a9009beba582593d8abc5e27/1c91af96a6a87b0da5e8e39975bfb3cf8b72dec1b25008ffab2dcacbfb8e08bc.json",
+      "ruleArtifactSha256": "1c91af96a6a87b0da5e8e39975bfb3cf8b72dec1b25008ffab2dcacbfb8e08bc",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Data Science and Technology"
+        },
+        "catalogSha256": "baba15d210edda1694f7ed9ac969faafed4160740c0f6b09ae4b1264ab6981cc",
+        "existingProgrammeConflictReview": {
+          "catalogSha256": "baba15d210edda1694f7ed9ac969faafed4160740c0f6b09ae4b1264ab6981cc",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "notes": [
+            "The entire current same-school raw programme set, all locale names, degree fields, code fields and URLs were independently read. The real source contains no programme code. Data Science and Technology is not a literal or established translated alias of any existing record; the nearby Artificial Intelligence is deliberately not duplicated.",
+            "prog-gap-wave3-sztu-ai-english-bachelor; degree=bachelor; all names={\"en\":\"Artificial Intelligence (English-taught Bachelor)\",\"zh\":\"人工智能（英文授课本科）\",\"ru\":\"Искусственный интеллект (бакалавриат на английском)\"}; code=not present; URL=https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm. Artificial Intelligence is explicitly the other programme in the same source paragraph, so remains a distinct unchanged old identity.",
+            "prog-gap-wave3-sztu-cs-chinese-bachelor; degree=bachelor; all names={\"en\":\"Computer Science and Technology (Chinese-taught Bachelor)\",\"zh\":\"计算机科学与技术（中文授课本科）\",\"ru\":\"Компьютерные науки и технологии (бакалавриат на китайском)\"}; code=not present; URL=https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm. Computer Science and Technology / 计算机科学与技术 is a different literal discipline from the actually named Data Science and Technology. No official code or alias connects them; the existing descriptive title is not stripped, renamed or silently approved.",
+            "prog-gap-wave3-sztu-international-business-english-bachelor; degree=bachelor; all names={\"en\":\"International Business (English-taught Bachelor)\",\"zh\":\"国际商务（英文授课本科）\",\"ru\":\"Международный бизнес (бакалавриат на английском)\"}; code=not present; URL=https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm. International Business / 国际商务 is a distinct business discipline, not data science.",
+            "prog-gap-wave3-sztu-pharmacy-english-bachelor; degree=bachelor; all names={\"en\":\"Pharmacy (English-taught Bachelor)\",\"zh\":\"药学（英文授课本科）\",\"ru\":\"Фармация (бакалавриат на английском)\"}; code=not present; URL=https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm. Pharmacy / 药学 is a distinct pharmacy discipline, not data science."
+          ],
+          "programsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\programs.json",
+            "sha256": "cfb0d96bfa63f97511cf0ee50dcb87946aba4d1848adbd5137d51bbbff4c178c"
+          },
+          "reviewedExistingRecords": [
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "888a343aa3f0d47a3b9bf76246c6046e87210a9c7308b137eafdfa196bbf38e0",
+              "names": {
+                "en": "Artificial Intelligence (English-taught Bachelor)",
+                "ru": "Искусственный интеллект (бакалавриат на английском)",
+                "zh": "人工智能（英文授课本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+              "recordId": "prog-gap-wave3-sztu-ai-english-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "d5487fea722c8b6d8333e0cb09319ef6d27449cc59127e1f37762a851e0a785d",
+              "names": {
+                "en": "Computer Science and Technology (Chinese-taught Bachelor)",
+                "ru": "Компьютерные науки и технологии (бакалавриат на китайском)",
+                "zh": "计算机科学与技术（中文授课本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+              "recordId": "prog-gap-wave3-sztu-cs-chinese-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "b0abcfe02cb8e6befcc1caebfdea645c978dac954701d71802c9dc18ae0fc4d2",
+              "names": {
+                "en": "International Business (English-taught Bachelor)",
+                "ru": "Международный бизнес (бакалавриат на английском)",
+                "zh": "国际商务（英文授课本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+              "recordId": "prog-gap-wave3-sztu-international-business-english-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "43f79fd3af3b443feb41b0304b3bc32c4bd5d52664d52b1afdadb70e12d0d169",
+              "names": {
+                "en": "Pharmacy (English-taught Bachelor)",
+                "ru": "Фармация (бакалавриат на английском)",
+                "zh": "药学（英文授课本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+              "recordId": "prog-gap-wave3-sztu-pharmacy-english-bachelor"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-19598e1cf69a2409b06e573af8cc32b7e24a3b75daa1c5b1",
+      "universityId": "uni-wenzhou-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "6499698703ba8f62902a010a155b481a13db4bd709064b1d167c2a78cead88f5",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-014\\review-pdf\\wzu-one-001\\independent-review.json",
+        "sha256": "15e00a22ed92c2e66633c423d8b01d154d6227dcd03f16f4cf498562766c301c"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-19598e1cf69a2409b06e573af8cc32b7e24a3b75daa1c5b1/b1132791f06018fd413661be64672071351840083f89ef9fc00ed34fe86dbe9b.json",
+      "ruleArtifactSha256": "b1132791f06018fd413661be64672071351840083f89ef9fc00ed34fe86dbe9b",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Business Administration"
+        },
+        "catalogSha256": "baba15d210edda1694f7ed9ac969faafed4160740c0f6b09ae4b1264ab6981cc",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "641509f60684872e933282f9d63603c616eb50c450c973314eaaa32913328bf2"
+          },
+          "aliasesConsidered": [
+            "Business Administration",
+            "工商管理",
+            "Bachelor of Business Administration",
+            "BBA"
+          ],
+          "catalogSha256": "baba15d210edda1694f7ed9ac969faafed4160740c0f6b09ae4b1264ab6981cc",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "641509f60684872e933282f9d63603c616eb50c450c973314eaaa32913328bf2"
+          },
+          "notes": [
+            "The latest captured official20262.pdfhas two complete physical pages. The central Admission Programs table at physical1has distinct Bachelor, CSCA, Master and Doctoral columns. In the School of Business row, Business Administration is explicitly in the Bachelor column alongside International Economics and Trade; Applied Economis is in the separate Master column. Native text interleaves columns, so the programme/degree binding was independently checked against the full actual rendered page. The target is Bachelor Business Administration, not an inferred Master or MBA award title.",
+            "All four current raw same-school records and actual bindings were independently audited at the current catalogue baseline. The three old bachelors are Chinese Language and Literature(Bachelor),Computer Science and Technology(Bachelor),and International Economics and Trade(Bachelor); the fourth is a dated China Link scientific exchange route with degreeLevelother. These are different concrete disciplines/categories from Business Administration. No old degree/year suffix is removed, no old ID is repurposed, and no English/Chinese synonym of Business Administration bachelor is present.",
+            "Compared existing program-wzu-china-link-2026-2027; degree=other; literal names={\"en\":\"China Link Short-Term Scientific Exchange Program (2026–2027)\",\"zh\":\"中国政府奖学金短期科研交流项目（2026—2027）\",\"ru\":\"Краткосрочная научно-исследовательская программа China Link (2026–2027)\"}; actual bindings=[]. Different discipline or degree category; no unresolved alias with the new bachelor programme.",
+            "Compared existing prog-gap-wave4-depth-wzu-chinese-language-literature-bachelor; degree=bachelor; literal names={\"en\":\"Chinese Language and Literature (Bachelor)\",\"zh\":\"汉语言文学（本科）\",\"ru\":\"Китайский язык и литература (бакалавриат)\"}; actual bindings=[]. Different discipline or degree category; no unresolved alias with the new bachelor programme.",
+            "Compared existing prog-gap-wave4-depth-wzu-computer-science-technology-bachelor; degree=bachelor; literal names={\"en\":\"Computer Science and Technology (Bachelor)\",\"zh\":\"计算机科学与技术（本科）\",\"ru\":\"Компьютерные науки и технологии (бакалавриат)\"}; actual bindings=[]. Different discipline or degree category; no unresolved alias with the new bachelor programme.",
+            "Compared existing prog-gap-wave4-depth-wzu-international-economics-trade-bachelor; degree=bachelor; literal names={\"en\":\"International Economics and Trade (Bachelor)\",\"zh\":\"国际经济与贸易（本科）\",\"ru\":\"Международная экономика и торговля (бакалавриат)\"}; actual bindings=[]. Different discipline or degree category; no unresolved alias with the new bachelor programme."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-014\\review-pdf\\wzu-one-001\\catalogue-identity-audit.json",
+            "sha256": "caab877b3ee339b8d2b2df3a46454fc7726c517827136b0e74ad87311069d1eb"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "other",
+              "identitySha256": "5e420c8ac487357127592578f14a34b421e7c8b61125cd13ca25deca12d95386",
+              "names": {
+                "en": "China Link Short-Term Scientific Exchange Program (2026–2027)",
+                "ru": "Краткосрочная научно-исследовательская программа China Link (2026–2027)",
+                "zh": "中国政府奖学金短期科研交流项目（2026—2027）"
+              },
+              "recordId": "program-wzu-china-link-2026-2027",
+              "url": "https://cic.wzu.edu.cn/info/1718/11956.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "identitySha256": "a209635f9a00b8e50e3769602435a95d86b1871295f4c200103901503c769cee",
+              "names": {
+                "en": "Chinese Language and Literature (Bachelor)",
+                "ru": "Китайский язык и литература (бакалавриат)",
+                "zh": "汉语言文学（本科）"
+              },
+              "recordId": "prog-gap-wave4-depth-wzu-chinese-language-literature-bachelor",
+              "url": "https://cic.wzu.edu.cn/wendaguojixueyuanzhaosheng2026.pdf"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "identitySha256": "b58a2f17dcf75709e402fae5a81800ced5291229313f08082147d8070c8b2d94",
+              "names": {
+                "en": "Computer Science and Technology (Bachelor)",
+                "ru": "Компьютерные науки и технологии (бакалавриат)",
+                "zh": "计算机科学与技术（本科）"
+              },
+              "recordId": "prog-gap-wave4-depth-wzu-computer-science-technology-bachelor",
+              "url": "https://cic.wzu.edu.cn/wendaguojixueyuanzhaosheng2026.pdf"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "identitySha256": "421876c2a4733bb817811ed49e9531087805b79cc105ca88df08f35002e1f35f",
+              "names": {
+                "en": "International Economics and Trade (Bachelor)",
+                "ru": "Международная экономика и торговля (бакалавриат)",
+                "zh": "国际经济与贸易（本科）"
+              },
+              "recordId": "prog-gap-wave4-depth-wzu-international-economics-trade-bachelor",
+              "url": "https://cic.wzu.edu.cn/wendaguojixueyuanzhaosheng2026.pdf"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-0bf6d82994822b19d605aab4394a255be1d2338b9d831cc3",
+      "universityId": "uni-yangtze-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "acd094f5d4e2caa66731b9cfe6b786a6818492f50f6a848a734c9ae2a2b0bb29",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-016\\html-independent\\ready-yangtze-pdf-001\\independent-review.json",
+        "sha256": "ba8fdad2513258a7bb92c7c1a1d58dd2323269ae562501d1fb6598beb474b0db"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-0bf6d82994822b19d605aab4394a255be1d2338b9d831cc3/c161ab95752aa415bc847b0802c4a6c5743e5bada34555476a8945ccf9a3730b.json",
+      "ruleArtifactSha256": "c161ab95752aa415bc847b0802c4a6c5743e5bada34555476a8945ccf9a3730b",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Clinical Medicine",
+          "zh": "临床医学"
+        },
+        "catalogSha256": "baba15d210edda1694f7ed9ac969faafed4160740c0f6b09ae4b1264ab6981cc",
+        "kind": "existing_literal",
+        "oldNames": {
+          "en": "Clinical Medicine",
+          "zh": "临床医学"
+        },
+        "recordId": "prog-gap-local-strong-yangtzeu-b-clinical-medicine-cn",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}
