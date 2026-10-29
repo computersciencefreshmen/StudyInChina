@@ -133,10 +133,13 @@ describe('verified broad university expansion on 2026-07-29', () => {
     expect(underThreeUniversities).toBeLessThanOrEqual(146)
   })
 
-  it('keeps every new priority record multilingual and tied to an exact official source', () => {
+  it('keeps historical priority fact records multilingual and tied to an exact official source', () => {
     const priorityIds = new Set(priorityCoverage.keys())
     const priorityPrograms = auditedPrograms.filter(
-      (program) => priorityIds.has(program.universityId),
+      // Later directory identities retain only names actually supplied by the
+      // official source; this historical bilingual fact batch has a different
+      // contract and must not force invented translations into new identities.
+      (program) => priorityIds.has(program.universityId) && program.verificationScope !== 'identity',
     )
 
     for (const program of priorityPrograms) {
@@ -151,6 +154,17 @@ describe('verified broad university expansion on 2026-07-29', () => {
           && source.url === program.programUrl
           && program.sourceIds.includes(source.id),
       ), program.id).toBe(true)
+    }
+  })
+
+  it('allows source-language-only directory identities with exact official entry points', () => {
+    const identities = data.programs.filter((program) => program.verificationScope === 'identity')
+    expect(identities.length).toBeGreaterThan(0)
+    for (const program of identities) {
+      expect(Object.values(program.name).some((name) => Boolean(name?.trim())), program.id).toBe(true)
+      expect(Object.values(program.name).join(' '), program.id).not.toMatch(/translation pending|翻译待补充/iu)
+      expect(data.sources.some((source) => source.official && source.url === program.programUrl
+        && program.sourceIds.includes(source.id)), program.id).toBe(true)
     }
   })
 })

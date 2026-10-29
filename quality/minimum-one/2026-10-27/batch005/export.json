@@ -1,0 +1,565 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch005-b14b6564",
+  "inputCatalogSha256": "79197bcc0ae46ea53a9e42a0abb6a991df4b074b7006ed6e182627474836b6de",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-28T16:40:32.491Z",
+  "proposals": [
+    {
+      "id": "maintenance-parser-reconciliation-8aed439df3a7abea52298df1f986be449ffb66e94cf201e72ca751a5652903dd",
+      "universityId": "uni-beijing-university-of-chinese-medicine",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/45fc1bad7b79363817806b1009f8c69e4ef0dc2b7bde5874f335524e0c071b1d/79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6.bin",
+          "quote": "申请人须为持有效普通护照的非中国籍公民",
+          "snapshotSha256": "79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6",
+          "sourceId": "45fc1bad7b79363817806b1009f8c69e4ef0dc2b7bde5874f335524e0c071b1d",
+          "url": "https://iec.bucm.edu.cn/ZSJZ/8c24201b3e8745ed80b537d909c8d06b.htm"
+        },
+        "name": {
+          "zh": "中医骨伤科学"
+        },
+        "programType": "degree",
+        "programUrl": "https://iec.bucm.edu.cn/ZSJZ/8c24201b3e8745ed80b537d909c8d06b.htm"
+      },
+      "source": {
+        "url": "https://iec.bucm.edu.cn/ZSJZ/8c24201b3e8745ed80b537d909c8d06b.htm",
+        "snapshotSha256": "79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6",
+        "objectKey": "maintenance/snapshots/45fc1bad7b79363817806b1009f8c69e4ef0dc2b7bde5874f335524e0c071b1d/79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6.bin",
+        "locator": "text:document",
+        "quote": "2 中医骨伤科学 5年 中文 医学学士 35000 文科中文、数学",
+        "id": "45fc1bad7b79363817806b1009f8c69e4ef0dc2b7bde5874f335524e0c071b1d",
+        "checkedAt": "2026-10-28T16:10:11.406Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "45fc1bad7b79363817806b1009f8c69e4ef0dc2b7bde5874f335524e0c071b1d",
+          "url": "https://iec.bucm.edu.cn/ZSJZ/8c24201b3e8745ed80b537d909c8d06b.htm",
+          "snapshotSha256": "79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6",
+          "objectKey": "maintenance/snapshots/45fc1bad7b79363817806b1009f8c69e4ef0dc2b7bde5874f335524e0c071b1d/79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6.bin",
+          "locator": "text:document",
+          "quote": "中医骨伤科学",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "45fc1bad7b79363817806b1009f8c69e4ef0dc2b7bde5874f335524e0c071b1d",
+          "url": "https://iec.bucm.edu.cn/ZSJZ/8c24201b3e8745ed80b537d909c8d06b.htm",
+          "snapshotSha256": "79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6",
+          "objectKey": "maintenance/snapshots/45fc1bad7b79363817806b1009f8c69e4ef0dc2b7bde5874f335524e0c071b1d/79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6.bin",
+          "locator": "text:document",
+          "quote": "医学学士",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "3bc23725-e0e9-4f71-a4b4-2548bb115792",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:d6a4b02c-01f8-44d5-afcf-865885fd45de:parser-envelope-v1",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:33:58.569Z",
+        "candidateSha256": "2d620406bf24f6af5a42d5d199ab91a1124f36c37f97599ef5265d49f26e6ec9",
+        "snapshotSha256": "79cdc14a57b4da469dfbe888bc50fc32f4e1fe5ad86eb021e9ff5b027d9a47e6",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "d6a4b02c-01f8-44d5-afcf-865885fd45de",
+        "artifactKey": "maintenance/reviews/maintenance-parser-reconciliation-8aed439df3a7abea52298df1f986be449ffb66e94cf201e72ca751a5652903dd/2452f7a5bf56561c9df4c87b77f343305619078cf400ff30c16be83d4b54cc8b.json",
+        "reviewArtifactSha256": "2452f7a5bf56561c9df4c87b77f343305619078cf400ff30c16be83d4b54cc8b"
+      }
+    },
+    {
+      "id": "maintenance-6bdb946b6e3ad874b4f2ee6056d1d43669d4c254b559c286c55d6b328b4fbd9c",
+      "universityId": "uni-northeast-forestry-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/4c5085c9e8a03ef7d052d027422516e605c57d9a3da88c9256d4bab32cc1f496/ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1.bin",
+          "quote": "一、申请资格 非中国籍公民,身心健康,高中毕业或具有同等学力。",
+          "snapshotSha256": "ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1",
+          "sourceId": "4c5085c9e8a03ef7d052d027422516e605c57d9a3da88c9256d4bab32cc1f496",
+          "url": "https://siee.nefu.edu.cn/jjy/bksxm.htm"
+        },
+        "name": {
+          "zh": "木材科学与工程"
+        },
+        "programType": "degree",
+        "programUrl": "https://siee.nefu.edu.cn/jjy/bksxm.htm"
+      },
+      "source": {
+        "url": "https://siee.nefu.edu.cn/jjy/bksxm.htm",
+        "snapshotSha256": "ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1",
+        "objectKey": "maintenance/snapshots/4c5085c9e8a03ef7d052d027422516e605c57d9a3da88c9256d4bab32cc1f496/ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1.bin",
+        "locator": "text:document",
+        "quote": "材料科学与工程学院 082402 木材科学与工程 中文 工学",
+        "id": "4c5085c9e8a03ef7d052d027422516e605c57d9a3da88c9256d4bab32cc1f496",
+        "checkedAt": "2026-10-28T16:30:54.924Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "4c5085c9e8a03ef7d052d027422516e605c57d9a3da88c9256d4bab32cc1f496",
+          "url": "https://siee.nefu.edu.cn/jjy/bksxm.htm",
+          "snapshotSha256": "ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1",
+          "objectKey": "maintenance/snapshots/4c5085c9e8a03ef7d052d027422516e605c57d9a3da88c9256d4bab32cc1f496/ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1.bin",
+          "locator": "text:document",
+          "quote": "木材科学与工程",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "4c5085c9e8a03ef7d052d027422516e605c57d9a3da88c9256d4bab32cc1f496",
+          "url": "https://siee.nefu.edu.cn/jjy/bksxm.htm",
+          "snapshotSha256": "ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1",
+          "objectKey": "maintenance/snapshots/4c5085c9e8a03ef7d052d027422516e605c57d9a3da88c9256d4bab32cc1f496/ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1.bin",
+          "locator": "text:document",
+          "quote": "2027-2028学年本科留学生招生专业目录 学院 专业代码 本科专业 授课语言 学科门类 林学院 090501 林学 中文 农学 090503 森林保护 中文 农学 082503 环境科学 中文 理学 070504 地理信息科学 中文 理学 090116TK 生物育种科学 中文 农学 090505T 智慧林业 中文 农学 材料科学与工程学院 082402 木材科学与工程 中文 工学",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "bbb348d0-e3b4-4280-9eb5-4245a0ff4290",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:c98f20a8-60ed-416f-ab79-acb5896f693a",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:35:09.510Z",
+        "candidateSha256": "8f10dbbc7d3fb8acbb9cc94181399c6a9310bb31e9a7f44fff6d7be57ad83a8e",
+        "snapshotSha256": "ea9a2d864859b6ca659066e4632a6dd8ae4fad2df5a455eab3d2b40fb1e5b1a1",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "c98f20a8-60ed-416f-ab79-acb5896f693a",
+        "artifactKey": "maintenance/reviews/maintenance-6bdb946b6e3ad874b4f2ee6056d1d43669d4c254b559c286c55d6b328b4fbd9c/64dbcae4499321458e035022250abc749dd8e93eb7ed93d5a39e4ad05c62d48b.json",
+        "reviewArtifactSha256": "64dbcae4499321458e035022250abc749dd8e93eb7ed93d5a39e4ad05c62d48b"
+      }
+    },
+    {
+      "id": "maintenance-acc72755b0e3b158584b6446522ecd62ed7bb70d876239a975c727ed9e554629",
+      "universityId": "uni-guangdong-medical-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/9df1e1689e532215085521de8090b2e9eeb52f553a5c5cf01ee8c88af8545ef2/76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952.bin",
+          "quote": "Enrollment Brochure for International Undergraduate Students of Guangdong Medical University (Chinese Medium)",
+          "snapshotSha256": "76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952",
+          "sourceId": "9df1e1689e532215085521de8090b2e9eeb52f553a5c5cf01ee8c88af8545ef2",
+          "url": "https://en.gdmu.edu.cn/info/1025/1265.htm"
+        },
+        "name": {
+          "en": "Biomedical Engineering"
+        },
+        "programType": "degree",
+        "programUrl": "https://en.gdmu.edu.cn/info/1025/1265.htm"
+      },
+      "source": {
+        "url": "https://en.gdmu.edu.cn/info/1025/1265.htm",
+        "snapshotSha256": "76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952",
+        "objectKey": "maintenance/snapshots/9df1e1689e532215085521de8090b2e9eeb52f553a5c5cf01ee8c88af8545ef2/76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952.bin",
+        "locator": "text:document",
+        "quote": "School of Biomedical Engineering Biomedical Engineering Four years Bachelor of Engineering",
+        "id": "9df1e1689e532215085521de8090b2e9eeb52f553a5c5cf01ee8c88af8545ef2",
+        "checkedAt": "2026-10-28T16:31:36.359Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "9df1e1689e532215085521de8090b2e9eeb52f553a5c5cf01ee8c88af8545ef2",
+          "url": "https://en.gdmu.edu.cn/info/1025/1265.htm",
+          "snapshotSha256": "76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952",
+          "objectKey": "maintenance/snapshots/9df1e1689e532215085521de8090b2e9eeb52f553a5c5cf01ee8c88af8545ef2/76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952.bin",
+          "locator": "text:document",
+          "quote": "Biomedical Engineering",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "9df1e1689e532215085521de8090b2e9eeb52f553a5c5cf01ee8c88af8545ef2",
+          "url": "https://en.gdmu.edu.cn/info/1025/1265.htm",
+          "snapshotSha256": "76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952",
+          "objectKey": "maintenance/snapshots/9df1e1689e532215085521de8090b2e9eeb52f553a5c5cf01ee8c88af8545ef2/76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952.bin",
+          "locator": "text:document",
+          "quote": "Biomedical Engineering Four years Bachelor of Engineering",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "a66c193d-f199-4ecb-b914-5d91e90cb29d",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:d33541d7-7755-47bc-81bc-98c1392f2db0",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:35:17.897Z",
+        "candidateSha256": "ef1f93e00a3b9085ffec0d8b5e4da31a056fa6eb88d4c4835fb670c2e0018582",
+        "snapshotSha256": "76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "d33541d7-7755-47bc-81bc-98c1392f2db0",
+        "artifactKey": "maintenance/reviews/maintenance-acc72755b0e3b158584b6446522ecd62ed7bb70d876239a975c727ed9e554629/f543df31a32b51c14b9ea34fbb72a2d17de1daf38cad885a139a0562ac86008a.json",
+        "reviewArtifactSha256": "f543df31a32b51c14b9ea34fbb72a2d17de1daf38cad885a139a0562ac86008a"
+      }
+    },
+    {
+      "id": "maintenance-705487a27224abed9786567e4721917f027e06f9448f6e62149c015699b714cd",
+      "universityId": "uni-ningxia-medical-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38/04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940.bin",
+          "quote": "A 、本科课程 1 、年满 18 周岁,品行端正,身体健康,持外国有效普通护照的非中国籍公民。",
+          "snapshotSha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "sourceId": "e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38",
+          "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+        },
+        "name": {
+          "en": "Nursing",
+          "zh": "护理学"
+        },
+        "programType": "degree",
+        "programUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+      },
+      "source": {
+        "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+        "snapshotSha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+        "objectKey": "maintenance/snapshots/e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38/04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940.bin",
+        "locator": "text:document",
+        "quote": "护理学 Nursing 汉语 Chinese 4 年 4 years 学士 Bachelor Degree",
+        "id": "e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38",
+        "checkedAt": "2026-10-28T16:31:58.467Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38",
+          "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "snapshotSha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "objectKey": "maintenance/snapshots/e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38/04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940.bin",
+          "locator": "text:document",
+          "quote": "护理学 Nursing",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38",
+          "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "snapshotSha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "objectKey": "maintenance/snapshots/e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38/04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940.bin",
+          "locator": "text:document",
+          "quote": "护理学 Nursing",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38",
+          "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "snapshotSha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "objectKey": "maintenance/snapshots/e869c4aed2d8028e6346bd9796c6f2835084b80730c0dafdd3d0dda35284fc38/04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940.bin",
+          "locator": "text:document",
+          "quote": "护理学 Nursing 汉语 Chinese 4 年 4 years 学士 Bachelor Degree",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "a26abae8-a399-4d3a-944a-18db7551d896",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:c39ddb18-48f1-4c74-879e-1d0cbfdf7d14",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:35:38.520Z",
+        "candidateSha256": "6eaa2a01f9128686b43c7ddf457f98e7db766e78c33fa5ad62daaea821ccd28b",
+        "snapshotSha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "c39ddb18-48f1-4c74-879e-1d0cbfdf7d14",
+        "artifactKey": "maintenance/reviews/maintenance-705487a27224abed9786567e4721917f027e06f9448f6e62149c015699b714cd/19657d5b96ddf57bb1f7390f6a89f36daee9d1800e6f1e8cd36e33a0be017b35.json",
+        "reviewArtifactSha256": "19657d5b96ddf57bb1f7390f6a89f36daee9d1800e6f1e8cd36e33a0be017b35"
+      }
+    },
+    {
+      "id": "maintenance-a16959cfc3a446f3bc192b12c61d68d4e8acb164880f17e2ab5a70a93354aca1",
+      "universityId": "uni-china-university-of-geosciences-wuhan",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "master",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/ac1ce2cd7dfa955ffd8e2b6d92979b32e1006fd73b17780631868f391bf291c5/c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc.bin",
+          "quote": "The program is open to international students demonstrating academic excellence who are applying for: Postgraduate Programs ( Master’s & Ph.D. Degrees )",
+          "snapshotSha256": "c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc",
+          "sourceId": "ac1ce2cd7dfa955ffd8e2b6d92979b32e1006fd73b17780631868f391bf291c5",
+          "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm"
+        },
+        "name": {
+          "en": "Groundwater Science and Engineering"
+        },
+        "programType": "degree",
+        "programUrl": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm"
+      },
+      "source": {
+        "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+        "snapshotSha256": "c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc",
+        "objectKey": "maintenance/snapshots/ac1ce2cd7dfa955ffd8e2b6d92979b32e1006fd73b17780631868f391bf291c5/c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc.bin",
+        "locator": "text:document",
+        "quote": "2. English-Taught Master’s Programs The following Master’s programs are offered in English: Geology Geological Resources and Geological Engineering (Mineral Resource Prospecting and Exploration) Geological Resources and Geological Engineering (Geological Engineering) Environmental Science and Engineering Groundwater Science and Engineering Petroleum and Natural Gas Engineering Computer Science and Technology Control Science and Engineering Geospatial Science and Technology Geology Materials Science and Engineering Business Administration Applied Economics Public Administration",
+        "id": "ac1ce2cd7dfa955ffd8e2b6d92979b32e1006fd73b17780631868f391bf291c5",
+        "checkedAt": "2026-10-28T16:32:22.180Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "ac1ce2cd7dfa955ffd8e2b6d92979b32e1006fd73b17780631868f391bf291c5",
+          "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+          "snapshotSha256": "c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc",
+          "objectKey": "maintenance/snapshots/ac1ce2cd7dfa955ffd8e2b6d92979b32e1006fd73b17780631868f391bf291c5/c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc.bin",
+          "locator": "text:document",
+          "quote": "Groundwater Science and Engineering",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "ac1ce2cd7dfa955ffd8e2b6d92979b32e1006fd73b17780631868f391bf291c5",
+          "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+          "snapshotSha256": "c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc",
+          "objectKey": "maintenance/snapshots/ac1ce2cd7dfa955ffd8e2b6d92979b32e1006fd73b17780631868f391bf291c5/c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc.bin",
+          "locator": "text:document",
+          "quote": "2. English-Taught Master’s Programs The following Master’s programs are offered in English:",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "77a8274d-fcea-48c6-a851-b93dece3584f",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:82bf0366-bfee-4c86-befe-d341b4b44fad",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:35:56.231Z",
+        "candidateSha256": "3f67faeaa9ad3cd63e1a53c47daa9af12b57e10115170ef90e25e73797678f0e",
+        "snapshotSha256": "c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "82bf0366-bfee-4c86-befe-d341b4b44fad",
+        "artifactKey": "maintenance/reviews/maintenance-a16959cfc3a446f3bc192b12c61d68d4e8acb164880f17e2ab5a70a93354aca1/34b1e42968016554870e1931c049c496c0d0a78679b22b2a93eb80287c14fc79.json",
+        "reviewArtifactSha256": "34b1e42968016554870e1931c049c496c0d0a78679b22b2a93eb80287c14fc79"
+      }
+    },
+    {
+      "id": "maintenance-74d5fa275322765cfd3a91373a6facaab31214a11ac670cc025f2014b7fad070",
+      "universityId": "uni-shandong-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "master",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7/37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae.bin",
+          "quote": "山东大学 2026-2027 学年国际学生硕士研究生 招生专业一览表(中文授课)",
+          "snapshotSha256": "37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae",
+          "sourceId": "e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7",
+          "url": "https://www.istudy.sdu.edu.cn/__local/0/F9/84/E59EA8B22AEB96A2BC13DDA0055_318F0DE6_15237.pdf"
+        },
+        "name": {
+          "zh": "国际中文教育"
+        },
+        "programType": "degree",
+        "programUrl": "https://www.istudy.sdu.edu.cn/__local/0/F9/84/E59EA8B22AEB96A2BC13DDA0055_318F0DE6_15237.pdf"
+      },
+      "source": {
+        "url": "https://www.istudy.sdu.edu.cn/__local/0/F9/84/E59EA8B22AEB96A2BC13DDA0055_318F0DE6_15237.pdf",
+        "snapshotSha256": "37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae",
+        "objectKey": "maintenance/snapshots/e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7/37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae.bin",
+        "locator": "text:document",
+        "quote": "国际教育学院 中心校区 国际中文教育 两年 22,000",
+        "id": "e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7",
+        "checkedAt": "2026-10-27T05:23:06.602Z",
+        "contentType": "application/pdf",
+        "textArtifact": {
+          "objectKey": "maintenance/text/e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7/3e77ac7c371d8f55552441940e1672a3558462457d0b3456291f7f36f256f8b7.txt",
+          "sha256": "3e77ac7c371d8f55552441940e1672a3558462457d0b3456291f7f36f256f8b7",
+          "rawSnapshotSha256": "37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae",
+          "parser": "poppler"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7",
+          "url": "https://www.istudy.sdu.edu.cn/__local/0/F9/84/E59EA8B22AEB96A2BC13DDA0055_318F0DE6_15237.pdf",
+          "snapshotSha256": "37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae",
+          "objectKey": "maintenance/snapshots/e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7/37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae.bin",
+          "locator": "text:document",
+          "quote": "国际中文教育",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7",
+          "url": "https://www.istudy.sdu.edu.cn/__local/0/F9/84/E59EA8B22AEB96A2BC13DDA0055_318F0DE6_15237.pdf",
+          "snapshotSha256": "37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae",
+          "objectKey": "maintenance/snapshots/e3bd5ab6b2d4995f566ec9df4f7667b616059b53a5a2f81bbb60a1bbcb1fc3e7/37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae.bin",
+          "locator": "text:document",
+          "quote": "山东大学 2026-2027 学年国际学生硕士研究生 招生专业一览表(中文授课)",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "dad02d81-8678-41a0-9c99-d2233199c4ef",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:15faaa44-9de5-4522-976f-2a848ac44232",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:38:09.713Z",
+        "candidateSha256": "7c4df9e1cc36378429850881ce6d6ff7548f86dec61a218677c6b243d73a8e53",
+        "snapshotSha256": "37b463c0ce0df6a11837889a5bfc3ad104a80341e883cf35cc24db86e39300ae",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "15faaa44-9de5-4522-976f-2a848ac44232",
+        "artifactKey": "maintenance/reviews/maintenance-74d5fa275322765cfd3a91373a6facaab31214a11ac670cc025f2014b7fad070/c4b525b6d322c18d2b8dc1d87132d8693aeaceea234449e66ab5d94289aa185a.json",
+        "reviewArtifactSha256": "c4b525b6d322c18d2b8dc1d87132d8693aeaceea234449e66ab5d94289aa185a"
+      }
+    },
+    {
+      "id": "maintenance-9e91597930bc41163f6250f8dddb355584326780c9785477bcb3762ef40f5e1b",
+      "universityId": "uni-zhejiang-university-of-technology",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c/1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79.bin",
+          "quote": "Zhejiang University of Technology Application Guide of Year 2026 for International Student (Undergraduate Program)",
+          "snapshotSha256": "1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79",
+          "sourceId": "55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c",
+          "url": "https://www.gjxy.zjut.edu.cn/ueditor/upload/file/20251125/1764050265176062.pdf"
+        },
+        "name": {
+          "en": "Applied Chemistry"
+        },
+        "programType": "degree",
+        "programUrl": "https://www.gjxy.zjut.edu.cn/ueditor/upload/file/20251125/1764050265176062.pdf"
+      },
+      "source": {
+        "url": "https://www.gjxy.zjut.edu.cn/ueditor/upload/file/20251125/1764050265176062.pdf",
+        "snapshotSha256": "1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79",
+        "objectKey": "maintenance/snapshots/55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c/1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79.bin",
+        "locator": "text:document",
+        "quote": "College of Chemical Applied Chemistry Engineering STEM-Chinese Chemical Engineering and Chinese Mathematics Technology Chemistry",
+        "id": "55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c",
+        "checkedAt": "2026-10-27T05:23:37.822Z",
+        "contentType": "application/pdf",
+        "textArtifact": {
+          "objectKey": "maintenance/text/55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c/312e789cdb950501122b702eb2c830a2fb87899ad91feecfbe4e85562ce9eeeb.txt",
+          "sha256": "312e789cdb950501122b702eb2c830a2fb87899ad91feecfbe4e85562ce9eeeb",
+          "rawSnapshotSha256": "1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79",
+          "parser": "poppler"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c",
+          "url": "https://www.gjxy.zjut.edu.cn/ueditor/upload/file/20251125/1764050265176062.pdf",
+          "snapshotSha256": "1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79",
+          "objectKey": "maintenance/snapshots/55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c/1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79.bin",
+          "locator": "text:document",
+          "quote": "Applied Chemistry",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c",
+          "url": "https://www.gjxy.zjut.edu.cn/ueditor/upload/file/20251125/1764050265176062.pdf",
+          "snapshotSha256": "1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79",
+          "objectKey": "maintenance/snapshots/55735685d59b0be4ef68ec2bacd1b2f5d3424415a3e0ec7c3402283415e0206c/1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79.bin",
+          "locator": "text:document",
+          "quote": "Zhejiang University of Technology Application Guide of Year 2026 for International Student (Undergraduate Program)",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "a04b6a26-7625-4db1-ba7f-9132e80c479f",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:1f5022b5-ae47-423e-85f4-e68068465545",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-28T16:38:24.067Z",
+        "candidateSha256": "a14536aa9d60194fad6834e3f910b432116c38aacaa6410fbddc53aa705981f1",
+        "snapshotSha256": "1b59188e03b8c3f97877f7d4bac0a77ec529ff7fe82af30585ccf072174cba79",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "1f5022b5-ae47-423e-85f4-e68068465545",
+        "artifactKey": "maintenance/reviews/maintenance-9e91597930bc41163f6250f8dddb355584326780c9785477bcb3762ef40f5e1b/e2f7f5806cd34f40d281e5b5fca9e8141c1245bc666bedfada516e9a55bba6a9.json",
+        "reviewArtifactSha256": "e2f7f5806cd34f40d281e5b5fca9e8141c1245bc666bedfada516e9a55bba6a9"
+      }
+    }
+  ],
+  "sha256": "4f31cec4038fbb33ca542601aa69aeb726722406766bf07b34e5ff9be50a242f"
+}
