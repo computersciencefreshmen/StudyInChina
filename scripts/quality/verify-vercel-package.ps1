@@ -27,11 +27,19 @@ try {
     if ($paths -notcontains $required) { throw "Missing required deployment input: $required" }
   }
   foreach ($path in $paths) {
-    if ($path -match '(^|/)(quality|\.tmp)/' -and $path -notmatch '^scripts/quality/') {
+    $identityReceipt = $path -match '^quality/minimum-one/[^/]+/[^/]+/identity-import-receipt\.json$' -or
+      $path -match '^quality/maintenance/batches/[^/]+/identity-receipt\.json$'
+    if ($path -match '(^|/)(quality|\.tmp)/' -and $path -notmatch '^scripts/quality/' -and -not $identityReceipt) {
       throw "Audit artifacts or temporary bundles entered the deployment: $path"
     }
     if ($path -match '(^|/)\.env($|\.)' -and $path -ne '.env.example') {
       throw "An environment file entered the deployment: $path"
+    }
+  }
+  $identityLedger = Get-Content -LiteralPath (Join-Path $root 'content/data/identity-acceptances.json') -Raw | ConvertFrom-Json
+  foreach ($entry in $identityLedger.entries) {
+    if ($entry.PSObject.Properties.Name -contains 'verifiedName' -and $paths -notcontains $entry.receiptPath) {
+      throw "Scoped official-name receipt missing from actual Vercel inputs: $($entry.receiptPath)"
     }
   }
 
@@ -63,7 +71,9 @@ try {
     try {
       & $npm ci
       if ($LASTEXITCODE -ne 0) { throw "Clean deployment dependency installation failed." }
-      & $npm run build
+      $hostingConfig = Get-Content -LiteralPath (Join-Path $packageRoot 'vercel.json') -Raw | ConvertFrom-Json
+      if ($hostingConfig.buildCommand -ne 'next build --webpack') { throw 'Review the package verifier for the changed Vercel build command.' }
+      & $npm exec -- next build --webpack
       if ($LASTEXITCODE -ne 0) { throw "Build from actual Vercel deployment inputs failed." }
     } finally { Pop-Location }
   }
