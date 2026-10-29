@@ -1,0 +1,112 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch012-d917d020",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "fe1b5ec9a85550502a5e43c39066265802978816749fa2b0b8f3234a108d1398",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\root-approved-fjnu-manifest-001.json",
+    "sha256": "658ba8d61380d42a7552bd6878e9e8cd86a0068f6fb8d1d1ce119f5e3da19228"
+  },
+  "formalImporterSha256": "9951f62a380c58ac0c8eb18a3bbd132a134a350d1c65a6a8fba0e0ed654ec440",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-81350219b04c2413ea508045cad927e86f618cf6f6c01114",
+      "universityId": "uni-fujian-normal-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "f21d59529ceab33c39e4063ad13cc715f3c71044c118c624a325addc93a31dd6",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\fjnu-001\\independent-review.json",
+        "sha256": "3035380471fc7104f27f585446de10df79ad4bc2c1b910eb044b96edead5b617"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-81350219b04c2413ea508045cad927e86f618cf6f6c01114/df646d6cb2bcab7cd4ec29feebd4890af89d968fa1007b293431dfe4fd832810.json",
+      "ruleArtifactSha256": "df646d6cb2bcab7cd4ec29feebd4890af89d968fa1007b293431dfe4fd832810",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "汉语言"
+        },
+        "catalogSha256": "5df108b54f25200426e2f830fea5ff381998d01d24b0b7570619661aff3bcba3",
+        "existingProgrammeConflictReview": {
+          "catalogSha256": "5df108b54f25200426e2f830fea5ff381998d01d24b0b7570619661aff3bcba3",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "notes": [
+            "This official guide names 汉语言 as an academic undergraduate major, with directions preserved within it. All existing same-school official codes, English/Chinese/Russian names and programme URLs were individually inspected. The source gives no code and none is invented. No same-degree 汉语言 / Chinese Language / TCSOL identity or alias is present.",
+            "program-fjnu-iclt-one-semester-spring-2027; degree=language; all names={\"en\":\"International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)\",\"zh\":\"国际中文教师奖学金一学期研修项目（2027年春季）\",\"ru\":\"Семестровая программа стипендии для преподавателей китайского языка (весна 2027)\"}; code=not present; URL=https://iccs.fjnu.edu.cn/a6/21/c6596a435745/page.htm. This is non-degree semester scholarship study; a different qualification from the academic 汉语言 bachelor.",
+            "prog-gap-wave5-fjnu-computer-science-and-technology-bachelor; degree=bachelor; all names={\"en\":\"Computer Science and Technology (Bachelor)\",\"zh\":\"计算机科学与技术（本科）\",\"ru\":\"Компьютерные науки и технологии (бакалавриат)\"}; code=not present; URL=https://iccs.fjnu.edu.cn/93/ba/c6595a431034/page.htm. This is a different named bachelor major; its literal Chinese/English labels and known translations are not 汉语言 / Chinese Language. Education (教育学) is a separate discipline, not an alias of this language major.",
+            "prog-gap-wave5-fjnu-education-bachelor; degree=bachelor; all names={\"en\":\"Education (Bachelor)\",\"zh\":\"教育学（本科）\",\"ru\":\"Педагогика (бакалавриат)\"}; code=not present; URL=https://iccs.fjnu.edu.cn/93/ba/c6595a431034/page.htm. This is a different named bachelor major; its literal Chinese/English labels and known translations are not 汉语言 / Chinese Language. Education (教育学) is a separate discipline, not an alias of this language major.",
+            "prog-gap-wave5-fjnu-international-economics-and-trade-bachelor; degree=bachelor; all names={\"en\":\"International Economics and Trade (Bachelor)\",\"zh\":\"国际经济与贸易（本科）\",\"ru\":\"Международная экономика и торговля (бакалавриат)\"}; code=not present; URL=https://iccs.fjnu.edu.cn/93/ba/c6595a431034/page.htm. This is a different named bachelor major; its literal Chinese/English labels and known translations are not 汉语言 / Chinese Language. Education (教育学) is a separate discipline, not an alias of this language major."
+          ],
+          "programsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\programs.json",
+            "sha256": "9a1493cb92985a91cea46653630e6067b039a7d3f5c0bb2022c4eb680d99f923"
+          },
+          "reviewedExistingRecords": [
+            {
+              "degreeLevel": "language",
+              "existingIdentitySha256": "7bece94b2eccdffcea589486da6beef187a992cedaf2f1d1e891b3324c87a2f3",
+              "names": {
+                "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+                "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)",
+                "zh": "国际中文教师奖学金一学期研修项目（2027年春季）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://iccs.fjnu.edu.cn/a6/21/c6596a435745/page.htm",
+              "recordId": "program-fjnu-iclt-one-semester-spring-2027"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "1917339063b82220b19b3ea432f2d2bacc2a0bda673e8e8e6dd22dec4d9d4a75",
+              "names": {
+                "en": "Computer Science and Technology (Bachelor)",
+                "ru": "Компьютерные науки и технологии (бакалавриат)",
+                "zh": "计算机科学与技术（本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://iccs.fjnu.edu.cn/93/ba/c6595a431034/page.htm",
+              "recordId": "prog-gap-wave5-fjnu-computer-science-and-technology-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "e7befbbea9845a3f071d3bb4cab588e25faf5bde3fca004b79355fac12357324",
+              "names": {
+                "en": "Education (Bachelor)",
+                "ru": "Педагогика (бакалавриат)",
+                "zh": "教育学（本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://iccs.fjnu.edu.cn/93/ba/c6595a431034/page.htm",
+              "recordId": "prog-gap-wave5-fjnu-education-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "5a0e8cbdb6b546169268b9d7d05dfe0f85183ffdfca1d92b5f22d67a95577924",
+              "names": {
+                "en": "International Economics and Trade (Bachelor)",
+                "ru": "Международная экономика и торговля (бакалавриат)",
+                "zh": "国际经济与贸易（本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://iccs.fjnu.edu.cn/93/ba/c6595a431034/page.htm",
+              "recordId": "prog-gap-wave5-fjnu-international-economics-and-trade-bachelor"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}

@@ -87,13 +87,7 @@ describe('verified school expansion on 2026-07-28', () => {
     ).toBe(false)
   })
 
-  it('publishes five BUPT English programs without inventing an absolute deadline', () => {
-    const schoolPrograms = data.programs.filter(
-      (item) => item.universityId
-        === 'uni-beijing-university-of-posts-and-telecommunications',
-    )
-    expect(schoolPrograms).toHaveLength(5)
-
+  it('preserves the five BUPT English programs from this batch without inventing an absolute deadline', () => {
     const expectedTuition = new Map([
       ['program-bupt-computer-science-and-technology-bachelor-english', 24600],
       ['program-bupt-computer-technology-master-english', 32800],
@@ -101,8 +95,12 @@ describe('verified school expansion on 2026-07-28', () => {
       ['program-bupt-information-and-communication-engineering-doctorate-english', 41000],
       ['program-bupt-computer-science-and-technology-doctorate-english', 41000],
     ])
+    // Bind this historical fee/language regression to its five original IDs.
+    const schoolPrograms = data.programs.filter(item => expectedTuition.has(item.id))
+    expect(schoolPrograms).toHaveLength(expectedTuition.size)
 
     for (const item of schoolPrograms) {
+      expect(item.universityId).toBe('uni-beijing-university-of-posts-and-telecommunications')
       expect(item.teachingLanguages).toEqual(['English'])
       expect(item.languageRequirements).toEqual([
         { test: 'TOEFL', minimum: '80' },

@@ -1,0 +1,93 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch011-b589e2a7",
+  "inputCatalogSha256": "f0361fd622a209508e14282a6bf13f481ff1ea238848f98f5c0ffa7fa28b0a3b",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-29T09:13:32.267Z",
+  "proposals": [
+    {
+      "id": "maintenance-470bce77e91fdb8ed395d628e6de025264b15b7d5a39c73a0571e47a10107655",
+      "universityId": "uni-beijing-university-of-posts-and-telecommunications",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c/60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8.bin",
+          "quote": "Health insurance is mandatory for international students.",
+          "snapshotSha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+          "sourceId": "a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c",
+          "url": "https://xxgk.bupt.edu.cn/__local/4/9D/6D/1EB441EB8B730D5E91D1635D888_A9DEF37C_2D5B4.pdf"
+        },
+        "name": {
+          "en": "Communication Engineering"
+        },
+        "programType": "degree",
+        "programUrl": "https://xxgk.bupt.edu.cn/__local/4/9D/6D/1EB441EB8B730D5E91D1635D888_A9DEF37C_2D5B4.pdf"
+      },
+      "source": {
+        "url": "https://xxgk.bupt.edu.cn/__local/4/9D/6D/1EB441EB8B730D5E91D1635D888_A9DEF37C_2D5B4.pdf",
+        "snapshotSha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+        "objectKey": "maintenance/snapshots/a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c/60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8.bin",
+        "locator": "text:document",
+        "quote": "School Of Information And Communication Engineering Communication Engineering",
+        "id": "a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c",
+        "checkedAt": "2026-10-27T05:23:14.829Z",
+        "contentType": "application/pdf",
+        "textArtifact": {
+          "objectKey": "maintenance/text/a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c/acb971081be0228ec2e0ee0a28de1504e929254d1230dd9705f879fb0424e127.txt",
+          "sha256": "acb971081be0228ec2e0ee0a28de1504e929254d1230dd9705f879fb0424e127",
+          "rawSnapshotSha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+          "parser": "poppler"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c",
+          "url": "https://xxgk.bupt.edu.cn/__local/4/9D/6D/1EB441EB8B730D5E91D1635D888_A9DEF37C_2D5B4.pdf",
+          "snapshotSha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+          "objectKey": "maintenance/snapshots/a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c/60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8.bin",
+          "locator": "text:document",
+          "quote": "Communication Engineering",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c",
+          "url": "https://xxgk.bupt.edu.cn/__local/4/9D/6D/1EB441EB8B730D5E91D1635D888_A9DEF37C_2D5B4.pdf",
+          "snapshotSha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+          "objectKey": "maintenance/snapshots/a7b59be0f340ceca0eb3430f0cb19e80ccbe739a277e45cefeadfde2af28942c/60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8.bin",
+          "locator": "text:document",
+          "quote": "Undergraduate Programs(for Bachelor’s Degree/Exchange students)",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "ef4153bb-a637-49ec-9e2b-ca57a1d2f149",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:68f244e9-485f-4ff3-a3c0-75c9fa34b760",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-29T08:27:26.092Z",
+        "candidateSha256": "dd5b24237cdff49d226c41f653d6c9370b5d021eaf016b2e70ca668aa66a9c03",
+        "snapshotSha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "68f244e9-485f-4ff3-a3c0-75c9fa34b760",
+        "artifactKey": "maintenance/reviews/maintenance-470bce77e91fdb8ed395d628e6de025264b15b7d5a39c73a0571e47a10107655/10e67c305bb72166a81ea080dc8191fcc70f0503dc317f21cbecd2dab938de67.json",
+        "reviewArtifactSha256": "10e67c305bb72166a81ea080dc8191fcc70f0503dc317f21cbecd2dab938de67"
+      }
+    }
+  ],
+  "sha256": "8fc5dbd410050e922206b149569cb151212bd5c873a577f2f611fa5c86e5122d"
+}
