@@ -1,0 +1,100 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch009-d2c7e1e3",
+  "inputCatalogSha256": "f8e984354fbfa28c888b4f84e8aeb3efac82968c33911862fd56879f3c292b5d",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-29T08:09:58.519Z",
+  "proposals": [
+    {
+      "id": "official-literal-76251b976e88d440de307cdd2a4de0e84385e208359ba8d9",
+      "universityId": "uni-communication-university-of-china",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "en": "Chinese Language and Literature"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3",
+          "url": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+          "snapshotSha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+          "objectKey": "maintenance/snapshots/ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3/4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927.bin",
+          "locator": "text:offset:551:651",
+          "quote": "The University admits various categories of international students, including undergraduate students"
+        }
+      },
+      "source": {
+        "url": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+        "snapshotSha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+        "objectKey": "maintenance/snapshots/ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3/4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927.bin",
+        "locator": "text:offset:7155:7186",
+        "quote": "Chinese Language and Literature",
+        "id": "ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3",
+        "checkedAt": "2026-10-27T05:27:42.409Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3",
+          "url": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+          "snapshotSha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+          "objectKey": "maintenance/snapshots/ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3/4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927.bin",
+          "locator": "text:offset:7155:7186",
+          "quote": "Chinese Language and Literature",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3",
+          "url": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+          "snapshotSha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+          "objectKey": "maintenance/snapshots/ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3/4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927.bin",
+          "locator": "text:offset:7035:7048",
+          "quote": "Undergraduate",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3",
+          "url": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+          "snapshotSha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+          "objectKey": "maintenance/snapshots/ae01f957a70ea98e8eb1370094c3cd131b94f3b28ef53d2e6d7926870ea56fb3/4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927.bin",
+          "locator": "text:offset:7035:7048",
+          "quote": "Undergraduate",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "identity_only_no_application_fact_renewal",
+        "unreviewed_existing_locales_not_approved",
+        "all_paid_stops_unknowns_remain_immutable",
+        "root_registration_and_formal_import_still_required"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:literal-official-existing-program-identity-v1:independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-29T02:56:25.440Z",
+        "candidateSha256": "04e7c3f000e62ad3bfbb7da8e051fa7ed60b30216b2ec18737090aa90b7c5811",
+        "snapshotSha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/rules/official-literal-76251b976e88d440de307cdd2a4de0e84385e208359ba8d9/b69e3c5742c92e5a364601ee5d6809ecfb6674052d2f24963f4b10b10d637959.json",
+        "reviewArtifactSha256": "b69e3c5742c92e5a364601ee5d6809ecfb6674052d2f24963f4b10b10d637959"
+      }
+    }
+  ],
+  "sha256": "6ec43c446bf701ea6f2d829d3b6903cf3fb243fa6c97ec66393264478c633aac"
+}

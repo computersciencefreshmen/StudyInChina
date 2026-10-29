@@ -1,0 +1,60 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch009-d2c7e1e3",
+  "ruleVersion": "literal-official-existing-program-identity-v1",
+  "sourcePlanSha256": "adb17397e7e108c022144315e94707cc97146f9d56afd7c27035098d5129a9e5",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\root-approved-cuc-manifest-001.json",
+    "sha256": "4dfec9fbe6d9e236ac5642e5b91c8929d52171b8f9bf0ef37c2ad001811c9201"
+  },
+  "formalImporterSha256": "9951f62a380c58ac0c8eb18a3bbd132a134a350d1c65a6a8fba0e0ed654ec440",
+  "importToolSha256": "b5c803abf484215c69e830c1c5818dcac31338a78839b6aae5fa4f726f0e05b7",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-76251b976e88d440de307cdd2a4de0e84385e208359ba8d9",
+      "universityId": "uni-communication-university-of-china",
+      "method": "deterministic",
+      "originalProposalContentSha256": "04e7c3f000e62ad3bfbb7da8e051fa7ed60b30216b2ec18737090aa90b7c5811",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\four-held-alternatives\\independent-review.json",
+        "sha256": "573514184d5af41fc17f8832bb40c4c477847563aca7e59a9fd2d7cad1b3d535"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-76251b976e88d440de307cdd2a4de0e84385e208359ba8d9/b69e3c5742c92e5a364601ee5d6809ecfb6674052d2f24963f4b10b10d637959.json",
+      "ruleArtifactSha256": "b69e3c5742c92e5a364601ee5d6809ecfb6674052d2f24963f4b10b10d637959",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Chinese Language and Literature"
+        },
+        "catalogSha256": "f8e984354fbfa28c888b4f84e8aeb3efac82968c33911862fd56879f3c292b5d",
+        "existingProgrammeConflictReview": {
+          "catalogSha256": "f8e984354fbfa28c888b4f84e8aeb3efac82968c33911862fd56879f3c292b5d",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "notes": [
+            "program-communication-university-of-china-digital-media-art-bachelor: degree=bachelor; names={\"en\":\"Digital Media Art\",\"zh\":\"数字媒体艺术\",\"ru\":\"Цифровое медиаискусство\"}; programmeUrl=https://icuc.cuc.edu.cn/2026/0206/c7289a266964/page.htm; identitySHA=da9fb501cbc6a26907d27eaa7e27d3ccfaa9c249d5ca2fd4c4bcedfc895bae89. Different named bachelor discipline; no Chinese Language and Literature / 汉语言文学 alias or official code is present.",
+            "program-communication-university-of-china-journalism-bachelor: degree=bachelor; names={\"en\":\"Journalism\",\"zh\":\"新闻学\",\"ru\":\"Журналистика\"}; programmeUrl=https://icuc.cuc.edu.cn/2026/0206/c7289a266964/page.htm; identitySHA=1d13db07d96cc410ae23e64496221c1b532d6944e3a35882c423ea4adcdc69eb. Different named bachelor discipline; no Chinese Language and Literature / 汉语言文学 alias or official code is present.",
+            "program-communication-university-of-china-chinese-language-preparatory-program-l: degree=language; names={\"en\":\"Chinese Language Preparatory Program\",\"zh\":\"汉语预科项目\",\"ru\":\"Подготовительная программа по китайскому языку\"}; programmeUrl=https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm; identitySHA=f83debce37a4b8467d0277d9c387d5bf87180af14f9fc81ab669001427eebbf9. Language/preparatory category is not the named undergraduate major; no degree identity is inferred from it."
+          ],
+          "programsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\programs.json",
+            "sha256": "1acee52237b5bcf213375dd9762c8e5b34b0c490a43f927410c40a6a132401c3"
+          },
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}

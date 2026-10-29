@@ -22,6 +22,23 @@ bundles from all directory levels. TypeScript build errors remain enabled.
 
 ## Reproducible deployment-package check
 
+### 2026-10-29: scoped official-name receipts
+
+Programme name projection now validates the reviewed name locales against an
+immutable identity-import receipt at runtime. Next.js tracing alone cannot make
+that receipt available if `.vercelignore` removed it before the build. The
+root audit directory therefore has two narrow server-input exceptions:
+`quality/minimum-one/<date>/<batch>/identity-import-receipt.json` and
+`quality/maintenance/batches/<batch>/identity-receipt.json`. Source captures,
+model outputs, exports and private executors remain excluded.
+
+Directory negations omit trailing slashes because Vercel's collector checks
+directory paths without a trailing slash before descending. The package verifier
+now requires every scoped ledger receipt in the actual input manifest and still
+rejects every other root audit artifact. Its build mode runs the configured
+`next build --webpack` command. A complete-repository build is insufficient for
+this check; the exact collected package must also build successfully.
+
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/quality/verify-vercel-package.ps1 -Build
 ```
