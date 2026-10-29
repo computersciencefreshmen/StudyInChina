@@ -6,7 +6,7 @@ import { loadMaintenanceBundle } from '../maintenance/build-scope'
 import { maintenanceScopeSchema, scopeContentSha256 } from '../maintenance/contracts'
 import { selectDiscoveryData } from '../../src/lib/data/discovery'
 import { selectPublishedData } from '../../src/lib/data/publication'
-import { identityAcceptanceLedgerSchema, identityFingerprint, canonicalIdentityJson, scopedNameReceiptMatches, verifiedNameMatchesRecord } from '../../src/lib/data/identity-acceptance'
+import { identityAcceptanceLedgerSchema, identityFingerprint, canonicalIdentityJson, scopedNameReceiptMatches, verifiedNameMatchesRecord, verifiedSourceUrlMatchesRecord } from '../../src/lib/data/identity-acceptance'
 import type { Program } from '../../src/lib/data/types'
 import { fieldVerificationLedgerSchema, fieldVerificationContentSha256, validateFieldVerification } from '../../src/lib/data/field-verification'
 import { getTodayDate } from '../../src/lib/data/freshness'
@@ -44,8 +44,9 @@ export async function validateDirectory(root: string, today = getTodayDate()) {
     if (!record || identityFingerprint(entry.entityType, record) !== entry.identitySha256
       || !entry.sourceIds.every(id => record.sourceIds.includes(id) && bundle.sources.some(source => source.id === id && source.official))) throw new Error('directory_identity_binding_invalid')
     const receipt = checkedReceipt(entry.receiptPath, entry.receiptSha256, 'identity')
-    if (entry.verifiedName && (!verifiedNameMatchesRecord(entry, record as Program)
-      || !scopedNameReceiptMatches(entry, { ...receipt, sha256: entry.receiptSha256 }))) throw Error('directory_scoped_name_binding_invalid')
+    if (!scopedNameReceiptMatches(entry, { ...receipt, sha256: entry.receiptSha256 })
+      || entry.verifiedName && !verifiedNameMatchesRecord(entry, record as Program)) throw Error('directory_scoped_name_binding_invalid')
+    if (entry.verifiedSourceUrl && !verifiedSourceUrlMatchesRecord(entry, record as Program, bundle.sources)) throw Error('directory_scoped_source_url_binding_invalid')
   }
   const fieldKeys = new Set<string>()
   for (const entry of fields) {

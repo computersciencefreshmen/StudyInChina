@@ -1,0 +1,93 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch014-386bd0c7",
+  "inputCatalogSha256": "f5ea81a50a6b39d6745b5cebc9e9f0882c6cbde063b0e326e8a0454886c7a61e",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-29T10:39:34.594Z",
+  "proposals": [
+    {
+      "id": "maintenance-174113f52491fa2758e4bb7d9c6d382c41bc9cd09bdf2eaab13f0c006496d8a4",
+      "universityId": "uni-xuzhou-medical-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0/b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff.bin",
+          "quote": "Xuzhou Medical University (XZMU) has been recruiting international students since 2005, and now over 400 international undergraduate and postgraduate students from about 40 countries worldwide are studying here.",
+          "snapshotSha256": "b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff",
+          "sourceId": "245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0",
+          "url": "https://gjjyen.xzhmu.edu.cn/__local/5/8F/F9/B69499FDB9350B58433206146EA_34258512_44F1D.pdf"
+        },
+        "name": {
+          "en": "Bachelor Program in Anesthesiology (English Medium)"
+        },
+        "programType": "degree",
+        "programUrl": "https://gjjyen.xzhmu.edu.cn/__local/5/8F/F9/B69499FDB9350B58433206146EA_34258512_44F1D.pdf"
+      },
+      "source": {
+        "url": "https://gjjyen.xzhmu.edu.cn/__local/5/8F/F9/B69499FDB9350B58433206146EA_34258512_44F1D.pdf",
+        "snapshotSha256": "b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff",
+        "objectKey": "maintenance/snapshots/245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0/b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff.bin",
+        "locator": "text:document",
+        "quote": "2026 Admission Brochure for Bachelor Program in Anesthesiology (English Medium)",
+        "id": "245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0",
+        "checkedAt": "2026-10-29T09:40:35.966Z",
+        "contentType": "application/pdf",
+        "textArtifact": {
+          "objectKey": "maintenance/text/245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0/3b648577121cc04bb1456a5adde7ffb56916059eacbd6bdae2e837bc4741a790.txt",
+          "sha256": "3b648577121cc04bb1456a5adde7ffb56916059eacbd6bdae2e837bc4741a790",
+          "rawSnapshotSha256": "b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff",
+          "parser": "poppler"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0",
+          "url": "https://gjjyen.xzhmu.edu.cn/__local/5/8F/F9/B69499FDB9350B58433206146EA_34258512_44F1D.pdf",
+          "snapshotSha256": "b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff",
+          "objectKey": "maintenance/snapshots/245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0/b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff.bin",
+          "locator": "text:document",
+          "quote": "Bachelor Program in Anesthesiology (English Medium)",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0",
+          "url": "https://gjjyen.xzhmu.edu.cn/__local/5/8F/F9/B69499FDB9350B58433206146EA_34258512_44F1D.pdf",
+          "snapshotSha256": "b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff",
+          "objectKey": "maintenance/snapshots/245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0/b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff.bin",
+          "locator": "text:document",
+          "quote": "2026 Admission Brochure for Bachelor Program in Anesthesiology (English Medium)",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "685f3252-3ee2-40b1-a219-f7bcced1e5f5",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:e08a69a7-0f67-42ff-ab13-70c367555d5d",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-29T10:17:02.121Z",
+        "candidateSha256": "beecac8341efe455bb6d6b26a300113ee0fa2d07490eff54ea7eb8fc891b0422",
+        "snapshotSha256": "b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "e08a69a7-0f67-42ff-ab13-70c367555d5d",
+        "artifactKey": "maintenance/reviews/maintenance-174113f52491fa2758e4bb7d9c6d382c41bc9cd09bdf2eaab13f0c006496d8a4/81a30f1f9d61f521974cad2675e1eff473ad983508f3e92933ee0618623ff28f.json",
+        "reviewArtifactSha256": "81a30f1f9d61f521974cad2675e1eff473ad983508f3e92933ee0618623ff28f"
+      }
+    }
+  ],
+  "sha256": "532d38c558fbaecffa88f72f064760357172038f3f026dee759a86d41be18c2a"
+}

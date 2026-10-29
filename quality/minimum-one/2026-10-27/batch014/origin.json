@@ -1,0 +1,59 @@
+{
+  "format": "studyinchina.minimum-one-reviewed-identity-origins",
+  "version": 1,
+  "batchId": "minimum-one-2026-10-27-batch014-386bd0c7",
+  "sourceJournal": "local-012",
+  "currentBaseRevalidation": true,
+  "originalHistoryModified": false,
+  "modelCalls": 0,
+  "sourceManifestSha256": "2e5b82d833d1ca6c6c36cbf59c6bb6744e09d4d7e2d89902c4c6c80555b337d8",
+  "readyRowsSnapshotSha256": "bfcedceb5c461d5c23848f2e5beb32d6970d36be82f0349d575f7d236de6dc51",
+  "reviewedProgramAliases": [],
+  "importToolSha256": "671b3f996dc15ba5832cf1db8066c859b45e63c6e57363ead4bdcf1ca876794a",
+  "origins": [
+    {
+      "proposalId": "maintenance-174113f52491fa2758e4bb7d9c6d382c41bc9cd09bdf2eaab13f0c006496d8a4",
+      "universityId": "uni-xuzhou-medical-university",
+      "method": "independent_model",
+      "reviewerId": "minimax-independent:e08a69a7-0f67-42ff-ab13-70c367555d5d",
+      "originalJournal": "local-012",
+      "originalProposalCanonicalSha256": "60bc1b493471a69f2af54ad0b784452e2eb46117081aa56e085f2b4820b599bb",
+      "proposalContentSha256": "beecac8341efe455bb6d6b26a300113ee0fa2d07490eff54ea7eb8fc891b0422",
+      "originalTableStatus": "ready",
+      "originalExportId": null,
+      "originalCreatedAt": "2026-10-29T10:17:02.138Z",
+      "reviewArtifactKey": "maintenance/reviews/maintenance-174113f52491fa2758e4bb7d9c6d382c41bc9cd09bdf2eaab13f0c006496d8a4/81a30f1f9d61f521974cad2675e1eff473ad983508f3e92933ee0618623ff28f.json",
+      "reviewArtifactSha256": "81a30f1f9d61f521974cad2675e1eff473ad983508f3e92933ee0618623ff28f",
+      "attempts": [
+        {
+          "role": "primary",
+          "attemptId": "685f3252-3ee2-40b1-a219-f7bcced1e5f5",
+          "status": "completed",
+          "model": "MiniMax-M3",
+          "sourceId": "245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0",
+          "snapshotSha256": "b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff",
+          "objectKey": "maintenance/models/7036a91a257085593bee2999f22129316eea4251da34b730105d8176dcd3cfda/18b60c43dd9a7e9f706552657de4fec6d68d7d464bef7fe1be7682bfe7f15920.json",
+          "sha256": "18b60c43dd9a7e9f706552657de4fec6d68d7d464bef7fe1be7682bfe7f15920",
+          "reservationKey": "7036a91a257085593bee2999f22129316eea4251da34b730105d8176dcd3cfda",
+          "requestSha256": "095e22231978d84b2fd421d234ee9f7b67dcd0d3cfb00141e92950339fcc928e",
+          "startedAt": "2026-10-29T10:16:51.821Z",
+          "completedAt": "2026-10-29T10:16:55.827Z"
+        },
+        {
+          "role": "independent-review",
+          "attemptId": "e08a69a7-0f67-42ff-ab13-70c367555d5d",
+          "status": "completed",
+          "model": "MiniMax-M3",
+          "sourceId": "245b0c8e7919a769536dac525ef9c678ddad7d58ebeac11f96c7d22020a805a0",
+          "snapshotSha256": "b9e6f1ba0c0d6940f121d30f52731831cbf548fa48a5f9e87e9104474d507fff",
+          "objectKey": "maintenance/models/bdb1c2c36a77b92401cf5d11816d01dc232b3b3527f1487004318fb7bba4a8c7/84663672292bd70acef812dd40077a49748a6003019b36d3cd4aa1815d141ce3.json",
+          "sha256": "84663672292bd70acef812dd40077a49748a6003019b36d3cd4aa1815d141ce3",
+          "reservationKey": "bdb1c2c36a77b92401cf5d11816d01dc232b3b3527f1487004318fb7bba4a8c7",
+          "requestSha256": "114672da0836dfdfe6e2a34da409e932fce05c03a106620a729b85ec84e7a629",
+          "startedAt": "2026-10-29T10:16:57.948Z",
+          "completedAt": "2026-10-29T10:17:02.096Z"
+        }
+      ]
+    }
+  ]
+}

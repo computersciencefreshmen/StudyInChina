@@ -72,7 +72,7 @@ export function selectDiscoveryData(bundle: DataBundle, today = getTodayDate(), 
     if (!named) return []
     const fresh = currentIds.program.has(record.id)
     return [{ ...audit(record, fresh), id: record.id, slug: record.slug, name: named.name, universityId: record.universityId,
-      degreeLevel: record.degreeLevel, programUrl: record.programUrl,
+      degreeLevel: record.degreeLevel, programUrl: named.programUrl,
       discipline: fresh ? record.discipline : 'other' as const, teachingLanguages: fresh ? record.teachingLanguages : [],
       durationMonths: fresh ? record.durationMonths : null, ...(fresh ? { durationMonthsMax: record.durationMonthsMax, durationText: record.durationText } : {}),
       applyUrl: fresh ? record.applyUrl : null, languageRequirements: fresh ? record.languageRequirements : [],
