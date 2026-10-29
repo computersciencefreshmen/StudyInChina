@@ -1,0 +1,889 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch010-70978555",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "8576628c648ac8b87e5a3a427b31c0ec5a85ec9f484e11c8969e1d0686f1f302",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\root-approved-code-manifest-002.json",
+    "sha256": "fce0b3df352f68ab05ce11bbedbff3e46ced156ea0c5b54b1b3e32468e628af5"
+  },
+  "formalImporterSha256": "9951f62a380c58ac0c8eb18a3bbd132a134a350d1c65a6a8fba0e0ed654ec440",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-ea126c72cf5feb6e7e51436b1aa59ec5ac0fe4b562697929",
+      "universityId": "uni-beijing-university-of-technology",
+      "method": "deterministic",
+      "originalProposalContentSha256": "900d05c50d5edd97532ed416946fd18279627151bd546ad835b96446f4f0ce14",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\code-revision-002\\pdf-independent-review-with-codes.json",
+        "sha256": "0171889b9dc7db2f57a42bc0628429aeab5db6617e4db7655479bf49414254fb"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-ea126c72cf5feb6e7e51436b1aa59ec5ac0fe4b562697929/2e44545c7214e45a96d024fd85497f8efb709f67db91ebe01c3e57349ef761ba.json",
+      "ruleArtifactSha256": "2e44545c7214e45a96d024fd85497f8efb709f67db91ebe01c3e57349ef761ba",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Robotic Engineering"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "existingProgrammeConflictReview": {
+          "aliasesConsidered": [
+            "Robotic Engineering",
+            "Robotics Engineering",
+            "Robot Engineering",
+            "机器人工程",
+            "机器人"
+          ],
+          "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "notes": [
+            "program-beijing-university-of-technology-computer-science-and-technology-bachelo: degree=bachelor; names={\"en\":\"Computer Science and Technology\",\"zh\":\"Computer Science and Technology\",\"ru\":\"Компьютерные науки и технологии\"}; code=not published in existing record; URL=https://isa.bjut.edu.cn/__local/C/5B/8A/281F6B1C10341C2FF785EEFE956_1A4C4532_5675A.pdf. Compared all names, degree, canonical code/name bindings and known translations against Robotic Engineering / Robotics Engineering / Robot Engineering / 机器人工程 / 机器人. This is a different named discipline or degree, not a conflicting target identity.",
+            "program-beijing-university-of-technology-international-economics-and-trade-bache: degree=bachelor; names={\"en\":\"International Economics and Trade\",\"zh\":\"International Economics and Trade\",\"ru\":\"Международная экономика и торговля\"}; code=not published in existing record; URL=https://isa.bjut.edu.cn/__local/1/21/CD/D848DA6BB2FD18E8A4960899C58_1962A72F_36E99A.pdf. Compared all names, degree, canonical code/name bindings and known translations against Robotic Engineering / Robotics Engineering / Robot Engineering / 机器人工程 / 机器人. This is a different named discipline or degree, not a conflicting target identity.",
+            "program-beijing-university-of-technology-mechanical-engineering-bachelor: degree=bachelor; names={\"en\":\"Mechanical Engineering\",\"zh\":\"Mechanical Engineering\",\"ru\":\"Машиностроение\"}; code=not published in existing record; URL=https://isa.bjut.edu.cn/__local/C/5B/8A/281F6B1C10341C2FF785EEFE956_1A4C4532_5675A.pdf. Compared all names, degree, canonical code/name bindings and known translations against Robotic Engineering / Robotics Engineering / Robot Engineering / 机器人工程 / 机器人. This is a different named discipline or degree, not a conflicting target identity."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\catalogue-programme-snapshot.json",
+            "sha256": "b80452a9ce42f8a9aa179f148808ee5c422c60cc76bb5bcecc8624607a06fade"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "c6d119942e212eb53d45fc8652f882c33b899c0a5c8baefcf8168d6079e750b0",
+              "names": {
+                "en": "Computer Science and Technology",
+                "ru": "Компьютерные науки и технологии",
+                "zh": "Computer Science and Technology"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isa.bjut.edu.cn/__local/C/5B/8A/281F6B1C10341C2FF785EEFE956_1A4C4532_5675A.pdf",
+              "recordId": "program-beijing-university-of-technology-computer-science-and-technology-bachelo"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "59f4d1c7ee7a7b976f66dc79a6aee68bac649a373669d2a912bd3620d4cf5bd4",
+              "names": {
+                "en": "International Economics and Trade",
+                "ru": "Международная экономика и торговля",
+                "zh": "International Economics and Trade"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isa.bjut.edu.cn/__local/1/21/CD/D848DA6BB2FD18E8A4960899C58_1962A72F_36E99A.pdf",
+              "recordId": "program-beijing-university-of-technology-international-economics-and-trade-bache"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "6a847fd3e3344f988aa0a393104a63a485967f4d89d92680a723bed782fddb53",
+              "names": {
+                "en": "Mechanical Engineering",
+                "ru": "Машиностроение",
+                "zh": "Mechanical Engineering"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isa.bjut.edu.cn/__local/C/5B/8A/281F6B1C10341C2FF785EEFE956_1A4C4532_5675A.pdf",
+              "recordId": "program-beijing-university-of-technology-mechanical-engineering-bachelor"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": [
+            {
+              "decision": "different_concrete_programme",
+              "existingIdentitySha256": "c6d119942e212eb53d45fc8652f882c33b899c0a5c8baefcf8168d6079e750b0",
+              "reason": "Existing {\"en\":\"Computer Science and Technology\",\"zh\":\"Computer Science and Technology\",\"ru\":\"Компьютерные науки и технологии\"} is an independently named bachelor discipline, not Robotic Engineering; actual catalogue rows distinguish these programmes.",
+              "recordId": "program-beijing-university-of-technology-computer-science-and-technology-bachelo"
+            },
+            {
+              "decision": "different_concrete_programme",
+              "existingIdentitySha256": "6a847fd3e3344f988aa0a393104a63a485967f4d89d92680a723bed782fddb53",
+              "reason": "Existing {\"en\":\"Mechanical Engineering\",\"zh\":\"Mechanical Engineering\",\"ru\":\"Машиностроение\"} is an independently named bachelor discipline, not Robotic Engineering; actual catalogue rows distinguish these programmes.",
+              "recordId": "program-beijing-university-of-technology-mechanical-engineering-bachelor"
+            }
+          ]
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-baeed9ffdfb63ba7bea2858a477d1a91ba2dd5899b5a7111",
+      "universityId": "uni-beijing-technology-and-business-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "260852fde1c759df8e96a204ddfa876b9b2ced01c7349a40a15700cc899321b3",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\code-revision-002\\pdf-independent-review-with-codes.json",
+        "sha256": "0171889b9dc7db2f57a42bc0628429aeab5db6617e4db7655479bf49414254fb"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-baeed9ffdfb63ba7bea2858a477d1a91ba2dd5899b5a7111/d0c74bd72bc78874003aa6c98368858df09fe1bc66c9de53904748dde04b245c.json",
+      "ruleArtifactSha256": "d0c74bd72bc78874003aa6c98368858df09fe1bc66c9de53904748dde04b245c",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Industrial Economics"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "existingProgrammeConflictReview": {
+          "aliasesConsidered": [
+            "Industrial Economics",
+            "Industrial Economy",
+            "产业经济学",
+            "产业经济"
+          ],
+          "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "notes": [
+            "prog-gap-prog-mew-ne-btbu-business-administration-bachelor: degree=bachelor; names={\"en\":\"Business Administration\",\"zh\":\"工商管理\",\"ru\":\"Деловое администрирование\"}; code=not published in existing record; URL=https://gjjy.btbu.edu.cn/docs/2026-03/026a6d668e884a8cbcc80f409ae0a7ac.pdf. Compared all names, degree, canonical code/name bindings and known translations against Industrial Economics / Industrial Economy / 产业经济学 / 产业经济. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-wave8-btbu-business-administration-master: degree=master; names={\"en\":\"Business Administration (Master's Program)\",\"zh\":\"工商管理硕士项目\",\"ru\":\"Магистратура по деловому администрированию\"}; code=not published in existing record; URL=https://gjjy.btbu.edu.cn/docs/2026-03/83c62e89b7684de8b5c71873ab5ba1ac.pdf. Compared all names, degree, canonical code/name bindings and known translations against Industrial Economics / Industrial Economy / 产业经济学 / 产业经济. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-prog-mew-ne-btbu-finance-bachelor: degree=bachelor; names={\"en\":\"Finance\",\"zh\":\"金融学\",\"ru\":\"Финансы\"}; code=not published in existing record; URL=https://gjjy.btbu.edu.cn/docs/2026-03/026a6d668e884a8cbcc80f409ae0a7ac.pdf. Compared all names, degree, canonical code/name bindings and known translations against Industrial Economics / Industrial Economy / 产业经济学 / 产业经济. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-wave8-btbu-international-business-master: degree=master; names={\"en\":\"International Business (Master's Program)\",\"zh\":\"国际商务硕士项目\",\"ru\":\"Магистратура по международному бизнесу\"}; code=not published in existing record; URL=https://gjjy.btbu.edu.cn/docs/2026-03/83c62e89b7684de8b5c71873ab5ba1ac.pdf. Compared all names, degree, canonical code/name bindings and known translations against Industrial Economics / Industrial Economy / 产业经济学 / 产业经济. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-prog-mew-ne-btbu-international-economics-trade-bachelor: degree=bachelor; names={\"en\":\"International Economics and Trade\",\"zh\":\"国际经济与贸易\",\"ru\":\"Международная экономика и торговля\"}; code=not published in existing record; URL=https://gjjy.btbu.edu.cn/docs/2026-03/026a6d668e884a8cbcc80f409ae0a7ac.pdf. Compared all names, degree, canonical code/name bindings and known translations against Industrial Economics / Industrial Economy / 产业经济学 / 产业经济. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-prog-mew-ne-btbu-polymer-materials-bachelor: degree=bachelor; names={\"en\":\"Polymer Materials and Engineering\",\"zh\":\"高分子材料与工程\",\"ru\":\"Полимерные материалы и инженерия\"}; code=not published in existing record; URL=https://gjjy.btbu.edu.cn/docs/2026-03/026a6d668e884a8cbcc80f409ae0a7ac.pdf. Compared all names, degree, canonical code/name bindings and known translations against Industrial Economics / Industrial Economy / 产业经济学 / 产业经济. This is a different named discipline or degree, not a conflicting target identity."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\catalogue-programme-snapshot.json",
+            "sha256": "b80452a9ce42f8a9aa179f148808ee5c422c60cc76bb5bcecc8624607a06fade"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "435ab613b8cf3941b4e89518eb8adde9c3b7e3685b03ded62c2cd7eced17c845",
+              "names": {
+                "en": "Business Administration",
+                "ru": "Деловое администрирование",
+                "zh": "工商管理"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://gjjy.btbu.edu.cn/docs/2026-03/026a6d668e884a8cbcc80f409ae0a7ac.pdf",
+              "recordId": "prog-gap-prog-mew-ne-btbu-business-administration-bachelor"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "existingIdentitySha256": "829191950789e9ea1afef50ee6e0433fa73db416550b8e95c716a463d5129973",
+              "names": {
+                "en": "Business Administration (Master's Program)",
+                "ru": "Магистратура по деловому администрированию",
+                "zh": "工商管理硕士项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://gjjy.btbu.edu.cn/docs/2026-03/83c62e89b7684de8b5c71873ab5ba1ac.pdf",
+              "recordId": "prog-gap-wave8-btbu-business-administration-master"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "28c9b81495c3f314069eb16baf0eff6059d0f273f13d100c0cf007d6d494d4bc",
+              "names": {
+                "en": "Finance",
+                "ru": "Финансы",
+                "zh": "金融学"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://gjjy.btbu.edu.cn/docs/2026-03/026a6d668e884a8cbcc80f409ae0a7ac.pdf",
+              "recordId": "prog-gap-prog-mew-ne-btbu-finance-bachelor"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "existingIdentitySha256": "07bf5cdb4a12c809d391e50c176bf6e417d434c4dead292f04fbeee78b52e143",
+              "names": {
+                "en": "International Business (Master's Program)",
+                "ru": "Магистратура по международному бизнесу",
+                "zh": "国际商务硕士项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://gjjy.btbu.edu.cn/docs/2026-03/83c62e89b7684de8b5c71873ab5ba1ac.pdf",
+              "recordId": "prog-gap-wave8-btbu-international-business-master"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "e19b4d72531325ca33797279605f7d89effc304e6ce7720d9f30c05aed8f8343",
+              "names": {
+                "en": "International Economics and Trade",
+                "ru": "Международная экономика и торговля",
+                "zh": "国际经济与贸易"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://gjjy.btbu.edu.cn/docs/2026-03/026a6d668e884a8cbcc80f409ae0a7ac.pdf",
+              "recordId": "prog-gap-prog-mew-ne-btbu-international-economics-trade-bachelor"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "d0cb0232e7ebfad40e16f295a0de5f66d87e837105667dc0abdc6f04eb65a168",
+              "names": {
+                "en": "Polymer Materials and Engineering",
+                "ru": "Полимерные материалы и инженерия",
+                "zh": "高分子材料与工程"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://gjjy.btbu.edu.cn/docs/2026-03/026a6d668e884a8cbcc80f409ae0a7ac.pdf",
+              "recordId": "prog-gap-prog-mew-ne-btbu-polymer-materials-bachelor"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": [
+            {
+              "decision": "different_concrete_programme",
+              "existingIdentitySha256": "829191950789e9ea1afef50ee6e0433fa73db416550b8e95c716a463d5129973",
+              "reason": "Existing {\"en\":\"Business Administration (Master's Program)\",\"zh\":\"工商管理硕士项目\",\"ru\":\"Магистратура по деловому администрированию\"} is an independently named master discipline, not Industrial Economics; actual catalogue rows distinguish these programmes.",
+              "recordId": "prog-gap-wave8-btbu-business-administration-master"
+            },
+            {
+              "decision": "different_concrete_programme",
+              "existingIdentitySha256": "07bf5cdb4a12c809d391e50c176bf6e417d434c4dead292f04fbeee78b52e143",
+              "reason": "Existing {\"en\":\"International Business (Master's Program)\",\"zh\":\"国际商务硕士项目\",\"ru\":\"Магистратура по международному бизнесу\"} is an independently named master discipline, not Industrial Economics; actual catalogue rows distinguish these programmes.",
+              "recordId": "prog-gap-wave8-btbu-international-business-master"
+            }
+          ]
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-f41fa8b6c0a784a01ec67f196af6fa8e16a58e9d41fb230b",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "method": "deterministic",
+      "originalProposalContentSha256": "c9fcc61921c622370c3075a5bcc5fb8e910427c7dc311bd8fa5cb7a185bb9159",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\code-revision-002\\pdf-independent-review-with-codes.json",
+        "sha256": "0171889b9dc7db2f57a42bc0628429aeab5db6617e4db7655479bf49414254fb"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-f41fa8b6c0a784a01ec67f196af6fa8e16a58e9d41fb230b/a965e7dca03565fa28fd80950442b89def460ac03fc78e0c9f68b52b01c675a6.json",
+      "ruleArtifactSha256": "a965e7dca03565fa28fd80950442b89def460ac03fc78e0c9f68b52b01c675a6",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Physical Education"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "existingProgrammeConflictReview": {
+          "aliasesConsidered": [
+            "Physical Education",
+            "体育学",
+            "体育教育",
+            "Sports Science",
+            "Sport Science"
+          ],
+          "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "canonicalCodesAreComparedInIdentityBindingsRatherThanAssumedRawProgrammeProperties": true,
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "frozenSnapshot": {
+              "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\code-revision-002\\identity-bindings.snapshot.json",
+              "sha256": "523169d681ef0a24c89888b1dd9d974a74683478c46bea21e07049bbeeb521c1"
+            },
+            "relatedBindings": [],
+            "sha256": "523169d681ef0a24c89888b1dd9d974a74683478c46bea21e07049bbeeb521c1"
+          },
+          "notes": [
+            "prog-gap-wave3-depth-cugb-computer-science-bachelor: degree=bachelor; names={\"en\":\"Computer Science and Technology (Bachelor)\",\"zh\":\"计算机科学与技术（本科）\",\"ru\":\"Компьютерные науки и технологии (бакалавриат)\"}; code=not published in existing record; URL=https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf. Compared all names, degree, canonical code/name bindings and known translations against Physical Education / 体育学 / 体育教育 / Sports Science / Sport Science. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english: degree=doctorate; names={\"en\":\"Environmental Science and Engineering (English-taught Doctorate)\",\"zh\":\"环境科学与工程（英文授课博士）\",\"ru\":\"Экологические науки и инженерия (докторантура на английском)\"}; code=not published in existing record; URL=https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf. Compared all names, degree, canonical code/name bindings and known translations against Physical Education / 体育学 / 体育教育 / Sports Science / Sport Science. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-confirmed-cugb-geology-master: degree=master; names={\"en\":\"Geology\",\"zh\":\"地质学\",\"ru\":\"Геология\"}; code=not published in existing record; URL=https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/11/14/293705.pdf. Compared all names, degree, canonical code/name bindings and known translations against Physical Education / 体育学 / 体育教育 / Sports Science / Sport Science. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-wave3-depth-cugb-geology-bachelor: degree=bachelor; names={\"en\":\"Geology (Bachelor)\",\"zh\":\"地质学（本科）\",\"ru\":\"Геология (бакалавриат)\"}; code=not published in existing record; URL=https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf. Compared all names, degree, canonical code/name bindings and known translations against Physical Education / 体育学 / 体育教育 / Sports Science / Sport Science. This is a different named discipline or degree, not a conflicting target identity.",
+            "prog-gap-wave3-depth-cugb-geology-master-english: degree=master; names={\"en\":\"Geology (English-taught Master)\",\"zh\":\"地质学（英文授课硕士）\",\"ru\":\"Геология (магистратура на английском)\"}; code=not published in existing record; URL=https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf. Compared all names, degree, canonical code/name bindings and known translations against Physical Education / 体育学 / 体育教育 / Sports Science / Sport Science. This is a different named discipline or degree, not a conflicting target identity."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\catalogue-programme-snapshot.json",
+            "sha256": "b80452a9ce42f8a9aa179f148808ee5c422c60cc76bb5bcecc8624607a06fade"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "dfb6c1dfd23ac87d9316dff02d9286fb50c665ce0950865c5cc372d8f5f1635b",
+              "names": {
+                "en": "Computer Science and Technology (Bachelor)",
+                "ru": "Компьютерные науки и технологии (бакалавриат)",
+                "zh": "计算机科学与技术（本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "recordId": "prog-gap-wave3-depth-cugb-computer-science-bachelor"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "doctorate",
+              "departmentCode": null,
+              "existingIdentitySha256": "b26a800f535c064dee4675f1d0412642554407beb4a17a06b5ec2f87e5b11ca3",
+              "names": {
+                "en": "Environmental Science and Engineering (English-taught Doctorate)",
+                "ru": "Экологические науки и инженерия (докторантура на английском)",
+                "zh": "环境科学与工程（英文授课博士）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "recordId": "prog-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "existingIdentitySha256": "dc39d5a1f2ec0822bf6b1ac21b3a1ef50c1367c0600255a04b31847555c7a8b5",
+              "names": {
+                "en": "Geology",
+                "ru": "Геология",
+                "zh": "地质学"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/11/14/293705.pdf",
+              "recordId": "prog-gap-confirmed-cugb-geology-master"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "existingIdentitySha256": "63e2cc7561e8cd0d55fce83b4fced181d497b8122880ff97d4f6da61f0d96858",
+              "names": {
+                "en": "Geology (Bachelor)",
+                "ru": "Геология (бакалавриат)",
+                "zh": "地质学（本科）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "recordId": "prog-gap-wave3-depth-cugb-geology-bachelor"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "existingIdentitySha256": "7df12435b71a6c0934f3f36d8af4982a80761cd6094d8a08d4970d456298c2f8",
+              "names": {
+                "en": "Geology (English-taught Master)",
+                "ru": "Геология (магистратура на английском)",
+                "zh": "地质学（英文授课硕士）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "recordId": "prog-gap-wave3-depth-cugb-geology-master-english"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": [
+            {
+              "decision": "different_concrete_programme",
+              "existingIdentitySha256": "dc39d5a1f2ec0822bf6b1ac21b3a1ef50c1367c0600255a04b31847555c7a8b5",
+              "reason": "Existing {\"en\":\"Geology\",\"zh\":\"地质学\",\"ru\":\"Геология\"} is an independently named master discipline, not Physical Education; actual catalogue rows distinguish these programmes.",
+              "recordId": "prog-gap-confirmed-cugb-geology-master"
+            }
+          ]
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "reviewedCodes": {
+          "fields": {
+            "officialProgramCode": "0403"
+          },
+          "identityBindingsSha256": "523169d681ef0a24c89888b1dd9d974a74683478c46bea21e07049bbeeb521c1",
+          "mappings": {
+            "officialProgramCode": {
+              "codeGrain": "first_level_discipline",
+              "exactProgrammeRowBindingConfirmed": true,
+              "fieldPath": "officialProgramCode",
+              "labelQuoteSha256": "0fe7a6bc0bd27566fd2e7b23534acd556f2f2173eff45e1633a9aff5baf10dc5",
+              "rowQuoteSha256": "27d72cec3ffa89f6064f19357bee1070811c0e964e8e2218e50aefd3219418a1",
+              "sourceLabel": "Discipline Code",
+              "value": "0403"
+            }
+          }
+        },
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-f6545209842c8bd9f4471ba1a0184f3fdb3468d6826a8724",
+      "universityId": "uni-south-china-normal-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "f91de529c6bd57d4a9feb54c7ecdd0de2a17c1073c8e66dd51e5c3f19877840d",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\code-revision-002\\html-independent-review-with-codes.json",
+        "sha256": "a0f8e9c09ae265bc4fbcc3b6cb0d3b4c845b0929c16567fa45dd04176c194fb7"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-f6545209842c8bd9f4471ba1a0184f3fdb3468d6826a8724/97f23be15ae4ac241b98474d67b3eb992ff7268b48c117c82f6b0928d42154ea.json",
+      "ruleArtifactSha256": "97f23be15ae4ac241b98474d67b3eb992ff7268b48c117c82f6b0928d42154ea",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Human Resource Management"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "kind": "existing_literal",
+        "oldNames": {
+          "en": "Human Resource Management"
+        },
+        "recordId": "program-south-china-normal-university-human-resource-management-bachelor",
+        "requiresExplicitRootManifestEntry": true,
+        "reviewedCodes": {
+          "fields": {
+            "officialProgramCode": "120206"
+          },
+          "identityBindingsSha256": "523169d681ef0a24c89888b1dd9d974a74683478c46bea21e07049bbeeb521c1",
+          "mappings": {
+            "officialProgramCode": {
+              "codeGrain": "official_program",
+              "degreeScopeQuoteSha256": "16c66a4b2b8a7177adb323effc913d99852efad1410c7d32603b1b48ad1b8a2b",
+              "exactProgrammeRowBindingConfirmed": true,
+              "fieldPath": "officialProgramCode",
+              "labelQuoteSha256": "fe3fd21082486b3416d33c878a0e4f01a3b2a34026a3d438c7ef42bb89a41195",
+              "rowQuoteSha256": "2bdac50146cc393dedf59c7d8a3b6d6aaced0df07b236cc2d1b08706e7454b29",
+              "sourceLabel": "Code",
+              "value": "120206"
+            }
+          }
+        },
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-f78fde7c25e1d07b8b60959f9039f892f9ef3c57a491c1bd",
+      "universityId": "uni-nanjing-forestry-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "ba0d890d7dc9a54c7edc7cf63baad60e66ebe0de4f3d4c208b92cd3f71bce375",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\code-revision-002\\html-independent-review-with-codes.json",
+        "sha256": "a0f8e9c09ae265bc4fbcc3b6cb0d3b4c845b0929c16567fa45dd04176c194fb7"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-f78fde7c25e1d07b8b60959f9039f892f9ef3c57a491c1bd/975edf832cfe8c2a1cb45b4f9be905994358bc5b3d1969d9f88521fee08375fa.json",
+      "ruleArtifactSha256": "975edf832cfe8c2a1cb45b4f9be905994358bc5b3d1969d9f88521fee08375fa",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Wood Science and Engineering"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "kind": "existing_literal",
+        "oldNames": {
+          "en": "Wood Science and Engineering"
+        },
+        "recordId": "prog-gap-mve-ecma-njfu-wood-science-bachelor",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-caec2f50f99dda9a4c4e2455e70153ac95f0bb463293c518",
+      "universityId": "uni-shandong-jianzhu-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "2142052dfa5f3577549afe9a4fb40cca8d9bc6d3152c2a621e51845efce983cb",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\pdf-rule-review-011\\code-revision-002\\html-independent-review-with-codes.json",
+        "sha256": "a0f8e9c09ae265bc4fbcc3b6cb0d3b4c845b0929c16567fa45dd04176c194fb7"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-caec2f50f99dda9a4c4e2455e70153ac95f0bb463293c518/78385170ea5debc9cbae1682c7d0ababe8bb7df35350162092c71e1ca9516229.json",
+      "ruleArtifactSha256": "78385170ea5debc9cbae1682c7d0ababe8bb7df35350162092c71e1ca9516229",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "工商管理"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "kind": "existing_literal",
+        "oldNames": {
+          "zh": "工商管理"
+        },
+        "recordId": "prog-gap-prog-mew-ne-sdjzu-business-administration-bachelor-en",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-1e0c35856b37dfc973b4ef2d3dd04a4c2abc6bc2667ab819",
+      "universityId": "uni-beihang-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "8480bdcef0988a79b2877f5133f88011f512534a30074e250d8f312efa786806",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\revision-001\\independent-review.json",
+        "sha256": "314bfec5081f47cf841409c16f7bbcc85989ac11c13b2a1fb846bca283e7d7e2"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-1e0c35856b37dfc973b4ef2d3dd04a4c2abc6bc2667ab819/6fe5b6149bc16bf22d8402a54c567c706bad8e6fd08d8271687d058fe86e4d4c.json",
+      "ruleArtifactSha256": "6fe5b6149bc16bf22d8402a54c567c706bad8e6fd08d8271687d058fe86e4d4c",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Computer Science and Technology"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "kind": "existing_literal",
+        "oldNames": {
+          "en": "Computer Science and Technology"
+        },
+        "recordId": "program-beihang-university-computer-science-and-technology-bachelor",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-7dc2b3321475496048a7e0c78483e8c116b010d0800c443b",
+      "universityId": "uni-changsha-university-of-science-and-technology",
+      "method": "deterministic",
+      "originalProposalContentSha256": "437486bfaf9853db7a7df8a9c0daa5ee9c657f1ffa6f5051645b56e1dae74c76",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\revision-001\\independent-review.json",
+        "sha256": "314bfec5081f47cf841409c16f7bbcc85989ac11c13b2a1fb846bca283e7d7e2"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-7dc2b3321475496048a7e0c78483e8c116b010d0800c443b/c4742416552bd8411baa08971f3d6170efd83ecce16b1c615489036b358f8b4c.json",
+      "ruleArtifactSha256": "c4742416552bd8411baa08971f3d6170efd83ecce16b1c615489036b358f8b4c",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Architecture"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "kind": "existing_literal",
+        "oldNames": {
+          "en": "Architecture"
+        },
+        "recordId": "prog-gap-mew-scws-csust-architecture-master",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-43bedc12f5f8339a7f4a22b7805e38202642ea9d767bfcc8",
+      "universityId": "uni-east-china-university-of-political-science-and-law",
+      "method": "deterministic",
+      "originalProposalContentSha256": "438883b9f63723b0194fe7e83775a741f590dc59474ba8c62d7ddf3862128f72",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\revision-001\\independent-review.json",
+        "sha256": "314bfec5081f47cf841409c16f7bbcc85989ac11c13b2a1fb846bca283e7d7e2"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-43bedc12f5f8339a7f4a22b7805e38202642ea9d767bfcc8/6c855db2178eca5c2e56f037b4fed3dca276c92c4031fa6c18f433edd0310579.json",
+      "ruleArtifactSha256": "6c855db2178eca5c2e56f037b4fed3dca276c92c4031fa6c18f433edd0310579",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "汉语言文学(商务汉语方向)"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "kind": "existing_casefold_only",
+        "oldNames": {
+          "zh": "汉语言文学（商务汉语方向）"
+        },
+        "recordId": "prog-gap-mve-ecs-ecupl-business-chinese-bachelor",
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-9ef2f47cdaa00f7f948f75e7d4c99b2bf189cac04f5747d4",
+      "universityId": "uni-hainan-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "b03e6a3a5c0af80bd8b19ee538cc203fe29258f43dacc03416ede71b768498f5",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\deeper-002\\independent-review.json",
+        "sha256": "9b84da0ba15de8579f97cad13ac8abfad1f5b8bc92d052612a97f601b8cf3b4f"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-9ef2f47cdaa00f7f948f75e7d4c99b2bf189cac04f5747d4/bfdef73f9cf48c28142cbd21db5948d94c780e05944b895a643bafd9dbc16c48.json",
+      "ruleArtifactSha256": "bfdef73f9cf48c28142cbd21db5948d94c780e05944b895a643bafd9dbc16c48",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Crop Science"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "kind": "existing_literal",
+        "oldNames": {
+          "en": "Crop Science"
+        },
+        "recordId": "program-hainan-university-crop-science-master",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-b6ba0d80c3ac3ef6d99e41c12b273be6e8c23f9d3d466799",
+      "universityId": "uni-shaanxi-normal-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "4a50cd9019fa5af097104e6525edf61a198ec00d0e1df74f921973f130ca2d2e",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\deeper-002\\independent-review.json",
+        "sha256": "9b84da0ba15de8579f97cad13ac8abfad1f5b8bc92d052612a97f601b8cf3b4f"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-b6ba0d80c3ac3ef6d99e41c12b273be6e8c23f9d3d466799/20ad7365abe7c8fc76d63bb0206685edf177a81794e35852771bac45cdbca5b3.json",
+      "ruleArtifactSha256": "20ad7365abe7c8fc76d63bb0206685edf177a81794e35852771bac45cdbca5b3",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Chinese Philosophy"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "existingProgrammeConflictReview": {
+          "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "notes": [
+            "This official HTML names the English-taught Chinese Philosophy master but supplies no programme code. No code is guessed from a domestic catalogue. The actual current school programme codes, degree/name fields, all locales and programme URLs were inspected individually.",
+            "program-snnu-iclt-one-semester-spring-2027; degree=language; all names={\"en\":\"International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)\",\"zh\":\"国际中文教师奖学金一学期研修项目（2027年春季）\",\"ru\":\"Семестровая программа стипендии для преподавателей китайского языка (весна 2027)\"}; code=not present; URL=https://study.snnu.edu.cn/info/1066/1238.htm. Non-degree semester language study is not the academic philosophy master.",
+            "prog-gap-wave5-west-snnu-curriculum-instruction-doctorate-english; degree=doctorate; all names={\"en\":\"Curriculum and Instruction (English-taught PhD)\",\"zh\":\"课程与教学论（英文授课博士）\",\"ru\":\"Теория учебных программ и преподавания (докторантура на английском языке)\"}; code=not present; URL=https://study.snnu.edu.cn/en/info/1066/1826.htm. A different doctoral discipline/qualification; not an alias of the named philosophy master.",
+            "prog-gap-clw-sw-snnu-icl-doctorate; degree=doctorate; all names={\"en\":\"Doctorate in International Chinese Language Education\",\"zh\":\"国际中文教育博士\",\"ru\":\"Докторантура по международному преподаванию китайского языка\"}; code=not present; URL=https://study.snnu.edu.cn/en/info/1066/1766.htm. A different doctoral discipline/qualification; not an alias of the named philosophy master.",
+            "prog-gap-wave5-west-snnu-educational-technology-doctorate-english; degree=doctorate; all names={\"en\":\"Educational Technology (English-taught PhD)\",\"zh\":\"教育技术学（英文授课博士）\",\"ru\":\"Образовательные технологии (докторантура на английском языке)\"}; code=not present; URL=https://study.snnu.edu.cn/en/info/1066/1826.htm. A different doctoral discipline/qualification; not an alias of the named philosophy master.",
+            "prog-gap-clw-sw-snnu-icl-master; degree=master; all names={\"en\":\"Master of International Chinese Language Education\",\"zh\":\"国际中文教育硕士\",\"ru\":\"Магистратура по международному преподаванию китайского языка\"}; code=not present; URL=https://study.snnu.edu.cn/en/info/1066/1766.htm. International Chinese Language Education is language-teacher education, not Chinese Philosophy; neither source nor translation establishes an alias.",
+            "prog-gap-wave5-west-snnu-theoretical-economics-doctorate-english; degree=doctorate; all names={\"en\":\"Theoretical Economics (English-taught PhD)\",\"zh\":\"理论经济学（英文授课博士）\",\"ru\":\"Теоретическая экономика (докторантура на английском языке)\"}; code=not present; URL=https://study.snnu.edu.cn/en/info/1066/1826.htm. A different doctoral discipline/qualification; not an alias of the named philosophy master."
+          ],
+          "programsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\programs.json",
+            "sha256": "d530879b18e3f3b99a5fcf074435f2d0deac8d65204baf6cb35dc82982e74495"
+          },
+          "reviewedExistingRecords": [
+            {
+              "degreeLevel": "language",
+              "existingIdentitySha256": "434556978a5026a3843db583c863db22230b4a989c954e46a133b4fb733f3244",
+              "names": {
+                "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+                "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)",
+                "zh": "国际中文教师奖学金一学期研修项目（2027年春季）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://study.snnu.edu.cn/info/1066/1238.htm",
+              "recordId": "program-snnu-iclt-one-semester-spring-2027"
+            },
+            {
+              "degreeLevel": "doctorate",
+              "existingIdentitySha256": "1082646a280aa95e578118f409dbfe2844c7a2700d91202d1e2baa85cb25c081",
+              "names": {
+                "en": "Curriculum and Instruction (English-taught PhD)",
+                "ru": "Теория учебных программ и преподавания (докторантура на английском языке)",
+                "zh": "课程与教学论（英文授课博士）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://study.snnu.edu.cn/en/info/1066/1826.htm",
+              "recordId": "prog-gap-wave5-west-snnu-curriculum-instruction-doctorate-english"
+            },
+            {
+              "degreeLevel": "doctorate",
+              "existingIdentitySha256": "c07fd592893088282d910e83c717fd77794f13c86549968b6b41f3fa520e6284",
+              "names": {
+                "en": "Doctorate in International Chinese Language Education",
+                "ru": "Докторантура по международному преподаванию китайского языка",
+                "zh": "国际中文教育博士"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://study.snnu.edu.cn/en/info/1066/1766.htm",
+              "recordId": "prog-gap-clw-sw-snnu-icl-doctorate"
+            },
+            {
+              "degreeLevel": "doctorate",
+              "existingIdentitySha256": "350b0ffc59d2c9221cda156bf1e562aabf2ef31570adaf060472bec23f4e56f4",
+              "names": {
+                "en": "Educational Technology (English-taught PhD)",
+                "ru": "Образовательные технологии (докторантура на английском языке)",
+                "zh": "教育技术学（英文授课博士）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://study.snnu.edu.cn/en/info/1066/1826.htm",
+              "recordId": "prog-gap-wave5-west-snnu-educational-technology-doctorate-english"
+            },
+            {
+              "degreeLevel": "master",
+              "existingIdentitySha256": "621eba843e46e2424101712bee401f50e544bf82bd6b204aae6e940dbc30ddb3",
+              "names": {
+                "en": "Master of International Chinese Language Education",
+                "ru": "Магистратура по международному преподаванию китайского языка",
+                "zh": "国际中文教育硕士"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://study.snnu.edu.cn/en/info/1066/1766.htm",
+              "recordId": "prog-gap-clw-sw-snnu-icl-master"
+            },
+            {
+              "degreeLevel": "doctorate",
+              "existingIdentitySha256": "1c3f6c58ba1034df585e32dba8a587582defbc0f0e4518e8c46358d73c92a953",
+              "names": {
+                "en": "Theoretical Economics (English-taught PhD)",
+                "ru": "Теоретическая экономика (докторантура на английском языке)",
+                "zh": "理论经济学（英文授课博士）"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://study.snnu.edu.cn/en/info/1066/1826.htm",
+              "recordId": "prog-gap-wave5-west-snnu-theoretical-economics-doctorate-english"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-6568efc1647e064e76d377f1ccade8f1e69138c1d1f30407",
+      "universityId": "uni-beijing-institute-of-technology",
+      "method": "deterministic",
+      "originalProposalContentSha256": "8acb327e4c385dbc1f09fcfa1e4cce84e9895224c5d1c4efbc52bac238dd74f7",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\bit-001\\independent-review.json",
+        "sha256": "e84bb23a988f15b1bd5531905b035669ce8bd3064d8f594ccb26b447a72bd187"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-6568efc1647e064e76d377f1ccade8f1e69138c1d1f30407/ce28dd6562e59c4b0d363a763433b80d4b3be103da4adfae35c8d9866bdc58e5.json",
+      "ruleArtifactSha256": "ce28dd6562e59c4b0d363a763433b80d4b3be103da4adfae35c8d9866bdc58e5",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "人工智能"
+        },
+        "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+        "existingProgrammeConflictReview": {
+          "catalogSha256": "3182ca4693cf7cd36393073d337761fff6dee3166582c9fd0b20db6b99ae8b01",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "notes": [
+            "This official HTML names the actual Artificial Intelligence undergraduate major but supplies no programme code. All current same-school bachelor codes, literal names, all translated aliases and URLs were examined. No AI bachelor identity already exists. No new identity is created from a merely reworded old programme.",
+            "program-beijing-institute-of-technology-computer-science-and-technology-master; degree=master; all names={\"en\":\"Computer Science and Technology\",\"zh\":\"Computer Science and Technology\",\"ru\":\"Компьютерные науки и технологии\"}; code=not present; URL=https://isc.bit.edu.cn/aboutbit/faq/b163461.htm. The existing record has a different master qualification; it is not an undergraduate Artificial Intelligence identity.",
+            "program-beijing-institute-of-technology-mechanical-engineering-master; degree=master; all names={\"en\":\"Mechanical Engineering\",\"zh\":\"Mechanical Engineering\",\"ru\":\"Машиностроение\"}; code=not present; URL=https://isc.bit.edu.cn/aboutbit/faq/b163461.htm. The existing record has a different master qualification; it is not an undergraduate Artificial Intelligence identity.",
+            "prog-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor; degree=bachelor; all names={\"en\":\"Aeronautical and Astronautical Engineering (Bachelor's Program)\",\"zh\":\"航空航天工程本科项目\",\"ru\":\"Бакалавриат по авиационно-космической технике\"}; code=not present; URL=https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm. The existing named bachelor discipline is not Artificial Intelligence; all its Chinese, English and Russian labels were examined, and no source establishes an AI alias.",
+            "prog-gap-wave8-bit-automation-bachelor; degree=bachelor; all names={\"en\":\"Automation (Bachelor's Program)\",\"zh\":\"自动化本科项目\",\"ru\":\"Бакалавриат по автоматизации\"}; code=not present; URL=https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm. The existing named bachelor discipline is not Artificial Intelligence; all its Chinese, English and Russian labels were examined, and no source establishes an AI alias.",
+            "prog-gap-wave8-bit-electronic-science-technology-bachelor; degree=bachelor; all names={\"en\":\"Electronic Science and Technology (Bachelor's Program)\",\"zh\":\"电子科学与技术本科项目\",\"ru\":\"Бакалавриат по электронной науке и технологиям\"}; code=not present; URL=https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm. The existing named bachelor discipline is not Artificial Intelligence; all its Chinese, English and Russian labels were examined, and no source establishes an AI alias.",
+            "prog-gap-wave8-bit-international-economics-trade-bachelor; degree=bachelor; all names={\"en\":\"International Economics and Trade (Bachelor's Program)\",\"zh\":\"国际经济与贸易本科项目\",\"ru\":\"Бакалавриат по международной экономике и торговле\"}; code=not present; URL=https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm. The existing named bachelor discipline is not Artificial Intelligence; all its Chinese, English and Russian labels were examined, and no source establishes an AI alias.",
+            "prog-gap-wave8-bit-mechatronics-engineering-bachelor; degree=bachelor; all names={\"en\":\"Mechatronics Engineering (Bachelor's Program)\",\"zh\":\"机电工程本科项目\",\"ru\":\"Бакалавриат по мехатронике\"}; code=not present; URL=https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm. The existing named bachelor discipline is not Artificial Intelligence; all its Chinese, English and Russian labels were examined, and no source establishes an AI alias."
+          ],
+          "programsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\programs.json",
+            "sha256": "d530879b18e3f3b99a5fcf074435f2d0deac8d65204baf6cb35dc82982e74495"
+          },
+          "reviewedExistingRecords": [
+            {
+              "degreeLevel": "master",
+              "existingIdentitySha256": "3d167442809ed9f5441bc3f728525fd18d334ba8c5c95869cf436008b63ab81d",
+              "names": {
+                "en": "Computer Science and Technology",
+                "ru": "Компьютерные науки и технологии",
+                "zh": "Computer Science and Technology"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/b163461.htm",
+              "recordId": "program-beijing-institute-of-technology-computer-science-and-technology-master"
+            },
+            {
+              "degreeLevel": "master",
+              "existingIdentitySha256": "03ad27b15430fbcc25b7faa04d0451f5d8f148be075e2d2d478b40533457c2b5",
+              "names": {
+                "en": "Mechanical Engineering",
+                "ru": "Машиностроение",
+                "zh": "Mechanical Engineering"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/b163461.htm",
+              "recordId": "program-beijing-institute-of-technology-mechanical-engineering-master"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "d4e534193b8fc3b2ee904ff49d2851c5a51edd5bfd20185fdbca2082668a3b83",
+              "names": {
+                "en": "Aeronautical and Astronautical Engineering (Bachelor's Program)",
+                "ru": "Бакалавриат по авиационно-космической технике",
+                "zh": "航空航天工程本科项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "recordId": "prog-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "ad9763e337b57fd4128800c0a10312e030ba0b99d2ce43419fa6042875acaeec",
+              "names": {
+                "en": "Automation (Bachelor's Program)",
+                "ru": "Бакалавриат по автоматизации",
+                "zh": "自动化本科项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "recordId": "prog-gap-wave8-bit-automation-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "ebccf64248032d62f369e253b7e2c29e6a15b1949fca8b90580f02cb92253d31",
+              "names": {
+                "en": "Electronic Science and Technology (Bachelor's Program)",
+                "ru": "Бакалавриат по электронной науке и технологиям",
+                "zh": "电子科学与技术本科项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "recordId": "prog-gap-wave8-bit-electronic-science-technology-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "42e6e85e70334fed83e6e413fa647f3bcdcb1b224ce9255559f1c25749752442",
+              "names": {
+                "en": "International Economics and Trade (Bachelor's Program)",
+                "ru": "Бакалавриат по международной экономике и торговле",
+                "zh": "国际经济与贸易本科项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "recordId": "prog-gap-wave8-bit-international-economics-trade-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "5f4855f3799b71950461226e84de7f99b0a423f10e04b1fdeca481c65a3f0547",
+              "names": {
+                "en": "Mechatronics Engineering (Bachelor's Program)",
+                "ru": "Бакалавриат по мехатронике",
+                "zh": "机电工程本科项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "recordId": "prog-gap-wave8-bit-mechatronics-engineering-bachelor"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}
