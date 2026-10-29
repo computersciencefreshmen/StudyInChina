@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import sources from '../../content/data/sources.json'
 import cities from '../../content/data/cities.json'
 import universities from '../../content/data/universities.json'
@@ -21,6 +21,9 @@ import { classifyProgramField } from '@/lib/data/fields'
 import { isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
+import * as identityStore from '@/lib/data/identity-acceptance-store'
+
+afterEach(() => vi.restoreAllMocks())
 
 const TODAY = '2026-07-20'
 const allData = bundleSchema.parse({
@@ -53,6 +56,9 @@ function compareItems(
 
 describe('CatalogRepository institution lists', () => {
   it('filters JSON institutions with the shared field taxonomy and exposes exact facets and counts', async () => {
+    // This fixture rewrites audit dates to July. Production identity receipts
+    // accepted later must not grant or remove authority from synthetic facts.
+    vi.spyOn(identityStore, 'readIdentityAcceptances').mockReturnValue([])
     const bundle = freshBundle()
     // Exercise filtering independently of whether today's production catalogue
     // happens to contain fresh records in both fields.
