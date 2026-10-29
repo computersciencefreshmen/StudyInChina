@@ -21,7 +21,7 @@ export type IdentityBindings = { schemaVersion: 1; entries: IdentityBinding[] }
 export type IdentityImportReceipt = {
   format: 'studyinchina.identity-import-receipt'; formatVersion: 1; batchId: string; batchSha256: string;
   scopeRegistrySha256: string; inputCatalogSha256: string; outputCatalogSha256: string;
-  acceptedAt: string; accepted: Array<{ proposalId: string; recordId: string; canonicalKey: string; action: 'created' | 'identity_accepted'; verifiedName?: VerifiedProgramName; verifiedNameAlias?: ReviewedProgramAliasAudit }>;
+  acceptedAt: string; accepted: Array<{ proposalId: string; recordId: string; canonicalKey: string; action: 'created' | 'identity_accepted'; verifiedName?: VerifiedProgramName; verifiedNameAlias?: ReviewedProgramAliasAudit; verifiedSourceUrl?: string }>;
   unchanged?: Array<{ proposalId: string; recordId: string; reason: 'identity_and_official_source_unchanged' }>;
   held: Array<{ proposalId: string; reason: string }>; sha256: string;
 }
@@ -35,7 +35,7 @@ const schoolDay = (timestamp: string): string => new Intl.DateTimeFormat('en-CA'
 
 /** A successful re-read can be an operational observation without becoming a new public fact. */
 export function hasAcceptedIdentityWithOfficialUrl(bundle: DataBundle, ledger: IdentityAcceptanceLedger,
-  entityType: 'program' | 'scholarship', record: Program | Scholarship, url: string, acceptedAt: string, expectedName?: VerifiedProgramName, expectedAlias?: ReviewedProgramAliasAudit): boolean {
+  entityType: 'program' | 'scholarship', record: Program | Scholarship, url: string, acceptedAt: string, expectedName?: VerifiedProgramName, expectedAlias?: ReviewedProgramAliasAudit, expectedSourceUrl?: string): boolean {
   if (record.status === 'draft' || record.status === 'archived' || record.verifiedAt > schoolDay(acceptedAt)) return false
   const official = new Map(bundle.sources.filter(source => source.official).map(source => [source.id, source]))
   if (!record.sourceIds.length || !record.sourceIds.every(id => official.has(id))) return false
@@ -45,6 +45,8 @@ export function hasAcceptedIdentityWithOfficialUrl(bundle: DataBundle, ledger: I
     && entry.identitySha256 === fingerprint && new Date(entry.acceptedAt) <= new Date(acceptedAt)
     && (expectedName === undefined || canonicalIdentityJson(entry.verifiedName) === canonicalIdentityJson(expectedName))
     && (expectedName === undefined || canonicalIdentityJson(entry.verifiedNameAlias) === canonicalIdentityJson(expectedAlias))
+    && (expectedSourceUrl === undefined || entry.verifiedSourceUrl === expectedSourceUrl
+      && entry.sourceIds.some(id => record.sourceIds.includes(id) && official.get(id)?.url === expectedSourceUrl))
     && entry.sourceIds.length > 0 && entry.sourceIds.every(id => record.sourceIds.includes(id) && official.has(id)))
 }
 
@@ -213,7 +215,7 @@ export async function importIdentityCandidates(options: {
   const accepted: IdentityImportReceipt['accepted'] = []
   const unchanged: NonNullable<IdentityImportReceipt['unchanged']> = []
   const held: IdentityImportReceipt['held'] = []
-  const pendingAcceptances: Array<{ record: Program; reviewer: string; verifiedName: VerifiedProgramName; verifiedNameAlias?: ReviewedProgramAliasAudit }> = []
+  const pendingAcceptances: Array<{ record: Program; reviewer: string; verifiedName: VerifiedProgramName; verifiedNameAlias?: ReviewedProgramAliasAudit; verifiedSourceUrl: string }> = []
   const reviewedAliases = await loadReviewedProgramAliases(options.reviewedProgramAliases ?? [], batch.proposals, options.readArtifact)
   const schools = new Map(scope.schools.map(school => [school.universityId, school]))
   for (const proposal of batch.proposals) {
@@ -257,7 +259,7 @@ export async function importIdentityCandidates(options: {
       const action = record ? 'identity_accepted' as const : 'created' as const
       if (!record && fields.programUrl !== proposal.source.url) throw new Error('new_identity_program_url_requires_matching_source')
       if (bound && record && bound.recordId !== record.id) throw new Error('canonical_key_already_bound_to_another_record')
-      if (record && hasAcceptedIdentityWithOfficialUrl(bundle, acceptances, 'program', record, proposal.source.url, options.acceptedAt, fields.name, reviewedAlias?.audit)) {
+      if (record && hasAcceptedIdentityWithOfficialUrl(bundle, acceptances, 'program', record, proposal.source.url, options.acceptedAt, fields.name, reviewedAlias?.audit, proposal.source.url)) {
         unchanged.push({ proposalId: proposal.id, recordId: record.id, reason: 'identity_and_official_source_unchanged' })
         continue
       }
@@ -286,8 +288,8 @@ export async function importIdentityCandidates(options: {
       }
       if (!bound) bindings.entries.push({ canonicalKey: key, recordId: record.id, aliases })
       else bound.aliases = [...new Set([...bound.aliases, ...aliases])].sort()
-      accepted.push({ proposalId: proposal.id, recordId: record.id, canonicalKey: key, action, verifiedName: { ...fields.name }, ...(reviewedAlias ? { verifiedNameAlias: reviewedAlias.audit } : {}) })
-      pendingAcceptances.push({ record, reviewer: proposal.review!.reviewerId, verifiedName: { ...fields.name }, ...(reviewedAlias ? { verifiedNameAlias: reviewedAlias.audit } : {}) })
+      accepted.push({ proposalId: proposal.id, recordId: record.id, canonicalKey: key, action, verifiedName: { ...fields.name }, verifiedSourceUrl: proposal.source.url, ...(reviewedAlias ? { verifiedNameAlias: reviewedAlias.audit } : {}) })
+      pendingAcceptances.push({ record, reviewer: proposal.review!.reviewerId, verifiedName: { ...fields.name }, verifiedSourceUrl: proposal.source.url, ...(reviewedAlias ? { verifiedNameAlias: reviewedAlias.audit } : {}) })
     } catch (error) {
       held.push({ proposalId: proposal.id, reason: error instanceof Error ? error.message : String(error) })
     }
@@ -299,12 +301,13 @@ export async function importIdentityCandidates(options: {
     inputCatalogSha256: inputHash, outputCatalogSha256: await catalogSha256(validated), acceptedAt: options.acceptedAt, accepted, unchanged, held,
   }
   const receipt = { ...receiptContent, sha256: sha256(canonicalJson(receiptContent)) }
-  for (const { record, reviewer, verifiedName, verifiedNameAlias } of pendingAcceptances) {
+  for (const { record, reviewer, verifiedName, verifiedNameAlias, verifiedSourceUrl } of pendingAcceptances) {
     const acceptance = {
       entityType: 'program' as const, recordId: record.id, identitySha256: identityFingerprint('program', record),
       sourceIds: record.sourceIds, acceptedAt: options.acceptedAt, reviewer,
       receiptPath: options.receiptPath, receiptSha256: receipt.sha256,
       verifiedName,
+      verifiedSourceUrl,
       ...(verifiedNameAlias ? { verifiedNameAlias } : {}),
     }
     const old = acceptances.entries.findIndex(entry => entry.entityType === 'program' && entry.recordId === record.id)

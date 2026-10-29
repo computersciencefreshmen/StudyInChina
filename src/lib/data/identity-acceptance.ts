@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { z } from 'zod'
-import type { City, Program, Scholarship, University } from './types'
+import type { City, Program, Scholarship, Source, University } from './types'
 
 export const identityEntityTypeSchema = z.enum(['city', 'university', 'program', 'scholarship'])
 export type IdentityEntityType = z.infer<typeof identityEntityTypeSchema>
@@ -32,9 +32,14 @@ export const identityAcceptanceSchema = z.object({
   receiptSha256: sha256,
   verifiedName: verifiedProgramNameSchema.optional(),
   verifiedNameAlias: reviewedProgramAliasAuditSchema.optional(),
+  verifiedSourceUrl: z.url().refine(value => {
+    const url = new URL(value)
+    return url.protocol === 'https:' && !url.username && !url.password && !url.port
+  }, 'Verified programme sources require credential-free HTTPS').optional(),
 }).strict().superRefine((entry, context) => {
   if (entry.verifiedName && entry.entityType !== 'program') context.addIssue({ code: 'custom', message: 'Scoped official names apply only to programs' })
   if (entry.verifiedNameAlias && (entry.entityType !== 'program' || !entry.verifiedName)) context.addIssue({ code: 'custom', message: 'Reviewed program alias requires scoped official names' })
+  if (entry.verifiedSourceUrl && (entry.entityType !== 'program' || !entry.verifiedName)) context.addIssue({ code: 'custom', message: 'Verified programme source requires scoped official program names' })
 })
 export const identityAcceptanceLedgerSchema = z.object({
   schemaVersion: z.literal(1), entries: z.array(identityAcceptanceSchema),
@@ -57,17 +62,30 @@ export function verifiedNameMatchesRecord(entry: IdentityAcceptance, record: Pro
     && alias.source.url === record.programUrl
 }
 
+/** The reviewed document must be the same official source linked by both the
+ * acceptance and raw record. It never changes the raw identity fingerprint. */
+export function verifiedSourceUrlMatchesRecord(entry: IdentityAcceptance, record: Program, sources: Source[]): boolean {
+  return entry.verifiedSourceUrl === undefined || sources.some(source => source.official && source.url === entry.verifiedSourceUrl
+    && entry.sourceIds.includes(source.id) && record.sourceIds.includes(source.id))
+}
+
 /** Scoped display authority must be present in the immutable import receipt,
  * not inferred from an unchanged raw identity hash or a mutable locale list. */
 export function scopedNameReceiptMatches(entry: IdentityAcceptance, input: unknown): boolean {
-  if (!entry.verifiedName) return true
+  if (input === undefined && !entry.verifiedName && entry.verifiedSourceUrl === undefined) return true
   if (!input || typeof input !== 'object' || Array.isArray(input)) return false
   const { sha256: receiptSha, ...receipt } = input as Record<string, unknown>
-  if (receiptSha !== entry.receiptSha256 || createHash('sha256').update(canonicalIdentityJson(receipt)).digest('hex') !== receiptSha
-    || receipt.format !== 'studyinchina.identity-import-receipt' || receipt.formatVersion !== 1 || !Array.isArray(receipt.accepted)) return false
+  // Generic receipt integrity is checked by the strict store/validator. A
+  // legacy scope check must not hash a shared bootstrap receipt per record.
+  if (!entry.verifiedName) return entry.verifiedSourceUrl === undefined && (!Array.isArray(receipt.accepted)
+    || !receipt.accepted.some(value => value && typeof value === 'object' && !Array.isArray(value) && value.recordId === entry.recordId
+      && ['verifiedName', 'verifiedNameAlias', 'verifiedSourceUrl'].some(key => Object.hasOwn(value, key))))
+  if (receiptSha !== entry.receiptSha256 || createHash('sha256').update(canonicalIdentityJson(receipt)).digest('hex') !== receiptSha) return false
+  if (receipt.format !== 'studyinchina.identity-import-receipt' || receipt.formatVersion !== 1 || !Array.isArray(receipt.accepted)) return false
   return receipt.accepted.some(value => value && typeof value === 'object' && !Array.isArray(value)
     && value.recordId === entry.recordId && canonicalIdentityJson(value.verifiedName) === canonicalIdentityJson(entry.verifiedName)
-    && canonicalIdentityJson(value.verifiedNameAlias) === canonicalIdentityJson(entry.verifiedNameAlias))
+    && canonicalIdentityJson(value.verifiedNameAlias) === canonicalIdentityJson(entry.verifiedNameAlias)
+    && value.verifiedSourceUrl === entry.verifiedSourceUrl)
 }
 
 export function canonicalIdentityJson(value: unknown): string {
