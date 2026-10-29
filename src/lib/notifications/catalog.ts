@@ -2,19 +2,20 @@ import type { DataBundle, LocalizedText } from '@/lib/data/types'
 import { selectPublishedData } from '@/lib/data/publication'
 import { getTodayDate, isCurrentVerifiedRecord, isWithinPostDeadlineGrace } from '@/lib/data/freshness'
 import { meaningfulFingerprint, type PublishedObservation } from './changes'
+import type { IdentityAcceptance } from '@/lib/data/identity-acceptance'
 
 function title(name: LocalizedText): string {
   return name.en || name.zh || name.ru || Object.values(name).find(Boolean) || 'Study in China'
 }
 
 /** Build observations from the actual public catalog, never the administrator's candidate queue. */
-export function observePublishedCatalog(data: DataBundle, now = Date.now()): Record<string, PublishedObservation> {
+export function observePublishedCatalog(data: DataBundle, now = Date.now(), identities: IdentityAcceptance[] = []): Record<string, PublishedObservation> {
   const today = getTodayDate(new Date(now))
-  const published = selectPublishedData(data, today)
+  const published = selectPublishedData(data, today, identities)
   const publicSchools = new Set(published.universities.map(item => item.id))
   const publicPrograms = new Set(published.programs.map(item => item.id))
   const schools = new Map(data.universities.map(item => [item.id, item]))
-  const programs = new Map(data.programs.map(item => [item.id, item]))
+  const programs = new Map(published.programs.map(item => [item.id, item]))
   const observations: Record<string, PublishedObservation> = {}
 
   for (const university of data.universities) {
@@ -25,7 +26,7 @@ export function observePublishedCatalog(data: DataBundle, now = Date.now()): Rec
       title: title(university.name), slug: university.slug,
     }
   }
-  for (const program of data.programs) {
+  for (const program of published.programs) {
     if (!publicPrograms.has(program.id)) continue
     const university = schools.get(program.universityId)!
     observations[`program:${program.id}`] = {
