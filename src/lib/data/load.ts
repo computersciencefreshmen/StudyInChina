@@ -26,7 +26,7 @@ export const getAllData = cache((): DataBundle => bundleSchema.parse({
   scholarships: readJson('scholarships'),
 }))
 
-const getPublishedData = cache((today: string): DataBundle => selectPublishedData(getAllData(), today))
+const getPublishedData = cache((today: string): DataBundle => selectPublishedData(getAllData(), today, readIdentityAcceptances(undefined, { strictProjection: true })))
 
 export function getData(): DataBundle {
   const data = getAllData()
@@ -45,7 +45,7 @@ const getRepositoryData = cache(async (today: string): Promise<DataBundle> => {
   const data = await activeCatalogRepository().getBundle()
   const previewEnabled = isContentPreviewEnabled(process.env)
   return previewEnabled ? data : selectDiscoveryData(data, today,
-    activeCatalogRepository().mode === 'json' ? readIdentityAcceptances() : [],
+    activeCatalogRepository().mode === 'json' ? readIdentityAcceptances(undefined, { strictProjection: true }) : [],
     activeCatalogRepository().mode === 'json' ? readFieldVerifications() : [])
 })
 

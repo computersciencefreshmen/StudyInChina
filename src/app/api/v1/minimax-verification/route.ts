@@ -4,6 +4,7 @@ import { getAllData } from '@/lib/data/load'
 import { createCatalogRepository } from '@/lib/catalog'
 import { MINIMAX_PUBLIC_MAX_BYTES, minimaxPublicSnapshotSchema, type MiniMaxPublicSnapshot } from '@/lib/verification/minimax-contract'
 import { selectPublicMiniMaxLabels } from '@/lib/verification/publication'
+import { readIdentityAcceptances } from '@/lib/data/identity-acceptance-store'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -44,5 +45,7 @@ async function publication(): Promise<MiniMaxPublicSnapshot | null> {
 export async function GET() {
   const [snapshot, bundle] = await Promise.all([publication(), process.env.CATALOG_BACKEND === 'd1' ? createCatalogRepository().getBundle() : Promise.resolve(getAllData())])
   if (!snapshot) return Response.json({ error: 'verification_unavailable' }, { status: 503, headers: { 'Cache-Control': 'no-store' } })
-  return Response.json(selectPublicMiniMaxLabels(snapshot, bundle), { headers: { 'Cache-Control': 'public, max-age=30, s-maxage=30', 'X-Content-Type-Options': 'nosniff' } })
+  return Response.json(selectPublicMiniMaxLabels(snapshot, bundle, undefined,
+    process.env.CATALOG_BACKEND === 'd1' ? [] : readIdentityAcceptances(undefined, { strictProjection: true })),
+  { headers: { 'Cache-Control': 'public, max-age=30, s-maxage=30', 'X-Content-Type-Options': 'nosniff' } })
 }

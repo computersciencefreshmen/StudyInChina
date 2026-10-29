@@ -6,7 +6,8 @@ import { loadMaintenanceBundle } from '../maintenance/build-scope'
 import { maintenanceScopeSchema, scopeContentSha256 } from '../maintenance/contracts'
 import { selectDiscoveryData } from '../../src/lib/data/discovery'
 import { selectPublishedData } from '../../src/lib/data/publication'
-import { identityAcceptanceLedgerSchema, identityFingerprint, canonicalIdentityJson } from '../../src/lib/data/identity-acceptance'
+import { identityAcceptanceLedgerSchema, identityFingerprint, canonicalIdentityJson, scopedNameReceiptMatches, verifiedNameMatchesRecord } from '../../src/lib/data/identity-acceptance'
+import type { Program } from '../../src/lib/data/types'
 import { fieldVerificationLedgerSchema, fieldVerificationContentSha256, validateFieldVerification } from '../../src/lib/data/field-verification'
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { getApplicationState } from '../../src/lib/data/admission'
@@ -42,7 +43,9 @@ export async function validateDirectory(root: string, today = getTodayDate()) {
     const record = list.find(record => record.id === entry.recordId)
     if (!record || identityFingerprint(entry.entityType, record) !== entry.identitySha256
       || !entry.sourceIds.every(id => record.sourceIds.includes(id) && bundle.sources.some(source => source.id === id && source.official))) throw new Error('directory_identity_binding_invalid')
-    checkedReceipt(entry.receiptPath, entry.receiptSha256, 'identity')
+    const receipt = checkedReceipt(entry.receiptPath, entry.receiptSha256, 'identity')
+    if (entry.verifiedName && (!verifiedNameMatchesRecord(entry, record as Program)
+      || !scopedNameReceiptMatches(entry, { ...receipt, sha256: entry.receiptSha256 }))) throw Error('directory_scoped_name_binding_invalid')
   }
   const fieldKeys = new Set<string>()
   for (const entry of fields) {
@@ -62,7 +65,7 @@ export async function validateDirectory(root: string, today = getTodayDate()) {
         && value.entityType === entry.entityType && value.recordId === entry.recordId && value.fieldPath === entry.fieldPath
         && value.verificationSha256 === fieldVerificationContentSha256(entry))) throw new Error('directory_field_receipt_binding_invalid')
   }
-  const directory = selectDiscoveryData(bundle, today, identities, fields), current = selectPublishedData(bundle, today)
+  const directory = selectDiscoveryData(bundle, today, identities, fields), current = selectPublishedData(bundle, today, identities)
   if (/"(?:receiptPath|objectKey|promptSha256|reviewerId|quote)"\s*:/u.test(JSON.stringify(directory))) throw new Error('directory_private_provenance_leak')
   const bySchool = new Map(directory.universities.map(university => [university.id, 0]))
   for (const program of directory.programs) bySchool.set(program.universityId, (bySchool.get(program.universityId) ?? 0) + 1)

@@ -7,6 +7,7 @@ import { fieldVerificationLedgerSchema } from '../../src/lib/data/field-verifica
 import { identityAcceptanceLedgerSchema } from '../../src/lib/data/identity-acceptance'
 import { canonicalJson, maintenanceCandidateExportSchema, maintenanceScopeSchema } from '../maintenance/contracts'
 import { importIdentityCandidates, localArtifactReader, type IdentityBindings } from '../maintenance/import-identities'
+import type { ReviewedProgramAliasRef } from '../maintenance/reviewed-program-alias'
 import { importFieldCandidates } from '../maintenance/import-fields'
 import { importScholarshipIdentities } from '../maintenance/import-scholarships'
 import { importAdmissionCycleCandidates } from '../maintenance/import-cycles'
@@ -26,7 +27,7 @@ export type CanonicalMaintenanceReceipt = {
   sha256: string
 }
 
-export async function prepareMaintenanceCatalog(options: { root: string; downloadDirectory: string; outputDirectory: string; acceptedAt: string; apply?: boolean }) {
+export async function prepareMaintenanceCatalog(options: { root: string; downloadDirectory: string; outputDirectory: string; acceptedAt: string; apply?: boolean; reviewedProgramAliases?: ReviewedProgramAliasRef[] }) {
   const root = resolve(options.root), download = resolve(options.downloadDirectory), output = resolve(options.outputDirectory)
   const dataDirectory = join(root, 'content', 'data')
   // Reject lexical and symlink escapes before producing any candidate file, even in dry-run mode.
@@ -51,7 +52,8 @@ export async function prepareMaintenanceCatalog(options: { root: string; downloa
   const fieldLedger = fieldVerificationLedgerSchema.parse(optional(join(dataDirectory, 'field-verifications.json'), { schemaVersion: 1, entries: [] }))
   const readArtifact = localArtifactReader(join(download, 'artifacts'))
   const identities = await importIdentityCandidates({ bundle: baseline.bundle, scope, batch, acceptedAt: options.acceptedAt,
-    receiptPath: receiptRelative.replace('canonical-receipt', 'identity-receipt'), acceptances, bindings, readArtifact })
+    receiptPath: receiptRelative.replace('canonical-receipt', 'identity-receipt'), acceptances, bindings, readArtifact,
+    reviewedProgramAliases: options.reviewedProgramAliases })
   const scholarships = await importScholarshipIdentities({ bundle: identities.bundle, inputBundle: baseline.bundle, scope, batch, acceptedAt: options.acceptedAt,
     receiptPath: receiptRelative.replace('canonical-receipt', 'scholarship-receipt'), acceptances: identities.acceptances, bindings: identities.bindings, readArtifact })
   const cycles = await importAdmissionCycleCandidates({ bundle: scholarships.bundle, inputBundle: baseline.bundle, scope, batch, acceptedAt: options.acceptedAt,
@@ -114,7 +116,8 @@ async function main() {
     console.log(JSON.stringify(await acknowledgeCanonicalMaintenance(process.cwd(), resolve(value('--receipt')), value('--commit')))); return
   }
   if (!args.includes('--download') || !args.includes('--output')) throw new Error('Usage: prepare-maintenance-catalog.ts --download <directory> --output <candidate-directory> [--apply] | ack --receipt <file> --commit <sha>')
-  const result = await prepareMaintenanceCatalog({ root: process.cwd(), downloadDirectory: value('--download'), outputDirectory: value('--output'), acceptedAt: new Date().toISOString(), apply: args.includes('--apply') })
+  const result = await prepareMaintenanceCatalog({ root: process.cwd(), downloadDirectory: value('--download'), outputDirectory: value('--output'), acceptedAt: new Date().toISOString(), apply: args.includes('--apply'),
+    ...(args.includes('--reviewed-program-aliases') ? { reviewedProgramAliases: read(value('--reviewed-program-aliases')) as ReviewedProgramAliasRef[] } : {}) })
   console.log(JSON.stringify({ batchId: result.receipt.batchId, accepted: result.receipt.acceptedProposalIds.length, held: result.receipt.held.length,
     unchanged: result.receipt.unchangedProposalIds?.length ?? 0,
     changed: result.changed, replayed: result.replayed, receiptSha256: result.receipt.sha256 }))

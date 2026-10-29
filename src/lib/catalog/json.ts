@@ -105,7 +105,7 @@ function requestedPage(
 }
 
 function projectDirectory(raw: DataBundle, today: string) {
-  const identities = readIdentityAcceptances(), fields = readFieldVerifications()
+  const identities = readIdentityAcceptances(undefined, { strictProjection: true }), fields = readFieldVerifications()
   return { data: selectDiscoveryData(raw, today, identities, fields), revision: directoryRevision(raw, today, identities, fields) }
 }
 
@@ -147,7 +147,7 @@ export class JsonCatalogRepository implements CatalogRepository {
     }
     const today = getTodayDate()
     const rawBundle = await this.getBundle()
-    const publicBundle = selectCatalogApiData(rawBundle, today)
+    const publicBundle = selectCatalogApiData(rawBundle, today, readIdentityAcceptances(undefined, { strictProjection: true }))
     const release = deriveCatalogRelease(rawBundle)
     const publicCounts = getCatalogRecordCounts(publicBundle)
     return new CatalogApiService(publicBundle, {
@@ -166,7 +166,7 @@ export class JsonCatalogRepository implements CatalogRepository {
     const rawData = await this.getBundle()
     const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
     if (directory) query = { ...query, today, directoryRevision: directory.revision }
-    const data = directory?.data ?? selectCatalogApiData(rawData, today)
+    const data = directory?.data ?? selectCatalogApiData(rawData, today, readIdentityAcceptances(undefined, { strictProjection: true }))
     const limit = listLimit(query.limit)
     const page = requestedPage('institutions', query)
     const requestedQuery = query.q?.trim() ?? ''
@@ -269,7 +269,7 @@ export class JsonCatalogRepository implements CatalogRepository {
     const rawData = await this.getBundle()
     const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
     if (directory) query = { ...query, today, directoryRevision: directory.revision }
-    const data = directory?.data ?? selectPublishedData(rawData, today)
+    const data = directory?.data ?? selectPublishedData(rawData, today, readIdentityAcceptances(undefined, { strictProjection: true }))
     const officialSourceIds = new Set(
       rawData.sources.filter((source) => source.official).map((source) => source.id),
     )
@@ -348,7 +348,7 @@ export class JsonCatalogRepository implements CatalogRepository {
     const rawData = await this.getBundle()
     const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
     if (directory) query = { ...query, today, directoryRevision: directory.revision }
-    const published = directory?.data ?? selectPublishedData(rawData, today)
+    const published = directory?.data ?? selectPublishedData(rawData, today, readIdentityAcceptances(undefined, { strictProjection: true }))
     const data = query.provider || query.program
       ? {
         ...published,

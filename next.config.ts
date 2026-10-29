@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   outputFileTracingIncludes: {
+    // Scoped official names are checked against immutable server-side receipts.
+    // Their ledger-provided paths cannot be reliably inferred by static tracing.
+    '/*': [
+      './quality/minimum-one/*/*/identity-import-receipt.json',
+      './quality/maintenance/batches/*/identity-receipt.json',
+    ],
     '/api/v1/minimax-verification': ['./content/verification/minimax.json'],
   },
   // These files belong to the local executor and must never enter website bundles.

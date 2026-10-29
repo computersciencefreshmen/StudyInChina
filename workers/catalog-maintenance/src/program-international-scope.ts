@@ -10,9 +10,9 @@ export function hasProgramInternationalScopeEvidence(quote: string): boolean {
     || /\b(?:without|no)\s+chinese\s+(?:citizenship|nationality)\b/iu.test(nationality)
     || /\bnot\s+(?:(?:be|have|hold|possess|of)\s+)?chinese\s+(?:citizens?(?:hip)?|nationals?|nationality)\b/iu.test(nationality)) return true
   // Explicit nationality wording in Chinese is the same admissions audience,
-  // including the official variants 非中国籍 and 非中国国籍. This does not match
+  // including the official variants 非中国籍, 非中国国籍 and 非中国公民. This does not match
   // Chinese-language instruction or the positive phrase 中国籍公民.
-  if (/非\s*中\s*国(?:\s*国)?\s*籍/u.test(nationality)) return true
+  if (/非\s*中\s*国(?:(?:\s*国)?\s*籍|\s*公\s*民)/u.test(nationality)) return true
   // International activities and teaching-language descriptions are not an
   // admissions audience. Retain the existing scope vocabulary elsewhere.
   const audience = text.replace(/\b(?:international\s+(?:internships?|cooperation)|foreign\s+languages?)\b/giu, '')

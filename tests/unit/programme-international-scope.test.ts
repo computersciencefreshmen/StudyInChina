@@ -13,6 +13,8 @@ describe('official programme admissions audience vocabulary', () => {
     '申请对象：非中国籍人士。',
     '持有效护照的非中国国籍公民。',
     '申请对象：非 中 国 籍 公民。',
+    '申请人须持有非中国公民的有效护照',
+    '申请对象：非 中 国 公 民。',
     'International students may apply to this master programme.',
   ])('recognizes an explicit foreign-student audience without changing the stored quote: %s', quote => {
     expect(hasProgramInternationalScopeEvidence(quote)).toBe(true)
@@ -20,6 +22,7 @@ describe('official programme admissions audience vocabulary', () => {
   it.each([
     'Only Chinese citizens may apply to this programme.',
     '本项目仅限中国籍公民申请。',
+    '申请对象为中国公民。',
     'The programme includes international internships.',
     'The university encourages international cooperation.',
     'The course teaches a foreign language.',

@@ -7,7 +7,8 @@ import type { DataBundle, Program, Scholarship, Source } from '../../src/lib/dat
 import { bundleSchema } from '../../src/lib/data/schema'
 import { htmlToText } from '../../workers/ingestion/src/rules'
 import { hasProgramInternationalScopeEvidence } from '../../workers/catalog-maintenance/src/program-international-scope'
-import { identityAcceptanceLedgerSchema, identityFingerprint, type IdentityAcceptanceLedger } from '../../src/lib/data/identity-acceptance'
+import { canonicalIdentityJson, identityAcceptanceLedgerSchema, identityFingerprint, verifiedNameMatchesRaw, type IdentityAcceptanceLedger, type VerifiedProgramName, type ReviewedProgramAliasAudit } from '../../src/lib/data/identity-acceptance'
+import { loadReviewedProgramAliases, resolveReviewedProgramAlias, type ReviewedProgramAliasRef } from './reviewed-program-alias'
 import { catalogSha256, loadMaintenanceBundle } from './build-scope'
 import {
   canonicalJson, exportContentSha256, maintenanceCandidateExportSchema, maintenanceScopeSchema,
@@ -20,7 +21,7 @@ export type IdentityBindings = { schemaVersion: 1; entries: IdentityBinding[] }
 export type IdentityImportReceipt = {
   format: 'studyinchina.identity-import-receipt'; formatVersion: 1; batchId: string; batchSha256: string;
   scopeRegistrySha256: string; inputCatalogSha256: string; outputCatalogSha256: string;
-  acceptedAt: string; accepted: Array<{ proposalId: string; recordId: string; canonicalKey: string; action: 'created' | 'identity_accepted' }>;
+  acceptedAt: string; accepted: Array<{ proposalId: string; recordId: string; canonicalKey: string; action: 'created' | 'identity_accepted'; verifiedName?: VerifiedProgramName; verifiedNameAlias?: ReviewedProgramAliasAudit }>;
   unchanged?: Array<{ proposalId: string; recordId: string; reason: 'identity_and_official_source_unchanged' }>;
   held: Array<{ proposalId: string; reason: string }>; sha256: string;
 }
@@ -34,7 +35,7 @@ const schoolDay = (timestamp: string): string => new Intl.DateTimeFormat('en-CA'
 
 /** A successful re-read can be an operational observation without becoming a new public fact. */
 export function hasAcceptedIdentityWithOfficialUrl(bundle: DataBundle, ledger: IdentityAcceptanceLedger,
-  entityType: 'program' | 'scholarship', record: Program | Scholarship, url: string, acceptedAt: string): boolean {
+  entityType: 'program' | 'scholarship', record: Program | Scholarship, url: string, acceptedAt: string, expectedName?: VerifiedProgramName, expectedAlias?: ReviewedProgramAliasAudit): boolean {
   if (record.status === 'draft' || record.status === 'archived' || record.verifiedAt > schoolDay(acceptedAt)) return false
   const official = new Map(bundle.sources.filter(source => source.official).map(source => [source.id, source]))
   if (!record.sourceIds.length || !record.sourceIds.every(id => official.has(id))) return false
@@ -42,6 +43,8 @@ export function hasAcceptedIdentityWithOfficialUrl(bundle: DataBundle, ledger: I
   const fingerprint = identityFingerprint(entityType, record)
   return ledger.entries.some(entry => entry.entityType === entityType && entry.recordId === record.id
     && entry.identitySha256 === fingerprint && new Date(entry.acceptedAt) <= new Date(acceptedAt)
+    && (expectedName === undefined || canonicalIdentityJson(entry.verifiedName) === canonicalIdentityJson(expectedName))
+    && (expectedName === undefined || canonicalIdentityJson(entry.verifiedNameAlias) === canonicalIdentityJson(expectedAlias))
     && entry.sourceIds.length > 0 && entry.sourceIds.every(id => record.sourceIds.includes(id) && official.has(id)))
 }
 
@@ -185,6 +188,7 @@ export async function importIdentityCandidates(options: {
   bundle: DataBundle; scope: unknown; batch: unknown; acceptedAt: string; receiptPath: string;
   acceptances?: IdentityAcceptanceLedger; bindings?: IdentityBindings; appliedReceipts?: IdentityImportReceipt[];
   readArtifact: (key: string) => Promise<Uint8Array>;
+  reviewedProgramAliases?: ReviewedProgramAliasRef[];
 }): Promise<{ bundle: DataBundle; acceptances: IdentityAcceptanceLedger; bindings: IdentityBindings; receipt: IdentityImportReceipt; replayed: boolean }> {
   const scope = maintenanceScopeSchema.parse(options.scope)
   const batch = maintenanceCandidateExportSchema.parse(options.batch)
@@ -209,7 +213,8 @@ export async function importIdentityCandidates(options: {
   const accepted: IdentityImportReceipt['accepted'] = []
   const unchanged: NonNullable<IdentityImportReceipt['unchanged']> = []
   const held: IdentityImportReceipt['held'] = []
-  const pendingAcceptances: Array<{ record: Program; reviewer: string }> = []
+  const pendingAcceptances: Array<{ record: Program; reviewer: string; verifiedName: VerifiedProgramName; verifiedNameAlias?: ReviewedProgramAliasAudit }> = []
+  const reviewedAliases = await loadReviewedProgramAliases(options.reviewedProgramAliases ?? [], batch.proposals, options.readArtifact)
   const schools = new Map(scope.schools.map(school => [school.universityId, school]))
   for (const proposal of batch.proposals) {
     try {
@@ -223,14 +228,17 @@ export async function importIdentityCandidates(options: {
       if (proposal.scope.year !== null || proposal.scope.intake !== null) throw new Error('identity_must_not_claim_a_cycle')
       if (new Date(proposal.source.checkedAt) > acceptedAt || new Date(proposal.review?.reviewedAt ?? '') > acceptedAt) throw new Error('future_evidence_or_review')
       await verifyProposalEvidence(proposal, fields, school, options.readArtifact)
+      const reviewedAlias = await resolveReviewedProgramAlias(reviewedAliases.find(alias => alias.proof.proposalId === proposal.id), proposal, fields, bundle.programs, options.acceptedAt, options.readArtifact)
       const key = canonicalProgramIdentityKey(school.universityId, fields)
       const aliases = nameAliases(school.universityId, fields)
+      if (reviewedAlias && bindings.entries.some(binding => binding.recordId === reviewedAlias.record.id
+        && binding.canonicalKey.includes('|code:'))) throw new Error('reviewed_alias_existing_code_binding_requires_review')
       const bound = bindings.entries.find(binding => binding.canonicalKey === key)
-      const explicitId = proposal.recordId ?? bound?.recordId
+      const explicitId = proposal.recordId ?? bound?.recordId ?? reviewedAlias?.record.id
       let record = explicitId ? bundle.programs.find(program => program.id === explicitId) : undefined
       if (explicitId && !record) throw new Error('mapped_record_missing')
       if (record && (record.universityId !== school.universityId || record.degreeLevel !== fields.degreeLevel)) throw new Error('mapped_identity_school_or_degree_conflict')
-      if (record && !Object.values(record.name).some(name => name && Object.values(fields.name)
+      if (record && !reviewedAlias && !Object.values(record.name).some(name => name && Object.values(fields.name)
         .some(candidateName => normalizeName(candidateName) === normalizeName(name)))) throw new Error('mapped_identity_name_conflict')
       if (!record) {
         const matches = bundle.programs.filter(program => program.universityId === school.universityId
@@ -242,12 +250,14 @@ export async function importIdentityCandidates(options: {
           && binding.canonicalKey.includes('|code:') && binding.canonicalKey !== key)) throw new Error('official_code_conflicts_with_existing_binding')
       }
       if (record?.status === 'archived' || record?.status === 'draft') throw new Error('draft_or_archived_identity_requires_separate_promotion')
+      if (reviewedAlias && record?.id !== reviewedAlias.record.id) throw new Error('reviewed_alias_mapped_identity_conflict')
+      if (record && !reviewedAlias && !verifiedNameMatchesRaw(fields.name, record.name)) throw new Error('verified_name_locale_value_conflict')
       if (record && fields.officialProgramCode && bindings.entries.some(binding => binding.recordId === record?.id
         && binding.canonicalKey.includes('|code:') && binding.canonicalKey !== key)) throw new Error('official_code_conflicts_with_existing_binding')
       const action = record ? 'identity_accepted' as const : 'created' as const
       if (!record && fields.programUrl !== proposal.source.url) throw new Error('new_identity_program_url_requires_matching_source')
       if (bound && record && bound.recordId !== record.id) throw new Error('canonical_key_already_bound_to_another_record')
-      if (record && hasAcceptedIdentityWithOfficialUrl(bundle, acceptances, 'program', record, proposal.source.url, options.acceptedAt)) {
+      if (record && hasAcceptedIdentityWithOfficialUrl(bundle, acceptances, 'program', record, proposal.source.url, options.acceptedAt, fields.name, reviewedAlias?.audit)) {
         unchanged.push({ proposalId: proposal.id, recordId: record.id, reason: 'identity_and_official_source_unchanged' })
         continue
       }
@@ -276,8 +286,8 @@ export async function importIdentityCandidates(options: {
       }
       if (!bound) bindings.entries.push({ canonicalKey: key, recordId: record.id, aliases })
       else bound.aliases = [...new Set([...bound.aliases, ...aliases])].sort()
-      accepted.push({ proposalId: proposal.id, recordId: record.id, canonicalKey: key, action })
-      pendingAcceptances.push({ record, reviewer: proposal.review!.reviewerId })
+      accepted.push({ proposalId: proposal.id, recordId: record.id, canonicalKey: key, action, verifiedName: { ...fields.name }, ...(reviewedAlias ? { verifiedNameAlias: reviewedAlias.audit } : {}) })
+      pendingAcceptances.push({ record, reviewer: proposal.review!.reviewerId, verifiedName: { ...fields.name }, ...(reviewedAlias ? { verifiedNameAlias: reviewedAlias.audit } : {}) })
     } catch (error) {
       held.push({ proposalId: proposal.id, reason: error instanceof Error ? error.message : String(error) })
     }
@@ -289,11 +299,13 @@ export async function importIdentityCandidates(options: {
     inputCatalogSha256: inputHash, outputCatalogSha256: await catalogSha256(validated), acceptedAt: options.acceptedAt, accepted, unchanged, held,
   }
   const receipt = { ...receiptContent, sha256: sha256(canonicalJson(receiptContent)) }
-  for (const { record, reviewer } of pendingAcceptances) {
+  for (const { record, reviewer, verifiedName, verifiedNameAlias } of pendingAcceptances) {
     const acceptance = {
       entityType: 'program' as const, recordId: record.id, identitySha256: identityFingerprint('program', record),
       sourceIds: record.sourceIds, acceptedAt: options.acceptedAt, reviewer,
       receiptPath: options.receiptPath, receiptSha256: receipt.sha256,
+      verifiedName,
+      ...(verifiedNameAlias ? { verifiedNameAlias } : {}),
     }
     const old = acceptances.entries.findIndex(entry => entry.entityType === 'program' && entry.recordId === record.id)
     if (old < 0) acceptances.entries.push(acceptance)
@@ -332,6 +344,7 @@ async function main(): Promise<void> {
     ...(args.includes('--acceptances') ? { acceptances: read(argument('--acceptances')) as IdentityAcceptanceLedger } : {}),
     ...(args.includes('--bindings') ? { bindings: read(argument('--bindings')) as IdentityBindings } : {}),
     ...(args.includes('--receipts') ? { appliedReceipts: read(argument('--receipts')) as IdentityImportReceipt[] } : {}),
+    ...(args.includes('--reviewed-program-aliases') ? { reviewedProgramAliases: read(argument('--reviewed-program-aliases')) as ReviewedProgramAliasRef[] } : {}),
   })
   mkdirSync(output, { recursive: true })
   const files: Record<string, unknown> = { 'candidate-bundle.json': result.bundle,

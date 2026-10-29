@@ -58,7 +58,8 @@ export async function getCatalogApiService(): Promise<CatalogApiService> {
     operationalRelease(activeRepository),
   ])
   const today = getTodayDate()
-  const publicBundle = selectCatalogApiData(rawBundle, today)
+  const identities = activeRepository.mode === 'json' ? readIdentityAcceptances(undefined, { strictProjection: true }) : []
+  const publicBundle = selectCatalogApiData(rawBundle, today, identities)
 
   const isJson = activeRepository.mode === 'json'
   const rawCounts = isJson ? getCatalogRecordCounts(rawBundle) : release.rawCounts
@@ -78,8 +79,8 @@ export async function getCatalogDirectoryService(): Promise<CatalogApiService> {
   const activeRepository = getRepository()
   const [rawBundle, release] = await Promise.all([activeRepository.getBundle(), operationalRelease(activeRepository)])
   const today = getTodayDate()
-  const current = selectCatalogApiData(rawBundle, today)
-  const identities = activeRepository.mode === 'json' ? readIdentityAcceptances() : []
+  const identities = activeRepository.mode === 'json' ? readIdentityAcceptances(undefined, { strictProjection: true }) : []
+  const current = selectCatalogApiData(rawBundle, today, identities)
   const fields = activeRepository.mode === 'json' ? readFieldVerifications() : []
   const directory = selectDiscoveryData(rawBundle, today, identities, fields)
   const revision = directoryRevision(rawBundle, today, identities, fields)
@@ -100,10 +101,10 @@ export async function getCurrentCatalogRelease(): Promise<ApiEnvelope<ReleaseInf
   if (activeRepository.mode === 'json') {
     const evaluatedForDate = getTodayDate()
     const rawBundle = await activeRepository.getBundle()
-    const publicBundle = selectCatalogApiData(rawBundle, evaluatedForDate)
+    const identities = readIdentityAcceptances(undefined, { strictProjection: true }), fields = readFieldVerifications()
+    const publicBundle = selectCatalogApiData(rawBundle, evaluatedForDate, identities)
     const rawCounts = getCatalogRecordCounts(rawBundle)
     const publicCounts = getCatalogRecordCounts(publicBundle)
-    const identities = readIdentityAcceptances(), fields = readFieldVerifications()
     const directory = selectDiscoveryData(rawBundle, evaluatedForDate, identities, fields)
     release = {
       ...release,
