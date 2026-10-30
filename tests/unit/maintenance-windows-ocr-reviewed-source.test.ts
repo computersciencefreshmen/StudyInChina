@@ -132,15 +132,15 @@ describe('explicit reviewed Windows OCR source contract', () => {
     const f = await fixture(); const result = await f.run(true, false)
     expect(result.receipt.accepted).toHaveLength(0); expect(result.receipt.held[0].reason).toBe('windows_ocr_root_code_authority_not_registered')
   })
-  it('formal import reads the code artifact and refuses a missing or modified code file', async () => {
-    for (const attack of ['missing', 'modified']) { const f = await fixture()
+  it.each(['missing', 'modified'])('formal import refuses a %s code artifact', async (attack) => {
+      const f = await fixture()
       if (attack === 'missing') f.artifacts.delete(f.codeRef().objectKey); else f.artifacts.set(f.codeRef().objectKey, Buffer.from('{}'))
       const result = await f.run(); expect(result.receipt.accepted).toHaveLength(0)
       expect(result.receipt.held[0].reason).toBe(attack === 'missing' ? 'missing_test_artifact' : 'windows_ocr_artifact_checksum_or_length_changed')
-    }
   })
-  it('formal import rejects fake, cross-content or malformed code approvals even after the synthetic span authority rehashes them', async () => {
-    for (const attack of ['pending', 'wrong-reviewer', 'cross-content', 'missing-pins', 'duplicate-pins']) { const f = await fixture()
+  it.each(['pending', 'wrong-reviewer', 'cross-content', 'missing-pins', 'duplicate-pins'])(
+    'formal import rejects %s code approval after the synthetic span authority rehashes it', async (attack) => {
+      const f = await fixture()
       f.replaceTestCodeManifest(code => {
         if (attack === 'pending') code.decision = 'pending'
         if (attack === 'wrong-reviewer') code.reviewerId = 'another-agent'
@@ -150,10 +150,10 @@ describe('explicit reviewed Windows OCR source contract', () => {
       })
       const result = await f.run(); expect(result.receipt.accepted).toHaveLength(0); expect(result.receipt.held).toHaveLength(1)
       if (attack === 'cross-content') expect(result.receipt.held[0].reason).toBe('windows_ocr_root_code_approval_content_mismatch')
-    }
   })
-  it('formal import rejects dishonest method or changed deterministic proof bytes/proposal/snapshot bindings', async () => {
-    for (const attack of ['human-method', 'checksum', 'proposal-sha', 'snapshot-sha']) { const f = await fixture()
+  it.each(['human-method', 'checksum', 'proposal-sha', 'snapshot-sha'])(
+    'formal import rejects deterministic proof attack: %s', async (attack) => {
+      const f = await fixture()
       const result = await f.run(true, true, proposal => {
         if (attack === 'human-method') { proposal.review!.method = 'human'; return }
         const key = proposal.review!.artifactKey!
@@ -166,7 +166,6 @@ describe('explicit reviewed Windows OCR source contract', () => {
       expect(result.receipt.accepted).toHaveLength(0); expect(result.receipt.held).toHaveLength(1)
       expect(result.receipt.held[0].reason).toContain(attack === 'human-method' ? 'ocr_private_review_method_or_reviewer_mismatch'
         : attack === 'checksum' ? 'ocr_private_review_artifact_checksum_mismatch' : attack === 'proposal-sha' ? 'ocr_private_review_proposal_sha_mismatch' : 'ocr_private_review_snapshot_sha_mismatch')
-    }
   })
   it('verifies only the four synthetic test-approved literals at their physical pages and imports only ZH identity', async () => {
     const f = await fixture(), text = await f.verify(); expect(text.split('\f')).toHaveLength(10)
