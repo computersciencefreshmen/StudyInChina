@@ -201,6 +201,7 @@ export async function importIdentityCandidates(options: {
   const inputHash = await catalogSha256(original)
   const acceptances = identityAcceptanceLedgerSchema.parse(options.acceptances ?? { schemaVersion: 1, entries: [] })
   const bindings = normalizeBindings(options.bindings ?? { schemaVersion: 1, entries: [] })
+  const reviewedAliasContext = { inputCatalogSha256: inputHash, programs: structuredClone(original.programs), bindings: structuredClone(bindings) }
   const prior = options.appliedReceipts?.find(receipt => receipt.batchId === batch.batchId)
   if (prior) {
     const { sha256: priorSha, ...content } = prior
@@ -230,7 +231,7 @@ export async function importIdentityCandidates(options: {
       if (proposal.scope.year !== null || proposal.scope.intake !== null) throw new Error('identity_must_not_claim_a_cycle')
       if (new Date(proposal.source.checkedAt) > acceptedAt || new Date(proposal.review?.reviewedAt ?? '') > acceptedAt) throw new Error('future_evidence_or_review')
       await verifyProposalEvidence(proposal, fields, school, options.readArtifact)
-      const reviewedAlias = await resolveReviewedProgramAlias(reviewedAliases.find(alias => alias.proof.proposalId === proposal.id), proposal, fields, bundle.programs, options.acceptedAt, options.readArtifact)
+      const reviewedAlias = await resolveReviewedProgramAlias(reviewedAliases.find(alias => alias.proof.proposalId === proposal.id), proposal, fields, bundle.programs, options.acceptedAt, options.readArtifact, reviewedAliasContext)
       const key = canonicalProgramIdentityKey(school.universityId, fields)
       const aliases = nameAliases(school.universityId, fields)
       if (reviewedAlias && bindings.entries.some(binding => binding.recordId === reviewedAlias.record.id
