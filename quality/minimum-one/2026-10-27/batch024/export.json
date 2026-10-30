@@ -1,0 +1,189 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch024-db2e6770",
+  "inputCatalogSha256": "1dae94d428a93a3d524336ddbbcefb6614ed46cd6ceaf1f5a60305e63432f8fa",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T03:54:10.491Z",
+  "proposals": [
+    {
+      "id": "official-literal-bf417d440e4e3c59a313494eeb3d4ba1ebe8d35a7fd3942b",
+      "universityId": "uni-southern-university-of-science-and-technology",
+      "entityType": "program",
+      "recordId": "prog-gap-sparse-depth-0808-sustech-chemistry-bachelor",
+      "operation": "patch",
+      "fields": {
+        "name": {
+          "en": "Chemistry"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://science-en.sustech.edu.cn/study/programs.html",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9",
+          "url": "https://science-en.sustech.edu.cn/study/programs.html",
+          "snapshotSha256": "2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83",
+          "objectKey": "maintenance/snapshots/415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9/2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83.bin",
+          "locator": "text:offset:1612:1666",
+          "quote": "Program of Chemistry for International Students (2019)"
+        }
+      },
+      "source": {
+        "url": "https://science-en.sustech.edu.cn/study/programs.html",
+        "snapshotSha256": "2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83",
+        "objectKey": "maintenance/snapshots/415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9/2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83.bin",
+        "locator": "text:offset:1612:1666",
+        "quote": "Program of Chemistry for International Students (2019)",
+        "id": "415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9",
+        "checkedAt": "2026-10-30T03:44:09.122Z",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9",
+          "url": "https://science-en.sustech.edu.cn/study/programs.html",
+          "snapshotSha256": "2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83",
+          "objectKey": "maintenance/snapshots/415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9/2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83.bin",
+          "locator": "text:offset:1612:1666",
+          "quote": "Program of Chemistry for International Students (2019)",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9",
+          "url": "https://science-en.sustech.edu.cn/study/programs.html",
+          "snapshotSha256": "2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83",
+          "objectKey": "maintenance/snapshots/415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9/2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83.bin",
+          "locator": "text:offset:1199:1247",
+          "quote": "Programs Undergraduate Department of Mathematics",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9",
+          "url": "https://science-en.sustech.edu.cn/study/programs.html",
+          "snapshotSha256": "2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83",
+          "objectKey": "maintenance/snapshots/415477ef89f4257471e89a5c682c517029715841a2b6507a393f25a6aee1e6c9/2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83.bin",
+          "locator": "text:offset:1199:1247",
+          "quote": "Programs Undergraduate Department of Mathematics",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "identity_only_no_application_fact_renewal",
+        "unreviewed_existing_locales_not_approved",
+        "all_paid_stops_unknowns_remain_immutable",
+        "root_registration_and_formal_import_still_required"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:literal-official-program-identity-with-codes-v2:independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T03:53:54.965Z",
+        "candidateSha256": "039a1e81e648f6d76367ef99406222f8166af8cd3220e310bf2cb1f0266303f6",
+        "snapshotSha256": "2398a7dc27e6c74dc47290b4e1e3a6faad2500237d856a260d5c8983c23a1b83",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/rules/official-literal-bf417d440e4e3c59a313494eeb3d4ba1ebe8d35a7fd3942b/0fa5cb0acb635eb49c755f14a9324941acc608febb8f29c2ebabe7a4fe05cc9d.json",
+        "reviewArtifactSha256": "0fa5cb0acb635eb49c755f14a9324941acc608febb8f29c2ebabe7a4fe05cc9d"
+      }
+    },
+    {
+      "id": "official-literal-376d291e2120073227ebf8e6d361cd3845ee15bc6f5352ef",
+      "universityId": "uni-wuhan-university-of-science-and-technology",
+      "entityType": "program",
+      "recordId": "prog-gap-sparse-depth-0808-wust-international-business-administration-bachelor",
+      "operation": "patch",
+      "fields": {
+        "name": {
+          "en": "international business administration"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://en.wust.edu.cn/About1/Overview.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795",
+          "url": "https://en.wust.edu.cn/About1/Overview.htm",
+          "snapshotSha256": "444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2",
+          "objectKey": "maintenance/snapshots/6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795/444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2.bin",
+          "locator": "text:offset:15321:15845",
+          "quote": "As well, WUST is a destination of almost 500 international students from various countries for pursuit of degree studies from undergraduate programs in fields such as clinical medicine, civil engineering, and international business administration to master’s and doctoral degree programs in first-level disciplines such as materials science and engineering, control science and engineering, mechanical engineering, chemical engineering and technology, safety science and engineering, mining engineering, and systems science."
+        }
+      },
+      "source": {
+        "url": "https://en.wust.edu.cn/About1/Overview.htm",
+        "snapshotSha256": "444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2",
+        "objectKey": "maintenance/snapshots/6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795/444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2.bin",
+        "locator": "text:offset:15321:15845",
+        "quote": "As well, WUST is a destination of almost 500 international students from various countries for pursuit of degree studies from undergraduate programs in fields such as clinical medicine, civil engineering, and international business administration to master’s and doctoral degree programs in first-level disciplines such as materials science and engineering, control science and engineering, mechanical engineering, chemical engineering and technology, safety science and engineering, mining engineering, and systems science.",
+        "id": "6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795",
+        "checkedAt": "2026-10-30T03:36:01.388Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795",
+          "url": "https://en.wust.edu.cn/About1/Overview.htm",
+          "snapshotSha256": "444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2",
+          "objectKey": "maintenance/snapshots/6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795/444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2.bin",
+          "locator": "text:offset:15321:15845",
+          "quote": "As well, WUST is a destination of almost 500 international students from various countries for pursuit of degree studies from undergraduate programs in fields such as clinical medicine, civil engineering, and international business administration to master’s and doctoral degree programs in first-level disciplines such as materials science and engineering, control science and engineering, mechanical engineering, chemical engineering and technology, safety science and engineering, mining engineering, and systems science.",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795",
+          "url": "https://en.wust.edu.cn/About1/Overview.htm",
+          "snapshotSha256": "444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2",
+          "objectKey": "maintenance/snapshots/6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795/444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2.bin",
+          "locator": "text:offset:15321:15845",
+          "quote": "As well, WUST is a destination of almost 500 international students from various countries for pursuit of degree studies from undergraduate programs in fields such as clinical medicine, civil engineering, and international business administration to master’s and doctoral degree programs in first-level disciplines such as materials science and engineering, control science and engineering, mechanical engineering, chemical engineering and technology, safety science and engineering, mining engineering, and systems science.",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795",
+          "url": "https://en.wust.edu.cn/About1/Overview.htm",
+          "snapshotSha256": "444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2",
+          "objectKey": "maintenance/snapshots/6e7d86a5787a9bd84447b169ee199b429339fcf52a74a3d9e4ae23cf05eaa795/444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2.bin",
+          "locator": "text:offset:15321:15845",
+          "quote": "As well, WUST is a destination of almost 500 international students from various countries for pursuit of degree studies from undergraduate programs in fields such as clinical medicine, civil engineering, and international business administration to master’s and doctoral degree programs in first-level disciplines such as materials science and engineering, control science and engineering, mechanical engineering, chemical engineering and technology, safety science and engineering, mining engineering, and systems science.",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "identity_only_no_application_fact_renewal",
+        "unreviewed_existing_locales_not_approved",
+        "all_paid_stops_unknowns_remain_immutable",
+        "root_registration_and_formal_import_still_required"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:literal-official-program-identity-with-codes-v2:independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T03:53:54.965Z",
+        "candidateSha256": "1a4ce2e467964df8af288b484247242755b7583bd7f8fb2785cfdebb240dbe18",
+        "snapshotSha256": "444162ddb91609222aa7b62e2451f3204114c7a1b0714d1e9d6d7416992937d2",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/rules/official-literal-376d291e2120073227ebf8e6d361cd3845ee15bc6f5352ef/2b98678034d055a8d10fce36f8e301c2b55a45a82bbd247a706872b644ded120.json",
+        "reviewArtifactSha256": "2b98678034d055a8d10fce36f8e301c2b55a45a82bbd247a706872b644ded120"
+      }
+    }
+  ],
+  "sha256": "2dd6d3c138633fa8d2ad37b7c65002d68fd96ae3358afa4d9c646f4086f45e21"
+}
