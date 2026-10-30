@@ -1,0 +1,87 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch021-00817d5f",
+  "inputCatalogSha256": "94e02e239c0a3066f71e23e54de6383aa2c4c81e642115ee36dff4b1e61db8b0",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T03:27:14.434Z",
+  "proposals": [
+    {
+      "id": "maintenance-97e48c451cbc90274197fccaa3ac1efa63ba982c19b865f6977fc83736f99569",
+      "universityId": "uni-shanghai-university-of-finance-and-economics",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/871818c5db6dbc0ee9625ab59d7432858284d163ad837c9c6dec5bd4c6e60fe1/74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c.bin",
+          "quote": "2026留学生本科生招生专业",
+          "snapshotSha256": "74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c",
+          "sourceId": "871818c5db6dbc0ee9625ab59d7432858284d163ad837c9c6dec5bd4c6e60fe1",
+          "url": "https://intlstu.sufe.edu.cn/ch/d4/75/c12423a250997/page.htm"
+        },
+        "name": {
+          "zh": "会计学"
+        },
+        "programType": "degree",
+        "programUrl": "https://intlstu.sufe.edu.cn/ch/d4/75/c12423a250997/page.htm"
+      },
+      "source": {
+        "url": "https://intlstu.sufe.edu.cn/ch/d4/75/c12423a250997/page.htm",
+        "snapshotSha256": "74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c",
+        "objectKey": "maintenance/snapshots/871818c5db6dbc0ee9625ab59d7432858284d163ad837c9c6dec5bd4c6e60fe1/74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c.bin",
+        "locator": "text:document",
+        "quote": "会计学 招生人数:2人 学制:4年 奖学金:上海市政府奖学金,上海财经大学本科新生奖学金 项目介绍",
+        "id": "871818c5db6dbc0ee9625ab59d7432858284d163ad837c9c6dec5bd4c6e60fe1",
+        "checkedAt": "2026-10-30T03:22:42.593Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "871818c5db6dbc0ee9625ab59d7432858284d163ad837c9c6dec5bd4c6e60fe1",
+          "url": "https://intlstu.sufe.edu.cn/ch/d4/75/c12423a250997/page.htm",
+          "snapshotSha256": "74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c",
+          "objectKey": "maintenance/snapshots/871818c5db6dbc0ee9625ab59d7432858284d163ad837c9c6dec5bd4c6e60fe1/74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c.bin",
+          "locator": "text:document",
+          "quote": "会计学",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "871818c5db6dbc0ee9625ab59d7432858284d163ad837c9c6dec5bd4c6e60fe1",
+          "url": "https://intlstu.sufe.edu.cn/ch/d4/75/c12423a250997/page.htm",
+          "snapshotSha256": "74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c",
+          "objectKey": "maintenance/snapshots/871818c5db6dbc0ee9625ab59d7432858284d163ad837c9c6dec5bd4c6e60fe1/74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c.bin",
+          "locator": "text:document",
+          "quote": "2026留学生本科生招生专业",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "f26d87ea-b188-48a5-a379-2f4a79f36bb1",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:327d8ecd-f3ae-497a-82c8-9dfcf3aaa1b7",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-30T03:23:52.367Z",
+        "candidateSha256": "4b2f948cbaccfe1d7d15f8b2361d64bd08f55f582c29c7fe97bf3e18c4bcc4df",
+        "snapshotSha256": "74f5a94a6a3303deef1a5a48b64719f65994a83c4143e3033fbe7efe5a497b1c",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "327d8ecd-f3ae-497a-82c8-9dfcf3aaa1b7",
+        "artifactKey": "maintenance/reviews/maintenance-97e48c451cbc90274197fccaa3ac1efa63ba982c19b865f6977fc83736f99569/e4dae0a5db598d33e20d3c677d3585659379f99e0f159ac4b192858096370c28.json",
+        "reviewArtifactSha256": "e4dae0a5db598d33e20d3c677d3585659379f99e0f159ac4b192858096370c28"
+      }
+    }
+  ],
+  "sha256": "ad09eb2c479de1880415333113a62c1b8f78b2b43b7dba7e2bd3d258bbe2369e"
+}
