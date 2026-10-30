@@ -1,0 +1,222 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch045-b290e699",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "480e9f32f9392c2eb7b2e2820b945d167dcacfe98b20a14446c53937a820526a",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-whu-ncut-two-001\\root-approved-rule-manifest.json",
+    "sha256": "bbe325c499bd0c4888b9fe0d70e87d4666d98aee0825a60cf7a322470f4d65c8"
+  },
+  "formalImporterSha256": "58457556a64705231a6e34a78a99969b197c8e5e1e12682882127b713238d4ca",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-9f84c641602b711d0ee54de18a7a23613047b3b21533aec7",
+      "universityId": "uni-wuhan-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "9e55da8374aa3d7cfaf1b4bcac7d60885f4f51acd157a36e3ef2f349686a30f9",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-whu-tcsol-one-001\\independent-review.json",
+        "sha256": "3768e87359e66ed5740a053211dfc229d97baa4ecb9e2a2246c366c2da66e0cb"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-9f84c641602b711d0ee54de18a7a23613047b3b21533aec7/6ada5f7c30e6a58fed58f4fc6a755be61fabd757c8d47677adaf11e6ca6ddbf8.json",
+      "ruleArtifactSha256": "6ada5f7c30e6a58fed58f4fc6a755be61fabd757c8d47677adaf11e6ca6ddbf8",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Teaching Chinese to Speakers of Other Languages"
+        },
+        "catalogSha256": "cee4939fc19f6692a2b03daa21b22226917cad3a3d64f1b78d2bd8f7d56540ca",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "4ce50f7dfdf7fd209393fc4dcef53f2ba45c8e70a36ddfa4658514b0e7a02bd8"
+          },
+          "aliasesConsidered": [
+            "Teaching Chinese to Speakers of Other Languages",
+            "汉语国际教育",
+            "国际中文教育",
+            "Teaching Chinese as a Foreign Language",
+            "International Chinese Language Education"
+          ],
+          "catalogSha256": "cee4939fc19f6692a2b03daa21b22226917cad3a3d64f1b78d2bd8f7d56540ca",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "4ce50f7dfdf7fd209393fc4dcef53f2ba45c8e70a36ddfa4658514b0e7a02bd8"
+          },
+          "notes": [
+            "Root independently read the complete official main English-site Admissions page. Its SIE paragraph explicitly offers a master's program in Teaching Chinese to Speakers of Other Languages for international students. Programme subject, master qualification and international audience are bound in the same sentence. The full School of International Education of Wuhan University identifies its owner in the same original source.",
+            "All three current raw Wuhan identities, related bindings and historical targets were checked: MBBS and Software Engineering are bachelors, while Public Health Global Health is a different master subject. No TCSOL master exists, so one new identity is appropriate. Broad name/translation aliases were checked without normalizing or approving old labels. The other undergraduate Chinese Language, International Law/WTO and English/French domestic overseas-training entries are not approved; international scope is not borrowed across the whole list.",
+            "The body has no programme-code column or labelled programme code. Historical statistics3500students/200majors/30schools and years2014/2016are institutional context, not codes or source intake years. Copyright2024does not establish an admission year; sourceDeclaredYear remains null. No academic-year identity is created.",
+            "Only the literal source-English master identity is approved. No invented translation, fee, date, duration, HSK, material, scholarship, award detail, current opportunity or complete-school catalogue claim is approved. Old admission-host403responses stay held; this independently accessible official main-site source was captured normally with TLS and robots checks and grants no paid model replay. No human or MiniMax approval is claimed."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-whu-tcsol-one-001\\actual-peer-and-history-audit.json",
+            "sha256": "591a4638ff48fb36122d3c2559e51dd41cd15163ce692e01e418c7f5d1728030"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "f0d5c7b41bb9c45e126c4b750bc7f7e38f22face4378a67cb5d25686989470a4",
+              "names": {
+                "en": "Bachelor of Medicine and Bachelor of Surgery (MBBS)",
+                "ru": "Клиническая медицина (MBBS)",
+                "zh": "临床医学（MBBS）"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-wuhan-university-bachelor-of-medicine-and-bachelor-of-surgery-mbbs-bache",
+              "url": "https://admission.whu.edu.cn/info/1121/5802.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "431c99df8e775e2b04d4c4b9d917cdb87a7dfd4e5bacfd5224164af49b2001eb",
+              "names": {
+                "en": "Master of Public Health (Global Health Track)",
+                "ru": "Магистратура общественного здравоохранения (глобальное здравоохранение)",
+                "zh": "公共卫生硕士（全球健康方向）"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-wuhan-university-master-of-public-health-global-health-track-master",
+              "url": "https://admission.whu.edu.cn/info/1131/5892.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "b72f165c63c83e7f33e692f2ff12d06fd884816f63cc05d4b014805750530220",
+              "names": {
+                "en": "Bachelor of Software Engineering",
+                "ru": "Бакалавриат по программной инженерии",
+                "zh": "软件工程（英文授课本科）"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-wuhan-university-bachelor-of-software-engineering-bachelor",
+              "url": "https://admission.whu.edu.cn/info/1121/5802.htm"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-ab1bf788f21058373ab05871f02a214af34803048addcc9e",
+      "universityId": "uni-north-china-university-of-technology",
+      "method": "deterministic",
+      "originalProposalContentSha256": "1278798231eb8204aff72d1a5e415b833a127749e421c21df0842b335edac373",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-ncut-international-trade-one-001\\independent-review.json",
+        "sha256": "d152b13d7560ee252ce75fc2dc3799ca6182568e41c0c97653d6b20e24a3613f"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-ab1bf788f21058373ab05871f02a214af34803048addcc9e/4e0d53118d165dd58843c32145a15820ee5bfa1074651c70c391ab0ce69860ee.json",
+      "ruleArtifactSha256": "4e0d53118d165dd58843c32145a15820ee5bfa1074651c70c391ab0ce69860ee",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "国际经济与贸易"
+        },
+        "catalogSha256": "cee4939fc19f6692a2b03daa21b22226917cad3a3d64f1b78d2bd8f7d56540ca",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "4ce50f7dfdf7fd209393fc4dcef53f2ba45c8e70a36ddfa4658514b0e7a02bd8"
+          },
+          "aliasesConsidered": [
+            "国际经济与贸易",
+            "International Economics and Trade",
+            "International Economy and Trade",
+            "International Trade"
+          ],
+          "catalogSha256": "cee4939fc19f6692a2b03daa21b22226917cad3a3d64f1b78d2bd8f7d56540ca",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "4ce50f7dfdf7fd209393fc4dcef53f2ba45c8e70a36ddfa4658514b0e7a02bd8"
+          },
+          "notes": [
+            "Root independently read the complete original official NCUT International College programme-specific article. Its title names 国际经济与贸易本科专业, its first body paragraph explicitly states that this programme recruits foreign students, and the same source names 北方工业大学国际学院. This is a concrete named international bachelor, not a domestic cooperation degree inferred from internationalization language.",
+            "All three current raw NCUT records, related bindings and historical targets were checked: Architecture, Electronic Information Engineering and Mechatronics Engineering are distinct bachelor subjects. None is International Economics and Trade. Prior/next article labels naming those old majors are not used as evidence to reaccept them. No old ID, name, URL or dynamic fact is modified, and no alias or year-based duplicate is created.",
+            "The source publication date is2017-01-12, so directory source year is2017and does not assert a current intake. No official programme code is stated; phone numbers, costs, ages and durations are not programme codes. Its Economics-bachelor award paragraph corroborates the qualification category, but no added award-specific eligibility claim is approved.",
+            "Only the original Chinese concrete bachelor directory identity is approved. English-taught wording, four-year duration, recurringJune30date, fees, passport/guardian/English conditions, scholarship and housing content remain unapproved historical context. The earlier English Undergrad page404remains held while this different official source was normally captured under TLS/robots rules. No current opportunity, translation, full-school reconciliation, human or MiniMax review is claimed; all historical paid STOP/unknown scopes remain unchanged."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-ncut-international-trade-one-001\\actual-peer-and-history-audit.json",
+            "sha256": "bd7bceb2ed1d295c49f2476d7d500715e6c301f709172fc5a14efa57b4d81a4f"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "27b8ad03742f6c0a6549cb4b17c968874cec234ca57fd4079e6697be62666bc0",
+              "names": {
+                "en": "Architecture",
+                "ru": "Архитектура",
+                "zh": "建筑学"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-local-strong-ncut-b-architecture-en",
+              "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "f8ebcd7964a7c107d1fed929322f95e44696f5b95202611aba8983c56c5a5152",
+              "names": {
+                "en": "Electronic Information Engineering",
+                "ru": "Электронная информационная инженерия",
+                "zh": "电子信息工程"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-breadth-ncut-b-electronic-information-engineering-en",
+              "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "7d029b74465176919d8856fc090de5a2b5337ed3e3cda6d5c12f8585f1d671b6",
+              "names": {
+                "en": "Mechatronics Engineering",
+                "ru": "Мехатроника",
+                "zh": "机械电子工程"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-breadth-ncut-b-mechatronics-engineering-en",
+              "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}

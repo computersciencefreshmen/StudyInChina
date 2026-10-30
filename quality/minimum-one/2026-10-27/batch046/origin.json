@@ -1,0 +1,186 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch046-3837fd3f",
+  "ruleVersion": "literal-official-program-identity-with-ynu-format-v8",
+  "sourcePlanSha256": "cf102837d9e1a643f86518851da68129cab23a0ef41dbc7a70314dbbc4ecc27d",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-ynu-ai-formatted-code-one-002\\root-approved-rule-manifest.json",
+    "sha256": "bc8444713d529ca49d8a93b2046600a371615eef9ebe4c4b250e4346684ee4fa"
+  },
+  "formalImporterSha256": "58457556a64705231a6e34a78a99969b197c8e5e1e12682882127b713238d4ca",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-04907c8f64d467b54ef906f6dab4c23f691704c31595e89a",
+      "universityId": "uni-yunnan-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "2741de4568318df71ee36a464b3f197478e2d2234ba876b3760212b2ef404a1c",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-ynu-ai-formatted-code-one-002\\independent-review.json",
+        "sha256": "054a3f78343b34d1227675c077d479fb98d3933eb49729a7206f971e0e371732"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-04907c8f64d467b54ef906f6dab4c23f691704c31595e89a/694d4918f458345e1e069ae6d8ce724f951558ac64fd944ccc042c8defab6d4d.json",
+      "ruleArtifactSha256": "694d4918f458345e1e069ae6d8ce724f951558ac64fd944ccc042c8defab6d4d",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "人工智能"
+        },
+        "catalogSha256": "ca1f801b226d94b3b3797e30980ac791ce22c70eceeb46b378907772e702d943",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "a169a29a1c1d44266fd3355b951893d79a9d51723ac4cdb66ab45eeb0e1c0909"
+          },
+          "aliasesConsidered": [
+            "人工智能",
+            "Artificial Intelligence",
+            "Artificial Intelligence Bachelor"
+          ],
+          "catalogSha256": "ca1f801b226d94b3b3797e30980ac791ce22c70eceeb46b378907772e702d943",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "a169a29a1c1d44266fd3355b951893d79a9d51723ac4cdb66ab45eeb0e1c0909"
+          },
+          "notes": [
+            "Root independently read the entire complete official Yunnan Software/AI School programme article. It explicitly states that the Ministry-approved Artificial Intelligence bachelor began recruiting in2021and annually recruits more than10international students alongside domestic students. Its programme-specific degree paragraph confirms an engineering bachelor. This is a specific international bachelor offering, not a domestic major with global navigation inferred as scope.",
+            "All six existing raw Yunnan identities, current bindings and historical targets were checked. Finance and Software Engineering are different bachelors; AI is explicitly a separate approved major with its own080717Tcode. Ecology doctorate, Chinese Education master and the two nondegree language-labelled records are other categories. No AI bachelor or conflicting code binding exists; no old names, directions or annual intakes are merged or duplicated.",
+            "The original HTML paragraph has exactly(一)专业代码:080717Twhen its inline strong-element textContent is read; the canonical htmlToTextartifact inserts spaces between inline elements, yielding the literal0 80717 T. V8retains that actual extracted literal value in field evidence and independently checks the original DOM code. The unchanged canonical identity-key normalizer maps both representations to080717t. No whitespace is silently removed from the source artifact, no code is omitted and no raw/normalized text is fabricated or replaced.",
+            "The labelled official-programme code, complete single-programme description row and bachelor scope are tied by exact quote hashes and offsets. This exceptional formatting proof is restricted to the exact university, URL, original raw/text hashes, Chinese name, degree, code literal and DOM paragraph; other fragmented codes are not approved. Existing current bindings are pinned and checked before import. Source year2025comes from the article publication, not the2021first cohort or footer copyright.",
+            "Only one original-Chinese AI bachelor directory identity is approved. Smart-medical-care research focus stays under that programme; it is not another project. No English/Russian translation, duration, language policy, admissions date, quota, fee, scholarship, awarded-degree detail, current opportunity or full-school catalogue claim is approved. Historical STOP, unknown requests and paid reservations are unchanged; no human or MiniMax review is claimed."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-ynu-ai-formatted-code-one-002\\actual-peer-and-history-audit.json",
+            "sha256": "29bc7bc4cd96675af5db681f03cf37075ff3f0b0586d9f3e5f358fe506a19022"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "language",
+              "departmentCode": null,
+              "identitySha256": "b8a6f5da7d6bd81228a96f72897395d50d157d7f13c9cf0d871abd13125914b4",
+              "names": {
+                "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+                "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)",
+                "zh": "国际中文教师奖学金一学期研修项目（2027年春季）"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-ynu-iclt-one-semester-spring-2027",
+              "url": "https://english.ynu.edu.cn/ynuscholarships.html"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "language",
+              "departmentCode": null,
+              "identitySha256": "8d70c0ff0bfe3b97238479710256629b0c71cc02cd837dc5930417ec0f9686cb",
+              "names": {
+                "en": "Chinese Language Program 2026",
+                "ru": "Программа китайского языка 2026",
+                "zh": "2026汉语项目"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-clw-sw-ynu-chinese-language-2026",
+              "url": "https://english.ynu.edu.cn/nondegreeprograms.html"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "doctorate",
+              "departmentCode": null,
+              "identitySha256": "c959ac25dc54f6d6967b169d1cc62e779917cf7a0a40ea959fbbf281cc6aa70c",
+              "names": {
+                "en": "Ecology (Doctorate)",
+                "ru": "Экология (докторантура)",
+                "zh": "生态学（博士）"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-wave3-depth-ynu-ecology-doctorate",
+              "url": "https://english.ynu.edu.cn/ynugraduate.html"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "de71873cec9ac32b339c95331105fd8b8df3b362d434c343d34867a67de496e5",
+              "names": {
+                "en": "Finance (Bachelor)",
+                "ru": "Финансы (бакалавриат)",
+                "zh": "金融学（本科）"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-wave3-depth-ynu-finance-bachelor",
+              "url": "https://english.ynu.edu.cn/ynumajors.html"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "98defbb870c0e5cec1ef287c9022a2f152c3bc46aae278c669ba7e658054c861",
+              "names": {
+                "en": "International Chinese Language Education (Master)",
+                "ru": "Международное преподавание китайского языка (магистратура)",
+                "zh": "国际中文教育（硕士）"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-wave3-depth-ynu-international-chinese-education-master",
+              "url": "https://english.ynu.edu.cn/ynugraduate.html"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "fdcead5ead0f6a89db32e9fdae976612d053db6bac6a6ee7bc715b0477e132d6",
+              "names": {
+                "en": "Software Engineering (English-taught Bachelor)",
+                "ru": "Программная инженерия (бакалавриат на английском)",
+                "zh": "软件工程（英文授课本科）"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-wave3-depth-ynu-software-engineering-bachelor-english",
+              "url": "https://english.ynu.edu.cn/ynumajors.html"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "reviewedCodes": {
+          "fields": {
+            "officialProgramCode": "0 80717 T"
+          },
+          "identityBindingsSha256": "a169a29a1c1d44266fd3355b951893d79a9d51723ac4cdb66ab45eeb0e1c0909",
+          "mappings": {
+            "officialProgramCode": {
+              "codeGrain": "official_program",
+              "degreeScopeQuoteSha256": "7edc6dd414506be20a2b04349bb23515e815cf2c57ee047d119cfc8c5e1fe9f8",
+              "exactProgrammeRowBindingConfirmed": true,
+              "fieldPath": "officialProgramCode",
+              "formattingAudit": {
+                "canonicalIdentityCode": "080717t",
+                "literalExtractedCode": "0 80717 T",
+                "literalValuePreserved": true,
+                "noCanonicalTextRepair": true,
+                "originalDomCode": "080717T"
+              },
+              "labelQuoteSha256": "157570b045912c15cfd232d30529fa0d3daa447d9e78cef6e1ffac923edf66d8",
+              "rowQuoteSha256": "c979813d619f739df4c09b624d85a6e4336c6a113e04ae89844af589771583a7",
+              "sourceLabel": "专业代码",
+              "value": "0 80717 T"
+            }
+          }
+        },
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}

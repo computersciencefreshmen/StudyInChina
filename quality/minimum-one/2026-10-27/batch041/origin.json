@@ -1,0 +1,147 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch041-c4f0dc58",
+  "ruleVersion": "literal-official-program-identity-with-visiting-v5",
+  "sourcePlanSha256": "b5c2dd5dd4508d0fed8b2e1c58d301c17fd8f78222df9e35af7fa66b79f1df3b",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-dlmu-general-visiting-one-002\\root-approved-rule-manifest.json",
+    "sha256": "10803dbe04178c5502d8a5f851056d3d7ea42665386ee4401b9738a64320e0a5"
+  },
+  "formalImporterSha256": "58457556a64705231a6e34a78a99969b197c8e5e1e12682882127b713238d4ca",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-f54f9d36eeaa36e4d5b48663ddfbef949de7ffd9732fd57e",
+      "universityId": "uni-dalian-maritime-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "45ceddf788bb6ca4520095e49421722118fac9eb16d8f66ce98105f84093661d",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-dlmu-general-visiting-one-002\\independent-review.json",
+        "sha256": "658fbda7ef2c888b61651e1e79d5dce74e1a03891678f28f819502713137f0a5"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-f54f9d36eeaa36e4d5b48663ddfbef949de7ffd9732fd57e/1fa6629030aef81d4cc71ba475ce6df58bdbb1aa7a0efc42b056e6b6747b8917.json",
+      "ruleArtifactSha256": "1fa6629030aef81d4cc71ba475ce6df58bdbb1aa7a0efc42b056e6b6747b8917",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "普通进修项目"
+        },
+        "catalogSha256": "ede1a8fb703dcf5bd1560c3c186561d026a25dc2bf0e6bd42c8c40e9cfaccea9",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "b9c67f182657cb92a547bc62d5f090b89052f10c923df75576bf20dbcfdd9a5d"
+          },
+          "aliasesConsidered": [
+            "普通进修项目",
+            "普通专业进修项目",
+            "General Visiting Student Program",
+            "General Scholar Program"
+          ],
+          "catalogSha256": "ede1a8fb703dcf5bd1560c3c186561d026a25dc2bf0e6bd42c8c40e9cfaccea9",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "b9c67f182657cb92a547bc62d5f090b89052f10c923df75576bf20dbcfdd9a5d"
+          },
+          "notes": [
+            "Root independently read the complete official Dalian Maritime University professional-study page and its separately headed ordinary and advanced visiting entries. The selected ordinary programme explicitly admits foreign citizens already enrolled in undergraduate study and requires the Dalian Maritime University foreign-student application form. It is a concrete named visiting-study category, not an unspecified degree admission page.",
+            "All five current raw Dalian Maritime identities, related bindings and historical targets were checked. Existing Chinese Language Program and its semester-labelled neighbour are language study; College Preparatory Program is a foundation purpose; Marine Engineering and Nautical Science are bachelor majors. None is ordinary professional visiting study. No new language alias or annual intake identity is created, no old duplicate is merged, and old names, fees and facts remain unchanged.",
+            "The ordinary and advanced visiting categories differ in academic entry stage and study level. Only the ordinary entry is selected; the advanced entry remains unapproved. Undergraduate and master courses mentioned in ordinary entry conditions do not confer bachelor or master degree authority. The accepted category is degreeLevel other and programmeType visiting, with no awarded-degree claim, not an artificial new major or a research direction.",
+            "No official programme-code column or labelled code token appears in this source. Ages, passport history years, seasonal dates, duration, fees, study-plan lengths and form identifiers are not programme codes and remain unapproved dynamic context. The page is undated, so no intake year is inferred. One original-Chinese visiting identity only is approved; no translation, current opportunity, scholarship or whole-school catalogue reconciliation is inferred. Historical STOP, unknown requests and paid reservations remain unchanged, and no model or human review is claimed."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-dlmu-general-visiting-one-002\\actual-peer-and-history-audit.json",
+            "sha256": "035478c2b1e37c65da4b30c3997e6e6fc3877d6b06dcd9fb89202aa7cad4dc28"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "language",
+              "departmentCode": null,
+              "identitySha256": "a8ea1ecefbe359aa6f598fbab5b1dca32ec243eccda9904af44481cb0db9ea45",
+              "names": {
+                "en": "Chinese Language Program",
+                "ru": "Программа изучения китайского языка",
+                "zh": "汉语进修项目"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-dalian-maritime-university-chinese-language-program-language",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Admission_Brochure/Admission_Brochure.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "language",
+              "departmentCode": null,
+              "identitySha256": "d28801d24e6fdaf73e42d9400b44939f12791d1a4ab8eafd002743d7edcce88c",
+              "names": {
+                "en": "Chinese Language Program — One Semester",
+                "ru": "Программа китайского языка — один семестр",
+                "zh": "汉语培训项目（一学期）"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-prog-mew-ne-dlmu-chinese-language-semester",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "foundation",
+              "departmentCode": null,
+              "identitySha256": "c878cf7ff7cb38060dfe6d956f7972103dd08e600a5a419696cdcaf7326c2e17",
+              "names": {
+                "en": "College Preparatory Program",
+                "ru": "Подготовительная программа к бакалавриату",
+                "zh": "本科预科项目"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-breadth-dlmu-foundation-college-preparatory",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "ca8213326c8e6aae0af4da369c91f3af7f5dcd4ead124d2feb94638bcce546e6",
+              "names": {
+                "en": "Marine Engineering",
+                "ru": "Судовая энергетика",
+                "zh": "轮机工程"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-prog-mew-ne-dlmu-marine-engineering-bachelor",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "3c76443a0bb555d353c99bf454df40b4af5e82732e956d9121a06d5d9164f961",
+              "names": {
+                "en": "Nautical Science",
+                "ru": "Судовождение",
+                "zh": "航海技术"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-prog-mew-ne-dlmu-nautical-science-bachelor",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}
