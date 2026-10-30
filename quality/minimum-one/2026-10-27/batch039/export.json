@@ -1,0 +1,100 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch039-1a53c05f",
+  "inputCatalogSha256": "989bee826a8205184709b74660b8e9c2b911d3407049f56e175bb921f4d0b802",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T11:11:52.360Z",
+  "proposals": [
+    {
+      "id": "official-literal-b1090d7b7ce3985bdbad3a7314d4a317e77a3d8c12a51401",
+      "universityId": "uni-shanghai-ocean-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "en": "Short-term Chinese Program"
+        },
+        "degreeLevel": "language",
+        "programType": "language",
+        "programUrl": "https://www.shou.edu.cn/eng/6708/list.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777",
+          "url": "https://www.shou.edu.cn/eng/6708/list.htm",
+          "snapshotSha256": "40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f",
+          "objectKey": "maintenance/snapshots/8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777/40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f.bin",
+          "locator": "text:offset:3371:3430",
+          "quote": "Short-term Chinese Program 1. Recruiting Object: Foreigners"
+        }
+      },
+      "source": {
+        "url": "https://www.shou.edu.cn/eng/6708/list.htm",
+        "snapshotSha256": "40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f",
+        "objectKey": "maintenance/snapshots/8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777/40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f.bin",
+        "locator": "text:offset:3371:3430",
+        "quote": "Short-term Chinese Program 1. Recruiting Object: Foreigners",
+        "id": "8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777",
+        "checkedAt": "2026-10-30T11:06:51.664Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777",
+          "url": "https://www.shou.edu.cn/eng/6708/list.htm",
+          "snapshotSha256": "40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f",
+          "objectKey": "maintenance/snapshots/8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777/40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f.bin",
+          "locator": "text:offset:3371:3430",
+          "quote": "Short-term Chinese Program 1. Recruiting Object: Foreigners",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777",
+          "url": "https://www.shou.edu.cn/eng/6708/list.htm",
+          "snapshotSha256": "40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f",
+          "objectKey": "maintenance/snapshots/8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777/40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f.bin",
+          "locator": "text:offset:4378:4505",
+          "quote": "4. Curriculums of Chinese Language Programs Chinese Intensive Reading, Chinese Listening, Chinese Conversation, Survey of China",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777",
+          "url": "https://www.shou.edu.cn/eng/6708/list.htm",
+          "snapshotSha256": "40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f",
+          "objectKey": "maintenance/snapshots/8613a647471b8fa8e86ba51ae2a0cc9d490a22841c1f7f011cda32068ffd3777/40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f.bin",
+          "locator": "text:offset:4378:4505",
+          "quote": "4. Curriculums of Chinese Language Programs Chinese Intensive Reading, Chinese Listening, Chinese Conversation, Survey of China",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "identity_only_no_application_fact_renewal",
+        "unreviewed_existing_locales_not_approved",
+        "all_paid_stops_unknowns_remain_immutable",
+        "root_registration_and_formal_import_still_required"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:literal-official-program-identity-with-codes-v2:independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T11:10:50.899Z",
+        "candidateSha256": "ba90c7de32ad59b3c6575124edcfb1a4833d9ca41a2de5a24adfe0d5d2d96b42",
+        "snapshotSha256": "40e3b8d80b4559e9c016e5c3bad0682cf028499f75826b4868443d72d62f187f",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/rules/official-literal-b1090d7b7ce3985bdbad3a7314d4a317e77a3d8c12a51401/e721956b9e9fa2183f4fd768792b5e298bd72d3a7a333c663a28afb2ed4a6582.json",
+        "reviewArtifactSha256": "e721956b9e9fa2183f4fd768792b5e298bd72d3a7a333c663a28afb2ed4a6582"
+      }
+    }
+  ],
+  "sha256": "d862afefacc73b79d9f95ded375b9a30b8acfdca93c93e2504509451681677d9"
+}
