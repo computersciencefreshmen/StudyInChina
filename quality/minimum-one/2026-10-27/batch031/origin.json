@@ -1,0 +1,120 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch031-4e7522e9",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "ae86cb71b987f6a22113c0e7f519614a5972f3d18fecbf8cec6a052caf1c2845",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-ustb-one-001\\root-approved-rule-manifest.json",
+    "sha256": "9fcfe5abaf0fd32575fe935a1f1dca3c27df25f139d632561ae7f39d31f9a5fb"
+  },
+  "formalImporterSha256": "58457556a64705231a6e34a78a99969b197c8e5e1e12682882127b713238d4ca",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-49d3c7252eed2e6532fba80057eda5df76f03fb703a184b6",
+      "universityId": "uni-university-of-science-and-technology-beijing",
+      "method": "deterministic",
+      "originalProposalContentSha256": "05cf49b11c093e61336d525e3d3d187a9b99cadc45e3e30cf42604f90d1865a0",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-ustb-one-001\\independent-review.json",
+        "sha256": "8618e375149898e3c41b593b2db2ea597ffa208141460900679442b7301514ac"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-49d3c7252eed2e6532fba80057eda5df76f03fb703a184b6/15bcf47682a4c2f4f6a707d7650a0f1fa558e9cad6dffd5848fe29cd8689b2e2.json",
+      "ruleArtifactSha256": "15bcf47682a4c2f4f6a707d7650a0f1fa558e9cad6dffd5848fe29cd8689b2e2",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "“汉语言+人工智能”北科-北语联合学士学位项目"
+        },
+        "catalogSha256": "1264665345f7040cb8b1a047ea4682e498ce826ebc57f3128eb406ecfaa9948c",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "a91317864702c843d095efef86f826057e57f2be75b18a55932ee0f30a87c0ae"
+          },
+          "aliasesConsidered": [
+            "“汉语言+人工智能”北科-北语联合学士学位项目",
+            "汉语言+人工智能",
+            "Chinese Language + Artificial Intelligence Joint Training Program",
+            "Chinese Language and Artificial Intelligence",
+            "北科-北语联合学士学位项目"
+          ],
+          "catalogSha256": "1264665345f7040cb8b1a047ea4682e498ce826ebc57f3128eb406ecfaa9948c",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "a91317864702c843d095efef86f826057e57f2be75b18a55932ee0f30a87c0ae"
+          },
+          "notes": [
+            "Root independently read the complete 3698-character original Chinese programme article, including the full curriculum and eligibility context. The exact title is a joint bachelor degree programme in Chinese Language plus Artificial Intelligence; it is not a non-degree Chinese course or a standalone generic AI major. The article explicitly awards 工学学士 and sets non-Chinese passport-holder admission requirements for this same named programme.",
+            "USTB and BLCU are explicitly named joint providers, with the first study stage at BLCU and final stage at USTB. Only the currently empty USTB school gains this one identity; BLCU is already covered and receives no additional programme. The three current USTB bachelors Computer Science and Technology, Environmental Engineering and Materials Science and Engineering are distinct; no old metadata is stripped, merged or translated.",
+            "The new Chinese ISC official source was normally captured with public DNS pinning, verified TLS and its own robots rules. Earlier iscen.ustb.edu.cn plain-HTTP robots redirects remain held; they are not rewritten or used as proof. The new page is a separate official Chinese article, not a fabricated HTTPS version of an old redirect. The CAU source in the same capture failed TLS and remains held.",
+            "The document is published in May2024. Historical September2024 commencement, tuition at both campuses, four-year duration, HSK/passport/age rules, scholarships, study-stage timing, credits and all course names remain source context only. No current opportunity, teaching language, programme code, partner degree guarantee, extra locale or applicant condition is approved."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-ustb-one-001\\actual-peer-and-history-audit.json",
+            "sha256": "eb030e5b5f103c05ab03c93d383ac00377e6c186bc9156de8e3935adffdd8752"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "47a43adf4972744a8167954423b390e906a3ff37a297d7c733323c293c5ba295",
+              "names": {
+                "en": "Computer Science and Technology",
+                "ru": "Компьютерные науки и технологии",
+                "zh": "Computer Science and Technology"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-university-of-science-and-technology-beijing-computer-science-and-techno",
+              "url": "https://iscen.ustb.edu.cn/Admissions/7a574bf57214495aa87b81647650f3da.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "e5de2aad5f10b71cae22bce26f6f3da1e41aa57851141c2bb08f93920ac8dc55",
+              "names": {
+                "en": "Environmental Engineering",
+                "ru": "Экологическая инженерия",
+                "zh": "Environmental Engineering"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-university-of-science-and-technology-beijing-environmental-engineering-b",
+              "url": "https://iscen.ustb.edu.cn/Admissions/7a574bf57214495aa87b81647650f3da.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "fd03bf40b2dadef021b8514e254d280eeecc0ccbea90eaa300ecca4514423894",
+              "names": {
+                "en": "Materials Science and Engineering",
+                "ru": "Материаловедение и инженерия",
+                "zh": "Materials Science and Engineering"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-university-of-science-and-technology-beijing-materials-science-and-engin",
+              "url": "https://iscen.ustb.edu.cn/Admissions/7a574bf57214495aa87b81647650f3da.htm"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}
