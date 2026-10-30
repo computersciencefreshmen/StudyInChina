@@ -117,8 +117,9 @@ describe('administrator workbench transport and session', () => {
     fireEvent.change(screen.getByLabelText('管理员访问口令'), { target: { value: 'test-only-password' } })
     fireEvent.click(screen.getByRole('button', { name: /进入管理员工作台/ }))
     await screen.findByRole('heading', { name: '正在连接工作空间…' })
+    // The loading heading can commit before the transport effect creates SSE.
+    await waitFor(() => expect(FakeEventSource.instances).toHaveLength(2))
     expect(screen.queryByRole('heading', { name: '让每一条数据，更可信。' })).not.toBeInTheDocument()
-    expect(FakeEventSource.instances).toHaveLength(2)
     act(() => FakeEventSource.instances[1].snapshot(adminSnapshot()))
     expect(screen.getByRole('heading', { name: '让每一条数据，更可信。' })).toBeVisible()
   })
@@ -141,6 +142,8 @@ describe('administrator workbench transport and session', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Token 用量' }))
     expect(screen.getByRole('heading', { name: '用量总览' }).closest('article')?.querySelector('strong')).toHaveTextContent('15,000')
     expect(screen.queryByText('99,999')).not.toBeInTheDocument()
+    // Settle queued rendering work while leaving future transport timers pending.
+    await act(async () => { await vi.advanceTimersByTimeAsync(0) })
     expect(vi.getTimerCount()).toBe(1)
   })
 

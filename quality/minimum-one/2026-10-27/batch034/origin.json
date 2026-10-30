@@ -1,0 +1,132 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch034-ff7de842",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "775673727077a13a9906ec4cafdd639fb3ed4de4d94af18754869b7512a5af32",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-zzu-one-001\\root-approved-rule-manifest.json",
+    "sha256": "c8ba5d971ffe0b24eeace02c56909f85e5e0c309da063c34b5a62a82983a9c18"
+  },
+  "formalImporterSha256": "58457556a64705231a6e34a78a99969b197c8e5e1e12682882127b713238d4ca",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-40b1fe14b53ccc1221d031b545467bed903906c539188e7c",
+      "universityId": "uni-zhengzhou-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "1f78c2c1320fea6912e694261f8fcd9e948dfbf1f857a2e2afefc688b35ba5d4",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-zzu-one-001\\independent-review.json",
+        "sha256": "19e83625eec5ba09a495e2a58275232866bdef11a8dd758bbe09052d1b6acd1b"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-40b1fe14b53ccc1221d031b545467bed903906c539188e7c/45efdc00eb5c548a30011f1b8343734e94cb5f45b4f080cdfea09258dd99cdbe.json",
+      "ruleArtifactSha256": "45efdc00eb5c548a30011f1b8343734e94cb5f45b4f080cdfea09258dd99cdbe",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "工商管理"
+        },
+        "catalogSha256": "f6564b17f4989286c5bc1df837170d13cecc77a0a4f853ee6f2ecaea2453c72e",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "1307126aee0c9b650d6f7b1c2f02a8f65bb9b44542568be0e06d41546b6931fe"
+          },
+          "aliasesConsidered": [
+            "工商管理",
+            "Business Administration",
+            "Business Management"
+          ],
+          "catalogSha256": "f6564b17f4989286c5bc1df837170d13cecc77a0a4f853ee6f2ecaea2453c72e",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "1307126aee0c9b650d6f7b1c2f02a8f65bb9b44542568be0e06d41546b6931fe"
+          },
+          "notes": [
+            "Root independently read the complete saved official international-education undergraduate recruitment table, including its exact heading, table column headers, all named rows and footer. The heading 郑州大学本科留学生招生专业一览表 explicitly applies undergraduate and foreign-student scope to the table, whose Business School row names 工商管理. This is not a domestic-major table with international navigation borrowed as eligibility.",
+            "All four actual current Zhengzhou records, complete current related bindings and historical target names/degrees were read. International Trade bachelor is a different business subject, Anesthesiology bachelor is medical, Architecture master has a different subject and degree, and the International Medical Foundation is non-degree foundation. None duplicates Business Administration bachelor. Old multilingual names, official URLs and IDs remain unchanged.",
+            "The complete official www5.zzu.edu.cn source was normally captured with verified TLS, public DNS and its own robots checks. The failed Huaqiao source in the same pool remains held; no HTTP redirect is upgraded and no failed paid attempt is retried.",
+            "The page is dated October2024. Only this one source-Chinese bachelor identity and source year are approved while other schools remain empty. Dozens of other table rows, subject directions, course durations, teaching languages, star markers, fees and eligibility are not imported or approved. No numeric programme code is present in the reviewed table, no translated name or scholarship is inferred, and the table is not claimed reconciled in full."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-zzu-one-001\\actual-peer-and-history-audit.json",
+            "sha256": "a8de6dfd9cb386fb3bd918ed07c1f5599e1506dcfa018ba272710a31e936799c"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "4c102b605cc704bcd40f448cce4361f019ef77c3cf94ff312e053ff02bfaa842",
+              "names": {
+                "en": "International Trade",
+                "ru": "Международная торговля",
+                "zh": "国际贸易"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-zhengzhou-university-international-trade-bachelor",
+              "url": "https://international.zzu.edu.cn/en/admission/index?cid=17&degree_id=3&pid=12&spid=4"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "bachelor",
+              "departmentCode": null,
+              "identitySha256": "c9c1032883bff3c39386209bb20a458399ac06abc30c6bddafa9fbdd2152e6b3",
+              "names": {
+                "en": "Anesthesiology",
+                "ru": "Анестезиология",
+                "zh": "麻醉学"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-zhengzhou-university-anesthesiology-bachelor",
+              "url": "https://international.zzu.edu.cn/en/school/detail?cid=3&detail=1&pid=3"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "caea65eaf572b4142a94f4edd570ef52f7a085a4f8bb1fbd60a74b9f2cb6490a",
+              "names": {
+                "en": "Architecture",
+                "ru": "Архитектура",
+                "zh": "建筑学"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-sparse-depth-0808-zzu-architecture-master",
+              "url": "https://international.zzu.edu.cn/en/article/detail?cid=53&detail=65&pid=53"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "foundation",
+              "departmentCode": null,
+              "identitySha256": "d94a597499544ccd2a14a899a48db6dc561b80e635d37c88f3df4c66685584d1",
+              "names": {
+                "en": "International Medical Foundation Program",
+                "ru": "Международная подготовительная медицинская программа",
+                "zh": "国际医学预科项目"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-sparse-depth-0808-zzu-medical-foundation",
+              "url": "https://international.zzu.edu.cn/en/admission/detail?cid=17&detail=612&pid=0&spid=0"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}

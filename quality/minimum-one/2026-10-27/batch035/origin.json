@@ -1,0 +1,147 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch035-a0f58806",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "f24a3b9f6a4ad415f6f7d778a7b31e3afbc1e0f873b8cb0778f91270ac36badb",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-gxnu-one-002\\root-approved-rule-manifest.json",
+    "sha256": "1e4d211cecd30c3459c406a5ca9e4c8230b3f15ff8262b9178bf73ee1637b177"
+  },
+  "formalImporterSha256": "58457556a64705231a6e34a78a99969b197c8e5e1e12682882127b713238d4ca",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-7fcc0e2245c737e2a7c1402c93ec984641e6ed53f66ed9a4",
+      "universityId": "uni-guangxi-normal-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "cb4b89a86b91a7e59cdd572cd739d33a8e3a7ddc59ce264081b3c2bbee6ba453",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-gxnu-one-002\\independent-review.json",
+        "sha256": "a3ae42d972063070fd89ef98446f45afa156898d08016313864b15e064b011af"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-7fcc0e2245c737e2a7c1402c93ec984641e6ed53f66ed9a4/c56880159ed00bf17d91b36d3726d68672cb6ac4f8498001b2f0ab92ad506ba9.json",
+      "ruleArtifactSha256": "c56880159ed00bf17d91b36d3726d68672cb6ac4f8498001b2f0ab92ad506ba9",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "汉语言"
+        },
+        "catalogSha256": "983817ae35b2bc89729e631b0d55baa8de6d173d2f9e6bc25647ee6d84e932c4",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "943ef01566148e9b91ca23cbc266553c5c15d0923327d003a9295a91cb4a8a9d"
+          },
+          "aliasesConsidered": [
+            "汉语言",
+            "Chinese Language",
+            "Chinese Language bachelor"
+          ],
+          "catalogSha256": "983817ae35b2bc89729e631b0d55baa8de6d173d2f9e6bc25647ee6d84e932c4",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "943ef01566148e9b91ca23cbc266553c5c15d0923327d003a9295a91cb4a8a9d"
+          },
+          "notes": [
+            "Root independently read and visually inspected physical PDF page18 (printed page15) of the complete 53-page official international student brochure. The red programme title explicitly says 汉语言本科生招生简章 / Admission Guidelines for Chinese Language Undergraduates. The same page describes training international students and explicitly grants a Bachelor of Arts from Guangxi Normal University. The primary quote ranges are all forced to physical page18, not the table of contents or adjacent programme pages.",
+            "All 53 physical pages and their original native text are retained; all-page canonical normalization and formfeed count were checked. Root read relevant contents and catalogue context on pages2,8,10 and the complete selected page18, not every unrelated brochure programme. The catalogue separates bachelor, master and doctorate columns and has no programme-code column in the selected context. No programme code is observed for this identity. Visual inspection confirms the two-column English text flow; no font-map repair, OCR, missing-text reconstruction or invented quote is used.",
+            "All five current raw GXNU identities, full related current bindings and historical target names/degrees were read. Existing Chinese Language and Culture is non-degree language training. Chinese Language and Literature master/doctorate, Computer Science master and Teaching Chinese to Speakers of Other Languages master differ in qualification or subject. None is the named 汉语言 bachelor; no existing record is normalized or duplicated.",
+            "The original official PDF was fully fetched with public DNS, verified TLS and robots handling after the separate source-only size cap was raised from12 to64MiB. The original size-limit failure remains archived. The paid PDF limit remains unchanged and no model request is made. Native Windows tools used a byte-identical short-path copy because the original path exceeds their limit; its hash and actual argv are retained. All original capture and extraction files remain immutable.",
+            "The saved brochure does not establish a current intake year, so sourceDeclaredYear is null. Only the exact Chinese bachelor programme name and institution identity are approved. Other programme rows, the 30-student target, credits, degree-award details, duration, fees, teaching language, exam/eligibility rules and scholarships remain unapproved source context. No complete catalogue reconciliation or human/MiniMax receipt is claimed."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-gxnu-one-002\\actual-peer-and-history-audit.json",
+            "sha256": "aaa7f6e7aec79b7a2addc3baacbca983cbf6bc682c0e349627a70eb638e19919"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "language",
+              "departmentCode": null,
+              "identitySha256": "25048b87691958f959a75cc19d7817698bad8ad0c0ab5d9d286e08741b044f17",
+              "names": {
+                "en": "Chinese Language and Culture Program",
+                "ru": "Программа китайского языка и культуры",
+                "zh": "汉语言文化项目"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-wave3-gxnu-chinese-language-culture",
+              "url": "https://english.gxnu.edu.cn/2026/0317/c4263a337717/pagem.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "6511480c5f92e14c4a0bba59a533394a677e0ef9dbd17ba183b6eabd95f3ab68",
+              "names": {
+                "en": "Chinese Language and Literature",
+                "ru": "Китайский язык и литература",
+                "zh": "中国语言文学"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-mew-csw-gxnu-chinese-language-literature-master",
+              "url": "https://english.gxnu.edu.cn/_upload/article/files/25/cb/1e8f23434a7ab9e9c2b06e177651/c6db6a62-18e3-43d2-bb67-0ed3bbc28873.pdf"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "doctorate",
+              "departmentCode": null,
+              "identitySha256": "9ab7b8ff411db2464a10c0f73d1c3115f6861a6b3e9f938306287f60a538f094",
+              "names": {
+                "en": "Chinese Language and Literature",
+                "ru": "Китайский язык и литература",
+                "zh": "中国语言文学"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-mew-csw-gxnu-chinese-language-literature-doctorate",
+              "url": "https://english.gxnu.edu.cn/_upload/article/files/ec/d1/d2f9b3e14879a8ef3e31b282d8eb/4baf4973-bf5f-4483-8c93-8af3e577e881.pdf"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "816ee8a5a2c1893dea23b386d0a03a8243785a6c12be1a889c6befb327e30772",
+              "names": {
+                "en": "Computer Science and Technology",
+                "ru": "Компьютерные науки и технологии",
+                "zh": "计算机科学与技术"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-mew-csw-gxnu-computer-science-technology-master",
+              "url": "https://english.gxnu.edu.cn/_upload/article/files/25/cb/1e8f23434a7ab9e9c2b06e177651/c6db6a62-18e3-43d2-bb67-0ed3bbc28873.pdf"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "f6be305f454a115bf1cb5526a89e46f5e5077f46f3f07d2ce8e1110bf4c597a6",
+              "names": {
+                "en": "Master of Teaching Chinese to Speakers of Other Languages",
+                "ru": "Магистратура по преподаванию китайского языка как иностранного",
+                "zh": "汉语国际教育硕士"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-wave3-gxnu-mtcsol-master",
+              "url": "https://english.gxnu.edu.cn/4250/listm.htm"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}
