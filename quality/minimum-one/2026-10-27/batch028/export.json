@@ -1,0 +1,100 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch028-1d34cddf",
+  "inputCatalogSha256": "82871643e6efdb781cb0a1ddfd6f7cb9a36b8893a4b50da26d57e2ab880905f3",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T04:46:20.149Z",
+  "proposals": [
+    {
+      "id": "upc-windows-ocr-private-v2-ef3736ce9dbf0953cb7029e4",
+      "universityId": "uni-china-university-of-petroleum-east-china",
+      "entityType": "program",
+      "recordId": "prog-gap-prog-mew-ne-upc-chemical-engineering-master-en",
+      "operation": "patch",
+      "fields": {
+        "name": {
+          "zh": "化学工程与技术"
+        },
+        "degreeLevel": "master",
+        "programType": "degree",
+        "programUrl": "https://cie.upc.edu.cn/admission_cn/zhongwenzhaoshengjianzhang.pdf",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "cdcb61778d4fdbfac1f6e514c15639038486019198fc8f54a98da51d7677edc1",
+          "url": "https://cie.upc.edu.cn/admission_cn/zhongwenzhaoshengjianzhang.pdf",
+          "snapshotSha256": "94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "objectKey": "maintenance/windows-ocr-upc-v1/original-pdf/94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "locator": "page 9",
+          "quote": "非中国籍公民"
+        }
+      },
+      "source": {
+        "url": "https://cie.upc.edu.cn/admission_cn/zhongwenzhaoshengjianzhang.pdf",
+        "snapshotSha256": "94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+        "objectKey": "maintenance/windows-ocr-upc-v1/original-pdf/94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+        "locator": "page 6",
+        "quote": "化学工程与技术",
+        "id": "cdcb61778d4fdbfac1f6e514c15639038486019198fc8f54a98da51d7677edc1",
+        "checkedAt": "2026-10-30T03:26:01.602Z",
+        "contentType": "application/pdf",
+        "textArtifact": {
+          "objectKey": "maintenance/windows-ocr-upc-v1/explicit-reviewed-source/164c46f30b11455ae5c93112f51bc7b63aae2406b386484936601b0e46f13ecd",
+          "sha256": "164c46f30b11455ae5c93112f51bc7b63aae2406b386484936601b0e46f13ecd",
+          "rawSnapshotSha256": "94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "parser": "windows-ocr-reviewed-v1"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "cdcb61778d4fdbfac1f6e514c15639038486019198fc8f54a98da51d7677edc1",
+          "url": "https://cie.upc.edu.cn/admission_cn/zhongwenzhaoshengjianzhang.pdf",
+          "snapshotSha256": "94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "objectKey": "maintenance/windows-ocr-upc-v1/original-pdf/94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "locator": "page 6",
+          "quote": "化学工程与技术",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "cdcb61778d4fdbfac1f6e514c15639038486019198fc8f54a98da51d7677edc1",
+          "url": "https://cie.upc.edu.cn/admission_cn/zhongwenzhaoshengjianzhang.pdf",
+          "snapshotSha256": "94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "objectKey": "maintenance/windows-ocr-upc-v1/original-pdf/94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "locator": "page 6",
+          "quote": "学术型硕士专业",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "cdcb61778d4fdbfac1f6e514c15639038486019198fc8f54a98da51d7677edc1",
+          "url": "https://cie.upc.edu.cn/admission_cn/zhongwenzhaoshengjianzhang.pdf",
+          "snapshotSha256": "94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "objectKey": "maintenance/windows-ocr-upc-v1/original-pdf/94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+          "locator": "page 6",
+          "quote": "学术型硕士专业",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:upc-reviewed-windows-ocr-private-v2:assistant-independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T04:42:10.115Z",
+        "candidateSha256": "692a39f9a0b90280c5d596621cc2dad625d40b48b355e663bd16619b220c2855",
+        "snapshotSha256": "94b8d03a80683ee66c00e856bf37f5fc1f1c1261bc151cd2f16f6e26c80595cb",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/windows-ocr-upc-v1/deterministic-review-v2/58c25b63ae6c6fce8ab09b6ae3c9f1daf0199a150a1b0cad22bf78402b00ccd6",
+        "reviewArtifactSha256": "58c25b63ae6c6fce8ab09b6ae3c9f1daf0199a150a1b0cad22bf78402b00ccd6"
+      }
+    }
+  ],
+  "sha256": "0bbd85c932ea87c20acd5d2e11dd3bba0290f3d8367fc8f3abb2335d1a89252b"
+}

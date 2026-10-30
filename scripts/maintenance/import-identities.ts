@@ -9,6 +9,7 @@ import { htmlToText } from '../../workers/ingestion/src/rules'
 import { hasProgramInternationalScopeEvidence } from '../../workers/catalog-maintenance/src/program-international-scope'
 import { canonicalIdentityJson, identityAcceptanceLedgerSchema, identityFingerprint, verifiedNameMatchesRaw, type IdentityAcceptanceLedger, type VerifiedProgramName, type ReviewedProgramAliasAudit } from '../../src/lib/data/identity-acceptance'
 import { loadReviewedProgramAliases, resolveReviewedProgramAlias, type ReviewedProgramAliasRef } from './reviewed-program-alias'
+import { rejectWindowsOcrEnvelopeAsNative, requireExplicitKnownWindowsOcrParser, verifyWindowsOcrReviewedSource, WINDOWS_OCR_PARSER, type ReviewedWindowsOcrSourceRef } from './windows-ocr-reviewed-source'
 import { catalogSha256, loadMaintenanceBundle } from './build-scope'
 import {
   canonicalJson, exportContentSha256, maintenanceCandidateExportSchema, maintenanceScopeSchema,
@@ -118,7 +119,8 @@ function assertLocatedQuote(evidence: SourceEvidence, text: string, raw?: Uint8A
 
 /** The writer reads immutable artifacts; a producer/model's assertion alone never verifies a quote. */
 export async function verifyReviewedProposalEvidence(proposal: MaintenanceProposal,
-  school: MaintenanceScope['schools'][number], readArtifact: (key: string) => Promise<Uint8Array>, extraEvidence: SourceEvidence[] = []): Promise<void> {
+  school: MaintenanceScope['schools'][number], readArtifact: (key: string) => Promise<Uint8Array>, extraEvidence: SourceEvidence[] = [],
+  reviewedWindowsOcrSources: ReviewedWindowsOcrSourceRef[] = [], windowsOcrIdentitySha256?: string): Promise<void> {
   const review = proposal.review
   if (!review || review.decision !== 'approved' || !Object.values(review.checks).every(Boolean)) throw new Error('independent_identity_review_required')
   if (review.candidateSha256 !== await proposalContentSha256(proposal)
@@ -133,6 +135,7 @@ export async function verifyReviewedProposalEvidence(proposal: MaintenancePropos
       || receipt.decision !== 'approved') throw new Error('review_artifact_binding_mismatch')
   }
   const source = proposal.source
+  requireExplicitKnownWindowsOcrParser(proposal)
   assertOfficial(source.url, school)
   const rawBytes = await readArtifact(source.objectKey)
   if (sha256(rawBytes) !== source.snapshotSha256) throw new Error('source_snapshot_checksum_mismatch')
@@ -141,7 +144,13 @@ export async function verifyReviewedProposalEvidence(proposal: MaintenancePropos
     if (source.textArtifact.rawSnapshotSha256 !== source.snapshotSha256) throw new Error('text_artifact_raw_binding_mismatch')
     const bytes = await readArtifact(source.textArtifact.objectKey)
     if (sha256(bytes) !== source.textArtifact.sha256) throw new Error('text_artifact_checksum_mismatch')
-    text = new TextDecoder('utf-8', { fatal: true }).decode(bytes)
+    if (source.textArtifact.parser === WINDOWS_OCR_PARSER) {
+      text = await verifyWindowsOcrReviewedSource({ proposal, rawPdf: rawBytes, envelopeBytes: bytes,
+        readArtifact, approvals: reviewedWindowsOcrSources, existingIdentitySha256: windowsOcrIdentitySha256 })
+    } else {
+      rejectWindowsOcrEnvelopeAsNative(bytes)
+      text = new TextDecoder('utf-8', { fatal: true }).decode(bytes)
+    }
   } else text = sourceText(rawBytes, source.contentType)
   const sourceEvidence: SourceEvidence = {
     sourceId: source.id, url: source.url, snapshotSha256: source.snapshotSha256, objectKey: source.objectKey,
@@ -167,9 +176,10 @@ export async function verifyReviewedProposalEvidence(proposal: MaintenancePropos
 }
 
 async function verifyProposalEvidence(proposal: MaintenanceProposal, fields: ProgramIdentityFields,
-  school: MaintenanceScope['schools'][number], readArtifact: (key: string) => Promise<Uint8Array>): Promise<void> {
+  school: MaintenanceScope['schools'][number], readArtifact: (key: string) => Promise<Uint8Array>,
+  reviewedWindowsOcrSources: ReviewedWindowsOcrSourceRef[] = [], windowsOcrIdentitySha256?: string): Promise<void> {
   assertOfficial(fields.programUrl, school)
-  await verifyReviewedProposalEvidence(proposal, school, readArtifact, [fields.internationalAdmissionsEvidence])
+  await verifyReviewedProposalEvidence(proposal, school, readArtifact, [fields.internationalAdmissionsEvidence], reviewedWindowsOcrSources, windowsOcrIdentitySha256)
   for (const [locale, name] of Object.entries(fields.name)) {
     const nameEvidence = proposal.fieldEvidence.filter(evidence => evidence.fieldPath === `name.${locale}`)
     if (!nameEvidence.some(evidence => normalizedText(evidence.quote).includes(normalizedText(name)))) throw new Error(`official_name_evidence_missing:${locale}`)
@@ -191,6 +201,7 @@ export async function importIdentityCandidates(options: {
   acceptances?: IdentityAcceptanceLedger; bindings?: IdentityBindings; appliedReceipts?: IdentityImportReceipt[];
   readArtifact: (key: string) => Promise<Uint8Array>;
   reviewedProgramAliases?: ReviewedProgramAliasRef[];
+  reviewedWindowsOcrSources?: ReviewedWindowsOcrSourceRef[];
 }): Promise<{ bundle: DataBundle; acceptances: IdentityAcceptanceLedger; bindings: IdentityBindings; receipt: IdentityImportReceipt; replayed: boolean }> {
   const scope = maintenanceScopeSchema.parse(options.scope)
   const batch = maintenanceCandidateExportSchema.parse(options.batch)
@@ -230,7 +241,10 @@ export async function importIdentityCandidates(options: {
       const fields = programIdentityFieldsSchema.parse(proposal.fields)
       if (proposal.scope.year !== null || proposal.scope.intake !== null) throw new Error('identity_must_not_claim_a_cycle')
       if (new Date(proposal.source.checkedAt) > acceptedAt || new Date(proposal.review?.reviewedAt ?? '') > acceptedAt) throw new Error('future_evidence_or_review')
-      await verifyProposalEvidence(proposal, fields, school, options.readArtifact)
+      const ocrRecord = proposal.source.textArtifact?.parser === WINDOWS_OCR_PARSER
+        ? bundle.programs.find(program => program.id === proposal.recordId) : undefined
+      await verifyProposalEvidence(proposal, fields, school, options.readArtifact, options.reviewedWindowsOcrSources ?? [],
+        ocrRecord ? identityFingerprint('program', ocrRecord) : undefined)
       const reviewedAlias = await resolveReviewedProgramAlias(reviewedAliases.find(alias => alias.proof.proposalId === proposal.id), proposal, fields, bundle.programs, options.acceptedAt, options.readArtifact, reviewedAliasContext)
       const key = canonicalProgramIdentityKey(school.universityId, fields)
       const aliases = nameAliases(school.universityId, fields)

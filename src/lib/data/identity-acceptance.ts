@@ -52,6 +52,9 @@ export type IdentityAcceptanceLedger = z.infer<typeof identityAcceptanceLedgerSc
  * raw sibling locales never acquire legacy display authority when scope is lost.
  * Other legacy records keep their existing unscoped semantics. */
 export function reviewedProgramNameScopeRequirement(recordId: string): 'name-and-alias' | 'name-only' | undefined {
+  // The UPC scan review validates this Chinese identity only. Dropping its
+  // reviewed name and receipt must never restore unreviewed sibling locales.
+  if (recordId === 'prog-gap-prog-mew-ne-upc-chemical-engineering-master-en') return 'name-only'
   return recordId === 'prog-gap-wave8-2-suep-international-economy-trade-bachelor'
     || reviewedHtmlAliasProfile(recordId) !== undefined ? 'name-and-alias' : undefined
 }

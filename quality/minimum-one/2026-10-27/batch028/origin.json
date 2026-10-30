@@ -1,0 +1,214 @@
+{
+  "format": "studyinchina.minimum-one-upc-reviewed-ocr-origin",
+  "version": 1,
+  "batchId": "minimum-one-2026-10-27-batch028-1d34cddf",
+  "privateProducerVersion": "upc-reviewed-windows-ocr-private-v2",
+  "sourcePlanSha256": "2c6fc945c5b0dfca0707e9d4ac51f466fd9249c13da88e90d2a50b3c7ae65cf8",
+  "sourceContentSha256": "ef3736ce9dbf0953cb7029e4470913c908e83262f1c45e4d2365ea981774a0be",
+  "reviewedV2FreezeSha256": "a7485f2c8f177e95fae1b64afa8fa95cb5fe0185762c0e33638219205468bac9",
+  "rootCodeApproval": {
+    "objectKey": "maintenance/windows-ocr-upc-v1/root-code-review/46d34489eb1beaf3612bfa66f69b0413549fc8e714bcf9668d2c523b8725cdc8",
+    "sha256": "46d34489eb1beaf3612bfa66f69b0413549fc8e714bcf9668d2c523b8725cdc8",
+    "byteLength": 5141
+  },
+  "rootSpanApproval": {
+    "objectKey": "maintenance/windows-ocr-upc-v1/root-span-review/9f8fb19472dc49239501398947300bbb3f6185217608ae11de6a5d7d41b16a5f",
+    "sha256": "9f8fb19472dc49239501398947300bbb3f6185217608ae11de6a5d7d41b16a5f",
+    "byteLength": 1580
+  },
+  "deterministicReviewArtifact": {
+    "objectKey": "maintenance/windows-ocr-upc-v1/deterministic-review-v2/58c25b63ae6c6fce8ab09b6ae3c9f1daf0199a150a1b0cad22bf78402b00ccd6",
+    "sha256": "58c25b63ae6c6fce8ab09b6ae3c9f1daf0199a150a1b0cad22bf78402b00ccd6",
+    "byteLength": 1854
+  },
+  "applicationToolSha256": "749ee8602a69f53907126d4886aa8e148603d7e9b8e7c7cb57a8cb5efc444b02",
+  "productionRuntimeClosure": [
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\maintenance\\build-scope.ts",
+      "sha256": "9e5117292121a021c0918f77ab59b0fd27cbcf5a2071ef81a1648eea2ee8cd3e"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\types.ts",
+      "sha256": "4dbedeb8cb5aa461446350e1d72b575ece121ff506b64f86e1b72ceac1f4a742"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\i18n\\config.ts",
+      "sha256": "d93d063b409750d82e4917f0cf870246411b934824c5aea360bcff065b629b93"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\schema.ts",
+      "sha256": "f1f0d21179a35e86f988cad39cf162052742c399b4342199e5b3ae91dc6d27bf"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\regions.ts",
+      "sha256": "9fb11dde2729490391963f86bcaeae9f1c01af77cccbfb24c3dd2483fb0587dd"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\source-manifest-registry.ts",
+      "sha256": "5e36340a7f2a7ffad8616801daf0cccb33295cb743751e4031c041c0893a805f"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\manifest-schema.ts",
+      "sha256": "458db6e6dff791e6e61907b81705fd36abe5181f820001bd5826975dc51aa396"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\types.ts",
+      "sha256": "5da42eae1245fe8b9227c205a9283b21fbffa84e1972b775a944474ca161e43a"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\rich-content.ts",
+      "sha256": "d090b5003ac39525001e70242347d06165180ed3d0a219d8591aab616879cf62"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\body.ts",
+      "sha256": "d55a04eb31b1bf1f7cf7a2105902bde7ce0a5bd13bc5a10b933617fb76f52fb2"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\errors.ts",
+      "sha256": "20b84a7e8cd0828d563586caaee9d63222e3885407d7ff8c5440127a36e495fb"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\security.ts",
+      "sha256": "0a51456aebbf90b7cd2a9421f3b37a21ea9cbc15e1776cd6c1bb5536493aefba"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\validate-source-manifests.ts",
+      "sha256": "1684364621d07383fbf9265b1e38033dace7f13a9c54734dd59bc707742738d4"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\source-manifest-contract.ts",
+      "sha256": "8ed3fc57f51de16330ce57dd7e3a4de9e0f29d6687fa03b570029fc66b819f03"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\maintenance\\contracts.ts",
+      "sha256": "1cdacb9227274eaffa8762badc90d1b72742e23c2dfb6d43924597a4378b5dd8"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\maintenance\\import-identities.ts",
+      "sha256": "58457556a64705231a6e34a78a99969b197c8e5e1e12682882127b713238d4ca"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\rules.ts",
+      "sha256": "616c8834fa84df59b43a59026deb175e8a646fb39ca794c0dcff4cc744acd34a"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\hash.ts",
+      "sha256": "a6580a03ee63ca376347af365c5429b5418ac7f9b468aee4dfdde428970975fd"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\catalog-maintenance\\src\\program-international-scope.ts",
+      "sha256": "17cb085bfa3e43dc98d5e8375016a76a35df11ed95910374314a5d0ec2928572"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\identity-acceptance.ts",
+      "sha256": "e3552e62d0703c3ba1c3cae2419ad524a148bdf4f9b827e34d71e7d945ff6a17"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\reviewed-html-program-alias.ts",
+      "sha256": "f8fc57331b4dc188bce44e86bca3ce46b929379b7a9b1ad746a733abac5bb884"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\maintenance\\reviewed-program-alias.ts",
+      "sha256": "6efcf9698330535065b9a44fd645dd172f6f9ba4d17ef8b18a61943ceeb39c28"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\maintenance\\reviewed-html-program-alias.ts",
+      "sha256": "65adc9c2ef85de42f94a3b3035b02a5c60958b2f7d6909375751ec97bf06a54e"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\automation\\capture-university-maintenance-sources.ts",
+      "sha256": "c12dfe7fb01e1994076a70ae6e72fe0a8b964cd5d919e539a0a6ab434ff6799e"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\freshness.ts",
+      "sha256": "3b62bc28c9670e07754ea068436da069a6affb992a795b3626c14d7f656aebf3"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\maintenance\\university-coverage.ts",
+      "sha256": "afbd5d2411748a4039ceab1a92258c746099bcf19c1714a47d8cbefbd42670ae"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\publication.ts",
+      "sha256": "3a67e029d63825009cfef33a159e67285713d3bf40af8dfcc188e00876b41fd4"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\verified-program-name.ts",
+      "sha256": "c12d34e15918d7fbe8d5ed9993180940603e0e02648934400bb984c697a0e9ba"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\workers\\ingestion\\src\\robots.ts",
+      "sha256": "c9d3201d4c2b81f142388384c2cda457c5f7706211066c93b26ed9975e23a3f4"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\maintenance\\windows-ocr-reviewed-source.ts",
+      "sha256": "abb48dc3c6b9b79fda1b4292d2147377fbb2f9d3a3a075f554ad8f262f425c53"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\maintenance\\windows-ocr-deterministic-review.ts",
+      "sha256": "6db6bb3a879d3b513d1ae17a450cc45db07df8b3d67737a540e331a00b372a3f"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\maintenance\\select-minimum-one.ts",
+      "sha256": "f64e0ab2ce349913de0dc393789d27aa10dc9fb1f14ed3ef6afaf14c3c177802"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\discovery.ts",
+      "sha256": "62b095a2dd59c89edbd94d8e1e746ec4ba15b91564a5f00106d57d9ee3cbd91f"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\field-verification.ts",
+      "sha256": "671a299fe1fcf8816cba1061077ee5cb7a6b28b919faaf47b2f4ccb8dd7d6532"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\catalog-api\\types.ts",
+      "sha256": "ee19aa1b3adbca05a1d185472974b6c41a5c618830d788c4f2392d0a89da8d51"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\tests\\unit\\maintenance-windows-ocr-reviewed-source.test.ts",
+      "sha256": "0cc548ff880b65cc1284492de69f071ca123e07ab8951ffd7d7aeab5aad32f6d"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\identity-acceptance-store.ts",
+      "sha256": "cb05d7880e15ae682ed6e92108aa0a7112ffeddff1a03bfab53f33186f6f8714"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\scripts\\quality\\validate-directory.ts",
+      "sha256": "10ef7575b50e300f2c1c70e2f6cf948bc0870dbfc02c6d702359ffa29af404a1"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\admission.ts",
+      "sha256": "46aac907ee2b7f84498d98ec32b988d555870617f22d806c0c368a65cf1aaebf"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\src\\lib\\data\\discovery-state.ts",
+      "sha256": "3fcdf668cee41cc055fba324e2df7a3400b36c7113558c1f94453c8a342440a8"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\package.json",
+      "sha256": "87982d47bdb196c0443bee964965eacba45630f4e67997c4a26aad1d8340806e"
+    },
+    {
+      "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\package-lock.json",
+      "sha256": "f04383a15e7048c4cac8c5a4268c0ac2df56aadb0843193821914a49b7400edb"
+    }
+  ],
+  "externalImports": [
+    "jsdom",
+    "node:assert/strict",
+    "node:crypto",
+    "node:dns/promises",
+    "node:fs",
+    "node:fs/promises",
+    "node:net",
+    "node:os",
+    "node:path",
+    "node:url",
+    "undici",
+    "vitest",
+    "zod"
+  ],
+  "typescriptVersion": "5.9.3",
+  "historicalModelArtifactsUsedAsApproval": false,
+  "humanReviewClaimed": false,
+  "minimaxReviewClaimed": false
+}
