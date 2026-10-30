@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教指委简介</title>
+    <meta name="keywords" content="教指委简介">
+    <meta name="description" content="教指委简介">
+    <link rel="stylesheet" type="text/css" href="https://icle.chinese.cn/front/swiper-bundle.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://icle.chinese.cn/front/main.css"/>
+    <style>
+        a, a:visited {
+            color: #000;
+        }
+
+        .home_nav a, .home_nav a:visited {
+            color: #fff;
+        }
+
+        .nav_content a, .nav_content a:visited {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<!-----全屏模态框，高度jquery计算--->
+<div class="mt_modal" style="display: none;"></div>
+<!-----全屏模态框，高度jquery计算--->
+
+<!-----搜索框--->
+<div class="mt_search" style="display: none;">
+         <span class="close">
+             <img src="https://icle.chinese.cn/front/imgs/close.png">
+         </span>
+
+    <img class="searchyuan" src="https://icle.chinese.cn/front/imgs/searchyuan.png">
+    <div class="search_title">
+        搜索<span>ICLE</span>
+    </div>
+    <div class="search_input">
+        <div class="input_border">
+            <input type="text" id="searchKeywords" placeholder="您想要找什么？">
+        </div>
+        <div class="search_icon">
+            <img id="searchBtn" src="https://icle.chinese.cn/front/imgs/searchicon.png">
+        </div>
+    </div>
+</div>
+
+<!-----导航栏--->
+<div class="mt_header_nav" style="display: none;">
+
+    <img class="navrighttop" src="https://icle.chinese.cn/front/imgs/navrighttop.png">
+    <div class="userinfo">
+        <!-- <div class="userinfo_left">
+            <img src="https://icle.chinese.cn/front/imgs/usericon.png">
+            <a>登录</a>
+        </div> -->
+        <div class="userinfo_right">
+            <img src="https://icle.chinese.cn/front/imgs/close.png">
+        </div>
+    </div>
+    <div class="nav_content">
+
+        <div class="nav_content_item news-nav-item">
+            <span class="rightarr"></span>
+            <span class="leftarr"></span>
+            <p>新闻动态</p>
+            <hr>
+            <div class="sub_nav">
+                <ul>
+                                                                                                                                                                                                <li><a href="https://icle.chinese.cn/news/offical">教指委新闻</a></li>
+                                                            <li><a href="https://icle.chinese.cn/news/notice">通知公告</a></li>
+                                                            <li><a href="https://icle.chinese.cn/news/university">院校新闻</a></li>
+                                                                                                                                                                                </ul>
+            </div>
+        </div>
+        <div class="nav_content_item fengcai-nav-item">
+            <span class="rightarr"></span>
+            <span class="leftarr"></span>
+            <p>院校风采</p>
+            <hr>
+            <div class="sub_nav">
+                <ul>
+                                                                                                                                                                                                                                            <li><a href="https://icle.chinese.cn/university/elegant">院校一览</a></li>
+                                                            <li><a href="https://icle.chinese.cn/university/style">实习实践</a></li>
+                                                            <li><a href="https://icle.chinese.cn/university/plan">培养方案</a></li>
+                                                            <li><a href="https://icle.chinese.cn/university/teacher">师生风采</a></li>
+                                                            <li><a href="https://icle.chinese.cn/university/recruit">招生信息</a></li>
+                                                            <li><a href="https://icle.chinese.cn/university/job">人才招聘</a></li>
+                                                                                                                                    </ul>
+            </div>
+        </div>
+        <div class="nav_content_item jiaoyan-nav-item">
+            <span class="rightarr"></span>
+            <span class="leftarr"></span>
+            <p>教研分享</p>
+            <hr>
+            <div class="sub_nav">
+                <ul>
+                                                                                                                                                                                                                                                                                        <li><a href="https://icle.chinese.cn/share/excellentPaper">优秀论文</a></li>
+                                                            <li><a href="https://icle.chinese.cn/share/researchAchievements">教研成果</a></li>
+                                                            <li><a href="https://icle.chinese.cn/share/textBook">教材推荐</a></li>
+                                                            <li><a href="https://icle.chinese.cn/share/typicalLesson">典型课例</a></li>
+                                                                                        </ul>
+            </div>
+        </div>
+        <div class="nav_content_item organization-nav-item">
+            <span class="rightarr"></span>
+            <span class="leftarr"></span>
+            <p>组织机构</p>
+            <hr>
+            <div class="sub_nav">
+                <ul>
+                                                                                                                                                    <li><a href="https://icle.chinese.cn/organization/introduce">教指委简介</a></li>
+                                                            <li><a href="https://icle.chinese.cn/organization/introduce">秘书处服务指南</a></li>
+                                                            <li><a href="https://icle.chinese.cn/organization/introduce">文件法规</a></li>
+                                                                                                                                                                                                                            </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-----导航栏--->
+<div class="top-line"></div>
+<div class="mt_header">
+    <div class="header_border">
+        <div class="logo">
+            <a href="https://icle.chinese.cn"><img src="https://icle.chinese.cn/front/imgs/toplogo.jpg"></a>
+            
+            
+            
+            
+            
+            
+            
+        </div>
+        <div class="btnapply">
+            <div class="search btnitem">
+                    <span>
+                        <img src="https://icle.chinese.cn/front/imgs/search.png">
+                    </span>
+            </div>
+
+
+
+            <div class="menu btnitem">
+                    <span>
+                        <img src="https://icle.chinese.cn/front/imgs/menu.png">
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="news_jiaozhiwei_detail">
+        <div class="mt_subheader">
+            <div class="subnav">
+                <a href="/">首页</a> <span>•</span>
+            </div>
+            <div class="nav_name">
+                <span>教指委简介</span>
+            </div>
+
+        </div>
+                    <div class="news_detail_content">
+                    <div class="detail_content">
+                <div class="detail_title">
+                    国际中文教育专业学位研究生教育发展历程
+                </div>
+                <div class="detail_time">
+
+                    <span>2021-12-13</span>
+                    <span></span>
+                </div>
+                <div class="detail_content">
+                    <p>1982年，确立“对外汉语教学”学科名称。</p><p>1983年，经教育部批准，北京语言学院（现北京语言大学）在外语系内设置了对外汉语教学专业。</p><p>1985年，北京语言学院将这一专业独立成语言文学系。随后，北京外国语学院（现北京外国语大学）、上海外国语学院（现上海外国语大学）、华东师范大学等院校相继开设了类似专业。</p><p>1986年，北京语言学院、北京大学开始招收对外汉语教学研究方向的硕士研究生。</p><p>1998年，北京语言文化大学（现北京语言大学）开始招收对外汉语方向的博士研究生，对外汉语方向隶属于语言学和应用语言学。</p><p>2007年，国务院学位委员会下发关于《汉语国际教育硕士专业学位设置方案》的通知，决定设置汉语国际教育硕士专业学位。全国汉语国际教育专业学位研究生教育指导委员会（以下简称“教指委”）成立，负责指导、协调全国汉语国际教育硕士专业学位教育活动，推动专业学位教育的顺利发展和教育水平的不断提高。北京大学、北京师范大学、北京语言大学等首批24所汉语国际教育硕士专业研究生培养单位启动招生培养，当年共招收1020名在职人员攻读汉语国际教育硕士专业学位。</p><p>2009年，开始招收和培养全日制汉语国际教育硕士专业学位研究生。</p><p>2012年，教育部颁布的《普通高等学校本科专业目录和专业介绍（2012年）》中，对外汉语专业更名为汉语国际教育。</p><p>2018-2019年，为补足高端专业人才培养短板，在国务院学位办大力支持下，教指委深入分析需求，系统总结汉硕专业人才培养和学科建设成果，借鉴“新汉学计划”等中外博士研究生培养经验，与教育专业学位教指委合作在教育博士专业学位下开展汉语国际教育领域研究生培养。北京大学、北京师范大学、华东师范大学等27所高校参与试点。</p><p>2022年，国务院学位委员会和教育部面向社会正式发布《研究生教育学科专业目录（2022）》，自2023年起实施。新版目录中，原“汉语国际教育”专业学位类别更名为“国际中文教育”专业学位类别（代码0453），增设博士专业学位，标志着国际中文教育本、硕、博贯通培养体系的正式建成。</p><p>目前，198所高校开设硕士专业学位，27所高校试点开展专博培养，累计招收培养数十万中外学生，成为开展国际中文教育的重要力量，为促进中外语言文化交流，增进中国与世界各国人民之间的理解与友谊发挥重要作用。</p>
+
+                                    </div>
+            </div>
+        </div>
+
+    </div>
+
+<div class="mt_footer">
+    <div class="footer_top"> 
+        <div class="top_border" id="footerLink">
+            <ul class="scrollBox">
+                <li class="top_item"><a href="http://www.moe.gov.cn/" target="_blank" title="中华人民共和国教育部"><img src="https://icle.chinese.cn/front/imgs/footer-link-1.png"></a></li>
+                <li class="top_item"><a href="http://www.moe.gov.cn/s78/A22/" target="_blank" title="国务院学位委员会办公室"><img src="https://icle.chinese.cn/front/imgs/footer-link-2.png"></a></li>
+                <li class="top_item"><a href="http://www.csadge.edu.cn/" target="_blank" title="中国学位与研究生教育学会"><img src="https://icle.chinese.cn/front/imgs/footer-link-3.png"></a></li>
+                <li class="top_item"><a href="http://www.cdgdc.edu.cn/" target="_blank" title="中国学位与研究生教育信息网"><img src="https://icle.chinese.cn/front/imgs/footer-link-4.png"></a></li>
+                <li class="top_item"><a href="http://www.chinese.cn/" target="_blank" title="中外语言交流合作中心"><img src="https://icle.chinese.cn/front/imgs/footer-link-5.png"></a></li>
+                <li class="top_item"><a href="https://www.chineseplus.net/" target="_blank" title="中文联盟"><img src="https://icle.chinese.cn/front/imgs/footer-link-6.png"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer_nav">
+        <div class="nav_border">
+            <div class="nav_left">
+
+            </div>
+            <div class="nav_mid">
+                <div class="mid_item">
+                    <div class="item_title">组织机构</div>
+                    <div class="item_content">
+                                                                                                                                                                            <p><a href="https://icle.chinese.cn/organization/introduce">教指委简介</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/organization/service">秘书处服务指南</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/organization/mtcsol-file">文件法规</a></p>
+                                                                                                                                                                                                                                                                    </div>
+                </div>
+                <div class="mid_item">
+                    <div class="item_title">新闻动态</div>
+                    <div class="item_content">
+                                                                                                                                                                                                                                <p><a href="https://icle.chinese.cn/news/offical">教指委新闻</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/news/notice">通知公告</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/news/university">院校新闻</a></p>
+                                                                                                                                                                                                                </div>
+                </div>
+                <div class="mid_item college_demeanor">
+                    <div class="item_title">院校风采</div>
+                    <div class="item_content">
+                                                                                                                                                                                                                                                                                    <p><a href="https://icle.chinese.cn/university/elegant" data-name="院校一览">院校一览</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/university/style" data-name="实习实践">实习实践</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/university/plan" data-name="培养方案">培养方案</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/university/teacher" data-name="师生风采">师生风采</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/university/recruit" data-name="招生信息">招生信息</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/university/job" data-name="人才招聘">人才招聘</a></p>
+                                                                                                                                                            </div>
+                </div>
+                <div class="mid_item teaching_and_research_sharing">
+                    <div class="item_title">教研分享</div>
+                    <div class="item_content">
+                                                                                                                                                                                                                                                                                                                                        <p><a href="https://icle.chinese.cn/share/excellentPaper">优秀论文</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/share/researchAchievements">教研成果</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/share/textBook">教材推荐</a></p>
+                                                                    <p><a href="https://icle.chinese.cn/share/typicalLesson">典型课例</a></p>
+                                                                                                        </div>
+                </div>
+                <div class="mid_item">
+                    <div class="item_title">联系我们</div>
+                    <div class="item_content">
+                        
+                        <p>Email:jzwmsc@chinese.cn</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="nav_right" style="display: none;">
+                <div class="right_top">
+                    <img src="https://icle.chinese.cn/front/imgs/footer_erweima.png">
+                </div>
+                <div class="right_bottom">
+                    <div class="bottom_item">
+                            <span>
+                                <img src="https://icle.chinese.cn/front/imgs/footer_iconone.png">
+                            </span>
+                    </div>
+                    <div class="bottom_item">
+                            <span>
+                                <img src="https://icle.chinese.cn/front/imgs/footer_icontwo.png">
+                            </span>
+                    </div>
+                    <div class="bottom_item">
+                            <span>
+                                <img src="https://icle.chinese.cn/front/imgs/footer_iconone.png">
+                            </span>
+                    </div>
+                    <div class="bottom_item">
+                            <span>
+                                <img src="https://icle.chinese.cn/front/imgs/footer_iconfour.png">
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_bottom">
+        <p>版权所有 © 国际中文教育研究生教育网</p>
+    </div>
+</div>
+<script src="https://icle.chinese.cn/front/jquery.min.js"></script>
+<script src="https://icle.chinese.cn/front/jQuery.marquee.js"></script>
+<script src="https://icle.chinese.cn/front/main.js"></script>
+<script src="https://icle.chinese.cn/front/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    $(function () {
+        $('#searchBtn').click(function () {
+            var searchKeywords = $('#searchKeywords').val()
+            if ($.trim(searchKeywords) == '') {
+                alert('请输入搜索关键字')
+                return;
+            }
+            if (searchKeywords.length > 0) {
+                window.open("https://icle.chinese.cn/search/" + encodeURI(searchKeywords))
+            }
+        })
+        $('#searchBtn2').click(function () {
+            var searchKeywords = $('#searchKeywords2').val()
+            if ($.trim(searchKeywords) == '') {
+                alert('请输入搜索关键字')
+                return;
+            }
+            if (searchKeywords.length > 0) {
+                window.location.href = "https://icle.chinese.cn/search/" + encodeURI(searchKeywords)
+
+            }
+        })
+        var swiper = new Swiper('.swiper-container', {
+            autoplay: {
+                delay: 5000,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        });
+
+        var swiper2 = new Swiper('.swiper-container2', {
+            slidesPerView: 5,
+            grid: {
+                fill: 'row',
+                rows: 2,
+            },
+            autoplay: {
+                disableOnInteraction: false,
+                delay: 3000,
+            },
+            spaceBetween: 50,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        var swiper3 = new Swiper('.swiper-container3', {
+            autoplay: {
+                delay: 5000,
+            },
+            spaceBetween: 0,
+            pagination: {
+                el: '.swiper-pagination3',
+                clickable: true,
+            },
+        });
+
+        $(".mt_modal").height($(".mt_header").height() + $(".home_page").height() + $(".mt_footer").height() + 70)
+
+        $("video").attr('preload', 'load');
+           
+        })
+</script>
+<script type="text/javascript">
+    window.onload = function () {
+        // (function (i, s, o, g, r, a, m) {
+        //     i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        //         (i[r].q = i[r].q || []).push(arguments)
+        //     }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        //         m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        // })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        //
+        // ga('create', 'UA-43672246-1', 'chineseplus.net');
+        // ga('send', 'pageview');
+        // if(navigator.appName == "Microsoft Internet Explorer"&&parseInt(navigator.appVersion.split(";")[1].replace(/[ ]/g, "").replace("MSIE",""))<9){
+        //   document.getElementById('ieContainer').style.display = 'block';
+        // }
+
+    }
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXCCS3YN86"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BXCCS3YN86');
+</script>
+</body>
+</html>

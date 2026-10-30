@@ -5,6 +5,8 @@ import type { Program } from '../../src/lib/data/types'
 import { proposalContentSha256, type MaintenanceProposal, type ProgramIdentityFields } from './contracts'
 import { HTML_PROGRAM_ALIAS_RULE } from '../../src/lib/data/reviewed-html-program-alias'
 import { reviewedHtmlProgramAliasProofSchema, resolveReviewedHtmlProgramAlias, type HtmlAliasContext, type ReviewedHtmlProgramAliasProof } from './reviewed-html-program-alias'
+import { PROGRAM_CORRESPONDENCE_RULE } from '../../src/lib/data/reviewed-program-correspondence'
+import { programCorrespondenceProofSchema, resolveProgramCorrespondence, type ProgramCorrespondenceProof } from './reviewed-program-correspondence'
 
 const hash = (value: Uint8Array | string) => createHash('sha256').update(value).digest('hex')
 const sha = z.string().regex(/^[a-f0-9]{64}$/u)
@@ -33,7 +35,7 @@ const proofSchema = z.object({
   departmentCode: z.object({ existing: z.null(), candidate: z.null(), conflict: z.literal(false) }),
 })
 export type ReviewedProgramAliasRef = { artifactKey: string; sha256: string }
-export type LoadedProgramAlias = { proof: z.infer<typeof proofSchema> | ReviewedHtmlProgramAliasProof; ref: ReviewedProgramAliasRef }
+export type LoadedProgramAlias = { proof: z.infer<typeof proofSchema> | ReviewedHtmlProgramAliasProof | ProgramCorrespondenceProof; ref: ReviewedProgramAliasRef }
 
 /** An opt-in artifact is additional authority, never a mutation of the original
  * extraction/review. All source artifacts remain subject to formal import checks. */
@@ -45,7 +47,8 @@ export async function loadReviewedProgramAliases(refs: ReviewedProgramAliasRef[]
     const bytes = await readArtifact(ref.artifactKey)
     if (hash(bytes) !== ref.sha256) throw Error('reviewed_alias_artifact_checksum_mismatch')
     const input = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes))
-    const proof = input.ruleVersion === HTML_PROGRAM_ALIAS_RULE ? reviewedHtmlProgramAliasProofSchema.parse(input) : proofSchema.parse(input)
+    const proof = input.ruleVersion === PROGRAM_CORRESPONDENCE_RULE ? programCorrespondenceProofSchema.parse(input)
+      : input.ruleVersion === HTML_PROGRAM_ALIAS_RULE ? reviewedHtmlProgramAliasProofSchema.parse(input) : proofSchema.parse(input)
     if (seen.has(proof.proposalId)) throw Error('reviewed_alias_duplicate_proposal')
     if (!proposals.some(proposal => proposal.id === proof.proposalId)) throw Error('reviewed_alias_proposal_missing')
     seen.add(proof.proposalId); result.push({ proof, ref })
@@ -57,6 +60,8 @@ export async function resolveReviewedProgramAlias(loaded: LoadedProgramAlias | u
   fields: ProgramIdentityFields, programs: Program[], acceptedAt: string,
   readArtifact: (key: string) => Promise<Uint8Array>, context?: HtmlAliasContext): Promise<{ record: Program; audit: ReviewedProgramAliasAudit } | undefined> {
   if (!loaded) return undefined
+  if (loaded.proof.ruleVersion === PROGRAM_CORRESPONDENCE_RULE)
+    return resolveProgramCorrespondence({ proof: loaded.proof, ref: loaded.ref }, proposal, fields, programs, acceptedAt, readArtifact, context)
   if (loaded.proof.ruleVersion === HTML_PROGRAM_ALIAS_RULE)
     return resolveReviewedHtmlProgramAlias({ proof: loaded.proof, ref: loaded.ref }, proposal, fields, programs, acceptedAt, readArtifact, context)
   const { proof, ref } = loaded, source = proposal.source, record = programs.find(program => program.id === proof.recordId)

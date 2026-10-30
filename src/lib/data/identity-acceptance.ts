@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { z } from 'zod'
 import type { City, Program, Scholarship, Source, University } from './types'
 import { HTML_PROGRAM_ALIAS_RULE, reviewedHtmlAliasProfile } from './reviewed-html-program-alias'
+import { PROGRAM_CORRESPONDENCE_RULE, reviewedProgramCorrespondenceProfile } from './reviewed-program-correspondence'
 
 export const identityEntityTypeSchema = z.enum(['city', 'university', 'program', 'scholarship'])
 export type IdentityEntityType = z.infer<typeof identityEntityTypeSchema>
@@ -10,7 +11,7 @@ export const verifiedProgramNameSchema = z.object({ en: z.string().trim().min(1)
   .strict().refine(name => Boolean(name.en || name.zh), 'At least one verified official name is required')
 export type VerifiedProgramName = z.infer<typeof verifiedProgramNameSchema>
 export const reviewedProgramAliasAuditSchema = z.object({
-  ruleVersion: z.enum(['suep-explicit-metadata-suffix-v1', HTML_PROGRAM_ALIAS_RULE]),
+  ruleVersion: z.enum(['suep-explicit-metadata-suffix-v1', HTML_PROGRAM_ALIAS_RULE, PROGRAM_CORRESPONDENCE_RULE]),
   proofArtifactKey: z.string().min(1), proofSha256: sha256,
   existingIdentitySha256: sha256, proposalId: z.string().min(1), proposalContentSha256: sha256,
   source: z.object({ sourceId: z.string().min(1), url: z.url(), snapshotSha256: sha256,
@@ -57,6 +58,7 @@ export function reviewedProgramNameScopeRequirement(recordId: string): 'name-and
   if (recordId === 'prog-gap-prog-mew-ne-upc-chemical-engineering-master-en') return 'name-only'
   // The Shantou scan validates the English programme name only.
   if (recordId === 'program-shantou-university-computer-science-and-technology-bachelor') return 'name-only'
+  if (reviewedProgramCorrespondenceProfile(recordId)) return 'name-and-alias'
   return recordId === 'prog-gap-wave8-2-suep-international-economy-trade-bachelor'
     || reviewedHtmlAliasProfile(recordId) !== undefined ? 'name-and-alias' : undefined
 }
@@ -75,6 +77,18 @@ export function verifiedNameMatchesRecord(entry: IdentityAcceptance, record: Pro
   if (!entry.verifiedName) return false
   const alias = entry.verifiedNameAlias
   if (!alias) return verifiedNameMatchesRaw(entry.verifiedName, record.name)
+  if (alias.ruleVersion === PROGRAM_CORRESPONDENCE_RULE) {
+    const profile = reviewedProgramCorrespondenceProfile(record.id)
+    const codes = record as Program & { officialProgramCode?: string; departmentCode?: string }
+    return Boolean(profile && entry.entityType === 'program' && entry.recordId === record.id
+      && record.universityId === profile.universityId && record.degreeLevel === profile.degreeLevel
+      && record.programUrl === profile.existingProgramUrl && !codes.officialProgramCode && !codes.departmentCode
+      && identityFingerprint('program', record) === profile.identitySha256 && entry.identitySha256 === profile.identitySha256
+      && alias.existingIdentitySha256 === profile.identitySha256
+      && canonicalIdentityJson(entry.verifiedName) === canonicalIdentityJson(profile.verifiedName)
+      && alias.source.url === profile.sourceUrl && alias.source.sourceId === profile.sourceId
+      && alias.source.snapshotSha256 === profile.rawSha256 && alias.source.canonicalTextSha256 === profile.textSha256)
+  }
   if (alias.ruleVersion === HTML_PROGRAM_ALIAS_RULE) {
     const profile = reviewedHtmlAliasProfile(record.id)
     const codes = record as Program & { officialProgramCode?: string; departmentCode?: string }
