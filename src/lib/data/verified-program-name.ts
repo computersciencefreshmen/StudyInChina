@@ -1,5 +1,5 @@
 import type { IdentityAcceptance } from './identity-acceptance'
-import { identityAcceptanceSchema, identityFingerprint, verifiedNameMatchesRecord, verifiedSourceUrlMatchesRecord } from './identity-acceptance'
+import { hasRequiredProgramNameScope, requiresReviewedProgramNameScope, identityAcceptanceSchema, identityFingerprint, verifiedNameMatchesRecord, verifiedSourceUrlMatchesRecord } from './identity-acceptance'
 import type { Program, Source } from './types'
 import { getTodayDate } from './freshness'
 
@@ -7,8 +7,9 @@ import { getTodayDate } from './freshness'
  * Old ledgers retain their previous semantics. An explicit but invalid scoped
  * review fails closed even for current records; it never restores raw siblings. */
 export function projectVerifiedProgramName(record: Program, sources: Source[], entries: IdentityAcceptance[], today: string): Program | undefined {
-  const scoped = entries.filter(entry => entry.entityType === 'program' && entry.recordId === record.id
-    && (Object.hasOwn(entry, 'verifiedName') || Object.hasOwn(entry, 'verifiedSourceUrl')))
+  const matching = entries.filter(entry => entry.entityType === 'program' && entry.recordId === record.id)
+  if (requiresReviewedProgramNameScope(record.id) && (matching.length !== 1 || !hasRequiredProgramNameScope(matching[0]))) return undefined
+  const scoped = matching.filter(entry => Object.hasOwn(entry, 'verifiedName') || Object.hasOwn(entry, 'verifiedNameAlias') || Object.hasOwn(entry, 'verifiedSourceUrl'))
   if (!scoped.length) return record
   if (scoped.length !== 1) return undefined
   const parsed = identityAcceptanceSchema.safeParse(scoped[0])

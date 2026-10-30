@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, realpathSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { isAbsolute, join, relative, resolve } from 'node:path'
-import { canonicalIdentityJson, identityAcceptanceLedgerSchema, scopedNameReceiptMatches, type IdentityAcceptance } from './identity-acceptance'
+import { canonicalIdentityJson, hasRequiredProgramNameScope, identityAcceptanceLedgerSchema, scopedNameReceiptMatches, type IdentityAcceptance } from './identity-acceptance'
 
 /** Invalid/missing review evidence must never widen public discovery. */
 export function readIdentityAcceptances(dataDirectory = join(process.cwd(), 'content', 'data'), options: { strictProjection?: boolean } = {}): IdentityAcceptance[] {
@@ -12,6 +12,7 @@ export function readIdentityAcceptances(dataDirectory = join(process.cwd(), 'con
     if (options.strictProjection) {
       const root = realpathSync(resolve(dataDirectory, '../..')), receipts = new Map<string, { value: unknown; sha256: string } | null>()
       for (const entry of entries) {
+        if (!hasRequiredProgramNameScope(entry)) throw Error('identity_scoped_name_receipt_invalid')
         const candidate = resolve(root, entry.receiptPath), relativeCandidate = relative(root, candidate)
         if (!relativeCandidate || relativeCandidate.startsWith('..') || isAbsolute(relativeCandidate)) throw Error('identity_scoped_name_receipt_invalid')
         if (!receipts.has(candidate)) {
