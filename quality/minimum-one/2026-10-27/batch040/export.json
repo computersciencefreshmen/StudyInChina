@@ -1,0 +1,100 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch040-842c87e8",
+  "inputCatalogSha256": "f73af1b1f34c248077c43166c8d8a39e77f6584803aae85324f98e10c171bdb1",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T11:33:40.571Z",
+  "proposals": [
+    {
+      "id": "official-literal-6aecfe03c26778e2aacd70ab6e3c3a418341acb39aa83a0e",
+      "universityId": "uni-xiangtan-university",
+      "entityType": "program",
+      "recordId": "prog-gap-mew-csw-xtu-philosophy-bachelor",
+      "operation": "patch",
+      "fields": {
+        "name": {
+          "en": "Philosophy"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629",
+          "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm",
+          "snapshotSha256": "ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f",
+          "objectKey": "maintenance/snapshots/ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629/ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f.bin",
+          "locator": "text:offset:662:718",
+          "quote": "Undergraduate Programs for International Students at XTU"
+        }
+      },
+      "source": {
+        "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm",
+        "snapshotSha256": "ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f",
+        "objectKey": "maintenance/snapshots/ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629/ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f.bin",
+        "locator": "text:offset:775:785",
+        "quote": "Philosophy",
+        "id": "ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629",
+        "checkedAt": "2026-10-30T11:28:22.738Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629",
+          "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm",
+          "snapshotSha256": "ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f",
+          "objectKey": "maintenance/snapshots/ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629/ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f.bin",
+          "locator": "text:offset:775:785",
+          "quote": "Philosophy",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629",
+          "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm",
+          "snapshotSha256": "ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f",
+          "objectKey": "maintenance/snapshots/ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629/ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f.bin",
+          "locator": "text:offset:662:718",
+          "quote": "Undergraduate Programs for International Students at XTU",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629",
+          "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm",
+          "snapshotSha256": "ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f",
+          "objectKey": "maintenance/snapshots/ec191ef1bc5740810d2af32073e7a8588586c78f9f6ed568ac17c62b4ff22629/ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f.bin",
+          "locator": "text:offset:662:718",
+          "quote": "Undergraduate Programs for International Students at XTU",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "identity_only_no_application_fact_renewal",
+        "unreviewed_existing_locales_not_approved",
+        "all_paid_stops_unknowns_remain_immutable",
+        "root_registration_and_formal_import_still_required"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:literal-official-program-identity-with-codes-v2:independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T11:33:28.473Z",
+        "candidateSha256": "38c8d0da6afc042b4e995a2a08070656910c1fd0dbc91eb5da692766cbee6fce",
+        "snapshotSha256": "ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/rules/official-literal-6aecfe03c26778e2aacd70ab6e3c3a418341acb39aa83a0e/e8b10e5107642e3743be879ffae25031e166332391c0395307ff13a357d45928.json",
+        "reviewArtifactSha256": "e8b10e5107642e3743be879ffae25031e166332391c0395307ff13a357d45928"
+      }
+    }
+  ],
+  "sha256": "b3cc741dc3248c1856d1f3fa2e3a843e8be4075585b3e1e5ab9e1fd2fd575332"
+}

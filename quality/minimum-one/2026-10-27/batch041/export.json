@@ -1,0 +1,100 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch041-c4f0dc58",
+  "inputCatalogSha256": "ede1a8fb703dcf5bd1560c3c186561d026a25dc2bf0e6bd42c8c40e9cfaccea9",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T11:38:55.286Z",
+  "proposals": [
+    {
+      "id": "official-literal-f54f9d36eeaa36e4d5b48663ddfbef949de7ffd9732fd57e",
+      "universityId": "uni-dalian-maritime-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "zh": "普通进修项目"
+        },
+        "degreeLevel": "other",
+        "programType": "visiting",
+        "programUrl": "https://iec.dlmu.edu.cn/lxsq/zyjxxm.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7",
+          "url": "https://iec.dlmu.edu.cn/lxsq/zyjxxm.htm",
+          "snapshotSha256": "242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114",
+          "objectKey": "maintenance/snapshots/1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7/242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114.bin",
+          "locator": "text:offset:290:313",
+          "quote": "身体健康,持有国外有效护照,本科在读的外国公民"
+        }
+      },
+      "source": {
+        "url": "https://iec.dlmu.edu.cn/lxsq/zyjxxm.htm",
+        "snapshotSha256": "242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114",
+        "objectKey": "maintenance/snapshots/1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7/242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114.bin",
+        "locator": "text:offset:240:254",
+        "quote": "普通进修项目 1、招生对象:",
+        "id": "1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7",
+        "checkedAt": "2026-10-30T11:34:55.735Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7",
+          "url": "https://iec.dlmu.edu.cn/lxsq/zyjxxm.htm",
+          "snapshotSha256": "242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114",
+          "objectKey": "maintenance/snapshots/1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7/242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114.bin",
+          "locator": "text:offset:240:254",
+          "quote": "普通进修项目 1、招生对象:",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7",
+          "url": "https://iec.dlmu.edu.cn/lxsq/zyjxxm.htm",
+          "snapshotSha256": "242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114",
+          "objectKey": "maintenance/snapshots/1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7/242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114.bin",
+          "locator": "text:offset:240:254",
+          "quote": "普通进修项目 1、招生对象:",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7",
+          "url": "https://iec.dlmu.edu.cn/lxsq/zyjxxm.htm",
+          "snapshotSha256": "242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114",
+          "objectKey": "maintenance/snapshots/1d8a4798f209eeac5456d53133def36bf3025913040041c6beada8416a3724d7/242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114.bin",
+          "locator": "text:offset:240:254",
+          "quote": "普通进修项目 1、招生对象:",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "identity_only_no_application_fact_renewal",
+        "unreviewed_existing_locales_not_approved",
+        "all_paid_stops_unknowns_remain_immutable",
+        "root_registration_and_formal_import_still_required"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:literal-official-program-identity-with-visiting-v5:independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T11:38:30.713Z",
+        "candidateSha256": "45ceddf788bb6ca4520095e49421722118fac9eb16d8f66ce98105f84093661d",
+        "snapshotSha256": "242f606cee0ead5f4898f127374a1024a90c9fa6da42968cfb1375ee08d05114",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/rules/official-literal-f54f9d36eeaa36e4d5b48663ddfbef949de7ffd9732fd57e/1fa6629030aef81d4cc71ba475ce6df58bdbb1aa7a0efc42b056e6b6747b8917.json",
+        "reviewArtifactSha256": "1fa6629030aef81d4cc71ba475ce6df58bdbb1aa7a0efc42b056e6b6747b8917"
+      }
+    }
+  ],
+  "sha256": "78dfcb60532b710a94f0a494747bad9cf2c7bca6562c5e43393acdef3b49ceac"
+}
