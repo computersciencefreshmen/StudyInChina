@@ -1,0 +1,100 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch037-a9a5356b",
+  "inputCatalogSha256": "0b48002b985df136fdfb6ad812a75a1c6554cffa94392f2084445242996bf11d",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T10:27:38.901Z",
+  "proposals": [
+    {
+      "id": "official-literal-8bef6d309c00a486d1f977a40c317012f7613a91c2ca65ac",
+      "universityId": "uni-wuhan-textile-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "en": "Master of Translation and Interpreting"
+        },
+        "degreeLevel": "master",
+        "programType": "degree",
+        "programUrl": "https://iec.wtu.edu.cn/info/1060/3112.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d",
+          "url": "https://iec.wtu.edu.cn/info/1060/3112.htm",
+          "snapshotSha256": "10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d",
+          "objectKey": "maintenance/snapshots/91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d/10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d.bin",
+          "locator": "text:offset:5675:5732",
+          "quote": "1.Non-Chinese citizen in good health with valid passport."
+        }
+      },
+      "source": {
+        "url": "https://iec.wtu.edu.cn/info/1060/3112.htm",
+        "snapshotSha256": "10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d",
+        "objectKey": "maintenance/snapshots/91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d/10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d.bin",
+        "locator": "text:offset:5113:5218",
+        "quote": "School of Foreign Languages Master of Translation and Interpreting Master of Translation and Interpreting",
+        "id": "91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d",
+        "checkedAt": "2026-10-30T10:22:54.463Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d",
+          "url": "https://iec.wtu.edu.cn/info/1060/3112.htm",
+          "snapshotSha256": "10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d",
+          "objectKey": "maintenance/snapshots/91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d/10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d.bin",
+          "locator": "text:offset:5113:5218",
+          "quote": "School of Foreign Languages Master of Translation and Interpreting Master of Translation and Interpreting",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d",
+          "url": "https://iec.wtu.edu.cn/info/1060/3112.htm",
+          "snapshotSha256": "10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d",
+          "objectKey": "maintenance/snapshots/91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d/10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d.bin",
+          "locator": "text:offset:5113:5218",
+          "quote": "School of Foreign Languages Master of Translation and Interpreting Master of Translation and Interpreting",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d",
+          "url": "https://iec.wtu.edu.cn/info/1060/3112.htm",
+          "snapshotSha256": "10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d",
+          "objectKey": "maintenance/snapshots/91df337e8ffd42cdf277a9580a63db3f328e48f0f069ec430aa2754708eaf03d/10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d.bin",
+          "locator": "text:offset:5113:5218",
+          "quote": "School of Foreign Languages Master of Translation and Interpreting Master of Translation and Interpreting",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "identity_only_no_application_fact_renewal",
+        "unreviewed_existing_locales_not_approved",
+        "all_paid_stops_unknowns_remain_immutable",
+        "root_registration_and_formal_import_still_required"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:literal-official-program-identity-with-codes-v2:independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T10:26:50.222Z",
+        "candidateSha256": "5903267eb0a1e49911de403f575b9490c4602275546490faccbe1dd704b17a1b",
+        "snapshotSha256": "10bddc109f318225f8a2c3c61aa3d6bc1e1e4d0f841c0ef1c6720d318e5ca51d",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/rules/official-literal-8bef6d309c00a486d1f977a40c317012f7613a91c2ca65ac/3972a6d37d117daa379ad36931d10df303dcaf5810aa7a7151a96b6f5d91accc.json",
+        "reviewArtifactSha256": "3972a6d37d117daa379ad36931d10df303dcaf5810aa7a7151a96b6f5d91accc"
+      }
+    }
+  ],
+  "sha256": "70f08d2be862a664d30b7d03b2c465d9220451b3f920d1281dbb78aa117b74d8"
+}

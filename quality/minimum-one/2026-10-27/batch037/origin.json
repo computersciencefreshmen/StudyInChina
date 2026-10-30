@@ -1,0 +1,158 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch037-a9a5356b",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "cd2edf9ddb0a1be60ca6f8c544f3a66db9606080dbfa7787070b4a8ec18dacdf",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-wtu-one-001\\root-approved-rule-manifest.json",
+    "sha256": "30a6e40d1e94c290742265fd7e01d20a4c7130f1a1913f62a60ef74cc3bebd21"
+  },
+  "formalImporterSha256": "58457556a64705231a6e34a78a99969b197c8e5e1e12682882127b713238d4ca",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-8bef6d309c00a486d1f977a40c317012f7613a91c2ca65ac",
+      "universityId": "uni-wuhan-textile-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "5903267eb0a1e49911de403f575b9490c4602275546490faccbe1dd704b17a1b",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-wtu-one-001\\independent-review.json",
+        "sha256": "362c8d2fc07ba0d51fe06190b876925a33a6bf6d38c0d03f1d67220738da42eb"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-8bef6d309c00a486d1f977a40c317012f7613a91c2ca65ac/3972a6d37d117daa379ad36931d10df303dcaf5810aa7a7151a96b6f5d91accc.json",
+      "ruleArtifactSha256": "3972a6d37d117daa379ad36931d10df303dcaf5810aa7a7151a96b6f5d91accc",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Master of Translation and Interpreting"
+        },
+        "catalogSha256": "0b48002b985df136fdfb6ad812a75a1c6554cffa94392f2084445242996bf11d",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "ea4083b4788de1ef893b5b86142a7bdb6769bd3003d3328be2dede7a0bffadb9"
+          },
+          "aliasesConsidered": [
+            "Master of Translation and Interpreting",
+            "Translation and Interpreting",
+            "MTI",
+            "翻译硕士",
+            "翻译"
+          ],
+          "catalogSha256": "0b48002b985df136fdfb6ad812a75a1c6554cffa94392f2084445242996bf11d",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "ea4083b4788de1ef893b5b86142a7bdb6769bd3003d3328be2dede7a0bffadb9"
+          },
+          "notes": [
+            "Root independently read the entire official2023 International Postgraduates guide, including the complete School/Discipline/Field-Direction table, nationality conditions, programme lengths, all scholarship categories and source dates. The School of Foreign Languages row explicitly names Master of Translation and Interpreting in both discipline and field columns, directly establishing master level for that concrete named programme. No masters category is borrowed from a scholarship to classify an unrelated row.",
+            "All five current WTU raw records, full related bindings and historical target names/degrees were checked. Existing Design and Textile Science doctorates and Textile Engineering, Computer Science and Technology and Business Administration masters are distinct. None is Translation and Interpreting. This new source-English programme is not a course, department name, generic graduate heading or duplicate direction.",
+            "The same complete guide explicitly requires a non-Chinese citizen with a valid passport and names Wuhan Textile University in its title, body, admissions procedure and contact. The separate2026 image-only guide remains outside this approval; no image transcription or current2026 programme scope is inferred. The2023 source was normally captured with verified TLS, public DNS and robots handling.",
+            "Several textile entries in this table are fields under Materials and Chemicals offered by different schools. They are not counted as separate newly named degree programmes. Only the unambiguous Translation and Interpreting master is selected for this currently empty school. The table has no programme-code column; no national0551 code or college code is inferred.",
+            "The guide is explicitly historical2023 with a September2023-July2025 study period. Its tuition, accommodation, scholarship amounts and tiers, English-language conditions, admission procedures, dates, duration and application eligibility remain unapproved context. Only exact English identity and source year are approved, with no invented Chinese or Russian translation, current intake or full catalogue reconciliation."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\root-wtu-one-001\\actual-peer-and-history-audit.json",
+            "sha256": "75d0eba0155280615cb6c7342b5cda55e61b3c5482466dcb68b2ab8fbebfb6c3"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "doctorate",
+              "departmentCode": null,
+              "identitySha256": "692a4859b6f8fcfd2d8d5975fb7d32c15e163ed72553fbb366d6a651303adf39",
+              "names": {
+                "en": "Design (Doctoral Program)",
+                "ru": "Докторантура по дизайну",
+                "zh": "设计学博士项目"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-wave8-2-wtu-design-doctorate",
+              "url": "https://iec.wtu.edu.cn/info/1060/4502.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "doctorate",
+              "departmentCode": null,
+              "identitySha256": "419b67071dcac531009cda259d3ee103116765612981b752daa1abd83453b02c",
+              "names": {
+                "en": "Textile Science and Engineering (Doctoral Program)",
+                "ru": "Докторантура по текстильной науке и инженерии",
+                "zh": "纺织科学与工程博士项目"
+              },
+              "officialProgramCode": null,
+              "recordId": "prog-gap-wave8-2-wtu-textile-science-engineering-doctorate",
+              "url": "https://iec.wtu.edu.cn/info/1060/4502.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "9a0a624b49e3f0e002d08fcf2b0fcc8f6bacd1d71b3f61b3b9936722116c181c",
+              "names": {
+                "de": "Textilingenieurwesen",
+                "en": "Textile Engineering",
+                "es": "Ingeniería Textil",
+                "fr": "Génie textile",
+                "ru": "Текстильная инженерия",
+                "zh": "纺织工程"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-wuhan-textile-university-textile-engineering-english-master",
+              "url": "https://iec.wtu.edu.cn/info/1060/4292.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "c7b256e8723a62b36783200aa6be6012538eeff754dfd5063d6c0b80a3a3ecfb",
+              "names": {
+                "de": "Informatik und Technologie",
+                "en": "Computer Science and Technology",
+                "es": "Ciencias y Tecnología de la Computación",
+                "fr": "Informatique et technologie",
+                "ru": "Информатика и технологии",
+                "zh": "计算机科学与技术"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-wuhan-textile-university-computer-science-and-technology-english-master",
+              "url": "https://iec.wtu.edu.cn/info/1060/4292.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "departmentCode": null,
+              "identitySha256": "01bd3c22e70ee8ae295ddb856e3d099d61939111db13686ff0fd61d3f11d7e7b",
+              "names": {
+                "de": "Betriebswirtschaftslehre",
+                "en": "Business Administration",
+                "es": "Administración de Empresas",
+                "fr": "Administration des affaires",
+                "ru": "Деловое администрирование",
+                "zh": "工商管理"
+              },
+              "officialProgramCode": null,
+              "recordId": "program-wuhan-textile-university-business-administration-english-master",
+              "url": "https://iec.wtu.edu.cn/info/1060/4292.htm"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": []
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}
