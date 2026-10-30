@@ -1,0 +1,100 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch034-ff7de842",
+  "inputCatalogSha256": "f6564b17f4989286c5bc1df837170d13cecc77a0a4f853ee6f2ecaea2453c72e",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T09:52:29.319Z",
+  "proposals": [
+    {
+      "id": "official-literal-40b1fe14b53ccc1221d031b545467bed903906c539188e7c",
+      "universityId": "uni-zhengzhou-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "zh": "工商管理"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://www5.zzu.edu.cn/sie/info/1145/1211.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8",
+          "url": "https://www5.zzu.edu.cn/sie/info/1145/1211.htm",
+          "snapshotSha256": "53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6",
+          "objectKey": "maintenance/snapshots/ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8/53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6.bin",
+          "locator": "text:offset:0:16",
+          "quote": "郑州大学本科留学生招生专业一览表"
+        }
+      },
+      "source": {
+        "url": "https://www5.zzu.edu.cn/sie/info/1145/1211.htm",
+        "snapshotSha256": "53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6",
+        "objectKey": "maintenance/snapshots/ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8/53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6.bin",
+        "locator": "text:offset:416:420",
+        "quote": "工商管理",
+        "id": "ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8",
+        "checkedAt": "2026-10-30T09:50:32.697Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8",
+          "url": "https://www5.zzu.edu.cn/sie/info/1145/1211.htm",
+          "snapshotSha256": "53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6",
+          "objectKey": "maintenance/snapshots/ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8/53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6.bin",
+          "locator": "text:offset:416:420",
+          "quote": "工商管理",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8",
+          "url": "https://www5.zzu.edu.cn/sie/info/1145/1211.htm",
+          "snapshotSha256": "53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6",
+          "objectKey": "maintenance/snapshots/ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8/53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6.bin",
+          "locator": "text:offset:0:16",
+          "quote": "郑州大学本科留学生招生专业一览表",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8",
+          "url": "https://www5.zzu.edu.cn/sie/info/1145/1211.htm",
+          "snapshotSha256": "53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6",
+          "objectKey": "maintenance/snapshots/ab7f8b2a41c76ad2626a8a85e74e15d885c93033bbf532dde38372a0df1167c8/53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6.bin",
+          "locator": "text:offset:0:16",
+          "quote": "郑州大学本科留学生招生专业一览表",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "identity_only_no_application_fact_renewal",
+        "unreviewed_existing_locales_not_approved",
+        "all_paid_stops_unknowns_remain_immutable",
+        "root_registration_and_formal_import_still_required"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:literal-official-program-identity-with-codes-v2:independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T09:52:05.999Z",
+        "candidateSha256": "1f78c2c1320fea6912e694261f8fcd9e948dfbf1f857a2e2afefc688b35ba5d4",
+        "snapshotSha256": "53c5db9b5efae4100d207b0838f2bcc5b944f77da59ca6d4e8f4360b931a3ca6",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/rules/official-literal-40b1fe14b53ccc1221d031b545467bed903906c539188e7c/45efdc00eb5c548a30011f1b8343734e94cb5f45b4f080cdfea09258dd99cdbe.json",
+        "reviewArtifactSha256": "45efdc00eb5c548a30011f1b8343734e94cb5f45b4f080cdfea09258dd99cdbe"
+      }
+    }
+  ],
+  "sha256": "6b0f56154516f10a95b0cd49dffcf2db791da3e7a060c45669a16fb8f1f4ab13"
+}
