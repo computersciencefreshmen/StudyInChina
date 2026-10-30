@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto'
 import { z } from 'zod'
 import { canonicalJson, type MaintenanceProposal } from './contracts'
 import { verifyDeterministicReviewProof } from './windows-ocr-deterministic-review'
+import { STU_SCAN_RAW_SHA256, WINDOWS_OCR_RULE as STU_OCR_RULE, verifyWindowsOcrReviewedSource as verifyStuSource } from './windows-ocr-stu-reviewed-source'
 
 export const WINDOWS_OCR_PARSER = 'windows-ocr-reviewed-v1' as const
 export const WINDOWS_OCR_FORMAT = 'studyinchina.windows-ocr-reviewed-source' as const
@@ -63,7 +64,7 @@ const json = (bytes: Uint8Array) => JSON.parse(new TextDecoder('utf-8', { fatal:
 
 /** This known scan may not acquire native-text authority by rewriting its derivative. */
 export function requireExplicitKnownWindowsOcrParser(proposal: MaintenanceProposal): void {
-  if (proposal.source.snapshotSha256 === UPC_SCAN_RAW_SHA256 && proposal.source.textArtifact?.parser !== WINDOWS_OCR_PARSER) {
+  if ([UPC_SCAN_RAW_SHA256, STU_SCAN_RAW_SHA256].includes(proposal.source.snapshotSha256) && proposal.source.textArtifact?.parser !== WINDOWS_OCR_PARSER) {
     fail('known_scan_requires_explicit_windows_ocr_parser')
   }
 }
@@ -85,7 +86,11 @@ export async function verifyWindowsOcrReviewedSource(options: {
   existingIdentitySha256?: string;
 }): Promise<string> {
   const { proposal, rawPdf, readArtifact } = options
-  const envelope = ocrReviewedEnvelopeSchema.parse(json(options.envelopeBytes)), content = envelope.content
+  const decoded = json(options.envelopeBytes)
+  if (proposal.source.snapshotSha256 === STU_SCAN_RAW_SHA256 || decoded?.content?.ruleVersion === STU_OCR_RULE) {
+    return verifyStuSource(options)
+  }
+  const envelope = ocrReviewedEnvelopeSchema.parse(decoded), content = envelope.content
   check(options.existingIdentitySha256 === content.existingIdentitySha256, 'current_raw_identity_changed_or_missing')
   const registered = options.approvals.find(ref => ref.artifactKey === envelope.rootApproval.objectKey
     && ref.sha256 === envelope.rootApproval.sha256)

@@ -55,6 +55,8 @@ export function reviewedProgramNameScopeRequirement(recordId: string): 'name-and
   // The UPC scan review validates this Chinese identity only. Dropping its
   // reviewed name and receipt must never restore unreviewed sibling locales.
   if (recordId === 'prog-gap-prog-mew-ne-upc-chemical-engineering-master-en') return 'name-only'
+  // The Shantou scan validates the English programme name only.
+  if (recordId === 'program-shantou-university-computer-science-and-technology-bachelor') return 'name-only'
   return recordId === 'prog-gap-wave8-2-suep-international-economy-trade-bachelor'
     || reviewedHtmlAliasProfile(recordId) !== undefined ? 'name-and-alias' : undefined
 }

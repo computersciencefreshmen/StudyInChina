@@ -1,0 +1,100 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch047-f0344a84",
+  "inputCatalogSha256": "e6add6a971278cdf0d46ba5b33f50d13ec5acb5344666d10b2c36058087be6af",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-30T12:44:26.453Z",
+  "proposals": [
+    {
+      "id": "stu-windows-ocr-private-v1-4fc78b3039ade1b8ed711006",
+      "universityId": "uni-shantou-university",
+      "entityType": "program",
+      "recordId": "program-shantou-university-computer-science-and-technology-bachelor",
+      "operation": "patch",
+      "fields": {
+        "name": {
+          "en": "COMPUTER SCIENCE AND TECHNOLOGY"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://sie.stu.edu.cn/upload/file/20260413/6391167738893235215371326.pdf",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "f58077cc0b2970f656198151ffa900cbe14f4eb65068931b09846577a18c13f7",
+          "url": "https://sie.stu.edu.cn/upload/file/20260413/6391167738893235215371326.pdf",
+          "snapshotSha256": "e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "objectKey": "maintenance/windows-ocr-stu-v1/original-pdf/e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "locator": "page 1",
+          "quote": "FOR INTERNATIONAL STUDENTS"
+        }
+      },
+      "source": {
+        "url": "https://sie.stu.edu.cn/upload/file/20260413/6391167738893235215371326.pdf",
+        "snapshotSha256": "e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+        "objectKey": "maintenance/windows-ocr-stu-v1/original-pdf/e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+        "locator": "page 2",
+        "quote": "COMPUTER SCIENCE AND TECHNOLOGY",
+        "id": "f58077cc0b2970f656198151ffa900cbe14f4eb65068931b09846577a18c13f7",
+        "checkedAt": "2026-10-30T04:26:58.080Z",
+        "contentType": "application/pdf",
+        "textArtifact": {
+          "objectKey": "maintenance/windows-ocr-stu-v1/explicit-reviewed-source/79bbcfc0237a6b7982e5e2e441b8b5ff607268e31709cb8b9fbd5701a39181be",
+          "sha256": "79bbcfc0237a6b7982e5e2e441b8b5ff607268e31709cb8b9fbd5701a39181be",
+          "rawSnapshotSha256": "e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "parser": "windows-ocr-reviewed-v1"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "f58077cc0b2970f656198151ffa900cbe14f4eb65068931b09846577a18c13f7",
+          "url": "https://sie.stu.edu.cn/upload/file/20260413/6391167738893235215371326.pdf",
+          "snapshotSha256": "e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "objectKey": "maintenance/windows-ocr-stu-v1/original-pdf/e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "locator": "page 2",
+          "quote": "COMPUTER SCIENCE AND TECHNOLOGY",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "f58077cc0b2970f656198151ffa900cbe14f4eb65068931b09846577a18c13f7",
+          "url": "https://sie.stu.edu.cn/upload/file/20260413/6391167738893235215371326.pdf",
+          "snapshotSha256": "e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "objectKey": "maintenance/windows-ocr-stu-v1/original-pdf/e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "locator": "page 1",
+          "quote": "UNDERGRADUATE PROGRAMS",
+          "fieldPath": "degreeLevel"
+        },
+        {
+          "sourceId": "f58077cc0b2970f656198151ffa900cbe14f4eb65068931b09846577a18c13f7",
+          "url": "https://sie.stu.edu.cn/upload/file/20260413/6391167738893235215371326.pdf",
+          "snapshotSha256": "e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "objectKey": "maintenance/windows-ocr-stu-v1/original-pdf/e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+          "locator": "page 1",
+          "quote": "UNDERGRADUATE PROGRAMS",
+          "fieldPath": "programType"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "deterministic:stu-reviewed-windows-ocr-private-v1:assistant-independent-source-reading",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-30T12:40:15.687Z",
+        "candidateSha256": "b1c1c2736b33336cd0f3aac6c504804b8f51c00ee6ea983079f13f82589028ed",
+        "snapshotSha256": "e2f84fa6e0ab52abcc02fe2c59676bf52ed3678fc3caff8dd579f3cbc41ce29c",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/windows-ocr-stu-v1/deterministic-review-v2/0148cd4c716e3552eb812aec013253f0d860a4ac5aeafb8e8119372f787caa42",
+        "reviewArtifactSha256": "0148cd4c716e3552eb812aec013253f0d860a4ac5aeafb8e8119372f787caa42"
+      }
+    }
+  ],
+  "sha256": "ab8d98f20931e486a06c999c134ce0a6d49b028ae4c762f53f66c268728ca53f"
+}
