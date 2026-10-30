@@ -1,0 +1,430 @@
+{
+  "format": "studyinchina.minimum-one-literal-origins",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch019-3cd298cc",
+  "ruleVersion": "literal-official-program-identity-with-codes-v2",
+  "sourcePlanSha256": "3ec4545c71cf6721df1b4d07ffcfb6a4148b844bb02ad2a0ecad7ec03ebc071b",
+  "approvedRuleManifest": {
+    "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\root-approved-wave10-manifest-001.json",
+    "sha256": "bd3b47f162e1940e39666d2bdb3ebcac37bdb1f3beba40114a8dd0c5876831c2"
+  },
+  "formalImporterSha256": "213e5a3de16825898676fc04773feed297b434ee1cd2a716594b06dd7b495acb",
+  "importToolSha256": "dbfec91449fd46752e55de9e3d34564b4fa6e0235f0334cd8e8ee6b0c97e56db",
+  "historicalModelJournalModified": false,
+  "modelCalls": 0,
+  "origins": [
+    {
+      "proposalId": "official-literal-0c576ae7e7f4acba3cca5f04d8f4c41095d289087ffe8dfb",
+      "universityId": "uni-jilin-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "4c20ef390e9e425cc76e9b4ac1f436877c118e2bb624122f5b67e9732ef8dcde",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\html-reviewed-second\\jlu-018-003\\independent-review.json",
+        "sha256": "3734469f17b80ff18e5377d396b94957565d491b461c29824ed69f21e5c12eac"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-0c576ae7e7f4acba3cca5f04d8f4c41095d289087ffe8dfb/7e6f9594f7d5c5d9723651e6884a9e8b3bbf665548c9bbe8e6d765415e238ba2.json",
+      "ruleArtifactSha256": "7e6f9594f7d5c5d9723651e6884a9e8b3bbf665548c9bbe8e6d765415e238ba2",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "外交学"
+        },
+        "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+        "existingProgrammeConflictReview": {
+          "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "notes": [
+            "The actual source names 外交学专业 in its Chinese-taught international undergraduate section. No official programme code is published here. All current school raw degree/name/code/URL fields and every locale were read. No same-degree Diplomacy / 外交学 / diplomatic-studies identity or unresolved alias is present.",
+            "program-jilin-university-clinical-medicine-mbbs-bachelor; degree=bachelor; all names={\"en\":\"Clinical Medicine (MBBS)\",\"zh\":\"Clinical Medicine (MBBS)\",\"ru\":\"Клиническая медицина (MBBS)\"}; code=not present; URL=https://cie.jlu.edu.cn/lxsq1/xlxm.htm. This is the separate named bachelor field stated in the unchanged raw record; none of its Chinese, English or Russian labels is Diplomacy / 外交学, and no source connects it as an alias.",
+            "program-jilin-university-vehicle-engineering-bachelor; degree=bachelor; all names={\"en\":\"Vehicle Engineering\",\"zh\":\"Vehicle Engineering\",\"ru\":\"Автомобилестроение\"}; code=not present; URL=https://cie.jlu.edu.cn/lxsq1/xlxm.htm. This is the separate named bachelor field stated in the unchanged raw record; none of its Chinese, English or Russian labels is Diplomacy / 外交学, and no source connects it as an alias.",
+            "prog-gap-wave8-jlu-chinese-language-bachelor; degree=bachelor; all names={\"en\":\"Chinese Language (Bachelor's Program)\",\"zh\":\"汉语言本科项目\",\"ru\":\"Бакалавриат по китайскому языку\"}; code=not present; URL=https://cie.jlu.edu.cn/info/1047/3653.htm. This is the separate named bachelor field stated in the unchanged raw record; none of its Chinese, English or Russian labels is Diplomacy / 外交学, and no source connects it as an alias.",
+            "prog-gap-jlu-2026-chinese-language-culture; degree=language; all names={\"en\":\"Chinese Language and Culture Program\",\"zh\":\"汉语言文化项目\",\"ru\":\"Программа китайского языка и культуры\"}; code=not present; URL=https://cie.jlu.edu.cn/info/1079/3627.htm. Non-degree Chinese-language/culture study is a different programme and qualification.",
+            "prog-gap-wave8-jlu-international-economics-trade-bachelor; degree=bachelor; all names={\"en\":\"International Economics and Trade (Bachelor's Program)\",\"zh\":\"国际经济与贸易本科项目\",\"ru\":\"Бакалавриат по международной экономике и торговле\"}; code=not present; URL=https://cie.jlu.edu.cn/info/1047/3653.htm. This is the separate named bachelor field stated in the unchanged raw record; none of its Chinese, English or Russian labels is Diplomacy / 外交学, and no source connects it as an alias.",
+            "prog-gap-jlu-2026-master-icle; degree=master; all names={\"en\":\"Master of International Chinese Language Education\",\"zh\":\"国际中文教育硕士\",\"ru\":\"Магистратура по международному преподаванию китайского языка\"}; code=not present; URL=https://cie.jlu.edu.cn/zhuanyemulu.pdf. International Chinese Language Education is a different discipline and master qualification.",
+            "prog-gap-wave8-jlu-pharmacy-bachelor; degree=bachelor; all names={\"en\":\"Pharmacy (Bachelor's Program)\",\"zh\":\"药学本科项目\",\"ru\":\"Бакалавриат по фармации\"}; code=not present; URL=https://cie.jlu.edu.cn/info/1047/3653.htm. This is the separate named bachelor field stated in the unchanged raw record; none of its Chinese, English or Russian labels is Diplomacy / 外交学, and no source connects it as an alias."
+          ],
+          "programsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\programs.json",
+            "sha256": "7da0eb3e12856bf8e36fa020ac87515a89ab1831f00dec6eb595591f632d150a"
+          },
+          "reviewedExistingRecords": [
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "5a9dcfd70ab15c231b81b3567505a2001d0d29af4f689505310daa8684d375cf",
+              "names": {
+                "en": "Clinical Medicine (MBBS)",
+                "ru": "Клиническая медицина (MBBS)",
+                "zh": "Clinical Medicine (MBBS)"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://cie.jlu.edu.cn/lxsq1/xlxm.htm",
+              "recordId": "program-jilin-university-clinical-medicine-mbbs-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "d8b2e334ac1c77220e7bf97119d4742e043df511a574dc91f27c153ed688d3ac",
+              "names": {
+                "en": "Vehicle Engineering",
+                "ru": "Автомобилестроение",
+                "zh": "Vehicle Engineering"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://cie.jlu.edu.cn/lxsq1/xlxm.htm",
+              "recordId": "program-jilin-university-vehicle-engineering-bachelor"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "c2a94041c305f4a1940c043c3196d8fc2414870e1ae9af6c5c3988a540ea131e",
+              "names": {
+                "en": "Chinese Language (Bachelor's Program)",
+                "ru": "Бакалавриат по китайскому языку",
+                "zh": "汉语言本科项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://cie.jlu.edu.cn/info/1047/3653.htm",
+              "recordId": "prog-gap-wave8-jlu-chinese-language-bachelor"
+            },
+            {
+              "degreeLevel": "language",
+              "existingIdentitySha256": "32151d769d77cb5131d439b983abc28854a411b8fb6d9e773ff2d7fe56e21688",
+              "names": {
+                "en": "Chinese Language and Culture Program",
+                "ru": "Программа китайского языка и культуры",
+                "zh": "汉语言文化项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://cie.jlu.edu.cn/info/1079/3627.htm",
+              "recordId": "prog-gap-jlu-2026-chinese-language-culture"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "8adbc60f54ae7d465af461ff3e1bff33da8a622a235ce7dd573b18964684307f",
+              "names": {
+                "en": "International Economics and Trade (Bachelor's Program)",
+                "ru": "Бакалавриат по международной экономике и торговле",
+                "zh": "国际经济与贸易本科项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://cie.jlu.edu.cn/info/1047/3653.htm",
+              "recordId": "prog-gap-wave8-jlu-international-economics-trade-bachelor"
+            },
+            {
+              "degreeLevel": "master",
+              "existingIdentitySha256": "c828f9129c6e254d1b79f27c0a8e77d1caf2886014475acbd0d20ebce66ee915",
+              "names": {
+                "en": "Master of International Chinese Language Education",
+                "ru": "Магистратура по международному преподаванию китайского языка",
+                "zh": "国际中文教育硕士"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://cie.jlu.edu.cn/zhuanyemulu.pdf",
+              "recordId": "prog-gap-jlu-2026-master-icle"
+            },
+            {
+              "degreeLevel": "bachelor",
+              "existingIdentitySha256": "fe479792de242e05021edf04b5fdce377cce3eb654872f77a66aa5b400548b14",
+              "names": {
+                "en": "Pharmacy (Bachelor's Program)",
+                "ru": "Бакалавриат по фармации",
+                "zh": "药学本科项目"
+              },
+              "officialProgramCode": null,
+              "programUrl": "https://cie.jlu.edu.cn/info/1047/3653.htm",
+              "recordId": "prog-gap-wave8-jlu-pharmacy-bachelor"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": [
+            {
+              "decision": "different_concrete_programme",
+              "existingIdentitySha256": "5a9dcfd70ab15c231b81b3567505a2001d0d29af4f689505310daa8684d375cf",
+              "reason": "The unchanged old identity is Clinical Medicine (MBBS), bachelor, a medical discipline. The shared degree-admissions page has separate Chinese and English clinical-medicine qualification clauses. The selected first Chinese-taught bachelor paragraph explicitly says 公共外交学院外交学专业, an independent diplomacy discipline; none of the old English/Chinese/Russian names or code fields establishes it as a Clinical Medicine alias.",
+              "recordId": "program-jilin-university-clinical-medicine-mbbs-bachelor"
+            },
+            {
+              "decision": "different_concrete_programme",
+              "existingIdentitySha256": "d8b2e334ac1c77220e7bf97119d4742e043df511a574dc91f27c153ed688d3ac",
+              "reason": "The unchanged old identity is Vehicle Engineering, bachelor, an engineering discipline. The shared source links an automotive engineering school programme brochure separately. The selected actual Chinese-taught bachelor clause explicitly names 外交学专业 at the public diplomacy college. All old locale names and code fields were read; this is a different concrete programme, not a vehicle-engineering translation, direction, campus or renamed identity.",
+              "recordId": "program-jilin-university-vehicle-engineering-bachelor"
+            }
+          ]
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-b4ac4b5c69aefc5d3174e0bc7d06f3ee9b157b777a04f312",
+      "universityId": "uni-tongji-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "3f83d64a09a26b53f4d54a239dc829bfbad1999b5e5dcd8a82225e4ebdc37ebf",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\batch-discovery-011\\tongji-architecture-2026\\revision-001\\independent-review.json",
+        "sha256": "8410a89d9224494f196ed59888ab0805ee04b2cd9ce3cb15237f5d69c4adc0b3"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-b4ac4b5c69aefc5d3174e0bc7d06f3ee9b157b777a04f312/4b4958f0db753b8284ae155484ac6b879f4fc5ca2d6aabfda39d0434086e4d25.json",
+      "ruleArtifactSha256": "4b4958f0db753b8284ae155484ac6b879f4fc5ca2d6aabfda39d0434086e4d25",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Architecture (International Class)"
+        },
+        "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+        "kind": "existing_literal",
+        "oldNames": {
+          "en": "Architecture (International Class)"
+        },
+        "recordId": "program-tongji-university-architecture-international-class-bachelor",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-244e43b6f5c807ac9a39b9c3549d1033861504888e3a76dc",
+      "universityId": "uni-south-china-agricultural-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "c7e7f8fc316281331c300e35f9dfa35b11f6ff51e8ef73ddc93fb23bf36d9ecd",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\scau-one-002\\independent-review.json",
+        "sha256": "97c0afd4ead6236d6d2c465ae8a1a4c42bbcd12a3f56149953c5926095b491b5"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-244e43b6f5c807ac9a39b9c3549d1033861504888e3a76dc/4389af750b319b21f40ec5a4298eb5aa89c6e0cd0943176dcd8aba3acefac696.json",
+      "ruleArtifactSha256": "4389af750b319b21f40ec5a4298eb5aa89c6e0cd0943176dcd8aba3acefac696",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Forest protection"
+        },
+        "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+        "existingProgrammeConflictReview": {
+          "actualIdentityBindingsFile": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\content\\data\\identity-bindings.json",
+            "sha256": "039beed232223ab74dfba45f6bf44e7fb7887df5029dae65e9da2a78ab83abd0"
+          },
+          "aliasesConsidered": [
+            "Forest protection",
+            "Forest Protection",
+            "森林保护",
+            "森林保护学",
+            "лесозащита",
+            "Plant Protection",
+            "植物保护"
+          ],
+          "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+          "checks": {
+            "knownAliasAndTranslationsChecked": true,
+            "noUnresolvedIdentityConflict": true,
+            "sameSchoolDegreeLiteralNameChecked": true,
+            "sameSchoolDegreeOfficialCodeChecked": true
+          },
+          "identityBindingsReview": {
+            "actualFileCompared": true,
+            "sha256": "039beed232223ab74dfba45f6bf44e7fb7887df5029dae65e9da2a78ab83abd0"
+          },
+          "notes": [
+            "The official international-student overview contains an explicitly paired individual profile: Name Hamza Shahid, Nationality Pakistani, Level Master student, Major Forest protection, and South China Agricultural University Scholarship. The contiguous profile, not nearby unrelated course names or a general institution footer, binds this exact concrete major, master category, international audience and owner.",
+            "This is an official account of an enrolled international student, not a current admissions catalogue. It confirms historical programme identity only. The page has no reliable programme intake year; it is deliberately not relabelled as 2026 admissions. No current opening, qualification, language, fee, deadline, duration or scholarship entitlement is approved.",
+            "All three current same-school raw records, every locale, degree level and actual identity binding were read. Soil Science / 土壤学, Food Science and Engineering / 食品科学与工程 and Plant Protection (Professional Master's) / 植物保护（专业硕士） are distinct disciplines from Forest protection / 森林保护学. Forest protection is not the general Plant Protection professional programme: no descriptive suffix is removed and no broad protection subject is silently merged. No old forest-protection name, translation, alias or code binding was found.",
+            "The only approved locale is the exact English string Forest protection, retaining the source lower-case p. Chinese 森林保护学 and Russian equivalents were considered solely in the conflict audit and are not approved translations. The profile publishes no programme/department code and its scholarship label is not a programme code.",
+            "The original complete HTTP200 HTML capture and canonical text were independently checked byte-for-byte and reparsed using the frozen HTML decoder and htmlToText. The real saved raw HTML contains the exact profile strings; this is source-only assistant review, never MiniMax approval. Historical model unknown/STOP records are unchanged.",
+            "Compared full existing program-south-china-agricultural-university-soil-science-master; degree=master; names={\"en\":\"Soil Science\",\"zh\":\"土壤学\",\"ru\":\"Почвоведение\"}; actual bindings=[]. The named discipline is distinct from Forest protection; no unresolved alias is reused as new identity.",
+            "Compared full existing program-south-china-agricultural-university-food-science-and-engineering-master; degree=master; names={\"en\":\"Food Science and Engineering\",\"zh\":\"食品科学与工程\",\"ru\":\"Пищевая наука и инженерия\"}; actual bindings=[]. The named discipline is distinct from Forest protection; no unresolved alias is reused as new identity.",
+            "Compared full existing prog-gap-mew-csw-scau-plant-protection-professional-master; degree=master; names={\"en\":\"Plant Protection (Professional Master's)\",\"zh\":\"植物保护（专业硕士）\",\"ru\":\"Защита растений (профессиональная магистратура)\"}; actual bindings=[]. The named discipline is distinct from Forest protection; no unresolved alias is reused as new identity."
+          ],
+          "programsSnapshot": {
+            "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\scau-one-002\\catalogue-identity-audit.json",
+            "sha256": "a49574452bef7b59699c08bfe36ed73a2bcedfe2ca24102ec5640210df275064"
+          },
+          "reviewedExistingRecords": [
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "identitySha256": "90f0fc8ea476f30ee76d8564a5e070bd25c6648c984de23723bb595ec95bfea4",
+              "names": {
+                "en": "Soil Science",
+                "ru": "Почвоведение",
+                "zh": "土壤学"
+              },
+              "recordId": "program-south-china-agricultural-university-soil-science-master",
+              "url": "https://cie.scau.edu.cn/bksy/list.psp"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "identitySha256": "04a3144395de1eaf9284f0c39bacf51b2ddcbc68b13bd1a171074f7ed802e89e",
+              "names": {
+                "en": "Food Science and Engineering",
+                "ru": "Пищевая наука и инженерия",
+                "zh": "食品科学与工程"
+              },
+              "recordId": "program-south-china-agricultural-university-food-science-and-engineering-master",
+              "url": "https://cie.scau.edu.cn/jxgl/list.htm"
+            },
+            {
+              "canonicalBindings": [],
+              "degreeLevel": "master",
+              "identitySha256": "4aafbf6bca926664c3e932f480ffedff95c13208fd39f90c5e80226154362df0",
+              "names": {
+                "en": "Plant Protection (Professional Master's)",
+                "ru": "Защита растений (профессиональная магистратура)",
+                "zh": "植物保护（专业硕士）"
+              },
+              "recordId": "prog-gap-mew-csw-scau-plant-protection-professional-master",
+              "url": "https://gdic.scau.edu.cn/2026/0421/c11155a432798/page.htm"
+            }
+          ],
+          "sameOfficialUrlDistinctProgrammeAudit": [
+            {
+              "decision": "different_concrete_programme",
+              "existingIdentitySha256": "90f0fc8ea476f30ee76d8564a5e070bd25c6648c984de23723bb595ec95bfea4",
+              "reason": "The existing Soil Science master is soil science / 土壤学, a distinct discipline from the explicitly named Forest protection master in a separate Pakistani student profile.",
+              "recordId": "program-south-china-agricultural-university-soil-science-master"
+            }
+          ]
+        },
+        "kind": "new_identity",
+        "oldNames": null,
+        "recordId": null,
+        "requiresExplicitRootManifestEntry": true,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-e2c867e25c84911da114c18cf54f6c57e2eb289fd8736568",
+      "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
+      "method": "deterministic",
+      "originalProposalContentSha256": "45149761105fac622e9d39e2ea006c0e1f1c7883b20bceb457943ca5bd44d9b5",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\wave10-input-001\\four-html-source-review.json",
+        "sha256": "57afe22aec3c29f3624fd02d31d5b5863f7536db80a927861c5acccc253f68dc"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-e2c867e25c84911da114c18cf54f6c57e2eb289fd8736568/f938f725fd59563f40e6bca709ea771c60f7deede43b781f880bc6958d543cfe.json",
+      "ruleArtifactSha256": "f938f725fd59563f40e6bca709ea771c60f7deede43b781f880bc6958d543cfe",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "中医学"
+        },
+        "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+        "kind": "existing_literal",
+        "oldNames": {
+          "zh": "中医学"
+        },
+        "recordId": "program-tianjin-university-of-traditional-chinese-medicine-traditional-chinese-m",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-f9b4baf115c876a6d1f007a7c668e0209e3143a70803754b",
+      "universityId": "uni-shanxi-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "e6f6763a46a6f8c7dd6f1d94fad28a35664a166aa08385268913b9c8245ce6d0",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\wave10-input-001\\four-html-source-review.json",
+        "sha256": "57afe22aec3c29f3624fd02d31d5b5863f7536db80a927861c5acccc253f68dc"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-f9b4baf115c876a6d1f007a7c668e0209e3143a70803754b/06718d575a63697d70f7fe6fc3685d210682176c6c4ddfb3c6d3c2d59dbf4ea3.json",
+      "ruleArtifactSha256": "06718d575a63697d70f7fe6fc3685d210682176c6c4ddfb3c6d3c2d59dbf4ea3",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "国际经济与贸易"
+        },
+        "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+        "kind": "existing_literal",
+        "oldNames": {
+          "zh": "国际经济与贸易"
+        },
+        "recordId": "program-shanxi-university-international-economics-and-trade-bachelor",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-1ad400b4963f99fe95798523425247d3a107ed00e630eb0b",
+      "universityId": "uni-southwest-petroleum-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "23cd5ce28fadce73428388e576416bbe941b1dfce5ea4d483d020689628110e4",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\wave10-input-001\\four-html-source-review.json",
+        "sha256": "57afe22aec3c29f3624fd02d31d5b5863f7536db80a927861c5acccc253f68dc"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-1ad400b4963f99fe95798523425247d3a107ed00e630eb0b/895ccfca141562cb7020490a9c6f2b935b697bc3308fe41d3da8147666ee0dbe.json",
+      "ruleArtifactSha256": "895ccfca141562cb7020490a9c6f2b935b697bc3308fe41d3da8147666ee0dbe",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "石油工程"
+        },
+        "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+        "kind": "existing_literal",
+        "oldNames": {
+          "zh": "石油工程"
+        },
+        "recordId": "prog-gap-confirmed-swpu-petroleum-engineering-bachelor",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-7052d5ad1b439632113baae9542c6f0bd9699b82b8e311b0",
+      "universityId": "uni-zhejiang-af-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "833fe9d235ca30c8577fb10545a7f53ad3b6b2d1d27e324e6950e0da985d10e1",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\literal-identity-rule\\wave10-input-001\\four-html-source-review.json",
+        "sha256": "57afe22aec3c29f3624fd02d31d5b5863f7536db80a927861c5acccc253f68dc"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-7052d5ad1b439632113baae9542c6f0bd9699b82b8e311b0/6743e570c529d1037557f73c413523253ecf06ca9278deef236fa44b2f89c1fb.json",
+      "ruleArtifactSha256": "6743e570c529d1037557f73c413523253ecf06ca9278deef236fa44b2f89c1fb",
+      "identityResolution": {
+        "actualOfficialName": {
+          "zh": "林学"
+        },
+        "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+        "kind": "existing_literal",
+        "oldNames": {
+          "zh": "林学"
+        },
+        "recordId": "prog-gap-wave7-zafu-forestry-bachelor",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    },
+    {
+      "proposalId": "official-literal-1cb6a3b382981c0f046ebe815880ba70b1bf501e5e9da2d4",
+      "universityId": "uni-north-china-electric-power-university",
+      "method": "deterministic",
+      "originalProposalContentSha256": "c7101e61cbb08323bd65bd4101e260e2ec5aa8372959daa4f7ea728d56e0dcc5",
+      "sourceReview": {
+        "file": "C:\\Users\\Henry\\.codex\\worktrees\\catalog-272-maintenance\\StudyInChina\\.pipeline-build\\minimum-one-school-2026-10-27\\source-discovery-019\\review-pdf\\ncepu-one-001\\independent-review.json",
+        "sha256": "6e811a25dbbc70ae2787c08f383297855fcecf675269fbe854dbfe9fdf9aee36"
+      },
+      "ruleArtifactKey": "maintenance/rules/official-literal-1cb6a3b382981c0f046ebe815880ba70b1bf501e5e9da2d4/06da259a9cb07dfcf0e2ffc1187b6105b533532e77a947d230a96eef4e1f9aa6.json",
+      "ruleArtifactSha256": "06da259a9cb07dfcf0e2ffc1187b6105b533532e77a947d230a96eef4e1f9aa6",
+      "identityResolution": {
+        "actualOfficialName": {
+          "en": "Electrical Engineering and Its Automation"
+        },
+        "catalogSha256": "0da16e1fd99474de86b656e29075026e82cfe18eeff6d07e943d048f1e27b469",
+        "kind": "existing_literal",
+        "oldNames": {
+          "en": "Electrical Engineering and Its Automation"
+        },
+        "recordId": "program-north-china-electric-power-university-electrical-engineering-and-its-aut",
+        "requiresExplicitRootManifestEntry": false,
+        "sourceReviewOriginalDecision": "pass_identity_evidence_only"
+      },
+      "originalModelArtifactsUsedAsApproval": false
+    }
+  ]
+}
