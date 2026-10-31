@@ -10,6 +10,7 @@ import { hasProgramInternationalScopeEvidence } from '../../workers/catalog-main
 import { canonicalIdentityJson, identityAcceptanceLedgerSchema, identityFingerprint, verifiedNameMatchesRaw, type IdentityAcceptanceLedger, type VerifiedProgramName, type ReviewedProgramAliasAudit } from '../../src/lib/data/identity-acceptance'
 import { loadReviewedProgramAliases, resolveReviewedProgramAlias, type ReviewedProgramAliasRef } from './reviewed-program-alias'
 import { rejectWindowsOcrEnvelopeAsNative, requireExplicitKnownWindowsOcrParser, verifyWindowsOcrReviewedSource, WINDOWS_OCR_PARSER, type ReviewedWindowsOcrSourceRef } from './windows-ocr-reviewed-source'
+import { OPENXML_WORKBOOK_PARSER, verifyLiteralWorkbookText } from './openxml-workbook-source'
 import { catalogSha256, loadMaintenanceBundle } from './build-scope'
 import {
   canonicalJson, exportContentSha256, maintenanceCandidateExportSchema, maintenanceScopeSchema,
@@ -139,12 +140,22 @@ export async function verifyReviewedProposalEvidence(proposal: MaintenancePropos
   assertOfficial(source.url, school)
   const rawBytes = await readArtifact(source.objectKey)
   if (sha256(rawBytes) !== source.snapshotSha256) throw new Error('source_snapshot_checksum_mismatch')
+  // A ZIP workbook cannot acquire HTML or PDF authority by changing its label.
+  if (rawBytes[0] === 0x50 && rawBytes[1] === 0x4b && source.textArtifact?.parser !== OPENXML_WORKBOOK_PARSER) {
+    throw new Error('workbook_evidence:explicit_workbook_parser_required')
+  }
   let text: string
   if (source.textArtifact) {
     if (source.textArtifact.rawSnapshotSha256 !== source.snapshotSha256) throw new Error('text_artifact_raw_binding_mismatch')
     const bytes = await readArtifact(source.textArtifact.objectKey)
     if (sha256(bytes) !== source.textArtifact.sha256) throw new Error('text_artifact_checksum_mismatch')
-    if (source.textArtifact.parser === WINDOWS_OCR_PARSER) {
+    if (source.textArtifact.parser === OPENXML_WORKBOOK_PARSER) {
+      if (!new URL(source.url).pathname.toLowerCase().endsWith('.xlsx')
+        || !/^application\/vnd\.(?:ms-excel|openxmlformats-officedocument\.spreadsheetml\.sheet)(?:;|$)/i.test(source.contentType)) {
+        throw new Error('workbook_evidence:official_xlsx_source_required')
+      }
+      text = verifyLiteralWorkbookText(rawBytes, bytes)
+    } else if (source.textArtifact.parser === WINDOWS_OCR_PARSER) {
       text = await verifyWindowsOcrReviewedSource({ proposal, rawPdf: rawBytes, envelopeBytes: bytes,
         readArtifact, approvals: reviewedWindowsOcrSources, existingIdentitySha256: windowsOcrIdentitySha256 })
     } else {
