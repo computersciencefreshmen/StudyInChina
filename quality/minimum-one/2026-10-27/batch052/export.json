@@ -1,0 +1,87 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch052-4930bc0a",
+  "inputCatalogSha256": "dbab4b99aeda28256931555f1da43123eea140e55de88aaca31822bb47314720",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-31T05:40:23.794Z",
+  "proposals": [
+    {
+      "id": "maintenance-e5f7ff027232c1058c55f113ed216c56b242fe3363c1f59f976081507225f7c2",
+      "universityId": "uni-shanghai-lixin-university-of-accounting-and-finance",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/2bb03d709814dbca64219b91deb81520f050c4542767b51a3bcde1c34c3b8591/656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c.bin",
+          "quote": "来华留学生 全日制本科的基本学制为四年 , 学习年限为三年至六年 , 学习年限包括休学、保留学籍的时间。",
+          "snapshotSha256": "656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c",
+          "sourceId": "2bb03d709814dbca64219b91deb81520f050c4542767b51a3bcde1c34c3b8591",
+          "url": "https://lxlx.lixin.edu.cn/UndergraduateDegreePrograms/list.htm"
+        },
+        "name": {
+          "zh": "汉语言文学"
+        },
+        "programType": "degree",
+        "programUrl": "https://lxlx.lixin.edu.cn/UndergraduateDegreePrograms/list.htm"
+      },
+      "source": {
+        "url": "https://lxlx.lixin.edu.cn/UndergraduateDegreePrograms/list.htm",
+        "snapshotSha256": "656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c",
+        "objectKey": "maintenance/snapshots/2bb03d709814dbca64219b91deb81520f050c4542767b51a3bcde1c34c3b8591/656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c.bin",
+        "locator": "text:document",
+        "quote": "School of Humanities and Arts C hinese",
+        "id": "2bb03d709814dbca64219b91deb81520f050c4542767b51a3bcde1c34c3b8591",
+        "checkedAt": "2026-10-31T05:33:45.666Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "2bb03d709814dbca64219b91deb81520f050c4542767b51a3bcde1c34c3b8591",
+          "url": "https://lxlx.lixin.edu.cn/UndergraduateDegreePrograms/list.htm",
+          "snapshotSha256": "656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c",
+          "objectKey": "maintenance/snapshots/2bb03d709814dbca64219b91deb81520f050c4542767b51a3bcde1c34c3b8591/656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c.bin",
+          "locator": "text:document",
+          "quote": "人文艺术学院 汉语言文学",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "2bb03d709814dbca64219b91deb81520f050c4542767b51a3bcde1c34c3b8591",
+          "url": "https://lxlx.lixin.edu.cn/UndergraduateDegreePrograms/list.htm",
+          "snapshotSha256": "656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c",
+          "objectKey": "maintenance/snapshots/2bb03d709814dbca64219b91deb81520f050c4542767b51a3bcde1c34c3b8591/656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c.bin",
+          "locator": "text:document",
+          "quote": "Undergraduate Degree Programs 本科生项目",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "0dba7f91-9382-454e-a981-dde24825b906",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:dcaddd83-7e6d-4c85-b7c5-47caa1bab756",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-31T05:35:30.306Z",
+        "candidateSha256": "12a10af19ed8fadf3e234cc66b9efbba24e4370d00a4adf5ea938607ac253474",
+        "snapshotSha256": "656e5980955ae88166227b8ec3aa464d2b626fd3fb338a89afb5f233e9d4da0c",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "dcaddd83-7e6d-4c85-b7c5-47caa1bab756",
+        "artifactKey": "maintenance/reviews/maintenance-e5f7ff027232c1058c55f113ed216c56b242fe3363c1f59f976081507225f7c2/a4333fc18df19e30fc8c7f949b0695a09c906ca395463bfbf8bf90f5765275c7.json",
+        "reviewArtifactSha256": "a4333fc18df19e30fc8c7f949b0695a09c906ca395463bfbf8bf90f5765275c7"
+      }
+    }
+  ],
+  "sha256": "93daad59f387422f8af0110b7897ee5c8d89fdf76cdcf6acba8a41c53269e32a"
+}
