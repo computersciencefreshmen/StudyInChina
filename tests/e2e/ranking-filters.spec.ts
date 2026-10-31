@@ -51,10 +51,26 @@ for (const route of ['universities', 'programs', 'scholarships']) {
 }
 
 test('institution API returns linked evidence for all four combined ranking filters', async ({ request }) => {
-  const response = await request.get('/api/v1/directory/institutions?qsRankMax=100&theRankMax=100&usNewsRankMax=100&arwuRankMax=100')
+  const response = await request.get('/api/v1/directory/institutions?limit=100&qsRankMax=100&theRankMax=100&usNewsRankMax=100&arwuRankMax=100')
   expect(response.ok()).toBe(true)
   const body = await response.json()
-  expect(body.data.length).toBeGreaterThan(0)
+  // Evidence can legitimately expire. Compare the combined filter with the
+  // current public evidence instead of requiring a permanently nonempty result.
+  const institutions: Array<{ id: string; rankings?: Array<{ system: string; rankMax: number }> }> = []
+  let cursor: string | null = null
+  do {
+    const params = new URLSearchParams({ limit: '100' })
+    if (cursor) params.set('cursor', cursor)
+    const page = await request.get(`/api/v1/directory/institutions?${params}`)
+    expect(page.ok()).toBe(true)
+    const all = await page.json()
+    institutions.push(...all.data)
+    cursor = all.meta.nextCursor ?? null
+  } while (cursor)
+  const expected = institutions.filter(institution => ['arwu', 'qs', 'the', 'usnews']
+    .every(system => institution.rankings?.some(ranking => ranking.system === system && ranking.rankMax <= 100)))
+  expect(body.data.map((item: { id: string }) => item.id).sort())
+    .toEqual(expected.map(item => item.id).sort())
   for (const institution of body.data) {
     expect(institution.rankings.map((ranking: { system: string }) => ranking.system).sort())
       .toEqual(['arwu', 'qs', 'the', 'usnews'])

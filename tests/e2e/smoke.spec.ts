@@ -326,7 +326,9 @@ test('scholarship deadline claims follow current evidence and never claim applic
     await expect(page.getByText('Deadline ahead', { exact: true })).toHaveCount(0)
     await expect(page.getByRole('link', { name: /Official application route/ })).toHaveCount(0)
     const original = rawData.scholarships.find(item => item.id === scholarship.id)!
-    if (original.deadline) await expect(page.locator(`time[datetime="${original.deadline}"]`)).toHaveCount(0)
+    // A source check or verification date can equal the expired deadline.
+    // Only the funding summary's date would make an application deadline claim.
+    if (original.deadline) await expect(page.locator('.detail-aside > section').locator(`time[datetime="${original.deadline}"]`)).toHaveCount(0)
     await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', /^https:\/\//)
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
   }
