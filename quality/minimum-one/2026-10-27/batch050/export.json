@@ -1,0 +1,87 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch050-0fbf6c8c",
+  "inputCatalogSha256": "1c1d14fd075f115788c735d885e0f503ac112ddfd24237a040ca9cc7753071e1",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-31T05:06:05.332Z",
+  "proposals": [
+    {
+      "id": "maintenance-e98c8edf6173f24cfcdb3d26663dc9897d21ee8b692e3d63b9a7dea0b025dac3",
+      "universityId": "uni-shenyang-pharmaceutical-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/abc277d4389b0ca04941a1a48dc879c98a5f68709b07bab64ef2ca108c61c39c/e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a.bin",
+          "quote": "The University has been authorized to confer Master’s and Doctor’s Degrees and to enroll students from Hong Kong , Macao , Taiwan , as well as other foreign countries.",
+          "snapshotSha256": "e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a",
+          "sourceId": "abc277d4389b0ca04941a1a48dc879c98a5f68709b07bab64ef2ca108c61c39c",
+          "url": "https://dir.syphu.edu.cn/info/1012/1369.htm"
+        },
+        "name": {
+          "en": "Pharmacy"
+        },
+        "programType": "degree",
+        "programUrl": "https://dir.syphu.edu.cn/info/1012/1369.htm"
+      },
+      "source": {
+        "url": "https://dir.syphu.edu.cn/info/1012/1369.htm",
+        "snapshotSha256": "e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a",
+        "objectKey": "maintenance/snapshots/abc277d4389b0ca04941a1a48dc879c98a5f68709b07bab64ef2ca108c61c39c/e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a.bin",
+        "locator": "text:document",
+        "quote": "School of Pharmacy Pharmacy 4-year 25,000 Bachelor of Science",
+        "id": "abc277d4389b0ca04941a1a48dc879c98a5f68709b07bab64ef2ca108c61c39c",
+        "checkedAt": "2026-10-31T05:02:19.552Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "abc277d4389b0ca04941a1a48dc879c98a5f68709b07bab64ef2ca108c61c39c",
+          "url": "https://dir.syphu.edu.cn/info/1012/1369.htm",
+          "snapshotSha256": "e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a",
+          "objectKey": "maintenance/snapshots/abc277d4389b0ca04941a1a48dc879c98a5f68709b07bab64ef2ca108c61c39c/e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a.bin",
+          "locator": "text:document",
+          "quote": "Pharmacy",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "abc277d4389b0ca04941a1a48dc879c98a5f68709b07bab64ef2ca108c61c39c",
+          "url": "https://dir.syphu.edu.cn/info/1012/1369.htm",
+          "snapshotSha256": "e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a",
+          "objectKey": "maintenance/snapshots/abc277d4389b0ca04941a1a48dc879c98a5f68709b07bab64ef2ca108c61c39c/e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a.bin",
+          "locator": "text:document",
+          "quote": "Bachelor of Science",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "735d48a7-00e9-466c-91cf-a22ec9eff768",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:4e6c5166-48ef-43c4-8fa9-aeaf310d6bb4",
+        "method": "independent_model",
+        "reviewedAt": "2026-10-31T05:03:39.787Z",
+        "candidateSha256": "499c90ffb67334bfcc87e0c92ccb004d318950c488d7764cf3ac27b282b68656",
+        "snapshotSha256": "e45bf1c89fbcb10b732eddb035e40f846326531addd3f34773f668d8b6b4ae5a",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "4e6c5166-48ef-43c4-8fa9-aeaf310d6bb4",
+        "artifactKey": "maintenance/reviews/maintenance-e98c8edf6173f24cfcdb3d26663dc9897d21ee8b692e3d63b9a7dea0b025dac3/dfaa68b42f68908ba5b28680c46919f53be606f4173a4431c57fb917d1e6c5c1.json",
+        "reviewArtifactSha256": "dfaa68b42f68908ba5b28680c46919f53be606f4173a4431c57fb917d1e6c5c1"
+      }
+    }
+  ],
+  "sha256": "a714caadca7dc800a9c05ec44644c327775bc95616c5b3600ceb3350d0517d22"
+}

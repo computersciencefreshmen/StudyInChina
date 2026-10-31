@@ -1,0 +1,90 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch051-1ea61fb8",
+  "inputCatalogSha256": "12b5533635cf433efd51ce6634f91bf10528daab500756ea01d7dbcc8f2cf13b",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-31T05:09:33.930Z",
+  "proposals": [
+    {
+      "id": "root-reviewed-gmu-literal-21b489b26cf8748e",
+      "universityId": "uni-guangzhou-medical-university",
+      "entityType": "program",
+      "recordId": "program-guangzhou-medical-university-clinical-medicine-mbbs-bachelor",
+      "operation": "patch",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "0c71523f2a4b28b1b739af5b900f0840e8089e829f87407f72bc39b4a4a6e57a",
+          "url": "https://fao.gzhmu.edu.cn/lxgy/zsgs.htm",
+          "snapshotSha256": "21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894",
+          "objectKey": "maintenance/snapshots/0c71523f2a4b28b1b739af5b900f0840e8089e829f87407f72bc39b4a4a6e57a/21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894.bin",
+          "locator": "text:offset:852:1060",
+          "quote": "GMU has enrolled and trained a total of 623 international students at different academic levels since 2010,representing 47 countries spanning five continents — Asia, Africa, the Americas, Europe, and Oceania."
+        },
+        "name": {
+          "en": "clinical medicine (MBBS)"
+        },
+        "programType": "degree",
+        "programUrl": "https://fao.gzhmu.edu.cn/lxgy/zsgs.htm"
+      },
+      "source": {
+        "url": "https://fao.gzhmu.edu.cn/lxgy/zsgs.htm",
+        "snapshotSha256": "21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894",
+        "objectKey": "maintenance/snapshots/0c71523f2a4b28b1b739af5b900f0840e8089e829f87407f72bc39b4a4a6e57a/21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894.bin",
+        "locator": "text:offset:1264:1288",
+        "quote": "clinical medicine (MBBS)",
+        "id": "0c71523f2a4b28b1b739af5b900f0840e8089e829f87407f72bc39b4a4a6e57a",
+        "checkedAt": "2026-10-31T05:02:10.592Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "0c71523f2a4b28b1b739af5b900f0840e8089e829f87407f72bc39b4a4a6e57a",
+          "url": "https://fao.gzhmu.edu.cn/lxgy/zsgs.htm",
+          "snapshotSha256": "21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894",
+          "objectKey": "maintenance/snapshots/0c71523f2a4b28b1b739af5b900f0840e8089e829f87407f72bc39b4a4a6e57a/21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894.bin",
+          "locator": "text:offset:1264:1288",
+          "quote": "clinical medicine (MBBS)",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "0c71523f2a4b28b1b739af5b900f0840e8089e829f87407f72bc39b4a4a6e57a",
+          "url": "https://fao.gzhmu.edu.cn/lxgy/zsgs.htm",
+          "snapshotSha256": "21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894",
+          "objectKey": "maintenance/snapshots/0c71523f2a4b28b1b739af5b900f0840e8089e829f87407f72bc39b4a4a6e57a/21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894.bin",
+          "locator": "text:offset:354:374",
+          "quote": "学校特别开设全英文授课的临床医学本科专业",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "19264b1f-bad9-441f-abb5-22b53d0be586",
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_resolution",
+        "original_model_disagreement_preserved",
+        "identity_only_no_dynamic_renewal"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:gmu-literal-source-resolution-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-31T05:08:01.307Z",
+        "candidateSha256": "ae059981bd687d6ba1cb9d30649d25717e91cc05a227b135fc673394a1608c35",
+        "snapshotSha256": "21b489b26cf8748eaf645d3d78c2157a51901216daa77727f5d053c725123894",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/root-literal-source/1bc1cc87884ad461f74c6e5843670a305c82d51eb95380112208bc2ff4f687c4.json",
+        "reviewArtifactSha256": "1bc1cc87884ad461f74c6e5843670a305c82d51eb95380112208bc2ff4f687c4"
+      }
+    }
+  ],
+  "sha256": "b9e9a494c1f14762878bc12029ca33cada44cd29fc0640e6a3f8782d2ded6d41"
+}
