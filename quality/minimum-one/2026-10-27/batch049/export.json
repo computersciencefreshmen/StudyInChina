@@ -1,0 +1,96 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch049-ee46c50f",
+  "inputCatalogSha256": "4ed7db07f7963c8685af0102d4e5949ae72a80a201fb8a2528ce5d31b65ea600",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-31T04:56:50.338Z",
+  "proposals": [
+    {
+      "id": "literal-hfut-workbook-biomedical-a288ccc61141f016",
+      "universityId": "uni-hefei-university-of-technology",
+      "entityType": "program",
+      "recordId": "prog-gap-mve-ecs-hfut-biomedical-engineering-bachelor",
+      "operation": "patch",
+      "fields": {
+        "name": {
+          "en": "Biomedical Engineering"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca",
+          "url": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+          "snapshotSha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+          "objectKey": "maintenance/snapshots/0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca/a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c.bin",
+          "locator": "text:offset:23:80",
+          "quote": "2026 HFUT Undergraduate Majors for International Students"
+        }
+      },
+      "source": {
+        "url": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+        "snapshotSha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+        "objectKey": "maintenance/snapshots/0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca/a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c.bin",
+        "locator": "text:offset:237:259",
+        "quote": "Biomedical Engineering",
+        "id": "0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca",
+        "checkedAt": "2026-10-30T16:16:58.971Z",
+        "contentType": "application/vnd.ms-excel;charset=UTF-8",
+        "textArtifact": {
+          "objectKey": "maintenance/text/0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca/3576ed137c9cb369563a5905307e4443367d3bfdb33c0aaccc4d1901bf15e20a.txt",
+          "sha256": "3576ed137c9cb369563a5905307e4443367d3bfdb33c0aaccc4d1901bf15e20a",
+          "rawSnapshotSha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+          "parser": "openxml-literal-workbook-v1"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca",
+          "url": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+          "snapshotSha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+          "objectKey": "maintenance/snapshots/0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca/a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c.bin",
+          "locator": "text:offset:237:259",
+          "quote": "Biomedical Engineering",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca",
+          "url": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+          "snapshotSha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+          "objectKey": "maintenance/snapshots/0d0cd5fd30eb5262d576bf1b89e8eacaefa077b772136655387d3e24ef3ccdca/a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c.bin",
+          "locator": "text:offset:23:80",
+          "quote": "2026 HFUT Undergraduate Majors for International Students",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "status": "ready",
+      "warnings": [
+        "identity_only",
+        "native_workbook_no_model_call",
+        "parallel_language_rows_not_separate_identities",
+        "only_source_literal_english_name_approved"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:literal-openxml-workbook-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-31T04:55:46.822Z",
+        "candidateSha256": "e0abbee3bf173bd29d7a510715e9d1203abd059dd00a4ae357e036a6893125c3",
+        "snapshotSha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/native-workbooks/264d4253ba29adfdc3ffb0a74d724e20b5006c7257c1ed3720b34249246365c3.json",
+        "reviewArtifactSha256": "264d4253ba29adfdc3ffb0a74d724e20b5006c7257c1ed3720b34249246365c3"
+      }
+    }
+  ],
+  "sha256": "e9e9ae6a13e246a3f86ae2ccd522c2320debc6152d15e13fddadd593485c5f95"
+}
