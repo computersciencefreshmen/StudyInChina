@@ -1,0 +1,91 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch056-3f37e5c1",
+  "inputCatalogSha256": "5bfc74908ae5c7f5230a798f1de5058e4d6bf729d37aa8a5e103de6ea010fdea",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-10-31T07:03:30.816Z",
+  "proposals": [
+    {
+      "id": "root-wku-master-source-2db6947d0d548dad",
+      "universityId": "uni-wenzhou-kean-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "en": "Architecture (M.Arch.)"
+        },
+        "degreeLevel": "master",
+        "programType": "degree",
+        "programUrl": "https://www.wku.edu.cn/en/node/5711",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "aa0de3418eef6aad0ccaa5ab2d1f34b1a0fe67204d80cb229ea688119c66e70d",
+          "url": "https://www.wku.edu.cn/en/node/5711",
+          "snapshotSha256": "2db6947d0d548dad38a67880a29c28a43b31ba3baf91cc2fd83bb8ace6730b25",
+          "objectKey": "maintenance/snapshots/aa0de3418eef6aad0ccaa5ab2d1f34b1a0fe67204d80cb229ea688119c66e70d/2db6947d0d548dad38a67880a29c28a43b31ba3baf91cc2fd83bb8ace6730b25.bin",
+          "locator": "text:offset:7465:7643",
+          "quote": "2) Graduate International Applicants https://www.kean.edu/offices/admissions/international-applicants *The Graduate International Applicants section is at the bottom of the page."
+        }
+      },
+      "source": {
+        "url": "https://www.wku.edu.cn/en/node/5711",
+        "snapshotSha256": "2db6947d0d548dad38a67880a29c28a43b31ba3baf91cc2fd83bb8ace6730b25",
+        "objectKey": "maintenance/snapshots/aa0de3418eef6aad0ccaa5ab2d1f34b1a0fe67204d80cb229ea688119c66e70d/2db6947d0d548dad38a67880a29c28a43b31ba3baf91cc2fd83bb8ace6730b25.bin",
+        "locator": "text:offset:5615:5675",
+        "quote": "Architecture (M.Arch.) Full-time 2–3 years 160,000 Part-time",
+        "id": "aa0de3418eef6aad0ccaa5ab2d1f34b1a0fe67204d80cb229ea688119c66e70d",
+        "checkedAt": "2026-10-31T06:55:33.982Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "aa0de3418eef6aad0ccaa5ab2d1f34b1a0fe67204d80cb229ea688119c66e70d",
+          "url": "https://www.wku.edu.cn/en/node/5711",
+          "snapshotSha256": "2db6947d0d548dad38a67880a29c28a43b31ba3baf91cc2fd83bb8ace6730b25",
+          "objectKey": "maintenance/snapshots/aa0de3418eef6aad0ccaa5ab2d1f34b1a0fe67204d80cb229ea688119c66e70d/2db6947d0d548dad38a67880a29c28a43b31ba3baf91cc2fd83bb8ace6730b25.bin",
+          "locator": "text:offset:5615:5675",
+          "quote": "Architecture (M.Arch.) Full-time 2–3 years 160,000 Part-time",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "0a5beefc2efa43f3ce394a22cf6cb385eb2715fa66f398213e0930c1f1880236",
+          "url": "https://design.wku.edu.cn/en/yanjiushengzhaosheng",
+          "snapshotSha256": "bea9a1e805a7878f56f4e12c081d1879a1968a4aa80f7916f410a8be1f9378c0",
+          "objectKey": "maintenance/snapshots/0a5beefc2efa43f3ce394a22cf6cb385eb2715fa66f398213e0930c1f1880236/bea9a1e805a7878f56f4e12c081d1879a1968a4aa80f7916f410a8be1f9378c0.bin",
+          "locator": "text:offset:1218:1393",
+          "quote": "Wenzhou-Kean University’s Master of Architecture program focuses on the relationship between architecture and its environment through the combination of technology and design.",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_resolution_not_model_approval",
+        "original_insufficient_model_scope_citation_preserved",
+        "source_year_conflict_not_resolved_or_published",
+        "new_master_identity_not_a_bachelor_alias"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:wku-master-original-source-resolution-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-10-31T07:02:46.774Z",
+        "candidateSha256": "fc040296214b4430fe03a940fc0af8ec71c0d1177c98c783723a7a42da58e2d3",
+        "snapshotSha256": "2db6947d0d548dad38a67880a29c28a43b31ba3baf91cc2fd83bb8ace6730b25",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/wku-master-source/69f30bc85b4bd93f24e20ce9d939dc2b610b66b63df85c01ae49dc7244bda758.json",
+        "reviewArtifactSha256": "69f30bc85b4bd93f24e20ce9d939dc2b610b66b63df85c01ae49dc7244bda758"
+      }
+    }
+  ],
+  "sha256": "521b4d907e767161a60def15ebebb430c6821d74d7bede634cca176a67dd0764"
+}

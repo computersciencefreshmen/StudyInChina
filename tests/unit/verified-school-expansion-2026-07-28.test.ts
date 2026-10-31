@@ -17,8 +17,16 @@ const data = bundleSchema.parse({
   scholarships,
 })
 
+const wkuBatchProgramIds = new Set([
+  'program-wenzhou-kean-university-finance-bs',
+  'program-wenzhou-kean-university-global-business-bs',
+  'program-wenzhou-kean-university-computer-science-bs',
+  'program-wenzhou-kean-university-biology-cell-molecular-bs',
+  'program-wenzhou-kean-university-architecture-bfa',
+])
+
 describe('verified school expansion on 2026-07-28', () => {
-  it('publishes five WKU programs with exact official program sources', () => {
+  it('preserves the five original WKU bachelors with exact official program sources', () => {
     const university = data.universities.find(
       (item) => item.id === 'uni-wenzhou-kean-university',
     )
@@ -27,11 +35,11 @@ describe('verified school expansion on 2026-07-28', () => {
       'https://admission.wku.edu.cn/en/internationalstudents',
     )
 
-    const schoolPrograms = data.programs.filter(
-      (item) => item.universityId === university?.id,
-    )
-    expect(schoolPrograms).toHaveLength(5)
+    // Later degrees have their own evidence; this regression protects this batch.
+    const schoolPrograms = data.programs.filter(item => wkuBatchProgramIds.has(item.id))
+    expect(schoolPrograms).toHaveLength(wkuBatchProgramIds.size)
     for (const item of schoolPrograms) {
+      expect(item.universityId).toBe(university?.id)
       expect(item.durationMonths).toBe(48)
       expect(item.teachingLanguages).toEqual(['English'])
       expect(item.applyUrl).toBe('https://intlapply.wku.edu.cn/')
@@ -47,12 +55,7 @@ describe('verified school expansion on 2026-07-28', () => {
   })
 
   it('keeps WKU spring entry visibly restricted to transfer students', () => {
-    const programIds = new Set(
-      data.programs
-        .filter((item) => item.universityId === 'uni-wenzhou-kean-university')
-        .map((item) => item.id),
-    )
-    const cycles = data.admissionCycles.filter((item) => programIds.has(item.programId))
+    const cycles = data.admissionCycles.filter(item => wkuBatchProgramIds.has(item.programId))
     expect(cycles).toHaveLength(5)
     for (const cycle of cycles) {
       expect(cycle.academicYear).toBe('2026-2027')
