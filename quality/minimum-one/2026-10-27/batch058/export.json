@@ -1,0 +1,251 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch058-27ade6f5",
+  "inputCatalogSha256": "5c8ef8eca93cf080f012e91504b90746d1a939818b76c47cfab4374ef3d9fc4c",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-11-01T06:11:55.038Z",
+  "proposals": [
+    {
+      "id": "root-imu-bachelor-column-e66ae1ccf49ac921",
+      "universityId": "uni-inner-mongolia-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "en": "Sports Training"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://iec.imu.edu.cn/en/danpian.jsp?urltype=tree.TreeTempUrl&wbtreeid=1195",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "2a509dfebc072f934c73937fc79bb3a2fbf0f1de398da2e77b9942cb62539f5e",
+          "url": "https://iec.imu.edu.cn/en/danpian.jsp?urltype=tree.TreeTempUrl&wbtreeid=1195",
+          "snapshotSha256": "e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60",
+          "objectKey": "maintenance/snapshots/2a509dfebc072f934c73937fc79bb3a2fbf0f1de398da2e77b9942cb62539f5e/e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60.bin",
+          "locator": "text:offset:4751:5006",
+          "quote": "1. Undergraduate Students: Applicants shall be at least 18 years old and be non-Chinese citizens, in good physical and mental health, with good character and academic performance, a high school diploma or higher, and a certificate of HSK Level 4 or above."
+        }
+      },
+      "source": {
+        "url": "https://iec.imu.edu.cn/en/danpian.jsp?urltype=tree.TreeTempUrl&wbtreeid=1195",
+        "snapshotSha256": "e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60",
+        "objectKey": "maintenance/snapshots/2a509dfebc072f934c73937fc79bb3a2fbf0f1de398da2e77b9942cb62539f5e/e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60.bin",
+        "locator": "text:offset:12977:12992",
+        "quote": "Sports Training",
+        "id": "2a509dfebc072f934c73937fc79bb3a2fbf0f1de398da2e77b9942cb62539f5e",
+        "checkedAt": "2026-11-01T05:54:49.994Z",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "2a509dfebc072f934c73937fc79bb3a2fbf0f1de398da2e77b9942cb62539f5e",
+          "url": "https://iec.imu.edu.cn/en/danpian.jsp?urltype=tree.TreeTempUrl&wbtreeid=1195",
+          "snapshotSha256": "e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60",
+          "objectKey": "maintenance/snapshots/2a509dfebc072f934c73937fc79bb3a2fbf0f1de398da2e77b9942cb62539f5e/e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60.bin",
+          "locator": "text:offset:12977:12992",
+          "quote": "Sports Training",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "2a509dfebc072f934c73937fc79bb3a2fbf0f1de398da2e77b9942cb62539f5e",
+          "url": "https://iec.imu.edu.cn/en/danpian.jsp?urltype=tree.TreeTempUrl&wbtreeid=1195",
+          "snapshotSha256": "e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60",
+          "objectKey": "maintenance/snapshots/2a509dfebc072f934c73937fc79bb3a2fbf0f1de398da2e77b9942cb62539f5e/e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60.bin",
+          "locator": "text:offset:8021:8094",
+          "quote": "Names of Schools/Colleges Bachelor Degree Master’s Degree Doctoral Degree",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_review_not_model_approval",
+        "identity_only_no_dynamic_fields"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:original-source-column-and-image-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-11-01T06:10:30.230Z",
+        "candidateSha256": "7252f8e5418b792530aacdf9f74ed47c3d7ddad18d328dfbf8c6ee6a9a71f009",
+        "snapshotSha256": "e66ae1ccf49ac9213aaa98705d2b93b0fb7db8afe5a714eea6bbee4240e1ec60",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/root-two-reviews/61ce6ef9873344f1ea5ec4652d23a07b76250e798c149b30620290c93dad863c.json",
+        "reviewArtifactSha256": "61ce6ef9873344f1ea5ec4652d23a07b76250e798c149b30620290c93dad863c"
+      }
+    },
+    {
+      "id": "root-gafa-original-image-c058424ad0460cd2",
+      "universityId": "uni-guangzhou-academy-of-fine-arts",
+      "entityType": "program",
+      "recordId": "prog-gap-mve-ecma-gafa-chinese-painting-bachelor",
+      "operation": "patch",
+      "fields": {
+        "name": {
+          "zh": "中国画"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://wsc.gzarts.edu.cn/info/1497/3952.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "d0ab189ec0a7c134d1bd999d6cb59b54cbbee3fea86d2c18ed432fc19ba2b417",
+          "url": "https://wsc.gzarts.edu.cn/info/1497/3952.htm",
+          "snapshotSha256": "2088c419342e58129c28d19ead1443987b98878937bb51ac3d001843d3454615",
+          "objectKey": "maintenance/snapshots/d0ab189ec0a7c134d1bd999d6cb59b54cbbee3fea86d2c18ed432fc19ba2b417/2088c419342e58129c28d19ead1443987b98878937bb51ac3d001843d3454615.bin",
+          "locator": "text:offset:2637:2652",
+          "quote": "非中国籍公民 ,持有效外国护照"
+        }
+      },
+      "source": {
+        "url": "https://wsc.gzarts.edu.cn/__local/4/FB/E6/BACE31AA8CD2923B19A646D0915_BA55498D_7C3A.png",
+        "snapshotSha256": "c058424ad0460cd2629a1cfd2490c879ddc251d1c5e82ac0b2fb1f571095a2ff",
+        "objectKey": "maintenance/snapshots/6edd72b47cbf78434269b1741420c0b1b5ae0d42c0443ca40abdaf721b2c89d1/c058424ad0460cd2629a1cfd2490c879ddc251d1c5e82ac0b2fb1f571095a2ff.bin",
+        "locator": "text:offset:0:3",
+        "quote": "中国画",
+        "id": "6edd72b47cbf78434269b1741420c0b1b5ae0d42c0443ca40abdaf721b2c89d1",
+        "checkedAt": "2026-11-01T06:05:33.676Z",
+        "contentType": "image/png",
+        "textArtifact": {
+          "objectKey": "maintenance/text/6edd72b47cbf78434269b1741420c0b1b5ae0d42c0443ca40abdaf721b2c89d1/8ef7458908ed892a0baccde4ceb5b19cda134ef9dbfbbb8e3eea98d55df3d152.txt",
+          "sha256": "8ef7458908ed892a0baccde4ceb5b19cda134ef9dbfbbb8e3eea98d55df3d152",
+          "rawSnapshotSha256": "c058424ad0460cd2629a1cfd2490c879ddc251d1c5e82ac0b2fb1f571095a2ff",
+          "parser": "tesseract"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "6edd72b47cbf78434269b1741420c0b1b5ae0d42c0443ca40abdaf721b2c89d1",
+          "url": "https://wsc.gzarts.edu.cn/__local/4/FB/E6/BACE31AA8CD2923B19A646D0915_BA55498D_7C3A.png",
+          "snapshotSha256": "c058424ad0460cd2629a1cfd2490c879ddc251d1c5e82ac0b2fb1f571095a2ff",
+          "objectKey": "maintenance/snapshots/6edd72b47cbf78434269b1741420c0b1b5ae0d42c0443ca40abdaf721b2c89d1/c058424ad0460cd2629a1cfd2490c879ddc251d1c5e82ac0b2fb1f571095a2ff.bin",
+          "locator": "text:offset:0:3",
+          "quote": "中国画",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "d0ab189ec0a7c134d1bd999d6cb59b54cbbee3fea86d2c18ed432fc19ba2b417",
+          "url": "https://wsc.gzarts.edu.cn/info/1497/3952.htm",
+          "snapshotSha256": "2088c419342e58129c28d19ead1443987b98878937bb51ac3d001843d3454615",
+          "objectKey": "maintenance/snapshots/d0ab189ec0a7c134d1bd999d6cb59b54cbbee3fea86d2c18ed432fc19ba2b417/2088c419342e58129c28d19ead1443987b98878937bb51ac3d001843d3454615.bin",
+          "locator": "text:offset:0:23",
+          "quote": "广州美术学院2026年国际学生(本科)招生简章",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_review_not_model_approval",
+        "identity_only_no_dynamic_fields"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:original-source-column-and-image-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-11-01T06:10:30.238Z",
+        "candidateSha256": "e334c7c35e937b89ee5de41efd7991482ba9d27fb82ac09835e2027d0325e5aa",
+        "snapshotSha256": "c058424ad0460cd2629a1cfd2490c879ddc251d1c5e82ac0b2fb1f571095a2ff",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/root-two-reviews/5ed9edc5e9e78bbbc7c6416aee8eec33fe47b66ea8820c1e786aa70f28c16480.json",
+        "reviewArtifactSha256": "5ed9edc5e9e78bbbc7c6416aee8eec33fe47b66ea8820c1e786aa70f28c16480"
+      }
+    },
+    {
+      "id": "root-mnnu-master-literal-688938d7837de2e0",
+      "universityId": "uni-minnan-normal-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "en": "Analytical Chemistry"
+        },
+        "degreeLevel": "master",
+        "programType": "degree",
+        "programUrl": "https://oes.mnnu.edu.cn/info/1024/1641.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "106dbe42fbd6764b8baeb9c28be02965fded74482b440b67516dea62cb7060cb",
+          "url": "https://oes.mnnu.edu.cn/info/1024/1641.htm",
+          "snapshotSha256": "688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa",
+          "objectKey": "maintenance/snapshots/106dbe42fbd6764b8baeb9c28be02965fded74482b440b67516dea62cb7060cb/688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa.bin",
+          "locator": "text:offset:519:660",
+          "quote": "It is also one of the universities approved by the Ministry of Education of the People’s Republic of China to recruit international students."
+        }
+      },
+      "source": {
+        "url": "https://oes.mnnu.edu.cn/info/1024/1641.htm",
+        "snapshotSha256": "688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa",
+        "objectKey": "maintenance/snapshots/106dbe42fbd6764b8baeb9c28be02965fded74482b440b67516dea62cb7060cb/688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa.bin",
+        "locator": "text:offset:1191:1211",
+        "quote": "Analytical Chemistry",
+        "id": "106dbe42fbd6764b8baeb9c28be02965fded74482b440b67516dea62cb7060cb",
+        "checkedAt": "2026-11-01T05:59:57.820Z",
+        "contentType": "text/html"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "106dbe42fbd6764b8baeb9c28be02965fded74482b440b67516dea62cb7060cb",
+          "url": "https://oes.mnnu.edu.cn/info/1024/1641.htm",
+          "snapshotSha256": "688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa",
+          "objectKey": "maintenance/snapshots/106dbe42fbd6764b8baeb9c28be02965fded74482b440b67516dea62cb7060cb/688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa.bin",
+          "locator": "text:offset:1191:1211",
+          "quote": "Analytical Chemistry",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "106dbe42fbd6764b8baeb9c28be02965fded74482b440b67516dea62cb7060cb",
+          "url": "https://oes.mnnu.edu.cn/info/1024/1641.htm",
+          "snapshotSha256": "688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa",
+          "objectKey": "maintenance/snapshots/106dbe42fbd6764b8baeb9c28be02965fded74482b440b67516dea62cb7060cb/688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa.bin",
+          "locator": "text:offset:1156:1237",
+          "quote": "Three-year master degree programs: Analytical Chemistry , Environmental Chemistry",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_review_not_model_approval",
+        "identity_only_no_dynamic_fields"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:original-source-column-and-image-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-11-01T06:10:30.240Z",
+        "candidateSha256": "945451304d9c5f2310e575fb325a2b91ffd145a9daf2c71590d48af2c8763485",
+        "snapshotSha256": "688938d7837de2e0b7cb7f7b03d3070f6acf087a1386ee9fe5dd2595174e19fa",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/root-two-reviews/b6e486b339df10941ff08f5aaf0f3ade9f2cfd37067b264a82652c7bc67a663b.json",
+        "reviewArtifactSha256": "b6e486b339df10941ff08f5aaf0f3ade9f2cfd37067b264a82652c7bc67a663b"
+      }
+    }
+  ],
+  "sha256": "96fb16947d57a04c302247347545a0682aa7df7380acd5a0c02431ff293254e6"
+}
