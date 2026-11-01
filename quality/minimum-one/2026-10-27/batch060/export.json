@@ -1,0 +1,95 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch060-96ec9c73",
+  "inputCatalogSha256": "be96b130d3b84a215a34578a0886f02627f0b6c5e7966bbd11e3d140cac47252",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-11-01T14:33:10.284Z",
+  "proposals": [
+    {
+      "id": "root-original-source-2c24ea304f9e557921d8",
+      "universityId": "uni-henan-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "zh": "汉语国际教育"
+        },
+        "degreeLevel": "master",
+        "programType": "degree",
+        "programUrl": "https://dwhy.henu.edu.cn/dfiles/upload/2_001.pdf",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4",
+          "url": "https://dwhy.henu.edu.cn/dfiles/upload/2_001.pdf",
+          "snapshotSha256": "2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf",
+          "objectKey": "maintenance/snapshots/b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4/2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf.bin",
+          "locator": "text:offset:1241:1270",
+          "quote": "非中国籍人士; Non-Chinese citizens;"
+        }
+      },
+      "source": {
+        "url": "https://dwhy.henu.edu.cn/dfiles/upload/2_001.pdf",
+        "snapshotSha256": "2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf",
+        "objectKey": "maintenance/snapshots/b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4/2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf.bin",
+        "locator": "text:offset:2019:2027",
+        "quote": "汉语国际教育专业",
+        "id": "b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4",
+        "checkedAt": "2026-11-01T10:58:22.887Z",
+        "contentType": "application/pdf",
+        "textArtifact": {
+          "objectKey": "maintenance/text/b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4/639711c5156f6d98e1b42f65ba9cddfaf9311749deb8108bac1d33851c01abd9.txt",
+          "sha256": "639711c5156f6d98e1b42f65ba9cddfaf9311749deb8108bac1d33851c01abd9",
+          "rawSnapshotSha256": "2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf",
+          "parser": "poppler"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4",
+          "url": "https://dwhy.henu.edu.cn/dfiles/upload/2_001.pdf",
+          "snapshotSha256": "2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf",
+          "objectKey": "maintenance/snapshots/b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4/2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf.bin",
+          "locator": "text:offset:2019:2027",
+          "quote": "汉语国际教育专业",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4",
+          "url": "https://dwhy.henu.edu.cn/dfiles/upload/2_001.pdf",
+          "snapshotSha256": "2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf",
+          "objectKey": "maintenance/snapshots/b6621e20be094d96a8eb125aab26c3b46113ed1fba947ee97ebdc39cc17abfa4/2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf.bin",
+          "locator": "text:offset:2019:2482",
+          "quote": "汉语国际教育专业 Teaching Chinese to 2年 60 分。提供毕业后拟任教机构工作协 硕士研究生 Speakers of Other Two years 议或相关证明者优先。 MTCSOL Languages Applicants shall hold a Bachelor’s degree, and have a minimum score of 210 on the HSK Test (Level 5) as well as 60 on the HSKK test (Intermediate Level). Priority will be given to applicants who may provide a work contract with a teaching institution upon completing their studies in China or a proof to the same effect. 汉语国际教育 汉语考试成绩达到 HSK(三级)270 分,",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_review_not_model_approval",
+        "identity_only_no_dynamic_fields"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:original-source-column-and-image-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-11-01T14:32:30.879Z",
+        "candidateSha256": "06463634a72cc4c88d432adcde472ddc930608bb901342ad9f3c30f0bd62dbd1",
+        "snapshotSha256": "2c24ea304f9e557921d8737bbbf7af50b740e834e3e355dceba811642a43eacf",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/root-three-reviews/5af38952b7705426f2f1f18f7186ab5ce67b5c2243609bee33994aeac389455c.json",
+        "reviewArtifactSha256": "5af38952b7705426f2f1f18f7186ab5ce67b5c2243609bee33994aeac389455c"
+      }
+    }
+  ],
+  "sha256": "cf5224b1a14b1dcb82dd2e528eaeada9be1b6d122c09a683ee40521592bd8216"
+}
