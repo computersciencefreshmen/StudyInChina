@@ -1,0 +1,267 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch059-09b7de58",
+  "inputCatalogSha256": "d3460edc7a4c397c9457794c1768f325c12e62a9a0793800cf210fed1dc72929",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-11-01T06:30:36.181Z",
+  "proposals": [
+    {
+      "id": "root-original-source-e35a6680f7febfde5557",
+      "universityId": "uni-ningbo-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "zh": "临床医学"
+        },
+        "degreeLevel": "bachelor",
+        "programType": "degree",
+        "programUrl": "https://medicine.nbu.edu.cn/yxyweb/xbgk.htm",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "cc1ef0524a55dcfccc899122913afcd5b3a60c495785db5681d916ff08c08a87",
+          "url": "https://medicine.nbu.edu.cn/yxyweb/xbgk.htm",
+          "snapshotSha256": "e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5",
+          "objectKey": "maintenance/snapshots/cc1ef0524a55dcfccc899122913afcd5b3a60c495785db5681d916ff08c08a87/e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5.bin",
+          "locator": "text:offset:690:713",
+          "quote": "本科临床医学专业(英语授课)来华留学生项目1个"
+        }
+      },
+      "source": {
+        "url": "https://medicine.nbu.edu.cn/yxyweb/xbgk.htm",
+        "snapshotSha256": "e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5",
+        "objectKey": "maintenance/snapshots/cc1ef0524a55dcfccc899122913afcd5b3a60c495785db5681d916ff08c08a87/e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5.bin",
+        "locator": "text:offset:690:713",
+        "quote": "本科临床医学专业(英语授课)来华留学生项目1个",
+        "id": "cc1ef0524a55dcfccc899122913afcd5b3a60c495785db5681d916ff08c08a87",
+        "checkedAt": "2026-11-01T06:22:33.782Z",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "cc1ef0524a55dcfccc899122913afcd5b3a60c495785db5681d916ff08c08a87",
+          "url": "https://medicine.nbu.edu.cn/yxyweb/xbgk.htm",
+          "snapshotSha256": "e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5",
+          "objectKey": "maintenance/snapshots/cc1ef0524a55dcfccc899122913afcd5b3a60c495785db5681d916ff08c08a87/e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5.bin",
+          "locator": "text:offset:156:160",
+          "quote": "临床医学",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "cc1ef0524a55dcfccc899122913afcd5b3a60c495785db5681d916ff08c08a87",
+          "url": "https://medicine.nbu.edu.cn/yxyweb/xbgk.htm",
+          "snapshotSha256": "e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5",
+          "objectKey": "maintenance/snapshots/cc1ef0524a55dcfccc899122913afcd5b3a60c495785db5681d916ff08c08a87/e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5.bin",
+          "locator": "text:offset:690:713",
+          "quote": "本科临床医学专业(英语授课)来华留学生项目1个",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_review_not_model_approval",
+        "identity_only_no_dynamic_fields"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:original-source-column-and-image-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-11-01T06:30:09.735Z",
+        "candidateSha256": "e8d6f2b3eaaebc24223bc228c74cc2ed2e05aa8e012f92e18857d7c5f93abcea",
+        "snapshotSha256": "e35a6680f7febfde5557521c474bfb0ab2d6696b86ef7d53bace94390f3b3cb5",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/root-three-reviews/c01571a48bb7e3da3f63ee73afea29f262af51cd1f79f4d2ba673a852b29912b.json",
+        "reviewArtifactSha256": "c01571a48bb7e3da3f63ee73afea29f262af51cd1f79f4d2ba673a852b29912b"
+      }
+    },
+    {
+      "id": "root-original-source-e625cd2c3f177b1fcfab",
+      "universityId": "uni-china-university-of-mining-and-technology-beijing",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "zh": "安全科学与工程",
+          "en": "Safety Science and Engineering"
+        },
+        "degreeLevel": "master",
+        "programType": "degree",
+        "programUrl": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=MoRro2L7UinRMfnuNQRL7W7M7W7ozNUPnz9sMmnVnzU8nR70gihFp2hmCIa0n1hRMShVL1hRnmGiMm-inzNsU4lbL4r2U4CYMmMfo7lYozMFnRv4UN7YUznFLz-aolLJv2bjo4OeoD6/qtPbqdXmgDTJQty0LzG4MYy8LRLPgtA8pUncc&oid=1385918509&tid=1037&nid=4031&e=.png",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "d91bc5d3549022a65d26d8f2785ccd6fc3e7851f8f7cfc21adea11c7d67cf2ba",
+          "url": "https://international.cumtb.edu.cn/info/1037/4031.htm",
+          "snapshotSha256": "11e2bd2a193d5e49c9fa62354695af55c4ab7aa87665ffef538bf5063e1b8826",
+          "objectKey": "maintenance/snapshots/d91bc5d3549022a65d26d8f2785ccd6fc3e7851f8f7cfc21adea11c7d67cf2ba/11e2bd2a193d5e49c9fa62354695af55c4ab7aa87665ffef538bf5063e1b8826.bin",
+          "locator": "text:offset:1490:1594",
+          "quote": "Applicants must be foreign citizens who are in good health, abide by the law, and hold a valid passport."
+        }
+      },
+      "source": {
+        "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=MoRro2L7UinRMfnuNQRL7W7M7W7ozNUPnz9sMmnVnzU8nR70gihFp2hmCIa0n1hRMShVL1hRnmGiMm-inzNsU4lbL4r2U4CYMmMfo7lYozMFnRv4UN7YUznFLz-aolLJv2bjo4OeoD6/qtPbqdXmgDTJQty0LzG4MYy8LRLPgtA8pUncc&oid=1385918509&tid=1037&nid=4031&e=.png",
+        "snapshotSha256": "e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9",
+        "objectKey": "maintenance/snapshots/b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1/e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9.bin",
+        "locator": "text:offset:234:271",
+        "quote": "Safety Science and Engineering (0837)",
+        "id": "b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1",
+        "checkedAt": "2026-11-01T06:27:02.721Z",
+        "contentType": "image/png",
+        "textArtifact": {
+          "objectKey": "maintenance/text/b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1/03a273ca2116d214f47da9471db3c3726687ee42fa6a0b65d7cc9f565efaf5bc.txt",
+          "sha256": "03a273ca2116d214f47da9471db3c3726687ee42fa6a0b65d7cc9f565efaf5bc",
+          "rawSnapshotSha256": "e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9",
+          "parser": "tesseract"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1",
+          "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=MoRro2L7UinRMfnuNQRL7W7M7W7ozNUPnz9sMmnVnzU8nR70gihFp2hmCIa0n1hRMShVL1hRnmGiMm-inzNsU4lbL4r2U4CYMmMfo7lYozMFnRv4UN7YUznFLz-aolLJv2bjo4OeoD6/qtPbqdXmgDTJQty0LzG4MYy8LRLPgtA8pUncc&oid=1385918509&tid=1037&nid=4031&e=.png",
+          "snapshotSha256": "e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9",
+          "objectKey": "maintenance/snapshots/b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1/e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9.bin",
+          "locator": "text:offset:199:206",
+          "quote": "安全科学与工程",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1",
+          "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=MoRro2L7UinRMfnuNQRL7W7M7W7ozNUPnz9sMmnVnzU8nR70gihFp2hmCIa0n1hRMShVL1hRnmGiMm-inzNsU4lbL4r2U4CYMmMfo7lYozMFnRv4UN7YUznFLz-aolLJv2bjo4OeoD6/qtPbqdXmgDTJQty0LzG4MYy8LRLPgtA8pUncc&oid=1385918509&tid=1037&nid=4031&e=.png",
+          "snapshotSha256": "e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9",
+          "objectKey": "maintenance/snapshots/b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1/e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9.bin",
+          "locator": "text:offset:234:271",
+          "quote": "Safety Science and Engineering (0837)",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1",
+          "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=MoRro2L7UinRMfnuNQRL7W7M7W7ozNUPnz9sMmnVnzU8nR70gihFp2hmCIa0n1hRMShVL1hRnmGiMm-inzNsU4lbL4r2U4CYMmMfo7lYozMFnRv4UN7YUznFLz-aolLJv2bjo4OeoD6/qtPbqdXmgDTJQty0LzG4MYy8LRLPgtA8pUncc&oid=1385918509&tid=1037&nid=4031&e=.png",
+          "snapshotSha256": "e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9",
+          "objectKey": "maintenance/snapshots/b47a46adab3c46d0695974fbd4cd65bb7af3cb508356ab41bd81e9ea7ef2a5b1/e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9.bin",
+          "locator": "text:offset:193:288",
+          "quote": "硕士&博士 安全科学与工程 (0837) 安全学院 Master&Doctor |Safety Science and Engineering (0837) School of Safety",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_review_not_model_approval",
+        "identity_only_no_dynamic_fields"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:original-source-column-and-image-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-11-01T06:30:09.741Z",
+        "candidateSha256": "3f43ab90f7bd1ab353ffa37c6e7eb2548bce3b8888e9b4cac51f86bb2d9c8f5a",
+        "snapshotSha256": "e625cd2c3f177b1fcfab948d8e12e964223e96e49ada2aef64feccd98eca74d9",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/root-three-reviews/08e5502dc71e87b1f5058787f40ba3e4aa07c6d6251ac55b96da4c414508fd01.json",
+        "reviewArtifactSha256": "08e5502dc71e87b1f5058787f40ba3e4aa07c6d6251ac55b96da4c414508fd01"
+      }
+    },
+    {
+      "id": "root-original-source-c20d47b0c5b4e41e3c59",
+      "universityId": "uni-zhongnan-university-of-economics-and-law",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "name": {
+          "en": "Intellectual Property Law"
+        },
+        "degreeLevel": "master",
+        "programType": "degree",
+        "programUrl": "https://sil.zuel.edu.cn/_upload/article/files/91/42/299e074949549eeb774c9005cc30/ac534975-7f49-406a-a369-09525f3c37e1.pdf",
+        "internationalAdmissionsEvidence": {
+          "sourceId": "35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40",
+          "url": "https://sil.zuel.edu.cn/_upload/article/files/91/42/299e074949549eeb774c9005cc30/ac534975-7f49-406a-a369-09525f3c37e1.pdf",
+          "snapshotSha256": "c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5",
+          "objectKey": "maintenance/snapshots/35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40/c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5.bin",
+          "locator": "text:offset:3129:3219",
+          "quote": "The Graduation Process for 2-year Master Programme International Students Enrolled in 2022"
+        }
+      },
+      "source": {
+        "url": "https://sil.zuel.edu.cn/_upload/article/files/91/42/299e074949549eeb774c9005cc30/ac534975-7f49-406a-a369-09525f3c37e1.pdf",
+        "snapshotSha256": "c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5",
+        "objectKey": "maintenance/snapshots/35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40/c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5.bin",
+        "locator": "text:offset:1169:1194",
+        "quote": "Intellectual Property Law",
+        "id": "35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40",
+        "checkedAt": "2026-11-01T06:21:55.475Z",
+        "contentType": "application/pdf",
+        "textArtifact": {
+          "objectKey": "maintenance/text/35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40/df0e243279f37e5f318e36f1d9f279700db69ce1180478d0422056c2f621fcc2.txt",
+          "sha256": "df0e243279f37e5f318e36f1d9f279700db69ce1180478d0422056c2f621fcc2",
+          "rawSnapshotSha256": "c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5",
+          "parser": "poppler"
+        }
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40",
+          "url": "https://sil.zuel.edu.cn/_upload/article/files/91/42/299e074949549eeb774c9005cc30/ac534975-7f49-406a-a369-09525f3c37e1.pdf",
+          "snapshotSha256": "c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5",
+          "objectKey": "maintenance/snapshots/35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40/c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5.bin",
+          "locator": "text:offset:1169:1194",
+          "quote": "Intellectual Property Law",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40",
+          "url": "https://sil.zuel.edu.cn/_upload/article/files/91/42/299e074949549eeb774c9005cc30/ac534975-7f49-406a-a369-09525f3c37e1.pdf",
+          "snapshotSha256": "c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5",
+          "objectKey": "maintenance/snapshots/35308f12c97611b58f51a835600a6226786bc1212939f34b2ab2fcc87c3bfc40/c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5.bin",
+          "locator": "text:offset:1067:1248",
+          "quote": "Credits Requirements for Each Major Master Programme Credits International Law (Taught in English) 36 Intellectual Property Law 34 Economic Law (Taught in Chinese) 34 Chinese Law 34",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": null,
+      "status": "ready",
+      "warnings": [
+        "separate_root_source_review_not_model_approval",
+        "identity_only_no_dynamic_fields"
+      ],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "root:original-source-column-and-image-v1",
+        "method": "deterministic",
+        "reviewedAt": "2026-11-01T06:30:09.742Z",
+        "candidateSha256": "e7d9e850aa0b0b225b6f417b4dc3b7e4361d35b0d6fa913ecebab6d4f698d3e1",
+        "snapshotSha256": "c20d47b0c5b4e41e3c590363b72859702855f32eef0e5989f7fb01446af913c5",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "artifactKey": "maintenance/reviews/root-three-reviews/9620bb8d7ec3ef92daf8a07c0871b82c04ee8ab4cc7da58c8f20008d506bc55b.json",
+        "reviewArtifactSha256": "9620bb8d7ec3ef92daf8a07c0871b82c04ee8ab4cc7da58c8f20008d506bc55b"
+      }
+    }
+  ],
+  "sha256": "0d73f83753fb9420659ec7b977fa1a0d7b9ac7387213786bf7f95ace2a3cf140"
+}
