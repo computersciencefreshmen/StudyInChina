@@ -1,0 +1,97 @@
+{
+  "format": "studyinchina.maintenance-candidate-export",
+  "formatVersion": 1,
+  "batchId": "minimum-one-2026-10-27-batch057-c206fb7b",
+  "inputCatalogSha256": "19aa19036fd6c7d182e7aaab42b8eb8d27abbecf19e162aa49c706e6050525df",
+  "scopeRegistrySha256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+  "createdAt": "2026-11-01T06:05:36.992Z",
+  "proposals": [
+    {
+      "id": "maintenance-5091efc6bb2044f25ae5322a4e06aa71b8ef3c8628712b443fccec63416c397a",
+      "universityId": "uni-hangzhou-normal-university",
+      "entityType": "program",
+      "recordId": null,
+      "operation": "create",
+      "fields": {
+        "degreeLevel": "bachelor",
+        "internationalAdmissionsEvidence": {
+          "locator": "text:document",
+          "objectKey": "maintenance/snapshots/f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815/d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af.bin",
+          "quote": "2026年国际学生本科专业介绍",
+          "snapshotSha256": "d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af",
+          "sourceId": "f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815",
+          "url": "https://gjjyxy.hznu.edu.cn/c/2026-03-04/3176518.shtml"
+        },
+        "name": {
+          "en": "Bachelor-Nursing",
+          "zh": "护理学"
+        },
+        "programType": "degree",
+        "programUrl": "https://gjjyxy.hznu.edu.cn/c/2026-03-04/3176518.shtml"
+      },
+      "source": {
+        "url": "https://gjjyxy.hznu.edu.cn/c/2026-03-04/3176518.shtml",
+        "snapshotSha256": "d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af",
+        "objectKey": "maintenance/snapshots/f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815/d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af.bin",
+        "locator": "text:document",
+        "quote": "专业介绍【本科 护理学】专业介绍 Bachelor-Nursing",
+        "id": "f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815",
+        "checkedAt": "2026-11-01T05:57:11.999Z",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "fieldEvidence": [
+        {
+          "sourceId": "f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815",
+          "url": "https://gjjyxy.hznu.edu.cn/c/2026-03-04/3176518.shtml",
+          "snapshotSha256": "d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af",
+          "objectKey": "maintenance/snapshots/f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815/d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af.bin",
+          "locator": "text:document",
+          "quote": "护理学",
+          "fieldPath": "name.zh"
+        },
+        {
+          "sourceId": "f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815",
+          "url": "https://gjjyxy.hznu.edu.cn/c/2026-03-04/3176518.shtml",
+          "snapshotSha256": "d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af",
+          "objectKey": "maintenance/snapshots/f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815/d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af.bin",
+          "locator": "text:document",
+          "quote": "Bachelor-Nursing",
+          "fieldPath": "name.en"
+        },
+        {
+          "sourceId": "f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815",
+          "url": "https://gjjyxy.hznu.edu.cn/c/2026-03-04/3176518.shtml",
+          "snapshotSha256": "d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af",
+          "objectKey": "maintenance/snapshots/f735c6f1424198c4069c3b6248b4858a0b67848aee9cf1a70c1b4846cb07f815/d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af.bin",
+          "locator": "text:document",
+          "quote": "本科 护理学",
+          "fieldPath": "degreeLevel"
+        }
+      ],
+      "scope": {
+        "year": null,
+        "intake": null
+      },
+      "extractionAttemptId": "63ff1294-34f8-4c50-9093-61b72bab4e1c",
+      "status": "ready",
+      "warnings": [],
+      "review": {
+        "decision": "approved",
+        "reviewerId": "minimax-independent:861d2b5a-983e-4483-99f2-241742227de5",
+        "method": "independent_model",
+        "reviewedAt": "2026-11-01T05:58:46.192Z",
+        "candidateSha256": "84491b182dc1fd0459d02a22d032594fba8278a2ad58b25a1b7dcd25070b8d3b",
+        "snapshotSha256": "d07f13917bbf38085db4d63afc2986a8163459de6ea79efe889abe76f8ae45af",
+        "checks": {
+          "internationalScope": true,
+          "concreteProgram": true,
+          "evidenceLocated": true
+        },
+        "reviewAttemptId": "861d2b5a-983e-4483-99f2-241742227de5",
+        "artifactKey": "maintenance/reviews/maintenance-5091efc6bb2044f25ae5322a4e06aa71b8ef3c8628712b443fccec63416c397a/0927f010b44ba2a398dd941e64b07413363ecf71d9ae9b8a52c1ebc5d38717e0.json",
+        "reviewArtifactSha256": "0927f010b44ba2a398dd941e64b07413363ecf71d9ae9b8a52c1ebc5d38717e0"
+      }
+    }
+  ],
+  "sha256": "090a5001e6ffbda662b2e4d65fe093722328a8d7002e945ce6b3979f34f6e455"
+}
