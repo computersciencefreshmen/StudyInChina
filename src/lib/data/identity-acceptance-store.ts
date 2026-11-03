@@ -2,11 +2,16 @@ import { existsSync, readFileSync, realpathSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { isAbsolute, join, relative, resolve } from 'node:path'
 import { canonicalIdentityJson, hasRequiredProgramNameScope, identityAcceptanceLedgerSchema, scopedNameReceiptMatches, type IdentityAcceptance } from './identity-acceptance'
+import { createFileSnapshotCache } from './file-snapshot'
+
+const cachedLedger = createFileSnapshotCache<IdentityAcceptance[]>()
 
 /** Invalid/missing review evidence must never widen public discovery. */
 export function readIdentityAcceptances(dataDirectory = join(process.cwd(), 'content', 'data'), options: { strictProjection?: boolean } = {}): IdentityAcceptance[] {
   try {
+    return cachedLedger(`${resolve(dataDirectory)}:${Boolean(options.strictProjection)}`, depend => {
     const file = join(dataDirectory, 'identity-acceptances.json')
+    depend(file)
     if (!existsSync(file)) return [] // Legacy catalogues without a ledger remain compatible.
     const entries = identityAcceptanceLedgerSchema.parse(JSON.parse(readFileSync(file, 'utf8'))).entries
     if (options.strictProjection) {
@@ -16,6 +21,7 @@ export function readIdentityAcceptances(dataDirectory = join(process.cwd(), 'con
         const candidate = resolve(root, entry.receiptPath), relativeCandidate = relative(root, candidate)
         if (!relativeCandidate || relativeCandidate.startsWith('..') || isAbsolute(relativeCandidate)) throw Error('identity_scoped_name_receipt_invalid')
         if (!receipts.has(candidate)) {
+          depend(candidate)
           // Old installations need not ship unscoped receipts. Available
           // receipts retain their scope even if both ledger fields are erased.
           if (!existsSync(candidate)) receipts.set(candidate, null)
@@ -38,6 +44,7 @@ export function readIdentityAcceptances(dataDirectory = join(process.cwd(), 'con
       }
     }
     return entries
+    })
   } catch (error) {
     if (options.strictProjection) throw error // Never turn a corrupt scoped review into unrestricted current names.
     return []

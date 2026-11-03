@@ -268,6 +268,8 @@ describe('production publication policy', () => {
 
   it('uses the China calendar date when deriving today at runtime', () => {
     expect(getTodayDate(new Date('2026-07-19T16:00:00.000Z'))).toBe(TODAY)
+    expect(getTodayDate(new Date('2026-07-19T15:59:59.999Z'))).toBe('2026-07-19')
+    expect(getTodayDate(new Date('2026-07-19T16:00:00.000Z'))).toBe(TODAY)
   })
 
   it('keeps the grace utility separate from immediate public deadline expiry', () => {

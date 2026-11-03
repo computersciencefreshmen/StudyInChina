@@ -2,18 +2,21 @@ import type { AuditMeta } from './types'
 
 export const DATA_TIME_ZONE = 'Asia/Shanghai'
 
+// Intl formatters are expensive to construct; the business calendar is fixed.
+const dataDateFormatter = new Intl.DateTimeFormat('en', {
+  timeZone: DATA_TIME_ZONE,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+})
+
 export type FreshnessState = 'fresh' | 'overdue'
 
 export const POST_DEADLINE_GRACE_DAYS = 30
 
 /** Returns the current calendar date used by admissions data in YYYY-MM-DD form. */
 export function getTodayDate(now = new Date()): string {
-  const parts = new Intl.DateTimeFormat('en', {
-    timeZone: DATA_TIME_ZONE,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).formatToParts(now)
+  const parts = dataDateFormatter.formatToParts(now)
   const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]))
 
   return `${values.year}-${values.month}-${values.day}`

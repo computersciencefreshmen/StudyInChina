@@ -56,10 +56,21 @@ export function numberParam(
   return value
 }
 
+function evaluationDate(payload: unknown): string | undefined {
+  const meta = payload && typeof payload === 'object' && 'meta' in payload ? payload.meta : null
+  const release = meta && typeof meta === 'object' && 'release' in meta ? meta.release : null
+  return release && typeof release === 'object' && 'evaluatedForDate' in release
+    && typeof release.evaluatedForDate === 'string' ? release.evaluatedForDate : undefined
+}
+
 export function ok<T>(payload: T) {
+  const evaluatedForDate = evaluationDate(payload)
   return NextResponse.json(payload, {
     status: 200,
-    headers: { ...responseHeaders, 'Cache-Control': catalogCacheControl() },
+    // Repository comparison adapters may return unknown. Cache only a response
+    // carrying an explicit, current evaluation date, regardless of its TS type.
+    headers: { ...responseHeaders, 'Cache-Control': evaluatedForDate === undefined
+      ? 'no-store' : catalogCacheControl(new Date(), evaluatedForDate) },
   })
 }
 

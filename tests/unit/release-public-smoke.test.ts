@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { dirname, join, relative } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
 import { getTodayDate } from '../../src/lib/data/freshness'
-import { loadSmokeExpectation, redactSmokeError, type SmokeInput } from '../../scripts/quality/release-public-smoke'
+import { loadSmokeExpectation, redactSmokeError, releaseSmokeScope, selectSmokeUniversities, type SmokeInput } from '../../scripts/quality/release-public-smoke'
 
 const root = process.cwd(), directories: string[] = []
 function fixture() { mkdirSync(join(root, '.tmp'), { recursive: true }); const path = mkdtempSync(join(root, '.tmp', 'release-smoke-test-')); directories.push(path); return path }
@@ -44,6 +44,28 @@ function frozenFixture() {
 afterEach(() => { for (const path of directories.splice(0)) rmSync(path, { recursive: true, force: true }) })
 
 describe('release smoke evidence safety', () => {
+  it('defaults full regression to local builds and scoped checks to remote deployments, with explicit full override', () => {
+    expect(releaseSmokeScope('http://localhost:3000')).toBe('full')
+    expect(releaseSmokeScope('http://127.0.0.1:3000')).toBe('full')
+    expect(releaseSmokeScope('https://studyinchina.vercel.app')).toBe('changed')
+    expect(releaseSmokeScope('https://studyinchina-candidate.vercel.app')).toBe('changed')
+    expect(releaseSmokeScope('https://studyinchina.vercel.app', 'full')).toBe('full')
+    expect(() => releaseSmokeScope('https://studyinchina.vercel.app', 'none' as 'full')).toThrow('invalid_smoke_scope')
+  })
+
+  it('covers every changed affiliation and unaffected populated/empty states without visiting unrelated schools', () => {
+    const expected = frozenFixture().load(), published = expected.published
+    const university = published.universities[0], program = published.programs[0]
+    published.universities = Array.from({ length: 10 }, (_, index) => ({ ...university, id: `u${index}`, slug: `u${index}` }))
+    published.programs = [0, 1, 2, 3, 4].map(index => ({ ...program, id: `p${index}`, universityId: `u${index}` }))
+    const changed = [published.programs[0], published.programs[1]]
+    const scholarships = [{ ...published.scholarships[0], universityIds: ['u2'], programIds: ['p3'] }]
+    const selected = selectSmokeUniversities(published, changed, scholarships, 'changed')
+    expect(selected.map(u => u.id)).toEqual(['u0', 'u1', 'u2', 'u3', 'u4', 'u5'])
+    expect(selectSmokeUniversities(published, changed, scholarships, 'full')).toHaveLength(10)
+    expect(published.universities).toHaveLength(10)
+  })
+
   it('preserves programme-only expectations and their manifest shape', () => {
     const f = frozenFixture(), expected = f.load()
     expect(expected.changed).toHaveLength(1)

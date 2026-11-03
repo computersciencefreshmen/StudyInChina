@@ -28,7 +28,8 @@ export type SmokeInput = {
   staleSlugs: string[]
   scholarshipBatches?: string[]; expectedChangedScholarships?: number; expectedScholarships?: number
 }
-type Options = { root: string; base: string; input: string; output: string; prefix: 'candidate' | 'stable'; proxy?: string; channel?: string; bypassEnvironment: string }
+export type SmokeScope = 'full' | 'changed'
+type Options = { root: string; base: string; input: string; output: string; prefix: 'candidate' | 'stable'; scope?: SmokeScope; proxy?: string; channel?: string; bypassEnvironment: string }
 type Check = { route: string; pass: boolean; [key: string]: unknown }
 type HtmlNode = { tagName?: string; nodeName?: string; value?: string; attrs?: { name: string; value: string }[]; childNodes?: HtmlNode[] }
 const filenames = { sources: 'sources', cities: 'cities', universities: 'universities', programs: 'programs', admissionCycles: 'admission-cycles', scholarships: 'scholarships' } as const
@@ -147,12 +148,33 @@ async function allRecords<T>(client: APIRequestContext, base: string, route: str
   const records: T[] = [], seen = new Set<string>(); let cursor: string | null = null
   do {
     const params = new URLSearchParams({ limit: '100' }); if (cursor) params.set('cursor', cursor)
-    const page = await getJson<ApiEnvelope<T[]>>(client, base, `${route}?${params}`)
+    const page = await getJson<ApiEnvelope<T[]>>(client, base, `${route}${route.includes('?') ? '&' : '?'}${params}`)
     invariant(Array.isArray(page.data), 'api_list_data_is_not_array')
     records.push(...page.data); cursor = page.meta.nextCursor ?? null
     if (cursor) { invariant(!seen.has(cursor) && seen.size < 200, 'api_cursor_cycle_or_unbounded_pagination'); seen.add(cursor) }
   } while (cursor)
   return records
+}
+
+/** Full regression belongs on the local production build; remote checks follow
+ * the frozen batch and keep unaffected populated/empty-state sentinels. */
+export function releaseSmokeScope(base: string, requested?: SmokeScope): SmokeScope {
+  invariant(requested === undefined || requested === 'full' || requested === 'changed', 'invalid_smoke_scope')
+  return requested ?? (['localhost', '127.0.0.1'].includes(new URL(base).hostname) ? 'full' : 'changed')
+}
+
+export function selectSmokeUniversities(published: DataBundle, changed: Program[], scholarships: Scholarship[], scope: SmokeScope) {
+  if (scope === 'full') return published.universities
+  const linkedProgramIds = new Set(scholarships.flatMap(s => s.programIds))
+  const affectedIds = new Set([...changed.map(p => p.universityId), ...scholarships.flatMap(s => s.universityIds),
+    ...published.programs.filter(p => linkedProgramIds.has(p.id)).map(p => p.universityId)])
+  const populatedIds = new Set(published.programs.map(p => p.universityId))
+  const selected = published.universities.filter(u => affectedIds.has(u.id))
+  for (const populated of [true, false]) {
+    const sentinel = published.universities.find(u => !affectedIds.has(u.id) && populatedIds.has(u.id) === populated)
+    if (sentinel) selected.push(sentinel)
+  }
+  return selected
 }
 function assertIds(actual: { id: string }[], expected: { id: string }[], name: string) {
   invariant(actual.length === expected.length && new Set(actual.map(p => p.id)).size === actual.length && stable(actual.map(p => p.id).sort()) === stable(expected.map(p => p.id).sort()), `exact_id_set_mismatch:${name}`)
@@ -169,11 +191,13 @@ export async function runReleasePublicSmoke(options: Options) {
   invariant(!baseUrl.username && !baseUrl.password && !baseUrl.search && !baseUrl.hash && baseUrl.pathname === '/', 'base_url_must_be_plain_origin')
   invariant(baseUrl.protocol === 'https:' && (baseUrl.hostname === 'studyinchina.vercel.app' || /^studyinchina-[a-z0-9-]+\.vercel\.app$/u.test(baseUrl.hostname)) || baseUrl.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(baseUrl.hostname), 'base_url_not_an_approved_site_origin')
   const base = baseUrl.origin, expected = loadSmokeExpectation(options.root, options.input)
+  const scope = releaseSmokeScope(base, options.scope)
+  const selectedUniversities = selectSmokeUniversities(expected.published, expected.changed, expected.changedScholarships, scope)
   const output = workspacePath(options.root, options.output)
   invariant(!existsSync(output), 'smoke_output_must_be_new_and_immutable')
   mkdirSync(dirname(output), { recursive: true }); mkdirSync(output)
   const secret = process.env[options.bypassEnvironment] ?? '', clean = (value: unknown) => redactSmokeError(value, secret)
-  const proof: Record<string, unknown> = { pass: false, checkedAt: new Date().toISOString(), base, prefix: options.prefix, today: expected.input.today, sourcePlanSha256: expected.sourcePlanSha256, smokeRunnerSha256: sha(readFileSync(fileURLToPath(import.meta.url))), expectedInputSha256: expected.expectedInputSha256, publicCounts: counts(expected.published), expectedInputManifest: expected.expectedInputManifest }
+  const proof: Record<string, unknown> = { pass: false, checkedAt: new Date().toISOString(), base, prefix: options.prefix, scope, fullCatalogEnumeration: scope === 'full', plannedScope: { universityIds: selectedUniversities.map(u => u.id), changedProgramIds: expected.changed.map(p => p.id), changedScholarshipIds: expected.changedScholarships.map(s => s.id) }, today: expected.input.today, sourcePlanSha256: expected.sourcePlanSha256, smokeRunnerSha256: sha(readFileSync(fileURLToPath(import.meta.url))), expectedInputSha256: expected.expectedInputSha256, publicCounts: counts(expected.published), expectedInputManifest: expected.expectedInputManifest }
   const checks: Check[] = [], universities: Check[] = [], details: Check[] = [], scholarshipDetails: Check[] = [], errors: string[] = [], consoleErrors: string[] = []
   const cleanup: Record<string, unknown>[] = [], pendingRoutes = new Map<Page | undefined, Set<Promise<void>>>(), closingPages = new Set<Page>()
   let closingContext = false
@@ -196,32 +220,48 @@ export async function runReleasePublicSmoke(options: Options) {
       return { publicCounts: value.data.publicCounts, evaluatedForDate: value.data.evaluatedForDate }
     })
     await record('/api/v1/programs', async () => {
-      const records = await allRecords<ProgramRecord>(client, base, '/api/v1/programs')
-      assertIds(records, expected.published.programs, 'programs')
-      for (const p of expected.published.programs) {
+      const records = scope === 'full'
+        ? await allRecords<ProgramRecord>(client, base, '/api/v1/programs')
+        : (await getJson<ApiEnvelope<ProgramRecord[]>>(client, base, '/api/v1/programs?limit=1')).data
+      if (scope === 'full') assertIds(records, expected.published.programs, 'programs')
+      else invariant(Array.isArray(records) && records.length === Math.min(1, expected.published.programs.length)
+        && records.every(record => expected.published.programs.some(p => p.id === record.id)), 'program_list_sentinel_mismatch')
+      for (const p of expected.published.programs.filter(p => records.some(record => record.id === p.id))) {
         const actual = records.find(record => record.id === p.id)!
         for (const key of ['durationMonths', 'durationMonthsMax', 'durationText'] as const) invariant(stable(actual[key] ?? null) === stable(p[key] ?? null), `duration_roundtrip_failed:${p.id}:${key}`)
       }
-      return { records: records.length, exactIds: true, exactDurationRoundtrip: true }
+      return { records: records.length, exactIds: scope === 'full', exactDurationRoundtrip: true }
     })
     await record('/api/v1/institutions', async () => {
-      const records = await allRecords<InstitutionRecord>(client, base, '/api/v1/institutions')
-      assertIds(records, expected.published.universities, 'universities')
+      const records = scope === 'full'
+        ? await allRecords<InstitutionRecord>(client, base, '/api/v1/institutions')
+        : await concurrent(selectedUniversities, 3, async u => (await getJson<ApiEnvelope<InstitutionRecord>>(client, base, `/api/v1/institutions/${u.slug}`)).data)
+      assertIds(records, selectedUniversities, 'universities')
       for (const u of records) invariant(u.programCount === expected.published.programs.filter(p => p.universityId === u.id).length, `institution_program_count_mismatch:${u.id}`)
       return { records: records.length, exactIds: true }
     })
     await record('/api/v1/scholarships', async () => {
-      const records = await allRecords<ScholarshipRecord>(client, base, '/api/v1/scholarships')
-      assertIds(records, expected.published.scholarships, 'scholarships')
+      // Scholarships have no single-record endpoint. A name-filtered paginated
+      // read retains exact changed-fact checks without enumerating every award.
+      const records = scope === 'full'
+        ? await allRecords<ScholarshipRecord>(client, base, '/api/v1/scholarships')
+        : [...new Map((await concurrent(expected.changedScholarships, 3, s => allRecords<ScholarshipRecord>(client, base, `/api/v1/scholarships?q=${encodeURIComponent(localize(s.name, 'en'))}`))).flat().map(s => [s.id, s])).values()]
+      if (scope === 'full') assertIds(records, expected.published.scholarships, 'scholarships')
+      else {
+        const sample = (await getJson<ApiEnvelope<ScholarshipRecord[]>>(client, base, '/api/v1/scholarships?limit=1')).data
+        invariant(Array.isArray(sample) && sample.length === Math.min(1, expected.published.scholarships.length)
+          && sample.every(record => expected.published.scholarships.some(s => s.id === record.id)), 'scholarship_list_sentinel_mismatch')
+      }
       for (const s of expected.changedScholarships) {
         const actual = records.find(value => value.id === s.id)!
+        invariant(actual, `changed_scholarship_not_public:${s.id}`)
         const coverage = Object.fromEntries(Object.entries(s.coverage).map(([key, value]) => [key, value === 'unknown' ? null : value]))
         invariant(stable(actual.coverage) === stable(coverage), `scholarship_coverage_roundtrip_failed:${s.id}`)
         for (const key of ['slug', 'providerType', 'universityIds', 'programIds', 'sourceIds', 'name', 'deadline', 'applicationUrl', 'summary', 'eligibility'] as const) invariant(stable(actual[key] ?? null) === stable(s[key] ?? null), `scholarship_fact_roundtrip_failed:${s.id}:${key}`)
       }
-      return { records: records.length, exactIds: true, reviewedFactsRoundtrip: true }
+      return { records: records.length, exactIds: scope === 'full', reviewedFactsRoundtrip: true }
     })
-    await concurrent(expected.published.universities, 6, async university => {
+    await concurrent(selectedUniversities, 6, async university => {
       const route = `/en/universities/${university.slug}`
       await record(route, async () => {
         const response = await client.get(base + route, { maxRedirects: 0, maxRetries: 1, timeout: 45000 })
@@ -236,7 +276,7 @@ export async function runReleasePublicSmoke(options: Options) {
         invariant(links.size === Math.min(8, programs.length) && [...links].every(href => programs.some(p => href === `/en/programs/${p.slug}`)), 'visible_university_program_links_mismatch')
         return { id: university.id, currentPrograms: programs.length, pending, listedPrograms: links.size }
       }, universities)
-      if (universities.length % 25 === 0) process.stdout.write(JSON.stringify({ stage: 'university-pages', checked: universities.length, total: expected.published.universities.length }) + '\n')
+      if (universities.length % 25 === 0) process.stdout.write(JSON.stringify({ stage: 'university-pages', checked: universities.length, total: selectedUniversities.length }) + '\n')
     })
     checks.push({ route: 'university-pages', pass: universities.every(check => check.pass), records: universities.length, pending: universities.filter(check => check.pending).length })
     for (const slug of expected.input.staleSlugs) for (const route of [`/en/programs/${slug}`, `/api/v1/programs/${slug}`]) await record(route, async () => {
@@ -245,6 +285,7 @@ export async function runReleasePublicSmoke(options: Options) {
     for (const p of expected.changed) await record(`/api/v1/programs/${p.slug}/cycles`, async () => {
       const program = await getJson<ApiEnvelope<ProgramRecord>>(client, base, `/api/v1/programs/${p.slug}`)
       invariant(program.data.id === p.id && stable(program.data.teachingLanguages) === stable(p.teachingLanguages), 'changed_program_api_identity_or_medium_mismatch')
+      for (const key of ['durationMonths', 'durationMonthsMax', 'durationText'] as const) invariant(stable(program.data[key] ?? null) === stable(p[key] ?? null), `duration_roundtrip_failed:${p.id}:${key}`)
       invariant(stable(program.data.languageRequirements) === stable(p.languageRequirements), 'changed_program_api_language_requirements_mismatch')
       const cycles = await getJson<ApiEnvelope<AdmissionCycleRecord[]>>(client, base, `/api/v1/programs/${p.slug}/cycles`)
       const expectedCycles = expected.published.admissionCycles.filter(c => c.programId === p.id)
@@ -425,25 +466,27 @@ export async function runReleasePublicSmoke(options: Options) {
     await browser?.close().catch(error => errors.push(clean(error)))
     await client.dispose().catch(error => errors.push(clean(error)))
     proof.completedAt = new Date().toISOString()
-    proof.pass = errors.length === 0 && consoleErrors.length === 0 && checks.every(check => check.pass) && universities.length === expected.input.expectedUniversities && details.length === expected.changed.length * publicLocales.length && details.every(check => check.pass)
+    proof.checkedUniversityIds = universities.filter(check => check.pass).map(check => check.id)
+    proof.pass = errors.length === 0 && consoleErrors.length === 0 && checks.every(check => check.pass) && universities.length === selectedUniversities.length && details.length === expected.changed.length * publicLocales.length && details.every(check => check.pass)
       && scholarshipDetails.length === expected.changedScholarships.length * publicLocales.length && scholarshipDetails.every(check => check.pass)
     writeFileSync(resolve(output, `${options.prefix}-public-smoke.json`), JSON.stringify(proof, null, 2) + '\n', { flag: 'wx' })
   }
   return proof
 }
 
-function help() { return 'Usage: node --import tsx scripts/quality/release-public-smoke.ts --base <origin> --input <expectation.json> --output <new-directory> --prefix candidate|stable [--proxy http://127.0.0.1:7897] [--channel chrome] [--bypass-env STUDYINCHINA_PROTECTION_BYPASS]\n       node --import tsx scripts/quality/release-public-smoke.ts --validate-input <expectation.json>\nReads only; never deploys, promotes, applies data or logs protection credentials. Output directory must not exist.' }
+function help() { return 'Usage: node --import tsx scripts/quality/release-public-smoke.ts --base <origin> --input <expectation.json> --output <new-directory> --prefix candidate|stable [--scope full|changed] [--proxy http://127.0.0.1:7897] [--channel chrome] [--bypass-env STUDYINCHINA_PROTECTION_BYPASS]\n       node --import tsx scripts/quality/release-public-smoke.ts --validate-input <expectation.json>\nScope defaults to full on localhost, changed on Vercel. Run full local/CI regression before remote changed checks. Proofs state their coverage. Reads only; never deploys, promotes, applies data or logs protection credentials. Output directory must not exist.' }
 export async function main(args = process.argv.slice(2)) {
   if (args.includes('--help')) { process.stdout.write(help() + '\n'); return }
   if (args[0] === '--validate-input' && args.length === 2) { const expected = loadSmokeExpectation(process.cwd(), args[1]); process.stdout.write(JSON.stringify({ inputValidatedOnly: true, websiteSmokeRun: false, sourcePlanSha256: expected.sourcePlanSha256, expectedInputSha256: expected.expectedInputSha256, publicCounts: counts(expected.published), changedPrograms: expected.changed.length }) + '\n'); return }
   invariant(args.length % 2 === 0, help())
   const values = new Map<string, string>()
-  for (let i = 0; i < args.length; i += 2) { invariant(['--base', '--input', '--output', '--prefix', '--proxy', '--channel', '--bypass-env'].includes(args[i]) && !values.has(args[i]), 'unknown_or_duplicate_cli_option'); values.set(args[i], args[i + 1]) }
+  for (let i = 0; i < args.length; i += 2) { invariant(['--base', '--input', '--output', '--prefix', '--scope', '--proxy', '--channel', '--bypass-env'].includes(args[i]) && !values.has(args[i]), 'unknown_or_duplicate_cli_option'); values.set(args[i], args[i + 1]) }
   invariant(values.get('--base') && values.get('--input') && values.get('--output') && ['candidate', 'stable'].includes(values.get('--prefix') ?? ''), help())
   const bypassEnvironment = values.get('--bypass-env') || 'STUDYINCHINA_PROTECTION_BYPASS'
   invariant(/^[A-Z][A-Z0-9_]+$/u.test(bypassEnvironment), 'invalid_bypass_environment_name')
-  const proof = await runReleasePublicSmoke({ root: process.cwd(), base: values.get('--base')!, input: values.get('--input')!, output: values.get('--output')!, prefix: values.get('--prefix') as Options['prefix'], proxy: values.get('--proxy'), channel: values.get('--channel'), bypassEnvironment })
-  process.stdout.write(JSON.stringify({ pass: proof.pass, proof: `${values.get('--output')}/${values.get('--prefix')}-public-smoke.json`, sourcePlanSha256: proof.sourcePlanSha256, expectedInputSha256: proof.expectedInputSha256 }) + '\n')
+  const scope = releaseSmokeScope(values.get('--base')!, values.get('--scope') as SmokeScope | undefined)
+  const proof = await runReleasePublicSmoke({ root: process.cwd(), base: values.get('--base')!, input: values.get('--input')!, output: values.get('--output')!, prefix: values.get('--prefix') as Options['prefix'], scope, proxy: values.get('--proxy'), channel: values.get('--channel'), bypassEnvironment })
+  process.stdout.write(JSON.stringify({ pass: proof.pass, scope, proof: `${values.get('--output')}/${values.get('--prefix')}-public-smoke.json`, sourcePlanSha256: proof.sourcePlanSha256, expectedInputSha256: proof.expectedInputSha256 }) + '\n')
   if (!proof.pass) process.exitCode = 1
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -23,6 +23,7 @@ const release = {
   id: 'release-example',
   dataDate: '2026-08-06',
   generatedAt: '2026-08-06T00:00:00.000Z',
+  evaluatedForDate: '2026-08-10',
   recordCounts: {
     sources: 1,
     cities: 1,
@@ -75,6 +76,15 @@ describe('institution catalog API route', () => {
   })
 
   afterEach(() => vi.useRealTimers())
+
+  it('does not publicly cache a legacy response without an evaluation date', async () => {
+    const legacyRelease: Omit<typeof release, 'evaluatedForDate'> & { evaluatedForDate?: string } = { ...release }
+    delete legacyRelease.evaluatedForDate
+    repository.listInstitutions.mockResolvedValue({ ...page, release: legacyRelease })
+    const response = await GET(new Request('https://example.test/api/v1/institutions'))
+    expect(response.status).toBe(200)
+    expect(response.headers.get('cache-control')).toBe('no-store')
+  })
 
   it('uses the bounded Repository list path without reading a compatibility bundle', async () => {
     const response = await GET(new Request(

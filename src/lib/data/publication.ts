@@ -1,7 +1,7 @@
 import { getTodayDate, isCurrentVerifiedRecord } from './freshness'
 import type { AuditMeta, ContentStatus, DataBundle } from './types'
 import type { IdentityAcceptance } from './identity-acceptance'
-import { projectVerifiedProgramName } from './verified-program-name'
+import { createVerifiedProgramNameProjector } from './verified-program-name'
 
 /** Unreviewed records remain available to administrators, never to applicants. */
 export function isPublicStatus(status: ContentStatus): boolean {
@@ -23,6 +23,7 @@ export function isPublicVerifiedRecord(record: AuditMeta, today: string): boolea
  */
 export function selectPublishedData(data: DataBundle, today = getTodayDate(), identities: IdentityAcceptance[] = []): DataBundle {
   const officialSourceIds = new Set(data.sources.filter(source => source.official).map(source => source.id))
+  const projectProgramName = createVerifiedProgramNameProjector(data.sources, identities, today)
   const publishable = (record: AuditMeta) => isPublicVerifiedRecord(record, today)
     && record.sourceIds.length > 0 && record.sourceIds.every(id => officialSourceIds.has(id))
   const cities = data.cities.filter(publishable)
@@ -31,7 +32,7 @@ export function selectPublishedData(data: DataBundle, today = getTodayDate(), id
   const universityIds = new Set(universities.map(item => item.id))
   const programs = data.programs.filter(item => publishable(item)
     && item.verificationScope !== 'identity' && universityIds.has(item.universityId)).flatMap(item => {
-      const projected = projectVerifiedProgramName(item, data.sources, identities, today)
+      const projected = projectProgramName(item)
       return projected ? [projected] : []
     })
   const programIds = new Set(programs.map(item => item.id))

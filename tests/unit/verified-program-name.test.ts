@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { identityAcceptanceSchema, identityFingerprint, canonicalIdentityJson, scopedNameReceiptMatches, type IdentityAcceptance } from '@/lib/data/identity-acceptance'
 import { selectDiscoveryData } from '@/lib/data/discovery'
 import { selectPublishedData } from '@/lib/data/publication'
+import { createVerifiedProgramNameProjector, projectVerifiedProgramName } from '@/lib/data/verified-program-name'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import { CatalogApiService, releaseFromBundle } from '@/lib/catalog-api/service'
 import { JsonCatalogRepository } from '@/lib/catalog/json'
@@ -41,6 +42,31 @@ function entry(bundle: DataBundle): IdentityAcceptance {
   return { entityType: 'program', recordId: 'program', identitySha256: identityFingerprint('program', bundle.programs[0]), sourceIds: ['official'],
     acceptedAt: now, reviewer: 'deterministic:synthetic-unit-rule', receiptPath: 'receipt.json', receiptSha256: 'a'.repeat(64), verifiedName: { en: 'Literal Computing' } }
 }
+
+describe('program-name projection indexes preserve evidence boundaries', () => {
+  it('keeps duplicate scoped acceptances ambiguous instead of choosing the last record', () => {
+    const raw = fixture(true), accepted = entry(raw)
+    const project = createVerifiedProgramNameProjector(raw.sources, [accepted, { ...accepted }], today)
+    expect(project(raw.programs[0])).toBeUndefined()
+  })
+
+  it('does not mix evidence for a different entity type sharing the same id', () => {
+    const raw = fixture(true), accepted = entry(raw)
+    const unrelated: IdentityAcceptance = { ...accepted, entityType: 'university' }
+    const project = createVerifiedProgramNameProjector(raw.sources, [accepted, unrelated], today)
+    expect(project(raw.programs[0])?.name).toEqual({ en: 'Literal Computing' })
+  })
+
+  it('observes source and ledger mutations on the next independent invocation', () => {
+    const raw = fixture(true), entries = [entry(raw)], program = raw.programs[0]
+    expect(projectVerifiedProgramName(program, raw.sources, entries, today)?.name).toEqual({ en: 'Literal Computing' })
+    raw.sources[0].official = false
+    expect(projectVerifiedProgramName(program, raw.sources, entries, today)).toBeUndefined()
+    raw.sources[0].official = true
+    entries.push({ ...entries[0] })
+    expect(projectVerifiedProgramName(program, raw.sources, entries, today)).toBeUndefined()
+  })
+})
 
 describe('scoped official names across directory and current applicant paths', () => {
   for (const fresh of [false, true]) it(`masks raw Russian in ${fresh ? 'current' : 'stale'} records without mutating raw data`, () => {

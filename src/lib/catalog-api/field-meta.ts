@@ -28,12 +28,24 @@ export function fieldMetaFor(
   staleSensitive = true,
   fieldPath?: string,
 ): FieldMeta {
+  return fieldMetaWithSource(record, sources.find(
+    source => source.official && record.sourceIds.includes(source.id),
+  ), fallback, value, today, emptyStatus, staleSensitive, fieldPath)
+}
+
+function fieldMetaWithSource(
+  record: RecordWithAudit,
+  officialSource: Source | undefined,
+  fallback: { url: string; title: string },
+  value: unknown,
+  today: string,
+  emptyStatus: FactStatus = 'officially_not_announced',
+  staleSensitive = true,
+  fieldPath?: string,
+): FieldMeta {
   const verifiedField = fieldPath && staleSensitive && record.discovery?.currentFieldPaths.includes(fieldPath)
     ? record.discovery.fieldMeta?.[fieldPath] : undefined
   if (verifiedField) return verifiedField
-  const officialSource = sources.find(
-    (source) => source.official && record.sourceIds.includes(source.id),
-  )
   const officialUrl = officialSource?.url ?? fallback.url
   const sourceTitle = officialSource?.title ?? fallback.title
   const checkedAt = officialSource?.accessedAt ?? record.verifiedAt
@@ -56,12 +68,15 @@ export function fieldMetaMap(
   emptyStatuses: Partial<Record<string, FactStatus>> = {},
   staleSensitive = true,
 ): Record<string, FieldMeta> {
+  // Source precedence belongs to the record, not the individual field. Resolve
+  // it once while retaining each field's independent receipt/freshness gate.
+  const officialSource = sources.find(source => source.official && record.sourceIds.includes(source.id))
   return Object.fromEntries(
     Object.entries(fields).map(([field, value]) => [
       field,
-      fieldMetaFor(
+      fieldMetaWithSource(
         record,
-        sources,
+        officialSource,
         fallback,
         value,
         today,

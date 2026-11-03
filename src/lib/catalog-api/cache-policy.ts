@@ -1,8 +1,11 @@
 import { getTodayDate } from '../data/freshness'
 
 /** A cached admissions response must expire before the China calendar changes. */
-export function catalogCacheControl(now = new Date()): string {
+export function catalogCacheControl(now = new Date(), evaluatedForDate?: string): string {
   const today = getTodayDate(now)
+  // Evaluation can start before midnight and finish after it. Never give an old
+  // projection a new day's TTL (also covers an outdated upstream D1 snapshot).
+  if (evaluatedForDate !== undefined && evaluatedForDate !== today) return 'no-store'
   const midnight = Date.parse(`${today}T00:00:00+08:00`) + 24 * 60 * 60 * 1_000
   // Round down: a response generated in the last partial second is not cacheable.
   const remaining = Math.max(0, Math.floor((midnight - now.getTime()) / 1_000))
