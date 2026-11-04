@@ -53,7 +53,8 @@ export function isAdminMutationOrigin(request: Request, environment: Environment
     const target = new URL(request.url)
     if (!['http:', 'https:'].includes(incoming.protocol) || origin !== incoming.origin) return false
     if (incoming.origin === target.origin) return true
-    const publicOrigins = [environment.NEXT_PUBLIC_SITE_URL, environment.VERCEL_URL ? `https://${environment.VERCEL_URL}` : undefined]
+    const publicOrigins = [environment.NEXT_PUBLIC_SITE_URL, environment.VERCEL_URL ? `https://${environment.VERCEL_URL}` : undefined,
+      environment.RENDER_EXTERNAL_URL?.startsWith('https://') ? environment.RENDER_EXTERNAL_URL : undefined]
       .filter((value): value is string => Boolean(value)).flatMap(value => { try { return [new URL(value).origin] } catch { return [] } })
     if (publicOrigins.includes(incoming.origin)) return true
     // Next dev normalizes its internal URL to localhost. The actual browser can use 127.0.0.1.

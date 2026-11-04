@@ -71,6 +71,26 @@ describe('administrator route authorization', () => {
 describe('administrator browser login', () => {
   const loginRequest = (value: unknown) => new Request('https://example.test/api/admin/session', { method: 'POST', headers: { origin: 'https://example.test', 'content-type': 'application/json' }, body: JSON.stringify(value) })
 
+  it('keeps Render login attempts in one rate-limit bucket despite spoofed Vercel headers', async () => {
+    vi.stubEnv('RENDER', 'true')
+    const counts = new Map<string, number>()
+    mocked.limiter.mockImplementation(async (key: string) => {
+      const count = (counts.get(key) ?? 0) + 1
+      counts.set(key, count)
+      return { allowed: count <= 5, retryAfterSeconds: 1800 }
+    })
+    const statuses: number[] = []
+    for (let attempt = 1; attempt <= 6; attempt++) {
+      const request = loginRequest({ password: 'incorrect' })
+      request.headers.set('x-forwarded-for', '203.0.113.42')
+      request.headers.set('x-vercel-forwarded-for', `198.51.100.${attempt}`)
+      request.headers.set('x-real-ip', `192.0.2.${attempt}`)
+      statuses.push((await login(request)).status)
+    }
+    expect(statuses).toEqual([401, 401, 401, 401, 401, 429])
+    expect(counts.size).toBe(1)
+  })
+
   it('uses HttpOnly, HTTPS, strict cookies and never returns a secret', async () => {
     const response = await login(loginRequest({ password }))
     expect(response.status).toBe(200)

@@ -13,7 +13,7 @@ let repository: CatalogRepository | undefined
 
 const DEPLOYMENT_SHA_PATTERN = /^[a-f0-9]{40}$/u
 
-export function deploymentShaFromEnvironment(value = process.env.VERCEL_GIT_COMMIT_SHA): string | null {
+export function deploymentShaFromEnvironment(value = process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.RENDER_GIT_COMMIT): string | null {
   const candidate = value?.trim()
   return candidate && DEPLOYMENT_SHA_PATTERN.test(candidate) ? candidate : null
 }

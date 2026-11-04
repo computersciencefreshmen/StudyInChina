@@ -27,6 +27,7 @@ function normalizeOrigin(value: string | undefined): string | null {
 export type OriginEnvironment = {
   NEXT_PUBLIC_SITE_URL?: string
   VERCEL_URL?: string
+  RENDER_EXTERNAL_URL?: string
   NODE_ENV?: string
 }
 
@@ -49,6 +50,10 @@ export function isAllowedFeedbackOrigin(
   )
   if (vercelOrigin) allowedOrigins.add(vercelOrigin)
 
+  // This is Render's server-provided external URL, never a forwarded-host header.
+  const renderOrigin = normalizeOrigin(environment.RENDER_EXTERNAL_URL)
+  if (renderOrigin?.startsWith('https://')) allowedOrigins.add(renderOrigin)
+
   if (environment.NODE_ENV !== 'production') {
     const localOrigin = normalizeOrigin(requestUrl)
     if (localOrigin) allowedOrigins.add(localOrigin)
@@ -63,7 +68,13 @@ function firstForwardedAddress(value: string | null): string | null {
   return address && isIP(address) !== 0 ? address : null
 }
 
-export function getClientIp(headers: Headers): string {
+export function getClientIp(headers: Headers, environment: Record<string, string | undefined> = process.env): string {
+  // Render documents X-Forwarded-For as its client-IP header. Vercel-specific
+  // and X-Real-IP headers have no platform trust here: accepting a caller's
+  // alternate header would let it choose a fresh login/feedback rate-limit key.
+  if (environment.RENDER === 'true') {
+    return firstForwardedAddress(headers.get('x-forwarded-for')) ?? 'unknown'
+  }
   return (
     firstForwardedAddress(headers.get('x-vercel-forwarded-for')) ??
     firstForwardedAddress(headers.get('x-forwarded-for')) ??

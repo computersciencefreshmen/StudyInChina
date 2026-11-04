@@ -18,6 +18,7 @@ describe('administrator verification scope and measurements', () => {
     expect(getVerificationCapabilities({ MINIMAX_API_KEY: 'synthetic-test-key' }).localMonitoring).toBe(false)
     expect(getVerificationCapabilities({ ADMIN_LOCAL_VERIFICATION_ENABLED: 'true', MINIMAX_API_KEY: 'synthetic-test-key' }).startVerification).toBe(true)
     expect(getVerificationCapabilities({ ADMIN_LOCAL_VERIFICATION_ENABLED: 'true', MINIMAX_API_KEY: 'synthetic-test-key', VERCEL: '1' }).startVerification).toBe(false)
+    expect(getVerificationCapabilities({ ADMIN_LOCAL_VERIFICATION_ENABLED: 'true', MINIMAX_API_KEY: 'synthetic-test-key', RENDER: 'true' })).toMatchObject({ localMonitoring: false, startVerification: false })
     expect(getVerificationCapabilities({ ADMIN_LOCAL_VERIFICATION_ENABLED: 'true', MINIMAX_API_KEY: 'synthetic-test-key', CF_PAGES: '1' }).localMonitoring).toBe(false)
   })
 

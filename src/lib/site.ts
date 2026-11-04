@@ -2,16 +2,28 @@ import type { Metadata } from 'next'
 import { getLocaleConfig, indexedLocales, isBetaLocale, isPublicLocale, type LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 
-function resolveSiteUrl(): URL {
-  const configuredOrigin = process.env.NEXT_PUBLIC_SITE_URL?.trim()
+type SiteEnvironment = {
+  [name: string]: string | undefined
+  NEXT_PUBLIC_SITE_URL?: string
+  VERCEL_ENV?: string
+  VERCEL_URL?: string
+  RENDER?: string
+  RENDER_EXTERNAL_URL?: string
+}
+
+export function resolveSiteUrl(environment: SiteEnvironment = process.env): URL {
+  const configuredOrigin = environment.NEXT_PUBLIC_SITE_URL?.trim()
+  const renderOrigin = environment.RENDER_EXTERNAL_URL?.trim()
   const productionOrigin = 'https://studyinchina.vercel.app'
-  const fallbackOrigin = process.env.VERCEL_ENV === 'production'
+  const fallbackOrigin = environment.VERCEL_ENV === 'production'
     ? productionOrigin
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000'
+    : environment.VERCEL_URL
+      ? `https://${environment.VERCEL_URL}`
+      : renderOrigin || 'http://localhost:3000'
   const resolved = new URL(configuredOrigin || fallbackOrigin)
-  if (process.env.VERCEL_ENV === 'production' && resolved.protocol !== 'https:') {
+  // Hosted production origins must use TLS. Local production-build smoke tests
+  // may still use localhost without pretending to be a Render/Vercel deployment.
+  if ((environment.VERCEL_ENV === 'production' || environment.RENDER === 'true' || renderOrigin) && resolved.protocol !== 'https:') {
     throw new Error('NEXT_PUBLIC_SITE_URL must use HTTPS in production')
   }
   return resolved

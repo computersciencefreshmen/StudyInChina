@@ -1,0 +1,51 @@
+{
+  "pass": true,
+  "platform": "win32",
+  "node": "v24.14.0",
+  "heapLimitMiBPerNodeProcess": 256,
+  "hardMemoryLimitApplied": false,
+  "checks": [
+    {
+      "check": "strict-health",
+      "pass": true,
+      "readyWallMs": 5445.7596
+    },
+    {
+      "check": "public-concurrent-origin-languages-release",
+      "requests": 60,
+      "concurrency": 6,
+      "pass": true
+    },
+    {
+      "check": "auth-cookie-https-csrf-sse-logout",
+      "pass": true,
+      "fixtureRateLimitMode": "memory; production distributed unchanged"
+    }
+  ],
+  "processes": [
+    {
+      "pid": 3752,
+      "role": "start-render.mjs",
+      "peakRssBytes": 37953536,
+      "peakHeapBytes": 5343248,
+      "cpuMs": 92
+    },
+    {
+      "pid": 19488,
+      "role": "validate-directory.ts",
+      "peakRssBytes": 182583296,
+      "peakHeapBytes": 66953344,
+      "cpuMs": 4500
+    },
+    {
+      "pid": 8964,
+      "role": "next",
+      "peakRssBytes": 314056704,
+      "peakHeapBytes": 148359544,
+      "cpuMs": 4733
+    }
+  ],
+  "sumOfIndividualPeakRssBytes": 534593536,
+  "sampledConcurrentPeakRssBytes": 350892032,
+  "limitation": "Windows RSS with a V8 heap cap; sum of peaks is conservative, not simultaneous cgroup usage. Linux/Render validation still required."
+}

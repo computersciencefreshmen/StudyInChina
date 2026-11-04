@@ -1,0 +1,49 @@
+# Review this candidate before creating a billable service. No Blueprint sync,
+# service creation, domain change, database, disk or paid add-on is performed here.
+previews:
+  generation: off
+
+services:
+  - type: web
+    name: studyinchina-render-candidate
+    runtime: node
+    plan: 0.5c-512mb
+    region: singapore
+    branch: codex/render-migration
+    numInstances: 1
+    autoDeployTrigger: off
+    # Omit service-level previews.generation: PR previews are disabled by default.
+    buildCommand: npm ci --include=dev && node scripts/hosting/build-render.mjs
+    startCommand: node scripts/hosting/start-render.mjs
+    healthCheckPath: /api/health
+    maxShutdownDelaySeconds: 30
+    envVars:
+      - key: NODE_VERSION
+        value: 24.x
+      - key: NODE_ENV
+        value: production
+      - key: CONTENT_PREVIEW
+        value: "false"
+      - key: CATALOG_BACKEND
+        value: json
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: ADMIN_LOCAL_VERIFICATION_ENABLED
+        value: "false"
+      - key: ADMIN_VERIFICATION_USE_CCSWITCH
+        value: "false"
+      - key: ADMIN_REMOTE_CONTROL_ENABLED
+        value: "false"
+      - key: ADMIN_RELEASE_CONTROL_ENABLED
+        value: "false"
+      # Reuse existing distributed limiting credentials; this creates no Redis.
+      - key: ADMIN_LOGIN_RATE_LIMIT_MODE
+        value: distributed
+      - key: ADMIN_ACCESS_TOKEN
+        sync: false
+      - key: ADMIN_SESSION_SECRET
+        sync: false
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false

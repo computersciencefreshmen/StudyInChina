@@ -8,7 +8,7 @@ export { parseVerificationRequest, buildVerificationArguments } from './verifica
 
 type Environment = Record<string, string | undefined>
 export function getVerificationCapabilities(environment: Environment = process.env): AdminSnapshot['capabilities'] {
-  const localMonitoring = environment.ADMIN_LOCAL_VERIFICATION_ENABLED === 'true' && !environment.VERCEL && !environment.CF_PAGES && !environment.AWS_LAMBDA_FUNCTION_NAME
+  const localMonitoring = environment.ADMIN_LOCAL_VERIFICATION_ENABLED === 'true' && !environment.VERCEL && !environment.RENDER && !environment.CF_PAGES && !environment.AWS_LAMBDA_FUNCTION_NAME
   const useCcSwitch = environment.ADMIN_VERIFICATION_USE_CCSWITCH === 'true'
   const environmentKey = Boolean(environment.MINIMAX_API_KEY || environment.ANTHROPIC_AUTH_TOKEN || environment.ANTHROPIC_API_KEY)
   const credentialSource = useCcSwitch ? 'ccswitch' : environmentKey ? 'environment' : 'unconfigured'

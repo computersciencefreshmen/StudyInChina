@@ -34,6 +34,9 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     globalNotFound: true,
+    // Render's small Node instance does not need a worker per desktop CPU.
+    // This only bounds build parallelism; runtime catalogue checks stay intact.
+    ...(process.env.RENDER === 'true' ? { cpus: 2 } : {}),
   },
   turbopack: {
     root: process.cwd(),
