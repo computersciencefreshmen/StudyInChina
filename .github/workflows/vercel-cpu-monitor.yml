@@ -1,0 +1,74 @@
+name: Check Vercel CPU meter access
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-cpu-meter-access
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Verify free machine-readable CPU metering
+    if: >-
+      github.repository == 'computersciencefreshmen/StudyInChina' &&
+      github.ref == 'refs/heads/main' &&
+      github.actor == 'computersciencefreshmen' &&
+      github.triggering_actor == 'computersciencefreshmen'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out reviewed main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+
+      - name: Read actual metering with the existing cloud credential
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: node scripts/operations/probe-vercel-cpu-usage.mjs --output "$RUNNER_TEMP/vercel-cpu-usage.json"
+
+      - name: Summarize availability without claiming budget success
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFile, readFile } from 'node:fs/promises'
+          let report
+          try {
+            report = JSON.parse(await readFile(`${process.env.RUNNER_TEMP}/vercel-cpu-usage.json`, 'utf8'))
+          } catch {
+            report = { state: 'unavailable', errorCode: 'report_missing' }
+          }
+          const state = ['unavailable', 'not_yet_verified', 'available'].includes(report.state) ? report.state : 'unavailable'
+          const status = Number.isInteger(report.httpStatus) ? String(report.httpStatus) : 'not received'
+          const code = typeof report.errorCode === 'string' && /^[a-z0-9_]{1,80}$/.test(report.errorCode) ? report.errorCode : 'none'
+          await appendFile(process.env.GITHUB_STEP_SUMMARY, [
+            '## CPU meter access preflight',
+            `- Source state: ${state}`,
+            `- HTTP status: ${status}`,
+            `- Safe diagnostic code: ${code}`,
+            '- This manual check does not enable a recurring monitor or prove a CPU budget.',
+            '- No plan changes, browser sessions, production site probes, or paid observability features.',
+            '- Enable cloud observation only after real CPU units, time bounds, and data coverage have been verified.',
+            '',
+          ].join('\n'))
+          NODE
+
+      - name: Save bounded, sanitized metering evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: vercel-cpu-meter-access-${{ github.run_id }}
+          path: ${{ runner.temp }}/vercel-cpu-usage.json
+          if-no-files-found: error
+          retention-days: 7
