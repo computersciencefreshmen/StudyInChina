@@ -1,10 +1,9 @@
 import 'server-only'
-import { createCatalogRepository, getCatalogRecordCounts, type CatalogRepository } from '@/lib/catalog'
+import { createCatalogRepository, deriveCatalogRelease, getCatalogRecordCounts, type CatalogRepository } from '@/lib/catalog'
 import { getTodayDate } from '@/lib/data/freshness'
 import { discoveryCounts, selectDiscoveryData } from '@/lib/data/discovery'
-import { readIdentityAcceptances } from '@/lib/data/identity-acceptance-store'
-import { readFieldVerifications } from '@/lib/data/field-verification-store'
 import { directoryRevision } from '@/lib/catalog/directory-revision'
+import { getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
 import { directoryCoverage } from '@/lib/data/directory-coverage'
 import { CatalogApiService, type InstitutionQuery, type ProgramQuery, type ScholarshipQuery } from './service'
 import { selectCatalogApiData } from './projection'
@@ -34,6 +33,14 @@ function getRepository() {
   return repository
 }
 
+async function bundleAndRelease(activeRepository: CatalogRepository) {
+  if (activeRepository.mode === 'json') {
+    const bundle = await activeRepository.getBundle()
+    return [bundle, deriveCatalogRelease(bundle)] as const
+  }
+  return Promise.all([activeRepository.getBundle(), operationalRelease(activeRepository)])
+}
+
 class DirectoryApiService extends CatalogApiService {
   constructor(bundle: Parameters<typeof selectDiscoveryData>[0], release: ReleaseInfo, private readonly projectionDate: string,
     private readonly projectionRevision: string) { super(bundle, release, projectionDate) }
@@ -53,13 +60,10 @@ class DirectoryApiService extends CatalogApiService {
 
 export async function getCatalogApiService(): Promise<CatalogApiService> {
   const activeRepository = getRepository()
-  const [rawBundle, release] = await Promise.all([
-    activeRepository.getBundle(),
-    operationalRelease(activeRepository),
-  ])
+  const [rawBundle, release] = await bundleAndRelease(activeRepository)
   const today = getTodayDate()
-  const identities = activeRepository.mode === 'json' ? readIdentityAcceptances(undefined, { strictProjection: true }) : []
-  const publicBundle = selectCatalogApiData(rawBundle, today, identities)
+  const publicBundle = activeRepository.mode === 'json'
+    ? getPublicCatalogSnapshot(rawBundle, today).current : selectCatalogApiData(rawBundle, today)
 
   const isJson = activeRepository.mode === 'json'
   const rawCounts = isJson ? getCatalogRecordCounts(rawBundle) : release.rawCounts
@@ -77,13 +81,12 @@ export async function getCatalogApiService(): Promise<CatalogApiService> {
 /** Explicit discovery endpoint; legacy APIs keep their current-only contract. */
 export async function getCatalogDirectoryService(): Promise<CatalogApiService> {
   const activeRepository = getRepository()
-  const [rawBundle, release] = await Promise.all([activeRepository.getBundle(), operationalRelease(activeRepository)])
+  const [rawBundle, release] = await bundleAndRelease(activeRepository)
   const today = getTodayDate()
-  const identities = activeRepository.mode === 'json' ? readIdentityAcceptances(undefined, { strictProjection: true }) : []
-  const current = selectCatalogApiData(rawBundle, today, identities)
-  const fields = activeRepository.mode === 'json' ? readFieldVerifications() : []
-  const directory = selectDiscoveryData(rawBundle, today, identities, fields)
-  const revision = directoryRevision(rawBundle, today, identities, fields)
+  const snapshot = activeRepository.mode === 'json' ? getPublicCatalogSnapshot(rawBundle, today) : undefined
+  const current = snapshot?.current ?? selectCatalogApiData(rawBundle, today)
+  const directory = snapshot?.directory ?? selectDiscoveryData(rawBundle, today)
+  const revision = snapshot?.revision ?? directoryRevision(rawBundle, today, [], [])
   const publicCounts = activeRepository.mode === 'json' ? getCatalogRecordCounts(current) : release.publicCounts
   return new DirectoryApiService(directory, { ...releaseInfo(release, activeRepository.mode), directoryRevision: revision,
     ...directoryCoverage(directory, rawBundle.universities.length, today),
@@ -96,16 +99,18 @@ export async function getCatalogDirectoryService(): Promise<CatalogApiService> {
 
 export async function getCurrentCatalogRelease(): Promise<ApiEnvelope<ReleaseInfo>> {
   const activeRepository = getRepository()
-  const operational = await operationalRelease(activeRepository)
+  // JSON metadata and counts must come from the same immutable file generation.
+  const jsonBundle = activeRepository.mode === 'json' ? await activeRepository.getBundle() : undefined
+  const operational = jsonBundle ? deriveCatalogRelease(jsonBundle) : await operationalRelease(activeRepository)
   let release = releaseInfo(operational, activeRepository.mode)
   if (activeRepository.mode === 'json') {
     const evaluatedForDate = getTodayDate()
-    const rawBundle = await activeRepository.getBundle()
-    const identities = readIdentityAcceptances(undefined, { strictProjection: true }), fields = readFieldVerifications()
-    const publicBundle = selectCatalogApiData(rawBundle, evaluatedForDate, identities)
+    const rawBundle = jsonBundle!
+    const snapshot = getPublicCatalogSnapshot(rawBundle, evaluatedForDate)
+    const publicBundle = snapshot.current
     const rawCounts = getCatalogRecordCounts(rawBundle)
     const publicCounts = getCatalogRecordCounts(publicBundle)
-    const directory = selectDiscoveryData(rawBundle, evaluatedForDate, identities, fields)
+    const directory = snapshot.directory
     release = {
       ...release,
       recordCounts: publicCounts,
@@ -113,7 +118,7 @@ export async function getCurrentCatalogRelease(): Promise<ApiEnvelope<ReleaseInf
       publicCounts,
       directoryCounts: discoveryCounts(directory),
       ...directoryCoverage(directory, rawBundle.universities.length, evaluatedForDate),
-      directoryRevision: directoryRevision(rawBundle, evaluatedForDate, identities, fields),
+      directoryRevision: snapshot.revision,
       currentFactsCounts: { universities: publicBundle.universities.length, programs: publicBundle.programs.length,
         admissionCycles: publicBundle.admissionCycles.length, scholarships: publicBundle.scholarships.length },
       evaluatedForDate,

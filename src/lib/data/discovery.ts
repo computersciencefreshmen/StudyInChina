@@ -4,7 +4,7 @@ import { selectPublishedData } from './publication'
 import { identityAcceptanceLedgerSchema, identityFingerprint, type IdentityAcceptance, type IdentityEntityType } from './identity-acceptance'
 import { applyFreshFieldVerifications, validateFieldVerification, type FieldVerification } from './field-verification'
 import type { FieldMeta } from '@/lib/catalog-api/types'
-import { projectVerifiedProgramName } from './verified-program-name'
+import { createVerifiedProgramNameProjector } from './verified-program-name'
 
 export type DiscoveryMeta = { identityAcceptedAt: string; currentFacts: boolean; currentFieldPaths: string[]
   fieldStates?: Record<string, string>; fieldMeta?: Record<string, FieldMeta> }
@@ -18,6 +18,7 @@ export type DiscoveryData = DataBundle & {
 /** A public identity is not a statement about this year's admission or award. */
 export function selectDiscoveryData(bundle: DataBundle, today = getTodayDate(), evidence: IdentityAcceptance[] = [], fieldEvidence: FieldVerification[] = []): DiscoveryData {
   const officialSources = new Map(bundle.sources.filter(source => source.official).map(source => [source.id, source]))
+  const projectProgramName = createVerifiedProgramNameProjector(bundle.sources, evidence, today)
   const current = selectPublishedData(bundle, today, evidence)
   const currentIds = {
     city: new Set(current.cities.map(record => record.id)), university: new Set(current.universities.map(record => record.id)),
@@ -68,7 +69,7 @@ export function selectDiscoveryData(bundle: DataBundle, today = getTodayDate(), 
   const programs = bundle.programs.flatMap(record => {
     const acceptedAt = accepted('program', record)
     if (!acceptedAt || !universityIds.has(record.universityId)) return []
-    const named = projectVerifiedProgramName(record, bundle.sources, evidence, today)
+    const named = projectProgramName(record)
     if (!named) return []
     const fresh = currentIds.program.has(record.id)
     return [{ ...audit(record, fresh), id: record.id, slug: record.slug, name: named.name, universityId: record.universityId,

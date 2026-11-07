@@ -457,9 +457,13 @@ export class CatalogApiService {
           || (query.scholarship === 'linked' && scholarships.length > 0)
           || scholarships.some((item) => matchesIdentity(item, query.scholarship)))
         && matchesCycle
-    }).map((item) => this.programRecord(item)).filter((item): item is ProgramRecord => item !== null)
+    })
+    // Filtering above has already required the owning university. Projection
+    // preserves id/slug, so cursor order is identical without projecting every
+    // matching record's field metadata before taking this page.
     const page = paginateBySlug(filtered, 'programs', query)
-    return this.envelope(page.items, { pageSize: page.items.length, nextCursor: page.nextCursor })
+    const items = page.items.map(item => this.programRecord(item)).filter((item): item is ProgramRecord => item !== null)
+    return this.envelope(items, { pageSize: items.length, nextCursor: page.nextCursor })
   }
 
   getProgram(slug: string): ApiEnvelope<ProgramRecord> | null {
@@ -561,9 +565,10 @@ export class CatalogApiService {
           (!query.institution || matchesIdentity(university, query.institution))
           && matchesUniversityRankings(university, query, this.today)
         )))
-    }).map((item) => this.scholarshipRecord(item))
+    })
     const page = paginateBySlug(filtered, 'scholarships', query)
-    return this.envelope(page.items, { pageSize: page.items.length, nextCursor: page.nextCursor })
+    const items = page.items.map(item => this.scholarshipRecord(item))
+    return this.envelope(items, { pageSize: items.length, nextCursor: page.nextCursor })
   }
 
   getScholarshipCycles(slug: string): ApiEnvelope<ScholarshipCycleRecord[]> | null {

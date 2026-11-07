@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest'
 import type { DataBundle } from '@/lib/data/types'
 import { InvalidCursorError } from '@/lib/catalog-api/cursor'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
+import { selectDiscoveryData } from '@/lib/data/discovery'
+import { identityFingerprint } from '@/lib/data/identity-acceptance'
 import {
   CatalogApiService,
   InvalidSearchQueryError,
@@ -55,6 +57,54 @@ function fixture(): DataBundle {
 }
 
 describe('CatalogApiService', () => {
+  it('keeps scoped stale identities and duplicate-slug cursor order when projecting a program page', () => {
+    const bundle = fixture(), today = '2026-07-20'
+    const base = bundle.programs[0]
+    bundle.programs = [
+      { ...base, id: 'b', slug: 'same', name: text('Computer Science', '计算机科学', 'UNREVIEWED_SENTINEL'), status: 'stale', reviewAfter: '2026-07-19' },
+      { ...base, id: 'c', slug: 'z-last' },
+      { ...base, id: 'a', slug: 'same' },
+      { ...base, id: 'orphan', universityId: 'missing' },
+    ]
+    const stale = bundle.programs[0]
+    const directory = selectDiscoveryData(bundle, today, [{
+      entityType: 'program', recordId: stale.id, identitySha256: identityFingerprint('program', stale),
+      sourceIds: stale.sourceIds, acceptedAt: '2026-07-20T00:00:00.000Z', reviewer: 'pagination-fixture',
+      receiptPath: 'fixture.json', receiptSha256: 'a'.repeat(64), verifiedName: { en: 'Computer Science' },
+    }])
+    const service = new CatalogApiService(directory, releaseFromBundle(directory, today), today)
+    const query = { q: 'Computer', view: 'directory' as const, limit: 1 }
+    const first = service.listPrograms(query)
+    const second = service.listPrograms({ ...query, cursor: first.meta.nextCursor! })
+    const third = service.listPrograms({ ...query, cursor: second.meta.nextCursor! })
+    expect([first, second, third].flatMap(page => page.data.map(item => item.id))).toEqual(['a', 'b', 'c'])
+    expect(third.meta.nextCursor).toBeNull()
+    expect(second.data[0].name).toEqual({ en: 'Computer Science' })
+    expect(second.data[0].durationMonths).toBeNull()
+    expect(second.data[0].fieldMeta.durationMonths.status).toBe('stale')
+    expect(service.listPrograms({ ...query, language: 'English', limit: 10 }).data.map(item => item.id)).toEqual(['a', 'c'])
+  })
+
+  it('retains scholarship filters, stale field redaction, and duplicate-slug pagination', () => {
+    const bundle = fixture(), today = '2026-07-20', base = bundle.scholarships[0]
+    bundle.scholarships = [
+      { ...base, id: 'b', slug: 'same', status: 'stale', reviewAfter: '2026-07-19' },
+      { ...base, id: 'c', slug: 'z-last' },
+      { ...base, id: 'a', slug: 'same' },
+      { ...base, id: 'excluded', slug: 'aaa', providerType: 'csc' },
+    ]
+    const service = new CatalogApiService(bundle, releaseFromBundle(bundle, today), today)
+    const query = { q: 'Example', provider: 'university', limit: 1 }
+    const first = service.listScholarships(query)
+    const second = service.listScholarships({ ...query, cursor: first.meta.nextCursor! })
+    const third = service.listScholarships({ ...query, cursor: second.meta.nextCursor! })
+    expect([first, second, third].flatMap(page => page.data.map(item => item.id))).toEqual(['a', 'b', 'c'])
+    expect(third.meta.nextCursor).toBeNull()
+    expect(second.data[0].summary).toBeNull()
+    expect(second.data[0].fieldMeta.summary.status).toBe('stale')
+    expect(service.listScholarships({ ...query, program: 'program-1', limit: 10 }).data.map(item => item.id)).toEqual(['a', 'c'])
+  })
+
   it('returns filters, source metadata, and explicit unknown fact statuses', () => {
     const bundle = fixture()
     const service = new CatalogApiService(bundle, releaseFromBundle(bundle, '2026-07-20'), '2026-07-20')

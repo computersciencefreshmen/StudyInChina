@@ -1,0 +1,397 @@
+
+> study-in-china-guide@1.0.0 test
+> vitest run --maxWorkers=2
+
+
+ RUN  v4.1.11 D:/学过的课程/github_profile_work/StudyInChina/.perf-worktree
+
+(node:33968) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43912) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4220) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22172) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:50492) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33764) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6876) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:624) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56280) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22152) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/unit/national-university-registry.test.ts (16 tests | 1 failed) 49ms
+     × rejects a symlink or junction in an otherwise lexically contained output path 5ms
+(node:10844) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12332) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:58356) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:55660) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43664) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:54544) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/unit/minimax-usage-ledger.test.ts (11 tests | 9 failed) 221ms
+     × keeps the Shanghai terminal preflight window in receipts and rejects stale or invalid admission metadata 25ms
+     × uses Shanghai midnight correctly, retaining both request and reply days and official admission windows 17ms
+     × publishes one immutable attempt under concurrent retries and excludes private runtime fields 45ms
+     × retains usage even when no usable model JSON/final response receipt was saved and handles absent usage explicitly 18ms
+     × allows null HTTP status only for unmeasured model-attempt transport receipts 13ms
+     × seeds historical surviving responses idempotently, preserves overwrites thereafter and never guesses historical provider 27ms
+     × does not seed an instrumented response a second time 15ms
+     × deduplicates copied receipts across runs and rejects tampered totals 37ms
+     × fails closed on invalid identities and does not infer a window from quota observed after admission 14ms
+(node:22816) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:52888) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22732) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/unit/minimax-verifier-usage.test.ts (10 tests | 9 failed) 170ms
+     × records successful attempts before the reusable response and retains quota/provider identity without credentials 26ms
+     × preserves charged usage even when generated JSON is unusable (null) 14ms
+     × preserves charged usage even when generated JSON is unusable ({broken) 10ms
+     × preserves charged usage even when generated JSON is unusable ({"results":[null]}) 9ms
+     × records unknown usage for an invalid API envelope instead of silently losing the HTTP attempt 9ms
+     × records HTTP error usage and never retries billing 402 10ms
+     × preserves each retry with a distinct attempt ID and refreshed preflight instead of overwriting its usage 9ms
+     × records transport failure as an unknown attempt without leaking the transport message 9ms
+     × retains an unknown transport attempt across a bounded successful retry 9ms
+(node:34204) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25500) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19028) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29196) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41024) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:37264) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2160) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:55400) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12808) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14572) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/unit/catalog-institution-api-route.test.ts (2 tests | 1 failed) 19ms
+     × uses the bounded Repository list path without reading a compatibility bundle 14ms
+(node:25524) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:740) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36348) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:49324) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/unit/maintenance-prepare-path.test.ts (4 tests | 1 failed) 31ms
+     × resolves a directory junction/symlink before producing candidate sidecars 8ms
+(node:18484) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 21 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/catalog-institution-api-route.test.ts > institution catalog API route > uses the bounded Repository list path without reading a compatibility bundle
+AssertionError: expected 'no-store' to contain 's-maxage=300'
+
+Expected: "s-maxage=300"
+Received: "no-store"
+
+ ❯ tests/unit/catalog-institution-api-route.test.ts:86:51
+     84|
+     85|     expect(response.status).toBe(200)
+     86|     expect(response.headers.get('cache-control')).toContain('s-maxage=…
+       |                                                   ^
+     87|     expect(repository.listInstitutions).toHaveBeenCalledTimes(1)
+     88|     expect(repository.listInstitutions).toHaveBeenCalledWith(expect.ob…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/21]⎯
+
+ FAIL  tests/unit/maintenance-prepare-path.test.ts > candidate writer cannot target canonical files in a dry run > resolves a directory junction/symlink before producing candidate sidecars
+Error: EPERM: operation not permitted, symlink 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\maintenance-path-test-eYFzWq\content\data' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\maintenance-path-test-eYFzWq\apparently-safe-output'
+ ❯ tests/unit/maintenance-prepare-path.test.ts:29:5
+     27|   it('resolves a directory junction/symlink before producing candidate…
+     28|     const f = fixture(), alias = join(f.root, 'apparently-safe-output')
+     29|     symlinkSync(f.data, alias, 'junction')
+       |     ^
+     30|     await expect(prepareMaintenanceCatalog({ root: f.root, outputDirec…
+     31|       acceptedAt: '2026-10-24T02:00:00.000Z' })).rejects.toThrow('main…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > keeps the Shanghai terminal preflight window in receipts and rejects stale or invalid admission metadata
+Error: EPERM: operation not permitted, link 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-2adiEn\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\257a855f619dcc9a82d9c6fc9efcd6165d4ff6f1bfb43c165bf731868d8d4944.json.24968.24526835-b7a6-4273-9173-a9037767a4aa.tmp' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-2adiEn\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\257a855f619dcc9a82d9c6fc9efcd6165d4ff6f1bfb43c165bf731868d8d4944.json'
+ ❯ recordModelUsage scripts/ingestion/minimax-usage-ledger.ts:147:9
+    145|   await writeFile(temporary, serialized, { encoding: 'utf8', flag: 'wx…
+    146|   let created = true
+    147|   try { await link(temporary, file) } catch (error) {
+       |         ^
+    148|     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    149|     created = false
+ ❯ tests/unit/minimax-usage-ledger.test.ts:43:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > uses Shanghai midnight correctly, retaining both request and reply days and official admission windows
+Error: EPERM: operation not permitted, link 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-UutJ2Z\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json.24968.847920fb-4d3d-4f3d-8923-a0ff53e5ba5b.tmp' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-UutJ2Z\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json'
+ ❯ recordModelUsage scripts/ingestion/minimax-usage-ledger.ts:147:9
+    145|   await writeFile(temporary, serialized, { encoding: 'utf8', flag: 'wx…
+    146|   let created = true
+    147|   try { await link(temporary, file) } catch (error) {
+       |         ^
+    148|     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    149|     created = false
+ ❯ tests/unit/minimax-usage-ledger.test.ts:81:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > publishes one immutable attempt under concurrent retries and excludes private runtime fields
+Error: EPERM: operation not permitted, link 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-OX5RTh\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json.24968.dbf9c95a-1288-4572-9a2c-b1762d363996.tmp' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-OX5RTh\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json'
+ ❯ recordModelUsage scripts/ingestion/minimax-usage-ledger.ts:147:9
+    145|   await writeFile(temporary, serialized, { encoding: 'utf8', flag: 'wx…
+    146|   let created = true
+    147|   try { await link(temporary, file) } catch (error) {
+       |         ^
+    148|     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    149|     created = false
+ ❯ tests/unit/minimax-usage-ledger.test.ts:95:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > retains usage even when no usable model JSON/final response receipt was saved and handles absent usage explicitly
+Error: EPERM: operation not permitted, link 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-KtZPPW\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json.24968.54c4949f-0dba-4ced-85ff-27e518e7276f.tmp' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-KtZPPW\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json'
+ ❯ recordModelUsage scripts/ingestion/minimax-usage-ledger.ts:147:9
+    145|   await writeFile(temporary, serialized, { encoding: 'utf8', flag: 'wx…
+    146|   let created = true
+    147|   try { await link(temporary, file) } catch (error) {
+       |         ^
+    148|     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    149|     created = false
+ ❯ tests/unit/minimax-usage-ledger.test.ts:106:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > allows null HTTP status only for unmeasured model-attempt transport receipts
+Error: EPERM: operation not permitted, link 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-HI1mFT\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json.24968.d9dfac41-9330-447a-91a4-03b2c0af05b2.tmp' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-HI1mFT\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json'
+ ❯ recordModelUsage scripts/ingestion/minimax-usage-ledger.ts:147:9
+    145|   await writeFile(temporary, serialized, { encoding: 'utf8', flag: 'wx…
+    146|   let created = true
+    147|   try { await link(temporary, file) } catch (error) {
+       |         ^
+    148|     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    149|     created = false
+ ❯ tests/unit/minimax-usage-ledger.test.ts:116:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > seeds historical surviving responses idempotently, preserves overwrites thereafter and never guesses historical provider
+AssertionError: expected { added: +0, reused: +0, …(2) } to match object { added: 1, reused: +0 }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "added": 1,
++   "added": 0,
+    "reused": 0,
+  }
+
+ ❯ tests/unit/minimax-usage-ledger.test.ts:128:50
+    126|     const response = { checkedAt: metadata.receivedAt, model: metadata…
+    127|     await writeFile(file, JSON.stringify(response))
+    128|     expect(await seedHistoricalUsage(directory)).toMatchObject({ added…
+       |                                                  ^
+    129|     expect(await seedHistoricalUsage(directory)).toMatchObject({ added…
+    130|     await writeFile(file, JSON.stringify({ ...response, checkedAt: '20…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > does not seed an instrumented response a second time
+Error: EPERM: operation not permitted, link 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-dsrVRA\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json.24968.0272f88e-70ee-4134-ae4d-c71db134c5de.tmp' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-dsrVRA\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json'
+ ❯ recordModelUsage scripts/ingestion/minimax-usage-ledger.ts:147:9
+    145|   await writeFile(temporary, serialized, { encoding: 'utf8', flag: 'wx…
+    146|   let created = true
+    147|   try { await link(temporary, file) } catch (error) {
+       |         ^
+    148|     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    149|     created = false
+ ❯ tests/unit/minimax-usage-ledger.test.ts:141:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > deduplicates copied receipts across runs and rejects tampered totals
+Error: EPERM: operation not permitted, link 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-JcdQVo\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json.24968.7a2bcd01-545a-46f0-9258-0a101edddf81.tmp' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-JcdQVo\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json'
+ ❯ recordModelUsage scripts/ingestion/minimax-usage-ledger.ts:147:9
+    145|   await writeFile(temporary, serialized, { encoding: 'utf8', flag: 'wx…
+    146|   let created = true
+    147|   try { await link(temporary, file) } catch (error) {
+       |         ^
+    148|     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    149|     created = false
+ ❯ tests/unit/minimax-usage-ledger.test.ts:149:29
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/21]⎯
+
+ FAIL  tests/unit/minimax-usage-ledger.test.ts > MiniMax truthful token usage accounting > fails closed on invalid identities and does not infer a window from quota observed after admission
+Error: EPERM: operation not permitted, link 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-RspxEy\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json.24968.5dae0f6e-9fee-405f-b54d-dc724f3285d7.tmp' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\minimax-usage-RspxEy\.official-harvest\minimax-verification\aaaaaaaaaaaaaaaa\usage-receipts\695171b86707984e3250a5f46eae69e434d09fbfea6860899782bdd7efe2d4e5.json'
+ ❯ recordModelUsage scripts/ingestion/minimax-usage-ledger.ts:147:9
+    145|   await writeFile(temporary, serialized, { encoding: 'utf8', flag: 'wx…
+    146|   let created = true
+    147|   try { await link(temporary, file) } catch (error) {
+       |         ^
+    148|     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    149|     created = false
+ ❯ tests/unit/minimax-usage-ledger.test.ts:170:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/21]⎯
+
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > records successful attempts before the reusable response and retains quota/provider identity without credentials
+AssertionError: promise rejected "Error: MiniMax usage receipt unavailable" instead of resolving
+ ❯ tests/unit/minimax-verifier-usage.test.ts:50:128
+     48|     const quota = freshQuota()
+     49|     vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringi…
+     50|     await expect(compareBatch([task], [], api, directory, inputSha256,…
+       |                                                                                                                                ^
+     51|     const saved = await receipts(directory)
+     52|     expect(saved).toHaveLength(1)
+
+Caused by: Error: MiniMax usage receipt unavailable
+ ❯ saveUsage scripts/ingestion/verify-catalog-minimax.ts:636:23
+ ❯ attempt scripts/ingestion/verify-catalog-minimax.ts:659:24
+ ❯ guardedRequest scripts/ingestion/verify-catalog-minimax.ts:271:16
+ ❯ retry scripts/ingestion/verify-catalog-minimax.ts:484:18
+ ❯ compareBatch scripts/ingestion/verify-catalog-minimax.ts:671:20
+ ❯ tests/unit/minimax-verifier-usage.test.ts:50:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/21]⎯
+
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > preserves charged usage even when generated JSON is unusable (null)
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > preserves charged usage even when generated JSON is unusable ({broken)
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > preserves charged usage even when generated JSON is unusable ({"results":[null]})
+AssertionError: expected [Function] to throw error including 'MiniMax response' but got 'MiniMax usage receipt unavailable'
+
+Expected: "MiniMax response"
+Received: "MiniMax usage receipt unavailable"
+
+ ❯ tests/unit/minimax-verifier-usage.test.ts:66:81
+     64|     const { root, directory } = await fixture()
+     65|     vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringi…
+     66|     await expect(compareBatch([task], [], api, directory, inputSha256,…
+       |                                                                                 ^
+     67|     expect((await buildUsageReport(root)).totals).toMatchObject({ atte…
+     68|     expect((await receipts(directory))[0].httpStatus).toBe(200)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/21]⎯
+
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > records unknown usage for an invalid API envelope instead of silently losing the HTTP attempt
+AssertionError: expected [Function] to throw error including 'MiniMax response JSON invalid' but got 'MiniMax usage receipt unavailable'
+
+Expected: "MiniMax response JSON invalid"
+Received: "MiniMax usage receipt unavailable"
+
+ ❯ tests/unit/minimax-verifier-usage.test.ts:74:81
+     72|     const { root, directory } = await fixture()
+     73|     vi.stubGlobal('fetch', vi.fn(async () => new Response('malformed A…
+     74|     await expect(compareBatch([task], [], api, directory, inputSha256,…
+       |                                                                                 ^
+     75|     expect((await buildUsageReport(root)).totals).toMatchObject({ atte…
+     76|     expect((await receipts(directory))[0].usage.reportedTokens).toBeNu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/21]⎯
+
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > records HTTP error usage and never retries billing 402
+AssertionError: expected [Function] to throw error including 'MiniMax HTTP 402' but got 'MiniMax usage receipt unavailable'
+
+Expected: "MiniMax HTTP 402"
+Received: "MiniMax usage receipt unavailable"
+
+ ❯ tests/unit/minimax-verifier-usage.test.ts:83:81
+     81|     const send = vi.fn(async () => new Response(JSON.stringify({ error…
+     82|     vi.stubGlobal('fetch', send)
+     83|     await expect(compareBatch([task], [], api, directory, inputSha256,…
+       |                                                                                 ^
+     84|     expect(send).toHaveBeenCalledTimes(1)
+     85|     expect((await receipts(directory))[0]).toMatchObject({ httpStatus:…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/21]⎯
+
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > preserves each retry with a distinct attempt ID and refreshed preflight instead of overwriting its usage
+Error: MiniMax usage receipt unavailable
+ ❯ saveUsage scripts/ingestion/verify-catalog-minimax.ts:636:23
+    634|           model: api.model, modelConfigSha256: modelConfiguration(api)…
+    635|           requestSha256: sha(serializedBody), httpStatus, apiFormat: a…
+    636|       } catch { throw new Error('MiniMax usage receipt unavailable') }
+       |                       ^
+    637|       return receivedAt
+    638|     }
+ ❯ attempt scripts/ingestion/verify-catalog-minimax.ts:659:24
+ ❯ guardedRequest scripts/ingestion/verify-catalog-minimax.ts:271:16
+ ❯ retry scripts/ingestion/verify-catalog-minimax.ts:484:18
+ ❯ compareBatch scripts/ingestion/verify-catalog-minimax.ts:671:20
+ ❯ tests/unit/minimax-verifier-usage.test.ts:96:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/21]⎯
+
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > records transport failure as an unknown attempt without leaking the transport message
+AssertionError: expected [Function] to throw error including 'MiniMax transport failed' but got 'MiniMax usage receipt unavailable'
+
+Expected: "MiniMax transport failed"
+Received: "MiniMax usage receipt unavailable"
+
+ ❯ tests/unit/minimax-verifier-usage.test.ts:132:81
+    130|     const send = vi.fn(async () => { throw new Error(`private request …
+    131|     vi.stubGlobal('fetch', send)
+    132|     await expect(compareBatch([task], [], api, directory, inputSha256,…
+       |                                                                                 ^
+    133|     const saved = await receipts(directory)
+    134|     expect(saved).toHaveLength(1)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/21]⎯
+
+ FAIL  tests/unit/minimax-verifier-usage.test.ts > MiniMax verifier immutable HTTP-attempt usage > retains an unknown transport attempt across a bounded successful retry
+Error: MiniMax usage receipt unavailable
+ ❯ saveUsage scripts/ingestion/verify-catalog-minimax.ts:636:23
+    634|           model: api.model, modelConfigSha256: modelConfiguration(api)…
+    635|           requestSha256: sha(serializedBody), httpStatus, apiFormat: a…
+    636|       } catch { throw new Error('MiniMax usage receipt unavailable') }
+       |                       ^
+    637|       return receivedAt
+    638|     }
+ ❯ attempt scripts/ingestion/verify-catalog-minimax.ts:648:7
+ ❯ guardedRequest scripts/ingestion/verify-catalog-minimax.ts:271:16
+ ❯ retry scripts/ingestion/verify-catalog-minimax.ts:484:18
+ ❯ compareBatch scripts/ingestion/verify-catalog-minimax.ts:671:20
+ ❯ tests/unit/minimax-verifier-usage.test.ts:148:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/21]⎯
+
+ FAIL  tests/unit/national-university-registry.test.ts > authoritative national institution target registry > rejects a symlink or junction in an otherwise lexically contained output path
+Error: EPERM: operation not permitted, symlink 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\national-registry-path-Vk54v5\outside' -> 'D:\学过的课程\github_profile_work\StudyInChina\.perf-worktree\.tmp\national-registry-path-Vk54v5\root\targets'
+ ❯ tests/unit/national-university-registry.test.ts:159:7
+    157|     try {
+    158|       await mkdir(root); await mkdir(outside)
+    159|       await symlink(outside, join(root, 'targets'), process.platform =…
+       |       ^
+    160|       await expect(assertRegistryPath(root, join(root, 'targets', 'reg…
+    161|       await expect(assertRegistryPath(root, join(root, 'safe', 'regist…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/21]⎯
+
+
+ Test Files  5 failed | 236 passed (241)
+      Tests  21 failed | 2133 passed | 1 skipped (2155)
+   Start at  23:28:24
+   Duration  344.40s (transform 16.16s, setup 63.88s, import 95.59s, tests 297.59s, environment 169.25s)
+

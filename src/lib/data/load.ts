@@ -1,11 +1,9 @@
 import 'server-only'
 import { cache } from 'react'
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { readValidatedCatalogBundle } from './raw-snapshot'
+import { getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
 import { getTodayDate } from './freshness'
 import { createCatalogRepository, type CatalogRepository } from '@/lib/catalog'
-import { bundleSchema } from './schema'
-import { selectPublishedData } from './publication'
 import { selectDiscoveryData } from './discovery'
 import { readIdentityAcceptances } from './identity-acceptance-store'
 import { readFieldVerifications } from './field-verification-store'
@@ -13,20 +11,9 @@ import { isContentPreviewEnabled } from './preview'
 import type { DataBundle } from './types'
 import { canonicalUniversitySlug } from './slug-aliases'
 
-function readJson(name: string): unknown {
-  return JSON.parse(readFileSync(join(process.cwd(), 'content', 'data', `${name}.json`), 'utf8'))
-}
+export const getAllData = cache((): DataBundle => readValidatedCatalogBundle())
 
-export const getAllData = cache((): DataBundle => bundleSchema.parse({
-  sources: readJson('sources'),
-  cities: readJson('cities'),
-  universities: readJson('universities'),
-  programs: readJson('programs'),
-  admissionCycles: readJson('admission-cycles'),
-  scholarships: readJson('scholarships'),
-}))
-
-const getPublishedData = cache((today: string): DataBundle => selectPublishedData(getAllData(), today, readIdentityAcceptances(undefined, { strictProjection: true })))
+const getPublishedData = cache((today: string): DataBundle => getPublicCatalogSnapshot(getAllData(), today).current)
 
 export function getData(): DataBundle {
   const data = getAllData()
@@ -44,6 +31,7 @@ function activeCatalogRepository(): CatalogRepository {
 const getRepositoryData = cache(async (today: string): Promise<DataBundle> => {
   const data = await activeCatalogRepository().getBundle()
   const previewEnabled = isContentPreviewEnabled(process.env)
+  if (!previewEnabled && activeCatalogRepository().mode === 'json') return getPublicCatalogSnapshot(data, today).directory
   return previewEnabled ? data : selectDiscoveryData(data, today,
     activeCatalogRepository().mode === 'json' ? readIdentityAcceptances(undefined, { strictProjection: true }) : [],
     activeCatalogRepository().mode === 'json' ? readFieldVerifications() : [])

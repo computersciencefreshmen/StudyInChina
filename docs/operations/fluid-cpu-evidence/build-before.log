@@ -1,0 +1,78 @@
+
+> study-in-china-guide@1.0.0 build
+> next build --webpack
+
+▲ Next.js 16.4.3 (webpack)
+✓ Running next.config.ts took 28ms
+- Experiments (use with caution):
+  ✓ globalNotFound
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 5.1s
+  Running TypeScript ...
+  Finished TypeScript in 8.5s ...
+  Collecting page data using 21 workers ...
+  Generating static pages using 21 workers (0/937) ...
+  Generating static pages using 21 workers (234/937) 
+  Generating static pages using 21 workers (468/937) 
+  Generating static pages using 21 workers (702/937) 
+✓ Generating static pages using 21 workers (937/937) in 3.6s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)                             Revalidate  Expire
+┌ ○ /_not-found
+├ ƒ /[locale]
+├ ƒ /[locale]/about
+├ ƒ /[locale]/cities
+├ ƒ /[locale]/cities/[slug]
+├ ƒ /[locale]/contact
+├ ƒ /[locale]/data-policy
+├ ƒ /[locale]/disclaimer
+├ ƒ /[locale]/double-first-class
+├ ƒ /[locale]/favorites
+├ ƒ /[locale]/guides
+├ ƒ /[locale]/guides/[slug]
+├ ƒ /[locale]/notifications
+├ ƒ /[locale]/opengraph-image
+├ ƒ /[locale]/privacy
+├ ƒ /[locale]/programs
+├ ƒ /[locale]/programs/[slug]
+├ ƒ /[locale]/scholarships
+├ ƒ /[locale]/scholarships/[slug]
+├ ƒ /[locale]/universities
+├ ƒ /[locale]/universities/[slug]
+├ ƒ /[locale]/updates
+├ ○ /admin
+├ ƒ /api/admin/automation
+├ ƒ /api/admin/events
+├ ƒ /api/admin/releases
+├ ƒ /api/admin/session
+├ ƒ /api/admin/status
+├ ƒ /api/admin/verification
+├ ƒ /api/feedback
+├ ƒ /api/notifications
+├ ƒ /api/v1/directory/institutions
+├ ƒ /api/v1/directory/programs
+├ ƒ /api/v1/directory/scholarships
+├ ○ /api/v1/double-first-class                  1d      1y
+├ ƒ /api/v1/institutions
+├ ƒ /api/v1/institutions/[slug]
+├ ƒ /api/v1/minimax-verification
+├ ƒ /api/v1/programs
+├ ƒ /api/v1/programs/[slug]
+├ ƒ /api/v1/programs/[slug]/cycles
+├ ƒ /api/v1/programs/compare
+├ ƒ /api/v1/releases/current
+├ ƒ /api/v1/scholarships
+├ ƒ /api/v1/scholarships/[slug]/cycles
+├ ○ /robots.txt
+├ ○ /sitemap.xml
+└ ○ /themes
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

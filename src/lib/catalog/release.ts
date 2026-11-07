@@ -1,5 +1,6 @@
 import { getDataReleaseDate } from '@/lib/data/release'
 import type { DataBundle } from '@/lib/data/types'
+import { freezeSnapshot } from '@/lib/data/file-snapshot'
 import {
   CATALOG_COLLECTIONS,
   CatalogRepositoryError,
@@ -17,7 +18,18 @@ export function getCatalogRecordCounts(bundle: DataBundle): CatalogRecordCounts 
   ) as CatalogRecordCounts
 }
 
+const releases = new WeakMap<DataBundle, Map<string, CatalogRelease>>()
+
 export function deriveCatalogRelease(bundle: DataBundle, idPrefix = 'json'): CatalogRelease {
+  if (!Object.isFrozen(bundle)) return deriveUncachedRelease(bundle, idPrefix)
+  let versions = releases.get(bundle)
+  if (!versions) { versions = new Map(); releases.set(bundle, versions) }
+  let release = versions.get(idPrefix)
+  if (!release) { release = freezeSnapshot(deriveUncachedRelease(bundle, idPrefix)); versions.set(idPrefix, release) }
+  return release
+}
+
+function deriveUncachedRelease(bundle: DataBundle, idPrefix: string): CatalogRelease {
   const dataDate = getDataReleaseDate(bundle)
   const generatedAt = `${dataDate}T00:00:00.000Z`
   const counts = getCatalogRecordCounts(bundle)

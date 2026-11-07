@@ -1,0 +1,545 @@
+{
+  "node": "v24.14.0",
+  "results": [
+    {
+      "path": "/en/universities",
+      "phase": "first",
+      "count": 1,
+      "cpuMs": 1220,
+      "wallMs": 943.5665,
+      "heapDeltaBytes": 137444160,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 943.0824
+        }
+      ]
+    },
+    {
+      "path": "/en/universities",
+      "phase": "hot",
+      "count": 5,
+      "cpuMs": 2546,
+      "wallMs": 2237.0550000000003,
+      "heapDeltaBytes": 100032048,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 430.82389999999987
+        },
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 427.00149999999985
+        },
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 414.1403
+        },
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 428.5147000000002
+        },
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 536.2708000000002
+        }
+      ]
+    },
+    {
+      "path": "/en/universities",
+      "phase": "concurrent",
+      "count": 4,
+      "cpuMs": 2016,
+      "wallMs": 2033.2350999999999,
+      "heapDeltaBytes": -193186832,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 2021.2093999999997
+        },
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 2025.7010999999998
+        },
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 2024.1347000000005
+        },
+        {
+          "status": 200,
+          "bytes": 154402,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 2025.9399000000003
+        }
+      ]
+    },
+    {
+      "path": "/zh/universities",
+      "phase": "first",
+      "count": 1,
+      "cpuMs": 625,
+      "wallMs": 597.0068000000001,
+      "heapDeltaBytes": 66721872,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 596.4144000000006
+        }
+      ]
+    },
+    {
+      "path": "/zh/universities",
+      "phase": "hot",
+      "count": 5,
+      "cpuMs": 2922,
+      "wallMs": 2752.6883000000007,
+      "heapDeltaBytes": 64147488,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 570.7601000000004
+        },
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 465.9956000000002
+        },
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 589.7551999999996
+        },
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 577.1142
+        },
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 548.6525000000001
+        }
+      ]
+    },
+    {
+      "path": "/zh/universities",
+      "phase": "concurrent",
+      "count": 4,
+      "cpuMs": 2156,
+      "wallMs": 2046.4138999999996,
+      "heapDeltaBytes": 89806760,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 2044.0953000000009
+        },
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 2045.3389000000006
+        },
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 2044.3889
+        },
+        {
+          "status": 200,
+          "bytes": 150799,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 2045.6605
+        }
+      ]
+    },
+    {
+      "path": "/en/universities/tsinghua-university",
+      "phase": "first",
+      "count": 1,
+      "cpuMs": 234,
+      "wallMs": 236.35739999999896,
+      "heapDeltaBytes": 48090704,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 236.14360000000124
+        }
+      ]
+    },
+    {
+      "path": "/en/universities/tsinghua-university",
+      "phase": "hot",
+      "count": 5,
+      "cpuMs": 1516,
+      "wallMs": 1319.1605,
+      "heapDeltaBytes": -232234392,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 237.72949999999946
+        },
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 240.89880000000085
+        },
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 286.5693999999985
+        },
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 287.52870000000075
+        },
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 266.15639999999985
+        }
+      ]
+    },
+    {
+      "path": "/en/universities/tsinghua-university",
+      "phase": "concurrent",
+      "count": 4,
+      "cpuMs": 1109,
+      "wallMs": 1056.845299999999,
+      "heapDeltaBytes": 55144464,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 1055.418599999999
+        },
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 1055.5355
+        },
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 1056.037699999999
+        },
+        {
+          "status": 200,
+          "bytes": 109743,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 1056.1971999999987
+        }
+      ]
+    },
+    {
+      "path": "/zh/universities/tsinghua-university",
+      "phase": "first",
+      "count": 1,
+      "cpuMs": 282,
+      "wallMs": 280.59710000000086,
+      "heapDeltaBytes": 5217896,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 280.40079999999944
+        }
+      ]
+    },
+    {
+      "path": "/zh/universities/tsinghua-university",
+      "phase": "hot",
+      "count": 5,
+      "cpuMs": 1156,
+      "wallMs": 1120.8769999999986,
+      "heapDeltaBytes": 99332128,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 251.3669000000009
+        },
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 201.83220000000074
+        },
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 203.2495999999992
+        },
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 258.6144999999997
+        },
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 205.5540000000001
+        }
+      ]
+    },
+    {
+      "path": "/zh/universities/tsinghua-university",
+      "phase": "concurrent",
+      "count": 4,
+      "cpuMs": 937,
+      "wallMs": 930.9388999999992,
+      "heapDeltaBytes": 45675152,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 929.3937999999998
+        },
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 929.9073000000008
+        },
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 930.3230999999996
+        },
+        {
+          "status": 200,
+          "bytes": 108603,
+          "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "wallMs": 929.9043999999994
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/directory/programs?limit=24",
+      "phase": "first",
+      "count": 1,
+      "cpuMs": 813,
+      "wallMs": 664.6754999999994,
+      "heapDeltaBytes": 31818528,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 662.9399000000012
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/directory/programs?limit=24",
+      "phase": "hot",
+      "count": 5,
+      "cpuMs": 2562,
+      "wallMs": 2363.8230000000003,
+      "heapDeltaBytes": -193279600,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 391.33630000000267
+        },
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 455.1445999999996
+        },
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 504.2639999999992
+        },
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 456.22769999999946
+        },
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 551.9418000000005
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/directory/programs?limit=24",
+      "phase": "concurrent",
+      "count": 4,
+      "cpuMs": 1875,
+      "wallMs": 1791.2479999999996,
+      "heapDeltaBytes": 38194808,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 471.71510000000126
+        },
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 876.8942999999999
+        },
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 1311.4694000000018
+        },
+        {
+          "status": 200,
+          "bytes": 131414,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 1788.314699999999
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/releases/current",
+      "phase": "first",
+      "count": 1,
+      "cpuMs": 251,
+      "wallMs": 259.21310000000085,
+      "heapDeltaBytes": 1108832,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 255.4955000000009
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/releases/current",
+      "phase": "hot",
+      "count": 5,
+      "cpuMs": 1374,
+      "wallMs": 1363.6623,
+      "heapDeltaBytes": 54266384,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 272.9477000000006
+        },
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 265.39510000000155
+        },
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 248.21169999999984
+        },
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 278.3378999999986
+        },
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 296.83290000000125
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/releases/current",
+      "phase": "concurrent",
+      "count": 4,
+      "cpuMs": 1218,
+      "wallMs": 1273.2211000000025,
+      "heapDeltaBytes": -16473432,
+      "responses": [
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 335.0407000000014
+        },
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 635.8087999999989
+        },
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 932.6594000000005
+        },
+        {
+          "status": 200,
+          "bytes": 2257,
+          "cacheControl": "public, max-age=60, s-maxage=300, stale-while-revalidate=300, must-revalidate",
+          "wallMs": 1270.3551000000007
+        }
+      ]
+    }
+  ]
+}

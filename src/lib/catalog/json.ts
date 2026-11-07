@@ -6,13 +6,10 @@ import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { classifyProgramField } from '@/lib/data/fields'
 import { matchesUniversityRankings, rankingFilterKeys } from '@/lib/data/rankings'
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
-import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import { CatalogApiService } from '@/lib/catalog-api/service'
-import { selectPublishedData } from '@/lib/data/publication'
-import { selectDiscoveryData } from '@/lib/data/discovery'
-import { readIdentityAcceptances } from '@/lib/data/identity-acceptance-store'
-import { readFieldVerifications } from '@/lib/data/field-verification-store'
-import { directoryRevision } from './directory-revision'
+import { getPublicCatalogSnapshot } from './public-snapshot'
+import { readValidatedCatalogBundle } from '@/lib/data/raw-snapshot'
+import { freezeSnapshot } from '@/lib/data/file-snapshot'
 import { selectLatestTuitionReference } from '@/lib/data/admission'
 import {
   parseProgramCatalogFilters,
@@ -105,8 +102,8 @@ function requestedPage(
 }
 
 function projectDirectory(raw: DataBundle, today: string) {
-  const identities = readIdentityAcceptances(undefined, { strictProjection: true }), fields = readFieldVerifications()
-  return { data: selectDiscoveryData(raw, today, identities, fields), revision: directoryRevision(raw, today, identities, fields) }
+  const snapshot = getPublicCatalogSnapshot(raw, today)
+  return { data: snapshot.directory, revision: snapshot.revision }
 }
 
 export class JsonCatalogRepository implements CatalogRepository {
@@ -116,10 +113,11 @@ export class JsonCatalogRepository implements CatalogRepository {
   constructor(private readonly loader: CatalogBundleLoader = readJsonCatalogBundle) {}
 
   getBundle(): Promise<DataBundle> {
+    if (this.loader === readJsonCatalogBundle) return Promise.resolve().then(() => readValidatedCatalogBundle())
     if (!this.bundlePromise) {
       this.bundlePromise = Promise.resolve()
         .then(() => this.loader())
-        .then((value) => bundleSchema.parse(value))
+        .then((value) => freezeSnapshot(bundleSchema.parse(value)))
         .catch((error: unknown) => {
           this.bundlePromise = undefined
           throw error
@@ -147,8 +145,8 @@ export class JsonCatalogRepository implements CatalogRepository {
     }
     const today = getTodayDate()
     const rawBundle = await this.getBundle()
-    const publicBundle = selectCatalogApiData(rawBundle, today, readIdentityAcceptances(undefined, { strictProjection: true }))
-    const release = deriveCatalogRelease(rawBundle)
+    const publicBundle = getPublicCatalogSnapshot(rawBundle, today).current
+    const release = getPublicCatalogSnapshot(rawBundle, today).release
     const publicCounts = getCatalogRecordCounts(publicBundle)
     return new CatalogApiService(publicBundle, {
       ...release,
@@ -166,7 +164,7 @@ export class JsonCatalogRepository implements CatalogRepository {
     const rawData = await this.getBundle()
     const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
     if (directory) query = { ...query, today, directoryRevision: directory.revision }
-    const data = directory?.data ?? selectCatalogApiData(rawData, today, readIdentityAcceptances(undefined, { strictProjection: true }))
+    const data = directory?.data ?? getPublicCatalogSnapshot(rawData, today).current
     const limit = listLimit(query.limit)
     const page = requestedPage('institutions', query)
     const requestedQuery = query.q?.trim() ?? ''
@@ -269,7 +267,7 @@ export class JsonCatalogRepository implements CatalogRepository {
     const rawData = await this.getBundle()
     const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
     if (directory) query = { ...query, today, directoryRevision: directory.revision }
-    const data = directory?.data ?? selectPublishedData(rawData, today, readIdentityAcceptances(undefined, { strictProjection: true }))
+    const data = directory?.data ?? getPublicCatalogSnapshot(rawData, today).current
     const officialSourceIds = new Set(
       rawData.sources.filter((source) => source.official).map((source) => source.id),
     )
@@ -348,7 +346,7 @@ export class JsonCatalogRepository implements CatalogRepository {
     const rawData = await this.getBundle()
     const directory = query.view === 'directory' ? projectDirectory(rawData, today) : undefined
     if (directory) query = { ...query, today, directoryRevision: directory.revision }
-    const published = directory?.data ?? selectPublishedData(rawData, today, readIdentityAcceptances(undefined, { strictProjection: true }))
+    const published = directory?.data ?? getPublicCatalogSnapshot(rawData, today).current
     const data = query.provider || query.program
       ? {
         ...published,
