@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process'
-import { mkdtemp, readFile, rm } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, rm } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { beforeAll, describe, expect, it, vi } from 'vitest'
 
@@ -49,6 +49,10 @@ function payload() {
 }
 const jsonResponse = (value: unknown) => new Response(JSON.stringify(value), { status: 200 })
 const successful = () => probe(environment, async () => jsonResponse(payload()), { now })
+async function fixtureDirectory() {
+  await mkdir(resolve(process.cwd(), '.tmp'), { recursive: true })
+  return mkdtemp(resolve(process.cwd(), '.tmp/vercel-cpu-probe-'))
+}
 
 describe('one-shot Vercel quantity preflight (no live requests)', () => {
   it('uses only the fixed API and official 24h UTC request, with redirects disabled', async () => {
@@ -89,7 +93,7 @@ describe('one-shot Vercel quantity preflight (no live requests)', () => {
     Object.assign(data.metrics[1].unit, { providerSecret: token })
     Object.assign(data.results.views.byProductRegionProject.results[0], { rawResponse: token, gross_cost: 999.25 })
     Object.assign(data.results.dimensionsMeta.project.values.study, { internal: token })
-    const directory = await mkdtemp(resolve(process.cwd(), '.tmp/vercel-cpu-probe-'))
+    const directory = await fixtureDirectory()
     try {
       const output = resolve(directory, 'usage.json')
       const result = await run(['--output', output], environment, async () => jsonResponse(data), { now })
@@ -175,7 +179,7 @@ describe('one-shot Vercel quantity preflight (no live requests)', () => {
     expect(await probe({}, transport, { now })).toMatchObject({ errorCode: 'credentials_missing_or_invalid' })
     expect(await run([], environment, transport, { now })).toMatchObject({ errorCode: 'output_argument_required' })
     expect(transport).not.toHaveBeenCalled()
-    const directory = await mkdtemp(resolve(process.cwd(), '.tmp/vercel-cpu-probe-'))
+    const directory = await fixtureDirectory()
     try {
       const output = resolve(directory, 'failure.json')
       const env = { ...process.env }; delete env.VERCEL_TOKEN
