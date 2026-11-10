@@ -3,6 +3,7 @@ import { control, event } from './repository'
 import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { canonical, digest, HASH, ID, nowIso, record } from './util'
+import { nativeReconciliationGate } from './native-reconciliation-guard'
 
 type ExportRow={batch_id:string;input_catalog_sha256:string;scope_sha256:string;object_key:string;sha256:string;created_at:string;status:'prepared'|'applied'|'published'|'rejected';acknowledgement_sha256:string|null;acknowledgement_json:string|null}
 export async function readExport(env:MaintenanceEnv,id:string):Promise<CandidateExport> {
@@ -20,6 +21,7 @@ export async function prepareExport(env:MaintenanceEnv,value:unknown):Promise<{b
   if(!Number.isSafeInteger(limit)||Number(limit)<1||Number(limit)>100)throw new MaintenanceError('invalid_export_limit')
   const cfg=await control(env)
   if(!cfg?.seed_complete)throw new MaintenanceError('seed_not_ready')
+  if(!(await nativeReconciliationGate(env)).ready)throw new MaintenanceError('native_head_reconciliation_required')
   const pending=await env.PIPELINE_DB.prepare("SELECT batch_id FROM maintenance_exports WHERE status='prepared' ORDER BY created_at LIMIT 1").first<{batch_id:string}>()
   if(pending){const batch=await readExport(env,pending.batch_id);return{batchId:batch.batchId,sha256:batch.sha256,proposalCount:batch.proposals.length,reused:true}}
   if(!cfg.enabled||!cfg.targets_complete)throw new MaintenanceError('export_requires_enabled_complete_targets')

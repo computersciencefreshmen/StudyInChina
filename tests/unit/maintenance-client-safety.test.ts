@@ -3,13 +3,29 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { basename, dirname, join, resolve } from 'node:path'
-import { candidateArtifactKeys, downloadMaintenanceExport, maintenanceClientFromEnvironment, maintenanceRuntimeGate, recoverPendingMaintenancePublication } from '../../scripts/automation/catalog-maintenance-client'
+import { candidateArtifactKeys, downloadMaintenanceExport, MaintenanceHttpError, maintenanceClientFromEnvironment, maintenanceRuntimeGate, recoverPendingMaintenancePublication } from '../../scripts/automation/catalog-maintenance-client'
 import { canonicalJson, maintenanceCandidateExportSchema } from '../../scripts/maintenance/contracts'
 
 const token = 'test-only-secret-that-is-never-a-real-account-token'
 const environment = { CATALOG_MAINTENANCE_URL: 'https://maintenance-fixture.example.workers.dev', CATALOG_MAINTENANCE_TOKEN: token }
 
 describe('maintenance bridge HTTP boundary', () => {
+  it('retains only numeric HTTP status and the exact bounded generic backend classification', async () => {
+    const fetcher = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(Response.json({ ok: false, error: 'request_invalid_or_backend_unavailable', extra: token }, { status: 409 }))
+      .mockResolvedValueOnce(Response.json({ ok: false, error: 'reconciliation_control_revision_changed' }, { status: 409 }))
+      .mockResolvedValueOnce(Response.json({ ok: false, error: 'request_invalid_or_backend_unavailable' }, { status: 401 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ ok: false, error: 'request_invalid_or_backend_unavailable', extra: token.repeat(50) }), { status: 500 }))
+    const client = maintenanceClientFromEnvironment(environment, fetcher)
+    for (const [status, backend] of [[409, true], [409, false], [401, false], [500, false]] as const) {
+      try { await client.json('/control'); throw Error('Expected HTTP failure') } catch (error) {
+        expect(error).toBeInstanceOf(MaintenanceHttpError)
+        expect(error).toMatchObject({ httpStatus: status, backendUnavailable: backend, message: 'maintenance_request_failed' })
+        expect(JSON.stringify(error)).not.toContain(token); expect(String(error)).not.toContain(token)
+        expect(Object.hasOwn(error as object, 'cause')).toBe(false)
+      }
+    }
+  })
   it('keeps normal quota and seed waits quiet while refusing an unknown backend failure', async () => {
     const client = { json: vi.fn(), artifact: vi.fn() }
     client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait' }, control: null })

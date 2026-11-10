@@ -13,6 +13,7 @@ import { listSchoolProgress,submitSchoolReconciliation } from './school-progress
 import { acknowledge, prepareExport, readExport } from './exports'
 import { readMaintenanceControl, reconcileMaintenanceHead } from './head-reconciliation'
 import { prepareReconciliationTargets, registerReconciliationTargets } from './reconciliation-targets'
+import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
 import type { MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
@@ -24,12 +25,14 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
   if(message?.version===1&&message.reconciliationTargetsUpload){await prepareReconciliationTargets(env,message.reconciliationTargetsUpload);return}
   if(message?.version===1&&message.bootstrapUploadSha256&&HASH.test(message.bootstrapUploadSha256)){await preparePendingBootstrap(env,message.bootstrapUploadSha256);return}
   if(message?.version===1&&message.bootstrapSeedSha256&&HASH.test(message.bootstrapSeedSha256)){await resumeBootstrapSeed(env,message.bootstrapSeedSha256);return}
-  if(message?.version===1&&message.discoveryManifestSha256&&HASH.test(message.discoveryManifestSha256)){await processDiscoveryFrontier(env,message.discoveryManifestSha256,message.discoveryOffset??0);return}
+  if(message?.version===1&&message.discoveryManifestSha256&&HASH.test(message.discoveryManifestSha256)&&env.NATIVE_HEAD_RECONCILIATION_REQUIRED!=='true'){await processDiscoveryFrontier(env,message.discoveryManifestSha256,message.discoveryOffset??0);return}
   if(message?.version===1&&message.seedSha256&&HASH.test(message.seedSha256)){await continueSeed(env,message.seedSha256);return}
   if(message?.version===1&&message.targetRefreshSha256&&HASH.test(message.targetRefreshSha256)){await continueTargetRefresh(env,message.targetRefreshSha256);return}
   if(message?.version!==1||!HASH.test(message.jobId))throw new MaintenanceError('invalid_queue_message')
   const cfg=await control(env)
   if(env.MAINTENANCE_ENABLED!=='true'||!cfg?.enabled||!cfg.seed_complete)return
+  if(!(await nativeReconciliationGate(env)).ready)return
+  if(message.discoveryManifestSha256&&HASH.test(message.discoveryManifestSha256)){await processDiscoveryFrontier(env,message.discoveryManifestSha256,message.discoveryOffset??0);return}
   const pending=await env.PIPELINE_DB.prepare('SELECT source_id,stage FROM maintenance_jobs WHERE job_id=?').bind(message.jobId).first<{source_id:string;stage:string}>()
   if(!pending||pending.stage!=='capture'&&!cfg.models_enabled||pending.stage==='maintain'&&!cfg.targets_complete)return
   const canary=JSON.parse(cfg.canary_json)as string[],schools=await sourceSchools(env,pending.source_id)

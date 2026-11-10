@@ -205,6 +205,7 @@ test('the pinned full 4129-target stream is validated in Queue, reuses its plan,
     assert.equal(currentTargets.length,4129);assert.equal(targetBytes.byteLength,3642343)
     assert.equal(createHash('sha256').update(targetBytes).digest('hex'),pin.targetUpload.sha256)
     await f.ready()
+    f.env.NATIVE_HEAD_RECONCILIATION_REQUIRED='true'
     const request=uploadRequest(),body=request.body,put=f.bucket.put.bind(f.bucket);let preservedStream=false
     f.bucket.put=async(key,value,options)=>{if(key.includes('/target-uploads/'))preservedStream=value===body;return put(key,value,options)}
     await registerReconciliationTargets(f.env,request)
@@ -213,12 +214,13 @@ test('the pinned full 4129-target stream is validated in Queue, reuses its plan,
     await processMessage(f.env,message);await processMessage(f.env,message)
     assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_target_refreshes').get()?.n,1)
     assert.equal((await control(f.env))?.revision,4);assert.equal((await control(f.env))?.enabled,0)
-    while(!(await control(f.env))?.targets_complete)await continueTargetRefresh(f.env,pin.targetUpload.sha256,false)
+    while(!(await control(f.env))?.targets_complete)await processMessage(f.env,{version:1,jobId:pin.targetUpload.sha256,targetRefreshSha256:pin.targetUpload.sha256})
     assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_record_targets WHERE active=1').get()?.n,4129)
     const count=f.bucket.objects.size,queued=f.messages.length
     const replay=await registerReconciliationTargets(f.env,uploadRequest())
     assert.equal(replay.pending,false);assert.equal(replay.bodySha256,pin.targetUpload.sha256);assert.equal(replay.byteLength,pin.targetUpload.byteLength);assert.equal(replay.expectedRevision,4)
     assert.equal(f.bucket.objects.size,count);assert.equal(f.messages.length,queued);assert.equal((await control(f.env))?.revision,5);assert.equal((await control(f.env))?.models_enabled,0)
+    assert.equal((await readMaintenanceControl(f.env)).deployment.guardReady,false)
   }finally{f.db.sqlite.close()}
 })
 

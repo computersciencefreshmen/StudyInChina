@@ -1,0 +1,28 @@
+{
+  "format": "studyinchina.live-d1-index-observation",
+  "observationDate": "2026-11-10",
+  "reviewedSourceCommit": "66b20f239921c9e803c3c95bf970020baecf9d9e",
+  "database": "studyinchina-pipeline",
+  "index": "idx_source_observations_snapshot_latest",
+  "columns": ["snapshot_id", "observed_at DESC"],
+  "sameQuery": true,
+  "sameSnapshot": true,
+  "sameSemanticResults": true,
+  "before": { "rowsRead": 2615, "engineDurationMilliseconds": 47.8126 },
+  "after": { "rowsRead": 2, "engineDurationMilliseconds": 1.104 },
+  "query": "SELECT snapshot.snapshot_id,snapshot.fetched_at,snapshot.content_type,(SELECT MAX(observed_at) FROM ingestion_source_observations observation WHERE observation.snapshot_id=snapshot.snapshot_id) AS observed_at FROM ingestion_snapshots snapshot WHERE snapshot.snapshot_id=(SELECT snapshot_id FROM ingestion_snapshots ORDER BY rowid DESC LIMIT 1)",
+  "evidence": "The exact raw result and index definition remain in .tmp/cpu-coverage-2026-11-10/index-0020-receipt-verified.json in the independent working clone; snapshot values are omitted here.",
+  "limitations": [
+    "One real D1 query and snapshot, not whole-workload or account-level savings.",
+    "Engine duration is not Vercel Active CPU or a CPU-time measurement.",
+    "PowerShell normalized .730Z to .73Z in the baseline artifact; both represent the same UTC instant.",
+    "Only index 0020 was applied. Historical migrations and migration tracker entries were not fabricated."
+  ],
+  "subsequentQuotaObservation": {
+    "providerCode": 7500,
+    "explicitDailyRowReadLimitExceeded": true,
+    "nextUtcReset": "2026-11-11T00:00:00Z",
+    "nextShanghaiReset": "2026-11-11T08:00:00+08:00",
+    "notice": "Optimizing queries does not clear accumulated daily usage. The cloud repair had not passed its first control read."
+  }
+}
