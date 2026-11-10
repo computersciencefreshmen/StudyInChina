@@ -1,0 +1,97 @@
+{
+  "observedDateShanghai": "2026-11-10",
+  "source": "Authenticated Vercel free Usage console, All Projects, Projects view",
+  "teamSlug": "henry-yangs-projects-c9706eac",
+  "mainCommitDuringObservation": "6b54d95070e240a475717cf04b102d95863605db",
+  "optimizationFirstPublishedAtUtc": "2026-11-07T05:41:05Z",
+  "dateConvention": "Asia/Shanghai; complete-day follow-up uses midnight through 23:59:59.999, excluding the next midnight.",
+  "precision": "CPU values are the UI's rounded duration labels. Team CPU is the approximate sum of all displayed nonzero project rows; not raw high-precision metering.",
+  "rawPrivateEvidenceDirectory": ".tmp/cpu-coverage-2026-11-10/",
+  "windows": [
+    {
+      "day": "2026-11-07",
+      "completeShanghaiDay": false,
+      "from": "2026-11-07T05:41:05Z",
+      "to": "2026-11-07T16:00:00Z",
+      "cpuSecondsApprox": {
+        "studyinchina": 175
+      },
+      "teamCpuSecondsApprox": 175,
+      "invocations": {
+        "studyinchina": 3448
+      },
+      "teamInvocations": 3448,
+      "note": "Only the post-publication part of the day, not a daily budget pass."
+    },
+    {
+      "day": "2026-11-08",
+      "completeShanghaiDay": true,
+      "from": "2026-11-07T16:00:00Z",
+      "to": "2026-11-08T15:59:59.999Z",
+      "cpuSecondsApprox": {
+        "studyinchina": 330,
+        "uncalque": 1
+      },
+      "teamCpuSecondsApprox": 331,
+      "invocations": {
+        "studyinchina": 6650,
+        "uncalque": 1
+      },
+      "teamInvocations": 6651
+    },
+    {
+      "day": "2026-11-09",
+      "completeShanghaiDay": true,
+      "from": "2026-11-08T16:00:00Z",
+      "to": "2026-11-09T15:59:59.999Z",
+      "cpuSecondsApprox": {
+        "studyinchina": 278,
+        "mtr-live": 5,
+        "uncalque": 1
+      },
+      "teamCpuSecondsApprox": 284,
+      "invocations": {
+        "studyinchina": 2351,
+        "mtr-live": 68,
+        "uncalque": 1
+      },
+      "teamInvocations": 2420
+    },
+    {
+      "day": "2026-11-10",
+      "completeShanghaiDay": false,
+      "from": "2026-11-09T16:00:00Z",
+      "to": "2026-11-10T03:27:18.365Z",
+      "cpuSecondsApprox": {
+        "studyinchina": 146,
+        "mtr-live": 2
+      },
+      "teamCpuSecondsApprox": 148,
+      "invocations": {
+        "studyinchina": 679,
+        "mtr-live": 12
+      },
+      "teamInvocations": 691,
+      "note": "Read at 11:27 Shanghai, incomplete day; do not use as a daily pass."
+    }
+  ],
+  "interpretation": {
+    "teamTargetSecondsPerDay": 336,
+    "completeDayMeanSecondsApprox": 307.5,
+    "forecast30DaysCpuHoursAtSameDailyUsage": 2.5625,
+    "cpuPer1000StudyInvocationsSecondsApprox": [
+      49.62406015037594,
+      118.24755423224161
+    ],
+    "outcome": "Both observed complete days are below the 5.6-minute target at UI precision; the first has only about five seconds of headroom.",
+    "stableCapacityProven": false,
+    "limits": [
+      "Only two complete Shanghai days after deployment were available at readback time.",
+      "Traffic is substantially below the historical 17,966-29,639 invocation/day examples.",
+      "Per-invocation CPU varies with route mix and initialization frequency; the route mix and cold-start share were not observed.",
+      "No traffic-normalized production improvement percentage can be attributed from these totals.",
+      "The 30-day figure is conditional on unchanged traffic and daily compute, and excludes no existing historical usage.",
+      "The courtesy 3x boost is not used as the budget target."
+    ]
+  }
+}
