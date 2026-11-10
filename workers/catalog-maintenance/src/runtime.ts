@@ -109,7 +109,7 @@ export async function runCloudTick(env:MaintenanceEnv){
         const result=await enqueueDue(env)
         tick.queued=result.queued;tick.targetsComplete=Boolean(cfg.targets_complete);tick.modelsEnabled=Boolean(cfg.models_enabled);tick.canarySchoolCount=(JSON.parse(cfg.canary_json)as string[]).length
         tick.state=result.enabled?'running':cfg.revision===0&&pointer?'waiting_for_activation':'disabled'
-        tick.code=result.enabled?'bounded_scheduler_completed':env.MAINTENANCE_ENABLED!=='true'?'deployment_activation_gate_disabled':cfg.targets_complete?'existing_controls_preserved':'target_refresh_in_progress'
+        tick.code=result.enabled?'bounded_scheduler_completed':env.MAINTENANCE_ENABLED!=='true'?'deployment_activation_gate_disabled':'nativeHeadReconciliationRequired'in result?'native_head_reconciliation_required':cfg.targets_complete?'existing_controls_preserved':'target_refresh_in_progress'
       }
     }
   }catch(error){const backend=backendCode(error);tick.state=backend==='quota_wait'?'quota_wait':'error';tick.code=error instanceof MaintenanceError?error.code:backend;tick.retryAt=backend==='quota_wait'?nextD1Reset():null}

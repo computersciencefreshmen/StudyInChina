@@ -2,8 +2,8 @@ import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
 import { mkdir, mkdtemp, readFile, rm } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import manifest from '../../content/maintenance/head-reconciliation-2026-11-10.v1.json'
-import { reconcileMaintenanceHead, requireTrustedReconciliationRunner, uploadReconciliationTargets, type verifyReconciliationHistory } from '../../scripts/automation/reconcile-maintenance-head'
-import type { MaintenanceClient } from '../../scripts/automation/catalog-maintenance-client'
+import { automaticallyReconcileMaintenanceHead, reconcileMaintenanceHead, requireTrustedAutomaticReconciliationRunner, requireTrustedReconciliationRunner, uploadReconciliationTargets, type verifyReconciliationHistory } from '../../scripts/automation/reconcile-maintenance-head'
+import { MaintenanceHttpError, type MaintenanceClient } from '../../scripts/automation/catalog-maintenance-client'
 import { buildMaintenanceTargets } from '../../scripts/automation/build-maintenance-bootstrap'
 import { loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
 import { canonicalJson, maintenanceScopeSchema } from '../../scripts/maintenance/contracts'
@@ -20,7 +20,7 @@ const originalControl = () => ({ input_catalog_sha256: manifest.oldInputCatalogS
   seed_sha256: manifest.seedSha256, legacy_guard_sha256: manifest.legacyGuardSha256, enabled: 1 as 0 | 1, models_enabled: 1 as 0 | 1,
   seed_complete: 1 as 0 | 1, targets_complete: 1 as 0 | 1, canary_json: '["uni-peking-university"]', revision: 1, updated_at: '2026-11-10T04:00:00Z' })
 type Control = ReturnType<typeof originalControl>
-type Snapshot = { format: string; control: Control; deployment: { maintenanceEnabled: boolean; subscriptionConfigured: boolean }; reconciliation: { manifestSha256: string;
+type Snapshot = { format: string; control: Control; deployment: { maintenanceEnabled: boolean; subscriptionConfigured: boolean; guardRequired: boolean; guardReady: boolean }; reconciliation: { manifestSha256: string;
   paused: { originalControl: Control; pausedRevision: number; proofSha256: string } | null;
   advanced: { reconciledRevision: number; proofSha256: string } | null;
   resumed: { restoredRevision: number } | null } }
@@ -37,7 +37,7 @@ const verifyHistory = vi.fn<typeof verifyReconciliationHistory>().mockResolvedVa
 
 function fixture(options: { holdTargets?: boolean; operatorChange?: boolean; loseAckResponse?: boolean; badExport?: boolean } = {}) {
   const state: Snapshot = { format: 'studyinchina.maintenance-control', control: originalControl(),
-    deployment: { maintenanceEnabled: false, subscriptionConfigured: true },
+    deployment: { maintenanceEnabled: false, subscriptionConfigured: true, guardRequired: false, guardReady: false },
     reconciliation: { manifestSha256: manifest.sha256, paused: null, advanced: null, resumed: null } }
   const requests: Array<{ path: string; method: string; body?: unknown }> = []
   let rejected = false, lostReply = false
@@ -74,6 +74,7 @@ function fixture(options: { holdTargets?: boolean; operatorChange?: boolean; los
           const original = state.reconciliation.paused!.originalControl
           state.control.enabled = original.enabled; state.control.models_enabled = original.models_enabled; state.control.canary_json = original.canary_json; state.control.revision++
           state.reconciliation.resumed = { restoredRevision: state.control.revision }
+          state.deployment.guardReady = true
         } else throw new Error('Unknown phase')
         return clone()
       }
@@ -89,8 +90,115 @@ function fixture(options: { holdTargets?: boolean; operatorChange?: boolean; los
     return { ok: true, pending: true, validation: 'pending-queue' }
   }
   const run = async (action: 'prepare' | 'resume' = 'prepare', maxPolls = 1) => reconcileMaintenanceHead({ root: process.cwd(), output: await outputDirectory(), client, uploadTargets, action, verifyHistory, wait: async () => {}, maxPolls })
-  return { state, requests, run, allowModelLane() { state.deployment.maintenanceEnabled = true }, completeTargets() { state.control.targets_complete = 1; state.control.revision++ } }
+  return { state, requests, run, client, uploadTargets, allowModelLane() { state.deployment.maintenanceEnabled = true }, completeTargets() { state.control.targets_complete = 1; state.control.revision++ } }
 }
+
+const automaticEnvironment = { GITHUB_ACTIONS: 'true', GITHUB_EVENT_NAME: 'schedule', GITHUB_REF: 'refs/heads/main',
+  GITHUB_REPOSITORY: 'computersciencefreshmen/StudyInChina', GITHUB_ACTOR: 'computersciencefreshmen', GITHUB_TRIGGERING_ACTOR: 'computersciencefreshmen',
+  GITHUB_SHA: 'a'.repeat(40), GITHUB_WORKFLOW_REF: 'computersciencefreshmen/StudyInChina/.github/workflows/catalog-maintenance-publish.yml@refs/heads/main' }
+async function automatic(context: ReturnType<typeof fixture>, verify = vi.fn<typeof verifyReconciliationHistory>().mockImplementation(verifyHistory)) {
+  const output = await outputDirectory()
+  return { output, verify, run: () => automaticallyReconcileMaintenanceHead({ root: process.cwd(), output, client: context.client, uploadTargets: context.uploadTargets,
+    environment: automaticEnvironment, commit: automaticEnvironment.GITHUB_SHA, verifyHistory: verify, wait: async () => {}, maxPolls: 0 }) }
+}
+
+describe('guarded cloud automatic continuation', () => {
+  it('confirms daily quota independently and waits without history verification or mutation', async () => {
+    const context = fixture(), calls: string[] = []
+    context.client.json = vi.fn(async path => { calls.push(path)
+      if (path === '/control') throw new MaintenanceHttpError(409, true)
+      return { format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait', errorKind: 'daily_quota', retryAt: '2026-11-11T00:00:00.000Z' } }
+    })
+    const auto = await automatic(context)
+    expect(await auto.run()).toMatchObject({ ready: false, reason: 'quota_wait', coverageSuccess: false, httpStatus: 409 })
+    expect(calls).toEqual(['/control', '/status']); expect(auto.verify).not.toHaveBeenCalled()
+    expect(context.requests).toEqual([])
+    expect(JSON.parse(await readFile(resolve(auto.output, 'automatic-recovery.json'), 'utf8'))).toMatchObject({ ready: false, coverageSuccess: false })
+  })
+  it.each([new MaintenanceHttpError(401), new MaintenanceHttpError(403), new MaintenanceHttpError(404), new MaintenanceHttpError(409), new Error('maintenance_request_failed')])('never hides auth, CAS or transport errors behind a later quota wait (%s)', async failure => {
+    const context = fixture(), calls: string[] = []
+    context.client.json = vi.fn(async path => { calls.push(path)
+      if (path === '/control') throw failure
+      return { format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait', errorKind: 'daily_quota', retryAt: null } }
+    })
+    const auto = await automatic(context)
+    await expect(auto.run()).rejects.toBe(failure)
+    expect(calls).toEqual(['/control']); expect(auto.verify).not.toHaveBeenCalled()
+  })
+  it.each(['ready', 'backend_unavailable'])('does not infer quota from a generic backend response when status says %s', async state => {
+    const context = fixture(), failure = new MaintenanceHttpError(409, true)
+    context.client.json = vi.fn(async path => { if (path === '/control') throw failure
+      return { format: 'studyinchina.cloud-maintenance-status', backend: { state, errorKind: 'backend_error', retryAt: null } }
+    })
+    await expect((await automatic(context)).run()).rejects.toBe(failure)
+  })
+  it('keeps an unarmed deployment or disabled global gate waiting without writes', async () => {
+    const context = fixture(), auto = await automatic(context)
+    expect(await auto.run()).toMatchObject({ ready: false, reason: 'guard_not_armed' })
+    context.state.deployment.guardRequired = true
+    expect(await auto.run()).toMatchObject({ ready: false, reason: 'deployment_gate_disabled' })
+    expect(context.requests.every(request => request.method === 'GET')).toBe(true); expect(auto.verify).not.toHaveBeenCalled()
+  })
+  it('prepares and resumes the exact pending operation once under the armed global gate', async () => {
+    const context = fixture(); context.state.deployment.guardRequired = true; context.allowModelLane()
+    const auto = await automatic(context)
+    expect(await auto.run()).toMatchObject({ ready: true, reason: 'reconciled', coverageSuccess: false, revision: 6 })
+    expect(auto.verify).toHaveBeenCalledTimes(1)
+    expect(context.requests.filter(request => request.path === '/head-reconcile').map(request => (request.body as { phase: string }).phase)).toEqual(['pause', 'advance', 'resume'])
+  })
+  it('leaves a partial pause intact on confirmed quota and resumes its exact operation on the next cloud run', async () => {
+    const context = fixture(); context.state.deployment.guardRequired = true; context.allowModelLane()
+    const original = context.client.json.bind(context.client); let exhausted = true
+    context.client.json = async (path, method, body) => {
+      if (exhausted && path.startsWith('/exports/')) throw new MaintenanceHttpError(409, true)
+      if (path === '/status') return { format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait', errorKind: 'daily_quota', retryAt: null } }
+      return original(path, method, body)
+    }
+    const auto = await automatic(context)
+    expect(await auto.run()).toMatchObject({ ready: false, reason: 'quota_wait' })
+    expect(context.state.control).toMatchObject({ enabled: 0, models_enabled: 0, revision: 2 })
+    expect(context.state.reconciliation.resumed).toBeNull()
+    exhausted = false
+    expect(await auto.run()).toMatchObject({ ready: true, reason: 'reconciled', revision: 6 })
+    expect(context.requests.filter(request => request.path === '/head-reconcile' && (request.body as { phase: string }).phase === 'pause')).toHaveLength(1)
+  })
+  it('accepts valid completed history with a later catalogue and preserves a later operator pause', async () => {
+    const context = fixture(); context.state.deployment.guardRequired = true; context.allowModelLane()
+    await (await automatic(context)).run()
+    context.state.control.input_catalog_sha256 = 'e'.repeat(64); context.state.control.targets_complete = 0
+    context.state.control.enabled = 0; context.state.control.models_enabled = 0; context.state.control.revision++
+    const posts = context.requests.filter(request => request.method === 'POST').length
+    const auto = await automatic(context, vi.fn<typeof verifyReconciliationHistory>().mockRejectedValue(new Error('old catalogue history must not be replayed')))
+    expect(await auto.run()).toMatchObject({ ready: true, reason: 'already_reconciled', enabled: false, inputCatalogSha256: 'e'.repeat(64) })
+    expect(auto.verify).not.toHaveBeenCalled(); expect(context.requests.filter(request => request.method === 'POST')).toHaveLength(posts)
+  })
+  it('does not resume over an intervening operator revision or incomplete target checkpoint', async () => {
+    for (const context of [fixture({ operatorChange: true }), fixture({ holdTargets: true })]) {
+      context.state.deployment.guardRequired = true; context.allowModelLane()
+      await expect((await automatic(context)).run()).rejects.toThrow(/completion_revision_changed|targets_waiting_keep_paused/)
+      expect(context.state.control.enabled).toBe(0); expect(context.state.reconciliation.resumed).toBeNull()
+      expect(context.requests.some(request => request.path === '/status')).toBe(false)
+    }
+  })
+  it('refuses malformed control and inconsistent resumed history without invoking recovery', async () => {
+    const context = fixture(); context.state.reconciliation.resumed = { restoredRevision: 6 }
+    await expect((await automatic(context)).run()).rejects.toThrow('completed_operation_invalid')
+    context.client.json = vi.fn().mockResolvedValue({ format: 'invalid' })
+    await expect((await automatic(context)).run()).rejects.toThrow()
+    expect(context.requests.some(request => request.method === 'POST')).toBe(false)
+  })
+})
+
+describe('known publisher automatic runner boundary', () => {
+  it.each(['schedule', 'workflow_dispatch'])('accepts the known owner main %s workflow', event => {
+    expect(() => requireTrustedAutomaticReconciliationRunner({ ...automaticEnvironment, GITHUB_EVENT_NAME: event }, automaticEnvironment.GITHUB_SHA)).not.toThrow()
+  })
+  it.each([['GITHUB_ACTIONS', 'false'], ['GITHUB_EVENT_NAME', 'push'], ['GITHUB_REF', 'refs/heads/codex/other'], ['GITHUB_REPOSITORY', 'other/StudyInChina'],
+    ['GITHUB_ACTOR', 'someone-else'], ['GITHUB_TRIGGERING_ACTOR', 'someone-else'], ['GITHUB_SHA', 'b'.repeat(40)],
+    ['GITHUB_WORKFLOW_REF', 'computersciencefreshmen/StudyInChina/.github/workflows/catalog-maintenance-reconcile.yml@refs/heads/main']])('rejects %s=%s', (key, value) => {
+    expect(() => requireTrustedAutomaticReconciliationRunner({ ...automaticEnvironment, [key]: value }, automaticEnvironment.GITHUB_SHA)).toThrow('trusted_publisher_main_required')
+  })
+})
 
 describe('pinned native Git head repair client', () => {
   it('prepares with controls off, then restores original controls only on a separate explicit resume', async () => {

@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { gunzipSync } from 'node:zlib'
@@ -11,7 +11,7 @@ import { canonicalIdentityJson, identityAcceptanceLedgerSchema, identityFingerpr
 import { catalogSha256, loadMaintenanceBundle } from '../maintenance/build-scope'
 import { canonicalJson, exportContentSha256, maintenanceCandidateExportSchema, maintenanceScopeSchema, scopeContentSha256 } from '../maintenance/contracts'
 import { buildMaintenanceTargets } from './build-maintenance-bootstrap'
-import { maintenanceClientFromEnvironment, type MaintenanceClient } from './catalog-maintenance-client'
+import { MaintenanceHttpError, maintenanceHttpFailure, maintenanceClientFromEnvironment, type MaintenanceClient } from './catalog-maintenance-client'
 
 const OPERATION = 'native-git-head-2026-11-10'
 const manifestPath = 'content/maintenance/head-reconciliation-2026-11-10.v1.json'
@@ -28,7 +28,7 @@ const controlSchema = z.object({
 }).passthrough()
 const stateSchema = z.object({
   format: z.literal('studyinchina.maintenance-control'), control: controlSchema,
-  deployment: z.object({ maintenanceEnabled: z.boolean(), subscriptionConfigured: z.boolean() }),
+  deployment: z.object({ maintenanceEnabled: z.boolean(), subscriptionConfigured: z.boolean(), guardRequired: z.boolean().optional().default(false), guardReady: z.boolean().optional().default(false) }),
   reconciliation: z.object({
     manifestSha256: HASH,
     paused: z.object({ originalControl: controlSchema, pausedRevision: z.number().int(), proofSha256: HASH }).nullable(),
@@ -55,6 +55,7 @@ export async function uploadReconciliationTargets(environment: Record<string, st
         'x-maintenance-reconcile-sha256': manifest.sha256, 'x-maintenance-targets-sha256': manifest.targetUpload.sha256,
         'x-maintenance-expected-revision': String(expectedRevision) } })
   } catch { throw new Error('maintenance_reconcile_target_upload_failed') }
+  if (!response.ok) throw await maintenanceHttpFailure(response)
   requireCheck(response.ok && !response.redirected && (!response.url || response.url === url.href), 'target_upload_response')
   requireCheck(response.body && Number(response.headers.get('content-length') ?? 0) <= 16 * 1024, 'target_upload_response_size')
   const reader = response.body.getReader(), chunks: Uint8Array[] = []
@@ -180,7 +181,8 @@ export function requireTrustedReconciliationRunner(environment: Record<string, s
 }
 
 /** No cleanup path resumes the lane. Every resume needs the persisted operation and an exact CAS. */
-export async function reconcileMaintenanceHead(options: { root: string; output: string; client: MaintenanceClient; uploadTargets: (bytes: Uint8Array<ArrayBuffer>, expectedRevision: number) => Promise<unknown>; action: 'prepare' | 'resume'; wait?: (milliseconds: number) => Promise<void>; maxPolls?: number; verifyHistory?: typeof verifyReconciliationHistory }) {
+type ReconciliationOptions = { root: string; output: string; client: MaintenanceClient; uploadTargets: (bytes: Uint8Array<ArrayBuffer>, expectedRevision: number) => Promise<unknown>; action: 'prepare' | 'resume'; wait?: (milliseconds: number) => Promise<void>; maxPolls?: number; verifyHistory?: typeof verifyReconciliationHistory }
+export async function reconcileMaintenanceHead(options: ReconciliationOptions) {
   const { root, output, client } = options
   await mkdir(output, { recursive: true })
   const save = (name: string, value: unknown) => writeFile(resolve(output, name), JSON.stringify(value, null, 2) + '\n')
@@ -262,6 +264,66 @@ export async function reconcileMaintenanceHead(options: { root: string; output: 
   return { alreadyCompleted: false, prepared: true, state }
 }
 
+export function requireTrustedAutomaticReconciliationRunner(environment: Record<string, string | undefined>, commit: string) {
+  requireCheck(environment.GITHUB_ACTIONS === 'true' && ['schedule', 'workflow_dispatch'].includes(environment.GITHUB_EVENT_NAME ?? '')
+    && environment.GITHUB_REF === 'refs/heads/main' && environment.GITHUB_REPOSITORY === 'computersciencefreshmen/StudyInChina'
+    && environment.GITHUB_ACTOR === 'computersciencefreshmen' && environment.GITHUB_TRIGGERING_ACTOR === 'computersciencefreshmen'
+    && environment.GITHUB_SHA === commit && environment.GITHUB_WORKFLOW_REF === 'computersciencefreshmen/StudyInChina/.github/workflows/catalog-maintenance-publish.yml@refs/heads/main', 'trusted_publisher_main_required')
+}
+function completedOperation(state: State) {
+  const { paused, advanced, resumed } = state.reconciliation
+  if (!resumed) return false
+  requireCheck(paused && advanced && advanced.reconciledRevision === paused.pausedRevision + 2
+    && resumed.restoredRevision === advanced.reconciledRevision + 2 && state.control.revision >= resumed.restoredRevision
+    && (!state.deployment.guardRequired || state.deployment.guardReady), 'completed_operation_invalid')
+  // A completed repair is immutable history. Later legitimate catalogue heads,
+  // target refreshes and operator pauses belong to the normal runtime gate.
+  return true
+}
+export async function automaticallyReconcileMaintenanceHead(options: Omit<ReconciliationOptions, 'action'> & { environment: Record<string, string | undefined>; commit: string }) {
+  requireTrustedAutomaticReconciliationRunner(options.environment, options.commit)
+  await mkdir(options.output, { recursive: true })
+  const save = (value: unknown) => writeFile(resolve(options.output, 'automatic-recovery.json'), JSON.stringify(value, null, 2) + '\n')
+  const result = async (ready: boolean, reason: string, state?: State, quota?: { retryAt: string | null; httpStatus: number }) => {
+    const proof = { operationId: OPERATION, ready, reason, publicPublicationClaimed: false, coverageSuccess: false,
+      ...(state ? { revision: state.control.revision, inputCatalogSha256: state.control.input_catalog_sha256,
+        enabled: state.control.enabled === 1, modelsEnabled: state.control.models_enabled === 1 } : {}), ...quota }
+    await save(proof); return proof
+  }
+  try {
+    const state = validatedState(await options.client.json('/control'))
+    if (completedOperation(state)) return result(true, 'already_reconciled', state)
+    if (!state.deployment.guardRequired) return result(false, 'guard_not_armed', state)
+    if (!state.deployment.maintenanceEnabled) return result(false, 'deployment_gate_disabled', state)
+    requireCheck(!state.deployment.guardReady, 'pending_guard_inconsistent')
+    // The same checked main checkout is used for prepare and resume. Verify its
+    // full historical chain once; neither phase can alter these local files.
+    let verified: ReturnType<typeof verifyReconciliationHistory> | undefined
+    const verifyHistory: typeof verifyReconciliationHistory = (root, settings) => verified ??= (options.verifyHistory ?? verifyReconciliationHistory)(root, settings)
+    await reconcileMaintenanceHead({ ...options, action: 'prepare', verifyHistory })
+    await reconcileMaintenanceHead({ ...options, action: 'resume', verifyHistory })
+    const completed = validatedState(await options.client.json('/control'))
+    requireCheck(completedOperation(completed), 'automatic_resume_unconfirmed')
+    return result(true, 'reconciled', completed)
+  } catch (error) {
+    // A numeric HTTP status alone is insufficient: only the fixed generic
+    // backend response plus an independent daily-quota status permits waiting.
+    if (error instanceof MaintenanceHttpError && error.backendUnavailable
+      && ([409, 429].includes(error.httpStatus) || error.httpStatus >= 500)) {
+      const quotaStatus = z.object({ format: z.literal('studyinchina.cloud-maintenance-status'), backend: z.object({
+        state: z.string(), errorKind: z.string().nullable(), retryAt: z.string().datetime({ offset: true }).nullable(),
+      }) })
+      let status: z.infer<typeof quotaStatus> | undefined
+      try { status = quotaStatus.parse(await options.client.json('/status')) } catch { /* A failed confirmation never turns an error into a wait. */ }
+      if (status?.backend.state === 'quota_wait' && status.backend.errorKind === 'daily_quota')
+        return result(false, 'quota_wait', undefined, { retryAt: status.backend.retryAt, httpStatus: error.httpStatus })
+    }
+    await save({ operationId: OPERATION, ready: false, reason: 'failed', coverageSuccess: false, publicPublicationClaimed: false,
+      httpStatus: error instanceof MaintenanceHttpError ? error.httpStatus : null, automaticCleanupResumeAttempted: false })
+    throw error
+  }
+}
+
 async function main() {
   const args = process.argv.slice(2), outputAt = args.indexOf('--output')
   requireCheck(outputAt >= 0 && args[outputAt + 1], 'output_required')
@@ -269,6 +331,14 @@ async function main() {
   await mkdir(output, { recursive: true })
   if (args.includes('--verify-only')) { const report = await verifyReconciliationHistory(root); await writeFile(resolve(output, 'history-verification.json'), JSON.stringify(report, null, 2) + '\n'); console.log(JSON.stringify(report)); return }
   const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim()
+  if (args.includes('--auto')) {
+    const result = await automaticallyReconcileMaintenanceHead({ root, output, commit, environment: process.env, client: maintenanceClientFromEnvironment(process.env),
+      uploadTargets: (bytes, revision) => uploadReconciliationTargets(process.env, bytes, revision) })
+    if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `ready=${result.ready}\nreason=${result.reason}\n`)
+    if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY,
+      `Cloud recovery: **${result.reason}**; publisher ready: **${result.ready}**. This is not a coverage or public publication success.\n`)
+    console.log(JSON.stringify(result)); return
+  }
   requireTrustedReconciliationRunner(process.env, commit)
   try {
     const result = await reconcileMaintenanceHead({ root, output, action: process.env.RECONCILIATION_ACTION as 'prepare' | 'resume', client: maintenanceClientFromEnvironment(process.env),

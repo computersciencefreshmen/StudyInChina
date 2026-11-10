@@ -16,7 +16,13 @@ concurrency:
 
 jobs:
   publish:
-    if: vars.CATALOG_MAINTENANCE_MODE == 'cloud'
+    if: >-
+      vars.CATALOG_MAINTENANCE_MODE == 'cloud' &&
+      github.repository == 'computersciencefreshmen/StudyInChina' &&
+      github.ref == 'refs/heads/main' &&
+      github.actor == 'computersciencefreshmen' &&
+      github.triggering_actor == 'computersciencefreshmen' &&
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     timeout-minutes: 75
     env:
@@ -34,15 +40,19 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Recover the pinned head only under the armed cloud guard
+        id: recovery
+        run: node --import tsx scripts/automation/reconcile-maintenance-head.ts --auto --output "$RUNNER_TEMP/maintenance-head-recovery"
       - name: Treat quota, seed and operator waits as normal
         id: runtime
+        if: steps.recovery.outputs.ready == 'true'
         run: npm run maintenance:cloud -- runtime-gate
       - name: Resume an applied publication before exporting another batch
         id: resume
-        if: steps.runtime.outputs.can_recover == 'true'
+        if: steps.recovery.outputs.ready == 'true' && steps.runtime.outputs.can_recover == 'true'
         run: npm run maintenance:cloud -- recover-publication
       - name: Restore the exact applied commit for publication readback
-        if: steps.resume.outputs.pending_publication == 'true'
+        if: steps.recovery.outputs.ready == 'true' && steps.resume.outputs.pending_publication == 'true'
         env:
           SOURCE_COMMIT: ${{ steps.resume.outputs.source_commit }}
         shell: bash
@@ -53,23 +63,23 @@ jobs:
           git checkout --detach "$SOURCE_COMMIT"
       - name: Download one immutable export and its exact evidence
         id: download
-        if: steps.runtime.outputs.can_start == 'true' && steps.resume.outputs.pending_publication != 'true'
+        if: steps.recovery.outputs.ready == 'true' && steps.runtime.outputs.can_start == 'true' && steps.resume.outputs.pending_publication != 'true'
         run: npm run maintenance:cloud -- download "$RUNNER_TEMP/maintenance-download"
       - name: Prepare and locally stage only independently accepted changes
         id: candidate
-        if: steps.download.outputs.has_export == 'true'
+        if: steps.recovery.outputs.ready == 'true' && steps.download.outputs.has_export == 'true'
         run: >-
           npm run maintenance:prepare --
           --download "$RUNNER_TEMP/maintenance-download"
           --output "$RUNNER_TEMP/maintenance-candidate" --apply
       - name: Acknowledge unchanged or held candidates without rebuilding unchanged facts
-        if: steps.download.outputs.has_export == 'true' && steps.candidate.outputs.changed == 'false' && steps.candidate.outputs.accepted_count == '0'
+        if: steps.recovery.outputs.ready == 'true' && steps.download.outputs.has_export == 'true' && steps.candidate.outputs.changed == 'false' && steps.candidate.outputs.accepted_count == '0'
         env:
           RECEIPT: ${{ steps.candidate.outputs.receipt }}
         run: npm run maintenance:prepare -- ack --receipt "$RECEIPT" --commit "$(git rev-parse HEAD)"
       - name: Recover the original commit after a lost application acknowledgement
         id: receipt_commit
-        if: steps.candidate.outputs.replayed == 'true' && steps.candidate.outputs.accepted_count != '0'
+        if: steps.recovery.outputs.ready == 'true' && steps.candidate.outputs.replayed == 'true' && steps.candidate.outputs.accepted_count != '0'
         env:
           RECEIPT: ${{ steps.candidate.outputs.receipt }}
         shell: bash
@@ -80,14 +90,14 @@ jobs:
           git checkout --detach "$source_commit"
           echo "sha=$source_commit" >> "$GITHUB_OUTPUT"
       - name: Validate candidate data and evidence before creating a commit
-        if: steps.candidate.outputs.changed == 'true'
+        if: steps.recovery.outputs.ready == 'true' && steps.candidate.outputs.changed == 'true'
         run: |
           npm run validate:data -- --directory-safe-expiry
           npm run validate:directory
           node node_modules/vitest/vitest.mjs run tests/unit/maintenance-identity-import.test.ts tests/unit/maintenance-scholarship-import.test.ts tests/unit/maintenance-field-import.test.ts tests/unit/field-verification.test.ts tests/unit/catalog-discovery.test.ts
       - name: Publish a checked exact commit through the protected main branch
         id: commit
-        if: steps.candidate.outputs.changed == 'true'
+        if: steps.recovery.outputs.ready == 'true' && steps.candidate.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -121,13 +131,13 @@ jobs:
           gh workflow run ci.yml --ref main
           echo "sha=$candidate_sha" >> "$GITHUB_OUTPUT"
       - name: Acknowledge canonical application separately from public publication
-        if: steps.commit.outputs.sha != '' || steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != ''
+        if: steps.recovery.outputs.ready == 'true' && (steps.commit.outputs.sha != '' || steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != '')
         env:
           RECEIPT: ${{ steps.candidate.outputs.receipt || steps.resume.outputs.receipt }}
           SOURCE_COMMIT: ${{ steps.commit.outputs.sha || steps.resume.outputs.source_commit || steps.receipt_commit.outputs.sha }}
         run: npm run maintenance:prepare -- ack --receipt "$RECEIPT" --commit "$SOURCE_COMMIT"
       - name: Recover a missing main CI dispatch after an ambiguous push reply
-        if: steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != ''
+        if: steps.recovery.outputs.ready == 'true' && (steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != '')
         env:
           GH_TOKEN: ${{ github.token }}
           SOURCE_COMMIT: ${{ steps.resume.outputs.source_commit || steps.receipt_commit.outputs.sha }}
@@ -140,7 +150,7 @@ jobs:
             if [[ "$count" == '0' ]]; then gh workflow run ci.yml --ref main; fi
           fi
       - name: Wait for protected promotion and verify stable exact content
-        if: steps.commit.outputs.sha != '' || steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != ''
+        if: steps.recovery.outputs.ready == 'true' && (steps.commit.outputs.sha != '' || steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != '')
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           SOURCE_COMMIT: ${{ steps.commit.outputs.sha || steps.resume.outputs.source_commit || steps.receipt_commit.outputs.sha }}
@@ -161,6 +171,7 @@ jobs:
         with:
           name: cloud-catalog-${{ github.run_id }}
           path: |
+            ${{ runner.temp }}/maintenance-head-recovery
             ${{ runner.temp }}/maintenance-candidate/canonical-receipt.json
             ${{ runner.temp }}/maintenance-candidate/identity-receipt.json
             ${{ runner.temp }}/maintenance-candidate/scholarship-receipt.json

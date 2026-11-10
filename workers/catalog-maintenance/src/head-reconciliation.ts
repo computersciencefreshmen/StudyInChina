@@ -4,6 +4,7 @@ import { control } from './repository'
 import type { Control, MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { canonical, digest, nowIso, record } from './util'
+import { nativeReconciliationGate } from './native-reconciliation-guard'
 
 /** One reviewed Git transition, not a general catalogue-head write API. */
 export const PINNED_HEAD_RECONCILIATION = manifest
@@ -52,9 +53,9 @@ async function archive(env: MaintenanceEnv, saved: StoredProof) {
 }
 export async function readMaintenanceControl(env: MaintenanceEnv) {
   await assertPin(env)
-  const cfg = await control(env), saved = await operation(env)
+  const cfg = await control(env), saved = await operation(env), gate = await nativeReconciliationGate(env)
   return { format: 'studyinchina.maintenance-control' as const, control: cfg,
-    deployment: { maintenanceEnabled: env.MAINTENANCE_ENABLED === 'true', subscriptionConfigured: Boolean(env.MINIMAX_SUBSCRIPTION_KEY && env.MINIMAX_MODEL === 'MiniMax-M3') }, reconciliation: {
+    deployment: { maintenanceEnabled: env.MAINTENANCE_ENABLED === 'true', subscriptionConfigured: Boolean(env.MINIMAX_SUBSCRIPTION_KEY && env.MINIMAX_MODEL === 'MiniMax-M3'), guardRequired: gate.required, guardReady: gate.ready }, reconciliation: {
     manifestSha256: manifest.sha256,
     paused: saved.pause ? { originalControl: saved.pause.proof.originalControl, pausedRevision: saved.pause.proof.pausedRevision, proofSha256: saved.pause.sha256 } : null,
     advanced: saved.advance ? { reconciledRevision: saved.advance.proof.reconciledRevision!, proofSha256: saved.advance.sha256 } : null,

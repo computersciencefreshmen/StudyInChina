@@ -33,6 +33,16 @@ The initial cadence, original canary and MiniMax subscription/quota checks are u
 
 The target-refresh budget evidence is in `docs/operations/maintenance-target-refresh-budget-2026-11-10.json`: one local parse/schema sample used about 62 ms CPU, before planning and hashing. This identifies a risk for the documented Free HTTP CPU limit; it is not Cloudflare's actual metering. The repair reuses the already configured Queue/continuation mechanism without changing CPU limits or billing. Successful prior bootstrap does not prove this new full target consumer fits its deployed allowance; verify the actual consumer, continuations and completion receipt in the cloud before resume.
 
+## Armed cloud continuation through the existing publisher
+
+The first real cloud prepare run did not pass its initial control read; its artifact contains history verification and a waiting receipt, with no initial-control or phase receipt. Subsequent Cloudflare API access explicitly reported the Free daily row-read limit exhausted. The next reset is November 11 at 00:00 UTC / 08:00 Shanghai. The applied query optimizations do not reset that accumulated usage. See [the bounded live index observation](d1-index-live-observation-2026-11-10.json).
+
+To continue while the owner's computer is off, the existing scheduled publisher can run the same audited phases in `auto` mode. No additional cron is required. This path is armed only with the explicit `NATIVE_HEAD_RECONCILIATION_REQUIRED=true` guard and the existing deployment gate. Before a valid durable resume proof exists, that guard blocks ordinary scheduling, new exports and provider model admission; an unavailable database also blocks execution. Repair continuations and authenticated operator endpoints remain available. Thus arming the deployment gate does not allow the old catalogue to start model work first.
+
+The trusted main publisher first reads control state. An already-completed repair is a read-only no-op, including after later legitimate catalogue imports or a later operator pause. A pending repair validates the pinned history and follows prepare, exact target completion and revision-checked resume. It never discards a conflict or uses cleanup as a reason to resume. The standalone owner-only manual prepare/resume workflow remains available.
+
+Only a recognized backend failure followed by the existing status endpoint's explicit `quota_wait` permits a normal waiting result. Other authentication, schema and operator/CAS conflicts remain failures. Waiting is recorded as `ready=false` and skips normal publisher work; a passing scheduled job in this state is not accepted coverage growth. Subscription quota, legacy guards, unknown-request protection, independent extraction and the protected public publisher continue to govern real model work after recovery.
+
 ## Failures and rollback
 
 `GET /control` is authenticated and returns only control/reconciliation metadata and configuration booleans. It avoids the full progress/status scan. Every reconciliation phase has a durable event and an immutable R2 proof; retries reuse the same original snapshot. A pause archive failure leaves the database paused and can be retried. An ambiguous transaction reply is resolved against its durable event.

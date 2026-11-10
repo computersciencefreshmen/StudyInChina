@@ -2,6 +2,7 @@ import { readBoundedBody } from '../../ingestion/src/body'
 import { isCurrentQuotaWindow } from '../../../scripts/ingestion/minimax-quota-window'
 import { control } from './repository'
 import { isDailyD1QuotaError } from './backend-errors'
+import { nativeReconciliationGate } from './native-reconciliation-guard'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
 
@@ -87,6 +88,7 @@ export class ModelAdmission {
   private async run(input:ModelRequest):Promise<Response> {
     const cfg=await control(this.env)
     if(this.env.MAINTENANCE_ENABLED!=='true'||!cfg?.enabled||!cfg.models_enabled||!cfg.seed_complete||!HASH.test(cfg.legacy_guard_sha256)) return json({ok:false,error:'model_lane_disabled'},409)
+    if(!(await nativeReconciliationGate(this.env)).ready)return json({ok:false,error:'native_head_reconciliation_required'},409)
     const base=this.env.MINIMAX_ANTHROPIC_BASE??'https://api.minimaxi.com/anthropic'
     if(!ENDPOINTS.has(base)||this.env.MINIMAX_MODEL!=='MiniMax-M3'||!this.env.MINIMAX_SUBSCRIPTION_KEY) return json({ok:false,error:'subscription_configuration_invalid'},409)
     const source=await this.env.PIPELINE_DB.prepare('SELECT source_id,raw_sha256 FROM maintenance_sources WHERE source_id=? AND enabled=1').bind(input.sourceId).first<{source_id:string;raw_sha256:string|null}>()
@@ -138,7 +140,7 @@ export class ModelAdmission {
       // The durable send_started reservation precedes the network request. A crash
       // or lost reply never authorizes a replay of this semantic request.
       const fresh=await control(this.env)
-      if(!fresh?.models_enabled||!fresh.enabled) {
+      if(!fresh?.models_enabled||!fresh.enabled||!(await nativeReconciliationGate(this.env)).ready) {
         await this.state.storage.put<Reservation>(key,{state:'known_failed',attemptId,requestSha256,retryable:true,notBefore:Date.now()+60000,attemptCount:(prior?.attemptCount??0)+1})
         await this.completeAttempt(input.reservationKey,attemptId,'known_failed','stopped_before_send')
         return json({ok:false,error:'model_waiting_control',retryAfter:60},429)

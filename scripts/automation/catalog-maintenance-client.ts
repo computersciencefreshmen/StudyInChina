@@ -10,6 +10,33 @@ export type MaintenanceClient = {
   artifact(key: string): Promise<Uint8Array>
 }
 
+/** Safe transport metadata only. Never retain a Response, body, token or cause. */
+export class MaintenanceHttpError extends Error {
+  constructor(readonly httpStatus: number, readonly backendUnavailable = false) { super('maintenance_request_failed') }
+}
+export async function maintenanceHttpFailure(response: Response): Promise<MaintenanceHttpError> {
+  let backendUnavailable = false
+  // Only this fixed Worker error can be a backend candidate. A CAS/operator
+  // conflict remains a failure even if a later status request reports quota.
+  if ([409, 429].includes(response.status) || response.status >= 500) {
+    const reader = response.body?.getReader()
+    if (reader) {
+      const chunks: Uint8Array[] = []; let size = 0
+      try {
+        for (;;) { const next = await reader.read(); if (next.done) break; size += next.value.byteLength
+          if (size > 1024) { await reader.cancel(); break }; chunks.push(next.value) }
+        if (size <= 1024) {
+          const value: unknown = JSON.parse(Buffer.concat(chunks).toString('utf8'))
+          backendUnavailable = Boolean(value && typeof value === 'object' && !Array.isArray(value)
+            && (value as Record<string, unknown>).ok === false && (value as Record<string, unknown>).error === 'request_invalid_or_backend_unavailable')
+        }
+      } catch { /* Unrecognized or malformed errors are never quota evidence. */ }
+      finally { reader.releaseLock() }
+    }
+  }
+  return new MaintenanceHttpError(response.status, backendUnavailable)
+}
+
 /** A known shared-quota or initial-seed wait is normal, not a failed export. */
 export async function maintenanceRuntimeGate(client: MaintenanceClient) {
   const status = await client.json('/status') as { format?: string; backend?: { state?: string }; enabled?: boolean;
@@ -32,12 +59,14 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
     if (!/^\/(?:status|control|head-reconcile|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
+    let response: Response
     try {
-      const response = await fetcher(url, { method, headers: { Authorization: `Bearer ${token}`, ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },
+      response = await fetcher(url, { method, headers: { Authorization: `Bearer ${token}`, ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },
         body: body === undefined ? undefined : JSON.stringify(body), redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(60_000) })
-      if (!response.ok || response.redirected || (response.url && new URL(response.url).origin !== origin.origin)) throw new Error('maintenance_http_error')
-      return response
     } catch { throw new Error('maintenance_request_failed') }
+    if (response.redirected || (response.url && new URL(response.url).origin !== origin.origin)) throw new Error('maintenance_request_failed')
+    if (!response.ok) throw await maintenanceHttpFailure(response)
+    return response
   }
   const bytes = async (response: Response, maximum: number): Promise<Uint8Array> => {
     if (!response.body || Number(response.headers.get('content-length')) > maximum) throw new Error('maintenance_response_too_large')

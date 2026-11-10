@@ -6,6 +6,7 @@ import { after, canonical, digest, HASH, ID, nowIso, record } from './util'
 import { coalesceOperations,type SqlOperation } from './sql-plan'
 import { selectScheduledJobs } from './scheduling'
 import { captureCadence } from './cadence'
+import { nativeReconciliationGate } from './native-reconciliation-guard'
 
 export async function control(env: MaintenanceEnv): Promise<Control | null> {
   return env.PIPELINE_DB.prepare('SELECT * FROM maintenance_control WHERE singleton=1').first<Control>()
@@ -145,6 +146,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
   if(cfg&&!cfg.seed_complete&&cfg.seed_plan_sha256){await env.MAINTENANCE_QUEUE.send({version:1,jobId:cfg.seed_sha256,seedSha256:cfg.seed_sha256});return{enabled:false,queued:1}}
   if(cfg&&!cfg.targets_complete){const refresh=await env.PIPELINE_DB.prepare("SELECT refresh_sha256 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=? ORDER BY created_at DESC LIMIT 1").bind(cfg.input_catalog_sha256).first<{refresh_sha256:string}>();if(refresh){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refresh.refresh_sha256,targetRefreshSha256:refresh.refresh_sha256});return{enabled:false,queued:1}}}
   if (env.MAINTENANCE_ENABLED !== 'true' || !cfg?.enabled || !cfg.seed_complete) return {enabled:false,queued:0}
+  if(!(await nativeReconciliationGate(env)).ready)return{enabled:false,queued:0,nativeHeadReconciliationRequired:true}
   const candidates = (await env.PIPELINE_DB.prepare(`SELECT s.*,(SELECT json_group_array(university_id) FROM maintenance_source_schools WHERE source_id=s.source_id) school_ids_json,(SELECT json_group_array(json_object('closesOn',json_extract(t.fields_json,'$.closesOn'),'deadline',json_extract(t.fields_json,'$.deadline'))) FROM maintenance_record_targets t JOIN maintenance_target_sources x ON x.target_id=t.target_id WHERE x.source_id=s.source_id AND t.active=1) scheduling_fields_json FROM maintenance_sources s WHERE s.enabled=1 AND s.due_at<=? AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=s.source_id)) AND NOT EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.source_id=s.source_id AND j.stage='capture' AND j.status IN('queued','running','retry')) ORDER BY COALESCE((SELECT MIN(COALESCE(u.last_attempt_at,'')) FROM maintenance_schools u JOIN maintenance_source_schools x ON x.university_id=u.university_id WHERE x.source_id=s.source_id),''),COALESCE(s.last_attempt_at,''),s.due_at,s.source_id LIMIT 40`).bind(nowIso(now),cfg.canary_json,cfg.canary_json).all<SourceRow&{school_ids_json:string;scheduling_fields_json:string}>()).results ?? []
   const due:SourceRow[]=[],selectedSchools=new Set<string>()
   for(const row of candidates){const ids=JSON.parse(row.school_ids_json)as string[];if(ids.some(id=>selectedSchools.has(id)))continue;ids.forEach(id=>selectedSchools.add(id));due.push(row);if(due.length>=8)break}
@@ -281,6 +283,7 @@ export async function continueTargetRefresh(env:MaintenanceEnv,refreshSha256:str
 }
 export async function status(env:MaintenanceEnv) {
   const cfg=await control(env)
+  const reconciliationGate=await nativeReconciliationGate(env)
   const [jobs,proposals,sources,attempts,latest,coverage]=await Promise.all([
     env.PIPELINE_DB.prepare('SELECT stage,status,COUNT(*) count,MIN(created_at) oldest_at FROM maintenance_jobs GROUP BY stage,status').all(),
     env.PIPELINE_DB.prepare('SELECT status,COUNT(*) count FROM maintenance_proposals GROUP BY status').all(),
@@ -289,5 +292,5 @@ export async function status(env:MaintenanceEnv) {
     env.PIPELINE_DB.prepare('SELECT kind,observed_at FROM maintenance_events ORDER BY observed_at DESC LIMIT 1').first(),
     env.PIPELINE_DB.prepare("SELECT (SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1) record_targets,(SELECT COUNT(DISTINCT x.university_id) FROM maintenance_source_schools x JOIN maintenance_observations o ON o.source_id=x.source_id) schools_with_actual_source_observation,(SELECT COUNT(*) FROM maintenance_schools WHERE last_attempt_at IS NOT NULL) schools_with_actual_source_attempt,(SELECT COUNT(*) FROM maintenance_legacy_guards) legacy_guards").first(),
   ])
-  return {format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:env.MAINTENANCE_ENABLED==='true'&&Boolean(cfg?.enabled),modelEnabled:Boolean(cfg?.models_enabled),scopeCount:cfg?272:0,control:cfg,jobs:jobs.results??[],proposals:proposals.results??[],sources,modelAttempts:attempts.results??[],coverage,lastEvent:latest,websiteBackendChanged:false}
+  return {format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:env.MAINTENANCE_ENABLED==='true'&&Boolean(cfg?.enabled)&&reconciliationGate.ready,modelEnabled:Boolean(cfg?.models_enabled)&&reconciliationGate.ready,reconciliationGate,scopeCount:cfg?272:0,control:cfg,jobs:jobs.results??[],proposals:proposals.results??[],sources,modelAttempts:attempts.results??[],coverage,lastEvent:latest,websiteBackendChanged:false}
 }
