@@ -1,0 +1,101 @@
+{
+  "format": "studyinchina.sampled-d1-read-evidence",
+  "schemaVersion": 1,
+  "capturedAtUTC": "2026-11-10T04:18:53.620868+00:00",
+  "database": "studyinchina-pipeline",
+  "requestedLookback": "7d",
+  "exactQueryWindowEndpointsReturned": false,
+  "parameterValuesIncluded": false,
+  "queries": [
+    {
+      "sql": "SELECT decision.candidate_id\n       FROM entity_materialization_decisions decision\n       WHERE decision.decision_status = 'materialized'\n         AND NOT EXISTS (\n           SELECT 1\n           FROM entity_materialization_release_requests request,\n                json_each(request.candidate_ids_json) requested\n           WHERE requested.value = decision.candidate_id\n         )\n       ORDER BY decision.decided_at, decision.candidate_id\n       LIMIT ?1",
+      "sqlSha256": "61ffd97556383bf0763ed02b0d9c5e7dbfb1734a09603b938c02eda81b2857ec",
+      "executionsReported": 30,
+      "totalRowsReadReported": 9324142,
+      "averageRowsReadReported": 310804
+    },
+    {
+      "sql": "\n    SELECT snapshot.fetched_at, snapshot.content_type, (\n      SELECT MAX(observed_at) FROM ingestion_source_observations observation\n      WHERE observation.snapshot_id = snapshot.snapshot_id\n    ) AS observed_at FROM ingestion_snapshots snapshot WHERE snapshot.snapshot_id = ?1\n  ",
+      "sqlSha256": "29c8667798859acf15f5cf819ec88ae2e37bf47d7a071059eb1b1233b341c3b2",
+      "executionsReported": 1801,
+      "totalRowsReadReported": 4089542,
+      "averageRowsReadReported": 2270
+    },
+    {
+      "sql": "SELECT candidate.candidate_id\n       FROM extracted_entity_candidates candidate\n       JOIN entity_registry registry\n         ON registry.institution_id = candidate.institution_id\n        AND registry.entity_type = candidate.entity_type\n        AND registry.entity_key = candidate.entity_key\n       JOIN catalog_reconciliation_items reconciliation\n         ON reconciliation.candidate_id = candidate.candidate_id\n       LEFT JOIN automation_retry_state retry\n         ON retry.task_kind = 'entity_materialization' AND retry.task_id = candidate.candidate_id\n       WHERE (retry.task_id IS NULL OR retry.next_attempt_at <= ?2)\n         AND candidate.candidate_status IN ('validated', 'registered', 'quarantined')\n         AND NOT EXISTS (\n           SELECT 1 FROM entity_materialization_decisions decision\n           WHERE decision.candidate_id = candidate.candidate_id\n         )\n       ORDER BY coalesce(retry.last_attempt_at, candidate.created_at), candidate.candidate_id\n       LIMIT ?1",
+      "sqlSha256": "2fd8b4e40639de1303be9654c03fb8bd5b261a28287fcc048274ce87063e5ee4",
+      "executionsReported": 588,
+      "totalRowsReadReported": 2169221,
+      "averageRowsReadReported": 3689
+    },
+    {
+      "sql": "SELECT DISTINCT\n            field.subject_record_id, field.field_path, field.locale, field.claim_id,\n            evidence.evidence_role,\n            source.id AS source_internal_id, source.public_id AS source_public_id,\n            source.canonical_url, source.source_kind, source.authority_level,\n            source.official, source.language_code,\n            fetch.completed_at AS checked_at,\n            metadata.title AS source_title, metadata.publisher AS source_publisher\n       FROM canonical_fields field\n       CROSS JOIN records record ON record.id = field.subject_record_id\n       CROSS JOIN claims claim ON claim.id = field.claim_id\n       CROSS JOIN claim_evidence evidence ON evidence.claim_id = claim.id\n       CROSS JOIN source_fragments fragment ON fragment.id = evidence.fragment_id\n       CROSS JOIN source_fetches fetch ON fetch.id = fragment.fetch_id\n       CROSS JOIN source_documents source ON source.id = fetch.source_id\n       LEFT JOIN publication_source_metadata metadata ON metadata.source_id = source.id\n      WHERE record.workflow_status IN ('applied', 'published')\n  AND NOT EXISTS (\n    SELECT 1\n    FROM materialization_batch_record_intents AS pending_intent\n    JOIN materialization_batches AS intent_batch\n      ON intent_batch.batch_id = pending_intent.batch_id\n    WHERE pending_intent.record_id = record.id\n      AND intent_batch.batch_status NOT IN ('applied', 'superseded')\n  )\n  AND NOT EXISTS (\n    SELECT 1\n    FROM materialization_batch_records AS pending_batch_record\n    JOIN materialization_batches AS pending_batch\n      ON pending_batch.batch_id = pending_batch_record.batch_id\n    WHERE pending_batch_record.record_id = record.id\n      AND pending_batch.batch_status NOT IN ('applied', 'superseded')\n  )\n        AND field.field_status = 'accepted'\n        AND claim.claim_status = 'accepted'\n      ORDER BY field.subject_record_id, field.field_path, field.locale,\n               source.id, evidence.evidence_role",
+      "sqlSha256": "0a07cdfeb09eedd4619650a979eef7fda892a5119a6115618a8d4963bb94b9e4",
+      "executionsReported": 8,
+      "totalRowsReadReported": 1567576,
+      "averageRowsReadReported": 195947
+    },
+    {
+      "sql": "\n      INSERT OR IGNORE INTO ingestion_sources (source_id, manifest_json, enabled, next_fetch_at, created_at, updated_at)\n      SELECT ?1, ?2, 1, ?3, ?3, ?3\n      WHERE (SELECT COUNT(*) FROM ingestion_sources\n        WHERE source_id GLOB 'auto-discovery-*'\n          AND json_extract(manifest_json, '$.institutionId') = ?4) < ?5\n        AND NOT EXISTS (SELECT 1 FROM ingestion_sources\n          WHERE json_extract(manifest_json, '$.institutionId') = ?4\n            AND json_extract(manifest_json, '$.officialUrl') = ?6)\n    ",
+      "sqlSha256": "d17436bac5b8282436f58e564d4c5457b5317c64d70042ec2424628c0becf9c5",
+      "executionsReported": 301,
+      "totalRowsReadReported": 1248009,
+      "averageRowsReadReported": 4146
+    },
+    {
+      "sql": "INSERT OR IGNORE INTO promotion_source_bindings\n          (source_id, source_document_id, enabled, created_at, updated_at)\n          SELECT ?1, id, 1, ?9, ?9 FROM source_documents WHERE canonical_url = ?7 AND publisher_organization_id = ?3\n        AND official = 1 AND active = 1 AND robots_policy = 'enforce'\n        AND authority_level IN ('primary_official', 'secondary_official') AND EXISTS (SELECT 1 FROM ingestion_sources current\n        JOIN organizations organization ON organization.record_id = ?3\n        JOIN institutions institution ON institution.record_id = organization.record_id\n        JOIN records record ON record.id = organization.record_id\n        JOIN ingestion_snapshots snapshot ON snapshot.snapshot_id = ?4 AND snapshot.source_id = current.source_id\n        WHERE current.source_id = ?1 AND current.manifest_json = ?2 AND current.enabled = 1\n          AND organization.official_url = ?5 AND institution.admissions_url IS ?6\n          AND record.workflow_status IN ('validated', 'applied', 'published', 'stale')\n          AND NOT EXISTS (SELECT 1 FROM json_each(?8) proof WHERE NOT (\n            (json_extract(proof.value, '$.kind') = 'official' AND organization.official_url = json_extract(proof.value, '$.value'))\n            OR (json_extract(proof.value, '$.kind') = 'admissions' AND institution.admissions_url = json_extract(proof.value, '$.value'))\n            OR (json_extract(proof.value, '$.kind') = 'domain' AND EXISTS (SELECT 1 FROM organization_domains domain\n              WHERE domain.organization_id = ?3 AND domain.domain = json_extract(proof.value, '$.value')))\n            OR (json_extract(proof.value, '$.kind') = 'document' AND EXISTS (SELECT 1 FROM source_documents trusted\n              WHERE trusted.publisher_organization_id = ?3 AND trusted.canonical_url = json_extract(proof.value, '$.value')\n                AND trusted.official = 1 AND trusted.active = 1 AND trusted.robots_policy = 'enforce'\n                AND trusted.authority_level IN ('primary_official', 'secondary_official'))))))\n        AND NOT EXISTS (SELECT 1 FROM promotion_source_bindings binding WHERE binding.source_id = ?1)\n        AND NOT EXISTS (SELECT 1 FROM ingestion_sources other WHERE other.enabled = 1\n          AND json_extract(other.manifest_json, '$.officialUrl') = ?7\n          AND json_extract(other.manifest_json, '$.institutionId') <> ?3)",
+      "sqlSha256": "eb18bfc930a806c2746e21a8a12fd8fe5c0dc89cc42067d0178c0d0996dc2b98",
+      "executionsReported": 382,
+      "totalRowsReadReported": 1072352,
+      "averageRowsReadReported": 2807
+    },
+    {
+      "sql": "SELECT (SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1) record_targets,(SELECT COUNT(DISTINCT x.university_id) FROM maintenance_source_schools x JOIN maintenance_observations o ON o.source_id=x.source_id) schools_with_actual_source_observation,(SELECT COUNT(*) FROM maintenance_schools WHERE last_attempt_at IS NOT NULL) schools_with_actual_source_attempt,(SELECT COUNT(*) FROM maintenance_legacy_guards) legacy_guards",
+      "sqlSha256": "fe2f146c68eed786edae207ce9b055132aa64fecbd2906ad541b1fdd8145c49a",
+      "executionsReported": 1324,
+      "totalRowsReadReported": 926890,
+      "averageRowsReadReported": 700
+    },
+    {
+      "sql": "INSERT OR IGNORE INTO source_documents\n          (id, public_id, canonical_url, publisher_organization_id, source_kind, authority_level, official,\n            language_code, active, fetch_cadence_minutes, robots_policy, created_at, updated_at)\n          SELECT ?9, ?9, ?7, ?3, ?10, 'primary_official', 1, 'other', 1, ?11, 'enforce', ?12, ?12\n          WHERE EXISTS (SELECT 1 FROM ingestion_sources current\n        JOIN organizations organization ON organization.record_id = ?3\n        JOIN institutions institution ON institution.record_id = organization.record_id\n        JOIN records record ON record.id = organization.record_id\n        JOIN ingestion_snapshots snapshot ON snapshot.snapshot_id = ?4 AND snapshot.source_id = current.source_id\n        WHERE current.source_id = ?1 AND current.manifest_json = ?2 AND current.enabled = 1\n          AND organization.official_url = ?5 AND institution.admissions_url IS ?6\n          AND record.workflow_status IN ('validated', 'applied', 'published', 'stale')\n          AND NOT EXISTS (SELECT 1 FROM json_each(?8) proof WHERE NOT (\n            (json_extract(proof.value, '$.kind') = 'official' AND organization.official_url = json_extract(proof.value, '$.value'))\n            OR (json_extract(proof.value, '$.kind') = 'admissions' AND institution.admissions_url = json_extract(proof.value, '$.value'))\n            OR (json_extract(proof.value, '$.kind') = 'domain' AND EXISTS (SELECT 1 FROM organization_domains domain\n              WHERE domain.organization_id = ?3 AND domain.domain = json_extract(proof.value, '$.value')))\n            OR (json_extract(proof.value, '$.kind') = 'document' AND EXISTS (SELECT 1 FROM source_documents trusted\n              WHERE trusted.publisher_organization_id = ?3 AND trusted.canonical_url = json_extract(proof.value, '$.value')\n                AND trusted.official = 1 AND trusted.active = 1 AND trusted.robots_policy = 'enforce'\n                AND trusted.authority_level IN ('primary_official', 'secondary_official'))))))\n        AND NOT EXISTS (SELECT 1 FROM promotion_source_bindings binding WHERE binding.source_id = ?1)\n        AND NOT EXISTS (SELECT 1 FROM ingestion_sources other WHERE other.enabled = 1\n          AND json_extract(other.manifest_json, '$.officialUrl') = ?7\n          AND json_extract(other.manifest_json, '$.institutionId') <> ?3)",
+      "sqlSha256": "da02f4c4c0869ba1188e1a1dd48f90e3c78826c54c9435520f1dd98425b07c3b",
+      "executionsReported": 317,
+      "totalRowsReadReported": 900191,
+      "averageRowsReadReported": 2839
+    },
+    {
+      "sql": "SELECT COUNT(*) AS pending_count, MIN(candidate.created_at) AS oldest_pending_at\n    FROM extracted_entity_candidates candidate\n    LEFT JOIN entity_materialization_decisions decision ON decision.candidate_id = candidate.candidate_id\n    WHERE candidate.candidate_status IN ('validated','registered') AND decision.candidate_id IS NULL",
+      "sqlSha256": "66dbcb1bb3bbd184bfdc8384e3b329c4c8027fe9a4d075edb5bc176530055ab4",
+      "executionsReported": 155,
+      "totalRowsReadReported": 889920,
+      "averageRowsReadReported": 5741
+    },
+    {
+      "sql": "SELECT COUNT(CASE WHEN status IN ('queued','running','retrying') THEN 1 END) AS active_count,\n    MIN(CASE WHEN status IN ('queued','running','retrying') THEN scheduled_at END) AS oldest_active_at,\n    COUNT(CASE WHEN status = 'running' AND datetime(updated_at) < datetime(?1) THEN 1 END) AS stuck_count,\n    COUNT(CASE WHEN status = 'failed' AND datetime(completed_at) >= datetime(?2) THEN 1 END) AS failed_recent_count,\n    COUNT(CASE WHEN status = 'failed' AND attempt >= 4 AND datetime(completed_at) >= datetime(?2) THEN 1 END) AS exhausted_recent_count\n    FROM ingestion_jobs",
+      "sqlSha256": "2fc991389fa3ce3f08d1a70709ecb6150e2a78dfaff66dafa1dc46412887dd61",
+      "executionsReported": 155,
+      "totalRowsReadReported": 824680,
+      "averageRowsReadReported": 5320
+    }
+  ],
+  "emptyDailyReadbacks": [
+    {
+      "database": "studyinchina-pipeline",
+      "requestedLookback": "1d",
+      "state": "no_samples",
+      "rowsRead": null
+    },
+    {
+      "database": "studyinchina-catalog",
+      "requestedLookback": "1d",
+      "state": "no_samples",
+      "rowsRead": null
+    }
+  ],
+  "limitations": [
+    "Wrangler D1 Insights returns sampled analytics; queries rejected before execution are absent.",
+    "These seven-day returned totals identify observed query workloads, not today's daily-quota root cause or complete account usage.",
+    "Empty daily arrays do not mean zero reads or prove available quota.",
+    "The CLI output does not contain precise UTC window endpoints; capturedAtUTC is the local evidence-file completion time."
+  ]
+}

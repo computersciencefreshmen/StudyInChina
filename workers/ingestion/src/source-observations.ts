@@ -8,6 +8,8 @@ const REVALIDATION_INTERVAL_MS = 24 * 60 * 60 * 1_000
 export async function sourceRevalidationDue(
   database: IngestionEnv['INGESTION_DB'], snapshotId: string, now: Date,
 ): Promise<boolean> {
+  // Migration 0020 indexes this immutable snapshot's observation times, so MAX
+  // does not search other snapshots. Freshness still requires the same receipt.
   const row = await database.prepare(`
     SELECT snapshot.fetched_at, snapshot.content_type, (
       SELECT MAX(observed_at) FROM ingestion_source_observations observation

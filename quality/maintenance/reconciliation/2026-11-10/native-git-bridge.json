@@ -1,0 +1,677 @@
+{
+  "format": "studyinchina.native-git-historical-bridge-audit",
+  "version": 1,
+  "observedAt": "2026-11-10T04:31:58.980Z",
+  "oldCommit": "b841240bbb8a1f34d87f5df2da499c5c64e0567c",
+  "newCommit": "743bdc92a80b1fb9dfb9601927e056acc31c43f3",
+  "headCommit": "390c009ed4c71ff2b1d42cacb74600ec51bff529",
+  "ancestry": {
+    "oldToBridge": true,
+    "bridgeToHead": true
+  },
+  "catalogHashes": {
+    "old": "14b620dcefb79b9c5c75c2b5700514da8640fafe929825b1ecda2d79dd4f7059",
+    "bridge": "55ec8db81b5b81d50edd4656bda69ec790b945cdf2099a666a50c8489d678472"
+  },
+  "sixJsonDelta": {
+    "sources": {
+      "before": 2595,
+      "after": 2683,
+      "addedIds": [
+        "src-moe-4111010012-official-home",
+        "src-moe-4111010015-official-home",
+        "src-moe-4111010020-official-home",
+        "src-moe-4111010025-official-home",
+        "src-moe-4111010029-official-home",
+        "src-moe-4111010049-official-home",
+        "src-moe-4111010051-official-home",
+        "src-moe-4111011417-official-home",
+        "src-moe-4131010262-official-home",
+        "src-moe-4131010262-international-entry",
+        "src-moe-4131010856-official-home",
+        "src-moe-4131010856-international-entry",
+        "src-moe-4131011458-official-home",
+        "src-moe-4131011458-international-entry",
+        "src-moe-4131012044-official-home",
+        "src-moe-4131012044-international-entry",
+        "src-moe-4131012050-official-home",
+        "src-moe-4131012050-international-entry",
+        "src-moe-4131012799-official-home",
+        "src-moe-4131012799-international-entry",
+        "src-moe-4131016404-official-home",
+        "src-moe-4131016404-international-entry",
+        "src-moe-4132010332-official-home",
+        "src-moe-4132010331-official-home",
+        "src-moe-4132011276-official-home",
+        "src-moe-4133013021-official-home",
+        "src-moe-4133013022-official-home",
+        "src-moe-4132013573-official-home",
+        "src-moe-4133011842-official-home",
+        "src-moe-4133010876-official-home",
+        "src-moe-4111010012-international-entry",
+        "src-moe-4111010015-international-entry",
+        "src-moe-4111010020-international-entry",
+        "src-moe-4111010025-international-entry",
+        "src-moe-4111010029-international-entry",
+        "src-moe-4111010049-international-entry",
+        "src-moe-4111010051-international-entry",
+        "src-moe-4131010856-official-name",
+        "src-moe-4131011458-official-name",
+        "src-moe-4131012050-official-name",
+        "src-moe-4131016404-official-name",
+        "src-moe-4132010332-international-entry",
+        "src-moe-4132010332-official-name",
+        "src-moe-4132010331-international-entry",
+        "src-moe-4132011276-official-name",
+        "src-moe-4133013021-international-entry",
+        "src-moe-4133013022-international-entry",
+        "src-moe-4132013573-international-entry",
+        "src-moe-4133011842-international-entry",
+        "src-moe-4133011842-official-name",
+        "src-moe-4133010876-international-entry",
+        "src-moe-4133010876-official-name",
+        "src-new-school-program-fe6c6fed5aca1c02a8b00171",
+        "src-new-school-program-7af0ebc4b7db29946829f3eb",
+        "src-new-school-program-e1a824b26f0d5f44a4b67c95",
+        "src-new-school-program-f8282aa4d4139df13c46299c",
+        "src-new-school-program-f1bb7de777f7c34a4624df19",
+        "src-new-school-program-d067b27b7ce56c45bdd3aadd",
+        "src-new-school-program-3d5ae065dbdfbd84939a021a",
+        "src-new-school-program-66940ba7fc84004144edffa3",
+        "src-new-school-program-7bd65a4c2acf1be9ee085318",
+        "src-new-school-program-5d0213391a137cd87117af12",
+        "src-new-school-program-0555251e04903e509a18dc8c",
+        "src-new-school-program-bdaf533a0250d85a04c72d63",
+        "src-new-school-program-92bec6bd8d2e85e6acc52158",
+        "src-new-school-program-b58650ab55c38e69ae64a48f",
+        "src-new-school-program-a28f7d674607d57399f34a8d",
+        "src-new-school-program-26374454be87f9d9ce7b3c23",
+        "src-new-school-program-36bf6f718937e9942460cb36",
+        "src-new-school-program-6f2defea95870ca09791bc22",
+        "src-new-school-program-f3f78c93245ccb2589c51925",
+        "src-new-school-program-a715183bebccc9d68947cca8",
+        "src-new-school-program-93fcfd96579c0d25075b1930",
+        "src-new-school-program-d51011c25f5068af642e92bb",
+        "src-new-school-program-e4bf51f97154b2ef1ff3b4ae",
+        "src-new-school-program-44ed95579cfc34420b93fcf9",
+        "src-new-school-program-a26e6714ad7bd356cf52def0",
+        "src-new-school-program-5a4a0f1a72b17ea165f09346",
+        "src-new-school-program-c16144ac9a0b5db2f7a0440f",
+        "src-new-school-program-a55d85810ab46abbdc674a1e",
+        "src-new-school-program-00df0eb310f95d804cd1c076",
+        "src-new-school-program-3ce29de12e4e9cb9c02e2e35",
+        "src-new-school-program-1b2e6f367667b6f815dda6d7",
+        "src-new-school-program-828ad30e93ead87bbce0f143",
+        "src-new-school-program-e0216f89e8584ed07b8fd55d",
+        "src-new-school-program-9d5c650bd1eaeb0de35f3134",
+        "src-new-school-program-73c2f52ccaae315ff85f9cfa",
+        "src-new-school-program-2e2a6c3a275f5834f51bc7c1"
+      ],
+      "removedIds": [],
+      "modifiedIds": []
+    },
+    "cities": {
+      "before": 62,
+      "after": 62,
+      "addedIds": [],
+      "removedIds": [],
+      "modifiedIds": []
+    },
+    "universities": {
+      "before": 272,
+      "after": 295,
+      "addedIds": [
+        "uni-moe-4111010012",
+        "uni-moe-4111010015",
+        "uni-moe-4111010020",
+        "uni-moe-4111010025",
+        "uni-moe-4111010029",
+        "uni-moe-4111010049",
+        "uni-moe-4111010051",
+        "uni-moe-4111011417",
+        "uni-moe-4131010262",
+        "uni-moe-4131010856",
+        "uni-moe-4131011458",
+        "uni-moe-4131012044",
+        "uni-moe-4131012050",
+        "uni-moe-4131012799",
+        "uni-moe-4131016404",
+        "uni-moe-4132010332",
+        "uni-moe-4132010331",
+        "uni-moe-4132011276",
+        "uni-moe-4133013021",
+        "uni-moe-4133013022",
+        "uni-moe-4132013573",
+        "uni-moe-4133011842",
+        "uni-moe-4133010876"
+      ],
+      "removedIds": [],
+      "modifiedIds": []
+    },
+    "programs": {
+      "before": 2057,
+      "after": 2080,
+      "addedIds": [
+        "program-4111010012-bachelor-40719f36298a2fa96d0a",
+        "program-4111010015-bachelor-a6b3a3d2d752b27bb958",
+        "program-4111010020-bachelor-628af2865abeb4434f77",
+        "program-4111010025-bachelor-ea9e4faacca63b7c4b3e",
+        "program-4111010029-language-738e4daa6eb4e7d0b6b9",
+        "program-4111010049-master-c3b8666ede089041fa91",
+        "program-4111010051-bachelor-9ed3764e35dab487f029",
+        "program-4111011417-bachelor-af427ecdfdaf20bcb7ff",
+        "program-4131010262-bachelor-089e9d61da4f7cb7c684",
+        "program-4131010856-bachelor-69719a006cffb4723324",
+        "program-4131011458-master-7ce71833b17253fe49eb",
+        "program-4131012044-bachelor-a868920158666b81ea87",
+        "program-4131012050-bachelor-73b5d59987f40eee2ab2",
+        "program-4131012799-bachelor-4df8cf4e6b92a6150b87",
+        "program-4131016404-bachelor-f0064a8371bc26a24e26",
+        "program-4132010332-doctorate-5b40a3846024fc6e21d7",
+        "program-4132010331-bachelor-e174d3d81d8913d711c1",
+        "program-4132011276-bachelor-f922c400c73e27090c55",
+        "program-4133013021-bachelor-08eb0062791aaa09f0ee",
+        "program-4133013022-bachelor-acc459cb60e96b475378",
+        "program-4132013573-bachelor-d269af4257e792d68ac3",
+        "program-4133011842-bachelor-65390e8d89b8545deece",
+        "program-4133010876-language-ed92040d9370c23bbd6d"
+      ],
+      "removedIds": [],
+      "modifiedIds": []
+    },
+    "admission-cycles": {
+      "before": 1654,
+      "after": 1654,
+      "addedIds": [],
+      "removedIds": [],
+      "modifiedIds": []
+    },
+    "scholarships": {
+      "before": 400,
+      "after": 400,
+      "addedIds": [],
+      "removedIds": [],
+      "modifiedIds": []
+    }
+  },
+  "ledgerDelta": {
+    "before": 1107,
+    "after": 1153,
+    "added": 46,
+    "changedOld": []
+  },
+  "receiptHashes": {
+    "school": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+    "program": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433"
+  },
+  "checks": {
+    "schoolSources": 66,
+    "programSources": 36,
+    "archivedUniquePaths": 133,
+    "exactQuoteSpans": 74,
+    "visualEvidenceSpans": 2,
+    "fixed272ScopeUnchanged": true
+  },
+  "items": [
+    {
+      "entityType": "university",
+      "id": "uni-moe-4111010012",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "2c852c38541f63dd4da25f221306568d3f17491c7eeacdc1ad8417855ed808da",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4111010015",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "606b1e4de30c936bef6b8037ae4a4870d25beecf5e32cbab5459a5f7b68e29cf",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4111010020",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "9b835b6b1e07ade7b8dec79cfbf129edb108dfea2b854f29fd4c2fa4c8205b39",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4111010025",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "6f27b039757297d0858d47b93c146dc2b13253bf881b4b6b76717a7eca502429",
+      "sourceCount": 2
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4111010029",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "e8b9ad64d110f1afabaaf75434eadc2192af4e1a0bc3488d53bc2084e31b7eeb",
+      "sourceCount": 2
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4111010049",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "b503c01ded0f8c4efb35580407d9e516581351877e840c083f905f1ec422764f",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4111010051",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "91f57b1f8e8da1552a902954ba24bc2015fba9c4a9dd8868198ec30801638451",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4111011417",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "f5c8209c99bbdfbdcb95d99d56687323da7a4468309c0030a077ddb16408a039",
+      "sourceCount": 1
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4131010262",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "60e098730b47f10023c2a61c72df9a8659db178e09b241d7daa257cda7463f42",
+      "sourceCount": 4
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4131010856",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "82c5c68032386e35c005df123d0bcf318d845ea6d5e0bb64075ab7b82d57a9eb",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4131011458",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "3579abec165a1a2c72047f50c2018ecea472ffcd2b4baf3980137401461edb78",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4131012044",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "299c770dfd63784fdd59d1604ae6f880ece9fef989e1964172bf0431f58a6157",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4131012050",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "c7d02969fbf3ec64190a0477be18de782bcd518b9c8577f9e254bbd45a6a49a2",
+      "sourceCount": 4
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4131012799",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "00ce61084aa0019bac7bf2cb6e5bbb74590ad61d41cb40617a8e28e4a1ca449a",
+      "sourceCount": 2
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4131016404",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "8b8d10d48fab16b41ad59729d8b81e2e5218bbe71dfd6998efd25d5fb35a3a64",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4132010332",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "83996f54835eb6681bc6bf4d9eb490af44056d47d609e3fa2b4584926e4e14fa",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4132010331",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "3117a9434e5684bb68ad1dfaf85ab715223e770acc7e196837885e8fe5741517",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4132011276",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "3a497072ff3be05434c147a9cf59ee0d655feb517ec3f8c17742ea5af15d5be5",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4133013021",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "871f73abf26fa4b91459ee440340fae3f776db33c1aab925f36c15031f28a3cf",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4133013022",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "e92580b6999a62592c37518c9dd89ad7455fcf0c56dcf97214b549ffb5e29427",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4132013573",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "f3939be32f768e32178d694fcde67aeea7eaa52e503126abc3a20fb7ddf1b238",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4133011842",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "187388a377880b706ef215866cf22dc450e46dc218173722c0338eab33825387",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "university",
+      "id": "uni-moe-4133010876",
+      "receiptSha256": "cbcd52cb2b5f07087d6b202552eb07bb9bed769f1e500f0b4ba93d66879f3e96",
+      "identitySha256": "4a659b69333225d3cb64cf1c66536bd12fdf09e471a2c224a31cf6e07493a2f6",
+      "sourceCount": 3
+    },
+    {
+      "entityType": "program",
+      "id": "program-4111010012-bachelor-40719f36298a2fa96d0a",
+      "universityId": "uni-moe-4111010012",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "98afbfe7fae382c45fcfb9aa2406089a239e87bed7db252d712be0644a63675e",
+      "evidenceFields": [
+        "nameQuote",
+        "degreeQuote",
+        "intlQuote"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4111010015-bachelor-a6b3a3d2d752b27bb958",
+      "universityId": "uni-moe-4111010015",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "b24389c5b175d7329411e5a437a2820e4de88f40d486620fd90224e43ebd7e7a",
+      "evidenceFields": [
+        "nameQuote",
+        "degreeQuote",
+        "intlQuote"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4111010020-bachelor-628af2865abeb4434f77",
+      "universityId": "uni-moe-4111010020",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "936c3de48eeea5bace99916fa693b17f34c1abdafc4844e3ad48474a2541cccb",
+      "evidenceFields": [
+        "nameQuote",
+        "degreeQuote",
+        "intlQuote"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4111010025-bachelor-ea9e4faacca63b7c4b3e",
+      "universityId": "uni-moe-4111010025",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "5d9cab5bb63b8ff3317a57d18f8c1bfb005c7de161282d142faabb2ae47cada4",
+      "evidenceFields": [
+        "nameQuote",
+        "degreeQuote",
+        "intlQuote"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4111010029-language-738e4daa6eb4e7d0b6b9",
+      "universityId": "uni-moe-4111010029",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "7e31794a81888dc211b6a89124e6543d95f65ab242a7db0ef70492d8dd2760c5",
+      "evidenceFields": [
+        "nameQuote",
+        "degreeQuote",
+        "intlQuote"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4111010049-master-c3b8666ede089041fa91",
+      "universityId": "uni-moe-4111010049",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "8979e523bf149c3482ed463cfbd0b523a2e4f30e3df94a0ac1d27d78cacff491",
+      "evidenceFields": [
+        "nameQuote",
+        "degreeQuote",
+        "intlQuote"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4111010051-bachelor-9ed3764e35dab487f029",
+      "universityId": "uni-moe-4111010051",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "27a574b8dfa5b122cc09b70d5da017bdacf01e66a6a492dda78ef4fe267e80b1",
+      "evidenceFields": [
+        "nameQuote",
+        "degreeQuote",
+        "intlQuote"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4111011417-bachelor-af427ecdfdaf20bcb7ff",
+      "universityId": "uni-moe-4111011417",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "78d70a38606ba71df97a221d0fe7f3eebd7fb5585eeed1a1bb0c7499ffc29179",
+      "evidenceFields": [
+        "nameQuote",
+        "degreeQuote",
+        "intlQuote"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4131010262-bachelor-089e9d61da4f7cb7c684",
+      "universityId": "uni-moe-4131010262",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "1dbf010a33d91d7754d45821c1f1a1f39bfb13e375478fb1b6ff2c05bb7605b0",
+      "evidenceFields": [
+        "name.zh",
+        "name.en",
+        "degreeLevel",
+        "internationalAudience"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4131010856-bachelor-69719a006cffb4723324",
+      "universityId": "uni-moe-4131010856",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "e7efdd53488b0a434d3a8649fb955815c78c25c899147ffb961b7b453c35b37d",
+      "evidenceFields": [
+        "name.en",
+        "degreeLevel_and_internationalAudience"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4131011458-master-7ce71833b17253fe49eb",
+      "universityId": "uni-moe-4131011458",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "8b2e24c9ee119e29a96d200014b4acfb9a072dd95ca219bb52c3289a3d69b448",
+      "evidenceFields": [
+        "name.zh_and_degreeLevel",
+        "internationalAudience"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4131012044-bachelor-a868920158666b81ea87",
+      "universityId": "uni-moe-4131012044",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "5fb01659857d6bb9fe4ca61ce5135857fca5f5e563388535b661d8a21072e659",
+      "evidenceFields": [
+        "name.zh",
+        "name.en",
+        "degreeLevel_and_internationalAudience"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4131012050-bachelor-73b5d59987f40eee2ab2",
+      "universityId": "uni-moe-4131012050",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "6bf41191ab0709b99c13bc1d0093ccecb6faab0e838e8d3fec9235fc30927874",
+      "evidenceFields": [
+        "name.zh",
+        "degreeLevel",
+        "internationalAudience"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4131012799-bachelor-4df8cf4e6b92a6150b87",
+      "universityId": "uni-moe-4131012799",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "2f02cf3d382d895db7a25dabc51e14406ba20c30215cefa751fd88d14d89b336",
+      "evidenceFields": [
+        "name.zh",
+        "degreeLevel",
+        "internationalAudienceHeader",
+        "internationalAudience"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4131016404-bachelor-f0064a8371bc26a24e26",
+      "universityId": "uni-moe-4131016404",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "323311a72aee8418b435194376b469ab1c2c44d2f1470d8d7b625672d1f7121d",
+      "evidenceFields": [
+        "name.en_and_degreeLevel",
+        "internationalAudience",
+        "campusWideUndergraduateApplicability",
+        "internationalAdmissionsRoute"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4132010332-doctorate-5b40a3846024fc6e21d7",
+      "universityId": "uni-moe-4132010332",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "8ef599262e39d918f73cf57381157025ce536468f75a83d6ac8c92d80078cd73",
+      "evidenceFields": [
+        "name",
+        "degreeOrCategory",
+        "internationalAdmissions",
+        "year"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4132010331-bachelor-e174d3d81d8913d711c1",
+      "universityId": "uni-moe-4132010331",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "b1c7a08a96a3ac202f75a661b6cf65b6fa2310738ff3895d6e33e87d9212793a",
+      "evidenceFields": [
+        "name",
+        "degreeOrCategory",
+        "internationalAdmissions",
+        "year"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4132011276-bachelor-f922c400c73e27090c55",
+      "universityId": "uni-moe-4132011276",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "34961eb3ef324c1b9f34d77e171cf71e3ec18c4b18182cfaf055305e1cbc8c2b",
+      "evidenceFields": [
+        "name",
+        "degreeOrCategory",
+        "internationalAdmissions",
+        "year"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4133013021-bachelor-08eb0062791aaa09f0ee",
+      "universityId": "uni-moe-4133013021",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "8100ccd21098c132285b5046386a97cd582ee0e16a5490bc269540fe7ab8398b",
+      "evidenceFields": [
+        "name",
+        "degreeOrCategory",
+        "internationalAdmissions",
+        "year"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4133013022-bachelor-acc459cb60e96b475378",
+      "universityId": "uni-moe-4133013022",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "5d265a39f41878a4243c97ff3b4dc5bce39c1a6a81158a92de37579bfbde7d75",
+      "evidenceFields": [
+        "name",
+        "degreeOrCategory",
+        "internationalAdmissions",
+        "year"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4132013573-bachelor-d269af4257e792d68ac3",
+      "universityId": "uni-moe-4132013573",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "393f467ab1e6d8fdc7b19d9ab55628cd7aa8bd93e04b6cfe4215bdd3441c6e2d",
+      "evidenceFields": [
+        "name",
+        "degreeOrCategory",
+        "internationalAdmissions",
+        "year"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4133011842-bachelor-65390e8d89b8545deece",
+      "universityId": "uni-moe-4133011842",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "bd61e26b4cd8fe651d60bb7f4aa945ce22c0ebefe440ad24d7e0e697aefed66e",
+      "evidenceFields": [
+        "name",
+        "degreeOrCategory",
+        "internationalAdmissions"
+      ]
+    },
+    {
+      "entityType": "program",
+      "id": "program-4133010876-language-ed92040d9370c23bbd6d",
+      "universityId": "uni-moe-4133010876",
+      "receiptSha256": "8dd4919192fb7e24becce4cc9490ecb8d647191d26fe5efdb0fbc8aaa66fe433",
+      "identitySha256": "0eead1a95ec56898ba5a386d1b1fd0ae4f1b251a265264a10674eaf87c99c700",
+      "evidenceFields": [
+        "name",
+        "degreeOrCategory",
+        "internationalAdmissions"
+      ]
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Historical Git transition plus two specialized identity receipts, not a native importer input/output receipt.",
+    "74 exact archived text quotation spans plus two independently visually reviewed image fields; all 133 unique gzip paths checked against raw bytes and declared lengths.",
+    "No live source re-fetch or claim of current application eligibility."
+  ],
+  "independentVisualReview": {
+    "reviewedOn": "2026-11-10",
+    "archiveRawSha256": "e297be574004e406d47e5adfef6b5c2cc6fcf3e1e6265ac456ad6cf33edd010a",
+    "confirmedFields": [
+      "视觉传达设计（全英文）",
+      "艺术学学士"
+    ],
+    "method": "independent visual reading of the original archived PNG"
+  },
+  "sha256": "bc064cf64225a316c2d917854ffe6e77e0590c77f9f2dc0b4e58df4c36fbd6be"
+}

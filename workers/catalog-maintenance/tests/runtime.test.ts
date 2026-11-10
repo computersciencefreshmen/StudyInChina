@@ -55,6 +55,7 @@ test('programme source text is never silently truncated into a completed extract
 })
 test('export snapshot changes during artifact preparation abort the entire SQL claim',async()=>{
   const f=makeEnv();await seed(f.env,seedInput());const sourceId=await digest('https://test.edu.cn/catalog'),raw='1'.repeat(64),now=new Date().toISOString()
+  await setControls(f.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:false,canaryUniversityIds:canary})
   f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=? WHERE source_id=?').run(raw,sourceId)
   const proposal={id:'race-proposal',universityId:'uni-000',entityType:'program',recordId:null,operation:'create',fields:{},source:{id:sourceId,url:'https://test.edu.cn/catalog',snapshotSha256:raw,objectKey:'maintenance/raw.bin',checkedAt:now,contentType:'text/html',locator:'text:document',quote:'International programme'},fieldEvidence:[{sourceId,url:'https://test.edu.cn/catalog',snapshotSha256:raw,objectKey:'maintenance/raw.bin',locator:'text:document',quote:'International programme',fieldPath:'name.en'}],scope:{year:null,intake:null},status:'ready',warnings:[]}
   f.db.sqlite.prepare('INSERT INTO maintenance_proposals(proposal_id,university_id,source_id,snapshot_sha256,status,proposal_json,created_at) VALUES(?,?,?,?,?,?,?)').run(proposal.id,proposal.universityId,sourceId,raw,'ready',JSON.stringify(proposal),now)

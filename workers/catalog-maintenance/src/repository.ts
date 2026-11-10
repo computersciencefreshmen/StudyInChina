@@ -202,9 +202,10 @@ export async function recordTargets(env:MaintenanceEnv,sourceId:string,depth=0,s
   if(depth<2){const lineage=await env.SNAPSHOTS_BUCKET.get(`maintenance/discovery-lineage/${sourceId}.json`);if(lineage){const value=record(JSON.parse(await lineage.text()));if(value?.sourceId!==sourceId||!Array.isArray(value.parents)||value.parents.some(id=>typeof id!=='string'||!HASH.test(id)))throw new MaintenanceError('source_lineage_invalid');for(const parent of value.parents as string[]){for(const target of await recordTargets(env,parent,depth+1,seen))if(target.entityType==='program'&&!targets.some(current=>current.entityType===target.entityType&&current.recordId===target.recordId))targets.push({...target,sourceIds:[...new Set([...target.sourceIds,sourceId])]})}}}
   return targets
 }
-export async function refreshTargets(env:MaintenanceEnv,value:unknown,staged=false) {
+export async function refreshTargets(env:MaintenanceEnv,value:unknown,staged=false,repairFence?:{expectedRevision:number}) {
   const raw=record(value),cfg=await control(env)
   if(!cfg?.seed_complete||!raw||raw.inputCatalogSha256!==cfg.input_catalog_sha256||!Array.isArray(raw.recordTargets)||raw.recordTargets.length>10000)throw new MaintenanceError('target_refresh_catalogue_mismatch')
+  if(repairFence&&(cfg.revision!==repairFence.expectedRevision||cfg.enabled!==0||cfg.models_enabled!==0||cfg.targets_complete!==0))throw new MaintenanceError('target_refresh_repair_control_changed')
   const targets=raw.recordTargets.map(target=>maintenanceRecordTargetSchema.parse(target)),ids=new Set<string>()
   const schools=new Set(((await env.PIPELINE_DB.prepare('SELECT university_id FROM maintenance_schools').all<{university_id:string}>()).results??[]).map(row=>row.university_id))
   const sources=new Set(((await env.PIPELINE_DB.prepare('SELECT source_id FROM maintenance_sources').all<{source_id:string}>()).results??[]).map(row=>row.source_id))
@@ -213,7 +214,7 @@ export async function refreshTargets(env:MaintenanceEnv,value:unknown,staged=fal
   const prior=await env.PIPELINE_DB.prepare('SELECT status FROM maintenance_target_refreshes WHERE refresh_sha256=?').bind(refreshSha256).first<{status:string}>()
   if(prior?.status==='completed')return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:true,reused:true}
   if(prior?.status==='staged'){if(staged){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refreshSha256,targetRefreshSha256:refreshSha256});return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:false,reused:true}}while(!(await control(env))?.targets_complete)await continueTargetRefresh(env,refreshSha256,false);return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:true,reused:true}}
-  await env.PIPELINE_DB.prepare('UPDATE maintenance_control SET targets_complete=0 WHERE singleton=1 AND input_catalog_sha256=?').bind(cfg.input_catalog_sha256).run()
+  if(!repairFence)await env.PIPELINE_DB.prepare('UPDATE maintenance_control SET targets_complete=0 WHERE singleton=1 AND input_catalog_sha256=?').bind(cfg.input_catalog_sha256).run()
   const operations:SqlOperation[]=[{sql:'UPDATE maintenance_record_targets SET active=0',values:[]}]
   const add=(sql:string,...values:unknown[])=>operations.push({sql,values})
   for(const target of targets) {
@@ -224,7 +225,17 @@ export async function refreshTargets(env:MaintenanceEnv,value:unknown,staged=fal
   }
   const plan={refreshSha256,inputCatalogSha256:cfg.input_catalog_sha256,expectedCount:targets.length,operations:coalesceOperations(operations)},bytes=canonical(plan),planSha256=await digest(bytes)
   await env.SNAPSHOTS_BUCKET.put(`maintenance/target-refresh/${refreshSha256}.json`,bytes,{httpMetadata:{contentType:'application/json'}})
-  await env.PIPELINE_DB.prepare("INSERT INTO maintenance_target_refreshes(refresh_sha256,input_catalog_sha256,plan_sha256,total_operations,expected_count,status,created_at) VALUES(?,?,?,?,?,'staged',?)").bind(refreshSha256,cfg.input_catalog_sha256,planSha256,plan.operations.length,targets.length,nowIso()).run()
+  const insert=env.PIPELINE_DB.prepare("INSERT INTO maintenance_target_refreshes(refresh_sha256,input_catalog_sha256,plan_sha256,total_operations,expected_count,status,created_at) VALUES(?,?,?,?,?,'staged',?)").bind(refreshSha256,cfg.input_catalog_sha256,planSha256,plan.operations.length,targets.length,nowIso())
+  if(repairFence){
+    const repairGuard=crypto.randomUUID()
+    try{await env.PIPELINE_DB.batch([
+      env.PIPELINE_DB.prepare("INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND input_catalog_sha256=? AND revision=? AND enabled=0 AND models_enabled=0 AND targets_complete=0) AND NOT EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE refresh_sha256=?) THEN 1 ELSE 0 END))").bind(repairGuard,cfg.input_catalog_sha256,repairFence.expectedRevision,refreshSha256),insert,
+      env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(repairGuard),
+    ])}catch{
+      const current=await control(env),existing=await env.PIPELINE_DB.prepare('SELECT status FROM maintenance_target_refreshes WHERE refresh_sha256=? AND input_catalog_sha256=?').bind(refreshSha256,cfg.input_catalog_sha256).first<{status:string}>()
+      if(current?.revision!==repairFence.expectedRevision||current.enabled!==0||current.models_enabled!==0||current.targets_complete!==0||existing?.status!=='staged')throw new MaintenanceError('target_refresh_repair_control_changed')
+    }
+  }else await insert.run()
   if(staged){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refreshSha256,targetRefreshSha256:refreshSha256});return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:false,reused:false}}
   while(!(await control(env))?.targets_complete)await continueTargetRefresh(env,refreshSha256,false)
   return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:true,reused:false}
@@ -251,10 +262,21 @@ export async function continueTargetRefresh(env:MaintenanceEnv,refreshSha256:str
   if(offset<row.total_operations){if(enqueue)await env.MAINTENANCE_QUEUE.send({version:1,jobId:refreshSha256,targetRefreshSha256:refreshSha256});return{targetsComplete:false,completedOperations:offset,totalOperations:row.total_operations}}
   const count=await env.PIPELINE_DB.prepare('SELECT COUNT(*) count FROM maintenance_record_targets WHERE active=1').first<{count:number}>()
   if(count?.count!==row.expected_count)throw new MaintenanceError('target_refresh_readback_mismatch')
-  const updated=await env.PIPELINE_DB.prepare('UPDATE maintenance_control SET targets_complete=1,revision=revision+1,updated_at=? WHERE singleton=1 AND input_catalog_sha256=?').bind(nowIso(),cfg.input_catalog_sha256).run()
-  if(updated.meta?.changes!==1)throw new MaintenanceError('target_refresh_concurrent_catalogue_change')
-  await env.PIPELINE_DB.prepare("UPDATE maintenance_target_refreshes SET status='completed' WHERE refresh_sha256=?").bind(refreshSha256).run()
-  await event(env,'targets_refreshed',{inputCatalogSha256:cfg.input_catalog_sha256,recordTargets:row.expected_count,refreshSha256})
+  const completionGuard=crypto.randomUUID(),completedAt=nowIso()
+  try {
+    // Publish the completed target set, its revision and audit event together.
+    // A duplicate finishing delivery must never increment the revision twice.
+    await env.PIPELINE_DB.batch([
+      env.PIPELINE_DB.prepare("INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND input_catalog_sha256=? AND revision=? AND targets_complete=0) AND EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE refresh_sha256=? AND input_catalog_sha256=? AND status='staged' AND completed_operations=total_operations AND expected_count=(SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1)) THEN 1 ELSE 0 END))").bind(completionGuard,cfg.input_catalog_sha256,cfg.revision,refreshSha256,cfg.input_catalog_sha256),
+      env.PIPELINE_DB.prepare('UPDATE maintenance_control SET targets_complete=1,revision=revision+1,updated_at=? WHERE singleton=1 AND input_catalog_sha256=? AND revision=? AND targets_complete=0').bind(completedAt,cfg.input_catalog_sha256,cfg.revision),
+      env.PIPELINE_DB.prepare("UPDATE maintenance_target_refreshes SET status='completed' WHERE refresh_sha256=? AND status='staged' AND completed_operations=total_operations").bind(refreshSha256),
+      env.PIPELINE_DB.prepare('INSERT INTO maintenance_events VALUES(?,?,?,?)').bind(crypto.randomUUID(),'targets_refreshed',completedAt,JSON.stringify({inputCatalogSha256:cfg.input_catalog_sha256,recordTargets:row.expected_count,refreshSha256})),
+      env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(completionGuard),
+    ])
+  } catch {
+    const finished=await env.PIPELINE_DB.prepare('SELECT status,input_catalog_sha256 FROM maintenance_target_refreshes WHERE refresh_sha256=?').bind(refreshSha256).first<{status:string;input_catalog_sha256:string}>(),current=await control(env)
+    if(finished?.status!=='completed'||finished.input_catalog_sha256!==cfg.input_catalog_sha256||current?.input_catalog_sha256!==cfg.input_catalog_sha256||current.targets_complete!==1)throw new MaintenanceError('target_refresh_completion_conflict')
+  }
   return{targetsComplete:true,completedOperations:offset,totalOperations:row.total_operations}
 }
 export async function status(env:MaintenanceEnv) {

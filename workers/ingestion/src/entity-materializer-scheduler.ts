@@ -76,17 +76,20 @@ export async function listUnreleasedMaterializedEntityCandidates(
   database: D1Database,
   limit = 500,
 ): Promise<string[]> {
+  // Build historical request membership once instead of expanding every request
+  // for every decision. Preserve NOT EXISTS behavior for legacy NULL values too;
+  // all request history counts, regardless of the linked publication's status.
   return candidateIds(
     database,
     `SELECT decision.candidate_id
        FROM entity_materialization_decisions decision
        WHERE decision.decision_status = 'materialized'
-         AND NOT EXISTS (
-           SELECT 1
+         AND (decision.candidate_id IS NULL OR decision.candidate_id NOT IN (
+           SELECT requested.value
            FROM entity_materialization_release_requests request,
                 json_each(request.candidate_ids_json) requested
-           WHERE requested.value = decision.candidate_id
-         )
+           WHERE requested.value IS NOT NULL
+         ))
        ORDER BY decision.decided_at, decision.candidate_id
        LIMIT ?1`,
     boundedLimit(limit, 500, 1_000),

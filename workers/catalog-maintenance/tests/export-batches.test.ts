@@ -3,12 +3,13 @@ import test from 'node:test'
 import type { MaintenanceProposal } from '../../../scripts/maintenance/contracts'
 import { acknowledge,prepareExport } from '../src/exports'
 import { persistProposals } from '../src/proposals'
-import { seed } from '../src/repository'
+import { seed, setControls } from '../src/repository'
 import { digest } from '../src/util'
-import { makeEnv,seedInput,TEST_CATALOG } from './fixture'
+import { makeEnv,seedInput,TEST_CATALOG,TEST_GUARDS } from './fixture'
 
 async function fixture(){
   const f=makeEnv();await seed(f.env,seedInput())
+  await setControls(f.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:false,canaryUniversityIds:['uni-000']})
   const sourceId=await digest('https://test.edu.cn/catalog'),rawSha='1'.repeat(64),checkedAt=new Date().toISOString()
   f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=? WHERE source_id=?').run(rawSha,sourceId)
   const proposals:MaintenanceProposal[]=Array.from({length:100},(_,index)=>({id:`candidate-${String(index).padStart(3,'0')}`,universityId:'uni-000',entityType:'program',recordId:null,operation:'create',fields:{name:{en:`Programme ${index}`}},source:{id:sourceId,url:'https://test.edu.cn/catalog',snapshotSha256:rawSha,objectKey:'maintenance/raw.bin',checkedAt,contentType:'text/html',locator:'text:document',quote:'International programme'},fieldEvidence:[{sourceId,url:'https://test.edu.cn/catalog',snapshotSha256:rawSha,objectKey:'maintenance/raw.bin',locator:'text:document',quote:'International programme',fieldPath:'name.en'}],scope:{year:null,intake:null},status:'ready',warnings:[]}))
@@ -40,5 +41,17 @@ test('a changed final proposal aborts the entire batched acknowledgement before 
   try{const prepared=await prepareExport(f.env,{limit:100});f.db.sqlite.prepare("UPDATE maintenance_proposals SET status='held' WHERE proposal_id=?").run(f.proposals[99].id)
     await assert.rejects(acknowledge(f.env,{batchId:prepared.batchId,outcome:'applied',receiptSha256:'2'.repeat(64),sourceCommit:'3'.repeat(40),newInputCatalogSha256:'4'.repeat(64),acceptedProposalIds:f.proposals.map(p=>p.id),heldProposalIds:[]}))
     assert.equal(f.db.sqlite.prepare('SELECT status FROM maintenance_exports').get()?.status,'prepared');assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) count FROM maintenance_proposals WHERE status='consumed'").get()?.count,0);assert.equal(f.db.sqlite.prepare('SELECT input_catalog_sha256 FROM maintenance_control').get()?.input_catalog_sha256,TEST_CATALOG)
+  }finally{f.db.sqlite.close()}
+})
+
+test('an operator pause racing immutable export storage prevents a new prepared batch',async()=>{
+  const f=await fixture()
+  try{
+    const put=f.bucket.put.bind(f.bucket)
+    f.bucket.put=async(key,body,options)=>{const saved=await put(key,body,options);if(key.startsWith('maintenance/exports/'))await setControls(f.env,{expectedRevision:1,legacyGuardSha256:TEST_GUARDS,enabled:false,modelsEnabled:false});return saved}
+    await assert.rejects(prepareExport(f.env,{limit:100}),/CHECK constraint/)
+    assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_exports').get()?.n,0)
+    assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) n FROM maintenance_proposals WHERE status='ready'").get()?.n,100)
+    assert.equal(f.db.sqlite.prepare('SELECT enabled FROM maintenance_control').get()?.enabled,0)
   }finally{f.db.sqlite.close()}
 })

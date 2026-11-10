@@ -1,0 +1,20 @@
+{
+  "format": "studyinchina.local-target-refresh-budget-observation",
+  "observationDate": "2026-11-10",
+  "catalogueSha256": "71f451ade04b0daaa59e1b730583072b4961900d0f590382d78d7f02df7a1972",
+  "targetCount": 4129,
+  "requestBodyBytes": 3642343,
+  "sampleCount": 1,
+  "jsonAndSchemaOnly": {
+    "wallMilliseconds": 23.043,
+    "cpuUserMicroseconds": 62000,
+    "cpuSystemMicroseconds": 0
+  },
+  "reproduction": "Load the current maintenance bundle and pinned 272-school scope, call buildMaintenanceTargets, JSON.stringify {inputCatalogSha256, recordTargets}, then measure JSON.parse and maintenanceRecordTargetSchema.parse for every target using performance.now and process.cpuUsage.",
+  "limitations": [
+    "Single local Node observation, not Cloudflare CPU metering or a throughput benchmark.",
+    "Excludes target-refresh planning, canonical hashing, database calls and network.",
+    "No target request or model request was sent by this measurement.",
+    "The repair should stage a known-length immutable upload and perform complete hash/schema validation and planning in the existing Queue consumer."
+  ]
+}
