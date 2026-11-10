@@ -1,0 +1,42 @@
+{
+  "verifiedAt": "2026-11-10T03:41:23.415Z",
+  "checks": [
+    {
+      "command": "npx vitest run tests/unit/maintenance-identity-import.test.ts tests/unit/maintenance-identity-noop.test.ts tests/unit/minimum-one-programme.test.ts tests/unit/directory-validation.test.ts tests/unit/data-validation-directory-expiry.test.ts",
+      "exitCode": 0,
+      "testFiles": 5,
+      "passed": 60
+    },
+    {
+      "command": "npm run validate:data -- --directory-safe-expiry",
+      "exitCode": 0,
+      "note": "Existing overdue raw records remain reported; CI directory-safe-expiry requires strict directory integrity and does not renew them."
+    },
+    {
+      "command": "validateDirectory(root, 2026-11-10)",
+      "integrityPassed": true
+    },
+    {
+      "command": "validateDirectory(root, 2026-11-11)",
+      "integrityPassed": true
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "independentPostWriteReview": {
+    "reviewer": "codex-agent:validation_workflows",
+    "result": "passed",
+    "scope": "15 official names/degrees/URLs and scoped receipt-ledger bindings; all 8 archived compressed/raw checksums and lengths; exact receipt digest; USTC undergraduate MAJOR column; unchanged existing programs and admission cycles",
+    "humanReviewClaimed": false,
+    "formalModelReviewClaimed": false
+  },
+  "limitations": [
+    "All 15 teachingLanguages remain empty; languages were not accepted through the field verification pipeline.",
+    "Soochow official names are Chinese-only; its undated page does not prove a current intake.",
+    "Xidian official catalogue year is 2026; it does not prove 2027 admission.",
+    "No current applications, fees, deadlines or award eligibility were added.",
+    "Local application only; production publication is a separate acceptance step."
+  ]
+}
