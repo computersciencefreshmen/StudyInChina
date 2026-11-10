@@ -111,7 +111,7 @@ test('one captured mixed URL retains both programme and scholarship discovery jo
   await queueExtraction(fixture.env,row,'d'.repeat(64),'maintenance/snapshots/test.json');assert.deepEqual(fixture.db.sqlite.prepare('SELECT stage FROM maintenance_jobs ORDER BY stage').all().map(row=>row.stage),['award','extract']);fixture.db.sqlite.close()
 })
 test('finite exports retain the21st school and regular cadence yields to fresh urgent deadlines',async()=>{
-  const fixture=makeEnv();await seed(fixture.env,seedInput())
+  const fixture=makeEnv();await enabled(fixture,false)
   const sourceId=await digest('https://test.edu.cn/catalog'),createdAt=new Date().toISOString()
   for(let index=0;index<21;index++){
     const proposal={id:`proposal-${index}`,universityId:`uni-${String(index).padStart(3,'0')}`,entityType:'program',recordId:null,operation:'create',fields:{},source:{id:sourceId,url:'https://test.edu.cn/catalog',snapshotSha256:'d'.repeat(64),objectKey:'maintenance/test.bin',checkedAt:createdAt,contentType:'text/html',locator:'text:document',quote:'International programme'},fieldEvidence:[{fieldPath:'name.en',sourceId,url:'https://test.edu.cn/catalog',snapshotSha256:'d'.repeat(64),objectKey:'maintenance/test.bin',locator:'text:document',quote:'International programme'}],scope:{year:null,intake:null},status:'ready',warnings:[]}
@@ -119,6 +119,7 @@ test('finite exports retain the21st school and regular cadence yields to fresh u
   }
   const first=await prepareExport(fixture.env,{limit:100}),batch=await readExport(fixture.env,first.batchId);assert.equal(new Set(batch.proposals.map(p=>p.universityId)).size,20);assert.equal(fixture.db.sqlite.prepare("SELECT COUNT(*) count FROM maintenance_proposals WHERE status='ready'").get()?.count,1)
   await acknowledge(fixture.env,{batchId:first.batchId,outcome:'applied',receiptSha256:'1'.repeat(64),sourceCommit:'2'.repeat(40),newInputCatalogSha256:'3'.repeat(64),acceptedProposalIds:batch.proposals.map(p=>p.id),heldProposalIds:[]})
+  await refreshTargets(fixture.env,{inputCatalogSha256:'3'.repeat(64),recordTargets:[]})
   await assert.rejects(prepareExport(fixture.env,{limit:100}),/export_cadence_wait/)
   const pending=fixture.db.sqlite.prepare("SELECT proposal_id,proposal_json FROM maintenance_proposals WHERE status='ready'").get();assert.ok(pending);const urgent=JSON.parse(String(pending.proposal_json));urgent.operation='patch';urgent.recordId='existing-cycle';urgent.fields={patches:[{fieldPath:'closesOn',value:new Date(Date.now()+2*86400000).toISOString().slice(0,10),factStatus:'known'}]};fixture.db.sqlite.prepare('UPDATE maintenance_proposals SET proposal_json=? WHERE proposal_id=?').run(JSON.stringify(urgent),String(pending.proposal_id));assert.equal((await prepareExport(fixture.env,{limit:100})).proposalCount,1);fixture.db.sqlite.close()
 })

@@ -1,0 +1,66 @@
+name: Reconcile the audited native Git catalogue head
+
+# An owner-reviewed, one-time repair. This is deliberately not a schedule and
+# never calls a model, deploys a Worker, or acknowledges a public publication.
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Exact reviewed operation: native-git-head-2026-11-10'
+        required: true
+        type: string
+      action:
+        description: 'Prepare keeps the lane paused. Resume requires a separate explicit operator decision after reviewing the Worker environment gate.'
+        required: true
+        default: prepare
+        type: choice
+        options:
+          - prepare
+          - resume
+
+permissions:
+  contents: read
+
+# Serialize with the existing canonical publisher, including any run which
+# passed its runtime gate before this repair pauses the Worker.
+concurrency:
+  group: autonomous-catalog-maintenance-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.ref == 'refs/heads/main' &&
+      github.repository == 'computersciencefreshmen/StudyInChina' &&
+      github.actor == 'computersciencefreshmen' &&
+      github.triggering_actor == 'computersciencefreshmen' &&
+      inputs.operation == 'native-git-head-2026-11-10'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Reconcile only the pinned reviewed history
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+          RECONCILIATION_OPERATION: ${{ inputs.operation }}
+          RECONCILIATION_ACTION: ${{ inputs.action }}
+        run: node --import tsx scripts/automation/reconcile-maintenance-head.ts --output "$RUNNER_TEMP/catalog-maintenance-reconcile"
+      - name: Preserve the bounded operation audit
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: catalog-maintenance-reconcile-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/catalog-maintenance-reconcile
+          if-no-files-found: warn
+          retention-days: 90

@@ -1,0 +1,17 @@
+# MiniMax cloud automation for broader school and programme coverage
+
+The goal is sustained growth in independently verified school/programme coverage, rather than a fixed list of schools, majors or a promised number per run. Reuse the existing GitHub cloud scheduler, durable maintenance Worker, official-source snapshots, MiniMax subscription admission gate, strict importer and protected publisher. A local desktop heartbeat would not meet the requirement to work while the user's computer is off.
+
+The existing cloud scheduler, document processor and publisher are enabled and run periodically. The Worker has completed seed/target registration, its database model flag is enabled, and the subscription secret name exists. The actual deployed global `MAINTENANCE_ENABLED` gate is false, so it requires an intentional activation after reconciliation rather than a blind code redeployment. Its five-school integration trial must still produce real source/model/import/publication receipts before the existing staged rollout can expand. Keep the 272-school source scope, legacy STOP/unknown/consumed guards, independent extraction checks, expiry semantics and subscription reserve. Do not enable PAYG fallback, purchase capacity or duplicate the scheduler.
+
+November 10 runtime receipts show D1 daily-quota waiting, not actual model progress. A successful scheduled workflow does not prove that programmes were discovered or published. The small control-row read is available through the authenticated administrative database API; aggregate Worker status can still fail. Neither observation proves that the model key is valid or that the provider's quota is available.
+
+## First repair
+
+Seven-day sampled cloud query analytics identify repeated candidate-membership anti-joins and latest-snapshot-observation lookups as expensive work in the shared Pipeline D1 database. Replace per-decision JSON membership reconstruction with one equivalent set construction and add the missing snapshot/time index. Preserve query results, NULL behavior, ordering, limits and all authenticity gates. Verify equivalence with real SQLite fixtures, compare query plans/work locally, and run existing ingestion/database checks. Local SQLite work is not D1 metered rows or Vercel Active CPU; seven-day hotspots are not proof of today's sole quota cause.
+
+## Readiness and recovery
+
+Before claiming automatic expansion is running, observe successful bounded dispatch, actual subscription-gated model attempts, accepted candidate evidence, a protected public release and an acknowledged coverage increase. Record waits and held candidates separately. Current Git catalogue changes must also be reconciled with the Worker's expected input hash through an audited, fenced procedure; a new Git import receipt cannot stand in for an older missing receipt chain. Keep all existing seed, proposals, reservations, guards and publication history. Do not reset the database or fabricate a publication acknowledgement to advance its head.
+
+Coverage acceptance tracks schools with accepted public programmes, accepted programme identities and separately evidenced current admission facts. Source fetches, raw records, model completions and green workflows are intermediate measures. Automatic progress remains unproven while quota or baseline consistency is unresolved.

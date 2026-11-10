@@ -19,6 +19,8 @@ This does **not** establish stable capacity at the earlier load. StudyInChina ha
 
 Only two full Shanghai days after deployment are present at this readback time. Partial days, sparse traffic, missing data or the prior suspension cannot prove a daily budget pass. The existing rolling-month accumulated usage is not reset by this forecast. Continue to evaluate the original allowance, not the temporary threefold courtesy boost.
 
+The same-day maintenance audit also found the automatic expansion flow stalled by backend quota/baseline state and a disabled deployment gate. These CPU days therefore do not establish a budget for a healthy expansion pipeline. Restoring it can add candidate deployments and scoped production validation requests; measure that workload separately before using the 2.5625-hour extrapolation for normal operation.
+
 ## Evidence
 
 The committed [normalized readback](fluid-cpu-evidence/usage-2026-11-10.json) records periods, metric units, project rows, counts and uncertainty. Private raw visible console text and exact dashboard URLs remain in `.tmp/cpu-coverage-2026-11-10/usage-ui.json` and `complete-days-ui.json` in the independent working clone. No browser session, cookies, token or billing amount was exported.

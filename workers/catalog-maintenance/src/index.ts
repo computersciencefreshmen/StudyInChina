@@ -11,6 +11,8 @@ import { evaluateRollout,rolloutStatus } from './rollout'
 import { acceptDocumentDerivative,listPendingDocuments } from './documents'
 import { listSchoolProgress,submitSchoolReconciliation } from './school-progress'
 import { acknowledge, prepareExport, readExport } from './exports'
+import { readMaintenanceControl, reconcileMaintenanceHead } from './head-reconciliation'
+import { prepareReconciliationTargets, registerReconciliationTargets } from './reconciliation-targets'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
 import type { MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
@@ -19,6 +21,7 @@ import { after, authorized, HASH, json, nowIso, requestJson } from './util'
 
 export { ModelAdmission }
 export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessage):Promise<void> {
+  if(message?.version===1&&message.reconciliationTargetsUpload){await prepareReconciliationTargets(env,message.reconciliationTargetsUpload);return}
   if(message?.version===1&&message.bootstrapUploadSha256&&HASH.test(message.bootstrapUploadSha256)){await preparePendingBootstrap(env,message.bootstrapUploadSha256);return}
   if(message?.version===1&&message.bootstrapSeedSha256&&HASH.test(message.bootstrapSeedSha256)){await resumeBootstrapSeed(env,message.bootstrapSeedSha256);return}
   if(message?.version===1&&message.discoveryManifestSha256&&HASH.test(message.discoveryManifestSha256)){await processDiscoveryFrontier(env,message.discoveryManifestSha256,message.discoveryOffset??0);return}
@@ -82,6 +85,9 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/seed'&&request.method==='POST')return json(await seed(env,await requestJson(request,8*1024*1024),Date.now(),true))
     if(url.pathname==='/bootstrap'&&request.method==='POST')return json(await registerBootstrapRequest(env,request))
     if(url.pathname==='/controls'&&request.method==='POST')return json(await setControls(env,await requestJson(request,32768)))
+    if(url.pathname==='/control'&&request.method==='GET')return json(await readMaintenanceControl(env))
+    if(url.pathname==='/head-reconcile'&&request.method==='POST')return json(await reconcileMaintenanceHead(env,await requestJson(request,4096)))
+    if(url.pathname==='/head-reconcile-targets'&&request.method==='POST')return json(await registerReconciliationTargets(env,request))
     if(url.pathname==='/rollout'&&request.method==='GET')return json(await rolloutStatus(env))
     if(url.pathname==='/rollout'&&request.method==='POST')return json(await evaluateRollout(env,await requestJson(request,4096)))
     if(url.pathname==='/targets'&&request.method==='POST')return json(await refreshTargets(env,await requestJson(request,8*1024*1024),true))

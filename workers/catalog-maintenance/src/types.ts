@@ -1,7 +1,8 @@
 import type { D1Database, QueueMessageBatch, QueueProducer } from '../../publisher/src/types'
 import type { MaintenanceRecordTarget } from '../../../scripts/maintenance/field-contracts'
 
-export type MaintenanceMessage = { version: 1; jobId: string;seedSha256?:string;targetRefreshSha256?:string;bootstrapUploadSha256?:string;bootstrapSeedSha256?:string;discoveryManifestSha256?:string;discoveryOffset?:number }
+export type ReconciliationTargetsUpload = { manifestSha256: string; bodySha256: string; byteLength: number; expectedRevision: number; uploadKey: string }
+export type MaintenanceMessage = { version: 1; jobId: string;seedSha256?:string;targetRefreshSha256?:string;bootstrapUploadSha256?:string;bootstrapSeedSha256?:string;discoveryManifestSha256?:string;discoveryOffset?:number;reconciliationTargetsUpload?:ReconciliationTargetsUpload }
 export type MaintenanceBatch = QueueMessageBatch<MaintenanceMessage>
 export interface BucketObject { text(): Promise<string>; arrayBuffer(): Promise<ArrayBuffer>; size?: number;etag?:string }
 export interface Bucket {

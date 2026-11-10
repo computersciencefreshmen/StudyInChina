@@ -1,0 +1,37 @@
+{
+  "format": "studyinchina.maintenance-export-rejection-review",
+  "version": 1,
+  "operationId": "native-git-head-2026-11-10",
+  "batchId": "maintenance-eed42d72-246a-4d52-a616-a5d50c584b1f",
+  "exportSha256": "bdacb62f8a2634e94635eb0ae9da76ebf5db451d692d4526c5f383eb775da783",
+  "inputCatalogSha256": "14b620dcefb79b9c5c75c2b5700514da8640fafe929825b1ecda2d79dd4f7059",
+  "reviewedCatalogSourceCommit": "390c009ed4c71ff2b1d42cacb74600ec51bff529",
+  "reviewedCatalogSha256": "71f451ade04b0daaa59e1b730583072b4961900d0f590382d78d7f02df7a1972",
+  "reason": "Historical prepared export base differs from current Git catalogue. Hold every candidate for explicit future review; this rejection neither applies nor publishes them.",
+  "acceptedProposalIds": [],
+  "heldProposalIds": [
+    "maintenance-415c9bfd60aa280b42a32631a17290224c36d2a7bb0b09ad4953bc057db6c3d5",
+    "maintenance-41ddf8860ad5356c8e65068f165eef5506ec8835fb63ed77392a321456e299d6",
+    "maintenance-4c275230f31c2c1e5b55a39aa6c5d375b3399cc51bff8d93b3d2baba3deee787",
+    "maintenance-5ae7c6bc268295e501d7eca87075d4a1724b00b03839cc1459c8f69e5e7421d3",
+    "maintenance-7294d2935c62b5782d2c91bacc012e310a84d7ef33f9754935e5651f14129d15",
+    "maintenance-7a9f8a4be28238c571c65a2c6212c002f63586c0f1ecefbbd9dd66d1e3da645c",
+    "maintenance-aa1ad2f74baaa513a722387b8dbe3aa1fbd64aa6bb75cc2b6cd4f2f7c430fd3a",
+    "maintenance-ac2dd5d4d6b0cf85b01ebc61d9e6f4f0acfa27d94c36aa514b053de67d4290fa",
+    "maintenance-b607a36eb2e92d6fd0654b8b5b024a8fa904a8b8da8fa0ab08d4eec271ff040a",
+    "maintenance-bab15020c0b27dd2cab99c51cbf94a159e2e8aca201446dc9e34969cc2ae01d8",
+    "maintenance-be435a3afe40933a2062279d809ebf1f6d3b655c04ceb41092c45bf9997018c0",
+    "maintenance-f23680f078e4bdc213a480dc49c3e25236e547d8e93f0cc966f6bb2348dbbec1"
+  ],
+  "unchangedProposalIds": [],
+  "historicalNativeImportOverlap": [
+    {
+      "proposalId": "maintenance-415c9bfd60aa280b42a32631a17290224c36d2a7bb0b09ad4953bc057db6c3d5",
+      "recordId": "program-a712f73c46146d5027763d4e",
+      "path": "quality/minimum-one/2026-10-27/batch001/identity-import-receipt.json",
+      "receiptSha256": "eaf890e2cc6eae38d1cb995ee8f3d308a193234889b855ec4f9661b68123b296"
+    }
+  ],
+  "policy": "Preserve original export, candidate, model reservation and legacy guard history. Existing native overlap does not make the entire prepared export applied or published.",
+  "sha256": "ec2d7a2f07e6e387ade576a954fc88d448bffe8e1bca8ea2fb043fbaf093a68d"
+}
