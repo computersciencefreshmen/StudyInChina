@@ -60,8 +60,9 @@ describe('ReleaseAnnouncement', () => {
     const first = render(<StrictMode><ReleaseAnnouncement {...props} /></StrictMode>)
 
     await screen.findByRole('dialog')
-    expect(window.localStorage.getItem(DISMISSED_RELEASE_ANNOUNCEMENT_KEY))
-      .toBe(announcement.id)
+    // Presentation is committed before its passive effect writes the seen ID.
+    await waitFor(() => expect(window.localStorage.getItem(DISMISSED_RELEASE_ANNOUNCEMENT_KEY))
+      .toBe(announcement.id))
     first.unmount()
 
     render(<ReleaseAnnouncement {...props} />)
