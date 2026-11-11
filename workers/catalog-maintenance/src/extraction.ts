@@ -110,5 +110,5 @@ export async function extractIdentities(env:MaintenanceEnv,job:JobRow,row:Source
     if(agreed)ready++;else held++
   }
   if(options?.persist!==false)await persistProposals(env,proposals,row.source_id,snapshot.rawSha256)
-  return {ready,held,...(options?.persist===false?{proposals,partitionCapacityLimited:first.length===20||record(primary.output)?.moreCandidates===true}: {})}
+  return {ready,held,...(options?.persist===false?{proposals,partitionCapacityLimited:first.length===20||record(primary.output)?.moreCandidates===true||record(secondary.output)?.moreCandidates===true}: {})}
 }

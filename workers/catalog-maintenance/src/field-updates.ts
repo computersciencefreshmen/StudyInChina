@@ -197,12 +197,16 @@ export async function maintainFields(env: MaintenanceEnv, job: JobRow, row: Sour
       snapshotSha256: snapshot.rawSha256, pass, payload: makePayload(pass, text, chunk), lane: 'maintenance', recordIds: chunk.map(target => target.recordId),
     })
     const primaryRequest = request('primary')
-    primaryRequest.reservationKey = await digest(`field-maintenance-v1:${row.source_id}:${snapshot.rawSha256}:${scopeKey}:primary`)
+    primaryRequest.reservationKey = partition
+      ? await digest(`field-document-partition-v1:${row.source_id}:${await digest(primaryRequest.payload)}:primary`)
+      : await digest(`field-maintenance-v1:${row.source_id}:${snapshot.rawSha256}:${scopeKey}:primary`)
     const primary = await runner(env, primaryRequest)
     const first = parseFieldExtraction(primary.output, text, chunk)
     if (!first.size) { result.held.push(...chunk.map(target => ({ recordId: target.recordId, reason: 'no_grounded_current_fields' }))); continue }
     const secondaryRequest = request('independent-review')
-    secondaryRequest.reservationKey = await digest(`field-maintenance-v1:${row.source_id}:${snapshot.rawSha256}:${scopeKey}:independent-review`)
+    secondaryRequest.reservationKey = partition
+      ? await digest(`field-document-partition-v1:${row.source_id}:${await digest(secondaryRequest.payload)}:independent-review`)
+      : await digest(`field-maintenance-v1:${row.source_id}:${snapshot.rawSha256}:${scopeKey}:independent-review`)
     const secondary = await runner(env, secondaryRequest)
     if (primary.attemptId === secondary.attemptId) throw new MaintenanceError('independent_field_attempt_reused')
     const second = parseFieldExtraction(secondary.output, text, chunk)

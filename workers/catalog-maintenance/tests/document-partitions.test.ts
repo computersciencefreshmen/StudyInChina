@@ -128,6 +128,24 @@ test('known unknown stops the original source scope; a healthy in-flight sibling
   } finally { f.db.sqlite.close() }
 })
 
+test('byte-only HTML changes with identical admitted model input reuse completed partition requests',async()=>{
+  const f=await fixture(),m=models()
+  try{
+    const text=f.text+' additional official text'.repeat(2500)
+    f.text=text;f.snapshot.contentType='text/html';f.snapshot.textSha256=await digest(text);f.snapshot.canonicalSha256=f.snapshot.textSha256
+    const raw=`<main>${text}</main>`
+    f.snapshot.rawSha256=await digest(raw);f.job.snapshot_sha256=f.snapshot.rawSha256
+    await f.bucket.put(f.snapshot.textKey!,text);await f.bucket.put(f.snapshot.rawKey,raw)
+    await runAll(f,m.runner)
+    const paid=m.paid.size;assert.ok(paid>0)
+    const changed=`<main class="official">${text}</main>`
+    const fresh={...f.snapshot,rawSha256:await digest(changed),checkedAt:'2026-11-12T01:00:00.000Z'}
+    f.job.snapshot_sha256=fresh.rawSha256;await f.bucket.put(fresh.rawKey,changed)
+    await runAll(f,m.runner,fresh)
+    assert.equal(m.paid.size,paid)
+  }finally{f.db.sqlite.close()}
+})
+
 test('short sources use the unchanged engine path and do not call the partition callback', async () => {
   const f = await fixture()
   try {

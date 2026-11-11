@@ -86,7 +86,9 @@ export async function extractScholarshipIdentities(env: MaintenanceEnv, job: Job
   const primaryInput = payload('primary'), reviewInput = payload('independent-review')
   // Version/source/snapshot/pass and exact prompt all bind the permanent reservation.
   const run = async (pass: 'primary' | 'independent-review', input: string) => modelRunner(env, {
-    reservationKey: await digest(`scholarship-identity-v1:${row.source_id}:${snapshot.rawSha256}:${pass}:${await digest(input)}`),
+    reservationKey: options?.partition
+      ? await digest(`scholarship-document-partition-v1:${row.source_id}:${pass}:${await digest(input)}`)
+      : await digest(`scholarship-identity-v1:${row.source_id}:${snapshot.rawSha256}:${pass}:${await digest(input)}`),
     sourceId: row.source_id, universityIds: schools.map(school => school.university_id), snapshotSha256: snapshot.rawSha256,
     pass, payload: input, lane: 'expansion', recordIds: [],
   })
@@ -124,5 +126,5 @@ export async function extractScholarshipIdentities(env: MaintenanceEnv, job: Job
     if (agreed) ready++; else held++
   }
   if (options?.persist !== false) await persistProposals(env,proposals,row.source_id,snapshot.rawSha256)
-  return { ready, held, ...(options?.persist === false ? { proposals, partitionCapacityLimited: first.length === 20 || record(primary.output)?.moreCandidates === true } : {}) }
+  return { ready, held, ...(options?.persist === false ? { proposals, partitionCapacityLimited: first.length === 20 || record(primary.output)?.moreCandidates === true || record(secondary.output)?.moreCandidates === true } : {}) }
 }
