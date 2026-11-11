@@ -1,4 +1,5 @@
 import type { AdmissionCycle } from './types'
+import type { CycleTrackScope } from './cycle-scope'
 import { getTodayDate, isCurrentVerifiedRecord } from './freshness'
 import { hasCurrentDirectoryCycleDates } from './discovery-state'
 
@@ -48,9 +49,11 @@ function compareWithinState(left: AdmissionCycle, right: AdmissionCycle, state: 
   return rightDate.localeCompare(leftDate)
 }
 
-export function selectAdmissionCycle(cycles: AdmissionCycle[], programId: string, today: string) {
-  return cycles
-    .filter((cycle) => cycle.programId === programId)
+export function selectAdmissionCycle(cycles: AdmissionCycle[], programId: string, today: string, scope?: CycleTrackScope) {
+  const candidates = cycles.filter(cycle => cycle.programId === programId && (!scope || cycle.teachingLanguage === scope.teachingLanguage && cycle.applicationRound === scope.applicationRound))
+  // Without a selected track, a different language or round must not win by earliest deadline.
+  if (!scope && new Set(candidates.map(cycle => `${cycle.teachingLanguage ?? ''}|${cycle.applicationRound ?? ''}`)).size > 1) return undefined
+  return candidates
     .sort((left, right) => {
       const leftState = getApplicationState(left, today)
       const rightState = getApplicationState(right, today)
@@ -66,8 +69,11 @@ export function selectAdmissionCycle(cycles: AdmissionCycle[], programId: string
 export function selectLatestTuitionReference(
   cycles: AdmissionCycle[],
   programId: string,
+  scope?: CycleTrackScope,
 ): AdmissionCycle | undefined {
-  return cycles
+  const candidates = cycles.filter(cycle => cycle.programId === programId && (!scope || cycle.teachingLanguage === scope.teachingLanguage && cycle.applicationRound === scope.applicationRound))
+  if (!scope && new Set(candidates.map(cycle => `${cycle.teachingLanguage ?? ''}|${cycle.applicationRound ?? ''}`)).size > 1) return undefined
+  return candidates
     .filter((cycle) => cycle.programId === programId
       && (cycle.status === 'verified' || cycle.status === 'stale')
       && cycle.tuitionCny !== null

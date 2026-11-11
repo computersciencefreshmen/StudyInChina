@@ -57,7 +57,7 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|control|head-reconcile|rollout|schools|reconciliations|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    if (!/^\/(?:status|control|head-reconcile|rollout|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     let response: Response
     try {

@@ -11,7 +11,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: catalog-maintenance-cloud-tick-${{ github.repository }}
+  # Scope transitions and the protected publisher share the canonical writer fence.
+  group: autonomous-catalog-maintenance-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
@@ -29,6 +30,16 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Continue the approved additive scope upgrade without local-machine state
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        run: node --import tsx scripts/automation/upgrade-maintenance-scope.ts --auto
+      - name: Refresh evidence-bound school coverage without rewriting record targets
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        run: npm run maintenance:coverage -- --cloud-refresh --output "$RUNNER_TEMP/catalog-maintenance-tick/coverage.json"
       - name: Tick the bounded scheduler and retain actual runtime observations
         env:
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
@@ -83,5 +94,6 @@ jobs:
             ${{ runner.temp }}/catalog-maintenance-tick/status.json
             ${{ runner.temp }}/catalog-maintenance-tick/receipt.json
             ${{ runner.temp }}/catalog-maintenance-tick/rollout.json
+            ${{ runner.temp }}/catalog-maintenance-tick/coverage.json
           if-no-files-found: warn
           retention-days: 35

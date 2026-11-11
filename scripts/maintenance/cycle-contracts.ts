@@ -1,4 +1,6 @@
 import { z } from 'zod'
+import { annualCycleIdentityKey, quotedTrackScope, TEACHING_LANGUAGES, trackMatchesProgram } from '../../src/lib/data/cycle-scope'
+import { programSchema } from '../../src/lib/data/schema'
 import { evidenceSchema, sha256Schema } from './contracts'
 import { MAINTAINED_CYCLE_FIELDS } from './field-contracts'
 
@@ -12,6 +14,7 @@ const knownCycleValues: Record<string, z.ZodType> = {
   opensOn: date, closesOn: date, dateStatus: z.literal('published'), tuitionCny: z.number().nonnegative(),
   applicationFeeCny: z.number().nonnegative(), tuitionPeriod: z.enum(['program', 'semester', 'academic-year', 'month', 'other']),
   tuitionStatus: z.enum(['confirmed', 'reference']), tuitionSchedule: localized,
+  languageRequirements: programSchema.shape.languageRequirements.min(1), eligibility: z.array(localized).min(1), applicationMaterials: z.array(localized).min(1), applyUrl: z.url().refine(value => value.startsWith('https://')),
 }
 export const cyclePatchSchema = z.object({ fieldPath: z.enum(MAINTAINED_CYCLE_FIELDS), value: z.unknown(),
   factStatus: z.enum(['known', 'officially_not_announced', 'not_applicable']) }).strict().superRefine((patch, context) => {
@@ -23,7 +26,7 @@ export const cyclePatchSchema = z.object({ fieldPath: z.enum(MAINTAINED_CYCLE_FI
 export const cycleDiscoveryFieldsSchema = z.object({
   programId: z.string().min(1), programScopeSha256: sha256Schema,
   academicYear: z.string().regex(/^20\d{2}-20\d{2}$/u).refine(value => Number(value.slice(5)) === Number(value.slice(0, 4)) + 1),
-  intake: z.enum(['spring', 'autumn']), patches: z.array(cyclePatchSchema).min(2).max(MAINTAINED_CYCLE_FIELDS.length),
+  intake: z.enum(['spring', 'autumn']), teachingLanguage: z.enum(TEACHING_LANGUAGES).optional(), applicationRound: z.string().trim().min(1).max(120).optional(), patches: z.array(cyclePatchSchema).min(2).max(MAINTAINED_CYCLE_FIELDS.length),
   programEvidence: evidenceSchema, internationalAdmissionsEvidence: evidenceSchema, cycleScopeEvidence: evidenceSchema,
 }).strict().superRefine((fields, context) => {
   const paths = fields.patches.map(patch => patch.fieldPath)
@@ -39,7 +42,7 @@ export const cycleDiscoveryFieldsSchema = z.object({
 })
 
 export type CycleDiscoveryFields = z.infer<typeof cycleDiscoveryFieldsSchema>
-export const cycleIdentityKey = (programId: string, year: string, intake: string) => `${programId}|${year}|${intake}`
+export const cycleIdentityKey = annualCycleIdentityKey
 export const normalizeCycleEvidence = (text: string) => text.normalize('NFKC').toLowerCase().replace(/\s+/gu, ' ').trim()
 export function sameOfficialProgramName(left: unknown, right: unknown): boolean {
   const values = (value: unknown) => value && typeof value === 'object' ? Object.values(value).filter((item): item is string => typeof item === 'string' && Boolean(item.trim())) : []
@@ -49,6 +52,11 @@ export function sameOfficialProgramName(left: unknown, right: unknown): boolean 
 export function cyclePatchHasQuoteSupport(patch: CycleDiscoveryFields['patches'][number], quote: string): boolean {
   if (patch.factStatus === 'officially_not_announced') return /not\s+(?:yet\s+)?(?:announced|published)|to be announced|尚未公布|另行通知/iu.test(quote)
   if (patch.factStatus === 'not_applicable') return /not applicable|不适用|无需|免收/iu.test(quote)
+  if (['languageRequirements', 'eligibility', 'applicationMaterials'].includes(patch.fieldPath)) {
+    const leaves = (value: unknown): string[] => typeof value === 'string' ? [value] : Array.isArray(value) ? value.flatMap(leaves) : value && typeof value === 'object' ? Object.values(value).flatMap(leaves) : []
+    return leaves(patch.value).every(value => normalizeCycleEvidence(quote).includes(normalizeCycleEvidence(value)))
+  }
+  if (patch.fieldPath === 'applyUrl') return typeof patch.value === 'string' && quote.includes(patch.value)
   if (typeof patch.value === 'number') return (quote.replace(/[,，]/gu, '').match(/\d+(?:\.\d+)?/gu) ?? []).some(value => Number(value) === patch.value)
     || patch.value === 0 && /waived|free of charge|免收|免费/iu.test(quote)
   if (patch.fieldPath === 'opensOn' || patch.fieldPath === 'closesOn') {
@@ -70,7 +78,8 @@ export function cyclePatchHasQuoteSupport(patch: CycleDiscoveryFields['patches']
 }
 
 /** The same named programme, degree and actual intake year must occur in cited official text. */
-export function explicitCycleScope(fields: CycleDiscoveryFields, identity: { name: unknown; degreeLevel?: unknown }): boolean {
+export function explicitCycleScope(fields: CycleDiscoveryFields, identity: { name: unknown; degreeLevel?: unknown; teachingLanguages?: unknown }): boolean {
+  if (!trackMatchesProgram(fields, identity.teachingLanguages) || !quotedTrackScope(fields, fields.cycleScopeEvidence.quote)) return false
   const names = identity.name && typeof identity.name === 'object' ? Object.values(identity.name).filter((value): value is string => typeof value === 'string' && value.trim().length > 1) : []
   const containsName = (quote: string) => names.some(name => normalizeCycleEvidence(quote).includes(normalizeCycleEvidence(name)))
   if (!containsName(fields.programEvidence.quote) || !containsName(fields.cycleScopeEvidence.quote)) return false

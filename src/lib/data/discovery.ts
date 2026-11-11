@@ -110,6 +110,7 @@ export function selectDiscoveryData(bundle: DataBundle, today = getTodayDate(), 
     // A scoped field receipt permits a blank annual container, never its old siblings.
     admissionCycles.push({ ...audit(record, false), sourceIds: [...new Set(checked.map(entry => entry.sourceId))],
       id: record.id, programId: record.programId, academicYear: record.academicYear, intake: record.intake,
+      ...(record.teachingLanguage ? { teachingLanguage: record.teachingLanguage } : {}), ...(record.applicationRound ? { applicationRound: record.applicationRound } : {}),
       opensOn: null, closesOn: null, dateStatus: 'not-announced', tuitionCny: null, tuitionPeriod: null,
       tuitionStatus: null, applicationFeeCny: null, factScope: 'partial',
       discovery: { identityAcceptedAt: checked[0].verifiedAt, currentFacts: false, currentFieldPaths: [] } })

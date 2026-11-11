@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2022", "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "target": "ES2022", "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "ESNext", "moduleResolution": "Bundler", "strict": true,
     "noEmit": true, "skipLibCheck": true, "types": ["node"],
     "paths": { "@/*": ["../../src/*"] }
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts"]
+  "include": ["src/**/*.ts", "tests/**/*.ts", "../../scripts/ingestion/tsinghua-jsdom.d.ts"]
 }

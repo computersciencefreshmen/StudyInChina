@@ -1,7 +1,7 @@
 import { createHash, webcrypto } from 'node:crypto'
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
 import { join, relative, resolve } from 'node:path'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { identityAcceptanceSchema, identityFingerprint, canonicalIdentityJson, scopedNameReceiptMatches, type IdentityAcceptance } from '@/lib/data/identity-acceptance'
 import { projectVerifiedProgramName } from '@/lib/data/verified-program-name'
 import { selectDiscoveryData } from '@/lib/data/discovery'
@@ -23,7 +23,14 @@ const oldUrl = 'https://example.edu/old-entry-404.pdf', verifiedUrl = 'https://e
 const sha = (value: string | Uint8Array) => createHash('sha256').update(value).digest('hex')
 vi.stubGlobal('crypto', webcrypto)
 const roots: string[] = []
+beforeEach(() => {
+  // Repository comparison uses the actual clock, unlike list queries with today.
+  // Keep both paths on the fixture date without extending real evidence validity.
+  vi.useFakeTimers({ toFake: ['Date'] })
+  vi.setSystemTime(new Date(now))
+})
 afterEach(() => {
+  vi.useRealTimers()
   vi.restoreAllMocks()
   for (const root of roots.splice(0)) {
     const inside = relative(process.cwd(), resolve(root))
@@ -89,6 +96,13 @@ describe('receipt-bound verified programme document URL', () => {
     const compared = JSON.stringify(await repository.comparePrograms(['program']))
     expect(compared).toContain(verifiedUrl)
     expect(selectPublishedData(raw, today, [entry]).programs.find(p => p.id === 'program')?.programUrl).toBe(verifiedUrl)
+  })
+  it('excludes the same comparison once the real evaluation date passes its review window', async () => {
+    const raw = fixture(true), entry = acceptance(raw)
+    vi.spyOn(store, 'readIdentityAcceptances').mockReturnValue([entry])
+    vi.setSystemTime(new Date('2026-11-11T01:00:00.000Z'))
+    const result = await new JsonCatalogRepository(async () => raw).comparePrograms(['program'])
+    expect(result).toMatchObject({ data: { items: [], missingIds: ['program'] } })
   })
   it.each(['http://example.edu/a', 'javascript:alert(1)', 'https://user:pass@example.edu/a', 'https://example.edu:444/a'])('rejects unsafe scoped URL %s', verifiedSourceUrl => {
     expect(identityAcceptanceSchema.safeParse({ ...acceptance(fixture()), verifiedSourceUrl }).success).toBe(false)

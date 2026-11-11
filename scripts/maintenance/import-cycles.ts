@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto'
+import { quotedTrackScope, trackMatchesProgram } from '../../src/lib/data/cycle-scope'
 import type { AdmissionCycle, DataBundle, Source } from '../../src/lib/data/types'
 import { bundleSchema } from '../../src/lib/data/schema'
 import { selectDiscoveryData } from '../../src/lib/data/discovery'
@@ -60,9 +61,9 @@ export async function importAdmissionCycleCandidates(options: {
       if (!school || !program || program.universityId !== school.universityId) throw new Error('new_cycle_program_or_school_mismatch')
       if (!acceptedParents.has(program.id)) throw new Error('new_cycle_parent_identity_not_accepted')
       if (bundle.programs.some(other => other.id !== program.id && acceptedParents.has(other.id) && other.universityId === program.universityId
-        && other.degreeLevel === program.degreeLevel && sameOfficialProgramName(other.name, program.name))) throw new Error('new_cycle_parent_program_name_ambiguous')
+        && trackMatchesProgram(fields, other.teachingLanguages) && other.degreeLevel === program.degreeLevel && sameOfficialProgramName(other.name, program.name))) throw new Error('new_cycle_parent_program_name_ambiguous')
       if (fields.programScopeSha256 !== fieldRecordScopeSha256('program', program)) throw new Error('new_cycle_program_identity_changed')
-      if (proposal.scope.year !== fields.academicYear || proposal.scope.intake !== fields.intake || !explicitCycleScope(fields, program)) throw new Error('new_cycle_explicit_program_year_or_intake_unproven')
+      if (proposal.scope.year !== fields.academicYear || proposal.scope.intake !== fields.intake || proposal.scope.teachingLanguage !== fields.teachingLanguage || proposal.scope.applicationRound !== fields.applicationRound || !explicitCycleScope(fields, program)) throw new Error('new_cycle_explicit_program_year_or_intake_unproven')
       if (proposal.review?.method !== 'independent_model' && proposal.review?.method !== 'human') throw new Error('new_cycle_independent_review_required')
       if (new Date(proposal.source.checkedAt) > acceptedAt || new Date(proposal.review.reviewedAt) > acceptedAt) throw new Error('new_cycle_future_evidence')
       const proof = [fields.programEvidence, fields.internationalAdmissionsEvidence, fields.cycleScopeEvidence]
@@ -73,21 +74,22 @@ export async function importAdmissionCycleCandidates(options: {
         const review = JSON.parse(new TextDecoder().decode(await options.readArtifact(proposal.review.artifactKey!))) as Record<string, unknown>
         if (canonicalJson(review.agreedCycleFields ?? null) !== canonicalJson(fields)) throw new Error('new_cycle_reviewed_fields_mismatch')
       }
-      const key = cycleIdentityKey(program.id, fields.academicYear, fields.intake)
-      if (bundle.admissionCycles.some(cycle => cycleIdentityKey(cycle.programId, cycle.academicYear, cycle.intake) === key)) throw new Error('annual_cycle_already_exists_use_field_maintenance')
+      const key = cycleIdentityKey(program.id, fields.academicYear, fields.intake, fields)
+      if (bundle.admissionCycles.some(cycle => cycleIdentityKey(cycle.programId, cycle.academicYear, cycle.intake, cycle) === key)) throw new Error('annual_cycle_already_exists_use_field_maintenance')
       const id = `cycle-${hash(key).slice(0, 32)}`
       if (bundle.admissionCycles.some(cycle => cycle.id === id)) throw new Error('new_cycle_id_collision')
       const sourceId = `src-maintenance-cycle-${hash(proposal.source.url).slice(0, 24)}`, checkedDay = getTodayDate(new Date(proposal.source.checkedAt))
       const source: Source = { id: sourceId, url: proposal.source.url, title: `Official ${fields.academicYear} ${fields.intake} admission notice`,
         publisher: school.name.en ?? school.name.zh ?? school.universityId, kind: 'admissions', language: 'other', official: true, accessedAt: checkedDay }
       const cycle: AdmissionCycle = { id, programId: program.id, academicYear: fields.academicYear, intake: fields.intake,
+        ...(fields.teachingLanguage ? { teachingLanguage: fields.teachingLanguage } : {}), ...(fields.applicationRound ? { applicationRound: fields.applicationRound } : {}),
         opensOn: null, closesOn: null, dateStatus: 'not-announced', tuitionCny: null, tuitionPeriod: null, tuitionStatus: null,
         applicationFeeCny: null, evidenceBasis: 'cycle-specific', factScope: 'partial', status: 'stale',
         sourceIds: [sourceId], verifiedAt: checkedDay, reviewAfter: checkedDay }
       for (const patch of fields.patches) {
         const evidence = proposal.fieldEvidence.find(evidence => evidence.fieldPath === patch.fieldPath)
         if (!evidence) throw new Error('new_cycle_leaf_evidence_missing')
-        if (!cyclePatchHasQuoteSupport(patch, evidence.quote)) throw new Error(`new_cycle_leaf_value_not_in_evidence:${patch.fieldPath}`)
+        if (!cyclePatchHasQuoteSupport(patch, evidence.quote) || !quotedTrackScope(fields, evidence.quote, true)) throw new Error(`new_cycle_leaf_value_not_in_evidence:${patch.fieldPath}`)
         Object.assign(cycle, { [patch.fieldPath]: structuredClone(patch.value) })
       }
       const next = structuredClone(bundle)

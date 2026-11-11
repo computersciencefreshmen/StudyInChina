@@ -14,12 +14,17 @@ export const FIXED_SCHOOL_COUNT = 272
 
 /** Deliberately covers the raw fixed cohort, including stale/archived public identities. */
 export async function buildMaintenanceScope(bundle: DataBundle, options: {
-  scopeId: string; createdAt: string; manifests?: SourceManifestRecord[]
+  scopeId: string; createdAt: string; manifests?: SourceManifestRecord[]; parentScope?: MaintenanceScope
 }): Promise<MaintenanceScope> {
   let universities = bundle.universities
+  const parent = options.parentScope && maintenanceScopeSchema.parse(options.parentScope)
+  if (parent && (parent.formatVersion !== 1 || parent.sha256 !== await scopeContentSha256(parent)
+    || universities.length !== 295 || parent.schools.some(school => !universities.some(row => row.id === school.universityId)))) {
+    throw new Error('Scope v2 requires the exact existing 295 schools and immutable original cohort')
+  }
   // The original maintenance cohort stays pinned when the public school
   // directory grows. New institutions must not replace any original member.
-  if (universities.length > FIXED_SCHOOL_COUNT) {
+  if (!parent && universities.length > FIXED_SCHOOL_COUNT) {
     const scopePath = import.meta.url.startsWith('file:')
       ? resolve(dirname(fileURLToPath(import.meta.url)), '../../content/maintenance/scope-272.v1.json')
       : join(process.cwd(), 'content/maintenance/scope-272.v1.json')
@@ -28,13 +33,16 @@ export async function buildMaintenanceScope(bundle: DataBundle, options: {
     const originalIds = new Set(pinned.schools.map(school => school.universityId))
     universities = universities.filter(university => originalIds.has(university.id))
   }
-  if (universities.length !== FIXED_SCHOOL_COUNT) {
+  const expected: 272 | 295 = parent ? 295 : FIXED_SCHOOL_COUNT
+  if (universities.length !== expected) {
     throw new Error(`Fixed scope requires exactly ${FIXED_SCHOOL_COUNT} original schools; found ${universities.length}`)
   }
   const ids = new Set(universities.map(university => university.id))
-  if (ids.size !== FIXED_SCHOOL_COUNT) throw new Error('Fixed scope contains duplicate school IDs')
+  if (ids.size !== expected) throw new Error('Fixed scope contains duplicate school IDs')
   const sources = new Map(bundle.sources.map(source => [source.id, source]))
   const schools = universities.map(university => {
+    const original = parent?.schools.find(school => school.universityId === university.id)
+    if (original) return original
     const hostFamily = (value: string) => {
       const hostname = new URL(value).hostname.toLowerCase().replace(/^www\./u, '')
       return /\.(?:edu|ac)\.cn$/u.test(hostname) ? hostname.split('.').slice(-3).join('.') : hostname
@@ -97,8 +105,9 @@ export async function buildMaintenanceScope(bundle: DataBundle, options: {
     }
   }).sort((left, right) => left.universityId.localeCompare(right.universityId))
   const content = {
-    format: 'studyinchina.maintenance-scope' as const, formatVersion: 1 as const,
-    scopeId: options.scopeId, createdAt: options.createdAt, expectedSchoolCount: 272 as const,
+    format: 'studyinchina.maintenance-scope' as const, formatVersion: parent ? 2 as const : 1 as const,
+    scopeId: options.scopeId, createdAt: options.createdAt, expectedSchoolCount: expected,
+    ...(parent ? { parentScopeSha256: parent.sha256 } : {}),
     inputCatalogSha256: await catalogSha256(bundle), schools,
   }
   return maintenanceScopeSchema.parse({ ...content, sha256: await scopeContentSha256(content) })
@@ -130,6 +139,7 @@ async function main(): Promise<void> {
     join(root, 'content', 'data', 'universities.json'))
   const scope = await buildMaintenanceScope(loadMaintenanceBundle(root), {
     scopeId: argument('--scope-id'), createdAt: args.includes('--created-at') ? argument('--created-at') : new Date().toISOString(), manifests,
+    ...(args.includes('--parent-scope') ? { parentScope: maintenanceScopeSchema.parse(JSON.parse(readFileSync(resolve(argument('--parent-scope')), 'utf8'))) } : {}),
   })
   const output = resolve(argument('--output'))
   mkdirSync(dirname(output), { recursive: true })

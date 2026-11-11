@@ -3,7 +3,7 @@ import test from 'node:test'
 import type { MaintenanceProposal } from '../../../scripts/maintenance/contracts'
 import { acknowledge,prepareExport } from '../src/exports'
 import { persistProposals } from '../src/proposals'
-import { seed, setControls } from '../src/repository'
+import { seed, setControls, refreshTargets, control, continueTargetRefresh } from '../src/repository'
 import { digest } from '../src/util'
 import { makeEnv,seedInput,TEST_CATALOG,TEST_GUARDS } from './fixture'
 
@@ -35,6 +35,45 @@ test('all unchanged candidates can reject without requeueing them as review conf
     await assert.rejects(acknowledge(f.env,{...ack,unchangedProposalIds:['not-in-export']}),/unchanged_partition_must_be_held_subset/)
     f.reset();await acknowledge(f.env,ack);assert.ok(f.queries()<50);assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) count FROM maintenance_proposals WHERE status='consumed'").get()?.count,100);assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) count FROM maintenance_proposals WHERE status='held'").get()?.count,0)
   }finally{f.db.sqlite.close()}
+})
+
+test('identity-only applied ACK with unchanged catalog safely revalidates completed targets without rewriting or stalling',async()=>{
+  const f=await fixture()
+  try{
+    const payload={inputCatalogSha256:TEST_CATALOG,recordTargets:[]}
+    const first=await refreshTargets(f.env,payload)
+    const prepared=await prepareExport(f.env,{limit:100}),accepted=f.proposals.slice(0,1).map(p=>p.id),held=f.proposals.slice(1).map(p=>p.id)
+    await acknowledge(f.env,{batchId:prepared.batchId,outcome:'applied',receiptSha256:'2'.repeat(64),sourceCommit:'3'.repeat(40),newInputCatalogSha256:TEST_CATALOG,acceptedProposalIds:accepted,heldProposalIds:held,unchangedProposalIds:held})
+    assert.equal((await control(f.env))?.targets_complete,0)
+    const before=(await control(f.env))!.revision,result=await refreshTargets(f.env,payload)
+    assert.equal(result.reused,true);assert.equal(result.refreshSha256,first.refreshSha256)
+    assert.equal((await control(f.env))?.targets_complete,1);assert.equal((await control(f.env))?.revision,before+1)
+    assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_target_refreshes').get()?.n,1)
+    assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) n FROM maintenance_events WHERE kind='targets_revalidated'").get()?.n,1)
+    await refreshTargets(f.env,payload);assert.equal((await control(f.env))?.revision,before+1)
+    // HTTP admission defers the expensive readback to the existing Queue path.
+    f.db.sqlite.prepare('UPDATE maintenance_control SET targets_complete=0').run()
+    const queued=await refreshTargets(f.env,payload,true)
+    assert.equal(queued.targetsComplete,false);assert.equal((await control(f.env))?.targets_complete,0)
+    assert.equal(f.messages.at(-1)?.targetRefreshSha256,first.refreshSha256)
+    await continueTargetRefresh(f.env,first.refreshSha256,false)
+    assert.equal((await control(f.env))?.targets_complete,1)
+  }finally{f.db.sqlite.close()}
+})
+
+test('completed refresh cannot restore readiness over another staged plan or altered active target set',async()=>{
+  for(const changed of ['staged','active-set','artifact']as const){
+    const f=await fixture()
+    try{
+      const payload={inputCatalogSha256:TEST_CATALOG,recordTargets:[]},result=await refreshTargets(f.env,payload)
+      f.db.sqlite.prepare('UPDATE maintenance_control SET targets_complete=0').run()
+      if(changed==='staged')f.db.sqlite.prepare("INSERT INTO maintenance_target_refreshes(refresh_sha256,input_catalog_sha256,plan_sha256,total_operations,expected_count,status,created_at) VALUES(?,?,?,1,0,'staged',?)").run('9'.repeat(64),TEST_CATALOG,'8'.repeat(64),new Date().toISOString())
+      if(changed==='active-set')f.db.sqlite.prepare("INSERT INTO maintenance_record_targets(target_id,record_id,entity_type,university_id,record_scope_sha256,fields_json,target_json,active) VALUES('program:unexpected','unexpected','program','uni-000',?,'{}','{}',1)").run('7'.repeat(64))
+      if(changed==='artifact')f.bucket.objects.delete(`maintenance/target-refresh/${result.refreshSha256}.json`)
+      await assert.rejects(refreshTargets(f.env,payload),/target_refresh_reuse_/u)
+      assert.equal((await control(f.env))?.targets_complete,0)
+    }finally{f.db.sqlite.close()}
+  }
 })
 test('a changed final proposal aborts the entire batched acknowledgement before any consumption',async()=>{
   const f=await fixture()

@@ -17,7 +17,8 @@ concurrency:
 jobs:
   quality:
     name: Lint, test, validate, and build
-    runs-on: ubuntu-latest
+    # Keep browser dependencies reproducible as ubuntu-latest moves releases.
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
       CI: "true"
@@ -125,7 +126,10 @@ jobs:
         run: npm run build
 
       - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
+        timeout-minutes: 5
+        # The hosted image already has Chromium's runtime libraries. Avoid an
+        # unrelated APT font download; the full E2E suite still verifies launch.
+        run: npx playwright install --only-shell chromium
 
       - name: Run end-to-end tests against the production build
         run: npm run test:e2e

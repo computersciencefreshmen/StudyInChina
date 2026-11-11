@@ -5,6 +5,7 @@ import type { Control, MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { canonical, digest, nowIso, record } from './util'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
+import { scopeUpgradeLineage } from './scope-config'
 
 /** One reviewed Git transition, not a general catalogue-head write API. */
 export const PINNED_HEAD_RECONCILIATION = manifest
@@ -52,11 +53,19 @@ async function archive(env: MaintenanceEnv, saved: StoredProof) {
   if (!existing || await existing.text() !== bytes) throw new MaintenanceError('reconciliation_proof_archive_unavailable')
 }
 export async function readMaintenanceControl(env: MaintenanceEnv) {
-  await assertPin(env)
+  // Read historical proof after a committed additive scope change; mutation
+  // routes retain assertPin's original, exact scope restriction.
+  const { sha256, ...manifestContent } = manifest
+  if (await digest(canonical(manifestContent)) !== sha256) throw new MaintenanceError('reconciliation_pin_mismatch')
   const cfg = await control(env), saved = await operation(env), gate = await nativeReconciliationGate(env)
+  const upgraded = Boolean(cfg && cfg.scope_sha256 !== manifest.scopeRegistrySha256
+    && cfg.scope_sha256 === env.SCOPE_REGISTRY_SHA256 && await scopeUpgradeLineage(env, manifest.scopeRegistrySha256, cfg.scope_sha256))
+  if (cfg && cfg.scope_sha256 !== manifest.scopeRegistrySha256 && !upgraded) throw new MaintenanceError('reconciliation_scope_lineage_unproven')
   return { format: 'studyinchina.maintenance-control' as const, control: cfg,
-    deployment: { maintenanceEnabled: env.MAINTENANCE_ENABLED === 'true', subscriptionConfigured: Boolean(env.MINIMAX_SUBSCRIPTION_KEY && env.MINIMAX_MODEL === 'MiniMax-M3'), guardRequired: gate.required, guardReady: gate.ready }, reconciliation: {
+    deployment: { maintenanceEnabled: env.MAINTENANCE_ENABLED === 'true', subscriptionConfigured: Boolean(env.MINIMAX_SUBSCRIPTION_KEY && env.MINIMAX_MODEL === 'MiniMax-M3'), guardRequired: gate.required, guardReady: gate.ready,
+      scopeUpgradePending: env.SCOPE_REGISTRY_SHA256 !== manifest.scopeRegistrySha256 && !upgraded && !gate.ready }, reconciliation: {
     manifestSha256: manifest.sha256,
+    scopeUpgrade: upgraded ? { previousScopeSha256: manifest.scopeRegistrySha256, nextScopeSha256: cfg!.scope_sha256, verified: true as const } : null,
     paused: saved.pause ? { originalControl: saved.pause.proof.originalControl, pausedRevision: saved.pause.proof.pausedRevision, proofSha256: saved.pause.sha256 } : null,
     advanced: saved.advance ? { reconciledRevision: saved.advance.proof.reconciledRevision!, proofSha256: saved.advance.sha256 } : null,
     resumed: saved.resume ? { restoredRevision: saved.resume.proof.restoredRevision!, proofSha256: saved.resume.sha256 } : null,

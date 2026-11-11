@@ -14,7 +14,7 @@ import { after, canonical, digest, gateRequest, nowIso, record } from './util'
 export type CapturedSnapshot = {
   version:1;sourceId:string;sourceUrl:string;finalUrl:string;checkedAt:string;contentType:string;
   rawSha256:string;rawKey:string;textKey:string|null;textSha256:string|null;canonicalSha256:string;
-  parserCandidates:unknown[];textArtifact?:{objectKey:string;sha256:string;rawSnapshotSha256:string;parser:'poppler'|'tesseract'|'browser-dom'}
+  parserCandidates:unknown[];textArtifact?:{objectKey:string;sha256:string;rawSnapshotSha256:string;parser:'poppler'|'tesseract'|'browser-dom'|'official-response-text-v1'}
 }
 const pause=(ms:number)=>new Promise<void>(done=>setTimeout(done,ms))
 export function decodeOfficialBody(bytes:ArrayBuffer,contentType:string):string {

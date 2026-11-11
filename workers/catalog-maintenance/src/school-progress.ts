@@ -2,6 +2,8 @@ import { z } from 'zod'
 import { schoolReconciliationSchema, evaluateSchoolReconciliation, type SchoolReconciliation } from '../../../scripts/maintenance/reconciliation'
 import { maintenanceRecordTargetSchema } from '../../../scripts/maintenance/field-contracts'
 import { control } from './repository'
+import { expectedScopeSchoolCount } from './scope-config'
+import { readCoverageSnapshot, type CoverageSnapshot } from './coverage'
 import { isDailyD1QuotaError } from './backend-errors'
 import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
@@ -150,14 +152,14 @@ async function bootstrapSchools(env: MaintenanceEnv): Promise<School[]> {
     const raw = await bytes(env, key, 8 * 1024 * 1024)
     if (await digest(raw) !== hash) throw new MaintenanceError('school_progress_bootstrap_checksum_invalid')
     const envelope = record(decode(raw)), seed = record(envelope?.seed)
-    if (!seed || seed.scopeRegistrySha256 !== env.SCOPE_REGISTRY_SHA256 || !Array.isArray(seed.schools) || seed.schools.length !== 272)
+    if (!seed || seed.scopeRegistrySha256 !== env.SCOPE_REGISTRY_SHA256 || !Array.isArray(seed.schools) || seed.schools.length !== expectedScopeSchoolCount(env))
       throw new MaintenanceError('school_progress_bootstrap_scope_invalid')
     const schools = seed.schools.map(value => {
       const school = record(value)
       if (!school || !ID.test(String(school.universityId)) || !record(school.name)) throw new MaintenanceError('school_progress_bootstrap_school_invalid')
       return { university_id: String(school.universityId), name_json: JSON.stringify(school.name), last_attempt_at: null }
     })
-    if (new Set(schools.map(school => school.university_id)).size !== 272) throw new MaintenanceError('school_progress_bootstrap_school_invalid')
+    if (new Set(schools.map(school => school.university_id)).size !== expectedScopeSchoolCount(env)) throw new MaintenanceError('school_progress_bootstrap_school_invalid')
     return schools
   }
   return []
@@ -190,11 +192,13 @@ async function verifiedSummary(env: MaintenanceEnv, summary: Summary, observatio
 export async function listSchoolProgress(env: MaintenanceEnv, now = Date.now()) {
   if (!env.SCOPE_REGISTRY_SHA256 || !HASH.test(env.SCOPE_REGISTRY_SHA256)) throw new MaintenanceError('school_progress_scope_unconfigured')
   let schools: School[] = [], sources: Source[] = [], observations: Observation[] = [], summaries: Array<{ details_json: string }> = []
+  let coverage: CoverageSnapshot | null = null
   let catalogSha256: string | null = null, backendState: 'observed' | 'quota_wait' | 'unavailable' = 'observed'
   try {
     const cfg = await control(env)
     if (cfg && cfg.scope_sha256 !== env.SCOPE_REGISTRY_SHA256) throw new MaintenanceError('school_progress_scope_mismatch')
     catalogSha256 = cfg?.seed_complete && cfg.targets_complete ? cfg.input_catalog_sha256 : null
+    if (catalogSha256) coverage = await readCoverageSnapshot(env,catalogSha256,env.SCOPE_REGISTRY_SHA256,now)
     schools = (await env.PIPELINE_DB.prepare('SELECT university_id,name_json,last_attempt_at FROM maintenance_schools WHERE scope_sha256=? ORDER BY university_id')
       .bind(env.SCOPE_REGISTRY_SHA256).all<School>()).results ?? []
     sources = (await env.PIPELINE_DB.prepare('SELECT x.university_id,s.source_id,s.url,s.enabled,s.due_at,s.last_attempt_at,s.failures,s.error_code FROM maintenance_sources s JOIN maintenance_source_schools x ON x.source_id=s.source_id JOIN maintenance_schools u ON u.university_id=x.university_id WHERE u.scope_sha256=?')
@@ -206,9 +210,9 @@ export async function listSchoolProgress(env: MaintenanceEnv, now = Date.now()) 
     if (error instanceof MaintenanceError) throw error
     backendState = isDailyD1QuotaError(error) ? 'quota_wait' : 'unavailable'
     // Partial reads must not become evidence of absence when the backend fails.
-    schools = []; sources = []; observations = []; summaries = []; catalogSha256 = null
+    schools = []; sources = []; observations = []; summaries = []; catalogSha256 = null; coverage = null
   }
-  const pending = schools.length === 272 && backendState === 'observed' ? [] : await bootstrapSchools(env)
+  const pending = schools.length === expectedScopeSchoolCount(env) && backendState === 'observed' ? [] : await bootstrapSchools(env)
   const schoolMap = new Map(pending.map(school => [school.university_id, school]))
   for (const school of schools) schoolMap.set(school.university_id, school)
   const rows = []
@@ -231,7 +235,7 @@ export async function listSchoolProgress(env: MaintenanceEnv, now = Date.now()) 
       try { reconciliation = await verifiedSummary(env, summary as Summary, [...latest.values()], catalogSha256, now) }
       catch { reconciliation = { status: 'in_progress', blockers: ['stored_reconciliation_evidence_unavailable_or_invalid'] } }
     }
-    rows.push({ universityId: school.university_id, name: JSON.parse(school.name_json) as Record<string, string>,
+    rows.push({ coverage: coverage?.schools.find(row=>row.universityId===school.university_id) ?? null, universityId: school.university_id, name: JSON.parse(school.name_json) as Record<string, string>,
       firstInspectionStatus: backendState !== 'observed' ? 'unknown' : attempted === 0 && captured === 0 ? 'pending'
         : enabled.length > 0 && capturedEnabled === enabled.length && failedEnabled === 0 ? 'observed' : 'in_progress',
       lastAttemptAt: attempts.at(-1) ?? null, sourceCount: backendState === 'observed' ? schoolSources.length : null,
@@ -243,7 +247,7 @@ export async function listSchoolProgress(env: MaintenanceEnv, now = Date.now()) 
         rawSha256: observation.raw_sha256, snapshotKey: observation.snapshot_key, checkedAt: observation.checked_at })), reconciliation })
   }
   return { format: 'studyinchina.school-maintenance-progress', version: 1, scopeRegistrySha256: env.SCOPE_REGISTRY_SHA256,
-    observedAt: nowIso(now), backendState, expectedSchools: 272, seededSchoolCount: backendState === 'observed' ? schools.length : null,
+    observedAt: nowIso(now), backendState, coverageSnapshotSha256: coverage?.sha256 ?? null, coverageEvaluatedOn: coverage?.evaluatedOn ?? null, minimumProgramCount: 5, coverageState: coverage ? 'observed' : 'unavailable', programCoverageCounts: coverage ? {schoolsMeetingMinimum:coverage.schools.filter(row=>row.gap===0).length,bands:Object.fromEntries(['zero','one','two-to-four','five-plus'].map(band=>[band,coverage.schools.filter(row=>row.coverageBand===band).length]))} : null, expectedSchools: expectedScopeSchoolCount(env), seededSchoolCount: backendState === 'observed' ? schools.length : null,
     counts: { schools: rows.length, attempted: backendState === 'observed' ? rows.filter(school => school.lastAttemptAt).length : null,
       observed: backendState === 'observed' ? rows.filter(school => school.firstInspectionStatus === 'observed').length : null,
       reconciled: backendState === 'observed' ? rows.filter(school => school.reconciliation.status === 'complete').length : null }, schools: rows }

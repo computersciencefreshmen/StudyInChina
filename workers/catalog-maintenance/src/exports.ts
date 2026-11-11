@@ -74,6 +74,13 @@ export async function acknowledge(env:MaintenanceEnv,value:unknown) {
     if(review.length){statements.push(env.PIPELINE_DB.prepare("UPDATE maintenance_proposals SET status='held',acknowledgement_sha256=? WHERE proposal_id IN(SELECT value FROM json_each(?)) AND export_id=? AND status='exported'").bind(sha256,JSON.stringify(review),row.batch_id));expected.push(review.length)}
     statements.push(env.PIPELINE_DB.prepare('UPDATE maintenance_control SET input_catalog_sha256=?,targets_complete=CASE WHEN ?=\'applied\' THEN 0 ELSE targets_complete END,revision=revision+1,updated_at=? WHERE singleton=1 AND input_catalog_sha256=? AND revision=?').bind(ack.newInputCatalogSha256,ack.outcome,nowIso(),row.input_catalog_sha256,cfg.revision))
     expected.push(1)
+    // This receipt is committed with the revision itself. An additive scope
+    // intent may follow this automatic head transition, never a manual revision.
+    statements.push(env.PIPELINE_DB.prepare("INSERT INTO maintenance_events VALUES(?,'control_revision_advanced',?,?)").bind(crypto.randomUUID(),nowIso(),canonical({
+      cause:`export_${ack.outcome}`,batchId:row.batch_id,fromRevision:cfg.revision,toRevision:cfg.revision+1,
+      previousInputCatalogSha256:cfg.input_catalog_sha256,inputCatalogSha256:ack.newInputCatalogSha256,
+    })))
+    expected.push(1)
   }
   statements.push(env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(guardId))
   expected.push(1)

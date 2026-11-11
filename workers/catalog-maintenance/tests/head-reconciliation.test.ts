@@ -15,12 +15,42 @@ import { prepareReconciliationTargets, registerReconciliationTargets } from '../
 import { buildMaintenanceTargets } from '../../../scripts/automation/build-maintenance-bootstrap'
 import { loadMaintenanceBundle } from '../../../scripts/maintenance/build-scope'
 import originalScopeJson from '../../../content/maintenance/scope-272.v1.json'
+import upgradedScopeJson from '../../../content/maintenance/scope-295.v2.json'
+import { EXISTING_SCHOOLS_V2_SHA256 } from '../src/scope-config'
+import { processScopeUpgrade } from '../src/scope-upgrade'
 
 const originalExport = maintenanceCandidateExportSchema.parse(JSON.parse(readFileSync(new URL('../../../quality/maintenance/reconciliation/2026-11-10/prepared-export.json', import.meta.url), 'utf8')))
 const originalScope=maintenanceScopeSchema.parse(originalScopeJson)
 const currentTargets=buildMaintenanceTargets(loadMaintenanceBundle(process.cwd()),originalScope)
 const targetPayload={inputCatalogSha256:pin.newInputCatalogSha256,recordTargets:currentTargets}
 const targetBytes=new TextEncoder().encode(canonical(targetPayload))
+
+test('a pinned v2 deployment settles old exports without the new table; historical control survives a committed scope upgrade', async () => {
+  const f = await fixture()
+  try {
+    await f.ready(); await f.targets(); await f.request('resume', 5)
+    f.env.NATIVE_HEAD_RECONCILIATION_REQUIRED = 'true'
+    f.env.SCOPE_REGISTRY_SHA256 = EXISTING_SCHOOLS_V2_SHA256; f.env.SCOPE_SCHOOL_COUNT = '295'
+    f.db.sqlite.exec('DROP TABLE maintenance_scope_upgrades')
+    const transition = await readMaintenanceControl(f.env)
+    assert.equal(transition.deployment.guardReady, true)
+    assert.equal(transition.deployment.scopeUpgradePending, false)
+    await assert.rejects(f.request('pause', 6), /reconciliation_pin_mismatch/u)
+    const nextScope = maintenanceScopeSchema.parse(upgradedScopeJson)
+    const body = canonical({ format: 'studyinchina.maintenance-scope-upgrade', version: 1, expectedRevision: 6,
+      inputCatalogSha256: pin.newInputCatalogSha256, legacyGuardSha256: pin.legacyGuardSha256, previousScope: originalScope, nextScope })
+    const hash = createHash('sha256').update(body).digest('hex')
+    await f.bucket.put(`maintenance/scope-upgrades/uploads/${hash}.json`, body)
+    let result = await processScopeUpgrade(f.env, hash)
+    while (!result.completed) result = await processScopeUpgrade(f.env, hash)
+    const observation = await readMaintenanceControl(f.env)
+    assert.equal(observation.control?.scope_sha256, EXISTING_SCHOOLS_V2_SHA256)
+    assert.equal(observation.deployment.guardReady, true)
+    assert.equal(observation.reconciliation.scopeUpgrade?.verified, true)
+    assert.equal(observation.reconciliation.resumed?.restoredRevision, 6)
+    await assert.rejects(f.request('pause', 8), /reconciliation_pin_mismatch/u)
+  } finally { f.db.sqlite.close() }
+})
 async function fixture() {
   const f = makeEnv(); f.env.SCOPE_REGISTRY_SHA256 = pin.scopeRegistrySha256
   const canary = JSON.stringify(['uni-peking-university']), at = '2026-11-10T00:00:00.000Z'

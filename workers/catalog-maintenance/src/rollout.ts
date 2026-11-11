@@ -3,6 +3,7 @@ import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { backendState as backend } from './backend-errors'
 import { canonical,digest,HASH,nowIso,record } from './util'
+import { expectedScopeSchoolCount } from './scope-config'
 
 type School={university_id:string;last_attempt_at:string|null}
 type Inspection={university_id:string;source_id:string;url:string;due_at:string;last_attempt_at:string;kind:'captured'|'blocked';observation_id:string|null;checked_at:string|null;raw_sha256:string|null;snapshot_key:string|null;job_id:string|null;error_code:string|null}
@@ -53,9 +54,10 @@ export async function rolloutStatus(env:MaintenanceEnv,now=Date.now()):Promise<R
     if(result.reasons.length)return result
     const schools=(await env.PIPELINE_DB.prepare('SELECT university_id,last_attempt_at FROM maintenance_schools WHERE scope_sha256=? ORDER BY COALESCE(last_attempt_at,\'\'),university_id').bind(cfg.scope_sha256).all<School>()).results??[]
     const ids=new Set(schools.map(school=>school.university_id))
-    if(schools.length!==272||ids.size!==272||!Array.isArray(current)||new Set(current).size!==current.length||current.some(id=>!ids.has(id))){result.reasons.push('seeded_scope_unproven');return result}
+    const expected = expectedScopeSchoolCount(env)
+    if(schools.length!==expected||ids.size!==expected||!Array.isArray(current)||new Set(current).size!==current.length||current.some(id=>!ids.has(id))){result.reasons.push('seeded_scope_unproven');return result}
     if(!current.length){result.state='full_scope';return result}
-    if(current.length!==272&&(current.length<5||(current.length-5)%20!==0)){result.reasons.push('rollout_stage_unrecognized');return result}
+    if(current.length!==expected&&(current.length<5||(current.length-5)%20!==0)){result.reasons.push('rollout_stage_unrecognized');return result}
     const previous=current.length>5?await previousAdvance(env,cfg.scope_sha256,current):null
     if(current.length>5&&(!previous||previous.inspectedSchoolIds.some(id=>!ids.has(id))||previous.currentCanaryIds.some(id=>!previous.inspectedSchoolIds.includes(id)))){result.reasons.push('previous_rollout_evidence_unproven');return result}
     const already=previous?.inspectedSchoolIds??[],batch=current.filter(id=>!already.includes(id));result.currentBatchIds=batch
@@ -71,7 +73,7 @@ export async function rolloutStatus(env:MaintenanceEnv,now=Date.now()):Promise<R
     for(const id of batch){let proof:Inspection|undefined;for(const candidate of candidates.filter(row=>row.university_id===id)){if(!timestamp(candidate.last_attempt_at,now)||!Number.isFinite(Date.parse(candidate.due_at)))continue;if(candidate.kind==='blocked'&&candidate.job_id&&candidate.error_code){proof=candidate;break}if(candidate.kind==='captured'&&await verifyCapturedReference(env,candidate,now)){proof=candidate;break}}if(proof)result.inspections.push({...proof});else result.reasons.push(`school_first_inspection_unproven:${id}`)}
     result.inspectedSchoolIds=[...new Set([...already,...result.inspections.map(proof=>proof.university_id)])].sort()
     if(result.reasons.length)return result
-    if(current.length===272){if(result.inspectedSchoolIds.length!==272){result.reasons.push('all_school_first_inspections_unproven');return result}result.nextCanaryIds=[]}
+    if(current.length===expected){if(result.inspectedSchoolIds.length!==expected){result.reasons.push('all_school_first_inspections_unproven');return result}result.nextCanaryIds=[]}
     else{result.addedSchoolIds=schools.filter(school=>!current.includes(school.university_id)).slice(0,20).map(school=>school.university_id);result.nextCanaryIds=[...current,...result.addedSchoolIds]}
     result.state='eligible';return result
   }catch(error){result.backendState=backend(error);result.reasons=[...new Set([...result.reasons,result.backendState==='quota_wait'?'quota_wait':'rollout_evidence_unavailable'])];return result}

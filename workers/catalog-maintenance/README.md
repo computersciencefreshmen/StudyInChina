@@ -242,6 +242,37 @@ rolls back the entire candidate batch rather than silently retaining only its
 first programmes. The surrounding capture/review job remains durably retryable
 under its existing outcome and model-reservation rules.
 
+## Long official documents
+
+All four engines share complete-document partition manifests once their existing
+short-document limit is exceeded. Owned UTF-16 ranges are continuous, disjoint
+and cover the entire saved text. Checked HTML heading positions, PDF chapter/page
+boundaries and paragraph boundaries are preferred. An oversized section remains
+an explicitly labelled continuous split; it is never silently discarded.
+Every range and the original full text retain their hashes and original raw
+snapshot binding. Small header/chapter context spans are listed explicitly.
+Quotes must occur in both the full original text and an admitted owned/context
+range; `text:offset` evidence is checked again by the canonical importer.
+
+One Queue turn processes one source range and one target batch, with at most two
+existing-account model requests. Identity/award output is capped at twenty and
+capacity-limited sections remain unfinished review work. Independent extraction
+still does not see the first answer. Short sources preserve their exact original
+payloads and reservation keys. Long-source keys bind the admitted text range;
+unknown original requests, equivalent captured-text aliases and expired sends
+cannot escape by selecting a different partition. Healthy concurrent requests
+cause a soft capacity wait, rather than becoming permanent unknown outcomes.
+
+Content-addressed results and their immutable unit pointers precede cursor CAS.
+The cursor also binds the real source-check time, job and target scope, while
+model keys omit audit dates so later genuine checks can reuse exact paid outputs.
+After all units are scanned, contradictory cross-section claims remain held.
+Accepted proposals drain in bounded transactions before the drain cursor moves;
+a crash can repeat an idempotent write but cannot skip unsaved facts. Progress
+distinguishes scanned ranges, unfinished sections, conflicts and public releases.
+A complete text scan never certifies a complete school catalogue: the separate
+official-row reconciliation and human completeness review still apply.
+
 ## Automatic staged rollout
 
 The first five schools each need a real saved snapshot or an explicit durable

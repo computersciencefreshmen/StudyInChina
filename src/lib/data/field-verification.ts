@@ -36,7 +36,7 @@ export function fieldVerificationContentSha256(entry: FieldVerification): string
 export function fieldRecordScopeSha256(entityType: FieldVerification['entityType'], record: Program | AdmissionCycle | Scholarship): string {
   if (entityType === 'admissionCycle') {
     const cycle = record as AdmissionCycle
-    return fieldValueSha256({ entityType, id: cycle.id, programId: cycle.programId, academicYear: cycle.academicYear, intake: cycle.intake })
+    return fieldValueSha256({ entityType, id: cycle.id, programId: cycle.programId, academicYear: cycle.academicYear, intake: cycle.intake, ...(cycle.teachingLanguage ? { teachingLanguage: cycle.teachingLanguage } : {}), ...(cycle.applicationRound ? { applicationRound: cycle.applicationRound } : {}) })
   }
   if (entityType === 'program') {
     const program = record as Program
@@ -61,7 +61,7 @@ function fieldSchema(entityType: FieldVerification['entityType'], path: string):
     const fields: Record<string, z.ZodType> = { opensOn: admissionCycleSchema.shape.opensOn, closesOn: admissionCycleSchema.shape.closesOn,
       dateStatus: admissionCycleSchema.shape.dateStatus, tuitionCny: admissionCycleSchema.shape.tuitionCny,
       tuitionPeriod: admissionCycleSchema.shape.tuitionPeriod, tuitionStatus: admissionCycleSchema.shape.tuitionStatus,
-      tuitionSchedule: admissionCycleSchema.shape.tuitionSchedule, applicationFeeCny: admissionCycleSchema.shape.applicationFeeCny }
+      tuitionSchedule: admissionCycleSchema.shape.tuitionSchedule, applicationFeeCny: admissionCycleSchema.shape.applicationFeeCny, languageRequirements: admissionCycleSchema.shape.languageRequirements, eligibility: admissionCycleSchema.shape.eligibility, applicationMaterials: admissionCycleSchema.shape.applicationMaterials, applyUrl: admissionCycleSchema.shape.applyUrl }
     return fields[path]
   }
   if (entityType === 'scholarship') {

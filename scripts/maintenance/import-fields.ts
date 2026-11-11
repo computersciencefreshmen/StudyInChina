@@ -1,4 +1,6 @@
 import { createHash } from 'node:crypto'
+import { quotedTrackScope } from '../../src/lib/data/cycle-scope'
+import { cyclePatchHasQuoteSupport, cyclePatchSchema } from './cycle-contracts'
 import type { DataBundle, Program, AdmissionCycle, Scholarship, Source } from '../../src/lib/data/types'
 import { bundleSchema } from '../../src/lib/data/schema'
 import { fieldRecordScopeSha256, fieldValueSha256, validateFieldVerification, fieldVerificationLedgerSchema, fieldVerificationContentSha256, type FieldVerification } from '../../src/lib/data/field-verification'
@@ -49,9 +51,11 @@ function assertAnnualScope(proposal: MaintenanceProposal, record: Program | Admi
       if (degrees.length && !degrees.includes(program.degreeLevel as typeof degrees[number])) throw new Error('field_degree_scope_mismatch')
     }
   }
-  if (proposal.entityType === 'program' && (proposal.scope.year !== null || proposal.scope.intake !== null)) throw new Error('program_field_scope_mismatch')
+  if (proposal.entityType === 'program' && (proposal.scope.year !== null || proposal.scope.intake !== null || proposal.scope.teachingLanguage || proposal.scope.applicationRound)) throw new Error('program_field_scope_mismatch')
   if (proposal.entityType === 'admission-cycle') {
     const cycle = record as AdmissionCycle
+    if (proposal.scope.teachingLanguage !== cycle.teachingLanguage || proposal.scope.applicationRound !== cycle.applicationRound) throw new Error('cycle_language_or_round_scope_mismatch')
+    for (const evidence of proposal.fieldEvidence.filter(entry => entry.fieldPath !== '$applicability')) if (!quotedTrackScope(cycle, evidence.quote, true)) throw new Error('cycle_track_evidence_required')
     if (proposal.scope.year !== cycle.academicYear || proposal.scope.intake !== cycle.intake) throw new Error('cycle_scope_mismatch')
     const intakeYear = cycle.intake === 'spring' ? cycle.academicYear.slice(5) : cycle.academicYear.slice(0, 4)
     if (!proposal.fieldEvidence.some(entry => entry.fieldPath === '$scope'
@@ -120,6 +124,11 @@ export async function importFieldCandidates(options: {
       target.sourceIds = [...new Set([...target.sourceIds, sourceId])]
       for (const patch of fields.patches) {
         if (!proposal.fieldEvidence.some(entry => entry.fieldPath === patch.fieldPath)) throw new Error('field_specific_evidence_missing')
+        if (entityType === 'program' && (record as Program).teachingLanguages.length > 1 && /languageRequirements|eligibility|applicationMaterials/u.test(patch.fieldPath)) throw new Error('multilingual_conditions_require_cycle_scope')
+        if (entityType === 'admissionCycle') {
+          const cyclePatch = cyclePatchSchema.safeParse(patch), quote = proposal.fieldEvidence.find(entry => entry.fieldPath === patch.fieldPath)?.quote
+          if (cyclePatch.success && (!quote || !cyclePatchHasQuoteSupport(cyclePatch.data, quote))) throw new Error('cycle_field_value_not_in_evidence')
+        }
         setField(target, patch.fieldPath, patch.value)
       }
       const validBundle = bundleSchema.parse(next), proposalEntries: FieldVerification[] = []

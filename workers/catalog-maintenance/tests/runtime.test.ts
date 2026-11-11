@@ -74,3 +74,18 @@ test('the cloud scheduler needs explicit mode and authorization and receives no 
   const yaml=readFileSync(new URL('../../../.github/workflows/catalog-maintenance-tick.yml',import.meta.url),'utf8')
   assert.match(yaml,/CATALOG_MAINTENANCE_MODE == 'cloud'/);assert.match(yaml,/CATALOG_MAINTENANCE_TICK_ENABLED == 'true'/);assert.match(yaml,/ref: main/);assert.match(yaml,/contents: read/);assert.doesNotMatch(yaml,/MINIMAX_.*(?:KEY|TOKEN)|CLOUDFLARE_API_TOKEN/)
 })
+
+test('status shares aggregate scans for one minute but observes an operator pause immediately',async()=>{
+  const f=makeEnv();await seed(f.env,seedInput())
+  await setControls(f.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:true,canaryUniversityIds:canary})
+  const prepare=f.db.prepare.bind(f.db);let aggregateScans=0
+  f.db.prepare=(sql:string)=>{if(sql.includes('GROUP BY'))aggregateScans++;return prepare(sql)}
+  try{
+    const first=await runtimeStatus(f.env);assert.equal(first.enabled,true);assert.equal('aggregatesCached'in first&&first.aggregatesCached,false)
+    const scans=aggregateScans;assert.ok(scans>=3)
+    const second=await runtimeStatus(f.env);assert.equal(second.enabled,true);assert.equal('aggregatesCached'in second&&second.aggregatesCached,true);assert.equal(aggregateScans,scans)
+    const cfg=await control(f.env);assert.ok(cfg)
+    await setControls(f.env,{expectedRevision:cfg.revision,legacyGuardSha256:TEST_GUARDS,enabled:false,modelsEnabled:false,canaryUniversityIds:canary})
+    const paused=await runtimeStatus(f.env);assert.equal(paused.enabled,false);assert.equal(paused.modelEnabled,false);assert.equal('aggregatesCached'in paused&&paused.aggregatesCached,false);assert.ok(aggregateScans>scans)
+  }finally{f.db.sqlite.close()}
+})
