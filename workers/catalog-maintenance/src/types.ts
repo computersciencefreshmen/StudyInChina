@@ -2,7 +2,7 @@ import type { D1Database, QueueMessageBatch, QueueProducer } from '../../publish
 import type { MaintenanceRecordTarget } from '../../../scripts/maintenance/field-contracts'
 
 export type ReconciliationTargetsUpload = { manifestSha256: string; bodySha256: string; byteLength: number; expectedRevision: number; uploadKey: string }
-export type MaintenanceMessage = { version: 1; jobId: string;seedSha256?:string;targetRefreshSha256?:string;bootstrapUploadSha256?:string;bootstrapSeedSha256?:string;discoveryManifestSha256?:string;discoveryOffset?:number;reconciliationTargetsUpload?:ReconciliationTargetsUpload }
+export type MaintenanceMessage = { version: 1; jobId: string;seedSha256?:string;targetRefreshSha256?:string;bootstrapUploadSha256?:string;bootstrapSeedSha256?:string;discoveryManifestSha256?:string;discoveryOffset?:number;reconciliationTargetsUpload?:ReconciliationTargetsUpload;scopeUpgradeSha256?:string }
 export type MaintenanceBatch = QueueMessageBatch<MaintenanceMessage>
 export interface BucketObject { text(): Promise<string>; arrayBuffer(): Promise<ArrayBuffer>; size?: number;etag?:string }
 export interface Bucket {
@@ -23,7 +23,7 @@ export type MaintenanceEnv = {
   MAINTENANCE_ADMIN_TOKEN?: string; MINIMAX_SUBSCRIPTION_KEY?: string;
   MAINTENANCE_ENABLED?: string; MINIMAX_MODEL?: string; MINIMAX_ANTHROPIC_BASE?: string;
   NATIVE_HEAD_RECONCILIATION_REQUIRED?: string;
-  SCOPE_REGISTRY_SHA256?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;
+  SCOPE_REGISTRY_SHA256?: string; SCOPE_SCHOOL_COUNT?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;
   USER_AGENT?: string; FETCH_CONCURRENCY?: string; MODEL_CONCURRENCY?: string;
 }
 export type Control = {

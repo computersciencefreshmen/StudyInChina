@@ -1,6 +1,7 @@
 import manifest from '../../../content/maintenance/head-reconciliation-2026-11-10.v1.json'
 import type { MaintenanceEnv } from './types'
 import { canonical, digest, HASH, record } from './util'
+import { isPinnedScopeTransition, scopeUpgradeLineage } from './scope-config'
 
 export type NativeReconciliationGate = { required: boolean; ready: boolean; reason: 'not_required' | 'resume_verified' | 'resume_missing' | 'resume_invalid' }
 const closed = (reason: 'resume_missing' | 'resume_invalid'): NativeReconciliationGate => ({ required: true, ready: false, reason })
@@ -10,7 +11,7 @@ const closed = (reason: 'resume_missing' | 'resume_invalid'): NativeReconciliati
 export async function nativeReconciliationGate(env: MaintenanceEnv): Promise<NativeReconciliationGate> {
   if (env.NATIVE_HEAD_RECONCILIATION_REQUIRED !== 'true') return { required: false, ready: true, reason: 'not_required' }
   const { sha256, ...content } = manifest
-  if (env.SCOPE_REGISTRY_SHA256 !== manifest.scopeRegistrySha256 || await digest(canonical(content)) !== sha256) return closed('resume_invalid')
+  if (await digest(canonical(content)) !== sha256) return closed('resume_invalid')
   // Database failures intentionally propagate to existing quota/backend handling.
   const row = await env.PIPELINE_DB.prepare('SELECT kind,details_json FROM maintenance_events WHERE event_id=?').bind(`${manifest.operationId}:resume`).first<{ kind: string; details_json: string }>()
   if (!row) return closed('resume_missing')
@@ -28,5 +29,14 @@ export async function nativeReconciliationGate(env: MaintenanceEnv): Promise<Nat
   // must also exist. Subsequent catalogue heads and operator pauses are allowed.
   const object = await env.SNAPSHOTS_BUCKET.get(saved.objectKey as string)
   if (!object || object.size !== undefined && object.size > 32 * 1024 || await object.text() !== bytes) return closed('resume_invalid')
+  if (!env.SCOPE_REGISTRY_SHA256) return closed('resume_invalid')
+  if (!await scopeUpgradeLineage(env, manifest.scopeRegistrySha256, env.SCOPE_REGISTRY_SHA256)) {
+    // Let the old, still-authorized cohort settle its immutable exports before
+    // scope CAS. A new deployment pin alone never registers the added schools.
+    const current = await env.PIPELINE_DB.prepare('SELECT scope_sha256,seed_sha256,legacy_guard_sha256 FROM maintenance_control WHERE singleton=1')
+      .first<{ scope_sha256: string; seed_sha256: string; legacy_guard_sha256: string }>()
+    if (!isPinnedScopeTransition(env, manifest.scopeRegistrySha256) || current?.scope_sha256 !== manifest.scopeRegistrySha256
+      || current.seed_sha256 !== manifest.seedSha256 || current.legacy_guard_sha256 !== manifest.legacyGuardSha256) return closed('resume_invalid')
+  }
   return { required: true, ready: true, reason: 'resume_verified' }
 }

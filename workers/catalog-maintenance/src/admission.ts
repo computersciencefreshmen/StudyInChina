@@ -49,7 +49,7 @@ export async function fetchPlanQuota(env:MaintenanceEnv,fetcher:typeof fetch=fet
 }
 function modelRequest(value:unknown):ModelRequest {
   const raw=record(value)
-  if(!raw||!HASH.test(String(raw.reservationKey))||!HASH.test(String(raw.sourceId))||!HASH.test(String(raw.snapshotSha256))||!['primary','independent-review'].includes(String(raw.pass))||!['maintenance','expansion'].includes(String(raw.lane))||typeof raw.payload!=='string'||raw.payload.length>200000||!Array.isArray(raw.universityIds)||!raw.universityIds.length||raw.universityIds.length>272||raw.universityIds.some(id=>typeof id!=='string')||raw.recordIds!==undefined&&(!Array.isArray(raw.recordIds)||raw.recordIds.some(id=>typeof id!=='string'))) throw new Error('invalid_model_request')
+  if(!raw||!HASH.test(String(raw.reservationKey))||!HASH.test(String(raw.sourceId))||!HASH.test(String(raw.snapshotSha256))||!['primary','independent-review'].includes(String(raw.pass))||!['maintenance','expansion'].includes(String(raw.lane))||typeof raw.payload!=='string'||raw.payload.length>200000||!Array.isArray(raw.universityIds)||!raw.universityIds.length||raw.universityIds.length>295||raw.universityIds.some(id=>typeof id!=='string')||raw.recordIds!==undefined&&(!Array.isArray(raw.recordIds)||raw.recordIds.some(id=>typeof id!=='string'))) throw new Error('invalid_model_request')
   return raw as unknown as ModelRequest
 }
 export class ModelAdmission {
@@ -92,7 +92,7 @@ export class ModelAdmission {
     const base=this.env.MINIMAX_ANTHROPIC_BASE??'https://api.minimaxi.com/anthropic'
     if(!ENDPOINTS.has(base)||this.env.MINIMAX_MODEL!=='MiniMax-M3'||!this.env.MINIMAX_SUBSCRIPTION_KEY) return json({ok:false,error:'subscription_configuration_invalid'},409)
     const source=await this.env.PIPELINE_DB.prepare('SELECT source_id,raw_sha256 FROM maintenance_sources WHERE source_id=? AND enabled=1').bind(input.sourceId).first<{source_id:string;raw_sha256:string|null}>()
-    const schools=(await this.env.PIPELINE_DB.prepare('SELECT university_id FROM maintenance_source_schools WHERE source_id=?').bind(input.sourceId).all<{university_id:string}>()).results??[]
+    const schools=(await this.env.PIPELINE_DB.prepare('SELECT x.university_id FROM maintenance_source_schools x JOIN maintenance_schools u ON u.university_id=x.university_id WHERE x.source_id=? AND u.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)').bind(input.sourceId).all<{university_id:string}>()).results??[]
     if(!source||input.universityIds.some(id=>!schools.some(s=>s.university_id===id))) return json({ok:false,error:'model_scope_not_seeded'},409)
     if(source.raw_sha256&&source.raw_sha256!==input.snapshotSha256)return json({ok:false,error:'source_snapshot_superseded'},409)
     const canary=JSON.parse(cfg.canary_json) as string[]
@@ -103,7 +103,15 @@ export class ModelAdmission {
       const targets=(await this.env.PIPELINE_DB.prepare(`SELECT target_json FROM maintenance_record_targets WHERE active=1 AND record_id IN(${[...guardedRecordIds].map(()=>'?').join(',')})`).bind(...guardedRecordIds).all<{target_json:string}>()).results??[]
       for(const target of targets){const value=record(JSON.parse(target.target_json));if(value?.entityType==='admission-cycle'){const parent=record(value.identity)?.programId;if(typeof parent!=='string'||!parent.trim())return json({ok:false,error:'record_parent_scope_unproven'},409);guardedRecordIds.add(parent)}}
     }
-    const guards=(await this.env.PIPELINE_DB.prepare('SELECT * FROM maintenance_legacy_guards WHERE source_id IS NULL OR source_id=? OR snapshot_sha256=?').bind(input.sourceId,input.snapshotSha256).all<{university_id:string|null;record_id:string|null;source_id:string|null;snapshot_sha256:string|null}>()).results??[]
+    // Apply the same conservative scope filters in SQL before fetching guards.
+    // NULL school/record guards remain global; snapshot aliases still match
+    // independently of source ID, and parent record IDs are already expanded.
+    const guards=(await this.env.PIPELINE_DB.prepare(`SELECT * FROM maintenance_legacy_guards
+      WHERE (university_id IS NULL OR university_id IN(SELECT value FROM json_each(?)))
+        AND (snapshot_sha256 IS NULL OR snapshot_sha256=?)
+        AND (source_id IS NULL OR source_id=? OR snapshot_sha256=?)
+        AND (source_id IS NOT NULL OR record_id IS NULL OR record_id IN(SELECT value FROM json_each(?)))`)
+      .bind(JSON.stringify(input.universityIds),input.snapshotSha256,input.sourceId,input.snapshotSha256,JSON.stringify([...guardedRecordIds])).all<{university_id:string|null;record_id:string|null;source_id:string|null;snapshot_sha256:string|null}>()).results??[]
     // A source-wide extraction can overlap a prior record-level request. The
     // exact old source/snapshot therefore stays reserved even when a new caller
     // omits record IDs. Hashless parent guards remain stronger across snapshots.

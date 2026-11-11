@@ -34,11 +34,17 @@ export const scopeSchoolSchema = z.object({
 }).strict()
 
 export const maintenanceScopeSchema = z.object({
-  format: z.literal('studyinchina.maintenance-scope'), formatVersion: z.literal(1),
-  scopeId: z.string().min(1), createdAt: timestampSchema, expectedSchoolCount: z.literal(272),
-  inputCatalogSha256: sha256Schema, schools: z.array(scopeSchoolSchema).length(272),
+  format: z.literal('studyinchina.maintenance-scope'), formatVersion: z.union([z.literal(1), z.literal(2)]),
+  scopeId: z.string().min(1), createdAt: timestampSchema, expectedSchoolCount: z.union([z.literal(272), z.literal(295)]),
+  inputCatalogSha256: sha256Schema, schools: z.array(scopeSchoolSchema).min(272).max(295),
+  parentScopeSha256: sha256Schema.optional(),
   sha256: sha256Schema,
 }).strict().superRefine((scope, context) => {
+  if (scope.schools.length !== scope.expectedSchoolCount
+    || scope.formatVersion === 1 && (scope.expectedSchoolCount !== 272 || scope.parentScopeSha256 !== undefined)
+    || scope.formatVersion === 2 && (scope.expectedSchoolCount !== 295 || !scope.parentScopeSha256)) {
+    context.addIssue({ code: 'custom', message: 'Scope version, parent and exact school count disagree' })
+  }
   const ids = scope.schools.map(school => school.universityId)
   if (new Set(ids).size !== ids.length) context.addIssue({ code: 'custom', message: 'Scope has duplicate schools' })
   for (const school of scope.schools) {
@@ -87,7 +93,7 @@ export const maintenanceProposalSchema = z.object({
   entityType: z.enum(['program', 'admission-cycle', 'scholarship']), recordId: z.string().min(1).nullable(),
   operation: z.enum(['create', 'patch']), fields: z.record(z.string(), z.unknown()),
   source: candidateSourceSchema, fieldEvidence: z.array(fieldEvidenceSchema).min(1),
-  scope: z.object({ year: z.string().nullable(), intake: z.string().nullable() }).strict(),
+  scope: z.object({ year: z.string().nullable(), intake: z.string().nullable(), teachingLanguage: z.string().min(1).optional(), applicationRound: z.string().trim().min(1).max(120).optional() }).strict(),
   extractionAttemptId: z.string().min(1).nullable().optional(),
   status: z.enum(['ready', 'held']), warnings: z.array(z.string()), review: independentReviewSchema.optional(),
 }).strict()

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { connection } from 'next/server'
+import { AdmissionTrackCards } from '@/components/features/AdmissionTrackCards'
 import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
@@ -20,7 +21,7 @@ import { formatCny, formatDate, formatTuition, localize, localizeProgramText } f
 import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
 import { getCatalogData, getData } from '@/lib/data/load'
-import { getProgramDisplayDetails } from '@/lib/data/program-details'
+import { getProgramCycleDisplayDetails } from '@/lib/data/program-details'
 import { localizeProgramSource, programSourceHref } from '@/lib/data/program-source-labels'
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { isIndexableProgram } from '@/lib/seo/indexability'
@@ -70,7 +71,6 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const data = await getCatalogData()
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) notFound()
-  const details = getProgramDisplayDetails(program)
 
   const messages = getMessages(locale)
   const decisionCopy = getDecisionExperienceCopy(locale)
@@ -80,6 +80,9 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const city = data.cities.find((item) => item.id === university.cityId)
   const today = getTodayDate()
   const cycle = selectAdmissionCycle(data.admissionCycles, program.id, today)
+  const hasScopedCycles = data.admissionCycles.some(item => item.programId === program.id && (item.teachingLanguage || item.applicationRound))
+  const details = getProgramCycleDisplayDetails(program, cycle, today, hasScopedCycles)
+  const applicationUrl = cycle?.teachingLanguage || cycle?.applicationRound ? cycle.applyUrl : program.applyUrl
   if (!details || !hasConfirmedProgramDuration(program) || !cycle) {
     const partialSourceIds = new Set([...program.sourceIds, ...(cycle?.sourceIds ?? [])])
     const sources = data.sources.filter((source) => partialSourceIds.has(source.id))
@@ -126,7 +129,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       ? null
       : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)
     const partialCanApply = isCurrentVerifiedRecord(program, today) && Boolean(cycle && isCurrentVerifiedRecord(cycle, today)) && (partialApplicationState === 'open' || partialApplicationState === 'rolling')
-      && Boolean(program.applyUrl)
+      && Boolean(applicationUrl)
     return <>
       <PageHero
         variant="compact"
@@ -136,8 +139,8 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           <span>{localize(university.name, locale)}</span>
           {city ? <span> {'\u00b7'} {localize(city.name, locale)}</span> : null}
         </>}
-        actions={partialCanApply && program.applyUrl
-          ? <a className="atlas-button atlas-button--primary atlas-button--medium" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+        actions={partialCanApply && applicationUrl
+          ? <a className="atlas-button atlas-button--primary atlas-button--medium" href={applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
           : <a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
               {messages.common.officialSource} ↗
             </a>}
@@ -157,6 +160,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       <div className="atlas-container">
         <DiscoveryNotice locale={locale} />
         <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
+        <AdmissionTrackCards program={program} cycles={data.admissionCycles} sources={data.sources} locale={locale} today={today} />
       </div>
       <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail>
         <div className={styles.main}>
@@ -203,8 +207,8 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               { label: messages.common.lastVerified, value: formatDate(program.verifiedAt, locale, '—') },
             ]}
             notice={partialReferenceTuition ? officialReferenceTuitionCopy(locale).notice : messages.common.authoritativeNotice}
-            actions={partialCanApply && program.applyUrl
-              ? <a className="atlas-button atlas-button--primary atlas-button--small" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+            actions={partialCanApply && applicationUrl
+              ? <a className="atlas-button atlas-button--primary atlas-button--small" href={applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
               : <a className="atlas-button atlas-button--secondary atlas-button--small" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
           />
           <FollowUpdates locale={locale} targets={[{ kind: 'program', id: program.id, label: localize(program.name, locale) }]} />
@@ -280,7 +284,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const evidenceBasis = cycle.evidenceBasis === 'recurring-official-rule'
     ? messages.programs.recurringRule
     : messages.programs.cycleSpecific
-  const requirements = program.languageRequirements.filter((item) => item.test !== 'other').map((item) => (
+  const requirements = (cycle.teachingLanguage || cycle.applicationRound ? cycle.languageRequirements ?? [] : program.teachingLanguages.length <= 1 ? program.languageRequirements : []).filter((item) => item.test !== 'other').map((item) => (
     `${item.test}${item.minimum ? `: ${localizeProgramText(item.minimum, locale)}` : ''}`
   ))
   const sourceIds = new Set([...program.sourceIds, ...cycle.sourceIds])
@@ -320,8 +324,8 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         {details.campus ? <span> · {localize(details.campus, locale)}</span> : city ? <span> · {localize(city.name, locale)}</span> : null}
       </>}
       actions={<>
-        {isAcceptingApplications && program.applyUrl
-          ? <a className="atlas-button atlas-button--primary atlas-button--medium" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+        {isAcceptingApplications && applicationUrl
+          ? <a className="atlas-button atlas-button--primary atlas-button--medium" href={applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
           : <a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
           {messages.common.officialSource}{' \u2197'}
           </a>}
@@ -344,6 +348,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     <div className="atlas-container">
       <DiscoveryNotice locale={locale} />
       <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
+        <AdmissionTrackCards program={program} cycles={data.admissionCycles} sources={data.sources} locale={locale} today={today} />
     </div>
     <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail>
       <div className={styles.main}>
@@ -448,8 +453,8 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
             { label: messages.common.lastVerified, value: formatDate(program.verifiedAt, locale, '—') },
           ]}
           notice={referenceTuition ? officialReferenceTuitionCopy(locale).notice : messages.common.authoritativeNotice}
-          actions={isAcceptingApplications && program.applyUrl
-            ? <a className="atlas-button atlas-button--primary atlas-button--small" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+          actions={isAcceptingApplications && applicationUrl
+            ? <a className="atlas-button atlas-button--primary atlas-button--small" href={applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
             : <a className="atlas-button atlas-button--secondary atlas-button--small" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
         />
         <FollowUpdates locale={locale} targets={[{ kind: 'program', id: program.id, label: localize(program.name, locale) }]} />

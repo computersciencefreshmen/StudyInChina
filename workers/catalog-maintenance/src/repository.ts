@@ -6,6 +6,9 @@ import { after, canonical, digest, HASH, ID, nowIso, record } from './util'
 import { coalesceOperations,type SqlOperation } from './sql-plan'
 import { selectScheduledJobs } from './scheduling'
 import { captureCadence } from './cadence'
+import { expectedScopeSchoolCount } from './scope-config'
+import { getTodayDate } from '../../../src/lib/data/freshness'
+import { readCoverageSnapshot, validateCoverageSnapshot, storeCoverageSnapshot, publishCoverageSnapshot, coverageEvent, type CoverageSnapshot } from './coverage'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
 
 export async function control(env: MaintenanceEnv): Promise<Control | null> {
@@ -16,9 +19,9 @@ export async function event(env: MaintenanceEnv, kind: string, details: unknown,
 }
 export type SeedSchool = { universityId: string; name: unknown; sourceSeeds: Array<{ id: string; url: string; allowedHosts: string[]; sourceCategory: string; enabled: boolean; registration?: string }> }
 export type Seed = { scopeRegistrySha256: string; inputCatalogSha256: string; schools: SeedSchool[]; legacyGuards: { artifactSha256: string; entries: LegacyGuard[] };recordTargets:RecordTarget[] }
-export function validateSeed(value: unknown): Seed {
+export function validateSeed(value: unknown, expectedCount?: number): Seed {
   const raw = record(value), legacy = record(raw?.legacyGuards)
-  if (!raw || !HASH.test(String(raw.scopeRegistrySha256)) || !HASH.test(String(raw.inputCatalogSha256)) || !legacy || !HASH.test(String(legacy.artifactSha256)) || !Array.isArray(legacy.entries) || legacy.entries.length > 20000 || !Array.isArray(raw.schools) || raw.schools.length !== 272) throw new MaintenanceError('invalid_fixed_scope_seed')
+  if (!raw || !HASH.test(String(raw.scopeRegistrySha256)) || !HASH.test(String(raw.inputCatalogSha256)) || !legacy || !HASH.test(String(legacy.artifactSha256)) || !Array.isArray(legacy.entries) || legacy.entries.length > 20000 || !Array.isArray(raw.schools) || ![272,295].includes(raw.schools.length) || expectedCount !== undefined && raw.schools.length !== expectedCount) throw new MaintenanceError('invalid_fixed_scope_seed')
   const schools: SeedSchool[] = [], ids = new Set<string>()
   for (const item of raw.schools) {
     const school = record(item), id = String(school?.universityId ?? '')
@@ -62,7 +65,7 @@ export function validateSeed(value: unknown): Seed {
   return {scopeRegistrySha256:String(raw.scopeRegistrySha256),inputCatalogSha256:String(raw.inputCatalogSha256),schools,legacyGuards:{artifactSha256:String(legacy.artifactSha256),entries:guards},recordTargets:targets}
 }
 export async function seed(env: MaintenanceEnv, value: unknown, now = Date.now(),staged=false) {
-  const input = validateSeed(value), hash = await digest(canonical(input)), old = await control(env)
+  const input = validateSeed(value, expectedScopeSchoolCount(env)), hash = await digest(canonical(input)), old = await control(env)
   if (env.SCOPE_REGISTRY_SHA256 && input.scopeRegistrySha256 !== env.SCOPE_REGISTRY_SHA256) throw new MaintenanceError('scope_registry_mismatch')
   if (old) {
     if (old.seed_sha256 !== hash) throw new MaintenanceError('seed_already_exists')
@@ -89,13 +92,13 @@ export async function seed(env: MaintenanceEnv, value: unknown, now = Date.now()
     add('INSERT OR IGNORE INTO maintenance_record_targets(target_id,record_id,entity_type,university_id,record_scope_sha256,academic_year,intake,fields_json,target_json) VALUES(?,?,?,?,?,?,?,?,?)',id,target.recordId,target.entityType,target.universityId,target.recordScopeSha256,target.year,target.intake,JSON.stringify(target.fields),JSON.stringify(target))
     for(const sourceId of new Set(target.sourceIds))if(sources.has(sourceId))add('INSERT OR IGNORE INTO maintenance_target_sources VALUES(?,?)',id,sourceId)
   }
-  const plan={version:1,seedSha256:hash,counts:{schools:272,sources:sources.size,guards:input.legacyGuards.entries.length,targets:input.recordTargets.length},operations:coalesceOperations(operations)}
+  const plan={version:1,seedSha256:hash,counts:{schools:input.schools.length,sources:sources.size,guards:input.legacyGuards.entries.length,targets:input.recordTargets.length},operations:coalesceOperations(operations)}
   const planBytes=canonical(plan),planSha256=await digest(planBytes)
   await env.SNAPSHOTS_BUCKET.put(`maintenance/bootstrap/${hash}.json`,planBytes,{httpMetadata:{contentType:'application/json'}})
   await env.PIPELINE_DB.prepare('INSERT OR IGNORE INTO maintenance_control(singleton,scope_sha256,input_catalog_sha256,seed_sha256,legacy_guard_sha256,updated_at,seed_total,seed_plan_sha256) VALUES(1,?,?,?,?,?,?,?)').bind(input.scopeRegistrySha256,input.inputCatalogSha256,hash,input.legacyGuards.artifactSha256,nowIso(now),plan.operations.length,planSha256).run()
   if(staged){await env.MAINTENANCE_QUEUE.send({version:1,jobId:hash,seedSha256:hash});return{seedSha256:hash,reused:false,enabled:false,seedComplete:false,operations:plan.operations.length}}
   while(!(await control(env))?.seed_complete)await continueSeed(env,hash,false)
-  return {seedSha256:hash,reused:false,enabled:false,seedComplete:true,schools:272,sources:sources.size}
+  return {seedSha256:hash,reused:false,enabled:false,seedComplete:true,schools:input.schools.length,sources:sources.size}
 }
 export async function continueSeed(env:MaintenanceEnv,hash:string,enqueue=true) {
   const cfg=await control(env)
@@ -130,7 +133,7 @@ export async function setControls(env: MaintenanceEnv, value: unknown, now = Dat
   if (raw.modelsEnabled && (env.MAINTENANCE_ENABLED !== 'true' || !env.MINIMAX_SUBSCRIPTION_KEY || env.MINIMAX_MODEL !== 'MiniMax-M3')) throw new MaintenanceError('subscription_model_configuration_unavailable')
   if(raw.enabled&&env.SCOPE_REGISTRY_SHA256!==old.scope_sha256)throw new MaintenanceError('activation_requires_exact_scope_pin')
   const canary=raw.canaryUniversityIds===undefined?JSON.parse(old.canary_json) as string[]:raw.canaryUniversityIds===null?[]:raw.canaryUniversityIds
-  if(!Array.isArray(canary)||canary.length>272||new Set(canary).size!==canary.length||canary.some(id=>typeof id!=='string'||!ID.test(id)))throw new MaintenanceError('invalid_canary_scope')
+  if(!Array.isArray(canary)||canary.length>expectedScopeSchoolCount(env)||new Set(canary).size!==canary.length||canary.some(id=>typeof id!=='string'||!ID.test(id)))throw new MaintenanceError('invalid_canary_scope')
   const known=await env.PIPELINE_DB.prepare('SELECT COUNT(*) count FROM maintenance_schools s JOIN json_each(?) chosen ON chosen.value=s.university_id WHERE s.scope_sha256=?').bind(JSON.stringify(canary),old.scope_sha256).first<{count:number}>()
   if(known?.count!==canary.length)throw new MaintenanceError('canary_school_not_seeded')
   if(raw.enabled&&old.revision===0&&!canary.length)throw new MaintenanceError('initial_canary_required')
@@ -140,25 +143,34 @@ export async function setControls(env: MaintenanceEnv, value: unknown, now = Dat
   return control(env)
 }
 export async function source(env: MaintenanceEnv,id: string) { return env.PIPELINE_DB.prepare('SELECT * FROM maintenance_sources WHERE source_id=?').bind(id).first<SourceRow>() }
-export async function sourceSchools(env: MaintenanceEnv,id: string): Promise<SchoolRow[]> { return (await env.PIPELINE_DB.prepare('SELECT s.university_id,s.name_json,s.seed_json FROM maintenance_schools s JOIN maintenance_source_schools x ON x.university_id=s.university_id WHERE x.source_id=? ORDER BY s.university_id').bind(id).all<SchoolRow>()).results ?? [] }
+export async function sourceSchools(env: MaintenanceEnv,id: string): Promise<SchoolRow[]> { return (await env.PIPELINE_DB.prepare('SELECT s.university_id,s.name_json,s.seed_json FROM maintenance_schools s JOIN maintenance_source_schools x ON x.university_id=s.university_id WHERE x.source_id=? AND s.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1) ORDER BY s.university_id').bind(id).all<SchoolRow>()).results ?? [] }
 export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
   const cfg = await control(env)
   if(cfg&&!cfg.seed_complete&&cfg.seed_plan_sha256){await env.MAINTENANCE_QUEUE.send({version:1,jobId:cfg.seed_sha256,seedSha256:cfg.seed_sha256});return{enabled:false,queued:1}}
   if(cfg&&!cfg.targets_complete){const refresh=await env.PIPELINE_DB.prepare("SELECT refresh_sha256 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=? ORDER BY created_at DESC LIMIT 1").bind(cfg.input_catalog_sha256).first<{refresh_sha256:string}>();if(refresh){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refresh.refresh_sha256,targetRefreshSha256:refresh.refresh_sha256});return{enabled:false,queued:1}}}
   if (env.MAINTENANCE_ENABLED !== 'true' || !cfg?.enabled || !cfg.seed_complete) return {enabled:false,queued:0}
   if(!(await nativeReconciliationGate(env)).ready)return{enabled:false,queued:0,nativeHeadReconciliationRequired:true}
-  const candidates = (await env.PIPELINE_DB.prepare(`SELECT s.*,(SELECT json_group_array(university_id) FROM maintenance_source_schools WHERE source_id=s.source_id) school_ids_json,(SELECT json_group_array(json_object('closesOn',json_extract(t.fields_json,'$.closesOn'),'deadline',json_extract(t.fields_json,'$.deadline'))) FROM maintenance_record_targets t JOIN maintenance_target_sources x ON x.target_id=t.target_id WHERE x.source_id=s.source_id AND t.active=1) scheduling_fields_json FROM maintenance_sources s WHERE s.enabled=1 AND s.due_at<=? AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=s.source_id)) AND NOT EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.source_id=s.source_id AND j.stage='capture' AND j.status IN('queued','running','retry')) ORDER BY COALESCE((SELECT MIN(COALESCE(u.last_attempt_at,'')) FROM maintenance_schools u JOIN maintenance_source_schools x ON x.university_id=u.university_id WHERE x.source_id=s.source_id),''),COALESCE(s.last_attempt_at,''),s.due_at,s.source_id LIMIT 40`).bind(nowIso(now),cfg.canary_json,cfg.canary_json).all<SourceRow&{school_ids_json:string;scheduling_fields_json:string}>()).results ?? []
+  const coverage = await readCoverageSnapshot(env,cfg.input_catalog_sha256,cfg.scope_sha256,now)
+  const coverageBySchool = new Map(coverage?.schools.map(row => [row.universityId,row]) ?? [])
+  const candidates = (await env.PIPELINE_DB.prepare(`SELECT s.*,(SELECT json_group_array(xu.university_id) FROM maintenance_source_schools xu JOIN maintenance_schools su ON su.university_id=xu.university_id WHERE xu.source_id=s.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)) school_ids_json,(SELECT json_group_array(json_object('closesOn',json_extract(t.fields_json,'$.closesOn'),'deadline',json_extract(t.fields_json,'$.deadline'))) FROM maintenance_record_targets t JOIN maintenance_target_sources x ON x.target_id=t.target_id WHERE x.source_id=s.source_id AND t.active=1) scheduling_fields_json FROM maintenance_sources s WHERE s.enabled=1 AND EXISTS(SELECT 1 FROM maintenance_source_schools sx JOIN maintenance_schools su ON su.university_id=sx.university_id WHERE sx.source_id=s.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)) AND (s.due_at<=? OR ((s.last_success_at IS NULL OR s.last_success_at<=?) AND EXISTS(SELECT 1 FROM maintenance_source_schools q JOIN json_each(?) c ON json_extract(c.value,'$.universityId')=q.university_id WHERE q.source_id=s.source_id AND json_extract(c.value,'$.reviewAfter')>=? AND json_extract(c.value,'$.reviewAfter')<=?))) AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=s.source_id)) AND NOT EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.source_id=s.source_id AND j.stage='capture' AND j.status IN('queued','running','retry')) ORDER BY COALESCE((SELECT MIN(COALESCE(u.last_attempt_at,'')) FROM maintenance_schools u JOIN maintenance_source_schools x ON x.university_id=u.university_id WHERE x.source_id=s.source_id),''),COALESCE(s.last_attempt_at,''),s.due_at,s.source_id LIMIT 40`).bind(nowIso(now),after(-86400000,now),JSON.stringify(coverage?.schools ?? []),getTodayDate(new Date(now)),getTodayDate(new Date(now+7*86400000)),cfg.canary_json,cfg.canary_json).all<SourceRow&{school_ids_json:string;scheduling_fields_json:string}>()).results ?? []
+  candidates.sort((a,b) => Math.min(...JSON.parse(a.school_ids_json).map((id:string)=>coverageBySchool.get(id)?.currentProgramCount ?? Infinity)) - Math.min(...JSON.parse(b.school_ids_json).map((id:string)=>coverageBySchool.get(id)?.currentProgramCount ?? Infinity)))
   const due:SourceRow[]=[],selectedSchools=new Set<string>()
   for(const row of candidates){const ids=JSON.parse(row.school_ids_json)as string[];if(ids.some(id=>selectedSchools.has(id)))continue;ids.forEach(id=>selectedSchools.add(id));due.push(row);if(due.length>=8)break}
   for (const row of due) {
     const id = await digest(`capture:${row.source_id}:${row.due_at}`)
-    const fields=JSON.parse((row as SourceRow&{scheduling_fields_json:string}).scheduling_fields_json)as Array<Record<string,unknown>>,priority=captureCadence(row,fields,now).priority===0?0:10
+    const fields=JSON.parse((row as SourceRow&{scheduling_fields_json:string}).scheduling_fields_json)as Array<Record<string,unknown>>
+    const reviewUrgent=(JSON.parse((row as SourceRow&{school_ids_json:string}).school_ids_json) as string[]).some(id=>{const date=coverageBySchool.get(id)?.reviewAfter;return Boolean(date&&date>=getTodayDate(new Date(now))&&date<=getTodayDate(new Date(now+7*86400000)))})
+    const priority=reviewUrgent||captureCadence(row,fields,now).priority===0?0:10
     await env.PIPELINE_DB.prepare("INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at) VALUES(?,?,'capture','queued',?,?,?,?)").bind(id,row.source_id,priority,nowIso(now),nowIso(now),nowIso(now)).run()
   }
   // A crash after persist/before send leaves a due job for the next tick.
-  const pool = (await env.PIPELINE_DB.prepare("WITH eligible AS(SELECT j.*,s.last_success_at source_last_success_at,CASE WHEN j.stage='maintain' OR(j.stage='capture' AND s.last_success_at IS NOT NULL) THEN 1 ELSE 0 END maintenance_lane FROM maintenance_jobs j JOIN maintenance_sources s ON s.source_id=j.source_id WHERE j.status IN('queued','retry') AND j.due_at<=? AND (j.enqueued_at IS NULL OR j.enqueued_at<?) AND (j.stage='capture' OR ?=1) AND (j.stage<>'maintain' OR ?=1) AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=j.source_id))),ranked AS(SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane ORDER BY priority,due_at,job_id) lane_order FROM eligible) SELECT * FROM ranked WHERE lane_order<=40 ORDER BY priority,due_at,job_id LIMIT 80").bind(nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete,cfg.canary_json,cfg.canary_json).all<JobRow&{source_last_success_at:string|null}>()).results ?? []
+  const pool = (await env.PIPELINE_DB.prepare("WITH eligible AS(SELECT j.*,CASE WHEN j.stage='award' OR s.category='scholarships' THEN 1 ELSE 0 END award_lane,s.category source_category,(SELECT json_group_array(xu.university_id) FROM maintenance_source_schools xu JOIN maintenance_schools su ON su.university_id=xu.university_id WHERE xu.source_id=j.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)) school_ids_json,(SELECT MIN(json_extract(c.value,'$.currentProgramCount')) FROM maintenance_source_schools x JOIN json_each(?) c ON json_extract(c.value,'$.universityId')=x.university_id WHERE x.source_id=j.source_id) coverage_count,s.last_success_at source_last_success_at,CASE WHEN j.stage='maintain' OR(j.stage='capture' AND s.last_success_at IS NOT NULL) THEN 1 ELSE 0 END maintenance_lane FROM maintenance_jobs j JOIN maintenance_sources s ON s.source_id=j.source_id WHERE j.status IN('queued','retry') AND EXISTS(SELECT 1 FROM maintenance_source_schools sx JOIN maintenance_schools su ON su.university_id=sx.university_id WHERE sx.source_id=j.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)) AND j.due_at<=? AND (j.enqueued_at IS NULL OR j.enqueued_at<?) AND (j.stage='capture' OR ?=1) AND (j.stage<>'maintain' OR ?=1) AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=j.source_id))),ranked AS(SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END ORDER BY priority,COALESCE(coverage_count,1000000),due_at,job_id) lane_order FROM eligible) SELECT * FROM ranked WHERE lane_order<=40 ORDER BY priority,due_at,job_id LIMIT 120").bind(JSON.stringify(coverage?.schools ?? []),nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete,cfg.canary_json,cfg.canary_json).all<JobRow&{source_last_success_at:string|null;school_ids_json:string;source_category:string}>()).results ?? []
   const round=await env.PIPELINE_DB.prepare('SELECT COUNT(*) schools,SUM(last_attempt_at IS NOT NULL) attempted FROM maintenance_schools WHERE scope_sha256=?').bind(cfg.scope_sha256).first<{schools:number;attempted:number}>()
-  const firstRoundComplete=Boolean(round?.schools===272&&round.attempted===272)
+  const firstRoundComplete=Boolean(round?.schools===expectedScopeSchoolCount(env)&&round.attempted===expectedScopeSchoolCount(env))
+  for (const job of pool) {
+    const rows = (JSON.parse(job.school_ids_json ?? '[]') as string[]).flatMap(id => coverageBySchool.has(id) ? [coverageBySchool.get(id)!] : [])
+    Object.assign(job,{...(rows.length?{coverage_count:Math.min(...rows.map(row=>row.currentProgramCount))}:{}),review_after:rows.map(row=>row.reviewAfter).filter((date):date is string=>Boolean(date)).sort()[0] ?? null})
+  }
   const jobs=selectScheduledJobs(pool,{limit:8,firstRoundComplete,now})
   let queued = 0
   for (const job of jobs) {
@@ -167,7 +179,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
   }
   // Read-only fetches may be retried after a lost lease. A model send cannot.
   await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET status=CASE WHEN stage='capture' THEN 'retry' ELSE 'unknown' END,error_code='execution_lease_expired',lease_token=NULL,lease_until=NULL,due_at=?,enqueued_at=NULL,updated_at=? WHERE status='running' AND lease_until<?").bind(after(60000,now),nowIso(now),nowIso(now)).run()
-  await event(env,'scheduler_tick',{queued,discoveredDueSources:due.length,firstRoundComplete,maintenanceShare:firstRoundComplete?0.7:0.3},now)
+  await event(env,'scheduler_tick',{queued,discoveredDueSources:due.length,firstRoundComplete,coverageSnapshotSha256:coverage?.sha256 ?? null,maintenanceShare:firstRoundComplete?0.7:0.3},now)
   return {enabled:true,queued}
 }
 export async function claimJob(env: MaintenanceEnv,id:string,now=Date.now()):Promise<JobRow|null> {
@@ -204,17 +216,55 @@ export async function recordTargets(env:MaintenanceEnv,sourceId:string,depth=0,s
   if(depth<2){const lineage=await env.SNAPSHOTS_BUCKET.get(`maintenance/discovery-lineage/${sourceId}.json`);if(lineage){const value=record(JSON.parse(await lineage.text()));if(value?.sourceId!==sourceId||!Array.isArray(value.parents)||value.parents.some(id=>typeof id!=='string'||!HASH.test(id)))throw new MaintenanceError('source_lineage_invalid');for(const parent of value.parents as string[]){for(const target of await recordTargets(env,parent,depth+1,seen))if(target.entityType==='program'&&!targets.some(current=>current.entityType===target.entityType&&current.recordId===target.recordId))targets.push({...target,sourceIds:[...new Set([...target.sourceIds,sourceId])]})}}}
   return targets
 }
+/** An identity/field-only ACK may leave the six-file catalog digest unchanged.
+ * Reuse the immutable completed plan only after exact active-set readback. This
+ * runs on the ACK path, never once per scheduler tick. */
+async function restoreCompletedTargets(env:MaintenanceEnv,cfg:Control,refreshSha256:string,targets:RecordTarget[]) {
+  const row=await env.PIPELINE_DB.prepare("SELECT plan_sha256,input_catalog_sha256 FROM maintenance_target_refreshes WHERE refresh_sha256=? AND status='completed'").bind(refreshSha256).first<{plan_sha256:string;input_catalog_sha256:string}>()
+  const artifact=await env.SNAPSHOTS_BUCKET.get(`maintenance/target-refresh/${refreshSha256}.json`)
+  if(!row||row.input_catalog_sha256!==cfg.input_catalog_sha256||!artifact||artifact.size!==undefined&&artifact.size>24*1024*1024)throw new MaintenanceError('target_refresh_reuse_artifact_unavailable')
+  const bytes=await artifact.text(),plan=JSON.parse(bytes)as {refreshSha256:string;inputCatalogSha256:string;expectedCount:number}
+  if(await digest(bytes)!==row.plan_sha256||plan.refreshSha256!==refreshSha256||plan.inputCatalogSha256!==cfg.input_catalog_sha256||plan.expectedCount!==targets.length)throw new MaintenanceError('target_refresh_reuse_plan_mismatch')
+  const active=(await env.PIPELINE_DB.prepare('SELECT target_id,record_scope_sha256,target_json FROM maintenance_record_targets WHERE active=1 ORDER BY target_id').all<{target_id:string;record_scope_sha256:string;target_json:string}>()).results??[]
+  const sorted=(values:RecordTarget[])=>[...values].sort((a,b)=>`${a.entityType}:${a.recordId}`.localeCompare(`${b.entityType}:${b.recordId}`))
+  if(active.length!==targets.length||canonical(sorted(active.map(row=>maintenanceRecordTargetSchema.parse(JSON.parse(row.target_json)))))!==canonical(sorted(targets))
+    ||active.some(row=>row.record_scope_sha256!==JSON.parse(row.target_json).recordScopeSha256))throw new MaintenanceError('target_refresh_reuse_active_set_mismatch')
+  const registered=new Set(((await env.PIPELINE_DB.prepare('SELECT source_id FROM maintenance_sources').all<{source_id:string}>()).results??[]).map(row=>row.source_id))
+  const expectedBindings=targets.flatMap(target=>[...new Set(target.sourceIds)].filter(id=>registered.has(id)).map(sourceId=>[`${target.entityType}:${target.recordId}`,sourceId]))
+  const actualBindings=(await env.PIPELINE_DB.prepare('SELECT x.target_id,x.source_id FROM maintenance_target_sources x JOIN maintenance_record_targets t ON t.target_id=x.target_id WHERE t.active=1').all<{target_id:string;source_id:string}>()).results??[]
+  const bindingKey=(pair:string[])=>pair.join('\u0000')
+  if(canonical(actualBindings.map(row=>bindingKey([row.target_id,row.source_id])).sort())!==canonical(expectedBindings.map(bindingKey).sort()))throw new MaintenanceError('target_refresh_reuse_source_set_mismatch')
+  const manifest=JSON.stringify(active),guard=crypto.randomUUID(),at=nowIso()
+  try{await env.PIPELINE_DB.batch([
+    env.PIPELINE_DB.prepare("INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND scope_sha256=? AND input_catalog_sha256=? AND revision=? AND targets_complete=0) AND EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE refresh_sha256=? AND status='completed' AND plan_sha256=?) AND NOT EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=?) AND (SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1)=json_array_length(?) AND NOT EXISTS(SELECT 1 FROM maintenance_record_targets t LEFT JOIN json_each(?) m ON json_extract(m.value,'$.target_id')=t.target_id WHERE t.active=1 AND (m.value IS NULL OR t.target_json<>json_extract(m.value,'$.target_json') OR t.record_scope_sha256<>json_extract(m.value,'$.record_scope_sha256'))) THEN 1 ELSE 0 END))")
+      .bind(guard,cfg.scope_sha256,cfg.input_catalog_sha256,cfg.revision,refreshSha256,row.plan_sha256,cfg.input_catalog_sha256,manifest,manifest),
+    env.PIPELINE_DB.prepare('UPDATE maintenance_control SET targets_complete=1,revision=revision+1,updated_at=? WHERE singleton=1 AND revision=? AND input_catalog_sha256=? AND targets_complete=0').bind(at,cfg.revision,cfg.input_catalog_sha256),
+    env.PIPELINE_DB.prepare('INSERT INTO maintenance_events VALUES(?,?,?,?)').bind(crypto.randomUUID(),'targets_revalidated',at,canonical({refreshSha256,inputCatalogSha256:cfg.input_catalog_sha256,recordTargets:targets.length,fromRevision:cfg.revision,toRevision:cfg.revision+1})),
+    env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(guard),
+  ])}catch{throw new MaintenanceError('target_refresh_reuse_control_changed')}
+}
 export async function refreshTargets(env:MaintenanceEnv,value:unknown,staged=false,repairFence?:{expectedRevision:number}) {
   const raw=record(value),cfg=await control(env)
   if(!cfg?.seed_complete||!raw||raw.inputCatalogSha256!==cfg.input_catalog_sha256||!Array.isArray(raw.recordTargets)||raw.recordTargets.length>10000)throw new MaintenanceError('target_refresh_catalogue_mismatch')
   if(repairFence&&(cfg.revision!==repairFence.expectedRevision||cfg.enabled!==0||cfg.models_enabled!==0||cfg.targets_complete!==0))throw new MaintenanceError('target_refresh_repair_control_changed')
   const targets=raw.recordTargets.map(target=>maintenanceRecordTargetSchema.parse(target)),ids=new Set<string>()
   const schools=new Set(((await env.PIPELINE_DB.prepare('SELECT university_id FROM maintenance_schools').all<{university_id:string}>()).results??[]).map(row=>row.university_id))
+  const coverage = raw.coverageSnapshot === undefined ? null : await validateCoverageSnapshot(raw.coverageSnapshot,{scopeRegistrySha256:cfg.scope_sha256,inputCatalogSha256:cfg.input_catalog_sha256,schoolIds:schools,today:getTodayDate()})
+  if(coverage)await storeCoverageSnapshot(env,coverage)
   const sources=new Set(((await env.PIPELINE_DB.prepare('SELECT source_id FROM maintenance_sources').all<{source_id:string}>()).results??[]).map(row=>row.source_id))
   for(const target of targets){const id=`${target.entityType}:${target.recordId}`;if(ids.has(id)||!schools.has(target.universityId)||!target.recordId.trim()||target.recordId.length>512||/[\u0000-\u001f]/u.test(target.recordId))throw new MaintenanceError('invalid_target_refresh_scope');ids.add(id)}
   const refreshSha256=await digest(canonical({inputCatalogSha256:raw.inputCatalogSha256,recordTargets:targets}))
   const prior=await env.PIPELINE_DB.prepare('SELECT status FROM maintenance_target_refreshes WHERE refresh_sha256=?').bind(refreshSha256).first<{status:string}>()
-  if(prior?.status==='completed')return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:true,reused:true}
+  if(prior?.status==='completed'){
+    if(!cfg.targets_complete&&staged){
+      await env.SNAPSHOTS_BUCKET.put(`maintenance/target-refresh/revalidate/${refreshSha256}.json`,canonical({scopeRegistrySha256:cfg.scope_sha256,inputCatalogSha256:cfg.input_catalog_sha256,recordTargets:targets,...(coverage?{coverageSnapshot:coverage}:{})}),{httpMetadata:{contentType:'application/json'}})
+      await env.MAINTENANCE_QUEUE.send({version:1,jobId:refreshSha256,targetRefreshSha256:refreshSha256})
+      return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:false,reused:true,revalidationQueued:true}
+    }
+    if(!cfg.targets_complete)await restoreCompletedTargets(env,cfg,refreshSha256,targets)
+    if(coverage)await publishCoverageSnapshot(env,coverage)
+    return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:true,reused:true,coverageSnapshotSha256:coverage?.sha256 ?? null}
+  }
   if(prior?.status==='staged'){if(staged){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refreshSha256,targetRefreshSha256:refreshSha256});return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:false,reused:true}}while(!(await control(env))?.targets_complete)await continueTargetRefresh(env,refreshSha256,false);return{ok:true,recordTargets:targets.length,refreshSha256,targetsComplete:true,reused:true}}
   if(!repairFence)await env.PIPELINE_DB.prepare('UPDATE maintenance_control SET targets_complete=0 WHERE singleton=1 AND input_catalog_sha256=?').bind(cfg.input_catalog_sha256).run()
   const operations:SqlOperation[]=[{sql:'UPDATE maintenance_record_targets SET active=0',values:[]}]
@@ -225,7 +275,7 @@ export async function refreshTargets(env:MaintenanceEnv,value:unknown,staged=fal
     add('DELETE FROM maintenance_target_sources WHERE target_id=?',id)
     for(const sourceId of new Set(target.sourceIds))if(sources.has(sourceId))add('INSERT OR IGNORE INTO maintenance_target_sources VALUES(?,?)',id,sourceId)
   }
-  const plan={refreshSha256,inputCatalogSha256:cfg.input_catalog_sha256,expectedCount:targets.length,operations:coalesceOperations(operations)},bytes=canonical(plan),planSha256=await digest(bytes)
+  const plan={refreshSha256,inputCatalogSha256:cfg.input_catalog_sha256,expectedCount:targets.length,...(coverage?{coverageSnapshot:coverage}:{}),operations:coalesceOperations(operations)},bytes=canonical(plan),planSha256=await digest(bytes)
   await env.SNAPSHOTS_BUCKET.put(`maintenance/target-refresh/${refreshSha256}.json`,bytes,{httpMetadata:{contentType:'application/json'}})
   const insert=env.PIPELINE_DB.prepare("INSERT INTO maintenance_target_refreshes(refresh_sha256,input_catalog_sha256,plan_sha256,total_operations,expected_count,status,created_at) VALUES(?,?,?,?,?,'staged',?)").bind(refreshSha256,cfg.input_catalog_sha256,planSha256,plan.operations.length,targets.length,nowIso())
   if(repairFence){
@@ -245,14 +295,26 @@ export async function refreshTargets(env:MaintenanceEnv,value:unknown,staged=fal
 export async function continueTargetRefresh(env:MaintenanceEnv,refreshSha256:string,enqueue=true) {
   const cfg=await control(env),row=await env.PIPELINE_DB.prepare('SELECT * FROM maintenance_target_refreshes WHERE refresh_sha256=?').bind(refreshSha256).first<{status:string;input_catalog_sha256:string;plan_sha256:string;total_operations:number;completed_operations:number;expected_count:number}>()
   if(!cfg||!row)throw new MaintenanceError('target_refresh_unavailable')
-  if(row.status==='completed')return{targetsComplete:true}
+  if(row.status==='completed'){
+    if(!cfg.targets_complete){
+      const request=await env.SNAPSHOTS_BUCKET.get(`maintenance/target-refresh/revalidate/${refreshSha256}.json`)
+      if(!request||request.size!==undefined&&request.size>24*1024*1024)throw new MaintenanceError('target_refresh_reuse_request_unavailable')
+      const input=JSON.parse(await request.text())as {scopeRegistrySha256:string;inputCatalogSha256:string;recordTargets:unknown[];coverageSnapshot?:CoverageSnapshot}
+      if(input.scopeRegistrySha256!==cfg.scope_sha256||input.inputCatalogSha256!==cfg.input_catalog_sha256||!Array.isArray(input.recordTargets)||input.recordTargets.length>10000)throw new MaintenanceError('target_refresh_reuse_request_mismatch')
+      const targets=input.recordTargets.map(value=>maintenanceRecordTargetSchema.parse(value))
+      if(await digest(canonical({inputCatalogSha256:input.inputCatalogSha256,recordTargets:targets}))!==refreshSha256)throw new MaintenanceError('target_refresh_reuse_request_mismatch')
+      await restoreCompletedTargets(env,cfg,refreshSha256,targets)
+      if(input.coverageSnapshot&&input.coverageSnapshot.evaluatedOn===getTodayDate())await publishCoverageSnapshot(env,input.coverageSnapshot)
+    }
+    return{targetsComplete:true}
+  }
   if(row.status==='superseded')return{targetsComplete:false,superseded:true}
   if(cfg.input_catalog_sha256!==row.input_catalog_sha256){await env.PIPELINE_DB.prepare("UPDATE maintenance_target_refreshes SET status='superseded' WHERE refresh_sha256=?").bind(refreshSha256).run();return{targetsComplete:false,superseded:true}}
   const artifact=await env.SNAPSHOTS_BUCKET.get(`maintenance/target-refresh/${refreshSha256}.json`)
   if(!artifact||artifact.size!==undefined&&artifact.size>24*1024*1024)throw new MaintenanceError('target_refresh_plan_unavailable')
   const bytes=await artifact.text()
   if(await digest(bytes)!==row.plan_sha256)throw new MaintenanceError('target_refresh_plan_checksum_mismatch')
-  const plan=JSON.parse(bytes)as {refreshSha256:string;inputCatalogSha256:string;expectedCount:number;operations:SqlOperation[]}
+  const plan=JSON.parse(bytes)as {refreshSha256:string;inputCatalogSha256:string;expectedCount:number;coverageSnapshot?:CoverageSnapshot;operations:SqlOperation[]}
   if(plan.refreshSha256!==refreshSha256||plan.inputCatalogSha256!==cfg.input_catalog_sha256||plan.operations.length!==row.total_operations)throw new MaintenanceError('target_refresh_plan_manifest_mismatch')
   const chunk=plan.operations.slice(row.completed_operations,row.completed_operations+32),offset=row.completed_operations+chunk.length,guardId=crypto.randomUUID()
   if(chunk.length)await env.PIPELINE_DB.batch([
@@ -272,7 +334,8 @@ export async function continueTargetRefresh(env:MaintenanceEnv,refreshSha256:str
       env.PIPELINE_DB.prepare("INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND input_catalog_sha256=? AND revision=? AND targets_complete=0) AND EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE refresh_sha256=? AND input_catalog_sha256=? AND status='staged' AND completed_operations=total_operations AND expected_count=(SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1)) THEN 1 ELSE 0 END))").bind(completionGuard,cfg.input_catalog_sha256,cfg.revision,refreshSha256,cfg.input_catalog_sha256),
       env.PIPELINE_DB.prepare('UPDATE maintenance_control SET targets_complete=1,revision=revision+1,updated_at=? WHERE singleton=1 AND input_catalog_sha256=? AND revision=? AND targets_complete=0').bind(completedAt,cfg.input_catalog_sha256,cfg.revision),
       env.PIPELINE_DB.prepare("UPDATE maintenance_target_refreshes SET status='completed' WHERE refresh_sha256=? AND status='staged' AND completed_operations=total_operations").bind(refreshSha256),
-      env.PIPELINE_DB.prepare('INSERT INTO maintenance_events VALUES(?,?,?,?)').bind(crypto.randomUUID(),'targets_refreshed',completedAt,JSON.stringify({inputCatalogSha256:cfg.input_catalog_sha256,recordTargets:row.expected_count,refreshSha256})),
+      env.PIPELINE_DB.prepare('INSERT INTO maintenance_events VALUES(?,?,?,?)').bind(crypto.randomUUID(),'targets_refreshed',completedAt,JSON.stringify({inputCatalogSha256:cfg.input_catalog_sha256,recordTargets:row.expected_count,refreshSha256,fromRevision:cfg.revision,toRevision:cfg.revision+1})),
+      ...(plan.coverageSnapshot ? [env.PIPELINE_DB.prepare('INSERT INTO maintenance_events VALUES(?,?,?,?)').bind(crypto.randomUUID(),'coverage_snapshot',completedAt,canonical(coverageEvent(plan.coverageSnapshot)))] : []),
       env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(completionGuard),
     ])
   } catch {
@@ -292,5 +355,6 @@ export async function status(env:MaintenanceEnv) {
     env.PIPELINE_DB.prepare('SELECT kind,observed_at FROM maintenance_events ORDER BY observed_at DESC LIMIT 1').first(),
     env.PIPELINE_DB.prepare("SELECT (SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1) record_targets,(SELECT COUNT(DISTINCT x.university_id) FROM maintenance_source_schools x JOIN maintenance_observations o ON o.source_id=x.source_id) schools_with_actual_source_observation,(SELECT COUNT(*) FROM maintenance_schools WHERE last_attempt_at IS NOT NULL) schools_with_actual_source_attempt,(SELECT COUNT(*) FROM maintenance_legacy_guards) legacy_guards").first(),
   ])
-  return {format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:env.MAINTENANCE_ENABLED==='true'&&Boolean(cfg?.enabled)&&reconciliationGate.ready,modelEnabled:Boolean(cfg?.models_enabled)&&reconciliationGate.ready,reconciliationGate,scopeCount:cfg?272:0,control:cfg,jobs:jobs.results??[],proposals:proposals.results??[],sources,modelAttempts:attempts.results??[],coverage,lastEvent:latest,websiteBackendChanged:false}
+  const programCoverage=cfg?.seed_complete&&cfg.targets_complete?await readCoverageSnapshot(env,cfg.input_catalog_sha256,cfg.scope_sha256):null
+  return {format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:env.MAINTENANCE_ENABLED==='true'&&Boolean(cfg?.enabled)&&reconciliationGate.ready,modelEnabled:Boolean(cfg?.models_enabled)&&reconciliationGate.ready,reconciliationGate,scopeCount:cfg?expectedScopeSchoolCount(env):0,control:cfg,jobs:jobs.results??[],proposals:proposals.results??[],sources,modelAttempts:attempts.results??[],coverage:{...coverage,...(programCoverage?{snapshotSha256:programCoverage.sha256,evaluatedOn:programCoverage.evaluatedOn,inputCatalogSha256:programCoverage.inputCatalogSha256,scopeRegistrySha256:programCoverage.scopeRegistrySha256}:{})},lastEvent:latest,websiteBackendChanged:false}
 }

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { backendErrorKind,isDailyD1QuotaError } from '../src/backend-errors'
-import { runtimeStatus,runCloudTick } from '../src/runtime'
+import { runtimeStatus,runCloudTick,nextD1Reset } from '../src/runtime'
 import { rolloutStatus } from '../src/rollout'
 import { listSchoolProgress } from '../src/school-progress'
 import { gateRequest,digest } from '../src/util'
@@ -29,5 +29,32 @@ test('generic 7500 does not masquerade as a daily quota wait in tick, rollout, a
     const tick=await runCloudTick(f.env);assert.equal(tick.state,'error');assert.equal(tick.code,'backend_unavailable');assert.equal(tick.retryAt,null)
     assert.equal((await rolloutStatus(f.env)).backendState,'backend_unavailable');assert.equal((await listSchoolProgress(f.env)).backendState,'unavailable')
     const response=await gateRequest(f.env,'/model/run',{reservationKey:'a'.repeat(64),sourceId:'b'.repeat(64),snapshotSha256:'c'.repeat(64),pass:'primary',lane:'maintenance',payload:'not sent',universityIds:['uni-000']});assert.equal(response.status,400);assert.notEqual((await response.json()).error,'quota_backend_wait')
+  }finally{f.db.sqlite.close()}
+})
+
+test('a proven daily quota wait is shared across status and ticks without probing D1 before UTC reset',async t=>{
+  const now=Date.parse('2026-11-11T04:00:00Z')
+  t.mock.timers.enable({apis:['Date'],now})
+  const f=makeEnv();let probes=0
+  try{
+    f.env.PIPELINE_DB={prepare(){probes++;throw new Error('D1 daily read quota exceeded')},async batch(){throw new Error('unexpected batch')}}
+    const first=await runtimeStatus(f.env)
+    assert.equal(first.backend.state,'quota_wait');assert.equal(probes,1)
+    for(let i=0;i<3;i++){
+      assert.equal((await runCloudTick({...f.env})).code,'daily_quota_wait_cached')
+      const status=await runtimeStatus({...f.env});assert.equal(status.control,null);assert.equal(status.jobs,null);assert.equal(status.backend.retryAt,nextD1Reset(now));assert.equal(status.productionRunningClaim,false)
+    }
+    assert.equal(probes,1)
+    t.mock.timers.tick(Date.parse(nextD1Reset(now))-now)
+    await runtimeStatus(f.env);assert.equal(probes,2)
+  }finally{f.db.sqlite.close()}
+})
+
+test('a SQL failure never creates the daily-quota cache and is retried on the next observation',async()=>{
+  const f=makeEnv();let probes=0
+  try{
+    f.env.PIPELINE_DB={prepare(){probes++;throw new Error('D1_ERROR: no such table: maintenance_control')},async batch(){throw new Error('unexpected batch')}}
+    await runtimeStatus(f.env);await runtimeStatus(f.env)
+    assert.equal(probes,2);assert.equal(await f.bucket.get('maintenance/runtime/d1-quota-wait.v1.json'),null)
   }finally{f.db.sqlite.close()}
 })

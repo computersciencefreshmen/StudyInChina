@@ -15,7 +15,7 @@ class Statement implements D1PreparedStatement {
 }
 export class TestD1 implements D1Database {
   readonly sqlite=new DatabaseSync(':memory:')
-  constructor(){this.sqlite.exec(readFileSync(new URL('../../../infra/d1/pipeline/migrations/0019_catalog_maintenance.sql',import.meta.url),'utf8'))}
+  constructor(){this.sqlite.exec(readFileSync(new URL('../../../infra/d1/pipeline/migrations/0019_catalog_maintenance.sql',import.meta.url),'utf8'));this.sqlite.exec(readFileSync(new URL('../../../infra/d1/pipeline/migrations/0021_maintenance_scope_upgrades.sql',import.meta.url),'utf8'))}
   prepare(sql:string){return new Statement(this.sqlite,sql)}
   async batch<T>(statements:D1PreparedStatement[]):Promise<D1Result<T>[]>{this.sqlite.exec('BEGIN IMMEDIATE');try{const result=statements.map(s=>(s as Statement).runSync()as D1Result<T>);this.sqlite.exec('COMMIT');return result}catch(error){this.sqlite.exec('ROLLBACK');throw error}}
 }

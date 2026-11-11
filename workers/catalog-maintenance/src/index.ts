@@ -1,4 +1,6 @@
 import { ModelAdmission } from './admission'
+import { submitCoverageSnapshot } from './coverage'
+import { registerScopeUpgradeRequest, processScopeUpgrade, scopeUpgradeStatus } from './scope-upgrade'
 import { captureSource } from './capture'
 import { extractIdentities } from './extraction'
 import { extractScholarshipIdentities } from './scholarship-identities'
@@ -17,11 +19,13 @@ import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
 import type { MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
-import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus } from './runtime'
+import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus,quotaWait,rememberQuotaWait } from './runtime'
+import { isDailyD1QuotaError } from './backend-errors'
 import { after, authorized, HASH, json, nowIso, requestJson } from './util'
 
 export { ModelAdmission }
 export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessage):Promise<void> {
+  if(message?.version===1&&message.scopeUpgradeSha256&&HASH.test(message.scopeUpgradeSha256)){await processScopeUpgrade(env,message.scopeUpgradeSha256);return}
   if(message?.version===1&&message.reconciliationTargetsUpload){await prepareReconciliationTargets(env,message.reconciliationTargetsUpload);return}
   if(message?.version===1&&message.bootstrapUploadSha256&&HASH.test(message.bootstrapUploadSha256)){await preparePendingBootstrap(env,message.bootstrapUploadSha256);return}
   if(message?.version===1&&message.bootstrapSeedSha256&&HASH.test(message.bootstrapSeedSha256)){await resumeBootstrapSeed(env,message.bootstrapSeedSha256);return}
@@ -36,7 +40,7 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
   const pending=await env.PIPELINE_DB.prepare('SELECT source_id,stage FROM maintenance_jobs WHERE job_id=?').bind(message.jobId).first<{source_id:string;stage:string}>()
   if(!pending||pending.stage!=='capture'&&!cfg.models_enabled||pending.stage==='maintain'&&!cfg.targets_complete)return
   const canary=JSON.parse(cfg.canary_json)as string[],schools=await sourceSchools(env,pending.source_id)
-  if(canary.length&&!schools.some(s=>canary.includes(s.university_id)))return
+  if(!schools.length||canary.length&&!schools.some(s=>canary.includes(s.university_id)))return
   const job=await claimJob(env,message.jobId)
   if(!job)return
   try {
@@ -78,7 +82,14 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
   }
 }
 export async function handleQueue(batch:MaintenanceBatch,env:MaintenanceEnv):Promise<void> {
-  await Promise.all(batch.messages.map(async message=>{try{await processMessage(env,message.body);message.ack()}catch{message.retry({delaySeconds:60})}}))
+  await Promise.all(batch.messages.map(async message=>{try{
+    const waiting=await quotaWait(env)
+    if(waiting){message.retry({delaySeconds:Math.max(60,Math.min(43200,Math.ceil((Date.parse(waiting.retryAt)-Date.now())/1000)))});return}
+    await processMessage(env,message.body);message.ack()
+  }catch(error){
+    if(isDailyD1QuotaError(error)){const waiting=await rememberQuotaWait(env);message.retry({delaySeconds:Math.max(60,Math.min(43200,Math.ceil((Date.parse(waiting.retryAt)-Date.now())/1000)))})}
+    else message.retry({delaySeconds:60})
+  }}))
 }
 export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Response> {
   const url=new URL(request.url)
@@ -87,6 +98,9 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   try {
     if(url.pathname==='/seed'&&request.method==='POST')return json(await seed(env,await requestJson(request,8*1024*1024),Date.now(),true))
     if(url.pathname==='/bootstrap'&&request.method==='POST')return json(await registerBootstrapRequest(env,request))
+    if(url.pathname==='/scope-upgrades'&&request.method==='POST')return json(await registerScopeUpgradeRequest(env,request))
+    if(url.pathname==='/scope-upgrades'&&request.method==='GET')return json(await scopeUpgradeStatus(env,url.searchParams.get('sha256')??''))
+    if(url.pathname==='/coverage'&&request.method==='POST')return json(await submitCoverageSnapshot(env,await requestJson(request,2*1024*1024)))
     if(url.pathname==='/controls'&&request.method==='POST')return json(await setControls(env,await requestJson(request,32768)))
     if(url.pathname==='/control'&&request.method==='GET')return json(await readMaintenanceControl(env))
     if(url.pathname==='/head-reconcile'&&request.method==='POST')return json(await reconcileMaintenanceHead(env,await requestJson(request,4096)))

@@ -259,7 +259,12 @@ export function queryProgramCatalog(
     if (!university) return []
     const city = citiesById.get(university.cityId)
     const programCycles = cyclesByProgram.get(program.id) || []
-    const cycle = selectAdmissionCycle(programCycles, program.id, today)
+    const trackCycles = programCycles.filter(item => !filters.language || !item.teachingLanguage || item.teachingLanguage === filters.language)
+    const cycle = selectAdmissionCycle(trackCycles, program.id, today)
+    const scopedCycles = programCycles.some(item => item.teachingLanguage || item.applicationRound)
+    const cycleFiltersMatch = (item: AdmissionCycle | undefined) => (!filters.intake || item?.intake === filters.intake)
+      && (!filters.applicationState || ((program.status === 'verified' || 'discovery' in program && hasCurrentDirectoryCycleDates(item, today)) && matchesApplicationState(item, filters.applicationState, today)))
+      && (!filters.tuition || ((program.status === 'verified' || 'discovery' in program && hasCurrentDirectoryTuition(item, today)) && matchesTuition(item, filters.tuition)))
 
     const matches = includesQuery([
       program.name,
@@ -276,12 +281,7 @@ export function queryProgramCatalog(
         || university.slug === filters.institution
         || university.id === filters.institution)
       && (!filters.city || city?.slug === filters.city || city?.id === filters.city)
-      && (!filters.intake || cycle?.intake === filters.intake)
-      && (!filters.applicationState || (
-        (program.status === 'verified' || 'discovery' in program && hasCurrentDirectoryCycleDates(cycle, today))
-        && matchesApplicationState(cycle, filters.applicationState, today)
-      ))
-      && (!filters.tuition || ((program.status === 'verified' || 'discovery' in program && hasCurrentDirectoryTuition(cycle, today)) && matchesTuition(cycle, filters.tuition)))
+      && (scopedCycles ? trackCycles.some(cycleFiltersMatch) : cycleFiltersMatch(cycle))
 
     return matches && matchesUniversityRankings(university, filters, today) ? [{ program, university, cycle }] : []
   })

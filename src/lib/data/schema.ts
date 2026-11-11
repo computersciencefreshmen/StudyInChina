@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { annualCycleIdentityKey, TEACHING_LANGUAGES } from './cycle-scope'
 import { broadRegions, normalizeRegionAlias } from './regions'
 
 const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine((value) => {
@@ -91,7 +92,7 @@ export const programSchema = audit.extend({ id: z.string().min(1), slug: z.strin
   if (value.teachingLanguages.length === 0) context.addIssue({ code: 'custom', message: 'Complete verified programs require confirmed teaching languages' })
   if (value.languageRequirements.length === 0) context.addIssue({ code: 'custom', message: 'Verified programs require an explicit language requirement or no-prerequisite statement' })
 })
-export const admissionCycleSchema = audit.extend({ id: z.string().min(1), programId: z.string().min(1), academicYear: z.string().regex(/^\d{4}-\d{4}$/).refine((value) => Number(value.slice(5)) === Number(value.slice(0, 4)) + 1, 'Academic year must contain consecutive years'), intake: z.enum(['spring', 'autumn', 'other']), opensOn: date.nullable(), closesOn: date.nullable(), dateStatus: z.enum(['published', 'rolling', 'not-announced', 'previous-cycle-reference']), tuitionCny: z.number().nonnegative().nullable(), tuitionPeriod: z.enum(['program', 'semester', 'academic-year', 'month', 'other']).nullable().optional(), tuitionStatus: z.enum(['confirmed', 'reference']).nullable().optional(), tuitionSchedule: localizedText.optional(), evidenceBasis: z.enum(['cycle-specific', 'recurring-official-rule']).optional(), factScope: z.enum(['dates-only', 'partial', 'complete']).optional(), applicationFeeCny: z.number().nonnegative().nullable(), notes: localizedText.optional() }).superRefine((value, context) => {
+export const admissionCycleSchema = audit.extend({ teachingLanguage: z.enum(TEACHING_LANGUAGES).optional(), applicationRound: z.string().trim().min(1).max(120).optional(), languageRequirements: programSchema.shape.languageRequirements.nullable().optional(), eligibility: z.array(localizedText).min(1).nullable().optional(), applicationMaterials: z.array(localizedText).min(1).nullable().optional(), applyUrl: httpsUrl.nullable().optional(), id: z.string().min(1), programId: z.string().min(1), academicYear: z.string().regex(/^\d{4}-\d{4}$/).refine((value) => Number(value.slice(5)) === Number(value.slice(0, 4)) + 1, 'Academic year must contain consecutive years'), intake: z.enum(['spring', 'autumn', 'other']), opensOn: date.nullable(), closesOn: date.nullable(), dateStatus: z.enum(['published', 'rolling', 'not-announced', 'previous-cycle-reference']), tuitionCny: z.number().nonnegative().nullable(), tuitionPeriod: z.enum(['program', 'semester', 'academic-year', 'month', 'other']).nullable().optional(), tuitionStatus: z.enum(['confirmed', 'reference']).nullable().optional(), tuitionSchedule: localizedText.optional(), evidenceBasis: z.enum(['cycle-specific', 'recurring-official-rule']).optional(), factScope: z.enum(['dates-only', 'partial', 'complete']).optional(), applicationFeeCny: z.number().nonnegative().nullable(), notes: localizedText.optional() }).superRefine((value, context) => {
   if (value.opensOn && value.closesOn && value.opensOn > value.closesOn) context.addIssue({ code: 'custom', message: 'opensOn must be before closesOn' })
   if (value.dateStatus === 'published' && !value.opensOn && !value.closesOn) context.addIssue({ code: 'custom', message: 'Published cycles require at least one official application date' })
   if (value.status === 'verified' && (value.factScope ?? 'complete') === 'complete' && value.dateStatus === 'published' && (value.tuitionCny === null || value.applicationFeeCny === null)) context.addIssue({ code: 'custom', message: 'Published verified cycles require tuition and application fee values' })
@@ -132,7 +133,7 @@ export const bundleSchema = z.object({
   for (const item of bundle.admissionCycles) if (!programIds.has(item.programId)) context.addIssue({ code: 'custom', message: `Unknown program ${item.programId} on ${item.id}` })
   const cycleKeys = new Set<string>()
   for (const item of bundle.admissionCycles) {
-    const key = `${item.programId}:${item.academicYear}:${item.intake}`
+    const key = annualCycleIdentityKey(item.programId, item.academicYear, item.intake, item)
     if (cycleKeys.has(key)) context.addIssue({ code: 'custom', message: `Duplicate admission cycle key: ${key}` })
     cycleKeys.add(key)
   }

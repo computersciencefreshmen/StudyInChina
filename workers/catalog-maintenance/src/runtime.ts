@@ -3,11 +3,16 @@ import type { BucketObject,MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { backendState as backendCode,backendErrorKind } from './backend-errors'
 import { canonical,digest,HASH,nowIso,record } from './util'
+import { scopeUpgradeLineage, isPinnedScopeTransition } from './scope-config'
+import { resumePendingScopeUpgrade } from './scope-upgrade'
+import { nativeReconciliationGate } from './native-reconciliation-guard'
 
 const POINTER='maintenance/bootstrap-pending/initial.v1.json'
 const UPLOAD_POINTER='maintenance/bootstrap-pending/upload.v1.json'
 const LATEST='maintenance/runtime/latest.v1.json'
 const FIRST_ELIGIBLE='maintenance/runtime/first-eligible.v1.json'
+const QUOTA_WAIT='maintenance/runtime/d1-quota-wait.v1.json'
+const STATUS_AGGREGATES='maintenance/runtime/status-aggregates.v1.json'
 const DAY=86400000
 function getTodayDate(date:Date){const parts=new Intl.DateTimeFormat('en',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date),values=Object.fromEntries(parts.map(part=>[part.type,part.value]));return`${values.year}-${values.month}-${values.day}`}
 type Activation={canaryUniversityIds:string[];modelsEnabled:true}
@@ -73,10 +78,35 @@ export async function registerBootstrap(env:MaintenanceEnv,value:unknown){
   await immutable(env,`maintenance/bootstrap-pending/receipts/${envelopeSha256}.json`,canonical({bootstrapSha256:envelopeSha256,registeredAt:nowIso()})).catch(error=>{if(!(error instanceof MaintenanceError&&error.code==='immutable_bootstrap_conflict'))throw error})
   return{ok:true,bootstrapSha256:envelopeSha256,seedSha256:pointer.seedSha256,pending:true,activationStored:true,canaryUniversityIds:canary,modelsEnabledRequested:true,d1Observed:false,modelCallsPerformed:false}
 }
-async function bootstrapPointer(env:MaintenanceEnv):Promise<BootstrapPointer|null>{const saved=await readObject(env,POINTER);if(!saved)return null;const pointer=JSON.parse(saved.text)as BootstrapPointer;if(pointer.format!=='studyinchina.pending-bootstrap'||pointer.version!==1||!HASH.test(pointer.envelopeSha256)||!HASH.test(pointer.seedSha256)||pointer.envelopeKey!==`maintenance/bootstrap-pending/envelopes/${pointer.envelopeSha256}.json`||pointer.scopeRegistrySha256!==env.SCOPE_REGISTRY_SHA256)throw new MaintenanceError('pending_bootstrap_pointer_invalid');return pointer}
+async function bootstrapPointer(env:MaintenanceEnv,verifyScope=true):Promise<BootstrapPointer|null>{
+  const saved=await readObject(env,POINTER);if(!saved)return null
+  const pointer=JSON.parse(saved.text)as BootstrapPointer
+  if(pointer.format!=='studyinchina.pending-bootstrap'||pointer.version!==1||!HASH.test(pointer.envelopeSha256)||!HASH.test(pointer.seedSha256)||!HASH.test(pointer.scopeRegistrySha256)||pointer.envelopeKey!==`maintenance/bootstrap-pending/envelopes/${pointer.envelopeSha256}.json`)throw new MaintenanceError('pending_bootstrap_pointer_invalid')
+  if(verifyScope&&pointer.scopeRegistrySha256!==env.SCOPE_REGISTRY_SHA256&&!await scopeUpgradeLineage(env,pointer.scopeRegistrySha256,env.SCOPE_REGISTRY_SHA256??'')){
+    const cfg=await control(env)
+    // The pinned old cohort may settle exports before the additive CAS. This
+    // accepts only its original seed and fully verified native recovery proof.
+    if(!isPinnedScopeTransition(env,pointer.scopeRegistrySha256)||cfg?.scope_sha256!==pointer.scopeRegistrySha256||cfg.seed_sha256!==pointer.seedSha256||!(await nativeReconciliationGate(env)).ready)throw new MaintenanceError('pending_bootstrap_pointer_invalid')
+  }
+  return pointer
+}
 async function bootstrapEnvelope(env:MaintenanceEnv,pointer:BootstrapPointer):Promise<{seed:Seed;activation:Activation}>{const saved=await readObject(env,pointer.envelopeKey,8*1024*1024);if(!saved||await digest(saved.text)!==pointer.envelopeSha256)throw new MaintenanceError('pending_bootstrap_checksum_mismatch');const value=JSON.parse(saved.text)as {seed:Seed;activation:Activation};if(await digest(canonical(value.seed))!==pointer.seedSha256||canonical(value.activation)!==canonical(pointer.activation))throw new MaintenanceError('pending_bootstrap_binding_mismatch');return value}
 export async function resumeBootstrapSeed(env:MaintenanceEnv,hash:string){const pointer=await bootstrapPointer(env);if(!pointer||pointer.seedSha256!==hash)throw new MaintenanceError('bootstrap_seed_pointer_mismatch');const cfg=await control(env);if(cfg){if(cfg.seed_sha256!==hash)throw new MaintenanceError('bootstrap_existing_seed_conflict');return enqueueDue(env)}const envelope=await bootstrapEnvelope(env,pointer);return seed(env,envelope.seed,Date.now(),true)}
 export function nextD1Reset(now=Date.now()):string{const date=new Date(now);return new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate()+1)).toISOString()}
+type QuotaWait={format:'studyinchina.d1-quota-wait';version:1;observedAt:string;retryAt:string}
+/** A proven account-wide daily exhaustion needs no further D1 probes before
+ * UTC reset. R2 keeps this wait across isolate restarts and separate workflows. */
+export async function quotaWait(env:MaintenanceEnv,now=Date.now()):Promise<QuotaWait|null>{
+  const saved=await readObject(env,QUOTA_WAIT,4096)
+  if(!saved)return null
+  const value=record(JSON.parse(saved.text)),observed=Date.parse(String(value?.observedAt??'')),retry=Date.parse(String(value?.retryAt??''))
+  return value?.format==='studyinchina.d1-quota-wait'&&value.version===1&&Number.isFinite(observed)&&observed<=now&&retry>now&&value.retryAt===nextD1Reset(observed)?value as QuotaWait:null
+}
+export async function rememberQuotaWait(env:MaintenanceEnv,observedAt=nowIso()):Promise<QuotaWait>{
+  const value:QuotaWait={format:'studyinchina.d1-quota-wait',version:1,observedAt,retryAt:nextD1Reset(Date.parse(observedAt))}
+  await updateJson(env,QUOTA_WAIT,raw=>{const previous=record(raw);return typeof previous?.observedAt==='string'&&previous.observedAt>observedAt?previous:value})
+  return value
+}
 async function saveTick(env:MaintenanceEnv,tick:RuntimeTick){
   const day=getTodayDate(new Date(tick.observedAt)),key=`maintenance/runtime/ticks/${day}/${tick.tickId}.json`
   await immutable(env,key,canonical(tick))
@@ -90,6 +120,9 @@ async function saveTick(env:MaintenanceEnv,tick:RuntimeTick){
 export async function runCloudTick(env:MaintenanceEnv){
   const tick:RuntimeTick={format:'studyinchina.cloud-maintenance-tick',version:1,tickId:crypto.randomUUID(),observedAt:nowIso(),state:'disabled',code:'not_observed',queued:null,seedComplete:null,targetsComplete:null,modelsEnabled:null,canarySchoolCount:null,retryAt:null}
   try{
+    const waiting=await quotaWait(env)
+    if(waiting){tick.state='quota_wait';tick.code='daily_quota_wait_cached';tick.retryAt=waiting.retryAt;return saveTick(env,tick)}
+    if(await resumePendingScopeUpgrade(env)){tick.state='waiting_for_seed';tick.code='scope_upgrade_pending';tick.queued=1;return saveTick(env,tick)}
     const pointer=await bootstrapPointer(env)
     if(!pointer){const uploaded=await readObject(env,UPLOAD_POINTER);if(uploaded){const pending=JSON.parse(uploaded.text)as UploadPointer;await env.MAINTENANCE_QUEUE.send({version:1,jobId:pending.rawSha256,bootstrapUploadSha256:pending.rawSha256})}}
     let cfg=await control(env)
@@ -112,7 +145,7 @@ export async function runCloudTick(env:MaintenanceEnv){
         tick.code=result.enabled?'bounded_scheduler_completed':env.MAINTENANCE_ENABLED!=='true'?'deployment_activation_gate_disabled':'nativeHeadReconciliationRequired'in result?'native_head_reconciliation_required':cfg.targets_complete?'existing_controls_preserved':'target_refresh_in_progress'
       }
     }
-  }catch(error){const backend=backendCode(error);tick.state=backend==='quota_wait'?'quota_wait':'error';tick.code=error instanceof MaintenanceError?error.code:backend;tick.retryAt=backend==='quota_wait'?nextD1Reset():null}
+  }catch(error){const backend=backendCode(error);tick.state=backend==='quota_wait'?'quota_wait':'error';tick.code=error instanceof MaintenanceError?error.code:backend;tick.retryAt=backend==='quota_wait'?(await rememberQuotaWait(env)).retryAt:null}
   return saveTick(env,tick)
 }
 export function buildSoakObservation(ticks:RuntimeTick[],firstEligibleAt:string|null,now=Date.now(),historyTruncated=false){
@@ -133,11 +166,31 @@ async function soak(env:MaintenanceEnv,now=Date.now()){
   return buildSoakObservation(histories.flatMap(history=>history.ticks),typeof firstAt==='string'?firstAt:null,now,histories.some(history=>history.truncated))
 }
 export async function runtimeStatus(env:MaintenanceEnv){
-  const [latest,observation,pointer,uploaded]=await Promise.all([readObject(env,LATEST),soak(env),bootstrapPointer(env),readObject(env,UPLOAD_POINTER)])
+  const [latest,observation,pointer,uploaded]=await Promise.all([readObject(env,LATEST),soak(env),bootstrapPointer(env,false),readObject(env,UPLOAD_POINTER)])
   const runtime={lastRuntimeTick:latest?JSON.parse(latest.text)as RuntimeTick:null,soak:observation,bootstrapUploadPending:uploaded?JSON.parse(uploaded.text)as UploadPointer:null,bootstrapPending:pointer?{bootstrapSha256:pointer.envelopeSha256,seedSha256:pointer.seedSha256,scopeRegistrySha256:pointer.scopeRegistrySha256,activation:pointer.activation}:null}
-  try{return{...await status(env),...runtime,backend:{state:'ready',retryAt:null,errorKind:null,diagnosticKey:null,diagnosticSha256:null}}}
+  const waiting=await quotaWait(env)
+  if(waiting)return{format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:false,modelEnabled:false,scopeCount:null,control:null,jobs:null,proposals:null,sources:null,modelAttempts:null,coverage:null,websiteBackendChanged:false,...runtime,backend:{state:'quota_wait' as const,retryAt:waiting.retryAt,errorKind:'daily_quota' as const,diagnosticKey:null,diagnosticSha256:null},productionRunningClaim:false}
+  try{
+    // The three cloud consumers often request status seconds apart. Aggregate
+    // counters may be sampled for 60s, but controls and the admission barrier
+    // are always read authoritatively. This cache never admits a model call.
+    const cfg=await control(env),cached=await readObject(env,STATUS_AGGREGATES,128*1024)
+    const value=cached?JSON.parse(cached.text) as Awaited<ReturnType<typeof status>>:null,observed=Date.parse(String(value?.observedAt??''))
+    if(value?.format==='studyinchina.cloud-maintenance-status'&&observed<=Date.now()&&Date.now()-observed<60000&&JSON.stringify(value.control)===JSON.stringify(cfg)){
+      const gate=await nativeReconciliationGate(env)
+      return{...value,observedAt:nowIso(),aggregatesObservedAt:value.observedAt,aggregatesCached:true,
+        enabled:env.MAINTENANCE_ENABLED==='true'&&Boolean(cfg?.enabled)&&gate.ready,modelEnabled:Boolean(cfg?.models_enabled)&&gate.ready,reconciliationGate:gate,
+        ...runtime,backend:{state:'ready' as const,retryAt:null,errorKind:null,diagnosticKey:null,diagnosticSha256:null}}
+    }
+    const current=await status(env)
+    // A status payload has optional display fields; unlike immutable evidence,
+    // it is ordinary JSON and must not fingerprint absent optional values.
+    await env.SNAPSHOTS_BUCKET.put(STATUS_AGGREGATES,JSON.stringify(current),jsonOptions)
+    return{...current,aggregatesObservedAt:current.observedAt,aggregatesCached:false,...runtime,backend:{state:'ready' as const,retryAt:null,errorKind:null,diagnosticKey:null,diagnosticSha256:null}}
+  }
   catch(error){
     const state=backendCode(error),errorKind=backendErrorKind(error),observedAt=nowIso()
+    const wait=state==='quota_wait'?await rememberQuotaWait(env,observedAt):null
     // This catch covers only our fixed static status SQL, never model payloads
     // or arbitrary client SQL. Keep raw failure text private and bounded.
     let message=error instanceof Error?error.message:String(error)
@@ -145,6 +198,6 @@ export async function runtimeStatus(env:MaintenanceEnv){
     message=message.replace(/Bearer\s+[^\s"']+/giu,'Bearer [redacted]').slice(0,1200)
     let diagnosticKey:string|null=null,diagnosticSha256:string|null=null
     try{const text=canonical({format:'studyinchina.private-status-diagnostic',version:1,observedAt,operation:'fixed-status-sql',errorKind,message});diagnosticSha256=await digest(text);const key=`maintenance/diagnostics/status/${diagnosticSha256}.json`;await env.SNAPSHOTS_BUCKET.put(key,text,{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}});diagnosticKey=key}catch{diagnosticSha256=null}
-    return{format:'studyinchina.cloud-maintenance-status',version:1,observedAt,enabled:false,modelEnabled:false,scopeCount:null,control:null,jobs:null,proposals:null,sources:null,modelAttempts:null,coverage:null,websiteBackendChanged:false,...runtime,backend:{state,retryAt:state==='quota_wait'?nextD1Reset():null,errorKind,diagnosticKey,diagnosticSha256},productionRunningClaim:false}
+    return{format:'studyinchina.cloud-maintenance-status',version:1,observedAt,enabled:false,modelEnabled:false,scopeCount:null,control:null,jobs:null,proposals:null,sources:null,modelAttempts:null,coverage:null,websiteBackendChanged:false,...runtime,backend:{state,retryAt:wait?.retryAt??null,errorKind,diagnosticKey,diagnosticSha256},productionRunningClaim:false}
   }
 }

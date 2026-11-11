@@ -244,6 +244,7 @@ export class CatalogApiService {
   private programRecord(program: Program): ProgramRecord | null {
     const university = this.bundle.universities.find((item) => item.id === program.universityId)
     if (!university) return null
+    const scopedConditions = program.teachingLanguages.length > 1 || this.bundle.admissionCycles.some(cycle => cycle.programId === program.id && (cycle.teachingLanguage || cycle.applicationRound))
     const fallback = { url: program.programUrl, title: 'Official program page' }
     const identityMeta = fieldMetaMap(program, this.bundle.sources, fallback, {
       id: program.id,
@@ -265,6 +266,10 @@ export class CatalogApiService {
       details: program.details,
       supplementaryDetails: program.supplementaryDetails,
     }, this.today)
+    const projectedSupplementary = 'discovery' in program ? program.supplementaryDetails
+      : knownValue(dynamicMeta, 'supplementaryDetails', program.supplementaryDetails ?? null) ?? undefined
+    const supplementary = projectedSupplementary ? { ...projectedSupplementary } : undefined
+    if (scopedConditions && supplementary) { delete supplementary.eligibility; delete supplementary.applicationMaterials; delete supplementary.languagePolicy }
     return {
       ...program,
       discipline: knownValue(dynamicMeta, 'discipline', program.discipline),
@@ -273,9 +278,9 @@ export class CatalogApiService {
       durationMonthsMax: knownValue(dynamicMeta, 'durationMonthsMax', program.durationMonthsMax ?? null),
       durationText: knownValue(dynamicMeta, 'durationText', program.durationText ?? null) ?? undefined,
       applyUrl: knownValue(dynamicMeta, 'applyUrl', program.applyUrl),
-      languageRequirements: knownValue(dynamicMeta, 'languageRequirements', program.languageRequirements),
-      details: knownValue(dynamicMeta, 'details', program.details ?? null),
-      supplementaryDetails: 'discovery' in program ? program.supplementaryDetails
+      languageRequirements: scopedConditions ? null : knownValue(dynamicMeta, 'languageRequirements', program.languageRequirements),
+      details: scopedConditions ? null : knownValue(dynamicMeta, 'details', program.details ?? null),
+      supplementaryDetails: scopedConditions ? supplementary : 'discovery' in program ? program.supplementaryDetails
         : knownValue(dynamicMeta, 'supplementaryDetails', program.supplementaryDetails ?? null) ?? undefined,
       programType: deriveProgramType(program),
       university: { id: university.id, slug: university.slug, name: university.name, rankings: university.rankings ? currentUniversityRankings(university, this.today) : undefined },
@@ -290,7 +295,7 @@ export class CatalogApiService {
       id: cycle.id,
       programId: cycle.programId,
       academicYear: cycle.academicYear,
-      intake: cycle.intake,
+      intake: cycle.intake, ...(cycle.teachingLanguage ? { teachingLanguage: cycle.teachingLanguage } : {}), ...(cycle.applicationRound ? { applicationRound: cycle.applicationRound } : {}),
     }, this.today, {}, false)
     const dynamicMeta = fieldMetaMap(cycle, this.bundle.sources, fallback, {
       opensOn: cycle.opensOn,
@@ -300,7 +305,7 @@ export class CatalogApiService {
       tuitionPeriod: cycle.tuitionPeriod,
       tuitionStatus: cycle.tuitionStatus,
       evidenceBasis: cycle.evidenceBasis,
-      applicationFeeCny: cycle.applicationFeeCny,
+      applicationFeeCny: cycle.applicationFeeCny, languageRequirements: cycle.languageRequirements, eligibility: cycle.eligibility, applicationMaterials: cycle.applicationMaterials, applyUrl: cycle.applyUrl,
       // Narratives can repeat deadlines and prices, so they share the freshness gate.
       notes: cycle.notes,
     }, this.today)
@@ -314,6 +319,10 @@ export class CatalogApiService {
       tuitionStatus: knownValue(dynamicMeta, 'tuitionStatus', cycle.tuitionStatus ?? null),
       evidenceBasis: knownValue(dynamicMeta, 'evidenceBasis', cycle.evidenceBasis ?? null),
       applicationFeeCny: knownValue(dynamicMeta, 'applicationFeeCny', cycle.applicationFeeCny),
+      languageRequirements: knownValue(dynamicMeta, 'languageRequirements', cycle.languageRequirements ?? null),
+      eligibility: knownValue(dynamicMeta, 'eligibility', cycle.eligibility ?? null),
+      applicationMaterials: knownValue(dynamicMeta, 'applicationMaterials', cycle.applicationMaterials ?? null),
+      applyUrl: knownValue(dynamicMeta, 'applyUrl', cycle.applyUrl ?? null),
       notes: knownValue(dynamicMeta, 'notes', cycle.notes ?? null),
     }
     return {
@@ -434,7 +443,8 @@ export class CatalogApiService {
         const tuition = cycle.tuitionStatus === 'confirmed' && hasCurrentDirectoryTuition(cycle, this.today)
           ? cycle.tuitionCny
           : null
-        return (!query.academicYear || cycle.academicYear === query.academicYear)
+        return (!query.language || !cycle.teachingLanguage || cycle.teachingLanguage.toLowerCase() === query.language.toLowerCase())
+          && (!query.academicYear || cycle.academicYear === query.academicYear)
           && (!query.intake || cycle.intake === query.intake)
           && (!query.applicationState || hasCurrentDirectoryCycleDates(cycle, this.today) && getApplicationState(cycle, this.today) === query.applicationState)
           && (query.tuitionMin === undefined || (tuition !== null && tuition >= query.tuitionMin))

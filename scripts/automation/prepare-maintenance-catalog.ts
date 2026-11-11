@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url'
 import { applyCatalogSnapshotFiles, readCatalogSnapshotBaseline } from './apply-catalog-snapshot'
 import { fieldVerificationLedgerSchema } from '../../src/lib/data/field-verification'
 import { identityAcceptanceLedgerSchema } from '../../src/lib/data/identity-acceptance'
-import { canonicalJson, maintenanceCandidateExportSchema, maintenanceScopeSchema } from '../maintenance/contracts'
+import { canonicalJson, maintenanceCandidateExportSchema } from '../maintenance/contracts'
 import { importIdentityCandidates, localArtifactReader, type IdentityBindings } from '../maintenance/import-identities'
 import type { ReviewedProgramAliasRef } from '../maintenance/reviewed-program-alias'
 import { importFieldCandidates } from '../maintenance/import-fields'
@@ -13,6 +13,9 @@ import { importScholarshipIdentities } from '../maintenance/import-scholarships'
 import { importAdmissionCycleCandidates } from '../maintenance/import-cycles'
 import { catalogSha256 } from '../maintenance/build-scope'
 import { maintenanceClientFromEnvironment } from './catalog-maintenance-client'
+import { readMaintenanceScope } from '../maintenance/scope-registry'
+import { buildProgramCoverage } from '../maintenance/program-coverage'
+import { getTodayDate } from '../../src/lib/data/freshness'
 import { buildMaintenanceTargets } from './build-maintenance-bootstrap'
 
 const digest = (value: unknown) => createHash('sha256').update(canonicalJson(value)).digest('hex')
@@ -37,8 +40,8 @@ export async function prepareMaintenanceCatalog(options: { root: string; downloa
   const outputReal = resolve(realpathSync(ancestor), relative(ancestor, output)), insideData = relative(dataReal, outputReal)
   if (insideData !== '..' && !insideData.startsWith(`..${sep}`) && !isAbsolute(insideData)) throw new Error('maintenance_output_inside_canonical_data')
   const baseline = readCatalogSnapshotBaseline(dataDirectory)
-  const scope = maintenanceScopeSchema.parse(read(join(root, 'content', 'maintenance', 'scope-272.v1.json')))
   const batch = maintenanceCandidateExportSchema.parse(read(join(download, 'export.json')))
+  const scope = readMaintenanceScope(root, batch.scopeRegistrySha256)
   if (!/^[a-zA-Z0-9_-]{1,140}$/u.test(batch.batchId)) throw new Error('maintenance_batch_id_invalid')
   const receiptRelative = `quality/maintenance/batches/${batch.batchId}/canonical-receipt.json`
   const priorPath = resolve(root, receiptRelative)
@@ -74,7 +77,8 @@ export async function prepareMaintenanceCatalog(options: { root: string; downloa
     cycleReceiptSha256: cycles.cycleReceipt.sha256, cycleFieldReceiptSha256: cycles.fieldReceipt.sha256,
     unchangedProposalIds: [...unchangedIds].sort() }
   const receipt: CanonicalMaintenanceReceipt = { ...content, sha256: digest(content) }
-  const candidateFiles: Record<string, unknown> = { 'candidate-bundle.json': fields.bundle, 'identity-acceptances.json': scholarships.acceptances,
+  const coverageSnapshot = await buildProgramCoverage(fields.bundle, scope, getTodayDate(new Date(options.acceptedAt)), scholarships.acceptances.entries, fields.entries)
+  const candidateFiles: Record<string, unknown> = { 'coverage-snapshot.json': coverageSnapshot, 'candidate-bundle.json': fields.bundle, 'identity-acceptances.json': scholarships.acceptances,
     'identity-bindings.json': scholarships.bindings, 'field-verifications.json': { schemaVersion: 1, entries: fields.entries },
     'canonical-receipt.json': receipt, 'identity-receipt.json': identities.receipt, 'scholarship-receipt.json': scholarships.receipt,
     'cycle-receipt.json': cycles.cycleReceipt, 'cycle-field-receipt.json': cycles.fieldReceipt, 'field-receipt.json': fields.receipt }
@@ -106,8 +110,10 @@ export async function acknowledgeCanonicalMaintenance(root: string, receiptPath:
   const result = await client.json('/ack', 'POST', { batchId: receipt.batchId, outcome: receipt.acceptedProposalIds.length ? 'applied' : 'rejected', receiptSha256: receipt.sha256, sourceCommit,
     newInputCatalogSha256: receipt.outputCatalogSha256, acceptedProposalIds: receipt.acceptedProposalIds, heldProposalIds: receipt.held.map(entry => entry.proposalId),
     ...(receipt.unchangedProposalIds?.length ? { unchangedProposalIds: receipt.unchangedProposalIds } : {}) })
-  const scope = maintenanceScopeSchema.parse(read(join(root, 'content/maintenance/scope-272.v1.json')))
-  if (receipt.acceptedProposalIds.length) await client.json('/targets', 'POST', { inputCatalogSha256: receipt.outputCatalogSha256, recordTargets: buildMaintenanceTargets(current, scope) })
+  const scope = readMaintenanceScope(root, receipt.scopeRegistrySha256)
+  const coverageSnapshot = await buildProgramCoverage(current, scope, getTodayDate(), identityAcceptanceLedgerSchema.parse(optional(join(root,'content/data/identity-acceptances.json'),{schemaVersion:1,entries:[]})).entries, fieldVerificationLedgerSchema.parse(optional(join(root,'content/data/field-verifications.json'),{schemaVersion:1,entries:[]})).entries)
+  if (receipt.acceptedProposalIds.length) await client.json('/targets', 'POST', { inputCatalogSha256: receipt.outputCatalogSha256, recordTargets: buildMaintenanceTargets(current, scope), coverageSnapshot })
+  else await client.json('/coverage', 'POST', coverageSnapshot)
   return result
 }
 async function main() {

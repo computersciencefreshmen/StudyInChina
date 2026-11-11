@@ -7,6 +7,7 @@ import { fieldRecordScopeSha256 } from '../../src/lib/data/field-verification'
 import { loadMaintenanceBundle, catalogSha256 } from '../maintenance/build-scope'
 import { maintenanceScopeSchema, canonicalJson, scopeContentSha256, type MaintenanceScope } from '../maintenance/contracts'
 import { maintainedFieldPaths, maintenanceRecordTargetSchema, type MaintenanceRecordTarget } from '../maintenance/field-contracts'
+import { readMaintenanceScope } from '../maintenance/scope-registry'
 
 type LegacyGuard = { id: string; universityId: string | null; sourceId: string | null; recordId: string | null; fields: '*' | string[];
   state: 'stop'; artifactSha256: string; reason: string; snapshotSha256?: string | null }
@@ -55,7 +56,10 @@ export function buildMaintenanceTargets(bundle: DataBundle, scope: MaintenanceSc
     }))
     targets.push(maintenanceRecordTargetSchema.parse({ recordId: record.id, entityType, universityId, sourceIds: urls.map(bootstrapHash),
       recordScopeSha256: fieldRecordScopeSha256(entityType === 'admission-cycle' ? 'admissionCycle' : entityType, record),
-      identity: { name, ...(program ? { degreeLevel: program.degreeLevel, universityId: program.universityId, ...(cycle ? { programId: program.id } : {}) } : {}) },
+      identity: { name, ...(program ? { degreeLevel: program.degreeLevel, universityId: program.universityId,
+        ...(scope.formatVersion === 2 || getField(cycle, 'teachingLanguage') || getField(cycle, 'applicationRound') ? { teachingLanguages: program.teachingLanguages } : {}), ...(cycle ? { programId: program.id,
+          ...(getField(cycle, 'teachingLanguage') ? { teachingLanguage: getField(cycle, 'teachingLanguage') } : {}),
+          ...(getField(cycle, 'applicationRound') ? { applicationRound: getField(cycle, 'applicationRound') } : {}) } : {}) } : {}) },
       year: cycle?.academicYear ?? (years.length === 1 ? years[0] : null), intake, fields, reviewAfter: record.reviewAfter }))
   }
   for (const program of bundle.programs) add(program, 'program', program.universityId)
@@ -127,7 +131,7 @@ export async function buildMaintenanceBootstrap(root: string, legacyRoot: string
 async function main() {
   const args = process.argv.slice(2), value = (name: string) => args[args.indexOf(name) + 1]
   if (!args.includes('--legacy-root') || !args.includes('--output')) throw new Error('Usage: build-maintenance-bootstrap.ts --legacy-root <old-workspace> --output <private-seed.json>')
-  const root = process.cwd(), scope = JSON.parse(readFileSync(resolve(root, 'content/maintenance/scope-272.v1.json'), 'utf8'))
+  const root = process.cwd(), scope = readMaintenanceScope(root)
   const result = await buildMaintenanceBootstrap(root, value('--legacy-root'), scope), output = resolve(value('--output'))
   if (output.includes(`${join(root, 'content', 'data')}`)) throw new Error('Bootstrap output must not replace public data')
   mkdirSync(dirname(output), { recursive: true }); writeFileSync(output, `${JSON.stringify(result)}\n`, { flag: 'wx' })

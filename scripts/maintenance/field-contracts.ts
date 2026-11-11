@@ -4,7 +4,7 @@ import { sha256Schema } from './contracts'
 export const MAINTAINED_PROGRAM_FIELDS = ['teachingLanguages', 'durationMonths', 'durationMonthsMax', 'durationText', 'applyUrl', 'languageRequirements',
   'supplementaryDetails.faculty', 'supplementaryDetails.qualification', 'supplementaryDetails.languagePolicy',
   'supplementaryDetails.curriculumHighlights', 'supplementaryDetails.eligibility', 'supplementaryDetails.applicationMaterials', 'supplementaryDetails.campus'] as const
-export const MAINTAINED_CYCLE_FIELDS = ['opensOn', 'closesOn', 'dateStatus', 'tuitionCny', 'tuitionPeriod', 'tuitionStatus', 'tuitionSchedule', 'applicationFeeCny'] as const
+export const MAINTAINED_CYCLE_FIELDS = ['opensOn', 'closesOn', 'dateStatus', 'tuitionCny', 'tuitionPeriod', 'tuitionStatus', 'tuitionSchedule', 'applicationFeeCny', 'languageRequirements', 'eligibility', 'applicationMaterials', 'applyUrl'] as const
 export const MAINTAINED_SCHOLARSHIP_FIELDS = ['deadline', 'applicationUrl', 'eligibility', 'coverage.tuition', 'coverage.accommodation', 'coverage.insurance', 'coverage.stipendCnyPerMonth'] as const
 export const maintainedFieldPathSchema = z.enum([...MAINTAINED_PROGRAM_FIELDS, ...MAINTAINED_CYCLE_FIELDS, ...MAINTAINED_SCHOLARSHIP_FIELDS])
 export const fieldPatchFieldsSchema = z.object({

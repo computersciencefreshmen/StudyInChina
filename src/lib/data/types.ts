@@ -1,3 +1,4 @@
+import type { CycleTeachingLanguage } from './cycle-scope'
 import type { Locale } from '@/i18n/config'
 
 export type LocalizedText = Partial<Record<Locale, string>>
@@ -104,6 +105,13 @@ export type AdmissionCycle = AuditMeta & {
   programId: string
   academicYear: string
   intake: 'spring' | 'autumn' | 'other'
+  /** Optional scope; older unscoped single-track cycles keep their identity. */
+  teachingLanguage?: CycleTeachingLanguage
+  applicationRound?: string
+  languageRequirements?: LanguageRequirement[] | null
+  eligibility?: LocalizedText[] | null
+  applicationMaterials?: LocalizedText[] | null
+  applyUrl?: string | null
   opensOn: string | null
   closesOn: string | null
   dateStatus: 'published' | 'rolling' | 'not-announced' | 'previous-cycle-reference'

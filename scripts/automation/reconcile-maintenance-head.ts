@@ -12,6 +12,7 @@ import { catalogSha256, loadMaintenanceBundle } from '../maintenance/build-scope
 import { canonicalJson, exportContentSha256, maintenanceCandidateExportSchema, maintenanceScopeSchema, scopeContentSha256 } from '../maintenance/contracts'
 import { buildMaintenanceTargets } from './build-maintenance-bootstrap'
 import { MaintenanceHttpError, maintenanceHttpFailure, maintenanceClientFromEnvironment, type MaintenanceClient } from './catalog-maintenance-client'
+import { readMaintenanceScope } from '../maintenance/scope-registry'
 
 const OPERATION = 'native-git-head-2026-11-10'
 const manifestPath = 'content/maintenance/head-reconciliation-2026-11-10.v1.json'
@@ -28,9 +29,10 @@ const controlSchema = z.object({
 }).passthrough()
 const stateSchema = z.object({
   format: z.literal('studyinchina.maintenance-control'), control: controlSchema,
-  deployment: z.object({ maintenanceEnabled: z.boolean(), subscriptionConfigured: z.boolean(), guardRequired: z.boolean().optional().default(false), guardReady: z.boolean().optional().default(false) }),
+  deployment: z.object({ maintenanceEnabled: z.boolean(), subscriptionConfigured: z.boolean(), guardRequired: z.boolean().optional().default(false), guardReady: z.boolean().optional().default(false), scopeUpgradePending: z.boolean().optional().default(false) }),
   reconciliation: z.object({
     manifestSha256: HASH,
+    scopeUpgrade: z.object({ previousScopeSha256: HASH, nextScopeSha256: HASH, verified: z.literal(true) }).nullable().optional(),
     paused: z.object({ originalControl: controlSchema, pausedRevision: z.number().int(), proofSha256: HASH }).nullable(),
     advanced: z.object({ reconciledRevision: z.number().int(), proofSha256: HASH }).nullable(),
     resumed: z.object({ restoredRevision: z.number().int() }).nullable(),
@@ -165,7 +167,14 @@ export async function verifyReconciliationHistory(root: string, options: { requi
 
 function validatedState(value: unknown): State {
   const state = stateSchema.parse(value)
-  requireCheck(state.reconciliation.manifestSha256 === manifest.sha256 && state.control.scope_sha256 === manifest.scopeRegistrySha256, 'worker_pin')
+  requireCheck(state.reconciliation.manifestSha256 === manifest.sha256, 'worker_pin')
+  if (state.control.scope_sha256 !== manifest.scopeRegistrySha256) {
+    const lineage = state.reconciliation.scopeUpgrade
+    requireCheck(lineage?.verified && lineage.previousScopeSha256 === manifest.scopeRegistrySha256
+      && lineage.nextScopeSha256 === state.control.scope_sha256 && state.deployment.guardReady, 'worker_scope_upgrade_lineage')
+    const scope = readMaintenanceScope(process.cwd(), lineage.nextScopeSha256), { sha256, ...content } = scope
+    requireCheck(scope.parentScopeSha256 === manifest.scopeRegistrySha256 && sha(canonicalJson(content)) === sha256, 'worker_scope_upgrade_registry')
+  }
   return state
 }
 function assertPaused(state: State): asserts state is State & { reconciliation: State['reconciliation'] & { paused: NonNullable<State['reconciliation']['paused']> } } {
@@ -292,6 +301,7 @@ export async function automaticallyReconcileMaintenanceHead(options: Omit<Reconc
   }
   try {
     const state = validatedState(await options.client.json('/control'))
+    if (state.deployment.scopeUpgradePending) return result(false, 'scope_upgrade_pending', state)
     if (completedOperation(state)) return result(true, 'already_reconciled', state)
     if (!state.deployment.guardRequired) return result(false, 'guard_not_armed', state)
     if (!state.deployment.maintenanceEnabled) return result(false, 'deployment_gate_disabled', state)
