@@ -186,9 +186,13 @@ export async function runPartitionedDocument(env: MaintenanceEnv, job: JobRow, r
     if (body.start > 0) {
       const headerEnd = Math.min(1600, body.start)
       contexts.push({ start: 0, end: headerEnd, sha256: await digest(fullText.slice(0, headerEnd)), boundary: 'continuous' })
-      const prior = fullText.slice(Math.max(0, body.start - 1200), body.start), heading = [...prior.matchAll(/(?:\n|\f)(?:#{1,6}\s|第[一二三四五六七八九十百\d]+[章节]|\d{1,2}[.、]\s)[^\n\f]{1,180}/gu)].at(-1)
-      if (heading?.index !== undefined) { const start = Math.max(0, body.start - 1200) + heading.index, end = start + heading[0].length
-        contexts.push({ start, end, sha256: await digest(fullText.slice(start, end)), boundary: 'chapter' }) }
+      const prior = fullText.slice(0, body.start), heading = [...prior.matchAll(/(?:\n|\f)(?:#{1,6}\s|第[一二三四五六七八九十百\d]+[章节]|\d{1,2}[.、]\s)[^\n\f]{1,180}/gu)].at(-1)
+      const htmlHeading = chapterOffsets.filter(offset => offset < body.start).at(-1)
+      const start = Math.max(heading?.index ?? -1, htmlHeading ?? -1)
+      if (start >= 0) {
+        const end = Math.min(body.start, start + (start === heading?.index ? heading[0].length : 180))
+        contexts.push({ start, end, sha256: await digest(fullText.slice(start, end)), boundary: 'chapter' })
+      }
     }
     const context: DocumentPartitionContext = { manifestKey, manifestSha256: manifest.sha256, partitionIndex: partIndex, unitIndex: unit,
       rawSnapshotSha256: snapshot.rawSha256, fullTextSha256: snapshot.textSha256, fullText,

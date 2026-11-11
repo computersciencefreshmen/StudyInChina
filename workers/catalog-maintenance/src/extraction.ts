@@ -35,6 +35,8 @@ export function parsePrograms(output:unknown,text:string,schools:SchoolRow[],row
     const degreeEvidence=fields.find(e=>e.fieldPath==='degreeLevel')
     const degreeWords:Record<string,RegExp>={bachelor:/bachelor|undergraduate|本科|学士/iu,master:/master|硕士/iu,doctorate:/doctor|ph\.?d|博士/iu,language:/language|汉语|中文|语言/iu,foundation:/foundation|pre.?university|预科/iu,other:/visiting|exchange|short.?term|访学|交换|短期/iu}
     if(!degreeEvidence||!degreeWords[degree]?.test(degreeEvidence.quote))continue
+    if(partition&&Object.values(degreeWords).filter(pattern=>pattern.test(text)).length>1
+      &&![partition.body,...partition.contexts.filter(span=>span.boundary==='chapter')].some(span=>normalizeEvidenceText(partition.fullText.slice(span.start,span.end)).includes(normalizeEvidenceText(degreeEvidence.quote))))continue
     const programUrl=String(raw.programUrl??'')
     try{assertSafeSourceUrl(programUrl,hosts)}catch{continue}
     if(!urls.has(programUrl)||programUrl!==snapshot.finalUrl)continue
