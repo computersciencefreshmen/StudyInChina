@@ -20,7 +20,42 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Read the previous persisted cloud health observation
+        if: vars.CATALOG_MAINTENANCE_MODE == 'cloud'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          previous_root="$RUNNER_TEMP/cloud-health-previous"
+          mkdir -p "$previous_root"
+          previous_runs="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/automation-health.yml/runs?per_page=10" \
+            --jq ".workflow_runs | map(select(.id != $GITHUB_RUN_ID and .status == \"completed\")) | .[0:5][] | .id")"
+          for previous_run in $previous_runs; do
+            [[ "$previous_run" =~ ^[0-9]+$ ]] || exit 1
+            previous_directory="$previous_root/$previous_run"
+            if gh run download "$previous_run" --repo "$GITHUB_REPOSITORY" \
+              --name "automation-health-$previous_run" --dir "$previous_directory"; then
+              if [[ -f "$previous_directory/automation-health.json" ]]; then
+                cp -- "$previous_directory/automation-health.json" "$previous_root/report.json"
+                break
+              fi
+            fi
+          done
+          if [[ ! -f "$previous_root/report.json" ]]; then
+            echo '::notice::No previous health artifact was available; coverage deltas and continuous wait history remain unobserved.'
+          fi
+      - name: Observe the active cloud maintenance and public catalog
+        if: vars.CATALOG_MAINTENANCE_MODE == 'cloud'
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        run: >-
+          node --import tsx scripts/automation/cloud-maintenance-health.ts
+          --previous "$RUNNER_TEMP/cloud-health-previous/report.json"
+          --output "$RUNNER_TEMP/automation-health.json"
       - name: Check persisted progress and public catalog
+        if: vars.CATALOG_MAINTENANCE_MODE != 'cloud'
         env:
           GH_TOKEN: ${{ github.token }}
           INGESTION_ADMIN_TOKEN: ${{ secrets.INGESTION_ADMIN_TOKEN }}
