@@ -127,7 +127,9 @@ jobs:
 
       - name: Install Playwright Chromium
         timeout-minutes: 5
-        run: npx playwright install --with-deps chromium
+        # The hosted image already has Chromium's runtime libraries. Avoid an
+        # unrelated APT font download; the full E2E suite still verifies launch.
+        run: npx playwright install --only-shell chromium
 
       - name: Run end-to-end tests against the production build
         run: npm run test:e2e
