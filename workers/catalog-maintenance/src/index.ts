@@ -6,6 +6,7 @@ import { extractIdentities } from './extraction'
 import { extractScholarshipIdentities } from './scholarship-identities'
 import { maintainFields } from './field-updates'
 import { discoverAdmissionCycles } from './cycle-discovery'
+import { runPartitionedDocument } from './document-partitions'
 import { processDiscoveryFrontier } from './discovery'
 import { loadSnapshot } from './capture'
 import { persistProposals } from './proposals'
@@ -17,13 +18,25 @@ import { readMaintenanceControl, reconcileMaintenanceHead } from './head-reconci
 import { prepareReconciliationTargets, registerReconciliationTargets } from './reconciliation-targets'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
-import type { MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
+import type { JobRow, MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
 import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus,quotaWait,rememberQuotaWait } from './runtime'
 import { isDailyD1QuotaError } from './backend-errors'
 import { after, authorized, HASH, json, nowIso, requestJson } from './util'
 
 export { ModelAdmission }
+async function finishDocumentPartition(env:MaintenanceEnv,job:JobRow,progress:Awaited<ReturnType<typeof runPartitionedDocument>>){
+  if(progress.pending){
+    // A successful bounded continuation is not a failed model attempt.
+    await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET attempt=MAX(0,attempt-1) WHERE job_id=? AND status='running' AND lease_token=?").bind(job.job_id,job.lease_token).run()
+    await finishJob(env,job,'retry','document_partition_pending',5)
+    await env.MAINTENANCE_QUEUE.send({version:1,jobId:job.job_id},{delaySeconds:5})
+  }else{
+    const unfinished='unfinishedSections'in progress&&Number(progress.unfinishedSections)>0
+    await finishJob(env,job,unfinished?'held':progress.ready?'done':progress.held?'held':'done',unfinished?'partition_capacity_requires_review':progress.held?'some_partition_scopes_require_review':null)
+  }
+  await event(env,'document_partition_progress',{jobId:job.job_id,...progress})
+}
 export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessage):Promise<void> {
   if(message?.version===1&&message.scopeUpgradeSha256&&HASH.test(message.scopeUpgradeSha256)){await processScopeUpgrade(env,message.scopeUpgradeSha256);return}
   if(message?.version===1&&message.reconciliationTargetsUpload){await prepareReconciliationTargets(env,message.reconciliationTargetsUpload);return}
@@ -60,11 +73,22 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
       if(!Array.isArray(pins))throw new MaintenanceError('maintenance_job_scope_invalid')
       const targets=(await recordTargets(env,row.source_id)).filter(target=>(!canary.length||canary.includes(target.universityId))&&pins.some(pin=>pin.id===`${target.entityType}:${target.recordId}`&&pin.sha256===target.recordScopeSha256))
       if(!targets.length)throw new MaintenanceError('maintenance_target_scope_changed')
+      const partition=await runPartitionedDocument(env,job,row,snapshot,cyclePurpose?'cycles':'fields',targets,async(context,selected)=>
+        cyclePurpose?discoverAdmissionCycles(env,job,row,context.snapshot,selected.filter(target=>target.entityType==='program'),undefined,context):maintainFields(env,job,row,context.snapshot,selected,undefined,context))
+      if(partition.handled){await finishDocumentPartition(env,job,partition);return}
       const result=cyclePurpose?await discoverAdmissionCycles(env,job,row,snapshot,targets.filter(target=>target.entityType==='program')):await maintainFields(env,job,row,snapshot,targets)
       await persistProposals(env,result.proposals,row.source_id,snapshot.rawSha256)
       await finishJob(env,job,result.proposals.length?'done':result.held.length?'held':'done',result.held.length?'some_field_scopes_require_review':null)
       await event(env,cyclePurpose?'cycles_discovered':'fields_checked',{jobId:job.job_id,ready:result.proposals.filter(p=>p.status==='ready').length,held:result.held})
     } else {
+      if(job.snapshot_key&&job.snapshot_sha256){
+        const snapshot=await loadSnapshot(env,job.snapshot_key)
+        const partition=await runPartitionedDocument(env,job,row,snapshot,job.stage==='award'?'scholarship':'program',[],async context=>{
+          const extracted=job.stage==='award'?await extractScholarshipIdentities(env,job,row,undefined,{partition:context,persist:false}):await extractIdentities(env,job,row,{partition:context,persist:false})
+          return{proposals:extracted.proposals??[],held:extracted.held?[{recordId:job.job_id,reason:`partition_identity_scopes_held:${extracted.held}`}]:[],...(extracted.partitionCapacityLimited?{capacityLimited:true}:{})}
+        })
+        if(partition.handled){await finishDocumentPartition(env,job,partition);return}
+      }
       const result=job.stage==='award'?await extractScholarshipIdentities(env,job,row):await extractIdentities(env,job,row)
       await finishJob(env,job,'done')
       await event(env,'identities_extracted',{jobId:job.job_id,...result})

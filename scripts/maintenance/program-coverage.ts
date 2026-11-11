@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs'
 import { resolve, join, dirname } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import type { AdmissionCycle, DataBundle, Program, Scholarship } from '../../src/lib/data/types'
+import type { AdmissionCycle, AuditMeta, DataBundle, Program, Scholarship } from '../../src/lib/data/types'
 import { selectDiscoveryData, type DiscoveryMeta } from '../../src/lib/data/discovery'
 import { readIdentityAcceptances } from '../../src/lib/data/identity-acceptance-store'
 import { readFieldVerifications } from '../../src/lib/data/field-verification-store'
@@ -42,29 +42,67 @@ function distinctPrograms(programs: Program[]): string[] {
   return groups.map(group => group.ids.sort()[0]).sort()
 }
 
+type WithDiscovery = AuditMeta & { discovery?: DiscoveryMeta }
+/** A whole-current record or a fresh leaf can prove a value. Explicit unknown
+ * overrides whole-record freshness; only a real not-applicable receipt grants
+ * an exemption, never an absent/empty field by itself. */
+function supportsField(record: WithDiscovery, path: string, meaningful: boolean, today: string, allowExemption = false): boolean {
+  const meta = record.discovery
+  const current = meta ? meta.currentFacts : record.status === 'verified' && record.verifiedAt <= today && record.reviewAfter >= today
+  if (!current && !meta?.currentFieldPaths.includes(path)) return false
+  const state = meta?.fieldStates?.[path]
+  if (state === 'not_applicable') return allowExemption
+  if (state !== undefined && state !== 'known') return false
+  return meaningful
+}
+const hasList = (value: unknown): boolean => Array.isArray(value) && value.length > 0
+function applicationRoute(value: unknown): boolean {
+  if (typeof value !== 'string') return false
+  try { const url = new URL(value); return ['http:', 'https:'].includes(url.protocol) && !url.username && !url.password }
+  catch { return false }
+}
+function completeScholarship(award: Scholarship & { discovery: DiscoveryMeta }, today: string): boolean {
+  const known = (path: string, meaningful: boolean, exemption = false) => supportsField(award, path, meaningful, today, exemption)
+  const deadline = typeof award.deadline === 'string' && /^\d{4}-\d{2}-\d{2}$/u.test(award.deadline) && award.deadline >= today
+  return known('deadline', deadline, award.deadline === null) && known('applicationUrl', applicationRoute(award.applicationUrl))
+    && known('eligibility', hasList(award.eligibility), true)
+    && known('coverage.tuition', ['full', 'partial', 'none'].includes(award.coverage.tuition))
+    && known('coverage.accommodation', ['full', 'partial', 'none'].includes(award.coverage.accommodation))
+    && known('coverage.insurance', typeof award.coverage.insurance === 'boolean')
+    && known('coverage.stipendCnyPerMonth', typeof award.coverage.stipendCnyPerMonth === 'number' && award.coverage.stipendCnyPerMonth >= 0, award.coverage.stipendCnyPerMonth === null)
+}
+
 export async function buildProgramCoverage(bundle: DataBundle, scope: MaintenanceScope, today: string, identities: IdentityAcceptance[] = [], fields: FieldVerification[] = []): Promise<CoverageSnapshot> {
   const directory = selectDiscoveryData(bundle, today, identities, fields)
   const projectedPrograms = directory.programs as Array<Program & { discovery: DiscoveryMeta }>
   const projectedAwards = directory.scholarships as Array<Scholarship & { discovery: DiscoveryMeta }>
   const projectedCycles = directory.admissionCycles as Array<AdmissionCycle & { discovery?: DiscoveryMeta }>
   const complete = projectedPrograms.filter(program => {
-    const has = (path: string) => program.discovery.currentFacts || program.discovery.currentFieldPaths.includes(path)
+    const known = (path: string, meaningful: boolean, exemption = false) => supportsField(program, path, meaningful, today, exemption)
     const usableCycle = projectedCycles.some(cycle => {
-      if (cycle.programId !== program.id || cycle.closesOn && cycle.closesOn < today) return false
-      const verified = (path: string) => cycle.discovery?.currentFacts || cycle.status === 'verified' && cycle.reviewAfter >= today
-        || cycle.discovery?.currentFieldPaths.includes(path)
-      const trackSpecific = Boolean(cycle.teachingLanguage || cycle.applicationRound)
-      const route = verified('applyUrl') && Boolean(cycle.applyUrl) || has('applyUrl') && Boolean(program.applyUrl)
-      const annualRequirements = verified('languageRequirements') && Boolean(cycle.languageRequirements?.length)
-        || verified('eligibility') && Boolean(cycle.eligibility?.length)
-      const legacyRequirements = !trackSpecific && (has('languageRequirements') && program.languageRequirements.length > 0
-        || has('supplementaryDetails.eligibility') && Boolean(program.supplementaryDetails?.eligibility?.length))
+      if (cycle.programId !== program.id || !/^20\d{2}-20\d{2}$/u.test(cycle.academicYear) || cycle.closesOn && cycle.closesOn < today) return false
+      const cycleField = (path: string, meaningful: boolean, exemption = false) => supportsField(cycle, path, meaningful, today, exemption)
+      // Without common-applicability evidence, a language/round-specific route
+      // and conditions must come from that exact annual scope.
+      const scoped = Boolean(cycle.teachingLanguage || cycle.applicationRound) || program.teachingLanguages.length > 1
+      const hasAnnualRoute = Object.hasOwn(cycle, 'applyUrl') || cycle.discovery?.currentFieldPaths.includes('applyUrl')
+      const route = hasAnnualRoute ? cycleField('applyUrl', applicationRoute(cycle.applyUrl))
+        : !scoped && known('applyUrl', applicationRoute(program.applyUrl))
+      const annualRequirements = cycleField('languageRequirements', hasList(cycle.languageRequirements), true)
+        && cycleField('eligibility', hasList(cycle.eligibility), true)
+      const hasAnnualConditions = ['languageRequirements', 'eligibility'].some(path => Object.hasOwn(cycle, path)
+        || cycle.discovery?.currentFieldPaths.includes(path))
+      const legacyRequirements = !scoped && !hasAnnualConditions
+        && known('languageRequirements', hasList(program.languageRequirements), true)
+        && (known('details.eligibility', hasList(program.details?.eligibility ?? program.supplementaryDetails?.eligibility), true)
+          || known('supplementaryDetails.eligibility', hasList(program.supplementaryDetails?.eligibility), true))
       return route && (annualRequirements || legacyRequirements)
     })
     return usableCycle && concreteProgramKeys(program).length > 0
-      && has('teachingLanguages') && program.teachingLanguages.length > 0
-      && has('durationMonths') && program.durationMonths !== null
+      && known('teachingLanguages', program.teachingLanguages.length > 0)
+      && known('durationMonths', program.durationMonths !== null)
   })
+  const completeAwards = projectedAwards.filter(award => completeScholarship(award, today))
   const content = {
     format: 'studyinchina.school-program-coverage' as const, version: 1 as const, scopeRegistrySha256: scope.sha256,
     inputCatalogSha256: await catalogSha256(bundle), evaluatedOn: today,
@@ -79,7 +117,7 @@ export async function buildProgramCoverage(bundle: DataBundle, scope: Maintenanc
         directoryProgramCount: distinctPrograms(directory.programs.filter(program => program.universityId === school.universityId)).length,
         currentProgramCount: ids.length, minimumProgramCount: 5 as const, gap: Math.max(0, 5 - ids.length), coverageBand: coverageBand(ids.length),
         countedProgramIds: ids, directoryScholarshipCount: projectedAwards.filter(award => award.universityIds.includes(school.universityId)).length,
-        currentScholarshipCount: projectedAwards.filter(award => award.universityIds.includes(school.universityId) && award.discovery.currentFacts).length,
+        currentScholarshipCount: completeAwards.filter(award => award.universityIds.includes(school.universityId)).length,
         reviewAfter: reviewDates[0] ?? null }
     }).sort((a, b) => a.universityId.localeCompare(b.universityId)),
   }
@@ -91,11 +129,12 @@ export function coverageSummary(snapshot: CoverageSnapshot) {
     bands: Object.fromEntries(['zero', 'one', 'two-to-four', 'five-plus'].map(band => [band, snapshot.schools.filter(school => school.coverageBand === band).length])),
     directoryPrograms: snapshot.schools.reduce((sum, row) => sum + row.directoryProgramCount, 0),
     currentConcretePrograms: snapshot.schools.reduce((sum, row) => sum + row.currentProgramCount, 0),
+    currentScholarshipOpportunities: snapshot.schools.reduce((sum, row) => sum + row.currentScholarshipCount, 0),
     schoolsMeetingMinimum: snapshot.schools.filter(row => row.gap === 0).length, totalProgramGap: snapshot.schools.reduce((sum, row) => sum + row.gap, 0) }
 }
 export function renderCoverageReport(snapshot: CoverageSnapshot): string {
   const summary = coverageSummary(snapshot)
-  return `# School programme coverage — ${snapshot.evaluatedOn}\n\nScope: ${snapshot.scopeRegistrySha256}\n\nCatalog: ${snapshot.inputCatalogSha256}\n\n${summary.schoolCount} schools; minimum 5 concrete current programmes per school. Bands 0 / 1 / 2–4 / ≥5: ${Object.values(summary.bands).join(' / ')}.\n\nCurrent means a discoverable, source-backed specific programme with a current admission cycle, application route, teaching language, duration and language/eligibility requirements. Exact bilingual identities are merged; teaching-language tracks and application rounds do not count separately. Directory identities and raw stored rows are reported separately. No official sites were fetched to generate this report.\n\n| School ID | Raw rows | Directory majors | Current majors | Gap to 5 | Review after |\n|---|---:|---:|---:|---:|---|\n${snapshot.schools.map(row => `| ${row.universityId} | ${row.rawProgramCount} | ${row.directoryProgramCount} | ${row.currentProgramCount} | ${row.gap} | ${row.reviewAfter ?? 'unknown'} |`).join('\n')}\n`
+  return `# School programme coverage — ${snapshot.evaluatedOn}\n\nScope: ${snapshot.scopeRegistrySha256}\n\nCatalog: ${snapshot.inputCatalogSha256}\n\n${summary.schoolCount} schools; minimum 5 concrete current programmes per school. Bands 0 / 1 / 2–4 / ≥5: ${Object.values(summary.bands).join(' / ')}.\n\nCurrent means a discoverable, source-backed specific programme with a current admission cycle, application route, teaching language, duration and both language requirements and eligibility. Explicit annual language/round scopes require their own application route and both conditions; absent or unknown facts do not count as complete. Exemptions count only with current official not-applicable leaf evidence. Scholarship opportunities require a current deadline (or an explicit no-deadline receipt), application route, eligibility, and all four funding leaves; unknown benefits do not count. Exact bilingual identities are merged; teaching-language tracks and application rounds do not count separately. Directory identities and raw stored rows are reported separately. No official sites were fetched to generate this report.\n\n| School ID | Raw rows | Directory majors | Current majors | Gap to 5 | Review after |\n|---|---:|---:|---:|---:|---|\n${snapshot.schools.map(row => `| ${row.universityId} | ${row.rawProgramCount} | ${row.directoryProgramCount} | ${row.currentProgramCount} | ${row.gap} | ${row.reviewAfter ?? 'unknown'} |`).join('\n')}\n`
 }
 export async function refreshCloudProgramCoverage(options: { root: string; client: Pick<MaintenanceClient, 'json'>; today?: string; onSnapshot?: (snapshot: CoverageSnapshot) => void }) {
   const today = options.today ?? getTodayDate(), status = await options.client.json('/status') as {

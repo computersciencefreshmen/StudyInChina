@@ -15,7 +15,7 @@ facts are 751 programmes/cycles at five schools and zero awards. These are Git
 data/projection counts, not a live production-readback claim.
 
 The stricter five-programme objective also requires an application route,
-teaching language, duration and evidenced language/eligibility requirements.
+teaching language, duration and both evidenced language requirements and eligibility.
 See [the dated coverage report](coverage-295-2026-11-11.md) for the deduplicated
 baseline and per-school gaps; raw records are not interchangeable with this KPI.
 
@@ -29,6 +29,17 @@ The existing quarter-hour cloud tick now continues the approved additive 295-sch
 scope upgrade and refreshes date/catalogue-bound coverage metadata without rewriting
 all record targets. The existing document and publisher schedules remain in place.
 No second writer, database, Cron slot or paid plan is introduced.
+
+Long official documents use a checksum-bound manifest covering every UTF-16
+position, preferring actual chapter/paragraph/page boundaries. Each Queue turn
+performs at most one segment's independent extraction pair, then saves its result
+before advancing an ETag-fenced cursor. The scan finishes before candidate drain;
+cross-segment conflicting facts stay held. Drain writes proposals before advancing
+its cursor, so a lost reply neither loses accepted facts nor repeats paid work.
+Source/snapshot reservations remain authoritative across partitions. Healthy
+in-flight siblings cause a bounded wait; genuinely unknown outcomes stop that
+original scope. Capacity-limited sections remain explicitly unfinished, and a
+complete document scan never certifies a complete school catalogue.
 
 Within the existing finite pools, low-coverage schools are prioritised as
 0, 1, 2-4, then 5+ current distinct programmes. Expansion uses programme/programme/

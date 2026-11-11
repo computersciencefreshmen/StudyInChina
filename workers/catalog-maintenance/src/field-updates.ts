@@ -12,6 +12,7 @@ import { runGuardedModelRequest } from './model-client'
 import type { JobRow, MaintenanceEnv, ModelRequest, ModelResult, SourceRow } from './types'
 import { MaintenanceError } from './types'
 import { digest, nowIso } from './util'
+import { partitionEvidenceLocator, partitionReviewScope, partitionSourceText, type DocumentPartitionContext } from './document-partitions'
 
 const MAX_SOURCE_CHARS = 100_000
 const TARGETS_PER_REQUEST = 40
@@ -171,7 +172,7 @@ function makePayload(pass: ModelRequest['pass'], text: string, targets: Maintena
 
 /** Two document/chunk extractions, never two calls per individual field or programme. */
 export async function maintainFields(env: MaintenanceEnv, job: JobRow, row: SourceRow, snapshot: CapturedSnapshot,
-  inputTargets: MaintenanceRecordTarget[], runner: FieldModelRunner = runGuardedModelRequest): Promise<FieldMaintenanceResult> {
+  inputTargets: MaintenanceRecordTarget[], runner: FieldModelRunner = runGuardedModelRequest, partition?: DocumentPartitionContext): Promise<FieldMaintenanceResult> {
   const result: FieldMaintenanceResult = { proposals: [], held: [] }
   const targets = inputTargets.map(target => maintenanceRecordTargetSchema.parse(target))
     .filter(target => target.sourceIds.includes(snapshot.sourceId))
@@ -182,13 +183,15 @@ export async function maintainFields(env: MaintenanceEnv, job: JobRow, row: Sour
   }
   const textObject = await env.SNAPSHOTS_BUCKET.get(snapshot.textKey)
   if (!textObject || textObject.size !== undefined && textObject.size > 2 * 1024 * 1024) throw new MaintenanceError('field_text_unavailable')
-  const text = await textObject.text()
-  if (await digest(text) !== snapshot.textSha256) throw new MaintenanceError('field_text_checksum_mismatch')
+  const fullText = await textObject.text()
+  if (await digest(fullText) !== snapshot.textSha256) throw new MaintenanceError('field_text_checksum_mismatch')
+  const text = partitionSourceText(partition, snapshot, fullText)
   if (text.length > MAX_SOURCE_CHARS) return { proposals: [], held: targets.map(target => ({ recordId: target.recordId, reason: 'large_source_requires_explicit_partition' })) }
   for (let offset = 0; offset < targets.length; offset += TARGETS_PER_REQUEST) {
     const chunk = targets.slice(offset, offset + TARGETS_PER_REQUEST)
-    const scopeKey = await digest(canonicalJson(chunk.map(target => ({ recordId: target.recordId, scope: target.recordScopeSha256,
+    let scopeKey = await digest(canonicalJson(chunk.map(target => ({ recordId: target.recordId, scope: target.recordScopeSha256,
       fields: maintainedFieldPaths(target.entityType) }))))
+    if (partition) scopeKey = await digest(`${scopeKey}:complete-document-partition-v1:${await digest(text)}`)
     const request = (pass: ModelRequest['pass']): ModelRequest => ({
       reservationKey: '', sourceId: row.source_id, universityIds: [...new Set(chunk.map(target => target.universityId))],
       snapshotSha256: snapshot.rawSha256, pass, payload: makePayload(pass, text, chunk), lane: 'maintenance', recordIds: chunk.map(target => target.recordId),
@@ -212,12 +215,12 @@ export async function maintainFields(env: MaintenanceEnv, job: JobRow, row: Sour
       const fields: FieldPatchFields = fieldPatchFieldsSchema.parse({ recordScopeSha256: target.recordScopeSha256,
         patches: agreed.map(({ fieldPath, value, factStatus }) => ({ fieldPath, value, factStatus })) })
       const evidence = (fieldPath: string, quote: string) => ({ fieldPath, sourceId: row.source_id, url: snapshot.finalUrl,
-        snapshotSha256: snapshot.rawSha256, objectKey: snapshot.rawKey, locator: 'text:document', quote })
+        snapshotSha256: snapshot.rawSha256, objectKey: snapshot.rawKey, locator: partitionEvidenceLocator(partition, quote), quote })
       const proposal: MaintenanceProposal = {
         id: `maintenance-field-${await digest(`${row.source_id}:${snapshot.rawSha256}:${target.recordScopeSha256}:${canonicalJson(fields)}:${snapshot.checkedAt.slice(0, 10)}`)}`,
         universityId: target.universityId, entityType: target.entityType, recordId: target.recordId, operation: 'patch', fields,
         source: { id: row.source_id, url: snapshot.finalUrl, snapshotSha256: snapshot.rawSha256, objectKey: snapshot.rawKey,
-          checkedAt: snapshot.checkedAt, contentType: snapshot.contentType, locator: 'text:document', quote: left.applicabilityQuote,
+          checkedAt: snapshot.checkedAt, contentType: snapshot.contentType, locator: partitionEvidenceLocator(partition, left.applicabilityQuote), quote: left.applicabilityQuote,
           ...(snapshot.textArtifact ? { textArtifact: snapshot.textArtifact } : {}) },
         fieldEvidence: [...agreed.map(patch => evidence(patch.fieldPath, patch.quote)), evidence('$applicability', left.applicabilityQuote),
           ...(left.scopeQuote ? [evidence('$scope', left.scopeQuote)] : [])],
@@ -228,7 +231,7 @@ export async function maintainFields(env: MaintenanceEnv, job: JobRow, row: Sour
       const receipt = { candidateSha256, reviewAttemptId: secondary.attemptId, decision: 'approved', snapshotSha256: snapshot.rawSha256,
         extractionAttemptId: primary.attemptId, primaryArtifactKey: primary.artifactKey, primaryArtifactSha256: primary.artifactSha256,
         modelArtifactKey: secondary.artifactKey, modelArtifactSha256: secondary.artifactSha256, agreedFields: fields,
-        reviewedAt: nowIso() }
+        reviewedAt: nowIso(), ...partitionReviewScope(partition) }
       const body = canonicalJson(receipt), reviewArtifactSha256 = await digest(body)
       const artifactKey = `maintenance/reviews/${proposal.id}/${reviewArtifactSha256}.json`
       await env.SNAPSHOTS_BUCKET.put(artifactKey, body, { httpMetadata: { contentType: 'application/json' } })

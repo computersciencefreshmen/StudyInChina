@@ -64,7 +64,7 @@ export const candidateSourceSchema = evidenceSchema.omit({ sourceId: true }).ext
   /** For PDFs/browser captures, a checksum-bound extraction must be supplied separately. */
   textArtifact: z.object({
     objectKey: z.string().min(1), sha256: sha256Schema, rawSnapshotSha256: sha256Schema,
-    parser: z.enum(['poppler', 'tesseract', 'browser-dom', 'windows-ocr-reviewed-v1', 'openxml-literal-workbook-v1']),
+    parser: z.enum(['poppler', 'tesseract', 'browser-dom', 'official-response-text-v1', 'windows-ocr-reviewed-v1', 'openxml-literal-workbook-v1']),
   }).strict().optional(),
 })
 

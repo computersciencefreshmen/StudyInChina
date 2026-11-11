@@ -5,7 +5,7 @@ import { buildProgramCoverage, concreteProgramKeys, refreshCloudProgramCoverage 
 import { loadMaintenanceBundle, catalogSha256 } from '../../../scripts/maintenance/build-scope'
 import { readMaintenanceScope } from '../../../scripts/maintenance/scope-registry'
 import type { MaintenanceScope } from '../../../scripts/maintenance/contracts'
-import type { DataBundle, Program, AdmissionCycle } from '../../../src/lib/data/types'
+import type { DataBundle, Program, AdmissionCycle, Scholarship } from '../../../src/lib/data/types'
 import { identityFingerprint } from '../../../src/lib/data/identity-acceptance'
 import { fieldRecordScopeSha256, fieldValueSha256, type FieldVerification } from '../../../src/lib/data/field-verification'
 import { readCoverageSnapshot, submitCoverageSnapshot, validateCoverageSnapshot } from '../src/coverage'
@@ -23,6 +23,7 @@ function fixture() {
   const names = ['Physics', 'Chemistry', 'Computer Science', 'Economics', 'Mathematics', 'Physics (English-taught)', 'Undergraduate Programs']
   const programs: Program[] = names.map((en, index) => ({ ...original.programs[0], ...audit, id: `test-program-${index}`, slug: `test-program-${index}`,
     universityId: university.id, name: { en }, verificationScope: 'facts' as const, durationMonths: 48,
+    supplementaryDetails: { eligibility: [{ en: 'Applicants must hold a high-school diploma.' }] },
     teachingLanguages: ['English'], languageRequirements: [{ test: 'IELTS' as const, minimum: '6.5' }], applyUrl: 'https://example.edu/apply' }))
   const admissionCycles: AdmissionCycle[] = programs.map(program => ({ ...original.admissionCycles[0], ...audit, id: `cycle-${program.id}`, programId: program.id,
     academicYear: '2027-2028', closesOn: '2027-06-01', dateStatus: 'published' as const }))
@@ -48,8 +49,8 @@ test('a stale identity counts only after independently scoped programme leaves a
   program.status = 'stale'; cycle.status = 'stale'
   const identity = { entityType: 'program' as const, recordId: program.id, identitySha256: identityFingerprint('program', program), sourceIds: ['official'],
     acceptedAt: `${today}T00:00:00.000Z`, reviewer: 'reviewer', receiptPath: 'quality/review.json', receiptSha256: '1'.repeat(64) }
-  const fields = ['applyUrl', 'teachingLanguages', 'durationMonths', 'languageRequirements'].map(fieldPath => {
-    const value = (program as unknown as Record<string, unknown>)[fieldPath]
+  const fields = ['applyUrl', 'teachingLanguages', 'durationMonths', 'languageRequirements', 'supplementaryDetails.eligibility'].map(fieldPath => {
+    const value = fieldPath === 'supplementaryDetails.eligibility' ? program.supplementaryDetails?.eligibility : (program as unknown as Record<string, unknown>)[fieldPath]
     return { entityType: 'program' as const, recordId: program.id, recordScopeSha256: fieldRecordScopeSha256('program', program), fieldPath, value, valueSha256: fieldValueSha256(value), factStatus: 'known' as const,
       sourceId: 'official', sourceUrl: bundle.sources[0].url, snapshotSha256: '1'.repeat(64), objectKey: 'raw/guide', locator: 'section:1', quote: 'Official details', verifiedAt: `${today}T00:00:00.000Z`, reviewAfter: '2026-11-13',
       review: { method: 'independent' as const, reviewerId: 'reviewer' }, receiptPath: 'quality/field.json', receiptSha256: '2'.repeat(64) }
@@ -66,9 +67,59 @@ test('named language tracks require annual track conditions and still count one 
   // The legacy programme IELTS text cannot fill an explicitly scoped annual track.
   assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,0)
   bundle.admissionCycles[0].languageRequirements = [{test:'IELTS',minimum:'6.5'}]
+  assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,0)
+  bundle.admissionCycles[0].eligibility=[{en:'High-school diploma required.'}]
+  assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,0)
+  bundle.admissionCycles[0].applyUrl='https://example.edu/english-track/apply'
   assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,1)
   bundle.admissionCycles.push({...bundle.admissionCycles[0],id:'chinese-track',teachingLanguage:'Chinese',languageRequirements:[{test:'HSK',minimum:'5'}]})
   assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,1)
+})
+
+function leaf(bundle: DataBundle, entityType: FieldVerification['entityType'], record: Program | AdmissionCycle | Scholarship, fieldPath: string, factStatus: FieldVerification['factStatus'] = 'known'): FieldVerification {
+  let value:unknown=record
+  for(const part of fieldPath.split('.'))value=(value as Record<string,unknown>)?.[part]
+  return {entityType,recordId:record.id,recordScopeSha256:fieldRecordScopeSha256(entityType,record),fieldPath,value,valueSha256:fieldValueSha256(value),factStatus,
+    sourceId:'official',sourceUrl:bundle.sources[0].url,snapshotSha256:'1'.repeat(64),objectKey:'raw/guide',locator:'section:1',quote:'Official conditions',
+    verifiedAt:`${today}T00:00:00.000Z`,reviewAfter:'2026-11-13',review:{method:'independent',reviewerId:'reviewer'},receiptPath:'quality/review.json',receiptSha256:'2'.repeat(64)}
+}
+test('language and eligibility are independently mandatory; explicit official waiver is supported',async()=>{
+  const {bundle,scope}=fixture();bundle.programs=[bundle.programs[0]];bundle.admissionCycles=[bundle.admissionCycles[0]]
+  const program=bundle.programs[0]
+  delete program.supplementaryDetails
+  assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,0,'IELTS alone is incomplete')
+  program.supplementaryDetails={eligibility:[{en:'High-school diploma required'}]};program.languageRequirements=[]
+  assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,0,'eligibility alone is incomplete')
+  const waiver=leaf(bundle,'program',program,'languageRequirements','not_applicable')
+  assert.equal((await buildProgramCoverage(bundle,scope,today,[],[waiver])).schools[0].currentProgramCount,1)
+  assert.equal((await buildProgramCoverage(bundle,scope,today,[],[{...waiver,factStatus:'officially_not_announced'}])).schools[0].currentProgramCount,0)
+  bundle.admissionCycles[0].academicYear='unknown'
+  assert.equal((await buildProgramCoverage(bundle,scope,today,[],[waiver])).schools[0].currentProgramCount,0)
+})
+test('partial requirements from two annual language tracks never combine into one complete scope',async()=>{
+  const {bundle,scope}=fixture();bundle.programs=[bundle.programs[0]];bundle.admissionCycles=[bundle.admissionCycles[0]]
+  const cycle=bundle.admissionCycles[0];cycle.teachingLanguage='English';cycle.applyUrl='https://example.edu/en/apply';cycle.languageRequirements=[{test:'IELTS',minimum:'6.5'}]
+  bundle.admissionCycles.push({...cycle,id:'cn-scope',teachingLanguage:'Chinese',applyUrl:'https://example.edu/cn/apply',languageRequirements:null,eligibility:[{en:'High-school diploma'}]})
+  assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,0)
+  cycle.eligibility=[{en:'High-school diploma'}]
+  assert.equal((await buildProgramCoverage(bundle,scope,today)).schools[0].currentProgramCount,1)
+})
+test('a fully leaf-reverified stale scholarship is a complete opportunity; every missing, expired or unknown leaf blocks completeness',async()=>{
+  const {bundle,scope}=fixture()
+  const award:Scholarship={...loadMaintenanceBundle(process.cwd()).scholarships[0],id:'test-award',slug:'test-award',name:{en:'2027 Official Award'},sourceIds:['official'],status:'stale',verifiedAt:'2026-11-01',reviewAfter:'2026-11-03',
+    universityIds:[bundle.universities[0].id],programIds:[],deadline:'2027-06-01',applicationUrl:'https://example.edu/award/apply',eligibility:[{en:'High-school diploma'}],
+    coverage:{tuition:'full',accommodation:'none',insurance:false,stipendCnyPerMonth:0}}
+  bundle.scholarships=[award]
+  const identities=[{entityType:'scholarship' as const,recordId:award.id,identitySha256:identityFingerprint('scholarship',award),sourceIds:['official'],acceptedAt:`${today}T00:00:00.000Z`,reviewer:'reviewer',receiptPath:'quality/award.json',receiptSha256:'3'.repeat(64)}]
+  const paths=['deadline','applicationUrl','eligibility','coverage.tuition','coverage.accommodation','coverage.insurance','coverage.stipendCnyPerMonth']
+  const proofs=paths.map(path=>leaf(bundle,'scholarship',award,path))
+  assert.equal((await buildProgramCoverage(bundle,scope,today,identities,proofs)).schools[0].currentScholarshipCount,1)
+  for(let i=0;i<proofs.length;i++)assert.equal((await buildProgramCoverage(bundle,scope,today,identities,proofs.filter((_,n)=>n!==i))).schools[0].currentScholarshipCount,0,paths[i])
+  assert.equal((await buildProgramCoverage(bundle,scope,today,identities,proofs.map(proof=>({...proof,reviewAfter:'2026-11-10'})))).schools[0].currentScholarshipCount,0)
+  award.coverage.insurance='unknown'
+  assert.equal((await buildProgramCoverage(bundle,scope,today,identities,paths.map(path=>leaf(bundle,'scholarship',award,path)))).schools[0].currentScholarshipCount,0)
+  award.status='verified';award.reviewAfter='2026-11-13'
+  assert.equal((await buildProgramCoverage(bundle,scope,today,identities)).schools[0].currentScholarshipCount,0,'whole-record freshness does not complete unknown funding')
 })
 
 async function cloudSnapshot(now: number) {

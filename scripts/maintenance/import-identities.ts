@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url'
 import { JSDOM } from 'jsdom'
 import type { DataBundle, Program, Scholarship, Source } from '../../src/lib/data/types'
 import { bundleSchema } from '../../src/lib/data/schema'
-import { htmlToText } from '../../workers/ingestion/src/rules'
+import { htmlToText, normalizeEvidenceText } from '../../workers/ingestion/src/rules'
 import { hasProgramInternationalScopeEvidence } from '../../workers/catalog-maintenance/src/program-international-scope'
 import { canonicalIdentityJson, identityAcceptanceLedgerSchema, identityFingerprint, verifiedNameMatchesRaw, type IdentityAcceptanceLedger, type VerifiedProgramName, type ReviewedProgramAliasAudit } from '../../src/lib/data/identity-acceptance'
 import { loadReviewedProgramAliases, resolveReviewedProgramAlias, type ReviewedProgramAliasRef } from './reviewed-program-alias'
@@ -149,7 +149,10 @@ export async function verifyReviewedProposalEvidence(proposal: MaintenancePropos
     if (source.textArtifact.rawSnapshotSha256 !== source.snapshotSha256) throw new Error('text_artifact_raw_binding_mismatch')
     const bytes = await readArtifact(source.textArtifact.objectKey)
     if (sha256(bytes) !== source.textArtifact.sha256) throw new Error('text_artifact_checksum_mismatch')
-    if (source.textArtifact.parser === OPENXML_WORKBOOK_PARSER) {
+    if (source.textArtifact.parser === 'official-response-text-v1') {
+      text = new TextDecoder('utf-8', { fatal: true }).decode(bytes)
+      if (normalizeEvidenceText(sourceText(rawBytes, source.contentType)) !== text) throw new Error('official_response_text_not_reproducible')
+    } else if (source.textArtifact.parser === OPENXML_WORKBOOK_PARSER) {
       if (!new URL(source.url).pathname.toLowerCase().endsWith('.xlsx')
         || !/^application\/vnd\.(?:ms-excel|openxmlformats-officedocument\.spreadsheetml\.sheet)(?:;|$)/i.test(source.contentType)) {
         throw new Error('workbook_evidence:official_xlsx_source_required')

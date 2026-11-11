@@ -108,6 +108,10 @@ test('partial scope upgrade followed by manual unrestricted resume isolates new-
     await setControls(f.env,{expectedRevision:cfg.revision,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:true,canaryUniversityIds:[]},now)
     assert.equal((await processScopeUpgrade(f.env,f.hash)).state,'handed_off')
     const at=new Date(now-60000).toISOString()
+    // Migration insertion timestamps may be later than the scheduler's pinned
+    // clock. Make both sources explicitly due so this tests scope isolation,
+    // independently of machine speed, clock resolution or UTC tick boundaries.
+    f.db.sqlite.prepare('UPDATE maintenance_sources SET due_at=? WHERE source_id IN(?,?)').run(at,sharedId,newOnlyId)
     for(const sourceId of [sharedId,newOnlyId])for(const stage of ['extract','award'])f.db.sqlite.prepare("INSERT INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at) VALUES(?,?,?,'queued',1,?,?,?)")
       .run(`${sourceId}-${stage}`,sourceId,stage,at,at,at)
     f.messages.length=0
