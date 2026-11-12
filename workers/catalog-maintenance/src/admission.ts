@@ -3,10 +3,15 @@ import { isCurrentQuotaWindow } from '../../../scripts/ingestion/minimax-quota-w
 import { control } from './repository'
 import { isDailyD1QuotaError } from './backend-errors'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
+import { hasUrgentMaintenance } from './admission-priority'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
 
-export type PlanQuota = { checkedAt: string; fiveHourRemaining: number; weeklyRemaining: number; fiveHourStart: string; fiveHourReset: string; weeklyStart: string; weeklyReset: string }
+type FiveHourQuota = { checkedAt: string; fiveHourRemaining: number; fiveHourStart: string; fiveHourReset: string }
+export type PlanQuota = FiveHourQuota & (
+  { weeklyUnlimited?: false; weeklyRemaining: number; weeklyStart: string; weeklyReset: string }
+  | { weeklyUnlimited: true; weeklyRemaining: null; weeklyStart: null; weeklyReset: null }
+)
 type Permit = { token: string; host?: string; lane?: string; expiresAt: number }
 type GateState = { fetches: Permit[]; models: Permit[]; nextHost: Record<string,number>; successes: number; cooldownUntil: number;modelLimit:number }
 type Reservation = { state: 'send_started'|'completed'|'unknown'|'known_failed'; attemptId: string; requestSha256: string; result?: ModelResult;retryable?:boolean;notBefore?:number;attemptCount?:number }
@@ -14,29 +19,53 @@ const initial = (): GateState => ({fetches:[],models:[],nextHost:{},successes:0,
 const ENDPOINTS=new Set(['https://api.minimaxi.com/anthropic','https://api.minimax.cn/anthropic','https://api.minimax.io/anthropic'])
 const MAX_MODEL_BODY=2*1024*1024
 
+const percent = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 100
+// Official MiniMax CLI types and quota renderer define status 3 as unlimited.
+// Only the weekly branch supports it here: a finite five-hour bucket is still
+// mandatory. Counts need not be positive (general buckets can use percentages).
+// https://github.com/MiniMax-AI/cli/blob/main/src/types/api.ts
+// https://github.com/MiniMax-AI/cli/blob/main/src/output/quota-table.ts
 export function normalizePlanQuota(payload:unknown,now=Date.now()):PlanQuota|null {
   const root=record(payload)
   if(record(root?.base_resp)?.status_code!==0||!Array.isArray(root?.model_remains)) return null
   const rows=root.model_remains.map(record).filter(row=>row?.model_name==='general')
   if(rows.length!==1||!rows[0]) return null
-  const row=rows[0], five=row.current_interval_remaining_percent,weekly=row.current_weekly_remaining_percent
-  if(typeof five!=='number'||!Number.isFinite(five)||five<0||five>100||typeof weekly!=='number'||!Number.isFinite(weekly)||weekly<0||weekly>100) return null
+  const row=rows[0],five=row.current_interval_remaining_percent,weekly=row.current_weekly_remaining_percent
+  const fiveStatus=row.current_interval_status,weeklyStatus=row.current_weekly_status
+  if(!percent(five)||fiveStatus!==undefined&&fiveStatus!==1&&fiveStatus!==2
+    ||fiveStatus===2&&five!==0||weeklyStatus!==undefined&&weeklyStatus!==1&&weeklyStatus!==2&&weeklyStatus!==3) return null
   const date=(value:unknown)=>typeof value==='number'&&Number.isSafeInteger(value)&&value>0&&value<=8640000000000000?new Date(value).toISOString():''
-  const fiveHourStart=date(row.start_time),fiveHourReset=date(row.end_time),weeklyStart=date(row.weekly_start_time),weeklyReset=date(row.weekly_end_time)
-  if(!isCurrentQuotaWindow({startAt:fiveHourStart,resetAt:fiveHourReset},'fiveHour',now)||!isCurrentQuotaWindow({startAt:weeklyStart,resetAt:weeklyReset},'weekly',now)) return null
+  const fiveHourStart=date(row.start_time),fiveHourReset=date(row.end_time)
+  if(!isCurrentQuotaWindow({startAt:fiveHourStart,resetAt:fiveHourReset},'fiveHour',now)) return null
+  if(weeklyStatus===3) {
+    // Do not invent weekly percentages or timestamps for a genuinely absent
+    // limit. Five-hour status 3, including the official both-zero/no-plan
+    // case, was rejected above and cannot admit through this weekly exception.
+    return {checkedAt:nowIso(now),fiveHourRemaining:five,weeklyRemaining:null,fiveHourStart,fiveHourReset,
+      weeklyStart:null,weeklyReset:null,weeklyUnlimited:true}
+  }
+  if(!percent(weekly)||weeklyStatus===2&&weekly!==0) return null
+  const weeklyStart=date(row.weekly_start_time),weeklyReset=date(row.weekly_end_time)
+  if(!isCurrentQuotaWindow({startAt:weeklyStart,resetAt:weeklyReset},'weekly',now)) return null
+  // Preserve the exact existing limited-week object shape and field order.
   return {checkedAt:nowIso(now),fiveHourRemaining:five,weeklyRemaining:weekly,fiveHourStart,fiveHourReset,weeklyStart,weeklyReset}
 }
 export function quotaAdmission(quota:PlanQuota|null,lane:'maintenance'|'expansion',urgentMaintenance:boolean,fallbackDisabled:boolean,now=Date.now()):{allow:boolean;code:string;retryAfter:number;low:boolean} {
-  if(!quota||now-Date.parse(quota.checkedAt)>30000||Date.parse(quota.checkedAt)>now||!isCurrentQuotaWindow({startAt:quota.fiveHourStart,resetAt:quota.fiveHourReset},'fiveHour',now)||!isCurrentQuotaWindow({startAt:quota.weeklyStart,resetAt:quota.weeklyReset},'weekly',now)) return {allow:false,code:'quota_unknown',retryAfter:300,low:true}
-  const minimum=Math.min(quota.fiveHourRemaining,quota.weeklyRemaining),floor=fallbackDisabled?0:5
+  const checked=quota?Date.parse(quota.checkedAt):NaN
+  if(!quota||!Number.isFinite(checked)||checked>now||now-checked>30000||!percent(quota.fiveHourRemaining)
+    ||!isCurrentQuotaWindow({startAt:quota.fiveHourStart,resetAt:quota.fiveHourReset},'fiveHour',now)
+    ||(quota.weeklyUnlimited===true
+      ?quota.weeklyRemaining!==null||quota.weeklyStart!==null||quota.weeklyReset!==null
+      :!percent(quota.weeklyRemaining)||!isCurrentQuotaWindow({startAt:quota.weeklyStart,resetAt:quota.weeklyReset},'weekly',now))) return {allow:false,code:'quota_unknown',retryAfter:300,low:true}
+  const minimum=quota.weeklyUnlimited===true?quota.fiveHourRemaining:Math.min(quota.fiveHourRemaining,quota.weeklyRemaining),floor=fallbackDisabled?0:5
   const reserve=lane==='expansion'&&urgentMaintenance?20:floor
   if(minimum<=reserve) {
-    const reset=Date.parse(quota.weeklyRemaining<=reserve?quota.weeklyReset:quota.fiveHourReset)
+    const reset=Date.parse(quota.weeklyUnlimited!==true&&quota.weeklyRemaining<=reserve?quota.weeklyReset:quota.fiveHourReset)
     return {allow:false,code:minimum<=floor?'quota_exhausted_or_overflow_margin':'maintenance_quota_reserved',retryAfter:Math.max(60,Math.ceil((reset-now)/1000)),low:true}
   }
   return {allow:true,code:'plan_quota_available',retryAfter:0,low:minimum<=10}
 }
-export async function fetchPlanQuota(env:MaintenanceEnv,fetcher:typeof fetch=fetch):Promise<PlanQuota|null> {
+export async function fetchPlanQuotaPayload(env:MaintenanceEnv,fetcher:typeof fetch=fetch):Promise<unknown|null> {
   const base=env.MINIMAX_ANTHROPIC_BASE??'https://api.minimaxi.com/anthropic'
   if(!ENDPOINTS.has(base)||!env.MINIMAX_SUBSCRIPTION_KEY||env.MINIMAX_MODEL!=='MiniMax-M3') return null
   const endpoint=new URL(base).hostname==='api.minimax.io'?'https://www.minimax.io/v1/token_plan/remains':'https://www.minimax.cn/v1/token_plan/remains'
@@ -44,8 +73,11 @@ export async function fetchPlanQuota(env:MaintenanceEnv,fetcher:typeof fetch=fet
   try {
     const response=await fetcher(endpoint,{method:'GET',redirect:'error',cache:'no-store',headers:{authorization:`Bearer ${env.MINIMAX_SUBSCRIPTION_KEY}`,accept:'application/json'},signal})
     if(!response.ok||response.redirected||(response.url&&response.url!==endpoint)) return null
-    return normalizePlanQuota(JSON.parse(new TextDecoder().decode(await readBoundedBody(response,128*1024,signal))))
+    return JSON.parse(new TextDecoder().decode(await readBoundedBody(response,128*1024,signal))) as unknown
   } catch { return null }
+}
+export async function fetchPlanQuota(env:MaintenanceEnv,fetcher:typeof fetch=fetch):Promise<PlanQuota|null> {
+  return normalizePlanQuota(await fetchPlanQuotaPayload(env,fetcher))
 }
 function modelRequest(value:unknown):ModelRequest {
   const raw=record(value)
@@ -127,8 +159,8 @@ export class ModelAdmission {
     // Quota queries do not execute a model. Every admission refreshes the official
     // shared account windows; unrelated applications may consume the same plan.
     const quota=await fetchPlanQuota(this.env,this.fetcher)
-    const urgent=await this.env.PIPELINE_DB.prepare("SELECT COUNT(*) count FROM maintenance_jobs WHERE stage='maintain' AND status IN('queued','retry','running')").first<{count:number}>()
-    const admission=quotaAdmission(quota,input.lane,Boolean(urgent?.count),this.env.MINIMAX_CREDIT_FALLBACK_DISABLED==='true')
+    const urgent=await hasUrgentMaintenance(this.env,cfg)
+    const admission=quotaAdmission(quota,input.lane,urgent,this.env.MINIMAX_CREDIT_FALLBACK_DISABLED==='true')
     if(!admission.allow) return json({ok:false,error:admission.code,retryAfter:admission.retryAfter},429)
     const token=crypto.randomUUID(),attemptId=crypto.randomUUID()
     const accepted=await this.state.storage.transaction(async txn=>{
@@ -136,7 +168,7 @@ export class ModelAdmission {
       if(current&&(current.state!=='known_failed'||!current.retryable||(current.notBefore??0)>Date.now()||current.requestSha256!==requestSha256))return false
       const gate=await txn.get<GateState>('gate')??initial(),now=Date.now();gate.models=gate.models.filter(p=>p.expiresAt>now)
       const target=admission.low?1:Math.min(4,Math.max(1,Number(this.env.MODEL_CONCURRENCY)||4),gate.modelLimit??2)
-      const expansionLimit=urgent?.count?Math.max(1,target-1):target
+      const expansionLimit=urgent?Math.max(1,target-1):target
       if(gate.cooldownUntil>now||gate.models.length>=target||input.lane==='expansion'&&gate.models.filter(p=>p.lane==='expansion').length>=expansionLimit)return false
       gate.models.push({token,lane:input.lane,expiresAt:now+120000})
       await txn.put('gate',gate);await txn.put<Reservation>(key,{state:'send_started',attemptId,requestSha256,attemptCount:(current?.attemptCount??0)+1});return true

@@ -4,7 +4,7 @@ import type { Control, JobRow, LegacyGuard, MaintenanceEnv, RecordTarget, School
 import { MaintenanceError } from './types'
 import { after, canonical, digest, HASH, ID, nowIso, record } from './util'
 import { coalesceOperations,type SqlOperation } from './sql-plan'
-import { selectScheduledJobs } from './scheduling'
+import { schedulingCoverageBand, selectScheduledJobs } from './scheduling'
 import { captureCadence } from './cadence'
 import { expectedScopeSchoolCount } from './scope-config'
 import { getTodayDate } from '../../../src/lib/data/freshness'
@@ -144,42 +144,168 @@ export async function setControls(env: MaintenanceEnv, value: unknown, now = Dat
 }
 export async function source(env: MaintenanceEnv,id: string) { return env.PIPELINE_DB.prepare('SELECT * FROM maintenance_sources WHERE source_id=?').bind(id).first<SourceRow>() }
 export async function sourceSchools(env: MaintenanceEnv,id: string): Promise<SchoolRow[]> { return (await env.PIPELINE_DB.prepare('SELECT s.university_id,s.name_json,s.seed_json FROM maintenance_schools s JOIN maintenance_source_schools x ON x.university_id=s.university_id WHERE x.source_id=? AND s.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1) ORDER BY s.university_id').bind(id).all<SchoolRow>()).results ?? [] }
+/** Only sparse acquisition priorities cross the SQL boundary, never programme
+ * IDs or factual payloads. Missing/unknown schools receive expansion priority. */
+type SchoolRotation = {key:string;etag?:string;lastScheduled:Record<string,number>;canWrite:boolean}
+async function readSchoolRotation(env:MaintenanceEnv,scope:string,schoolIds:Set<string>,now:number):Promise<SchoolRotation> {
+  // A scope-stable hint survives catalogue updates. It is never a source attempt
+  // or evidence of processing/completeness, and needs no job-history SQL scan.
+  const key=`maintenance/scheduling/school-rotation/${scope}.json`,object=await env.SNAPSHOTS_BUCKET.get(key)
+  const lastScheduled:Record<string,number>={},result={key,etag:object?.etag,lastScheduled,canWrite:true}
+  if(!object||object.size!==undefined&&object.size>24*1024)return result
+  try{
+    const text=await object.text()
+    if(new TextEncoder().encode(text).length>24*1024)return result
+    const value=record(JSON.parse(text)),entries=record(value?.lastScheduled),tick=Math.floor(now/900000)
+    if(value?.format!=='studyinchina.school-scheduling-rotation'||value.version!==1||value.scopeRegistrySha256!==scope||!entries)return result
+    for(const [id,at]of Object.entries(entries))if(schoolIds.has(id)&&Number.isSafeInteger(at)&&Number(at)>=0){
+      if(Number(at)>tick)result.canWrite=false // An older concurrent tick cannot erase newer scheduling ages.
+      else lastScheduled[id]=Number(at)
+    }
+  }catch{/* An invalid scheduling hint restarts fairness, never factual evidence. */}
+  return result
+}
+async function saveSchoolRotation(env:MaintenanceEnv,rotation:SchoolRotation,scope:string,scopeIds:Set<string>,schoolIds:string[],now:number) {
+  let current=rotation
+  // Normally one read/write. A lost ETag gets at most one merge/retry, never a
+  // history scan or an unbounded loop; dispatch ownership stays in the job ledger.
+  for(let attempt=0;attempt<2;attempt++){
+    if(!current.canWrite)return false
+    const lastScheduled={...rotation.lastScheduled}
+    for(const [id,tick]of Object.entries(current.lastScheduled))lastScheduled[id]=Math.max(lastScheduled[id]??0,tick)
+    for(const id of schoolIds)lastScheduled[id]=Math.max(lastScheduled[id]??0,Math.floor(now/900000))
+    const content=canonical({format:'studyinchina.school-scheduling-rotation',version:1,scopeRegistrySha256:scope,lastScheduled})
+    if(new TextEncoder().encode(content).length>24*1024)throw new MaintenanceError('scheduling_rotation_too_large')
+    const saved=await env.SNAPSHOTS_BUCKET.put(current.key,content,{onlyIf:current.etag?{etagMatches:current.etag}:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}})
+    if(saved)return true
+    if(attempt===0)current=await readSchoolRotation(env,scope,scopeIds,now)
+  }
+  return false
+}
+function schedulingMetadata(coverage: CoverageSnapshot | null, rotation:SchoolRotation, now: number) {
+  const today = getTodayDate(new Date(now)), reviewLimit = getTodayDate(new Date(now + 7 * 86400000))
+  const metadata:Record<string,number[]> = Object.fromEntries(Object.entries(rotation.lastScheduled).map(([id,tick])=>[id,[0,0,tick]]))
+  for(const school of coverage?.schools ?? []){
+    const band=schedulingCoverageBand(school.currentProgramCount)
+    const urgent=Boolean(school.reviewAfter&&school.reviewAfter>=today&&school.reviewAfter<=reviewLimit)
+    if(band||urgent||metadata[school.universityId])metadata[school.universityId]=[band,urgent?1:0,rotation.lastScheduled[school.universityId]??0]
+  }
+  const bytes = JSON.stringify(metadata)
+  if (new TextEncoder().encode(bytes).length > 24 * 1024) throw new MaintenanceError('scheduling_metadata_too_large')
+  return bytes
+}
+
+// Materialize the tiny metadata once. Start from the bounded committed school
+// set, then use the reverse school/source index instead of scanning fact tables.
+const schedulingSchoolsSql = `school_meta AS MATERIALIZED (
+  SELECT key university_id,json_extract(value,'$[0]') coverage_band,json_extract(value,'$[1]') review_urgent,json_extract(value,'$[2]') last_dispatched_tick FROM json_each(?)
+),canary AS MATERIALIZED (SELECT value university_id FROM json_each(?)),school_priority AS MATERIALIZED (
+  SELECT u.university_id,u.last_attempt_at school_last_attempt_at,COALESCE(m.last_dispatched_tick,0) school_last_dispatched_tick,COALESCE(m.coverage_band,0) coverage_band,COALESCE(m.review_urgent,0) review_urgent
+  FROM maintenance_schools u LEFT JOIN school_meta m ON m.university_id=u.university_id
+  WHERE u.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)
+    AND (NOT EXISTS(SELECT 1 FROM canary) OR u.university_id IN(SELECT university_id FROM canary))
+)`
+const schedulingSchoolIdsSql = `(SELECT json_group_array(xu.university_id) FROM maintenance_source_schools xu JOIN maintenance_schools su ON su.university_id=xu.university_id WHERE xu.source_id=chosen.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1))`
+
 export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
   const cfg = await control(env)
   if(cfg&&!cfg.seed_complete&&cfg.seed_plan_sha256){await env.MAINTENANCE_QUEUE.send({version:1,jobId:cfg.seed_sha256,seedSha256:cfg.seed_sha256});return{enabled:false,queued:1}}
   if(cfg&&!cfg.targets_complete){const refresh=await env.PIPELINE_DB.prepare("SELECT refresh_sha256 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=? ORDER BY created_at DESC LIMIT 1").bind(cfg.input_catalog_sha256).first<{refresh_sha256:string}>();if(refresh){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refresh.refresh_sha256,targetRefreshSha256:refresh.refresh_sha256});return{enabled:false,queued:1}}}
   if (env.MAINTENANCE_ENABLED !== 'true' || !cfg?.enabled || !cfg.seed_complete) return {enabled:false,queued:0}
   if(!(await nativeReconciliationGate(env)).ready)return{enabled:false,queued:0,nativeHeadReconciliationRequired:true}
-  const coverage = await readCoverageSnapshot(env,cfg.input_catalog_sha256,cfg.scope_sha256,now)
+  const suppliedCoverage = await readCoverageSnapshot(env,cfg.input_catalog_sha256,cfg.scope_sha256,now)
+  // Verify the complete identity set as well as the date/catalog/scope hashes.
+  // This bounded registry lookup replaces the old first-attempt aggregate, and
+  // does not count or scan programme/fact records. Historical scopes stay valid.
+  const scopeSchools = (await env.PIPELINE_DB.prepare('SELECT university_id FROM maintenance_schools WHERE scope_sha256=? LIMIT 296')
+    .bind(cfg.scope_sha256).all<{university_id:string}>()).results ?? []
+  const scopeIds = new Set(scopeSchools.map(school => school.university_id))
+  const coverage = suppliedCoverage && [272,295].includes(scopeIds.size) && suppliedCoverage.schools.length === scopeIds.size
+    && new Set(suppliedCoverage.schools.map(school => school.universityId)).size === scopeIds.size
+    && suppliedCoverage.schools.every(school => scopeIds.has(school.universityId)) ? suppliedCoverage : null
   const coverageBySchool = new Map(coverage?.schools.map(row => [row.universityId,row]) ?? [])
-  const candidates = (await env.PIPELINE_DB.prepare(`SELECT s.*,(SELECT json_group_array(xu.university_id) FROM maintenance_source_schools xu JOIN maintenance_schools su ON su.university_id=xu.university_id WHERE xu.source_id=s.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)) school_ids_json,(SELECT json_group_array(json_object('closesOn',json_extract(t.fields_json,'$.closesOn'),'deadline',json_extract(t.fields_json,'$.deadline'))) FROM maintenance_record_targets t JOIN maintenance_target_sources x ON x.target_id=t.target_id WHERE x.source_id=s.source_id AND t.active=1) scheduling_fields_json FROM maintenance_sources s WHERE s.enabled=1 AND EXISTS(SELECT 1 FROM maintenance_source_schools sx JOIN maintenance_schools su ON su.university_id=sx.university_id WHERE sx.source_id=s.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)) AND (s.due_at<=? OR ((s.last_success_at IS NULL OR s.last_success_at<=?) AND EXISTS(SELECT 1 FROM maintenance_source_schools q JOIN json_each(?) c ON json_extract(c.value,'$.universityId')=q.university_id WHERE q.source_id=s.source_id AND json_extract(c.value,'$.reviewAfter')>=? AND json_extract(c.value,'$.reviewAfter')<=?))) AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=s.source_id)) AND NOT EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.source_id=s.source_id AND j.stage='capture' AND j.status IN('queued','running','retry')) ORDER BY COALESCE((SELECT MIN(COALESCE(u.last_attempt_at,'')) FROM maintenance_schools u JOIN maintenance_source_schools x ON x.university_id=u.university_id WHERE x.source_id=s.source_id),''),COALESCE(s.last_attempt_at,''),s.due_at,s.source_id LIMIT 40`).bind(nowIso(now),after(-86400000,now),JSON.stringify(coverage?.schools ?? []),getTodayDate(new Date(now)),getTodayDate(new Date(now+7*86400000)),cfg.canary_json,cfg.canary_json).all<SourceRow&{school_ids_json:string;scheduling_fields_json:string}>()).results ?? []
-  candidates.sort((a,b) => Math.min(...JSON.parse(a.school_ids_json).map((id:string)=>coverageBySchool.get(id)?.currentProgramCount ?? Infinity)) - Math.min(...JSON.parse(b.school_ids_json).map((id:string)=>coverageBySchool.get(id)?.currentProgramCount ?? Infinity)))
-  const due:SourceRow[]=[],selectedSchools=new Set<string>()
-  for(const row of candidates){const ids=JSON.parse(row.school_ids_json)as string[];if(ids.some(id=>selectedSchools.has(id)))continue;ids.forEach(id=>selectedSchools.add(id));due.push(row);if(due.length>=8)break}
+  const rotation=await readSchoolRotation(env,cfg.scope_sha256,scopeIds,now)
+  const metadata = schedulingMetadata(coverage,rotation,now)
+  const firstRoundComplete = Boolean(coverage?.schools.every(school => school.currentProgramCount >= 5))
+  const canaryIds=new Set(JSON.parse(cfg.canary_json) as string[])
+  const withSchoolPriority = <T extends {school_ids_json:string}>(row:T) => {
+    const ids = (JSON.parse(row.school_ids_json) as string[]).filter(id=>!canaryIds.size||canaryIds.has(id))
+    const schools = ids.map(id => coverageBySchool.get(id))
+    const dates = schools.flatMap(school => school?.reviewAfter ? [school.reviewAfter] : []).sort()
+    return Object.assign(row, {
+      coverage_count: schools.length && schools.every(school => school !== undefined) ? Math.min(...schools.map(school => school!.currentProgramCount)) : undefined,
+      review_after: dates.find(date => date >= getTodayDate(new Date(now)) && date <= getTodayDate(new Date(now + 7 * 86400000))) ?? null,
+    })
+  }
+  const candidates = (await env.PIPELINE_DB.prepare(`WITH ${schedulingSchoolsSql},associations AS MATERIALIZED (
+    SELECT s.*,p.university_id scheduling_school_id,p.school_last_attempt_at,p.school_last_dispatched_tick,p.coverage_band,p.review_urgent
+    FROM school_priority p CROSS JOIN maintenance_source_schools x CROSS JOIN maintenance_sources s
+    WHERE x.university_id=p.university_id AND s.source_id=x.source_id AND s.enabled=1
+      AND (s.due_at<=? OR ((s.last_success_at IS NULL OR s.last_success_at<=?) AND p.review_urgent=1))
+      -- The redundant stage list proves the complete partial-index predicate.
+      AND NOT EXISTS(SELECT 1 FROM maintenance_jobs j INDEXED BY maintenance_jobs_active_source_stage WHERE j.source_id=s.source_id
+        AND j.stage='capture' AND j.stage IN('capture','extract','award') AND j.status IN('queued','running','retry'))
+  ),anchored AS (
+    SELECT *,ROW_NUMBER() OVER(PARTITION BY source_id ORDER BY review_urgent DESC,coverage_band,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),scheduling_school_id) anchor_order FROM associations
+  ),source_priority AS MATERIALIZED (
+    SELECT anchored.*,CASE WHEN review_urgent=1 OR EXISTS(
+      SELECT 1 FROM maintenance_target_sources x JOIN maintenance_record_targets t ON t.target_id=x.target_id
+      WHERE x.source_id=anchored.source_id AND t.active=1 AND (
+        julianday(json_extract(t.fields_json,'$.closesOn')||'T23:59:59+08:00') BETWEEN julianday(?) AND julianday(?)
+        OR julianday(json_extract(t.fields_json,'$.deadline')||'T23:59:59+08:00') BETWEEN julianday(?) AND julianday(?))) THEN 1 ELSE 0 END scheduling_urgent
+    FROM anchored WHERE anchor_order=1
+  ),ranked AS (
+    SELECT *,ROW_NUMBER() OVER(PARTITION BY scheduling_school_id ORDER BY scheduling_urgent DESC,COALESCE(last_attempt_at,''),due_at,source_id) school_order FROM source_priority
+  ),chosen AS MATERIALIZED (
+    SELECT * FROM ranked ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),COALESCE(last_attempt_at,''),due_at,source_id LIMIT 40
+  ) SELECT chosen.*,${schedulingSchoolIdsSql} school_ids_json,
+    (SELECT json_group_array(json_object('closesOn',json_extract(t.fields_json,'$.closesOn'),'deadline',json_extract(t.fields_json,'$.deadline')))
+      FROM maintenance_target_sources x JOIN maintenance_record_targets t ON t.target_id=x.target_id WHERE x.source_id=chosen.source_id AND t.active=1) scheduling_fields_json FROM chosen`)
+    .bind(metadata,cfg.canary_json,nowIso(now),after(-86400000,now),nowIso(now),after(7*86400000,now),nowIso(now),after(7*86400000,now))
+    .all<SourceRow&{school_ids_json:string;scheduling_fields_json:string;scheduling_school_id:string;school_last_attempt_at:string|null;school_last_dispatched_tick:number;scheduling_urgent:number}>()).results ?? []
+  const due = selectScheduledJobs(candidates.map(row => Object.assign(withSchoolPriority(row), {
+    stage:'capture',priority:row.scheduling_urgent ? 0 : 10,source_last_success_at:row.last_success_at,source_category:row.category,
+  })), {limit:8,firstRoundComplete,now})
   for (const row of due) {
     const id = await digest(`capture:${row.source_id}:${row.due_at}`)
     const fields=JSON.parse((row as SourceRow&{scheduling_fields_json:string}).scheduling_fields_json)as Array<Record<string,unknown>>
-    const reviewUrgent=(JSON.parse((row as SourceRow&{school_ids_json:string}).school_ids_json) as string[]).some(id=>{const date=coverageBySchool.get(id)?.reviewAfter;return Boolean(date&&date>=getTodayDate(new Date(now))&&date<=getTodayDate(new Date(now+7*86400000)))})
+    const reviewUrgent=Boolean(row.review_after)
     const priority=reviewUrgent||captureCadence(row,fields,now).priority===0?0:10
     await env.PIPELINE_DB.prepare("INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at) VALUES(?,?,'capture','queued',?,?,?,?)").bind(id,row.source_id,priority,nowIso(now),nowIso(now),nowIso(now)).run()
   }
   // A crash after persist/before send leaves a due job for the next tick.
-  const pool = (await env.PIPELINE_DB.prepare("WITH eligible AS(SELECT j.*,CASE WHEN j.stage='award' OR s.category='scholarships' THEN 1 ELSE 0 END award_lane,s.category source_category,(SELECT json_group_array(xu.university_id) FROM maintenance_source_schools xu JOIN maintenance_schools su ON su.university_id=xu.university_id WHERE xu.source_id=j.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)) school_ids_json,(SELECT MIN(json_extract(c.value,'$.currentProgramCount')) FROM maintenance_source_schools x JOIN json_each(?) c ON json_extract(c.value,'$.universityId')=x.university_id WHERE x.source_id=j.source_id) coverage_count,s.last_success_at source_last_success_at,CASE WHEN j.stage='maintain' OR(j.stage='capture' AND s.last_success_at IS NOT NULL) THEN 1 ELSE 0 END maintenance_lane FROM maintenance_jobs j JOIN maintenance_sources s ON s.source_id=j.source_id WHERE j.status IN('queued','retry') AND EXISTS(SELECT 1 FROM maintenance_source_schools sx JOIN maintenance_schools su ON su.university_id=sx.university_id WHERE sx.source_id=j.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)) AND j.due_at<=? AND (j.enqueued_at IS NULL OR j.enqueued_at<?) AND (j.stage='capture' OR ?=1) AND (j.stage<>'maintain' OR ?=1) AND (json_array_length(?)=0 OR EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN json_each(?) c ON c.value=x.university_id WHERE x.source_id=j.source_id))),ranked AS(SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END ORDER BY priority,COALESCE(coverage_count,1000000),due_at,job_id) lane_order FROM eligible) SELECT * FROM ranked WHERE lane_order<=40 ORDER BY priority,due_at,job_id LIMIT 120").bind(JSON.stringify(coverage?.schools ?? []),nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete,cfg.canary_json,cfg.canary_json).all<JobRow&{source_last_success_at:string|null;school_ids_json:string;source_category:string}>()).results ?? []
-  const round=await env.PIPELINE_DB.prepare('SELECT COUNT(*) schools,SUM(last_attempt_at IS NOT NULL) attempted FROM maintenance_schools WHERE scope_sha256=?').bind(cfg.scope_sha256).first<{schools:number;attempted:number}>()
-  const firstRoundComplete=Boolean(round?.schools===expectedScopeSchoolCount(env)&&round.attempted===expectedScopeSchoolCount(env))
-  for (const job of pool) {
-    const rows = (JSON.parse(job.school_ids_json ?? '[]') as string[]).flatMap(id => coverageBySchool.has(id) ? [coverageBySchool.get(id)!] : [])
-    Object.assign(job,{...(rows.length?{coverage_count:Math.min(...rows.map(row=>row.currentProgramCount))}:{}),review_after:rows.map(row=>row.reviewAfter).filter((date):date is string=>Boolean(date)).sort()[0] ?? null})
-  }
-  const jobs=selectScheduledJobs(pool,{limit:8,firstRoundComplete,now})
+  // Read the due-job index once before school joins. Reversing these outer loops
+  // would repeat the whole due range for every source (maintain has no source index).
+  const pool = (await env.PIPELINE_DB.prepare(`WITH ${schedulingSchoolsSql},associations AS MATERIALIZED (
+    SELECT j.*,s.category source_category,s.last_success_at source_last_success_at,p.university_id scheduling_school_id,p.school_last_attempt_at,p.school_last_dispatched_tick,p.coverage_band,
+      CASE WHEN j.priority<=0 OR p.review_urgent=1 THEN 1 ELSE 0 END scheduling_urgent,
+      CASE WHEN j.stage='award' OR s.category='scholarships' THEN 1 ELSE 0 END award_lane,
+      CASE WHEN j.stage='maintain' OR(j.stage='capture' AND s.last_success_at IS NOT NULL) THEN 1 ELSE 0 END maintenance_lane
+    FROM maintenance_jobs j CROSS JOIN maintenance_sources s CROSS JOIN maintenance_source_schools x CROSS JOIN school_priority p
+    WHERE s.source_id=j.source_id AND s.enabled=1 AND x.source_id=j.source_id AND p.university_id=x.university_id
+      AND j.status IN('queued','retry') AND j.due_at<=? AND (j.enqueued_at IS NULL OR j.enqueued_at<?)
+      AND (j.stage='capture' OR ?=1) AND (j.stage<>'maintain' OR ?=1)
+  ),anchored AS (
+    SELECT *,ROW_NUMBER() OVER(PARTITION BY job_id ORDER BY scheduling_urgent DESC,coverage_band,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),scheduling_school_id) anchor_order FROM associations
+  ),school_ranked AS (
+    SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END,scheduling_school_id ORDER BY scheduling_urgent DESC,priority,due_at,job_id) school_order FROM anchored WHERE anchor_order=1
+  ),ranked AS (
+    SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id) lane_order FROM school_ranked
+  ),chosen AS MATERIALIZED (
+    SELECT * FROM ranked WHERE lane_order<=40 ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id LIMIT 120
+  ) SELECT chosen.*,${schedulingSchoolIdsSql} school_ids_json FROM chosen`)
+    .bind(metadata,cfg.canary_json,nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete)
+    .all<JobRow&{source_last_success_at:string|null;school_ids_json:string;source_category:string;scheduling_school_id:string;school_last_attempt_at:string|null;school_last_dispatched_tick:number}>()).results ?? []
+  const jobs=selectScheduledJobs(pool.map(withSchoolPriority),{limit:8,firstRoundComplete,now})
   let queued = 0
   for (const job of jobs) {
     await env.MAINTENANCE_QUEUE.send({version:1,jobId:job.job_id})
     await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET enqueued_at=? WHERE job_id=? AND status IN('queued','retry')").bind(nowIso(now),job.job_id).run(); queued++
   }
+  const schoolRotationSaved=queued?await saveSchoolRotation(env,rotation,cfg.scope_sha256,scopeIds,[...new Set(jobs.map(job=>job.scheduling_school_id))],now):false
   // Read-only fetches may be retried after a lost lease. A model send cannot.
   await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET status=CASE WHEN stage='capture' THEN 'retry' ELSE 'unknown' END,error_code='execution_lease_expired',lease_token=NULL,lease_until=NULL,due_at=?,enqueued_at=NULL,updated_at=? WHERE status='running' AND lease_until<?").bind(after(60000,now),nowIso(now),nowIso(now)).run()
-  await event(env,'scheduler_tick',{queued,discoveredDueSources:due.length,firstRoundComplete,coverageSnapshotSha256:coverage?.sha256 ?? null,maintenanceShare:firstRoundComplete?0.7:0.3},now)
+  await event(env,'scheduler_tick',{queued,discoveredDueSources:due.length,firstRoundComplete,coverageSnapshotSha256:coverage?.sha256 ?? null,maintenanceShare:firstRoundComplete?0.7:0.3,schoolRotationSaved},now)
   return {enabled:true,queued}
 }
 export async function claimJob(env: MaintenanceEnv,id:string,now=Date.now()):Promise<JobRow|null> {
