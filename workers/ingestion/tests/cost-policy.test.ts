@@ -7,6 +7,7 @@ import {
   scheduledJobReason,
 } from '../src/cost-policy'
 import { scheduleDueSources } from '../src/index'
+import { AUTOMATIC_SOURCE_BINDING_CANDIDATES_SQL } from '../src/automatic-source-bindings'
 import type { IngestionEnv, IngestionJob } from '../src/types'
 import { sourceManifest } from './fixtures'
 
@@ -64,11 +65,11 @@ test('scheduler keeps registered critical checks while discovery is frozen', asy
       return {
         bind(...values: unknown[]) {
           bindings = values
-          if (!query.includes('WITH latest AS')) queryBindings.push(values)
+          if (query !== AUTOMATIC_SOURCE_BINDING_CANDIDATES_SQL) queryBindings.push(values)
           return this
         },
         async all() {
-          if (query.includes('WITH latest AS')) return { success: true, results: [] }
+          if (query === AUTOMATIC_SOURCE_BINDING_CANDIDATES_SQL) return { success: true, results: [] }
           assert.match(query, /json_extract\(manifest_json/)
           return {
             success: true,
