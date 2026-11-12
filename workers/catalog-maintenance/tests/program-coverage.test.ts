@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { readFileSync } from 'node:fs'
 import { buildProgramCoverage, concreteProgramKeys, refreshCloudProgramCoverage } from '../../../scripts/maintenance/program-coverage'
 import { loadMaintenanceBundle, catalogSha256 } from '../../../scripts/maintenance/build-scope'
 import { readMaintenanceScope } from '../../../scripts/maintenance/scope-registry'
@@ -176,12 +175,14 @@ test('cloud candidate reservoir retains award work even behind a large old progr
     assert.ok(stages.includes('award')); assert.ok(stages.includes('extract'))
   } finally { f.db.sqlite.close() }
 })
-test('daily cloud refresh follows active historical scope, skips quota/head/current states, and never uploads targets', async () => {
-  const root=process.cwd(), oldSha=JSON.parse(readFileSync('content/maintenance/scope-272.v1.json','utf8')).sha256 as string,
-    scope=readMaintenanceScope(root,oldSha), catalog=await catalogSha256(loadMaintenanceBundle(root)), calls:string[]=[]
+test('daily cloud refresh waits for historical scope, refreshes active scope, and skips quota/head/current states without uploading targets', async () => {
+  const root=process.cwd(), scope=readMaintenanceScope(root), previousScope=readMaintenanceScope(root,scope.parentScopeSha256),
+    catalog=await catalogSha256(loadMaintenanceBundle(root)), calls:string[]=[]
   const status={format:'studyinchina.cloud-maintenance-status',backend:{state:'ready'},enabled:true,
-    control:{seed_complete:1,targets_complete:1,scope_sha256:scope.sha256,input_catalog_sha256:catalog},coverage:{} as Record<string,string>}
+    control:{seed_complete:1,targets_complete:1,scope_sha256:previousScope.sha256,input_catalog_sha256:catalog},coverage:{} as Record<string,string>}
   const client={async json(path:string,_method?:'GET'|'POST',body?:unknown){calls.push(path);if(path==='/status')return structuredClone(status);assert.equal(path,'/coverage');assert.equal((body as {scopeRegistrySha256:string}).scopeRegistrySha256,scope.sha256);return{ok:true}}}
+  assert.deepEqual(await refreshCloudProgramCoverage({root,client,today}),{refreshed:false,reason:'scope_upgrade_wait'});assert.deepEqual(calls,['/status'])
+  status.control.scope_sha256=scope.sha256;calls.length=0
   const result=await refreshCloudProgramCoverage({root,client,today});assert.equal(result.refreshed,true);assert.deepEqual(calls,['/status','/coverage'])
   status.coverage={snapshotSha256:'1'.repeat(64),evaluatedOn:today,inputCatalogSha256:catalog,scopeRegistrySha256:scope.sha256}
   calls.length=0;assert.equal((await refreshCloudProgramCoverage({root,client,today})).reason,'coverage_current');assert.deepEqual(calls,['/status'])
