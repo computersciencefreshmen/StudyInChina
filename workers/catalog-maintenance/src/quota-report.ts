@@ -1,4 +1,4 @@
-import { fetchPlanQuotaPayload, normalizePlanQuota } from './admission'
+import { readQuotaProvider, normalizePlanQuota } from './admission'
 import type { MaintenanceEnv } from './types'
 import { nowIso, record } from './util'
 
@@ -27,11 +27,11 @@ function providerObservation(payload: unknown) {
 /** A provider read, independent of the D1 execution ledger. This never admits
  * work, consumes a model request, or changes the account's billing settings. */
 export async function readPlanQuotaReport(env: MaintenanceEnv, fetcher: typeof fetch = fetch) {
-  const payload = await fetchPlanQuotaPayload(env, fetcher), quota = normalizePlanQuota(payload)
+  const {payload,transport} = await readQuotaProvider(env, fetcher), quota = normalizePlanQuota(payload)
   return {
     format: 'studyinchina.maintenance-quota', version: 1,
     observedAt: nowIso(), state: quota ? 'observed' : 'quota_unknown',
-    quota, providerObservation: providerObservation(payload), backendIndependent: true, modelCallsPerformed: false,
+    quota, providerTransport: transport, providerObservation: providerObservation(payload), backendIndependent: true, modelCallsPerformed: false,
     admissionPolicy: {
       minimumRemainingPercent: env.MINIMAX_CREDIT_FALLBACK_DISABLED === 'true' ? 0 : 5,
       urgentMaintenanceReservePercent: 20,

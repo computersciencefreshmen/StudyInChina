@@ -65,16 +65,28 @@ export function quotaAdmission(quota:PlanQuota|null,lane:'maintenance'|'expansio
   }
   return {allow:true,code:'plan_quota_available',retryAfter:0,low:minimum<=10}
 }
-export async function fetchPlanQuotaPayload(env:MaintenanceEnv,fetcher:typeof fetch=fetch):Promise<unknown|null> {
+export type QuotaTransport = { state: 'configuration_invalid'|'http_error'|'response_rejected'|'unreadable_response'|'network_unavailable'|'received'; httpStatus: number|null;
+  reason: 'unsupported_base'|'missing_subscription_key'|'unsupported_model'|'provider_http_error'|'redirect_or_url_mismatch'|'invalid_or_oversized_json'|'provider_transport_failed'|null }
+export async function readQuotaProvider(env:MaintenanceEnv,fetcher:typeof fetch=fetch):Promise<{payload:unknown|null;transport:QuotaTransport}> {
   const base=env.MINIMAX_ANTHROPIC_BASE??'https://api.minimaxi.com/anthropic'
-  if(!ENDPOINTS.has(base)||!env.MINIMAX_SUBSCRIPTION_KEY||env.MINIMAX_MODEL!=='MiniMax-M3') return null
-  const endpoint=new URL(base).hostname==='api.minimax.io'?'https://www.minimax.io/v1/token_plan/remains':'https://www.minimax.cn/v1/token_plan/remains'
+  const invalidReason=!ENDPOINTS.has(base)?'unsupported_base':!env.MINIMAX_SUBSCRIPTION_KEY?'missing_subscription_key':env.MINIMAX_MODEL!=='MiniMax-M3'?'unsupported_model':null
+  if(invalidReason)return{payload:null,transport:{state:'configuration_invalid',httpStatus:null,reason:invalidReason}}
+  // Match MiniMax's official CLI regional API origins. Never follow redirects
+  // carrying the subscription credential to a website or an unexpected host.
+  // https://github.com/MiniMax-AI/cli/blob/main/src/config/schema.ts
+  // https://github.com/MiniMax-AI/cli/blob/main/src/client/endpoints.ts
+  const endpoint=new URL(base).hostname==='api.minimax.io'?'https://api.minimax.io/v1/token_plan/remains':'https://api.minimax.cn/v1/token_plan/remains'
   const signal=AbortSignal.timeout(20000)
   try {
-    const response=await fetcher(endpoint,{method:'GET',redirect:'error',cache:'no-store',headers:{authorization:`Bearer ${env.MINIMAX_SUBSCRIPTION_KEY}`,accept:'application/json'},signal})
-    if(!response.ok||response.redirected||(response.url&&response.url!==endpoint)) return null
-    return JSON.parse(new TextDecoder().decode(await readBoundedBody(response,128*1024,signal))) as unknown
-  } catch { return null }
+    const response=await fetcher(endpoint,{method:'GET',redirect:'error',cache:'no-store',headers:{authorization:`Bearer ${env.MINIMAX_SUBSCRIPTION_KEY}`,accept:'application/json','content-type':'application/json'},signal})
+    if(response.redirected||(response.url&&response.url!==endpoint))return{payload:null,transport:{state:'response_rejected',httpStatus:response.status,reason:'redirect_or_url_mismatch'}}
+    if(!response.ok)return{payload:null,transport:{state:'http_error',httpStatus:response.status,reason:'provider_http_error'}}
+    try{return{payload:JSON.parse(new TextDecoder().decode(await readBoundedBody(response,128*1024,signal))) as unknown,transport:{state:'received',httpStatus:response.status,reason:null}}}
+    catch{return{payload:null,transport:{state:'unreadable_response',httpStatus:response.status,reason:'invalid_or_oversized_json'}}}
+  } catch { return{payload:null,transport:{state:'network_unavailable',httpStatus:null,reason:'provider_transport_failed'}} }
+}
+export async function fetchPlanQuotaPayload(env:MaintenanceEnv,fetcher:typeof fetch=fetch):Promise<unknown|null> {
+  return (await readQuotaProvider(env,fetcher)).payload
 }
 export async function fetchPlanQuota(env:MaintenanceEnv,fetcher:typeof fetch=fetch):Promise<PlanQuota|null> {
   return normalizePlanQuota(await fetchPlanQuotaPayload(env,fetcher))
