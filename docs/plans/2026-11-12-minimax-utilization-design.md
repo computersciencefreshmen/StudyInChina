@@ -48,6 +48,11 @@ allowlist of provider schema observations. Missing, null, unexpected types, and
 explicit unlimited status remain distinguishable without dumping raw responses.
 The configured reserve is reported separately from unverified provider billing
 settings. It never asserts that a configuration variable disabled account credits.
+Transport diagnostics expose only fixed configuration/network/parse reasons and
+numeric HTTP status, without response errors, headers, credentials, or account
+identifiers. Subscription reads use the official CLI's regional API origins and
+JSON headers; redirects remain forbidden. An unknown observation still blocks
+model admission rather than treating a successful workflow as available quota.
 
 ## Legacy subscription compatibility
 
