@@ -216,6 +216,19 @@ export async function recordTargets(env:MaintenanceEnv,sourceId:string,depth=0,s
   if(depth<2){const lineage=await env.SNAPSHOTS_BUCKET.get(`maintenance/discovery-lineage/${sourceId}.json`);if(lineage){const value=record(JSON.parse(await lineage.text()));if(value?.sourceId!==sourceId||!Array.isArray(value.parents)||value.parents.some(id=>typeof id!=='string'||!HASH.test(id)))throw new MaintenanceError('source_lineage_invalid');for(const parent of value.parents as string[]){for(const target of await recordTargets(env,parent,depth+1,seen))if(target.entityType==='program'&&!targets.some(current=>current.entityType===target.entityType&&current.recordId===target.recordId))targets.push({...target,sourceIds:[...new Set([...target.sourceIds,sourceId])]})}}}
   return targets
 }
+/** Bound UTF-8 JSON, including row-string escaping and array punctuation. */
+function targetRevalidationManifests(rows:Array<{target_id:string;record_scope_sha256:string;target_json:string}>):string[] {
+  const limit=64*1024,encoder=new TextEncoder(),chunks:string[]=[]
+  let entries:string[]=[],bytes=2
+  for(const row of rows){
+    const entry=JSON.stringify(row),size=encoder.encode(entry).byteLength
+    if(size+2>limit)throw new MaintenanceError('target_refresh_reuse_row_too_large')
+    if(entries.length&&bytes+1+size>limit){chunks.push(`[${entries.join(',')}]`);entries=[];bytes=2}
+    bytes+=size+(entries.length?1:0);entries.push(entry)
+  }
+  if(entries.length)chunks.push(`[${entries.join(',')}]`)
+  return chunks
+}
 /** An identity/field-only ACK may leave the six-file catalog digest unchanged.
  * Reuse the immutable completed plan only after exact active-set readback. This
  * runs on the ACK path, never once per scheduler tick. */
@@ -234,13 +247,16 @@ async function restoreCompletedTargets(env:MaintenanceEnv,cfg:Control,refreshSha
   const actualBindings=(await env.PIPELINE_DB.prepare('SELECT x.target_id,x.source_id FROM maintenance_target_sources x JOIN maintenance_record_targets t ON t.target_id=x.target_id WHERE t.active=1').all<{target_id:string;source_id:string}>()).results??[]
   const bindingKey=(pair:string[])=>pair.join('\u0000')
   if(canonical(actualBindings.map(row=>bindingKey([row.target_id,row.source_id])).sort())!==canonical(expectedBindings.map(bindingKey).sort()))throw new MaintenanceError('target_refresh_reuse_source_set_mismatch')
-  const manifest=JSON.stringify(active),guard=crypto.randomUUID(),at=nowIso()
+  const manifests=targetRevalidationManifests(active),guard=crypto.randomUUID(),rowGuards=manifests.map(()=>crypto.randomUUID()),at=nowIso()
+  // D1 strings are bounded. Every full-row comparison still runs in the same
+  // atomic transaction as the control CAS; a late chunk failure rolls it all back.
   try{await env.PIPELINE_DB.batch([
-    env.PIPELINE_DB.prepare("INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND scope_sha256=? AND input_catalog_sha256=? AND revision=? AND targets_complete=0) AND EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE refresh_sha256=? AND status='completed' AND plan_sha256=?) AND NOT EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=?) AND (SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1)=json_array_length(?) AND NOT EXISTS(SELECT 1 FROM maintenance_record_targets t LEFT JOIN json_each(?) m ON json_extract(m.value,'$.target_id')=t.target_id WHERE t.active=1 AND (m.value IS NULL OR t.target_json<>json_extract(m.value,'$.target_json') OR t.record_scope_sha256<>json_extract(m.value,'$.record_scope_sha256'))) THEN 1 ELSE 0 END))")
-      .bind(guard,cfg.scope_sha256,cfg.input_catalog_sha256,cfg.revision,refreshSha256,row.plan_sha256,cfg.input_catalog_sha256,manifest,manifest),
+    env.PIPELINE_DB.prepare("INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND scope_sha256=? AND input_catalog_sha256=? AND revision=? AND targets_complete=0) AND EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE refresh_sha256=? AND status='completed' AND plan_sha256=?) AND NOT EXISTS(SELECT 1 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=?) AND (SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1)=? THEN 1 ELSE 0 END))")
+      .bind(guard,cfg.scope_sha256,cfg.input_catalog_sha256,cfg.revision,refreshSha256,row.plan_sha256,cfg.input_catalog_sha256,active.length),
+    ...manifests.map((manifest,index)=>env.PIPELINE_DB.prepare("INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN NOT EXISTS(SELECT 1 FROM json_each(?) m LEFT JOIN maintenance_record_targets t ON t.target_id=json_extract(m.value,'$.target_id') WHERE t.target_id IS NULL OR t.active<>1 OR t.target_json<>json_extract(m.value,'$.target_json') OR t.record_scope_sha256<>json_extract(m.value,'$.record_scope_sha256')) THEN 1 ELSE 0 END))").bind(rowGuards[index],manifest)),
     env.PIPELINE_DB.prepare('UPDATE maintenance_control SET targets_complete=1,revision=revision+1,updated_at=? WHERE singleton=1 AND revision=? AND input_catalog_sha256=? AND targets_complete=0').bind(at,cfg.revision,cfg.input_catalog_sha256),
     env.PIPELINE_DB.prepare('INSERT INTO maintenance_events VALUES(?,?,?,?)').bind(crypto.randomUUID(),'targets_revalidated',at,canonical({refreshSha256,inputCatalogSha256:cfg.input_catalog_sha256,recordTargets:targets.length,fromRevision:cfg.revision,toRevision:cfg.revision+1})),
-    env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(guard),
+    env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id IN(SELECT value FROM json_each(?))').bind(JSON.stringify([guard,...rowGuards])),
   ])}catch{throw new MaintenanceError('target_refresh_reuse_control_changed')}
 }
 export async function refreshTargets(env:MaintenanceEnv,value:unknown,staged=false,repairFence?:{expectedRevision:number}) {

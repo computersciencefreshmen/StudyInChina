@@ -30,6 +30,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Resume exact target metadata after an acknowledged catalogue application
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        run: node --import tsx scripts/maintenance/refresh-cloud-targets.ts --output "$RUNNER_TEMP/catalog-maintenance-tick/target-refresh.json"
       - name: Continue the approved additive scope upgrade without local-machine state
         env:
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
@@ -95,5 +100,6 @@ jobs:
             ${{ runner.temp }}/catalog-maintenance-tick/receipt.json
             ${{ runner.temp }}/catalog-maintenance-tick/rollout.json
             ${{ runner.temp }}/catalog-maintenance-tick/coverage.json
+            ${{ runner.temp }}/catalog-maintenance-tick/target-refresh.json
           if-no-files-found: warn
           retention-days: 35

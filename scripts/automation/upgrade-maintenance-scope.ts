@@ -57,6 +57,12 @@ async function main() {
       }
       supersedes = pending.upgradeSha256
     }
+    // An applied catalogue must finish its exact target refresh before a new
+    // upgrade intent pins a revision. Existing pending continuations above keep
+    // their own durable completion and supersession rules.
+    if (status.control.targets_complete !== 1) {
+      console.log(JSON.stringify({ state: 'targets_not_ready', continuation: 'existing_cloud_tick' })); return
+    }
     const nextScope = readMaintenanceScope(root), previousScope = readMaintenanceScope(root, nextScope.parentScopeSha256)
     const bundle = loadMaintenanceBundle(root), ids = new Set(bundle.universities.map(school => school.id)), inputCatalogSha256 = await catalogSha256(bundle)
     if (nextScope.formatVersion !== 2 || ids.size !== 295 || nextScope.schools.some(school => !ids.has(school.universityId))) throw new Error('scope_upgrade_current_school_set_changed')
