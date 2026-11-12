@@ -1,0 +1,9 @@
+# Recovering pending cloud target metadata
+
+A canonical application acknowledgement can leave `targets_complete=0` while its exact target refresh is staged or waiting for revalidation. The existing 15-minute cloud tick now runs `scripts/maintenance/refresh-cloud-targets.ts` before scope-upgrade automation. This helper reads `/status` once and, only when the backend is ready, seed complete, target metadata pending and operator/native/deployment controls permit it, submits one existing `/targets` request. It does not poll for completion.
+
+The checked checkout must match the control's canonical catalogue SHA. The active scope must be the immutable, checksum-verified 295-school registry or its preserved original 272-school parent. Targets and today's coverage snapshot come from that same checkout and active registry; recovering 272-school metadata does not activate the additional 23 schools. Ready targets bypass catalogue scanning. A daily-quota wait, incomplete seed, pause or mismatched catalogue head causes no metadata POST.
+
+The Worker retains validation, content-addressed plan reuse, exact active-set readback and atomic target completion. The helper changes no control flags, publishes no facts, sends no model requests and repeats no acknowledgement. A queued response means metadata work was accepted, not completed. The small `target-refresh.json` tick artifact records the exact response plus response, target-plan, request and coverage hashes. Lost queue delivery can be re-enqueued by the next ordinary tick; errors remain errors.
+
+Scope-upgrade automation may inspect an existing pending upgrade's durable state as before. It must observe ready targets before preparing a new or superseding intent, so a pending target refresh cannot pin a premature upgrade revision. Existing pending completion continues through its own guarded Worker path. Cadence, shared writer lock, resources, secrets and model settings are unchanged.
