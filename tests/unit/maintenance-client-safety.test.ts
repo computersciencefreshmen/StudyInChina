@@ -10,6 +10,13 @@ const token = 'test-only-secret-that-is-never-a-real-account-token'
 const environment = { CATALOG_MAINTENANCE_URL: 'https://maintenance-fixture.example.workers.dev', CATALOG_MAINTENANCE_TOKEN: token }
 
 describe('maintenance bridge HTTP boundary', () => {
+  it('observes provider quota through the authenticated fixed-origin read endpoint', async () => {
+    const report = { format: 'studyinchina.maintenance-quota', state: 'quota_unknown', quota: null }
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(Response.json(report))
+    expect(await maintenanceClientFromEnvironment(environment, fetcher).json('/quota')).toEqual(report)
+    expect(String(fetcher.mock.calls[0][0])).toBe('https://maintenance-fixture.example.workers.dev/quota')
+    expect(fetcher.mock.calls[0][1]).toMatchObject({ method: 'GET', redirect: 'error', cache: 'no-store' })
+  })
   it('retains only numeric HTTP status and the exact bounded generic backend classification', async () => {
     const fetcher = vi.fn<typeof fetch>()
       .mockResolvedValueOnce(Response.json({ ok: false, error: 'request_invalid_or_backend_unavailable', extra: token }, { status: 409 }))

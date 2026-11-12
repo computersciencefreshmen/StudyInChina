@@ -30,6 +30,17 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Observe subscription windows independently of the database quota
+        # Read-only diagnostics must not block the existing scheduler on a
+        # transient provider failure or a rolling Worker deployment.
+        continue-on-error: true
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/catalog-maintenance-tick"
+          node --import tsx scripts/automation/catalog-maintenance-client.ts quota > "$RUNNER_TEMP/catalog-maintenance-tick/quota.json"
       - name: Resume exact target metadata after an acknowledged catalogue application
         env:
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
@@ -62,6 +73,12 @@ jobs:
           const directory = join(process.env.RUNNER_TEMP, 'catalog-maintenance-tick');
           const tick = JSON.parse(readFileSync(join(directory, 'tick.json'), 'utf8'));
           const status = JSON.parse(readFileSync(join(directory, 'status.json'), 'utf8'));
+          let quota = { format: 'studyinchina.maintenance-quota', version: 1,
+            state: 'quota_unknown', quota: null, reason: 'observation_unavailable' };
+          try {
+            const observed = JSON.parse(readFileSync(join(directory, 'quota.json'), 'utf8'));
+            if (observed.format === quota.format && observed.version === 1) quota = observed;
+          } catch { /* Keep unobserved values unknown; the diagnostic step reports its failure. */ }
           if (tick.format !== 'studyinchina.cloud-maintenance-tick'
               || status.format !== 'studyinchina.cloud-maintenance-status'
               || !/^[a-f0-9]{64}$/.test(tick.receiptSha256 ?? '')) {
@@ -70,7 +87,7 @@ jobs:
           const receipt = { format: 'studyinchina.github-cloud-tick', version: 1,
             observedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID,
             runAttempt: process.env.GITHUB_RUN_ATTEMPT, sourceCommit: process.env.GITHUB_SHA,
-            tick, status };
+            tick, status, quota };
           writeFileSync(join(directory, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n');
           const soak = status.soak ?? {};
           appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
@@ -78,6 +95,9 @@ jobs:
             '- Actual tick: ' + tick.state + ' (' + tick.code + ').',
             '- Durable Worker receipt: `' + tick.receiptKey + '`.',
             '- D1 state: ' + (status.backend?.state ?? 'unobserved') + '.',
+            '- MiniMax remaining: five-hour ' + (quota.quota?.fiveHourRemaining ?? 'unobserved') + '%; weekly '
+              + (quota.quota?.weeklyUnlimited === true ? 'unlimited' : (quota.quota?.weeklyRemaining ?? 'unobserved') + '%') + '.',
+            '- Quota observation performs no model requests and does not authorize work while D1 is unavailable.',
             '- Seed ready: ' + (status.control?.seed_complete === 1) + '; targets ready: ' + (status.control?.targets_complete === 1) + '.',
             '- Seven-day observation: ' + (soak.assessment ?? 'unobserved') + '; ' + (soak.observedHours ?? 0) + ' of 168 real elapsed hours.',
             '- Recorded/eligible ticks: ' + (soak.recordedTicksLastSevenDays ?? 0) + '/' + (soak.eligibleTicksLastSevenDays ?? 0) + '.',
@@ -97,6 +117,7 @@ jobs:
           path: |
             ${{ runner.temp }}/catalog-maintenance-tick/tick.json
             ${{ runner.temp }}/catalog-maintenance-tick/status.json
+            ${{ runner.temp }}/catalog-maintenance-tick/quota.json
             ${{ runner.temp }}/catalog-maintenance-tick/receipt.json
             ${{ runner.temp }}/catalog-maintenance-tick/rollout.json
             ${{ runner.temp }}/catalog-maintenance-tick/coverage.json

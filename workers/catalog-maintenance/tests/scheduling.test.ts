@@ -76,3 +76,25 @@ test('selection preserves the original priority/due order within both lanes and 
   assert.deepEqual(selectScheduledJobs(jobs, options), selected)
   assert.equal(JSON.stringify(jobs), before)
 })
+
+test('unknown coverage receives growth priority without being treated as a completed school', () => {
+  const unknown={...expansion('unknown'),scheduling_school_id:'unknown'}
+  const complete={...expansion('complete'),coverage_count:8,scheduling_school_id:'complete'}
+  assert.deepEqual(selectScheduledJobs([complete,unknown],{limit:1,firstRoundComplete:false,now:0}),[unknown])
+  assert.equal('coverage_count' in unknown,false)
+})
+
+test('school fairness spans both shares while preserving programme/programme/award expansion and borrowing',()=>{
+  const jobs=Array.from({length:12},(_,school)=>Array.from({length:12},(_,index)=>['maintain','extract','award'].map(stage=>({
+    id:`${school}-${index}-${stage}`,stage,priority:1,coverage_count:0,scheduling_school_id:`school-${school}`,
+    school_last_attempt_at:school===0?'2026-11-11T00:00:00Z':null,
+  })))).flat(2)
+  const selected=selectScheduledJobs(jobs,{limit:8,firstRoundComplete:false,now:0})
+  assert.equal(new Set(selected.map(job=>job.scheduling_school_id)).size,8)
+  assert.equal(selected.filter(job=>job.stage==='maintain').length,2)
+  assert.equal(selected.filter(job=>job.stage==='extract').length,4)
+  assert.equal(selected.filter(job=>job.stage==='award').length,2)
+  assert.ok(selected.every(job=>job.scheduling_school_id!=='school-0'))
+  const onlyOneSchool=jobs.filter(job=>job.scheduling_school_id==='school-0')
+  assert.equal(selectScheduledJobs(onlyOneSchool,{limit:8,firstRoundComplete:false,now:0}).length,8)
+})

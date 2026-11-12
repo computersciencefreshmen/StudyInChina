@@ -1,4 +1,5 @@
 import { ModelAdmission } from './admission'
+import { readPlanQuotaReport } from './quota-report'
 import { submitCoverageSnapshot } from './coverage'
 import { registerScopeUpgradeRequest, processScopeUpgrade, scopeUpgradeStatus } from './scope-upgrade'
 import { captureSource } from './capture'
@@ -120,6 +121,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   if(url.pathname==='/health'&&request.method==='GET')return json({ok:true,service:'studyinchina-catalog-maintenance',version:'1.0.0',publicationPerformed:false})
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
   try {
+    if(url.pathname==='/quota'&&request.method==='GET')return json(await readPlanQuotaReport(env))
     if(url.pathname==='/seed'&&request.method==='POST')return json(await seed(env,await requestJson(request,8*1024*1024),Date.now(),true))
     if(url.pathname==='/bootstrap'&&request.method==='POST')return json(await registerBootstrapRequest(env,request))
     if(url.pathname==='/scope-upgrades'&&request.method==='POST')return json(await registerScopeUpgradeRequest(env,request))
