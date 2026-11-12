@@ -35,6 +35,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          token: ${{ secrets.CATALOG_PUBLISH_GITHUB_TOKEN || github.token }}
       - uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -99,10 +100,14 @@ jobs:
         id: commit
         if: steps.recovery.outputs.ready == 'true' && steps.candidate.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.CATALOG_PUBLISH_GITHUB_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
+          if [[ -z "${GH_TOKEN:-}" ]]; then
+            echo '::error title=Cloud candidate publication held::Configure repository secret CATALOG_PUBLISH_GITHUB_TOKEN with repository Contents read/write and Actions read permissions. A dedicated token is required to trigger trusted push CI. The immutable export is retained; no commit, branch push or application acknowledgement was made.'
+            exit 1
+          fi
           base_sha="$(git rev-parse HEAD)"
           git fetch origin main --depth=1
           [[ "$(git rev-parse origin/main)" == "$base_sha" ]] || { echo 'Main changed; candidate held for reconciliation.'; exit 1; }
@@ -115,11 +120,10 @@ jobs:
           git commit -m 'data: apply evidence-checked cloud catalog batch'
           candidate_sha="$(git rev-parse HEAD)"
           git push origin "HEAD:refs/heads/$branch"
-          gh workflow run ci.yml --ref "$branch"
           deadline=$((SECONDS + 1800))
           passed=false
           while (( SECONDS < deadline )); do
-            outcome="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?branch=${branch}&event=workflow_dispatch&per_page=20" --jq ".workflow_runs | map(select(.head_sha == \"${candidate_sha}\" and .head_branch == \"${branch}\")) | sort_by(.id) | last | if . == null or .status != \"completed\" then \"pending\" else .conclusion end")"
+            outcome="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?branch=${branch}&event=push&per_page=20" --jq ".workflow_runs | map(select(.head_sha == \"${candidate_sha}\" and .head_branch == \"${branch}\" and .event == \"push\")) | sort_by(.id) | last | if . == null or .status != \"completed\" then \"pending\" else .conclusion end")"
             if [[ "$outcome" == 'success' ]]; then passed=true; break; fi
             [[ "$outcome" == 'pending' ]] || { echo "Exact candidate CI ended with $outcome; main unchanged."; exit 1; }
             sleep 20
@@ -128,7 +132,6 @@ jobs:
           git fetch origin main --depth=1
           [[ "$(git rev-parse origin/main)" == "$base_sha" ]] || { echo 'Main advanced; no rebase or untested replacement will be pushed.'; exit 1; }
           git push origin "${candidate_sha}:refs/heads/main"
-          gh workflow run ci.yml --ref main
           echo "sha=$candidate_sha" >> "$GITHUB_OUTPUT"
       - name: Acknowledge canonical application separately from public publication
         if: steps.recovery.outputs.ready == 'true' && (steps.commit.outputs.sha != '' || steps.resume.outputs.pending_publication == 'true' || steps.receipt_commit.outputs.sha != '')

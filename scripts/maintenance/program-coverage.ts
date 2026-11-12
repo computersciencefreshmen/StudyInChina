@@ -14,6 +14,7 @@ import { maintenanceClientFromEnvironment, type MaintenanceClient } from '../aut
 import { readMaintenanceScope } from './scope-registry'
 import { catalogSha256, loadMaintenanceBundle } from './build-scope'
 import { coverageBand, coverageSnapshotSchema, type CoverageSnapshot } from '../../workers/catalog-maintenance/src/coverage'
+import { EXISTING_SCHOOLS_V2_SHA256 } from '../../workers/catalog-maintenance/src/scope-config'
 
 /** Language tracks and admission rounds do not create another concrete major. */
 export function concreteProgramKeys(program: Program): string[] {
@@ -148,8 +149,18 @@ export async function refreshCloudProgramCoverage(options: { root: string; clien
   const cfg = status.control
   if (cfg?.seed_complete !== 1 || cfg.targets_complete !== 1 || !cfg.scope_sha256 || !cfg.input_catalog_sha256) return skipped('targets_not_ready')
   if (status.enabled === false) return skipped('operator_pause')
-  const scope = readMaintenanceScope(options.root, cfg.scope_sha256), bundle = loadMaintenanceBundle(options.root)
+  const scope = readMaintenanceScope(options.root, cfg.scope_sha256), currentScope = readMaintenanceScope(options.root)
   if (scope.sha256 !== await scopeContentSha256(scope)) throw new Error('coverage_scope_checksum_mismatch')
+  if (currentScope.sha256 !== await scopeContentSha256(currentScope)) throw new Error('coverage_scope_checksum_mismatch')
+  if (scope.sha256 !== currentScope.sha256) {
+    // The Worker accepts coverage only after the approved additive upgrade.
+    // Leave that upgrade and any prior publication to their existing fences.
+    if (currentScope.sha256 === EXISTING_SCHOOLS_V2_SHA256 && currentScope.formatVersion === 2
+      && currentScope.expectedSchoolCount === 295 && currentScope.parentScopeSha256 === scope.sha256
+      && scope.formatVersion === 1 && scope.expectedSchoolCount === 272) return skipped('scope_upgrade_wait')
+    throw new Error('coverage_scope_not_current')
+  }
+  const bundle = loadMaintenanceBundle(options.root)
   if (await catalogSha256(bundle) !== cfg.input_catalog_sha256) return skipped('head_wait')
   if (status.coverage?.snapshotSha256 && status.coverage.evaluatedOn === today && status.coverage.inputCatalogSha256 === cfg.input_catalog_sha256
     && status.coverage.scopeRegistrySha256 === cfg.scope_sha256) return skipped('coverage_current')
