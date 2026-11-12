@@ -12,15 +12,12 @@ type PendingSource = {
 const AUTOMATIC_ID = /^(?:auto-seed-[a-f0-9]{24}|auto-discovery-d[12]-[a-f0-9]{40})$/u
 const CATEGORIES = new Set(['catalog_anchor', 'international_admissions_home', 'undergraduate_catalog', 'masters_catalog', 'doctoral_catalog', 'non_degree_catalog', 'current_guide', 'program_detail', 'university_scholarship', 'faculty_scholarship'])
 
-/** Bind an observed official source to its registered owner; this grants no fact publication. */
-export async function registerAutomaticSourceBindings(environment: Environment, now: string, maximum = 25) {
-  if (!Number.isFinite(Date.parse(now))) throw new Error('Invalid binding evaluation time')
-  const limit = Math.max(1, Math.min(100, Math.floor(maximum) || 25))
-  const pending = await environment.INGESTION_DB.prepare(`
-    WITH latest AS (
-      SELECT snapshot.*, ROW_NUMBER() OVER (PARTITION BY source_id ORDER BY fetched_at DESC, snapshot_id) AS snapshot_rank
-      FROM ingestion_snapshots snapshot
-    ), eligible AS (
+// Reuse idx_ingestion_snapshots_source_fetched for each eligible source instead
+// of ranking the entire immutable snapshot history on every scheduler call.
+// CROSS JOIN keeps source outermost even when production statistics would
+// otherwise repeat the source-prefix ranges once for every organization record.
+export const AUTOMATIC_SOURCE_BINDING_CANDIDATES_SQL = `
+    WITH eligible AS (
       SELECT source.source_id, source.manifest_json,
         organization.record_id AS institution_id, organization.official_url, institution.admissions_url,
         (SELECT text_value FROM localized_content WHERE record_id = organization.record_id
@@ -30,17 +27,27 @@ export async function registerAutomaticSourceBindings(environment: Environment, 
         snapshot.content_type, snapshot.byte_length, snapshot.final_url, snapshot.fetched_at,
         ROW_NUMBER() OVER (PARTITION BY organization.record_id ORDER BY RANDOM()) AS institution_rank
       FROM ingestion_sources source
-      JOIN organizations organization ON organization.record_id = json_extract(source.manifest_json, '$.institutionId')
-      JOIN institutions institution ON institution.record_id = organization.record_id
-      JOIN records record ON record.id = organization.record_id
-      JOIN latest snapshot ON snapshot.source_id = source.source_id AND snapshot.snapshot_rank = 1
+      CROSS JOIN organizations organization ON organization.record_id = json_extract(source.manifest_json, '$.institutionId')
+      CROSS JOIN institutions institution ON institution.record_id = organization.record_id
+      CROSS JOIN records record ON record.id = organization.record_id
+      CROSS JOIN ingestion_snapshots snapshot ON snapshot.snapshot_id = (
+        SELECT newest.snapshot_id FROM ingestion_snapshots newest
+        WHERE newest.source_id = source.source_id
+        ORDER BY newest.fetched_at DESC, newest.snapshot_id ASC LIMIT 1
+      )
       WHERE source.enabled = 1
         AND (source.source_id GLOB 'auto-seed-*' OR source.source_id GLOB 'auto-discovery-*')
         AND json_extract(source.manifest_json, '$.sourceCategory') NOT IN ('contacts', 'government_scholarship')
         AND record.kind = 'organization' AND record.workflow_status IN ('validated', 'applied', 'published', 'stale')
         AND NOT EXISTS (SELECT 1 FROM promotion_source_bindings binding WHERE binding.source_id = source.source_id)
     ) SELECT * FROM eligible ORDER BY institution_rank, RANDOM() LIMIT ?1
-  `).bind(limit).all<PendingSource>()
+  `
+
+/** Bind an observed official source to its registered owner; this grants no fact publication. */
+export async function registerAutomaticSourceBindings(environment: Environment, now: string, maximum = 25) {
+  if (!Number.isFinite(Date.parse(now))) throw new Error('Invalid binding evaluation time')
+  const limit = Math.max(1, Math.min(100, Math.floor(maximum) || 25))
+  const pending = await environment.INGESTION_DB.prepare(AUTOMATIC_SOURCE_BINDING_CANDIDATES_SQL).bind(limit).all<PendingSource>()
   if (!pending.success) throw new Error('Could not list automatic source bindings')
   const result = { examined: 0, registered: 0, deferred: 0, reasons: {} as Record<string, number> }
   const defer = (reason: string) => { result.deferred += 1; result.reasons[reason] = (result.reasons[reason] ?? 0) + 1 }

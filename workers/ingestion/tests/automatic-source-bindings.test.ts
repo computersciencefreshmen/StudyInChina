@@ -66,6 +66,33 @@ test('seed registration and database-only snapshots never suffice without an aut
   }
 })
 
+test('an unusable newest whole snapshot never falls back to an older usable body or an evaluation-time cutoff', async () => {
+  for (const mode of ['future', 'missing-body', 'wrong-key', 'invalid-tie-winner'] as const) {
+    const { db, env, source, key, metadata } = await fixture()
+    try {
+      if (mode !== 'invalid-tie-winner') {
+        const earlier = '2026-09-15T00:00:00.000Z'
+        db.prepare('UPDATE ingestion_snapshots SET fetched_at=? WHERE source_id=?').run(earlier, source.id)
+        metadata.fetchedAt = earlier
+      }
+      const hash = 'c'.repeat(64), id = mode === 'invalid-tie-winner' ? '0'.repeat(64) : await sha256Hex(`${source.id}:${hash}`)
+      const latestKey = mode === 'wrong-key' ? 'invalid-key' : snapshotObjectKey(source.id, hash, 'text/html')
+      const fetchedAt = mode === 'future' ? '2026-09-16T00:00:00.001Z' : NOW
+      db.prepare(`INSERT INTO ingestion_snapshots
+        (snapshot_id,source_id,r2_key,raw_sha256,canonical_sha256,content_type,byte_length,final_url,fetched_at)
+        VALUES (?,?,?,?,?,'text/html',100,?,?)`).run(id, source.id, latestKey, hash, hash, source.officialUrl, fetchedAt)
+      const requested: string[] = [], get = env.SNAPSHOTS_BUCKET.get
+      env.SNAPSHOTS_BUCKET.get = async requestedKey => { requested.push(requestedKey); return get(requestedKey) }
+      const result = await registerAutomaticSourceBindings(env, NOW)
+      assert.equal(result.examined, 1, mode); assert.equal(result.registered, 0, mode)
+      assert.equal(result.deferred, 1, mode); assert.equal(count(db, 'source_documents'), 0, mode)
+      assert.ok(!requested.includes(key), `${mode}: do not read the older body`)
+      if (mode === 'missing-body') assert.deepEqual(requested, [latestKey])
+      else assert.deepEqual(requested, [])
+    } finally { db.close() }
+  }
+})
+
 test('contacts, shared scholarship, manual, disabled and blocked sources are never automatically bound', async () => {
   for (const change of [
     { sourceCategory: 'contacts' }, { sourceCategory: 'government_scholarship' }, { id: 'manual-source' },
