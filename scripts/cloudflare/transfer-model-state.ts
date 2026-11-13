@@ -18,13 +18,17 @@ type Page = Binding & { format: 'studyinchina.model-state-page'; version: 1; ind
 type PageInfo = { index: number; sha256: string; byteLength: number; entryCount: number; firstKey: string | null; lastKey: string | null; startAfter: string | null }
 type RelayCode = 'configuration_invalid' | 'source_inflight' | 'authentication_failed' | 'transport_unavailable'
   | 'redirect_rejected' | 'response_too_large' | 'request_too_large' | 'response_invalid'
-  | 'source_freeze_rejected' | 'source_export_rejected' | 'source_snapshot_changed' | 'source_manifest_missing'
+  | 'source_freeze_rejected' | 'source_diagnostics_invalid' | 'source_export_rejected' | 'source_snapshot_changed' | 'source_manifest_missing'
   | 'source_manifest_invalid' | 'source_page_invalid' | 'source_page_limit' | 'target_import_rejected'
   | 'target_finalize_rejected' | 'target_receipt_invalid' | 'private_state_unavailable' | 'private_cleanup_failed'
+export type ModelStateSourceDiagnostics = {
+  activeOperations: number; serverTime: string; activeFetchPermitCount: number; activeModelPermitCount: number; latestPermitExpiresAt: string | null
+}
 export type ModelStateRelayReport = {
   format: 'studyinchina.model-state-migration-report'; version: 1; migrationId: string | null;
   state: 'finalized' | 'waiting' | 'failed'; code: RelayCode | null; sourceFrozen: boolean; targetFinalized: boolean;
   manifestSha256: string | null; pageCount: number | null; entryCount: number | null; requestCount: number | null; states: Counts | null;
+  sourceDiagnostics: ModelStateSourceDiagnostics | null;
   modelCallsPerformed: false; controlsChanged: false
 }
 export type ModelStateRelayOptions = {
@@ -51,6 +55,17 @@ function peerBinding(raw: Record<string, unknown>, migrationId: string): Binding
   if (raw.migrationId !== migrationId || typeof raw.sourceAccountId !== 'string' || !ACCOUNT.test(raw.sourceAccountId)
     || typeof raw.targetAccountId !== 'string' || !ACCOUNT.test(raw.targetAccountId) || raw.sourceAccountId === raw.targetAccountId) return fail('response_invalid')
   return { migrationId, sourceAccountId: raw.sourceAccountId, targetAccountId: raw.targetAccountId }
+}
+function sourceDiagnostics(raw: Record<string, unknown>): ModelStateSourceDiagnostics | null {
+  const fields = ['activeOperations', 'serverTime', 'activeFetchPermitCount', 'activeModelPermitCount', 'latestPermitExpiresAt'] as const
+  // Old source versions have no diagnostics. Partial or malformed observations
+  // must never be presented as trustworthy zero counts or runner-local dates.
+  if (fields.every(field => raw[field] === undefined)) return null
+  const iso = (value: unknown): value is string => typeof value === 'string' && Number.isFinite(Date.parse(value)) && new Date(value).toISOString() === value
+  if (!integer(raw.activeOperations) || !integer(raw.activeFetchPermitCount) || !integer(raw.activeModelPermitCount) || !iso(raw.serverTime)
+    || raw.latestPermitExpiresAt !== null && !iso(raw.latestPermitExpiresAt)) return fail('source_diagnostics_invalid')
+  return { activeOperations: raw.activeOperations, serverTime: raw.serverTime, activeFetchPermitCount: raw.activeFetchPermitCount,
+    activeModelPermitCount: raw.activeModelPermitCount, latestPermitExpiresAt: raw.latestPermitExpiresAt as string | null }
 }
 async function boundedJson(response: Response) {
   if (!/^application\/json(?:\s*;|$)/i.test(response.headers.get('content-type') ?? '')) return fail('response_invalid')
@@ -108,7 +123,7 @@ function validateManifest(value: unknown, sha256: unknown, expected: Binding, pa
 export async function transferModelState(options: ModelStateRelayOptions): Promise<ModelStateRelayReport> {
   const report: ModelStateRelayReport = { format: 'studyinchina.model-state-migration-report', version: 1, migrationId: null,
     state: 'failed', code: null, sourceFrozen: false, targetFinalized: false, manifestSha256: null, pageCount: null,
-    entryCount: null, requestCount: null, states: null, modelCallsPerformed: false, controlsChanged: false }
+    entryCount: null, requestCount: null, states: null, sourceDiagnostics: null, modelCallsPerformed: false, controlsChanged: false }
   let privateDirectory: string | undefined, tempRoot: string | undefined
   try {
     if (!/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{7,95}$/.test(options.migrationId) || !isAbsolute(options.runnerTemp)
@@ -141,6 +156,7 @@ export async function transferModelState(options: ModelStateRelayOptions): Promi
     const binding = peerBinding(freeze.raw, options.migrationId)
     if (freeze.raw.ok !== true || freeze.raw.role !== 'source' || freeze.raw.frozen !== true || !['frozen', 'exporting', 'exported'].includes(String(freeze.raw.state))) return fail('source_freeze_rejected')
     report.sourceFrozen = true
+    report.sourceDiagnostics = sourceDiagnostics(freeze.raw)
     if (freeze.status === 409) {
       if (freeze.raw.error !== 'model_state_migration_inflight') return fail('source_freeze_rejected')
       report.state = 'waiting'; return fail('source_inflight')
