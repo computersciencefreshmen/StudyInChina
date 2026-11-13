@@ -88,9 +88,18 @@ export function evaluateCloudMaintenanceHealth(input: CloudHealthInput, options:
   const unknownModels = attempts?.filter(value => value.status === 'unknown').reduce((sum, value) => sum + (count(value.count) ?? 0), 0) ?? null
   const currentUnknownFailure = tick?.state === 'error' && /unknown|unresolved/iu.test(String(tick.code))
   const historicalUnknowns = unknownJobs !== null && unknownModels !== null && unknownJobs + unknownModels > 0
+  const disposition = row(status?.unknownJobDisposition), totalUnknown = count(disposition?.totalUnknown), quarantinedUnknown = count(disposition?.quarantinedUnknown), unresolvedUnknown = count(disposition?.unresolvedUnknown)
+  const quarantineObserved = totalUnknown !== null && quarantinedUnknown !== null && unresolvedUnknown !== null && totalUnknown === unknownJobs
+    && quarantinedUnknown + unresolvedUnknown === totalUnknown && disposition?.replayAllowed === false && disposition.modelSuccessesClaimed === false
+    && (quarantinedUnknown === 0 || disposition.state === 'active' && sha(disposition.proofSha256))
   add('maintenance.unknown_outcomes', currentUnknownFailure ? 'fail' : unknownJobs === null || unknownModels === null || historicalUnknowns ? 'unobserved' : 'pass',
     currentUnknownFailure ? 'current_unknown_outcome_blocker' : unknownJobs === null || unknownModels === null ? 'outcomes_unobserved' : historicalUnknowns ? 'historical_or_guarded_unknown_outcomes' : 'no_unknown_outcomes_observed',
-    { jobs: unknownJobs, modelAttempts: unknownModels, classification: 'Aggregate history does not identify a new failed request; reservations remain preserved.' })
+    { jobs: unknownJobs, modelAttempts: unknownModels,
+      ...(quarantineObserved ? { totalUnknown, quarantinedUnknown, unresolvedUnknown, quarantineProofSha256: disposition?.proofSha256 ?? null,
+        importedDoUnknownAtMigration: count(row(disposition?.importedDoStates)?.unknown),
+        replayAllowed: false, modelSuccessesClaimed: false } : {}),
+      classification: quarantineObserved && quarantinedUnknown! > 0 ? 'Reviewed terminal quarantines remain unknown and NO_REPLAY. They are not model successes or new catalogue records.'
+        : 'Aggregate history does not identify a new failed request; reservations remain preserved.' })
   // created_at dates and scheduler_tick events cannot prove processor progress.
   // Report that limitation rather than treating a newly served /status as activity.
   add('maintenance.processing_progress', 'unobserved', quota ? 'progress_unobserved_during_quota_wait' : budgetWait ? 'progress_unobserved_during_budget_wait' : 'processing_timestamp_not_exposed')

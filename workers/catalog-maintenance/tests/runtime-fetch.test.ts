@@ -5,6 +5,7 @@ import test from 'node:test'
 import { build } from 'esbuild'
 import { convertV4MiniflareOptions, Miniflare, Response as WorkerResponse } from 'miniflare'
 import type { ModelRequest, ModelResult } from '../src/types'
+import { TERMINAL_QUARANTINE_POLICY } from '../src/reviewed-terminal-quarantine'
 
 const sourceId = 'd'.repeat(64), snapshotSha256 = 'e'.repeat(64), scope = 'a'.repeat(64)
 const adminToken = 'runtime-test-admin-token-not-a-real-secret'
@@ -116,9 +117,9 @@ async function runtimeFixture() {
       .bind(scope, 'b'.repeat(64), 'c'.repeat(64), 'f'.repeat(64), new Date().toISOString()).run()
     await db.prepare('INSERT INTO maintenance_schools(university_id,name_json,seed_json,scope_sha256) VALUES(?,?,?,?)')
       .bind('runtime-school', '{"en":"Runtime Test School"}', '{}', scope).run()
-    await db.prepare(`INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256)
-      VALUES(?,?,?,'undergraduate_catalog',1,24,?,?)`)
-      .bind(sourceId, 'https://runtime-test.edu.cn/catalog', '["runtime-test.edu.cn"]', new Date().toISOString(), snapshotSha256).run()
+    await db.prepare(`INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256,canonical_sha256)
+      VALUES(?,?,?,'undergraduate_catalog',1,24,?,?,?)`)
+      .bind(sourceId, 'https://runtime-test.edu.cn/catalog', '["runtime-test.edu.cn"]', new Date().toISOString(), snapshotSha256, 'f'.repeat(64)).run()
     await db.prepare('INSERT INTO maintenance_source_schools(source_id,university_id) VALUES(?,?)').bind(sourceId, 'runtime-school').run()
     return { mf, db, calls, provider }
   } catch (error) { await mf.dispose(); throw error }
@@ -132,6 +133,27 @@ function runModel(mf: Miniflare, input: ModelRequest) {
   return mf.dispatchFetch('https://runtime.test/model', { method: 'POST',
     headers: { authorization: `Bearer ${adminToken}`, 'content-type': 'application/json' }, body: JSON.stringify(input) })
 }
+
+test('real workerd permanently rejects quarantined sources and canonical-text aliases before any provider or SQL attempt', { timeout: 120000 }, async () => {
+  const { mf, db, calls } = await runtimeFixture()
+  try {
+    const subject = TERMINAL_QUARANTINE_POLICY.jobs[0]
+    await db.prepare('UPDATE maintenance_sources SET canonical_sha256=? WHERE source_id=?').bind(subject.textSha256, sourceId).run()
+    for (const [index, pass] of ['primary', 'independent-review'].entries()) {
+      const input = { ...modelRequest(String(index + 5).repeat(64)), pass, payload: JSON.stringify({ newContract: index, callerTextSha256: '0'.repeat(64) }) } as ModelRequest
+      const response = await runModel(mf, input)
+      assert.equal(response.status, 409); assert.equal((await response.json() as { error: string }).error, 'terminal_quarantine_no_replay')
+    }
+    await db.prepare('INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at) VALUES(?,?,?,\'undergraduate_catalog\',1,24,?)')
+      .bind(subject.job.source_id, subject.sourceUrl, JSON.stringify([new URL(subject.sourceUrl).hostname]), new Date().toISOString()).run()
+    await db.prepare('INSERT INTO maintenance_source_schools VALUES(?,?)').bind(subject.job.source_id, 'runtime-school').run()
+    const original = await runModel(mf, { ...modelRequest('7'.repeat(64)), sourceId: subject.job.source_id, snapshotSha256: '0'.repeat(64) })
+    assert.equal((await original.json() as { error: string }).error, 'terminal_quarantine_no_replay')
+    assert.equal(calls.length, 0)
+    const attempts = await db.prepare('SELECT COUNT(*) count FROM maintenance_model_attempts').first()
+    assert.equal(attempts?.count, 0)
+  } finally { await mf.dispose() }
+})
 
 test('real workerd fetch admits supported manual requests and refuses credentialed redirects', { timeout: 120000 }, async t => {
   const { mf, db, calls, provider } = await runtimeFixture()

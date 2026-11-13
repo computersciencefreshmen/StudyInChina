@@ -110,8 +110,8 @@ async function runtime(script: string, role: 'source' | 'target') {
       enabled,models_enabled,seed_complete,targets_complete,canary_json,updated_at) VALUES(1,?,?,?,?,1,1,1,1,'[]',?)`)
       .bind(scope, 'b'.repeat(64), 'c'.repeat(64), 'f'.repeat(64), new Date().toISOString()).run()
     await db.prepare('INSERT INTO maintenance_schools(university_id,name_json,seed_json,scope_sha256) VALUES(?,?,?,?)').bind('runtime-school', '{"en":"Runtime School"}', '{}', scope).run()
-    await db.prepare(`INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256)
-      VALUES(?,?,?,'undergraduate_catalog',1,24,?,?)`).bind(sourceId, 'https://runtime-test.edu.cn/catalog', '["runtime-test.edu.cn"]', new Date().toISOString(), snapshotSha256).run()
+    await db.prepare(`INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256,canonical_sha256)
+      VALUES(?,?,?,'undergraduate_catalog',1,24,?,?,?)`).bind(sourceId, 'https://runtime-test.edu.cn/catalog', '["runtime-test.edu.cn"]', new Date().toISOString(), snapshotSha256, 'f'.repeat(64)).run()
     await db.prepare('INSERT INTO maintenance_source_schools(source_id,university_id) VALUES(?,?)').bind(sourceId, 'runtime-school').run()
     return { mf, db, bucket, outbound }
   } catch (error) { await mf.dispose(); throw error }

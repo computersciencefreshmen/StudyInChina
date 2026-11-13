@@ -10,6 +10,17 @@ const token = 'test-only-secret-that-is-never-a-real-account-token'
 const environment = { CATALOG_MAINTENANCE_URL: 'https://maintenance-fixture.example.workers.dev', CATALOG_MAINTENANCE_TOKEN: token }
 
 describe('maintenance bridge HTTP boundary', () => {
+  it('allows only the authenticated bounded disposition endpoint for read and explicit operator registration', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockImplementation(async () => Response.json({ ok: true }))
+    const client = maintenanceClientFromEnvironment(environment, fetcher)
+    await client.json('/job-dispositions')
+    await client.json('/job-dispositions', 'POST', { phase: 'prepare' })
+    expect(fetcher.mock.calls.map(call => String(call[0]))).toEqual(Array(2).fill(`${environment.CATALOG_MAINTENANCE_URL}/job-dispositions`))
+    expect(fetcher.mock.calls[0][1]?.method).toBe('GET')
+    expect(fetcher.mock.calls[1][1]).toMatchObject({ method: 'POST', body: '{"phase":"prepare"}', redirect: 'error' })
+    await expect(client.json('/job-dispositions/reset', 'POST', {})).rejects.toThrow('maintenance_endpoint_rejected')
+    expect(fetcher).toHaveBeenCalledTimes(2)
+  })
   it('observes provider quota through the authenticated fixed-origin read endpoint', async () => {
     const report = { format: 'studyinchina.maintenance-quota', state: 'quota_unknown', quota: null }
     const fetcher = vi.fn<typeof fetch>().mockResolvedValue(Response.json(report))

@@ -1,0 +1,83 @@
+{
+  "format": "studyinchina.lease-expired-no-replay-policy",
+  "version": 1,
+  "operationId": "lease-expired-three-jobs-2026-11-14-v1",
+  "migrationId": "studyinchina-gmail-20261114-b75f28d5",
+  "sourceAccountId": "78969c65bfdd892bb12c116869ea91cf",
+  "targetAccountId": "b75f28d574289c29e9bda60a2fca27ed",
+  "targetDatabaseId": "43e2d4a5-54a4-4932-97f3-755be12ef8bb",
+  "registrationScopeSha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "outcomeClaim": "unknown_preserved_no_replay",
+  "jobs": [
+    {
+      "job": {
+        "job_id": "bd5c8e9c06b5f2102717a30fb6bd45a50b5dc3abad9f1662f7abc1a172e12bbe",
+        "source_id": "41c651375db3dad49d2e9f39bc8c345197b99fbace8576ec1d1a074aed484ecf",
+        "stage": "extract",
+        "status": "unknown",
+        "attempt": 1,
+        "created_at": "2026-11-11T02:20:02.492Z",
+        "updated_at": "2026-11-11T04:44:41.625Z",
+        "due_at": "2026-11-11T04:45:41.625Z",
+        "lease_token": null,
+        "lease_until": null,
+        "snapshot_sha256": "1b015e5a230616a2a5eef1235d5c7a8c4bb9576fb5422502ef8b96411c8de86e",
+        "snapshot_key": "maintenance/snapshots/41c651375db3dad49d2e9f39bc8c345197b99fbace8576ec1d1a074aed484ecf/1b015e5a230616a2a5eef1235d5c7a8c4bb9576fb5422502ef8b96411c8de86e.json",
+        "error_code": "execution_lease_expired",
+        "target_ids_json": null
+      },
+      "sourceUrl": "https://iczu.zju.edu.cn/admissionsen/2022/0531/c95474a2590758/page.htm",
+      "snapshotObjectSha256": "fef6fe218120399a0c5e25d7bb3cc42a93173138e197f66ff6a013267f0d6f10",
+      "rawKey": "maintenance/snapshots/41c651375db3dad49d2e9f39bc8c345197b99fbace8576ec1d1a074aed484ecf/1b015e5a230616a2a5eef1235d5c7a8c4bb9576fb5422502ef8b96411c8de86e.bin",
+      "textKey": "maintenance/text/41c651375db3dad49d2e9f39bc8c345197b99fbace8576ec1d1a074aed484ecf/0ef937e70976197cee219d1d939a5ae59005e6878662bf7e21de5f483965a317.txt",
+      "textSha256": "0ef937e70976197cee219d1d939a5ae59005e6878662bf7e21de5f483965a317"
+    },
+    {
+      "job": {
+        "job_id": "c2b52981cea136e926c62861b9685646d77478553d2d33367ddabdb31e5f12d9",
+        "source_id": "1bb510bf237e9803fa02c016b7cf12ac1ae93875d22c9b4a263755cd5d137e06",
+        "stage": "maintain",
+        "status": "unknown",
+        "attempt": 1,
+        "created_at": "2026-11-11T01:45:18.836Z",
+        "updated_at": "2026-11-11T07:44:26.649Z",
+        "due_at": "2026-11-11T07:45:26.649Z",
+        "lease_token": null,
+        "lease_until": null,
+        "snapshot_sha256": "016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96",
+        "snapshot_key": "maintenance/snapshots/1bb510bf237e9803fa02c016b7cf12ac1ae93875d22c9b4a263755cd5d137e06/016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96.json",
+        "error_code": "execution_lease_expired",
+        "target_ids_json": "[{\"id\":\"admission-cycle:cycle-wave4-program-beijing-language-and-culture-university-finance-english-bachelor-2026-2027-other-evidence\",\"sha256\":\"2a29b01c2cb1fc367752083f6504eff87afb00b041cb7c5bcbfaadbbdcdcf025\"},{\"id\":\"program:program-beijing-language-and-culture-university-finance-english-bachelor\",\"sha256\":\"59447dbca25982b372c9c160d2d66c23fb289e1f60ca50668a65c19f404c22bb\"}]"
+      },
+      "sourceUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
+      "snapshotObjectSha256": "0043869da53d7d5ca58f8753f443f5c42b509a5615d17f31593fa6b677bd653a",
+      "rawKey": "maintenance/snapshots/1bb510bf237e9803fa02c016b7cf12ac1ae93875d22c9b4a263755cd5d137e06/016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96.bin",
+      "textKey": "maintenance/text/1bb510bf237e9803fa02c016b7cf12ac1ae93875d22c9b4a263755cd5d137e06/1a6a30008383c28f866802fc9d9b406dd9600044cecc3dc8a1945315693c085a.txt",
+      "textSha256": "1a6a30008383c28f866802fc9d9b406dd9600044cecc3dc8a1945315693c085a"
+    },
+    {
+      "job": {
+        "job_id": "fef7bacdbee746d575d034560ff4db92075e379d892df2de8a2826aac74293b2",
+        "source_id": "5ab0eaa3a3edcb13af20a71b26502ede213f06609509196d80afc4557174a97f",
+        "stage": "maintain",
+        "status": "unknown",
+        "attempt": 1,
+        "created_at": "2026-11-11T02:29:38.015Z",
+        "updated_at": "2026-11-11T15:44:33.186Z",
+        "due_at": "2026-11-11T15:45:33.186Z",
+        "lease_token": null,
+        "lease_until": null,
+        "snapshot_sha256": "5e0be83cd566f91c3e275eddec6e769a939aa249d3669235445111677c24ad86",
+        "snapshot_key": "maintenance/snapshots/5ab0eaa3a3edcb13af20a71b26502ede213f06609509196d80afc4557174a97f/5e0be83cd566f91c3e275eddec6e769a939aa249d3669235445111677c24ad86.json",
+        "error_code": "execution_lease_expired",
+        "target_ids_json": "[{\"id\":\"program:program-beijing-language-and-culture-university-finance-english-bachelor\",\"sha256\":\"59447dbca25982b372c9c160d2d66c23fb289e1f60ca50668a65c19f404c22bb\"}]"
+      },
+      "sourceUrl": "https://admission.blcu.edu.cn/en/39/list.htm",
+      "snapshotObjectSha256": "27b8b59ba9f67a254526f6dd5c3a6f7eab2bedc2a8aec2aaceb9027db3f529fa",
+      "rawKey": "maintenance/snapshots/5ab0eaa3a3edcb13af20a71b26502ede213f06609509196d80afc4557174a97f/5e0be83cd566f91c3e275eddec6e769a939aa249d3669235445111677c24ad86.bin",
+      "textKey": "maintenance/text/5ab0eaa3a3edcb13af20a71b26502ede213f06609509196d80afc4557174a97f/1a6a30008383c28f866802fc9d9b406dd9600044cecc3dc8a1945315693c085a.txt",
+      "textSha256": "1a6a30008383c28f866802fc9d9b406dd9600044cecc3dc8a1945315693c085a"
+    }
+  ],
+  "sha256": "35c25b08aac253ae77045c17cad8ec4ad63d51304b82173d825b3666b7e8ed74"
+}

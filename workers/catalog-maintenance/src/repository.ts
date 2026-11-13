@@ -10,6 +10,7 @@ import { expectedScopeSchoolCount } from './scope-config'
 import { getTodayDate } from '../../../src/lib/data/freshness'
 import { readCoverageSnapshot, validateCoverageSnapshot, storeCoverageSnapshot, publishCoverageSnapshot, coverageEvent, type CoverageSnapshot } from './coverage'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
+import { readUnknownJobDisposition } from './reviewed-terminal-quarantine'
 
 export async function control(env: MaintenanceEnv): Promise<Control | null> {
   return env.PIPELINE_DB.prepare('SELECT * FROM maintenance_control WHERE singleton=1').first<Control>()
@@ -488,6 +489,7 @@ export async function continueTargetRefresh(env:MaintenanceEnv,refreshSha256:str
 }
 export async function status(env:MaintenanceEnv) {
   const cfg=await control(env)
+  const unknownJobDisposition=(await readUnknownJobDisposition(env,cfg)).summary
   const reconciliationGate=await nativeReconciliationGate(env)
   const [jobs,proposals,sources,attempts,latest,coverage]=await Promise.all([
     env.PIPELINE_DB.prepare('SELECT stage,status,COUNT(*) count,MIN(created_at) oldest_at FROM maintenance_jobs GROUP BY stage,status').all(),
@@ -498,5 +500,5 @@ export async function status(env:MaintenanceEnv) {
     env.PIPELINE_DB.prepare("SELECT (SELECT COUNT(*) FROM maintenance_record_targets WHERE active=1) record_targets,(SELECT COUNT(DISTINCT x.university_id) FROM maintenance_source_schools x JOIN maintenance_observations o ON o.source_id=x.source_id) schools_with_actual_source_observation,(SELECT COUNT(*) FROM maintenance_schools WHERE last_attempt_at IS NOT NULL) schools_with_actual_source_attempt,(SELECT COUNT(*) FROM maintenance_legacy_guards) legacy_guards").first(),
   ])
   const programCoverage=cfg?.seed_complete&&cfg.targets_complete?await readCoverageSnapshot(env,cfg.input_catalog_sha256,cfg.scope_sha256):null
-  return {format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:env.MAINTENANCE_ENABLED==='true'&&Boolean(cfg?.enabled)&&reconciliationGate.ready,modelEnabled:Boolean(cfg?.models_enabled)&&reconciliationGate.ready,reconciliationGate,scopeCount:cfg?expectedScopeSchoolCount(env):0,control:cfg,jobs:jobs.results??[],proposals:proposals.results??[],sources,modelAttempts:attempts.results??[],coverage:{...coverage,...(programCoverage?{snapshotSha256:programCoverage.sha256,evaluatedOn:programCoverage.evaluatedOn,inputCatalogSha256:programCoverage.inputCatalogSha256,scopeRegistrySha256:programCoverage.scopeRegistrySha256}:{})},lastEvent:latest,websiteBackendChanged:false}
+  return {format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:env.MAINTENANCE_ENABLED==='true'&&Boolean(cfg?.enabled)&&reconciliationGate.ready,modelEnabled:Boolean(cfg?.models_enabled)&&reconciliationGate.ready,reconciliationGate,scopeCount:cfg?expectedScopeSchoolCount(env):0,control:cfg,unknownJobDisposition,jobs:jobs.results??[],proposals:proposals.results??[],sources,modelAttempts:attempts.results??[],coverage:{...coverage,...(programCoverage?{snapshotSha256:programCoverage.sha256,evaluatedOn:programCoverage.evaluatedOn,inputCatalogSha256:programCoverage.inputCatalogSha256,scopeRegistrySha256:programCoverage.scopeRegistrySha256}:{})},lastEvent:latest,websiteBackendChanged:false}
 }

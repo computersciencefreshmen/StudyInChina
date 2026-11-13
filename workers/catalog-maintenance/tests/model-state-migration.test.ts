@@ -263,7 +263,9 @@ test('freeze drains an already paid model even after permit TTL, then exports it
   try {
     await seed(f.env, seedInput()); await setControls(f.env, { expectedRevision: 0, legacyGuardSha256: TEST_GUARDS, enabled: true, modelsEnabled: true, canaryUniversityIds: ['uni-000'] })
     const input: ModelRequest = { reservationKey: '1'.repeat(64), sourceId: await digest('https://test.edu.cn/catalog'), snapshotSha256: 'd'.repeat(64), universityIds: ['uni-000'], pass: 'primary', payload: 'paid result fixture', lane: 'expansion' }
-    const pending = gateRequest(f.env, '/model/run', input); await sent
+    f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').run(input.snapshotSha256, 'e'.repeat(64), input.sourceId)
+    const pending = gateRequest(f.env, '/model/run', input)
+    await Promise.race([sent, pending.then(async response => { throw new Error(`Fixture model was never sent: ${response.status} ${await response.text()}`) })])
     configure(f.env, 'source')
     const migration = (path: string, body: unknown) => gateRequest(f.env, `/model-state-migration/${path}`, body)
     const firstFreeze = await migration('freeze', { migrationId }), firstObserved = await firstFreeze.json()

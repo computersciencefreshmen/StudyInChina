@@ -6,6 +6,7 @@ import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { hasUrgentMaintenance } from './admission-priority'
 import { assertModelStateBusinessOpen, assertModelStateCleanupOpen, handleModelStateMigration, ModelStateMigrationError } from './model-state-migration'
 import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
+import { noReplayReason } from './reviewed-terminal-quarantine'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
 
@@ -151,10 +152,12 @@ export class ModelAdmission {
     if(!(await nativeReconciliationGate(this.env)).ready)return json({ok:false,error:'native_head_reconciliation_required'},409)
     const base=this.env.MINIMAX_ANTHROPIC_BASE??'https://api.minimaxi.com/anthropic'
     if(!ENDPOINTS.has(base)||this.env.MINIMAX_MODEL!=='MiniMax-M3'||!this.env.MINIMAX_SUBSCRIPTION_KEY) return json({ok:false,error:'subscription_configuration_invalid'},409)
-    const source=await this.env.PIPELINE_DB.prepare('SELECT source_id,raw_sha256 FROM maintenance_sources WHERE source_id=? AND enabled=1').bind(input.sourceId).first<{source_id:string;raw_sha256:string|null}>()
+    const source=await this.env.PIPELINE_DB.prepare('SELECT source_id,raw_sha256,canonical_sha256,snapshot_key FROM maintenance_sources WHERE source_id=? AND enabled=1').bind(input.sourceId).first<{source_id:string;raw_sha256:string|null;canonical_sha256:string|null;snapshot_key:string|null}>()
     const schools=(await this.env.PIPELINE_DB.prepare('SELECT x.university_id FROM maintenance_source_schools x JOIN maintenance_schools u ON u.university_id=x.university_id WHERE x.source_id=? AND u.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)').bind(input.sourceId).all<{university_id:string}>()).results??[]
     if(!source||input.universityIds.some(id=>!schools.some(s=>s.university_id===id))) return json({ok:false,error:'model_scope_not_seeded'},409)
     if(source.raw_sha256&&source.raw_sha256!==input.snapshotSha256)return json({ok:false,error:'source_snapshot_superseded'},409)
+    const noReplay=await noReplayReason(this.env,input,source)
+    if(noReplay)return json({ok:false,error:noReplay,replayAllowed:false},409)
     const canary=JSON.parse(cfg.canary_json) as string[]
     if(canary.length&&input.universityIds.some(id=>!canary.includes(id)))return json({ok:false,error:'outside_canary_scope'},409)
     const guardedRecordIds=new Set(input.recordIds??[])
