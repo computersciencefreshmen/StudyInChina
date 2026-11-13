@@ -29,7 +29,7 @@ export const NOW = '2026-09-16T00:00:00.000Z'
 export function discoveryDatabase() {
   const database = new DatabaseSync(':memory:')
   database.exec('PRAGMA foreign_keys = ON')
-  for (const name of ['0001_domain', '0002_evidence_workflow', '0003_indexes_guards', '0004_worker_runtime', '0005_domain_throttle', '0006_candidate_provenance_promotion', '0007_snapshot_derivatives', '0008_release_builder_contract', '0009_entity_discovery_registry', '0018_source_revalidation_observations']) {
+  for (const name of ['0001_domain', '0002_evidence_workflow', '0003_indexes_guards', '0004_worker_runtime', '0005_domain_throttle', '0006_candidate_provenance_promotion', '0007_snapshot_derivatives', '0008_release_builder_contract', '0009_entity_discovery_registry', '0018_source_revalidation_observations', '0023_ingestion_read_budget_indexes']) {
     database.exec(readFileSync(resolve(`infra/d1/pipeline/migrations/${name}.sql`), 'utf8'))
   }
   return database

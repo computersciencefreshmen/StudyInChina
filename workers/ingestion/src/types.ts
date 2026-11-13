@@ -1,3 +1,5 @@
+import type { BudgetStateBucket } from '../../shared/background-budget'
+
 export const INGESTION_SERVICE_VERSION = '1.0.0'
 
 export type SourceEntityType =
@@ -113,6 +115,8 @@ export type IngestionJob = {
   sourceId: string
   reason: 'scheduled' | 'discovery' | 'manual' | 'retry'
   scheduledAt: string
+  /** Preserve the logical attempt when a domain-busy delivery is republished. */
+  deliveryAttemptOffset?: number
 }
 
 export type IngestionFailure = {
@@ -266,6 +270,9 @@ export interface R2ObjectBody {
 
 export interface R2Bucket {
   get(key: string): Promise<R2ObjectBody | null>
+  list?(options: { prefix: string; limit: number; cursor?: string }): Promise<{
+    objects: Array<{ key: string }>; truncated: boolean; cursor?: string
+  }>
   head(key: string): Promise<unknown | null>
   put(
     key: string,
@@ -273,6 +280,7 @@ export interface R2Bucket {
     options?: {
       httpMetadata?: { contentType?: string }
       customMetadata?: Record<string, string>
+      onlyIf?: { etagMatches?: string; etagDoesNotMatch?: string }
     },
   ): Promise<unknown>
   delete(key: string): Promise<void>
@@ -309,6 +317,7 @@ export interface ScheduledControllerLike {
 }
 
 export interface IngestionEnv {
+  BUDGET_STATE_BUCKET?: BudgetStateBucket
   INGESTION_DB: D1Database
   SNAPSHOTS_BUCKET: R2Bucket
   INGESTION_QUEUE: QueueProducer<IngestionJob>

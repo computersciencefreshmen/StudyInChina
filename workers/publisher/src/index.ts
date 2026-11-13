@@ -1,6 +1,7 @@
 import { promoteCandidate } from './promoter'
 import { clearAutomationRetry, recordAutomationRetry } from '../../entity-materializer/src/runtime-retry'
 import { withAutomationHeartbeat } from '../../shared/automation-heartbeat'
+import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
 import type {
   PromotionFailure,
   PromotionJob,
@@ -90,6 +91,7 @@ async function dispatchValidatedCandidates(
 }
 
 async function scheduleValidatedCandidates(controller: ScheduledControllerLike, environment: PublisherEnv): Promise<void> {
+  if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) return
   await withAutomationHeartbeat(environment.PIPELINE_DB, 'publisher', () => dispatchValidatedCandidates(controller, environment))
 }
 
@@ -97,6 +99,10 @@ async function handleQueue(
   batch: QueueMessageBatch<unknown>,
   environment: PublisherEnv,
 ): Promise<void> {
+  if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) {
+    for (const message of batch.messages) message.retry({ delaySeconds: BACKGROUND_BUDGET_RETRY_SECONDS })
+    return
+  }
   const maximumAttempts = boundedInteger(environment.MAX_QUEUE_ATTEMPTS, 4, 1, 10)
   for (const message of batch.messages) {
     if (!isPromotionJob(message.body)) {

@@ -1,4 +1,5 @@
 import { withAutomationHeartbeat } from '../../shared/automation-heartbeat'
+import { readBackgroundBudgetGate, type BudgetStateBucket } from '../../shared/background-budget'
 import { processEntityMaterializationBatch } from '../../ingestion/src/entity-materializer-scheduler'
 import type {
   D1Database,
@@ -10,6 +11,7 @@ export const DAILY_RELEASE_CRON = '17 19 * * *'
 export const MATERIALIZATION_CRON = '*/15 * * * *'
 
 export interface EntityMaterializerEnv {
+  BUDGET_STATE_BUCKET?: BudgetStateBucket
   PIPELINE_DB: D1Database
   MATERIALIZATION_BATCH_LIMIT?: string
   RELEASE_CANDIDATE_LIMIT?: string
@@ -59,6 +61,7 @@ async function materializeScheduledBatch(
 }
 
 export async function scheduleEntityMaterialization(controller: ScheduledControllerLike, environment: EntityMaterializerEnv): Promise<void> {
+  if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) return
   await withAutomationHeartbeat(environment.PIPELINE_DB, 'entity-materializer', () => materializeScheduledBatch(controller, environment))
 }
 

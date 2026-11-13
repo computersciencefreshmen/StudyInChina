@@ -4,6 +4,7 @@ import { control } from './repository'
 import { isDailyD1QuotaError } from './backend-errors'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { hasUrgentMaintenance } from './admission-priority'
+import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
 
@@ -133,6 +134,8 @@ export class ModelAdmission {
     }
   }
   private async run(input:ModelRequest):Promise<Response> {
+    const budget=await readBackgroundBudgetGate(this.env.SNAPSHOTS_BUCKET)
+    if(!budget.allowed)return json({ok:false,error:'budget_wait',code:budget.code,retryAfter:BACKGROUND_BUDGET_RETRY_SECONDS},429)
     const cfg=await control(this.env)
     if(this.env.MAINTENANCE_ENABLED!=='true'||!cfg?.enabled||!cfg.models_enabled||!cfg.seed_complete||!HASH.test(cfg.legacy_guard_sha256)) return json({ok:false,error:'model_lane_disabled'},409)
     if(!(await nativeReconciliationGate(this.env)).ready)return json({ok:false,error:'native_head_reconciliation_required'},409)

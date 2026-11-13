@@ -24,6 +24,11 @@ function quotaWait() {
     modelAttempts: [{ status: 'unknown', count: 399 }], backend: { state: 'quota_wait', retryAt: '2026-11-12T00:00:00.000Z' },
     lastRuntimeTick: { ...ready().lastRuntimeTick, state: 'quota_wait', code: 'daily_quota_wait_cached' } }
 }
+function budgetWait(budget: unknown = { allowed: false, state: 'paused', code: 'budget_paused' }) {
+  return { ...ready(), enabled: false, modelEnabled: false, scopeCount: null, control: null, coverage: null, jobs: null,
+    modelAttempts: null, budget, backend: { state: 'budget_wait', retryAt: null },
+    lastRuntimeTick: { ...ready().lastRuntimeTick, state: 'budget_wait', code: 'budget_paused' } }
+}
 function snapshot(programs = 5): CoverageSnapshot {
   const content = { format: 'studyinchina.school-program-coverage' as const, version: 1 as const, scopeRegistrySha256: scope, inputCatalogSha256: catalog, evaluatedOn: '2026-11-12',
     schools: [0, 1].map(index => { const n = index === 0 ? programs : 0; return { universityId: `uni-${index}`, rawProgramCount: n, directoryProgramCount: n, currentProgramCount: n,
@@ -135,5 +140,78 @@ describe('read-only transport and the existing hourly workflow', () => {
     expect(yaml).toContain("if: vars.CATALOG_MAINTENANCE_MODE != 'cloud'"); expect(yaml).toContain('npm run automation:health -- --operations-url "$INGESTION_WORKER_URL"')
     expect(yaml).toContain('CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}'); expect(yaml).toContain('name: automation-health-${{ github.run_id }}')
     expect(yaml).not.toMatch(/MINIMAX_.*(?:KEY|TOKEN)|CLOUDFLARE_API_TOKEN/)
+  })
+})
+
+describe('budget waits are authenticated observations, separate from D1 quota and operator controls', () => {
+  it('reports a budget pause as actionable waiting without inventing controls, counts, reset times or D1 failures', () => {
+    const report = evaluateCloudMaintenanceHealth({ maintenance: budgetWait(), release: release() }, { now })
+    expect(report.status).toBe('waiting')
+    expect(check(report, 'maintenance.backend')).toMatchObject({ status: 'wait', code: 'budget_paused' })
+    expect(check(report, 'maintenance.backend').value).toMatchObject({ action: expect.stringContaining('explicitly resume') })
+    expect(check(report, 'maintenance.controls').code).toBe('controls_unavailable_during_budget_wait')
+    expect(report.runtime).toMatchObject({ backendState: 'budget_wait', quotaWaitSince: null, retryAt: null,
+      controlObservation: 'unobserved', jobs: null, modelAttempts: null, budget: { allowed: false, state: 'paused', code: 'budget_paused' } })
+    expect(report.coverage).toMatchObject({ state: 'unobserved', bands: null, currentConcretePrograms: null, schoolsWithCurrentScholarships: null })
+    expect(report.notification).toMatchObject({ actionable: true, changed: true, growthDetected: false })
+    expect(report.publication?.publicCounts?.programs).toBe(751)
+    expect(report.checks.some(value => value.code === 'backend_unavailable' || value.code === 'operator_pause_preserved')).toBe(false)
+  })
+  for (const code of ['budget_observation_missing', 'budget_observation_unknown', 'budget_observation_stale', 'budget_policy_unavailable']) {
+    it(`keeps ${code} unknown and actionable while waiting for verified billing evidence`, () => {
+      const report = evaluateCloudMaintenanceHealth({ maintenance: budgetWait({ allowed: false, state: 'unknown', code }), release: release() }, { now })
+      expect(report.status).toBe('waiting')
+      expect(check(report, 'maintenance.backend')).toMatchObject({ status: 'wait', code })
+      expect(report.runtime.budget?.state).toBe('unknown')
+      expect(report.coverage.currentConcretePrograms).toBeNull()
+      expect(report.notification.actionable).toBe(true)
+    })
+  }
+  for (const invalid of [undefined, null, {}, { allowed: true, state: 'paused', code: 'budget_paused' },
+    { allowed: 'false', state: 'paused', code: 'budget_paused' }, { allowed: false, state: 'ready', code: 'budget_paused' },
+    { allowed: false, state: 'paused', code: 'budget_observation_unknown' }, { allowed: false, state: 'unknown', code: 'budget_paused' },
+    { allowed: false, state: 'paused', code: 'arbitrary_provider_text_or_secret' }]) {
+    it('refuses an unsupported budget_wait claim without the exact allowed/state/fixed-code evidence', () => {
+      const report = evaluateCloudMaintenanceHealth({ maintenance: budgetWait(invalid), release: release() }, { now })
+      // Passing undefined to the fixture's default parameter is not an absent field.
+      if (invalid === undefined) {
+        const status = budgetWait(); delete (status as { budget?: unknown }).budget
+        const absent = evaluateCloudMaintenanceHealth({ maintenance: status, release: release() }, { now })
+        expect(absent.status).toBe('fail'); expect(check(absent, 'maintenance.backend').code).toBe('budget_wait_unproven')
+      } else {
+        expect(report.status).toBe('fail'); expect(check(report, 'maintenance.backend').code).toBe('budget_wait_unproven')
+        expect(report.runtime.budget).toBeNull()
+      }
+    })
+  }
+  it('breaks quota-wait continuity and deduplicates an unchanged actionable budget pause', () => {
+    const priorQuota = { format: 'studyinchina.automation-operations-health', mode: 'cloud', evaluatedAt: '2026-11-11T15:30:00.000Z',
+      runtime: { backendState: 'quota_wait', quotaWaitSince: '2026-11-10T14:00:00.000Z' } }
+    const first = evaluateCloudMaintenanceHealth({ maintenance: budgetWait(), release: release(), previous: priorQuota }, { now })
+    expect(first.status).toBe('waiting'); expect(first.runtime.quotaWaitSince).toBeNull()
+    const next = evaluateCloudMaintenanceHealth({ maintenance: budgetWait(), release: release(), previous: first }, { now: new Date(+now + 60000) })
+    expect(next.notification).toMatchObject({ changed: false, actionable: true })
+    const quota = evaluateCloudMaintenanceHealth({ maintenance: quotaWait(), release: release(), previous: first }, { now })
+    expect(quota.runtime.quotaWaitSince).toBe(now.toISOString())
+  })
+  it('does not let a budget wait conceal stale scheduler ticks or authentication failure', () => {
+    const stale = budgetWait(); stale.lastRuntimeTick.observedAt = '2026-11-11T14:00:00.000Z'
+    expect(evaluateCloudMaintenanceHealth({ maintenance: stale, release: release() }, { now }).status).toBe('fail')
+    const auth = evaluateCloudMaintenanceHealth({ maintenance: budgetWait(), maintenanceError: 'maintenance_authentication_failed', release: release() }, { now })
+    expect(auth.status).toBe('fail')
+  })
+  it('does not copy private bill amounts, account identifiers or arbitrary extra fields into its public report', () => {
+    const status = budgetWait({ allowed: false, state: 'paused', code: 'budget_paused', accountId: 'private-account',
+      token: 'private-token', usageMicroDollars: 4321987, totalMicroDollars: 9321987 })
+    const report = evaluateCloudMaintenanceHealth({ maintenance: status, release: release() }, { now })
+    const serialized = JSON.stringify(report)
+    for (const secret of ['private-account', 'private-token', '4321987', '9321987', 'usageMicroDollars', 'totalMicroDollars']) expect(serialized).not.toContain(secret)
+  })
+  it('collects only /status plus the public release while budget gates block coverage and D1 work', async () => {
+    const calls: string[] = [], client: MaintenanceClient = { json: async path => { calls.push(path); return budgetWait() },
+      artifact: async key => { calls.push(key); throw Error('coverage must not be read during budget wait') } }
+    const report = await collectCloudMaintenanceHealth({ now, client, fetcher: (async () => Response.json(release())) as typeof fetch })
+    expect(report.status).toBe('waiting'); expect(report.notification.actionable).toBe(true)
+    expect(calls).toEqual(['/status'])
   })
 })

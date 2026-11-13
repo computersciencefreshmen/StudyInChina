@@ -42,6 +42,7 @@ export async function maintenanceRuntimeGate(client: MaintenanceClient) {
   const status = await client.json('/status') as { format?: string; backend?: { state?: string }; enabled?: boolean;
     control?: { seed_complete?: number; targets_complete?: number } | null }
   if (status.format !== 'studyinchina.cloud-maintenance-status') throw new Error('maintenance_runtime_status_invalid')
+  if (status.backend?.state === 'budget_wait') return { canRecover: false, canStart: false, reason: 'budget_wait' }
   if (status.backend?.state === 'quota_wait') return { canRecover: false, canStart: false, reason: 'quota_wait' }
   if (status.backend?.state !== 'ready') throw new Error('maintenance_backend_unavailable')
   const canRecover = status.control?.seed_complete === 1
@@ -57,7 +58,7 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|quota|control|head-reconcile|rollout|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     let response: Response
     try {
@@ -158,7 +159,17 @@ async function main() {
       `pending_publication=${Boolean(pending)}\n${pending ? `source_commit=${pending.sourceCommit}\nreceipt=${pending.receiptPath}\n` : ''}`, { flag: 'a' })
     console.log(JSON.stringify({ pendingPublication: Boolean(pending), batchId: pending?.batchId ?? null })); return
   }
-  if (['status', 'quota', 'schools', 'rollout'].includes(action) && !value) { console.log(JSON.stringify(await client.json(`/${action}`))); return }
+  if (['status', 'quota', 'budget', 'schools', 'rollout'].includes(action) && !value) { console.log(JSON.stringify(await client.json(`/${action}`))); return }
+  if (action === 'configure-budget' && !value) {
+    console.log(JSON.stringify(await client.json('/budget', 'POST', { accountId: process.env.CLOUDFLARE_ACCOUNT_ID, baseUsd: 5, targetUsd: 10, pauseAtUsd: 9 }))); return
+  }
+  if (action === 'check-budget' && !value) { console.log(JSON.stringify(await client.json('/budget/check', 'POST', {}))); return }
+  if (action === 'resume-budget' && !value) {
+    console.log(JSON.stringify(await client.json('/budget/resume', 'POST', { reason: 'operator-confirmed-budget-resume' }))); return
+  }
+  if (action === 'recheck-backend' && !value) {
+    console.log(JSON.stringify(await client.json('/backend/recheck', 'POST', { reason: 'account-plan-change' }))); return
+  }
   if (action === 'runtime-gate' && !value) {
     const gate = await maintenanceRuntimeGate(client)
     if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT,
@@ -184,7 +195,7 @@ async function main() {
     console.log(JSON.stringify(result)); return
   }
   if (action === 'tick' && !value) { console.log(JSON.stringify(await client.json('/tick', 'POST', {}))); return }
-  throw new Error('Usage: catalog-maintenance-client.ts status | quota | schools | tick | recover-publication | download <directory> | seed|targets|controls|ack|reconciliations <body.json>')
+  throw new Error('Usage: catalog-maintenance-client.ts status | quota | budget | configure-budget | check-budget | resume-budget | schools | tick | recheck-backend | recover-publication | download <directory> | seed|targets|controls|ack|reconciliations <body.json>')
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href)
   main().catch(error => { console.error(error instanceof Error && error.message.startsWith('maintenance_') ? error.message : 'maintenance_command_failed'); process.exitCode = 1 })

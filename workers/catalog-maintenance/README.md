@@ -275,6 +275,10 @@ official-row reconciliation and human completeness review still apply.
 
 ## Automatic staged rollout
 
+Account-level background budget admission and safe recovery after a paid-plan
+change are described in [BUDGET.md](./BUDGET.md). They preserve the existing
+school rollout, model reservations and manual controls.
+
 The first five schools each need a real saved snapshot or an explicit durable
 robots/source acquisition blocker with its next due date. Seed registration,
 capacity waiting and internal execution errors do not qualify. At least one

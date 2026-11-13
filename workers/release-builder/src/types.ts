@@ -1,3 +1,5 @@
+import type { BudgetStateBucket } from '../../shared/background-budget'
+
 export type SqlValue = string | number | null
 export type SqlRow = Record<string, SqlValue>
 
@@ -79,6 +81,7 @@ export type ReleaseFailure = {
 }
 
 export interface ReleaseBuilderEnv {
+  BUDGET_STATE_BUCKET?: BudgetStateBucket
   PIPELINE_DB: D1Database
   CATALOG_DB: D1Database
   RELEASE_ARTIFACTS: R2Bucket

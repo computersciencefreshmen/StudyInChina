@@ -6,6 +6,22 @@ on:
   schedule:
     - cron: '11,26,41,56 * * * *'
   workflow_dispatch:
+    inputs:
+      configure_budget:
+        description: Install the approved USD 10 target and USD 9 pause policy
+        type: boolean
+        required: false
+        default: false
+      resume_budget:
+        description: Explicitly resume only after a fresh under-threshold bill observation
+        type: boolean
+        required: false
+        default: false
+      recheck_backend:
+        description: Verify real D1 reads and writes after an account plan change
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -30,6 +46,57 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Configure the approved account budget policy
+        if: github.event_name == 'workflow_dispatch' && inputs.configure_budget == true
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        run: node --import tsx scripts/automation/catalog-maintenance-client.ts configure-budget
+      - name: Resume only with explicit operator intent and fresh billing evidence
+        if: github.event_name == 'workflow_dispatch' && inputs.resume_budget == true
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        run: node --import tsx scripts/automation/catalog-maintenance-client.ts resume-budget
+      - name: Refresh the account budget decision before background work
+        id: budget
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/catalog-maintenance-tick"
+          node --import tsx scripts/automation/catalog-maintenance-client.ts check-budget > "$RUNNER_TEMP/catalog-maintenance-tick/budget.json"
+          node --input-type=module <<'NODE'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const result = JSON.parse(readFileSync(join(process.env.RUNNER_TEMP, 'catalog-maintenance-tick/budget.json'), 'utf8'));
+          if (result.format !== 'studyinchina.cloudflare-budget-state' || typeof result.allowed !== 'boolean') {
+            throw new Error('budget_decision_invalid');
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, 'work_allowed=' + result.allowed + '\n');
+          NODE
+      - name: Verify real backend recovery after an explicit account plan change
+        if: github.event_name == 'workflow_dispatch' && inputs.recheck_backend == true
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/catalog-maintenance-tick"
+          node --import tsx scripts/automation/catalog-maintenance-client.ts recheck-backend > "$RUNNER_TEMP/catalog-maintenance-tick/backend-recheck.json"
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const result = JSON.parse(readFileSync(join(process.env.RUNNER_TEMP, 'catalog-maintenance-tick/backend-recheck.json'), 'utf8'));
+          if (result.format !== 'studyinchina.backend-quota-recheck' || result.state !== 'ready'
+              || result.readVerified !== true || result.writeVerified !== true || result.waitCleared !== true) {
+            throw new Error('backend_recovery_not_confirmed');
+          }
+          NODE
       - name: Observe subscription windows independently of the database quota
         # Read-only diagnostics must not block the existing scheduler on a
         # transient provider failure or a rolling Worker deployment.
@@ -42,22 +109,26 @@ jobs:
           mkdir -p "$RUNNER_TEMP/catalog-maintenance-tick"
           node --import tsx scripts/automation/catalog-maintenance-client.ts quota > "$RUNNER_TEMP/catalog-maintenance-tick/quota.json"
       - name: Resume exact target metadata after an acknowledged catalogue application
+        if: steps.budget.outputs.work_allowed == 'true'
         env:
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
         run: node --import tsx scripts/maintenance/refresh-cloud-targets.ts --output "$RUNNER_TEMP/catalog-maintenance-tick/target-refresh.json"
       - name: Continue the approved additive scope upgrade without local-machine state
+        if: steps.budget.outputs.work_allowed == 'true'
         env:
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
         run: node --import tsx scripts/automation/upgrade-maintenance-scope.ts --auto
       - name: Refresh evidence-bound school coverage without rewriting record targets
+        if: steps.budget.outputs.work_allowed == 'true'
         env:
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
         run: npm run maintenance:coverage -- --cloud-refresh --output "$RUNNER_TEMP/catalog-maintenance-tick/coverage.json"
       - name: Tick the bounded scheduler and retain actual runtime observations
         env:
+          BUDGET_WORK_ALLOWED: ${{ steps.budget.outputs.work_allowed }}
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
         shell: bash
@@ -66,13 +137,18 @@ jobs:
           mkdir -p "$RUNNER_TEMP/catalog-maintenance-tick"
           node --import tsx scripts/automation/catalog-maintenance-client.ts tick > "$RUNNER_TEMP/catalog-maintenance-tick/tick.json"
           node --import tsx scripts/automation/catalog-maintenance-client.ts status > "$RUNNER_TEMP/catalog-maintenance-tick/status.json"
-          node --import tsx scripts/automation/catalog-maintenance-client.ts advance-rollout > "$RUNNER_TEMP/catalog-maintenance-tick/rollout.json"
+          if [ "$BUDGET_WORK_ALLOWED" = 'true' ]; then
+            node --import tsx scripts/automation/catalog-maintenance-client.ts advance-rollout > "$RUNNER_TEMP/catalog-maintenance-tick/rollout.json"
+          else
+            printf '%s\n' '{"advanced":false,"reasons":["budget_wait"]}' > "$RUNNER_TEMP/catalog-maintenance-tick/rollout.json"
+          fi
           node --input-type=module <<'NODE'
           import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
           import { join } from 'node:path';
           const directory = join(process.env.RUNNER_TEMP, 'catalog-maintenance-tick');
           const tick = JSON.parse(readFileSync(join(directory, 'tick.json'), 'utf8'));
           const status = JSON.parse(readFileSync(join(directory, 'status.json'), 'utf8'));
+          const budget = JSON.parse(readFileSync(join(directory, 'budget.json'), 'utf8'));
           let quota = { format: 'studyinchina.maintenance-quota', version: 1,
             state: 'quota_unknown', quota: null, reason: 'observation_unavailable' };
           try {
@@ -87,7 +163,7 @@ jobs:
           const receipt = { format: 'studyinchina.github-cloud-tick', version: 1,
             observedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID,
             runAttempt: process.env.GITHUB_RUN_ATTEMPT, sourceCommit: process.env.GITHUB_SHA,
-            tick, status, quota };
+            tick, status, quota, budget };
           writeFileSync(join(directory, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n');
           const soak = status.soak ?? {};
           appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
@@ -95,6 +171,7 @@ jobs:
             '- Actual tick: ' + tick.state + ' (' + tick.code + ').',
             '- Durable Worker receipt: `' + tick.receiptKey + '`.',
             '- D1 state: ' + (status.backend?.state ?? 'unobserved') + '.',
+            '- Background budget admission: ' + budget.state + '; allowed=' + budget.allowed + '.',
             '- MiniMax remaining: five-hour ' + (quota.quota?.fiveHourRemaining ?? 'unobserved') + '%; weekly '
               + (quota.quota?.weeklyUnlimited === true ? 'unlimited' : (quota.quota?.weeklyRemaining ?? 'unobserved') + '%') + '.',
             '- Quota observation performs no model requests and does not authorize work while D1 is unavailable.',
@@ -122,5 +199,7 @@ jobs:
             ${{ runner.temp }}/catalog-maintenance-tick/rollout.json
             ${{ runner.temp }}/catalog-maintenance-tick/coverage.json
             ${{ runner.temp }}/catalog-maintenance-tick/target-refresh.json
+            ${{ runner.temp }}/catalog-maintenance-tick/backend-recheck.json
+            ${{ runner.temp }}/catalog-maintenance-tick/budget.json
           if-no-files-found: warn
           retention-days: 35

@@ -17,6 +17,7 @@
     "SCHEDULE_BATCH_LIMIT": "20",
     "MAX_QUEUE_ATTEMPTS": "4"
   },
+  "r2_buckets": [{ "binding": "BUDGET_STATE_BUCKET", "bucket_name": "studyinchina-source-snapshots" }],
   "d1_databases": [
     {
       "binding": "PIPELINE_DB",

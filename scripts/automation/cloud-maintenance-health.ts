@@ -16,6 +16,17 @@ const instant = (value: unknown) => typeof value === 'string' && Number.isFinite
 const count = (value: unknown) => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? value : null
 const hash = (value: unknown) => createHash('sha256').update(canonicalJson(value)).digest('hex')
 const sha = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value)
+const budgetUnknownCodes = new Set(['budget_policy_unavailable', 'budget_policy_invalid', 'budget_observation_missing',
+  'budget_observation_invalid', 'budget_policy_changed', 'budget_observation_future', 'budget_observation_stale',
+  'budget_period_invalid', 'budget_period_unconfirmed', 'budget_observation_unknown', 'budget_total_unconfirmed'])
+function observedBudgetWait(value: unknown) {
+  const budget = row(value)
+  if (budget?.allowed !== false || typeof budget.code !== 'string') return null
+  if (budget.state === 'paused' && ['budget_paused', 'budget_threshold_reached'].includes(budget.code)
+    || budget.state === 'unknown' && budgetUnknownCodes.has(budget.code))
+    return { allowed: false as const, state: budget.state as 'paused' | 'unknown', code: budget.code }
+  return null
+}
 const publicCounts = (value: unknown) => {
   const input = row(value)
   return input ? Object.fromEntries(['universities', 'programs', 'admissionCycles', 'scholarships', 'cities', 'sources']
@@ -40,6 +51,7 @@ export function evaluateCloudMaintenanceHealth(input: CloudHealthInput, options:
   else add('maintenance.observation', status && statusFresh ? 'pass' : 'fail', !status ? 'invalid_status_contract' : !statusFresh ? 'stale_status_observation' : 'authenticated_status_observed', status?.observedAt ?? null)
 
   const quota = backend?.state === 'quota_wait', retry = instant(backend?.retryAt)
+  const budgetWait = backend?.state === 'budget_wait', budget = budgetWait ? observedBudgetWait(status?.budget) : null
   const priorWaitStart = previousRuntime?.backendState === 'quota_wait' ? instant(previousRuntime.quotaWaitSince) : null
   // Only adjacent hourly observations can establish a continuous wait. A gap
   // cannot rule out work or recovery between reports, and its start must be historical.
@@ -49,6 +61,9 @@ export function evaluateCloudMaintenanceHealth(input: CloudHealthInput, options:
   const longQuota = quota && quotaWaitSince !== null && time - Date.parse(quotaWaitSince) >= 24 * 3600000
   const validQuotaWait = quota && retry !== null && retry > time && retry <= time + 26 * 3600000 && !longQuota
   if (quota) add('maintenance.backend', validQuotaWait ? 'wait' : 'fail', longQuota ? 'persistent_quota_wait' : retry !== null && retry <= time ? 'quota_reset_overdue' : !validQuotaWait ? 'invalid_quota_reset' : 'daily_quota_wait', { retryAt: typeof backend?.retryAt === 'string' ? backend.retryAt : null, quotaWaitSince })
+  else if (budgetWait) add('maintenance.backend', budget ? 'wait' : 'fail', budget?.code ?? 'budget_wait_unproven', budget ? { ...budget,
+    action: budget.state === 'paused' ? 'Review billing, then explicitly resume after a fresh under-threshold observation.'
+      : 'Restore verified billing evidence or configuration; unknown spending cannot authorize background work.' } : null)
   else if (backend?.state === 'ready') add('maintenance.backend', 'pass', 'backend_observed')
   else add('maintenance.backend', 'fail', status ? 'backend_unavailable' : 'backend_unobserved')
 
@@ -58,6 +73,7 @@ export function evaluateCloudMaintenanceHealth(input: CloudHealthInput, options:
     !validTick ? 'durable_tick_unobserved' : tickAgeMinutes! > 45 ? 'durable_tick_stale' : tick?.state === 'error' ? 'durable_tick_error' : 'durable_tick_current',
     { observedAt: validTick ? tick?.observedAt : null, ageMinutes: validTick ? Math.round(tickAgeMinutes! * 10) / 10 : null, state: typeof tick?.state === 'string' ? tick.state : null, code: typeof tick?.code === 'string' ? tick.code : null })
   if (quota) add('maintenance.controls', 'unobserved', 'controls_unavailable_during_quota_wait')
+  else if (budgetWait) add('maintenance.controls', 'unobserved', 'controls_unavailable_during_budget_wait')
   else if (!cfg) add('maintenance.controls', 'wait', 'bootstrap_or_controls_unobserved')
   else if (cfg.enabled === 0) add('maintenance.controls', 'wait', 'operator_pause_preserved')
   else if (row(status?.reconciliationGate)?.ready === false) add('maintenance.controls', 'wait', 'native_reconciliation_wait')
@@ -77,7 +93,7 @@ export function evaluateCloudMaintenanceHealth(input: CloudHealthInput, options:
     { jobs: unknownJobs, modelAttempts: unknownModels, classification: 'Aggregate history does not identify a new failed request; reservations remain preserved.' })
   // created_at dates and scheduler_tick events cannot prove processor progress.
   // Report that limitation rather than treating a newly served /status as activity.
-  add('maintenance.processing_progress', 'unobserved', quota ? 'progress_unobserved_during_quota_wait' : 'processing_timestamp_not_exposed')
+  add('maintenance.processing_progress', 'unobserved', quota ? 'progress_unobserved_during_quota_wait' : budgetWait ? 'progress_unobserved_during_budget_wait' : 'processing_timestamp_not_exposed')
 
   const coverageMeta = row(status?.coverage)
   let coverage: { state: 'observed' | 'unobserved'; snapshotSha256: string | null; evaluatedOn: string | null; schoolCount: number | null;
@@ -105,7 +121,7 @@ export function evaluateCloudMaintenanceHealth(input: CloudHealthInput, options:
         schoolsWithCurrentScholarships: value.schools.filter(school => school.currentScholarshipCount > 0).length }
       add('maintenance.coverage', 'pass', 'evidence_bound_coverage_observed', { evaluatedOn: value.evaluatedOn, snapshotSha256: value.sha256 })
     }
-  } else add('maintenance.coverage', 'unobserved', input.coverageError ?? (quota ? 'coverage_unavailable_during_quota_wait' : 'coverage_snapshot_unobserved'))
+  } else add('maintenance.coverage', 'unobserved', input.coverageError ?? (quota ? 'coverage_unavailable_during_quota_wait' : budgetWait ? 'coverage_unavailable_during_budget_wait' : 'coverage_snapshot_unobserved'))
 
   const payload = row(input.release), release = row(payload?.data)
   const releaseBackend = release?.catalogBackend, expectedBackend = options.expectedBackend ?? null
@@ -143,12 +159,12 @@ export function evaluateCloudMaintenanceHealth(input: CloudHealthInput, options:
   const fingerprint = hash(incidents)
   return { format: 'studyinchina.automation-operations-health', formatVersion: 1, mode: 'cloud', evaluatedAt: now.toISOString(), status: resultStatus,
     summary: Object.fromEntries(['pass', 'wait', 'fail', 'unobserved'].map(state => [state, checks.filter(check => check.status === state).length])),
-    fingerprint, notification: { changed: previous?.fingerprint !== fingerprint || growthDetected, growthDetected, actionable: resultStatus === 'fail' || resultStatus === 'unobserved' },
+    fingerprint, notification: { changed: previous?.fingerprint !== fingerprint || growthDetected, growthDetected, actionable: resultStatus === 'fail' || resultStatus === 'unobserved' || budget !== null },
     scope: { configuredSchoolCount: count(status?.scopeCount), registeredScopeSha256: typeof cfg?.scope_sha256 === 'string' ? cfg.scope_sha256 : null,
       inputCatalogSha256: typeof cfg?.input_catalog_sha256 === 'string' ? cfg.input_catalog_sha256 : null,
       pendingBootstrapScopeSha256: typeof row(status?.bootstrapPending)?.scopeRegistrySha256 === 'string' ? row(status?.bootstrapPending)!.scopeRegistrySha256 : null, productionRunningClaim: false },
-    runtime: { backendState: typeof backend?.state === 'string' ? backend.state : 'unobserved', retryAt: typeof backend?.retryAt === 'string' ? backend.retryAt : null,
-      quotaWaitSince, lastRuntimeTick: tick ? { observedAt: tick.observedAt ?? null, state: tick.state ?? null, code: tick.code ?? null } : null,
+    runtime: { backendState: typeof backend?.state === 'string' ? backend.state : 'unobserved', retryAt: !budgetWait && typeof backend?.retryAt === 'string' ? backend.retryAt : null,
+      quotaWaitSince, budget, lastRuntimeTick: tick ? { observedAt: tick.observedAt ?? null, state: tick.state ?? null, code: tick.code ?? null } : null,
       enabled: typeof status?.enabled === 'boolean' ? status.enabled : null, modelEnabled: typeof status?.modelEnabled === 'boolean' ? status.modelEnabled : null,
       controlObservation: cfg ? 'observed' : 'unobserved', processingProgress: 'unobserved',
       jobs: jobRows?.map(value => ({ stage: value.stage, status: value.status, count: count(value.count), oldestCreatedAt: value.oldest_at ?? null })) ?? null,

@@ -1,3 +1,5 @@
+import type { BudgetStateBucket } from '../../shared/background-budget'
+
 export interface D1Result<T = Record<string, unknown>> {
   success: boolean
   results?: T[]
@@ -56,6 +58,7 @@ export interface ScheduledControllerLike {
 }
 
 export interface PublisherEnv {
+  BUDGET_STATE_BUCKET?: BudgetStateBucket
   PIPELINE_DB: D1Database
   PROMOTION_QUEUE: QueueProducer<PromotionJob>
   PUBLISHER_DLQ: QueueProducer<PromotionFailure>
