@@ -130,7 +130,8 @@ describe('administrator workbench transport and session', () => {
     await screen.findByRole('heading', { name: '让每一条数据，更可信。' })
     vi.useFakeTimers()
     let resolvePoll: (value: ReturnType<typeof response>) => void = () => {}
-    vi.stubGlobal('fetch', vi.fn(() => new Promise<ReturnType<typeof response>>(resolve => { resolvePoll = resolve })))
+    const pollFetch = vi.fn(() => new Promise<ReturnType<typeof response>>(resolve => { resolvePoll = resolve }))
+    vi.stubGlobal('fetch', pollFetch)
     const source = FakeEventSource.instances[0]
     act(() => source.onerror?.())
     await act(async () => { await vi.advanceTimersByTimeAsync(1200) })
@@ -142,9 +143,10 @@ describe('administrator workbench transport and session', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Token 用量' }))
     expect(screen.getByRole('heading', { name: '用量总览' }).closest('article')?.querySelector('strong')).toHaveTextContent('15,000')
     expect(screen.queryByText('99,999')).not.toBeInTheDocument()
-    // Settle queued rendering work while leaving future transport timers pending.
-    await act(async () => { await vi.advanceTimersByTimeAsync(0) })
-    expect(vi.getTimerCount()).toBe(1)
+    // Observe the transport, since rendering can also schedule unrelated timers.
+    // Polling must stay stopped before the stream's 15-second watchdog expires.
+    await act(async () => { await vi.advanceTimersByTimeAsync(5000) })
+    expect(pollFetch).toHaveBeenCalledTimes(1)
   })
 
   it('continues fetching real usage when the stream opens without delivering any snapshot', async () => {

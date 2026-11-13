@@ -73,3 +73,17 @@ young/wrong/sealed locks, malformed state, bounded scans, failed writes/rollback
 retries and changed IDs; authenticated HTTP routing; and real workerd transactions
 with zero provider traffic. No force/retire-all/reset/lease-clearing mechanism is
 introduced and no request or legacy STOP reservation is changed.
+
+## Private source gate inspection
+
+If the strict recovery schema rejects the actual gate, authenticated
+`GET /model-state-migration/gate-inspection` can inspect its complete canonical
+JSON and SHA in a private operator response capped at 64 KiB of gate bytes.
+It requires the matching source binding, a durable frozen lock with no export
+pages, and zero live operations before and after reading. It reads only the lock
+and gate, never a request key or a namespace list. It creates no export manifest
+and performs no write or provider call. The operator must save the response
+privately and print only a local summary of field names, types, counts and hashes.
+Canonical JSON normalizes negative zero; a separate count records that possible
+schema discrepancy. Inspection does not relax recovery validation or `hasInflight`
+and explicitly reports `cutoverReady: false`.

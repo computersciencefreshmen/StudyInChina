@@ -1,6 +1,6 @@
 import type { DurableStorage, MaintenanceEnv } from './types'
 import { canonical, digest, HASH, json, record } from './util'
-import { NonTemporalPermitRecoveryError, recoverNonTemporalPermits, requestLedgerSummary } from './non-temporal-permit-recovery'
+import { inspectFrozenSourceGate, NonTemporalPermitRecoveryError, recoverNonTemporalPermits, requestLedgerSummary } from './non-temporal-permit-recovery'
 
 // Private DO storage only: these bytes must never enter the generic R2 artifact API.
 export const MODEL_STATE_MIGRATION_KEY = '__model_state_migration_v1'
@@ -203,6 +203,10 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
       return json({ ...status(lock, cfg), ...await diagnostics(await storage.get('gate'), activeOperations, now) })
     }
     requireId(raw, cfg)
+    if (path === '/model-state-migration/gate-inspection') {
+      requireRole(cfg, 'source')
+      return json(await inspectFrozenSourceGate(storage, cfg, MODEL_STATE_MIGRATION_KEY, activeOperationsNow, now))
+    }
     if (path === '/model-state-migration/ledger-summary' || path === '/model-state-migration/non-temporal-fetch-permit-recovery') {
       requireRole(cfg, 'source')
       return json(path.endsWith('/ledger-summary')
