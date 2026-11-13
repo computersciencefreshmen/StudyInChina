@@ -80,6 +80,11 @@ source/job/reservation IDs, release IDs and historical receipts do not change.
    re-enter `MINIMAX_SUBSCRIPTION_KEY` on the destination maintenance Worker;
    deployed Cloudflare secrets are not readable migration data. Keep the
    existing M3 model, subscription endpoint and automatic-credit margin policy.
+   The owner subsequently selected subscription-only expansion: retain the legacy
+   ingestion service's records/read APIs, but do not restore its M2.7 provider
+   secret, scheduled trigger or queue consumer. The new account's ingestion queue
+   remains paused. Trying a newer subscription model is a separately reviewed
+   canary and must preserve existing unknown reservations.
 7. Require foreign-key and integrity checks, exact ordinary-table summaries,
    scope/version validation, all R2 SHA/metadata checks, DO manifest verification,
    completed-request reuse and unknown-request rejection with zero model sends.

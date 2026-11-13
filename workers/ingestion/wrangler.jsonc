@@ -7,8 +7,10 @@
   "workers_dev": true,
   "preview_urls": false,
   "observability": { "enabled": true },
+  // The owner retired the legacy M2.7 model lane. Subscription-based expansion
+  // runs through catalog-maintenance; retain ingestion data and read APIs only.
   "triggers": {
-    "crons": ["17 * * * *"]
+    "crons": []
   },
   "vars": {
     "USER_AGENT": "StudyInChinaDataBot/1.0 (+https://studyinchina.vercel.app/contact)",
@@ -64,15 +66,6 @@
         "queue": "studyinchina-ingestion-quarantine"
       }
     ],
-    "consumers": [
-      {
-        "queue": "studyinchina-ingestion",
-        "max_batch_size": 10,
-        "max_batch_timeout": 5,
-        "max_retries": 4,
-        "dead_letter_queue": "studyinchina-ingestion-dlq",
-        "max_concurrency": 2
-      }
-    ]
+    "consumers": []
   }
 }
