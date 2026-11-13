@@ -136,6 +136,8 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/job-dispositions'&&request.method==='GET')return json((await readUnknownJobDisposition(env,await control(env))).summary)
     if(url.pathname==='/job-dispositions'&&request.method==='POST')return json(await reviewedTerminalQuarantine(env,await requestJson(request,32*1024)))
     if(url.pathname==='/model-state-migration/status'&&request.method==='GET')return await gateRequest(env,url.pathname,{})
+    if(url.pathname==='/model-state-migration/ledger-summary'&&request.method==='GET')return await gateRequest(env,url.pathname,{migrationId:env.MODEL_STATE_MIGRATION_ID})
+    if(url.pathname==='/model-state-migration/non-temporal-fetch-permit-recovery'&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,4096))
     if(['/model-state-migration/freeze','/model-state-migration/export','/model-state-migration/import','/model-state-migration/finalize'].includes(url.pathname)&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,12*1024*1024))
     if(url.pathname==='/budget'&&request.method==='GET')return json(await budgetStatus(env))
     if(url.pathname==='/budget'&&request.method==='POST')return json(await configureBudget(env,await requestJson(request,2048)))

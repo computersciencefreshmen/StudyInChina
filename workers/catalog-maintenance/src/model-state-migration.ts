@@ -1,5 +1,6 @@
 import type { DurableStorage, MaintenanceEnv } from './types'
 import { canonical, digest, HASH, json, record } from './util'
+import { NonTemporalPermitRecoveryError, recoverNonTemporalPermits, requestLedgerSummary } from './non-temporal-permit-recovery'
 
 // Private DO storage only: these bytes must never enter the generic R2 artifact API.
 export const MODEL_STATE_MIGRATION_KEY = '__model_state_migration_v1'
@@ -192,7 +193,7 @@ async function parsePage(raw: Record<string, unknown>, manifest: ModelStateManif
   return page as unknown as Page
 }
 
-export async function handleModelStateMigration(storage: DurableStorage, env: MaintenanceEnv, path: string, body: unknown, activeOperations: number, now = Date.now()): Promise<Response> {
+export async function handleModelStateMigration(storage: DurableStorage, env: MaintenanceEnv, path: string, body: unknown, activeOperations: number, now = Date.now(), activeOperationsNow = () => activeOperations): Promise<Response> {
   try {
     const cfg = config(env), raw = record(body)
     if (!raw) return fail('model_state_migration_request_invalid')
@@ -202,6 +203,12 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
       return json({ ...status(lock, cfg), ...await diagnostics(await storage.get('gate'), activeOperations, now) })
     }
     requireId(raw, cfg)
+    if (path === '/model-state-migration/ledger-summary' || path === '/model-state-migration/non-temporal-fetch-permit-recovery') {
+      requireRole(cfg, 'source')
+      return json(path.endsWith('/ledger-summary')
+        ? await requestLedgerSummary(storage, cfg, MODEL_STATE_MIGRATION_KEY, activeOperationsNow, now)
+        : await recoverNonTemporalPermits(storage, cfg, MODEL_STATE_MIGRATION_KEY, raw, activeOperationsNow, now))
+    }
     if (path === '/model-state-migration/freeze') {
       requireRole(cfg, 'source')
       const lock = await storage.transaction(async txn => {
@@ -279,6 +286,6 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
     }
     return json({ ok: false, error: 'not_found' }, 404)
   } catch (error) {
-    return json({ ok: false, error: error instanceof ModelStateMigrationError ? error.code : 'model_state_migration_unavailable' }, 409)
+    return json({ ok: false, error: error instanceof ModelStateMigrationError || error instanceof NonTemporalPermitRecoveryError ? error.code : 'model_state_migration_unavailable' }, 409)
   }
 }
