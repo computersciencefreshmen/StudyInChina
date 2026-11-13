@@ -21,12 +21,16 @@ const sourceHost = 'studyinchina-catalog-maintenance.source-test.workers.dev', t
 const sourceToken = 'source-test-token-PRIVATE-never-log', targetToken = 'target-test-token-PRIVATE-never-log', rawCanary = 'RAW-PRIVATE-MODEL-OUTPUT-never-artifact'
 const binding = { migrationId, sourceAccountId, targetAccountId }
 const hash = (value: unknown) => createHash('sha256').update(typeof value === 'string' ? value : canonicalJson(value)).digest('hex')
-type Row = { key: string; value: { state: 'unknown' | 'completed'; attemptId: string; requestSha256: string; retainedField: string } }
-function snapshot(count = 40, large = false) {
-  const entries: Row[] = Array.from({ length: count }, (_, i) => ({ key: `request:${i.toString(16).padStart(64, '0')}`, value: {
-    state: i % 2 ? 'completed' : 'unknown', attemptId: `paid-attempt-${i}`, requestSha256: 'a'.repeat(64), retainedField: large ? '\\'.repeat(60000) : rawCanary } }))
+type Row = { key: string; value: Record<string, unknown> }
+function snapshot(count = 40, large = false, extraEntries: Row[] = [], opaque = false) {
+  const entries: Row[] = [...extraEntries, ...Array.from({ length: count }, (_, i) => ({ key: `request:${i.toString(16).padStart(64, '0')}`, value: {
+    state: i % 2 ? 'completed' : 'unknown', attemptId: `paid-attempt-${i}`, requestSha256: 'a'.repeat(64),
+    ...(opaque ? { retainedField: rawCanary } : {}),
+    ...(i % 2 ? { result: { attemptId: `paid-attempt-${i}`, output: { privateResult: large ? '\\'.repeat(120000) : rawCanary },
+      artifactKey: 'maintenance/models/private-test.json', artifactSha256: 'b'.repeat(64), reused: false } } : {}) } }))
+  ].sort((a, b) => a.key.localeCompare(b.key))
   const pages: Array<{ pageBytes: string; pageSha256: string; pageIndex: number }> = [], refs: unknown[] = []
-  for (let index = 0; index < Math.max(1, Math.ceil(count / 32)); index++) {
+  for (let index = 0; index < Math.max(1, Math.ceil(entries.length / 32)); index++) {
     const pageEntries = entries.slice(index * 32, (index + 1) * 32)
     const pageBytes = canonicalJson({ format: 'studyinchina.model-state-page', version: 1, ...binding, index, entries: pageEntries })
     pages.push({ pageBytes, pageSha256: hash(pageBytes), pageIndex: index })
@@ -34,8 +38,10 @@ function snapshot(count = 40, large = false) {
       firstKey: pageEntries[0]?.key ?? null, lastKey: pageEntries.at(-1)?.key ?? null, startAfter: index ? entries[index * 32 - 1].key : null })
   }
   const states = { send_started: 0, completed: Math.floor(count / 2), unknown: Math.ceil(count / 2), known_failed: 0 }
+  const auxiliaryEntryCount = extraEntries.filter(entry => entry.key !== 'gate').length
   const manifest = { format: 'studyinchina.model-state-manifest', version: 1, ...binding, frozenAt: '2026-11-13T00:00:00.000Z',
-    pages: refs, entryCount: count, requestCount: count, gatePresent: false, states }
+    pages: refs, entryCount: entries.length, requestCount: count, gatePresent: extraEntries.some(entry => entry.key === 'gate'), states,
+    ...(auxiliaryEntryCount ? { auxiliaryEntryCount } : {}) }
   return { entries, pages, manifest, manifestSha256: hash(manifest), states }
 }
 type Hook = (url: string, body: Record<string, unknown>, normal: Record<string, unknown>) => Response | void | Promise<Response | void>
@@ -43,9 +49,11 @@ function peers(data = snapshot(), hook?: Hook) {
   const calls: Array<{ url: string; init: RequestInit; body: Record<string, unknown> }> = []
   const imported = new Map<number, string>()
   let finalized = false
+  const auxiliaryImported = () => [...imported.values()].flatMap(bytes => (JSON.parse(bytes) as { entries: Row[] }).entries).filter(entry => entry.key.startsWith('offline-')).length
   const receipt = () => ({ ok: true, ...binding, role: 'target', state: finalized ? 'finalized' : 'importing',
     pageCount: data.pages.length, importedPages: imported.size, entryCount: data.manifest.entryCount, requestCount: data.manifest.requestCount,
-    states: data.states, manifestSha256: data.manifestSha256, finalizedAt: finalized ? '2026-11-14T00:00:00.000Z' : null })
+    states: data.states, manifestSha256: data.manifestSha256, finalizedAt: finalized ? '2026-11-14T00:00:00.000Z' : null,
+    ...(auxiliaryImported() ? { auxiliaryEntryCount: auxiliaryImported() } : {}) })
   const fetcher: typeof fetch = async (input, init) => {
     const url = String(input), body = JSON.parse(String(init?.body)) as Record<string, unknown>
     calls.push({ url, init: init ?? {}, body })
@@ -95,6 +103,7 @@ describe('private frozen model-state relay', () => {
     const report = await transferModelState(options(directory, peer.fetcher))
     expect(report).toMatchObject({ state: 'finalized', code: null, sourceFrozen: true, targetFinalized: true, pageCount: 2, entryCount: 40,
       requestCount: 40, states: data.states, manifestSha256: data.manifestSha256, modelCallsPerformed: false, controlsChanged: false })
+    expect(Object.hasOwn(report, 'auxiliaryEntryCount')).toBe(false)
     expect(peer.calls.map(c => new URL(c.url).pathname)).toEqual(['/model-state-migration/freeze', '/model-state-migration/export', '/model-state-migration/export',
       '/model-state-migration/import', '/model-state-migration/import', '/model-state-migration/finalize'])
     for (const call of peer.calls) {
@@ -104,6 +113,80 @@ describe('private frozen model-state relay', () => {
     expect(observedPrivate).not.toHaveLength(0); expect(await readdir(directory)).toEqual([])
     const serialized = JSON.stringify(report)
     for (const privateValue of [rawCanary, sourceToken, targetToken, sourceAccountId, targetAccountId, sourceHost, targetHost]) expect(serialized.includes(privateValue)).toBe(false)
+  }))
+
+  function legacyEntries(): Row[] {
+    const batchId = 'offline-legacy-relay-test', fence = { batchId, phase: 'held_for_handoff', tokenSha256: 'b'.repeat(64), scopeRegistrySha256: 'c'.repeat(64),
+      inputCatalogSha256: 'd'.repeat(64), acquiredAt: '2026-11-01T00:00:00.000Z', manifestSha256: 'e'.repeat(64), releaseRequestedAt: '2026-11-02T00:00:00.000Z',
+      epoch: 1, retiredManifests: ['f'.repeat(64)], sourceManifestHistory: ['1'.repeat(64)], rowsStarted: false }
+    const key = '0'.repeat(64)
+    return [{ key: 'gate', value: { fetches: [], models: [], nextHost: {}, successes: 0, cooldownUntil: 0, modelLimit: 2, offlineFence: fence } },
+      { key: `offline-adoption:${batchId}`, value: { [`request:${key}`]: { reservationKey: key, state: 'unknown', attemptId: 'paid-attempt-0', requestSha256: 'a'.repeat(64) } } },
+      { key: `offline-fence:${batchId}`, value: fence }]
+  }
+
+  it('preserves known legacy fence/adoption bytes across pages and reruns without counting auxiliary state as model successes', async () => local(async directory => {
+    const data = snapshot(40, false, legacyEntries()), peer = peers(data)
+    const first = await transferModelState(options(directory, peer.fetcher)), second = await transferModelState(options(directory, peer.fetcher))
+    for (const report of [first, second]) expect(report).toMatchObject({ state: 'finalized', code: null, entryCount: 43, requestCount: 40,
+      auxiliaryEntryCount: 2, states: { completed: 20, unknown: 20, send_started: 0, known_failed: 0 }, modelCallsPerformed: false, controlsChanged: false })
+    const imported = [...peer.imported.values()].flatMap(bytes => (JSON.parse(bytes) as { entries: Row[] }).entries)
+    expect(imported).toEqual(data.entries)
+    expect(peer.calls.every(call => /\/model-state-migration\/(?:freeze|export|import|finalize)$/.test(call.url))).toBe(true)
+    for (const report of [first, second]) expect(JSON.stringify(report)).not.toContain('offline-legacy-relay-test')
+    expect(await readdir(directory)).toEqual([])
+  }))
+
+  it('refuses malformed known auxiliary values, unknown storage prefixes and malformed legacy gate fields before import', async () => local(async directory => {
+    const cases = [
+      [{ key: 'offline-fence:offline-legacy-relay-test', value: { ...legacyEntries()[2].value, phase: 'silently-released' } }],
+      [{ key: 'offline-adoption:offline-legacy-relay-test', value: { [`request:${'0'.repeat(64)}`]: { reservationKey: '0'.repeat(64), state: 'success', attemptId: 'paid-attempt-0', requestSha256: 'a'.repeat(64) } } }],
+      [{ key: 'offline-unknown:offline-legacy-relay-test', value: { state: 'completed' } }],
+      [{ key: 'unrecognized-history', value: { state: 'completed', attemptId: 'old', requestSha256: 'a'.repeat(64) } }],
+      [{ key: 'gate', value: { fetches: [], models: [], offlineFence: { ...legacyEntries()[2].value, tokenSha256: rawCanary } } }],
+    ]
+    for (const extra of cases) {
+      const peer = peers(snapshot(1, false, extra)), report = await transferModelState(options(directory, peer.fetcher))
+      expect(report).toMatchObject({ state: 'failed', code: 'source_page_invalid', targetFinalized: false })
+      expect(peer.imported.size).toBe(0); expect(JSON.stringify(report)).not.toContain(rawCanary)
+    }
+  }))
+
+  it('retains ordinary opaque request fields under the existing default migration contract', async () => local(async directory => {
+    const data = snapshot(2, false, [], true), peer = peers(data), report = await transferModelState(options(directory, peer.fetcher))
+    expect(report).toMatchObject({ state: 'finalized', requestCount: 2, states: { completed: 1, unknown: 1, send_started: 0, known_failed: 0 } })
+    expect([...peer.imported.values()].flatMap(bytes => (JSON.parse(bytes) as { entries: Row[] }).entries)).toEqual(data.entries)
+    expect(Object.hasOwn(report, 'auxiliaryEntryCount')).toBe(false); expect(JSON.stringify(report)).not.toContain(rawCanary)
+  }))
+
+  it('reports only fixed legacy-schema refusal codes from a source and never its private state', async () => local(async directory => {
+    const peer = peers(snapshot(), (url) => url.endsWith('/freeze') ? Response.json({ ok: false, error: 'model_state_migration_legacy_state_invalid', rawState: rawCanary }, { status: 409 }) : undefined)
+    const report = await transferModelState(options(directory, peer.fetcher))
+    expect(report).toMatchObject({ state: 'failed', code: 'source_freeze_rejected', upstreamErrorCode: 'model_state_migration_legacy_state_invalid', targetFinalized: false })
+    expect(peer.imported.size).toBe(0); expect(JSON.stringify(report)).not.toContain(rawCanary)
+  }))
+
+  it('requires exact auxiliary manifest counts including strict missing versus null types', async () => local(async directory => {
+    for (const count of [undefined, null, '2', -1, 1, 3]) {
+      const peer = peers(snapshot(40, false, legacyEntries()), (url, _body, normal) => {
+        if (url.endsWith('/freeze')) return Response.json({ ...normal, manifestSha256: null })
+        if (url.endsWith('/export')) {
+          const manifest = { ...(normal.manifest as Record<string, unknown>), auxiliaryEntryCount: count }
+          if (count === undefined) delete manifest.auxiliaryEntryCount
+          return Response.json({ ...normal, manifest, manifestSha256: hash(manifest) })
+        }
+      })
+      const report = await transferModelState(options(directory, peer.fetcher))
+      expect(report).toMatchObject({ state: 'failed', code: 'source_manifest_invalid', targetFinalized: false })
+      expect(peer.imported.size).toBe(0)
+    }
+  }))
+
+  it('requires target import and final receipts to acknowledge every auxiliary entry exactly', async () => local(async directory => {
+    for (const phase of ['/import', '/finalize']) for (const count of [undefined, null, 0, 1, 3]) {
+      const peer = peers(snapshot(40, false, legacyEntries()), (url, _body, normal) => url.endsWith(phase) ? Response.json({ ...normal, auxiliaryEntryCount: count }) : undefined)
+      expect((await transferModelState(options(directory, peer.fetcher))).code).toBe('target_receipt_invalid')
+    }
   }))
 
   it('does not mistake an inflight409 for permission to reset, import or unlock', async () => local(async directory => {
