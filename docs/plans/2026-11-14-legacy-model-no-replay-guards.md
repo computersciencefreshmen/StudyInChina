@@ -11,6 +11,10 @@ It binds all 15 attempt columns, original source identity, and nine actually
 hashed official snapshot/raw/complete-text objects. Its permanent denial matches
 source, raw, reservation, payload hash and trusted complete-text aliases, before
 DO reservation, quota or provider calls. It does not depend on scope or model.
+The alias set includes the original full-text hash and the exact capturer's
+`normalizeEvidenceText` hash. Artifact verification recomputes this set from the
+actual immutable text bytes; a new URL or changed prompt metadata cannot escape
+through a normalized HTML/plain-text mirror of the same official document.
 Queue processing also stops protected aliases before document partitioning, so
 the retained unknown cannot manufacture an additional unknown job. Caller text
 hashes are ignored. Unproven source text cannot authorize a send.

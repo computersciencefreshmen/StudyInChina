@@ -165,8 +165,8 @@ test('real workerd denies all legacy model unknown sources, raw and full-text al
       await db.prepare('INSERT INTO maintenance_source_schools VALUES(?,?)').bind(s.source.source_id,'runtime-school').run()
       const direct=await runModel(mf,{...modelRequest(String(index+1).repeat(64)),sourceId:s.source.source_id,snapshotSha256:'0'.repeat(64)})
       assert.equal(direct.status,409);assert.equal((await direct.json() as {error:string}).error,'legacy_model_replay_protected')
-      for(const pass of ['primary','independent-review'] as const){
-        await db.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').bind(snapshotSha256,s.textSha256,sourceId).run()
+      for(const aliasSha256 of s.trustedTextAliases)for(const pass of ['primary','independent-review'] as const){
+        await db.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').bind(snapshotSha256,aliasSha256,sourceId).run()
         const alias=await runModel(mf,{...modelRequest(String(index+5).repeat(64)),pass,payload:JSON.stringify({newContract:index,newScope:true})})
         assert.equal(alias.status,409);assert.equal((await alias.json() as {error:string}).error,'legacy_model_replay_protected')
       }

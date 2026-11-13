@@ -6,9 +6,10 @@ import { readLegacyReconciliationPackage, readLegacyReconciliationManifest, read
 import { canonicalLegacyRequestDescriptors, type LegacyReconciliationPackage } from './legacy-reconciliation-contracts'
 import { isPinnedScopeTransition, scopeUpgradeLineage } from './scope-config'
 import { isDailyD1QuotaError } from './backend-errors'
+import { normalizeEvidenceText } from '../../ingestion/src/rules'
 
-export const LEGACY_UNKNOWN_POLICY_SHA256 = 'd6e47532b56a5d2d6392927d0a10b4118f1b2b2c2c77a9874693886ead68d410'
-export const LEGACY_UNKNOWN_GUARD_SET_SHA256 = 'c7ad1e88e1c7bddd07dc273ed23c7bcc4d3d54d1ab646beeb7cc3321f823c958'
+export const LEGACY_UNKNOWN_POLICY_SHA256 = '82fe0f4a9a594ba6c890a3c37df0cc52b05a58cc571435aa3d9558e1fada6028'
+export const LEGACY_UNKNOWN_GUARD_SET_SHA256 = 'b7964b3f6a65c3fc81b291a7a95c6c5daba74431d1a605f74a03d4eca736f536'
 const fields = ['reservation_key','attempt_id','source_id','snapshot_sha256','pass','request_sha256','model','status','started_at','completed_at','output_key','output_sha256','usage_json','quota_json','error_code'] as const
 const attemptsJson = canonical(pinned.subjects.map(s => s.attempt))
 const sourcesJson = canonical(pinned.subjects.map(s => s.source))
@@ -60,7 +61,7 @@ export async function legacyModelNoReplayReason(env: MaintenanceEnv, input: Mode
     }
   }
   if (!HASH.test(textSha256)) return 'legacy_model_source_text_unproven'
-  return pinned.subjects.some(s => s.textSha256 === textSha256) ? 'legacy_model_replay_protected' : null
+  return pinned.subjects.some(s => s.trustedTextAliases.includes(textSha256)) ? 'legacy_model_replay_protected' : null
 }
 
 /** Full immutable SQL tuples, including nullable result/usage/quota columns. */
@@ -79,10 +80,17 @@ export async function verifyLegacyUnknownArtifacts(env: MaintenanceEnv) {
     const source = await env.PIPELINE_DB.prepare('SELECT source_id,url,allowed_hosts_json FROM maintenance_sources WHERE source_id=?')
       .bind(subject.source.source_id).first()
     if (!source || canonical({ ...source }) !== canonical(subject.source)) fail('legacy_model_guard_source_changed')
+    let fullText: ArrayBuffer | undefined
     for (const ref of [subject.snapshot, subject.raw, subject.text]) {
       const bytes = await checkedBytes(env, ref.objectKey, 1024 * 1024)
       if (bytes.byteLength !== ref.byteLength || await digest(bytes) !== ref.sha256) fail('legacy_model_guard_artifact_corrupt')
+      if (ref === subject.text) fullText = bytes
     }
+    // The capturer uses this exact normalization function. An HTML/PDF mirror
+    // may retain these bytes as its canonical text despite new raw/URL/payload.
+    const normalizedSha256 = await digest(normalizeEvidenceText(new TextDecoder('utf-8',{fatal:true}).decode(fullText!)))
+    const expectedAliases = [...new Set([subject.textSha256, normalizedSha256])].sort()
+    if (canonical(subject.trustedTextAliases) !== canonical(expectedAliases)) fail('legacy_model_guard_text_alias_invalid')
     const snapshot = record(JSON.parse(new TextDecoder().decode(await checkedBytes(env, subject.snapshot.objectKey, 64 * 1024))))
     if (snapshot?.sourceId !== subject.attempt.source_id || snapshot.rawSha256 !== subject.attempt.snapshot_sha256
       || snapshot.sourceUrl !== subject.source.url || snapshot.rawKey !== subject.raw.objectKey || snapshot.textKey !== subject.text.objectKey

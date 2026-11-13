@@ -5,7 +5,8 @@ import test from 'node:test'
 import policy from '../../../content/maintenance/legacy-model-no-replay-policy.v1.json'
 import { legacyModelNoReplayReason, verifyLegacyUnknownRows, verifyLegacyUnknownArtifacts, legacyModelDispositionFence, registerLegacyModelGuards,
   readLegacyModelDisposition, LEGACY_UNKNOWN_POLICY_SHA256, LEGACY_UNKNOWN_GUARD_SET_SHA256, legacyUnknownRegistrationIntentSha256, verifyLegacyModelGuardRegistration } from '../src/legacy-model-guards'
-import { canonical, digest } from '../src/util'
+import { canonical, digest, gateRequest } from '../src/util'
+import { normalizeEvidenceText } from '../../ingestion/src/rules'
 import { makeEnv, seedInput } from './fixture'
 import { seed, control } from '../src/repository'
 import { processMessage } from '../src/index'
@@ -92,11 +93,42 @@ test('permanent source, reservation, raw and trusted complete-text aliases deny 
       assert.equal(await legacyModelNoReplayReason(f.env,input({sourceId:s.attempt.source_id}),source),'legacy_model_replay_protected')
       assert.equal(await legacyModelNoReplayReason(f.env,input({snapshotSha256:s.attempt.snapshot_sha256}),source),'legacy_model_replay_protected')
       assert.equal(await legacyModelNoReplayReason(f.env,input({reservationKey:s.attempt.reservation_key}),source),'legacy_model_replay_protected')
-      assert.equal(await legacyModelNoReplayReason(f.env,input(),{...source,canonical_sha256:s.textSha256}),'legacy_model_replay_protected')
+      for(const alias of s.trustedTextAliases)assert.equal(await legacyModelNoReplayReason(f.env,input(),{...source,canonical_sha256:alias}),'legacy_model_replay_protected')
     }
     assert.equal(await legacyModelNoReplayReason(f.env,input(),source),null)
     assert.equal(f.network(),0); assert.equal(f.storage.values.size,0)
   } finally { f.db.sqlite.close() }
+})
+
+test('actual normalized text mirrors with new URLs, raw bytes, payloads and keys are denied at DO and held at the queue without new unknowns',async()=>{
+  let aliasesTested=0
+  for(const subject of policy.subjects){
+    const fullText=new TextDecoder('utf-8',{fatal:true}).decode(original(subject.text.sha256,'text')),text=normalizeEvidenceText(fullText),normalizedSha=await digest(text)
+    assert.deepEqual(subject.trustedTextAliases,[...new Set([subject.textSha256,normalizedSha])].sort())
+    if(normalizedSha===subject.textSha256)continue
+    aliasesTested++
+    const f=await fixture(true),url=`https://mirror-test.edu.cn/${subject.attempt.attempt_id}.txt`,sourceId=await digest(url),rawSha=await digest(text),rawKey=`maintenance/snapshots/${sourceId}/${rawSha}.bin`,key=`maintenance/snapshots/${sourceId}/${rawSha}.json`,textKey=`maintenance/text/${sourceId}/${normalizedSha}.txt`,iso=new Date(Date.now()-1000).toISOString(),jobId=await digest(`normalized-mirror-job:${sourceId}`)
+    try{
+      await f.bucket.put(rawKey,text);await f.bucket.put(textKey,text)
+      await f.bucket.put(key,canonical({version:1,sourceId,sourceUrl:url,finalUrl:url,checkedAt:iso,contentType:'text/plain',rawKey,rawSha256:rawSha,textKey,textSha256:normalizedSha,canonicalSha256:normalizedSha,parserCandidates:[]}))
+      f.db.sqlite.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256,canonical_sha256,snapshot_key) VALUES(?,?,'[\"mirror-test.edu.cn\"]','undergraduate_catalog',1,24,?,?,?,?)")
+        .run(sourceId,url,iso,rawSha,normalizedSha,key)
+      f.db.sqlite.prepare("INSERT INTO maintenance_source_schools VALUES(?,'uni-000')").run(sourceId)
+      f.db.sqlite.exec('UPDATE maintenance_control SET enabled=1,models_enabled=1')
+      const direct=await gateRequest(f.env,'/model/run',input({sourceId,snapshotSha256:rawSha,reservationKey:await digest(`new-model-key:${sourceId}`),universityIds:['uni-000'],payload:'Changed contract and metadata on the same normalized official text'}))
+      assert.equal(direct.status,409);assert.equal((await direct.json() as {error:string}).error,'legacy_model_replay_protected')
+      f.db.sqlite.prepare("INSERT INTO maintenance_jobs(job_id,source_id,stage,status,due_at,created_at,updated_at,snapshot_sha256,snapshot_key) VALUES(?,?,'extract','queued',?,?,?,?,?)")
+        .run(jobId,sourceId,iso,iso,iso,rawSha,key)
+      await processMessage(f.env,{version:1,jobId})
+      const row=f.db.sqlite.prepare('SELECT status,error_code FROM maintenance_jobs WHERE job_id=?').get(jobId)
+      assert.equal(row?.status,'held');assert.equal(row?.error_code,'legacy_model_replay_protected')
+      assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) n FROM maintenance_jobs WHERE status='unknown'").get()?.n,0)
+      assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) n FROM maintenance_model_attempts WHERE status='unknown'").get()?.n,3)
+      assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').get()?.n,3)
+      assert.equal(f.network(),0);assert.equal(f.storage.values.size,0)
+    }finally{f.db.sqlite.close()}
+  }
+  assert.equal(aliasesTested,2)
 })
 
 test('PDF/HTML fallback only trusts exact source-bound snapshot and actual hashed full text, not caller-supplied aliases',async () => {
