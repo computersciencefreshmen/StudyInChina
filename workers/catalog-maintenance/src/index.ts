@@ -157,6 +157,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/job-dispositions'&&request.method==='GET')return json((await readUnknownJobDisposition(env,await control(env))).summary)
     if(url.pathname==='/job-dispositions'&&request.method==='POST')return json(await reviewedTerminalQuarantine(env,await requestJson(request,32*1024)))
     if(url.pathname==='/model-state-migration/status'&&request.method==='GET')return await gateRequest(env,url.pathname,{})
+    if(['/model-state-migration/reconciliation-promote','/model-state-migration/reconciliation-adopt','/model-state-migration/reconciliation-finalize'].includes(url.pathname)&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,2048))
     if(url.pathname==='/model-state-migration/gate-inspection'&&request.method==='GET')return await gateRequest(env,url.pathname,{migrationId:env.MODEL_STATE_MIGRATION_ID})
     if(url.pathname==='/model-state-migration/storage-inspection'&&request.method==='GET')return await gateRequest(env,url.pathname,{migrationId:env.MODEL_STATE_MIGRATION_ID,pageIndex:Number(url.searchParams.get('pageIndex')??0),...(url.searchParams.has('expectedStorageSha256')?{expectedStorageSha256:url.searchParams.get('expectedStorageSha256')}: {})})
     if(url.pathname==='/model-state-migration/handoff-operation-recovery'&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,4096))

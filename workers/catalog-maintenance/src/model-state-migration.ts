@@ -3,6 +3,7 @@ import { canonical, digest, HASH, json, record } from './util'
 import { inspectFrozenSourceGate, NonTemporalPermitRecoveryError, recoverNonTemporalPermits, requestLedgerSummary } from './non-temporal-permit-recovery'
 import { validateLegacyAuxiliaryEntry, validateLegacyOfflineGate, validateMigratedRequest } from './legacy-offline-state'
 import { inspectFrozenStorage, LegacyHandoffRecoveryError, recoverHandoffOperation } from './legacy-handoff-recovery'
+import { handleLegacyReconciliation } from './legacy-reconciliation-do'
 
 // Private DO storage only: these bytes must never enter the generic R2 artifact API.
 export const MODEL_STATE_MIGRATION_KEY = '__model_state_migration_v1'
@@ -214,6 +215,10 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
       return json({ ...status(lock, cfg), ...await diagnostics(await storage.get('gate'), activeOperations, now) })
     }
     requireId(raw, cfg)
+    if (['/model-state-migration/reconciliation-promote', '/model-state-migration/reconciliation-adopt', '/model-state-migration/reconciliation-finalize'].includes(path)) {
+      requireRole(cfg, 'target')
+      return json(await handleLegacyReconciliation(storage, env, cfg, MODEL_STATE_MIGRATION_KEY, path, raw, activeOperationsNow, now))
+    }
     if (path === '/model-state-migration/storage-inspection' || path === '/model-state-migration/handoff-operation-recovery') {
       requireRole(cfg, 'source')
       return json(path.endsWith('/storage-inspection')
