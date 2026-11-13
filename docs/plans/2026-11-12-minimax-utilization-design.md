@@ -53,6 +53,14 @@ numeric HTTP status, without response errors, headers, credentials, or account
 identifiers. Subscription reads use the official CLI's regional API origins and
 JSON headers; redirects remain forbidden. An unknown observation still blocks
 model admission rather than treating a successful workflow as available quota.
+Cloudflare Workers implements only `follow` and `manual` redirect modes;
+`error` throws before the request is sent. Both quota and model requests therefore
+use `manual` and explicitly reject every 3xx response. Model redirects retain the
+unknown-outcome reservation and cannot be replayed. A real Miniflare/workerd
+regression, with entirely local provider responses, validates this runtime boundary.
+Native `fetch` also requires the global invocation receiver. The injected fetch
+function is called through a local variable, rather than as a Durable Object
+method; the real-runtime model test verifies that the provider POST is reached.
 
 ## Legacy subscription compatibility
 
