@@ -1,13 +1,9 @@
 import { readdirSync } from 'node:fs'
 import { basename, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 import { createHash } from 'node:crypto'
-
-const [stateDirectory, kind] = process.argv.slice(2)
-
-if (!stateDirectory || !['catalog', 'pipeline'].includes(kind)) {
-  throw new Error('Usage: node verify-restored-d1.mjs <local-state-directory> <catalog|pipeline>')
-}
+import { scopeRegistry, tableLogicalSummaries, validateTrustedSchema } from './prepare-account-migration-d1.mjs'
 
 function sqliteFiles(directory) {
   const files = []
@@ -21,68 +17,8 @@ function sqliteFiles(directory) {
   return files
 }
 
-const requiredTables =
-  kind === 'catalog'
-    ? [
-        'catalog_releases',
-        'release_pointer',
-        'catalog_records',
-        'institutions',
-        'programs',
-        'program_cycles',
-        'scholarships',
-      ]
-    : [
-        'records',
-        'source_documents',
-        'claims',
-        'ingestion_sources',
-        'ingestion_jobs',
-        'ingestion_snapshots',
-        'ingestion_candidates',
-        'maintenance_control',
-        'maintenance_schools',
-        'maintenance_sources',
-        'maintenance_source_schools',
-        'maintenance_jobs',
-        'maintenance_observations',
-        'maintenance_robots',
-        'maintenance_document_derivatives',
-        'maintenance_document_failures',
-        'maintenance_legacy_guards',
-        'maintenance_model_attempts',
-        'maintenance_proposals',
-        'maintenance_record_targets',
-        'maintenance_target_sources',
-        'maintenance_target_refreshes',
-        'maintenance_exports',
-        'maintenance_events',
-        'maintenance_transaction_guards',
-      ]
-
-const markerTable = requiredTables[0]
-const matches = []
-for (const path of sqliteFiles(resolve(stateDirectory))) {
-  const database = new DatabaseSync(path, { readOnly: true })
-  try {
-    const marker = database
-      .prepare("SELECT COUNT(*) AS count FROM sqlite_schema WHERE type = 'table' AND name = ?")
-      .get(markerTable)
-    if (marker.count === 1) matches.push({ path, database })
-    else database.close()
-  } catch (error) {
-    database.close()
-    throw error
-  }
-}
-
-if (matches.length !== 1) {
-  for (const match of matches) match.database.close()
-  throw new Error(`Expected one restored ${kind} SQLite file, found ${matches.length}`)
-}
-
-const [{ path, database }] = matches
-try {
+export function verifyRestoredDatabase(database, kind, path = 'local.sqlite') {
+  const schema = validateTrustedSchema(database, kind), requiredTables = schema.tables
   const tablePlaceholders = requiredTables.map(() => '?').join(', ')
   const actualTables = database
     .prepare(
@@ -117,6 +53,8 @@ try {
     integrityCheck: 'ok',
     coreTables: requiredTables,
     triggerCount,
+    schema,
+    logicalTables: tableLogicalSummaries(database, requiredTables),
   }
 
   if (kind === 'catalog') {
@@ -230,8 +168,17 @@ try {
         if (!hash.test(control[field])) throw new Error(`Pipeline maintenance control has invalid ${field}`)
       }
       const schools = database.prepare('SELECT university_id,scope_sha256 FROM maintenance_schools').all()
-      if (control.seed_complete && (schools.length !== 272 || schools.some(row => row.scope_sha256 !== control.scope_sha256)
+      const registry = scopeRegistry(control.scope_sha256)
+      const scopedSchools = schools.filter(row => row.scope_sha256 === control.scope_sha256)
+      const expectedIds = new Set(registry.universityIds)
+      if (scopedSchools.some(row => !expectedIds.has(row.university_id)) || control.seed_complete && (scopedSchools.length !== registry.expectedSchoolCount
           || control.seed_offset !== control.seed_total)) throw new Error('Pipeline completed maintenance seed is incomplete or has a different scope')
+      const stagedSchools = schools.filter(row => row.scope_sha256 !== control.scope_sha256)
+      for (const school of stagedSchools) {
+        const nextRegistry = scopeRegistry(school.scope_sha256)
+        const upgrade = database.prepare("SELECT status FROM maintenance_scope_upgrades WHERE previous_scope_sha256=? AND next_scope_sha256=? AND status='staged'").get(control.scope_sha256, school.scope_sha256)
+        if (!upgrade || expectedIds.has(school.university_id) || !nextRegistry.universityIds.includes(school.university_id)) throw new Error('Pipeline maintenance staged school has no matching scope upgrade')
+      }
       let canary
       try { canary = JSON.parse(control.canary_json) } catch { throw new Error('Pipeline maintenance canary is invalid JSON') }
       if (!Array.isArray(canary) || new Set(canary).size !== canary.length || canary.some(id => !schools.some(school => school.university_id === id))) {
@@ -255,7 +202,8 @@ try {
       }
       report.maintenance = {
         state: 'checkpoint_validated', resumable: false, checkpointValidated: true,
-        seedComplete: Boolean(control.seed_complete), schools: schools.length,
+        seedComplete: Boolean(control.seed_complete), schools: scopedSchools.length, stagedSchools: stagedSchools.length,
+        scopeRegistrySha256: registry.sha256, expectedSchoolCount: registry.expectedSchoolCount,
         jobs: database.prepare('SELECT status,COUNT(*) count FROM maintenance_jobs GROUP BY status').all(),
         modelAttempts: database.prepare('SELECT status,COUNT(*) count FROM maintenance_model_attempts GROUP BY status').all(),
         exports: database.prepare('SELECT status,COUNT(*) count FROM maintenance_exports GROUP BY status').all(),
@@ -266,7 +214,22 @@ try {
     }
   }
 
-  process.stdout.write(JSON.stringify(report))
-} finally {
-  database.close()
+  return report
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const [stateDirectory, kind] = process.argv.slice(2)
+  if (!stateDirectory || !['catalog', 'pipeline'].includes(kind)) throw new Error('Usage: node verify-restored-d1.mjs <local-state-directory> <catalog|pipeline>')
+  const markerTable = kind === 'catalog' ? 'catalog_releases' : 'records', matches = []
+  for (const path of sqliteFiles(resolve(stateDirectory))) {
+    const database = new DatabaseSync(path, { readOnly: true })
+    try {
+      const marker = database.prepare("SELECT COUNT(*) AS count FROM sqlite_schema WHERE type='table' AND name=?").get(markerTable)
+      if (marker.count === 1) matches.push({ path, database })
+      else database.close()
+    } catch (error) { database.close(); throw error }
+  }
+  if (matches.length !== 1) { for (const match of matches) match.database.close(); throw new Error(`Expected one restored ${kind} SQLite file, found ${matches.length}`) }
+  const [{ path, database }] = matches
+  try { process.stdout.write(JSON.stringify(verifyRestoredDatabase(database, kind, path))) } finally { database.close() }
 }

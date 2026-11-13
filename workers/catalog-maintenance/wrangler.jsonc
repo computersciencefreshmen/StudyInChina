@@ -1,6 +1,7 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "studyinchina-catalog-maintenance",
+  "account_id": "b75f28d574289c29e9bda60a2fca27ed",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-24",
   "workers_dev": true,
@@ -18,7 +19,7 @@
   },
   "d1_databases": [{
     "binding": "PIPELINE_DB", "database_name": "studyinchina-pipeline",
-    "database_id": "bb68098a-1429-44ad-869a-de9c3a5e478c",
+    "database_id": "43e2d4a5-54a4-4932-97f3-755be12ef8bb",
     "migrations_dir": "../../infra/d1/pipeline/migrations"
   }],
   "r2_buckets": [{ "binding": "SNAPSHOTS_BUCKET", "bucket_name": "studyinchina-source-snapshots" }],

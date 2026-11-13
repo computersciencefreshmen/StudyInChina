@@ -60,6 +60,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           INGESTION_ADMIN_TOKEN: ${{ secrets.INGESTION_ADMIN_TOKEN }}
           INGESTION_WORKER_URL: ${{ vars.INGESTION_WORKER_URL }}
+          INGESTION_TOKEN_HOST: ${{ vars.INGESTION_TOKEN_HOST || 'studyinchina-ingestion.13022037121.workers.dev' }}
         run: |
           test -n "$INGESTION_WORKER_URL" && test -n "$INGESTION_ADMIN_TOKEN"
           npm run automation:health -- --operations-url "$INGESTION_WORKER_URL" --github-repo "$GITHUB_REPOSITORY" --release-url https://studyinchina.vercel.app/api/v1/releases/current --output "$RUNNER_TEMP/automation-health.json"

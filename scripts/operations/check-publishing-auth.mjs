@@ -4,12 +4,18 @@ import { resolve } from 'node:path'
 const PROJECT = 'prj_AgYJcsuat4kmLiinlvcBbZsYY3cg'
 const TEAM = 'team_o5qghzfTOk24QwoYANzJ8hNH'
 const ALIAS = 'studyinchina.vercel.app'
-const TELEMETRY = 'https://studyinchina-catalog-api.13022037121.workers.dev/internal/v1/admin-telemetry'
+const DEFAULT_TELEMETRY_HOST = 'studyinchina-catalog-api.13022037121.workers.dev'
 
 /** GET-only credential check. Raw provider responses and credentials never leave this function. */
 export async function checkPublishingAuthentication(environment = process.env, transport = fetch) {
   const admin = environment.ADMIN_TELEMETRY_TOKEN, vercel = environment.VERCEL_TOKEN
-  if (!admin || admin.length < 32 || !vercel || vercel.length < 20 || environment.ADMIN_TELEMETRY_URL !== TELEMETRY) {
+  // The host is an independent deployment pin. A URL change alone must never
+  // move the credential; the old deployment remains the compatible default.
+  const host = environment.ADMIN_TELEMETRY_TOKEN_HOST || DEFAULT_TELEMETRY_HOST
+  const telemetry = `https://${host}/internal/v1/admin-telemetry`
+  if (!admin || admin.length < 32 || !vercel || vercel.length < 20
+    || !/^studyinchina-catalog-api\.[a-z0-9-]+\.workers\.dev$/u.test(host)
+    || environment.ADMIN_TELEMETRY_URL !== telemetry) {
     throw new Error('publishing_credentials_missing_or_target_invalid')
   }
   const read = async (url, token) => {
@@ -34,7 +40,7 @@ export async function checkPublishingAuthentication(environment = process.env, t
   const project = await read(api(`/v9/projects/${PROJECT}`), vercel)
   if (project.id !== PROJECT || project.accountId !== TEAM) throw new Error('publishing_project_ownership_mismatch')
   const alias = await read(api(`/v4/aliases/${ALIAS}`), vercel)
-  const writer = await read(new URL('/internal/v1/admin-releases?writer=1', TELEMETRY).href, admin)
+  const writer = await read(new URL('/internal/v1/admin-releases?writer=1', telemetry).href, admin)
   if (alias.projectId !== PROJECT || !/^dpl_[A-Za-z0-9]+$/u.test(alias.deploymentId ?? '')
     || writer.controlEnabled !== true || writer.state?.registry?.projectId !== PROJECT
     || writer.state.registry.alias !== ALIAS || writer.state.registry.currentId !== alias.deploymentId

@@ -1,0 +1,64 @@
+name: Transfer frozen model execution history
+
+on:
+  workflow_dispatch:
+    inputs:
+      migration_id:
+        description: Exact migration ID already bound on both maintenance Workers
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autonomous-catalog-maintenance-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  transfer:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.repository == 'computersciencefreshmen/StudyInChina' &&
+      github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Require the current main commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          current_main="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          if [[ "$GITHUB_REF" != 'refs/heads/main' || "$current_main" != "$GITHUB_SHA" || "$(git rev-parse HEAD)" != "$GITHUB_SHA" ]]; then
+            echo 'model_state_migration_requires_current_main' >&2
+            exit 1
+          fi
+      - name: Freeze, verify and relay private model state without restoring execution
+        env:
+          MIGRATION_ID: ${{ inputs.migration_id }}
+          CATALOG_MIGRATION_SOURCE_URL: ${{ vars.CATALOG_MIGRATION_SOURCE_URL }}
+          CATALOG_MIGRATION_TARGET_URL: ${{ vars.CATALOG_MIGRATION_TARGET_URL }}
+          CATALOG_MIGRATION_SOURCE_HOST: ${{ vars.CATALOG_MIGRATION_SOURCE_HOST }}
+          CATALOG_MIGRATION_TARGET_HOST: ${{ vars.CATALOG_MIGRATION_TARGET_HOST }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+          CATALOG_MIGRATION_TARGET_TOKEN: ${{ secrets.CATALOG_MIGRATION_TARGET_TOKEN }}
+        run: node --import tsx scripts/cloudflare/transfer-model-state.ts
+      - name: Retain only the redacted migration result
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: model-state-migration-${{ github.run_id }}
+          path: ${{ runner.temp }}/model-state-migration-report.json
+          if-no-files-found: warn
+          retention-days: 7

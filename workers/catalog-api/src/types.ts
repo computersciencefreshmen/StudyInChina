@@ -33,6 +33,7 @@ export type CatalogApiEnv = {
   ADMIN_TELEMETRY_TOKEN?: string
   ADMIN_EXECUTOR_ID?: string
   ADMIN_RELEASE_CONTROL_ENABLED?: string
+  ACCOUNT_MIGRATION_FROZEN?: string
 }
 
 export type ActiveReleaseRow = {

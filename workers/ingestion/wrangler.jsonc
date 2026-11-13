@@ -1,13 +1,16 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "studyinchina-ingestion",
+  "account_id": "b75f28d574289c29e9bda60a2fca27ed",
   "main": "./src/index.ts",
   "compatibility_date": "2026-07-20",
   "workers_dev": true,
   "preview_urls": false,
   "observability": { "enabled": true },
+  // The owner retired the legacy M2.7 model lane. Subscription-based expansion
+  // runs through catalog-maintenance; retain ingestion data and read APIs only.
   "triggers": {
-    "crons": ["17 * * * *"]
+    "crons": []
   },
   "vars": {
     "USER_AGENT": "StudyInChinaDataBot/1.0 (+https://studyinchina.vercel.app/contact)",
@@ -34,7 +37,7 @@
     {
       "binding": "INGESTION_DB",
       "database_name": "studyinchina-pipeline",
-      "database_id": "bb68098a-1429-44ad-869a-de9c3a5e478c",
+      "database_id": "43e2d4a5-54a4-4932-97f3-755be12ef8bb",
       "migrations_dir": "../../infra/d1/pipeline/migrations"
     }
   ],
@@ -63,15 +66,6 @@
         "queue": "studyinchina-ingestion-quarantine"
       }
     ],
-    "consumers": [
-      {
-        "queue": "studyinchina-ingestion",
-        "max_batch_size": 10,
-        "max_batch_timeout": 5,
-        "max_retries": 4,
-        "dead_letter_queue": "studyinchina-ingestion-dlq",
-        "max_concurrency": 2
-      }
-    ]
+    "consumers": []
   }
 }

@@ -27,4 +27,5 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           ADMIN_TELEMETRY_URL: ${{ secrets.ADMIN_TELEMETRY_URL }}
           ADMIN_TELEMETRY_TOKEN: ${{ secrets.ADMIN_TELEMETRY_TOKEN }}
+          ADMIN_TELEMETRY_TOKEN_HOST: ${{ vars.ADMIN_TELEMETRY_TOKEN_HOST }}
         run: node scripts/operations/check-publishing-auth.mjs

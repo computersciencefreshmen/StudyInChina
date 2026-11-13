@@ -16,6 +16,7 @@ export interface DurableStorage {
   put<T>(key: string, value: T): Promise<void>
   delete(key: string): Promise<boolean>
   transaction<T>(body: (txn: DurableStorage) => Promise<T>): Promise<T>
+  list?<T>(options: { startAfter?: string; limit: number }): Promise<Map<string, T>>
 }
 export interface DurableState { storage: DurableStorage }
 export interface DurableNamespace { idFromName(name: string): unknown; get(id: unknown): { fetch(request: Request): Promise<Response> } }
@@ -24,6 +25,8 @@ export type MaintenanceEnv = {
   MAINTENANCE_QUEUE: QueueProducer<MaintenanceMessage>; MODEL_ADMISSION: DurableNamespace;
   MAINTENANCE_ADMIN_TOKEN?: string; MINIMAX_SUBSCRIPTION_KEY?: string;
   CLOUDFLARE_BILLING_READ_TOKEN?: string;
+  MODEL_STATE_MIGRATION_ID?: string; MODEL_STATE_MIGRATION_ROLE?: string;
+  MODEL_STATE_MIGRATION_SOURCE_ACCOUNT_ID?: string; MODEL_STATE_MIGRATION_TARGET_ACCOUNT_ID?: string;
   MAINTENANCE_ENABLED?: string; MINIMAX_MODEL?: string; MINIMAX_ANTHROPIC_BASE?: string;
   NATIVE_HEAD_RECONCILIATION_REQUIRED?: string;
   SCOPE_REGISTRY_SHA256?: string; SCOPE_SCHOOL_COUNT?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;

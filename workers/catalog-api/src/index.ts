@@ -391,6 +391,11 @@ async function internalBundleResponse(request: Request, env: CatalogApiEnv) {
 
 async function handle(request: Request, env: CatalogApiEnv) {
   const url = new URL(request.url)
+  if (env.ACCOUNT_MIGRATION_FROZEN === 'true' && [
+    '/internal/v1/admin-telemetry', '/internal/v1/admin-executor', '/internal/v1/admin-releases',
+  ].includes(url.pathname)) {
+    return json({ error: { code: 'account_migration_frozen' } }, 503, { 'Retry-After': '3600' })
+  }
   if (url.pathname === '/internal/v1/admin-telemetry') return handleAdminTelemetry(request, env)
   if (url.pathname === '/internal/v1/admin-executor') return handleAdminExecutor(request, env)
   if (url.pathname === '/internal/v1/admin-releases') return handleAdminReleases(request, env)

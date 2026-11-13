@@ -1,6 +1,7 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "studyinchina-release-builder",
+  "account_id": "b75f28d574289c29e9bda60a2fca27ed",
   "main": "./src/index.ts",
   "compatibility_date": "2026-07-20",
   "workers_dev": true,
@@ -25,13 +26,13 @@
     {
       "binding": "PIPELINE_DB",
       "database_name": "studyinchina-pipeline",
-      "database_id": "bb68098a-1429-44ad-869a-de9c3a5e478c",
+      "database_id": "43e2d4a5-54a4-4932-97f3-755be12ef8bb",
       "migrations_dir": "../../infra/d1/pipeline/migrations"
     },
     {
       "binding": "CATALOG_DB",
       "database_name": "studyinchina-catalog",
-      "database_id": "451c22ea-473e-4a71-a1b5-8b0a2de4176f",
+      "database_id": "491ecd37-db2d-4520-afef-8b7deb1c64c0",
       "migrations_dir": "../../infra/d1/catalog/migrations"
     }
   ],

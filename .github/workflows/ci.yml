@@ -105,6 +105,9 @@ jobs:
       - name: Run cloud maintenance queue, quota and evidence tests
         run: npm run test:catalog-maintenance
 
+      - name: Verify account migration preserves evidence bytes and metadata
+        run: npm run test:account-migration
+
       - name: Validate ingestion Worker bundle and bindings
         run: npm run check:worker:ingestion
 
