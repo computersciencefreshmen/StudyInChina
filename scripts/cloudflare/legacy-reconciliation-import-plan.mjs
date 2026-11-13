@@ -104,7 +104,7 @@ export async function buildImportPlan({manifest, classification, readRow, findAt
       }
       if(before && table!=='maintenance_sources' && !same(before,after))fail('existing_row_conflict')
       const operation={table,before,after,originalRowSha256:fingerprint(original)}
-      if(before && same(before,after))preserved.push({table,keySha256:fingerprint(schema.keys.map(k=>after[k])),rowSha256:fingerprint(after)})
+      if(before && same(before,after))preserved.push({table,keySha256:fingerprint(schema.keys.map(k=>after[k])),rowSha256:fingerprint(after),row:after})
       else operations.push(operation)
     }
   }
@@ -130,5 +130,17 @@ export async function applyImportPlan(plan, query) {
     if(!same(after,op.after))fail('write_readback_conflict')
     applied++
   }
-  return {applied,reused,operationCount:plan.operations.length,planSha256:sha256,modelCalls:false,publicWrites:false}
+  for(const preserved of plan.preserved??[]) {
+    const schema=shape(preserved.table,preserved.row)
+    if(fingerprint(schema.keys.map(k=>preserved.row[k]))!==preserved.keySha256 || fingerprint(preserved.row)!==preserved.rowSha256)fail('preserved_row_proof_invalid')
+    const observed=(await query(readStatement(preserved.table,preserved.row)))[0]??null
+    if(!same(observed,preserved.row))fail('preserved_row_readback_conflict')
+  }
+  // Final readback also catches deletion or change of an earlier imported row
+  // while later chunks were written. The caller keeps the backend disabled.
+  for(const operation of plan.operations) {
+    const observed=(await query(readStatement(operation.table,operation.after)))[0]??null
+    if(!same(observed,operation.after))fail('final_row_readback_conflict')
+  }
+  return {applied,reused,operationCount:plan.operations.length,preservedCount:plan.preserved?.length??0,planSha256:sha256,modelCalls:false,publicWrites:false}
 }

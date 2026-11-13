@@ -49,3 +49,21 @@ test('plan corruption rejects before queries',async()=>{
   const plan=makePlan([]);plan.operations.push({table:'anything'})
   await assert.rejects(applyImportPlan(plan,()=>assert.fail('unexpected database query')),/plan_invalid/)
 })
+test('unchanged rows are freshly verified instead of trusting the planning snapshot',async()=>{
+  const{db,query}=harness();try{
+    const plan=makePlan([]);delete plan.sha256
+    plan.preserved=[{table:'maintenance_model_attempts',row,keySha256:fingerprint([row.attempt_id]),rowSha256:fingerprint(row)}]
+    plan.sha256=fingerprint(plan)
+    await assert.rejects(applyImportPlan(plan,query),/preserved_row_readback_conflict/)
+    await query(writeStatement({table:'maintenance_model_attempts',before:null,after:row}))
+    assert.equal((await applyImportPlan(plan,query)).preservedCount,1)
+  }finally{db.close()}
+})
+test('final readback catches an earlier row changing while later rows import',async()=>{
+  const{db,query}=harness();try{
+    const other={...row,attempt_id:'second-unknown',reservation_key:'e'.repeat(64),request_sha256:'f'.repeat(64)}
+    const plan=makePlan([row,other].map(after=>({table:'maintenance_model_attempts',before:null,after})))
+    const racing=async s=>{const r=await query(s);if(s.sql.startsWith('INSERT')&&s.params.includes(other.attempt_id))db.prepare('DELETE FROM maintenance_model_attempts WHERE attempt_id=?').run(row.attempt_id);return r}
+    await assert.rejects(applyImportPlan(plan,racing),/final_row_readback_conflict/)
+  }finally{db.close()}
+})
