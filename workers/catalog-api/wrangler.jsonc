@@ -1,6 +1,7 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "studyinchina-catalog-api",
+  "account_id": "b75f28d574289c29e9bda60a2fca27ed",
   "main": "./src/index.ts",
   "compatibility_date": "2026-07-20",
   "compatibility_flags": ["nodejs_compat"],
@@ -12,7 +13,7 @@
     {
       "binding": "CATALOG_DB",
       "database_name": "studyinchina-catalog",
-      "database_id": "451c22ea-473e-4a71-a1b5-8b0a2de4176f",
+      "database_id": "491ecd37-db2d-4520-afef-8b7deb1c64c0",
       "migrations_dir": "../../infra/d1/catalog/migrations"
     }
   ],

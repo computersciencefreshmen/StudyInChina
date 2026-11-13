@@ -13,6 +13,10 @@ snapshot or copy admission. Sum the listed sizes to locate objects above 16 MiB.
 `/v1/list` and `/v1/object` still require `SOURCE_FROZEN=true`; passing inventory
 descriptors to the target cannot bypass the source byte-read freeze gate.
 
+Metadata listing accepts an optional strict `limit=1..64` (default four), with
+a one-MiB response bound. This speeds inventory without increasing the copy
+batch or binary buffer limits; oversized metadata returns an explicit error.
+
 1. Freeze all source writers and record the freeze proof. Keep destination
    production workers/queues/models disabled throughout migration and validation.
 2. Make two private copies of `wrangler.example.jsonc`, explicitly pinning each

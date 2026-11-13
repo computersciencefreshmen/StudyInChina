@@ -1,13 +1,20 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import sitemap from '@/app/sitemap'
 import { getTodayDate } from '@/lib/data/freshness'
-import { getData } from '@/lib/data/load'
+import { getCatalogData } from '@/lib/data/load'
 import {
   isIndexableCity,
   isIndexableProgram,
   isIndexableScholarship,
 } from '@/lib/seo/indexability'
+
+beforeEach(() => {
+  // Sitemap membership is evaluated against a fixed evidence snapshot day.
+  vi.useFakeTimers({ toFake: ['Date'] })
+  vi.setSystemTime(new Date('2026-10-28T04:00:00Z'))
+})
+afterEach(() => vi.useRealTimers())
 
 describe('localized sitemap', () => {
   it('indexes the three fully translated locales and excludes beta and preview locales', async () => {
@@ -27,7 +34,7 @@ describe('localized sitemap', () => {
   }, 15_000)
 
   it('keeps thin records accessible but excludes them from discovery feeds', async () => {
-    const data = getData()
+    const data = await getCatalogData()
     const today = getTodayDate()
     const paths = (await sitemap()).map((entry) => new URL(entry.url).pathname)
     const detailCount = (segment: string) => paths.filter((path) => (

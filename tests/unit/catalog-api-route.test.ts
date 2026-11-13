@@ -93,6 +93,10 @@ describe('catalog API routes', () => {
   })
 
   it('reports record counts for the current public release', async () => {
+    // Evaluate the checked-in evidence within its original review window.
+    // Production keeps using the real clock and may correctly publish zero.
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-10-28T04:00:00Z'))
     const repository = createCatalogRepository()
     const publicBundle = selectCatalogApiData(
       await repository.getBundle(),

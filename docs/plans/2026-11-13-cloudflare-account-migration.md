@@ -1,14 +1,14 @@
 # ADR: Move StudyInChina to the owner's paid Gmail Cloudflare account
 
-Status: accepted account choice; execution pending authenticated target access
-and verification. The owner explicitly selected migration instead of purchasing
-a second subscription on the existing account.
+Status: target authentication and staged resources verified; final frozen capture,
+state verification and endpoint cutover pending. The owner explicitly selected
+migration instead of purchasing a second subscription on the existing account.
 
 ## Context and decision
 
 The deployed project belongs to account `78969c65bfdd892bb12c116869ea91cf`.
 The owner purchased Workers Paid on Gmail account
-`b75f28d574289c29e9bda60a2fca27ed`, which has no project resources yet.
+`b75f28d574289c29e9bda60a2fca27ed`.
 The project will move to that account while retaining existing business IDs,
 official evidence, hashes, publication history and model execution protections.
 No second paid plan is required by this migration. Usage-based charges remain
@@ -55,7 +55,10 @@ send-started reservation. Allow already-running work to settle before exporting;
 never run source and target model writers simultaneously.
 
 Cloudflare resource IDs are recreated: database UUIDs, queue IDs, DO namespaces,
-version/deployment IDs and the workers.dev hostname change. Domain record IDs,
+version/deployment IDs and the workers.dev hostname change. Repository Worker
+configs explicitly pin the destination account and its two new database IDs;
+source freeze operations use a private, pinned pre-migration configuration.
+Domain record IDs,
 source/job/reservation IDs, release IDs and historical receipts do not change.
 
 ## Execution and verification

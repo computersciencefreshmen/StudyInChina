@@ -2,8 +2,10 @@ import type { BucketAlias, CopyResult, Descriptor, MigrationBucket, MigrationEnv
 
 export const MAX_OBJECT_BYTES = 16 * 1024 * 1024
 export const MAX_BATCH = 4
+export const MAX_LIST_OBJECTS = 64
 export const ALIASES: BucketAlias[] = ['snapshots', 'releases', 'backups']
 const JSON_LIMIT = 64 * 1024
+const LIST_RESPONSE_LIMIT = 1024 * 1024
 const SHA = /^[a-f0-9]{64}$/u
 const HTTP_KEYS = ['contentType', 'contentLanguage', 'contentDisposition', 'contentEncoding', 'cacheControl', 'cacheExpiry']
 const encode = new TextEncoder()
@@ -154,13 +156,19 @@ export async function handleFetch(request: Request, env: MigrationEnv, fetcher: 
       if (url.pathname === '/v1/list' || inventory) {
         const cursor = url.searchParams.get('cursor')
         if (cursor && cursor.length > 4096) throw new Error('cursor_invalid')
-        const page = await bucket(env, name).list({ limit: MAX_BATCH, ...(cursor ? { cursor } : {}), include: ['httpMetadata', 'customMetadata'] })
-        if (page.objects.length > MAX_BATCH || page.truncated && !page.cursor) throw new Error('listing_invalid')
+        const rawLimit = url.searchParams.get('limit')
+        if (url.searchParams.getAll('limit').length > 1 || rawLimit !== null && (!/^[1-9][0-9]?$/u.test(rawLimit) || Number(rawLimit) > MAX_LIST_OBJECTS)) throw new Error('listing_limit_invalid')
+        const limit = rawLimit === null ? MAX_BATCH : Number(rawLimit)
+        const page = await bucket(env, name).list({ limit, ...(cursor ? { cursor } : {}), include: ['httpMetadata', 'customMetadata'] })
+        if (page.objects.length > limit || page.truncated && !page.cursor) throw new Error('listing_invalid')
         const excludedReceiptKeys = page.objects.filter(item => item.key.startsWith(receiptsPrefix(env.MIGRATION_ID))).map(item => item.key)
         const objects = await Promise.all(page.objects.filter(item => !excludedReceiptKeys.includes(item.key)).map(describe))
-        return json({ migrationId: env.MIGRATION_ID, role: 'source', bucket: name, objects, excludedReceiptKeys,
+        const result = { migrationId: env.MIGRATION_ID, role: 'source', bucket: name, objects, excludedReceiptKeys,
           sourceFrozen: env.SOURCE_FROZEN === 'true', cutoverReady: !inventory && env.SOURCE_FROZEN === 'true',
-          truncated: page.truncated, cursor: page.truncated ? page.cursor : null })
+          truncated: page.truncated, cursor: page.truncated ? page.cursor : null }
+        const text = JSON.stringify(result)
+        if (encode.encode(text).byteLength > LIST_RESPONSE_LIMIT) return json({ error: 'listing_metadata_too_large' }, 413)
+        return new Response(text, { headers: { 'content-type': 'application/json', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' } })
       }
       if (url.pathname === '/v1/object' && request.method === 'GET') {
         const key = url.searchParams.get('key')

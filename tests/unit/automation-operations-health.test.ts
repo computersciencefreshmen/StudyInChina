@@ -62,6 +62,36 @@ function check(report: Awaited<ReturnType<typeof collectOperationsHealth>>, id: 
 }
 
 describe('automation operations health', () => {
+  it('reads a migrated ingestion origin only with its independently configured host pin', async () => {
+    const host = 'studyinchina-ingestion.yanghanyu2023.workers.dev'
+    const calls: { url: string; init?: RequestInit }[] = []
+    const rows = healthyRows()
+    const report = await collectOperationsHealth(options({ operationsUrl: `https://${host}`, githubRepo: undefined, releaseUrl: undefined }), {
+      env: { INGESTION_TOKEN_HOST: host, INGESTION_ADMIN_TOKEN: 'test-only-ingestion-credential' }, now, data,
+      fetch: (async (input, init) => {
+        calls.push({ url: String(input), init })
+        return Response.json({ format: 'studyinchina.operations-observations', observedAt: now.toISOString(),
+          observations: Object.fromEntries(Object.entries(rows).map(([key, value]) => [key, { state: 'observed', rows: value }])) })
+      }) as typeof fetch,
+    })
+    expect(calls).toHaveLength(1)
+    expect(calls[0].url).toBe(`https://${host}/operations`)
+    expect(calls[0].init?.redirect).toBe('error')
+    expect(check(report, 'scheduler.ingestion').status).toBe('pass')
+    expect(readFileSync(join(process.cwd(), '.github/workflows/automation-health.yml'), 'utf8'))
+      .toContain("INGESTION_TOKEN_HOST: ${{ vars.INGESTION_TOKEN_HOST || 'studyinchina-ingestion.13022037121.workers.dev' }}")
+  })
+
+  it('does not send an ingestion credential to a changed origin without the matching pin', async () => {
+    let calls = 0
+    const report = await collectOperationsHealth(options({ operationsUrl: 'https://studyinchina-ingestion.yanghanyu2023.workers.dev', githubRepo: undefined, releaseUrl: undefined }), {
+      env: { INGESTION_ADMIN_TOKEN: 'test-only-ingestion-credential' }, now, data,
+      fetch: (async () => { calls++; return Response.json({}) }) as typeof fetch,
+    })
+    expect(calls).toBe(0)
+    expect(check(report, 'pipeline.heartbeats.observation').status).toBe('unobserved')
+  })
+
   it('requires observations instead of treating an unconfigured runtime as healthy', async () => {
     const { fetcher, calls } = mockFetcher()
     const report = await collectOperationsHealth(options({ remote: false, githubRepo: undefined, releaseUrl: undefined }), { fetch: fetcher, env: {}, now, data })

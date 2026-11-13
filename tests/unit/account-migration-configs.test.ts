@@ -7,7 +7,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { buildAccountMigrationConfigs, type MigrationConfigOptions } from '../../scripts/cloudflare/build-account-migration-configs.mjs'
 
 const workers = ['catalog-maintenance', 'ingestion', 'localization', 'entity-materializer', 'publisher', 'release-builder', 'catalog-api']
-const temporary: string[] = [], source = 'a'.repeat(32), target = 'b'.repeat(32)
+const temporary: string[] = [], source = 'b75f28d574289c29e9bda60a2fca27ed', target = 'b'.repeat(32)
 const flags = ['MODEL_STATE_MIGRATION_ID', 'MODEL_STATE_MIGRATION_ROLE', 'MODEL_STATE_MIGRATION_SOURCE_ACCOUNT_ID', 'MODEL_STATE_MIGRATION_TARGET_ACCOUNT_ID']
 const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'))
 function fixture() {

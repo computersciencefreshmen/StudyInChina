@@ -1,6 +1,13 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { GET } from '@/app/api/v1/programs/compare/route'
 import { getData } from '@/lib/data/load'
+
+beforeEach(() => {
+  // Input IDs and the API must share the checked-in evidence's evaluation day.
+  vi.useFakeTimers({ toFake: ['Date'] })
+  vi.setSystemTime(new Date('2026-10-28T04:00:00Z'))
+})
+afterEach(() => vi.useRealTimers())
 
 describe('program comparison API', () => {
   it('returns at most four lightweight records in requested order', async () => {

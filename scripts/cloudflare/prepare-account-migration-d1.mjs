@@ -266,7 +266,9 @@ export async function prepareAccountMigrationD1({ kind, dataOnlyPath, outputDire
     write('01-schema.sql', trusted.migrations.map(migration => `-- Trusted migration ${migration.name}; sha256 ${migration.sha256}\n${migration.sql}`).join('\n'))
     write('02-before-data.sql', before)
     write('04-after-data.sql', after)
-    write('05-check.sql', 'PRAGMA foreign_key_check;\nPRAGMA integrity_check;\n' + trusted.tables.map(table => `SELECT '${table}' AS table_name,COUNT(*) AS rows FROM ${identifier(table)};`).join('\n') + '\n')
+    // D1 permits quick_check, but rejects the full integrity_check pragma.
+    // The local export readback verifier still runs full integrity_check.
+    write('05-check.sql', 'PRAGMA foreign_key_check;\nPRAGMA quick_check;\n' + trusted.tables.map(table => `SELECT '${table}' AS table_name,COUNT(*) AS rows FROM ${identifier(table)};`).join('\n') + '\n')
     const sqlPath = join(output, '03-data.sql'), boundPath = join(output, '03-data-bindings.jsonl'), planPath = join(output, '03-data-plan.jsonl')
     const descriptors = [sqlPath, boundPath, planPath].map(path => openSync(path, 'wx', 0o600))
     let ordinal = 0, sqlStatements = 0, boundRows = 0

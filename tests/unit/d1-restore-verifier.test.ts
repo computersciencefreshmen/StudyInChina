@@ -182,6 +182,23 @@ describe('complete D1 restore and account migration', () => {
       expect(target.prepare('SELECT quota_json,status FROM maintenance_model_attempts').get()).toEqual({ quota_json: payload, status: 'unknown' })
     } finally { target.close() }
   })
+  it('emits remote-supported quick_check while retaining full local readback integrity verification', async () => {
+    const f = pipelineFixture(), output = join(f.root, 'prepared')
+    const manifest = await prepareAccountMigrationD1({ kind: 'pipeline', dataOnlyPath: dump(f), outputDirectory: output })
+    const remoteChecks = readFileSync(join(output, '05-check.sql'), 'utf8')
+    expect(remoteChecks).toMatch(/^PRAGMA foreign_key_check;\nPRAGMA quick_check;\n/u)
+    expect(remoteChecks).not.toContain('PRAGMA integrity_check')
+    expect(manifest.verification.integrityCheck).toBe('ok')
+    const target = new DatabaseSync(':memory:')
+    try {
+      target.exec(readFileSync(join(output, '01-schema.sql'), 'utf8'))
+      executeIndependent(target, readFileSync(join(output, '02-before-data.sql'), 'utf8')); executeDataPlan(target, output)
+      executeIndependent(target, readFileSync(join(output, '04-after-data.sql'), 'utf8'))
+      const statements = unstable_splitSqlQuery(remoteChecks)
+      expect(target.prepare(statements[0]).all()).toEqual([])
+      expect(target.prepare(statements[1]).all()).toEqual([{ quick_check: 'ok' }])
+    } finally { target.close() }
+  })
   it('preserves a staged additive upgrade separately from the current 272-school control scope', () => {
     const f = pipelineFixture(), previous = scope(272), next = scope(295), originalIds = new Set(previous.schools.map((school: { universityId: string }) => school.universityId))
     mutate(f, db => {

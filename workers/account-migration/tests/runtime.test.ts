@@ -8,7 +8,8 @@ import test from 'node:test'
 import { build } from 'esbuild'
 import { convertV4MiniflareOptions, Miniflare, Response as WorkerResponse } from 'miniflare'
 import { copyAccountR2 } from '../../../scripts/cloudflare/copy-account-r2'
-import { MAX_OBJECT_BYTES, receiptsPrefix } from '../src/index'
+import { handleFetch, MAX_OBJECT_BYTES, receiptsPrefix } from '../src/index'
+import type { MigrationBucket, MigrationEnv } from '../src/types'
 
 const token = 'a'.repeat(64), migrationId = 'local-canary-20261113'
 const sourceUrl = 'https://source-migration.invalid', targetUrl = 'https://target-migration.invalid'
@@ -204,10 +205,47 @@ test('real workerd and native R2 copy all pages, preserve exact metadata/bytes a
       assert.equal((await receipt.json() as { results: Array<{ code: string }> }).results[0].code, 'copy_receipt_unconfirmed')
       assert.deepEqual(Buffer.from(await (await targetSnapshots.get(key))!.arrayBuffer()), compressed)
     })
+    await context.test('metadata limit accepts only strict integers1..64 on list and inventory', async () => {
+      for (const path of ['/v1/list', '/v1/inventory']) for (const limit of ['', '0', '65', '-1', '4.0', '1e1', '04', '+4', ' 4', '4&limit=8']) {
+        const query = limit === '4&limit=8' ? limit : encodeURIComponent(limit)
+        const response = await source.fetch(new Request(`${sourceUrl}${path}?bucket=snapshots&limit=${query}`, { headers }))
+        assert.equal(response.status, 400, `invalid list limit ${JSON.stringify(limit)}`)
+      }
+    })
+    await context.test('native metadata limit64 paginates all keys while the unchanged default remains4', async () => {
+      for (let i = 0; i < 70; i++) await sourceSnapshots.put(`zz-pagination-${String(i).padStart(3, '0')}`, 'metadata-only')
+      const expected = (await sourceSnapshots.list()).objects.filter(item => !item.key.startsWith(receiptsPrefix(migrationId))).map(item => item.key)
+      for (const path of ['/v1/list', '/v1/inventory']) {
+        const keys: string[] = []; let cursor: string | null = null, pages = 0
+        do {
+          const url = new URL(path, sourceUrl); url.searchParams.set('bucket', 'snapshots'); url.searchParams.set('limit', '64')
+          if (cursor) url.searchParams.set('cursor', cursor)
+          const response = await source.fetch(new Request(url, { headers })); assert.equal(response.status, 200)
+          const page = await response.json() as { objects: Array<{ key: string }>; cursor: string | null; truncated: boolean }
+          assert.ok(page.objects.length <= 64); keys.push(...page.objects.map(item => item.key)); cursor = page.cursor; pages++
+          assert.equal(page.truncated, cursor !== null)
+        } while (cursor)
+        assert.equal(pages, 2); assert.deepEqual(keys, expected)
+        const normal = await (await source.fetch(new Request(`${sourceUrl}${path}?bucket=snapshots`, { headers }))).json() as { objects: unknown[] }
+        assert.equal(normal.objects.length, 4)
+      }
+    })
   } finally {
     await mf.dispose()
     const base = resolve('.tmp') + sep
     assert.equal(directory.startsWith(base), true)
     rmSync(directory, { recursive: true, force: true })
   }
+})
+
+test('oversized metadata listing returns an explicit error instead of truncating descriptors', async () => {
+  let byteReads = 0
+  const bucket: MigrationBucket = {
+    async list(options) { assert.equal(options.limit, 64); return { objects: [{ key: 'large-metadata', size: 1, customMetadata: { value: 'x'.repeat(1024 * 1024) } }], truncated: false } },
+    async get() { byteReads++; throw new Error('unexpected_object_read') },
+    async put() { throw new Error('unexpected_write') },
+  }
+  const env: MigrationEnv = { MIGRATION_ROLE: 'source', MIGRATION_ID: migrationId, MIGRATION_TRANSFER_TOKEN: token, SOURCE_FROZEN: 'true', SNAPSHOTS_BUCKET: bucket, RELEASES_BUCKET: bucket, BACKUPS_BUCKET: bucket }
+  const response = await handleFetch(new Request(`${sourceUrl}/v1/list?bucket=snapshots&limit=64`, { headers }), env)
+  assert.equal(response.status, 413); assert.deepEqual(await response.json(), { error: 'listing_metadata_too_large' }); assert.equal(byteReads, 0)
 })
