@@ -15,7 +15,7 @@ import { makeEnv, seedInput, TEST_CATALOG } from './fixture'
 const now = Date.now(), first = Array.from({ length: 5 }, (_, index) => `uni-${String(index).padStart(3, '0')}`)
 const original = (name: string) => gunzipSync(readFileSync(new URL(`./fixtures/terminal-quarantine/${name}.gz`, import.meta.url)))
 
-async function fixture() {
+async function fixture(options: { migration?: Record<string, unknown>; relay?: Record<string, unknown> } = {}) {
   let network = 0
   const f = makeEnv(async () => { network++; throw new Error('No provider request is permitted by this suite') })
   f.env.SCOPE_REGISTRY_SHA256 = EXISTING_SCHOOLS_V2_SHA256; f.env.SCOPE_SCHOOL_COUNT = '295'; f.env.MAINTENANCE_ENABLED = 'false'
@@ -46,12 +46,27 @@ async function fixture() {
       j.created_at, subject.sourceUrl, 200, j.snapshot_sha256, subject.textSha256, j.snapshot_key, 'text/html', 'captured', 0)
   }
   const states = { send_started: 1, completed: 1, unknown: 2, known_failed: 0 }, manifestSha256 = await digest('test-only-full-finalized-do-manifest')
-  const finalized = { manifestSha256, finalizedAt: new Date(now - 1000).toISOString(), pageCount: 1, importedPages: 1, entryCount: 5, requestCount: 4, states }
+  const finalized: Record<string, unknown> = { manifestSha256, finalizedAt: new Date(now - 1000).toISOString(), pageCount: 1, importedPages: 1, entryCount: 5, requestCount: 4, states, ...options.migration }
   await f.storage.put(MODEL_STATE_MIGRATION_KEY, { version: 1, migrationId: policy.migrationId, sourceAccountId: policy.sourceAccountId, targetAccountId: policy.targetAccountId,
     role: 'target', phase: 'finalized', frozenAt: new Date(now - 2000).toISOString(), pages: [{ index: 0 }], gatePresent: true, ...finalized })
   for (let index = 0; index < 4; index++) await f.storage.put(`request:${String(index).repeat(64)}`, { state: index < 2 ? 'unknown' : index === 2 ? 'send_started' : 'completed', attemptId: `preserved-${index}`, requestSha256: String(index).repeat(64) })
+  if (Object.hasOwn(finalized, 'auxiliaryEntryCount')) {
+    // The consumer's forward-compatible metadata fixture mirrors the new DO
+    // field from its real lock; the existing finalized/id/hash/state handler runs.
+    const admission = f.env.MODEL_ADMISSION
+    f.env.MODEL_ADMISSION = { idFromName: name => admission.idFromName(name), get: id => {
+      const stub = admission.get(id)
+      return { fetch: async request => {
+        const response = await stub.fetch(request)
+        if (!response.ok || new URL(request.url).pathname !== '/model-state-migration/status') return response
+        const value = await response.json() as Record<string, unknown>, lock = await f.storage.get<Record<string, unknown>>(MODEL_STATE_MIGRATION_KEY)
+        return Response.json({ ...value, auxiliaryEntryCount: value.auxiliaryEntryCount ?? lock?.auxiliaryEntryCount })
+      } }
+    } }
+  }
   const relay = { format: 'studyinchina.model-state-migration-report', version: 1, migrationId: policy.migrationId, state: 'finalized', code: null,
-    sourceFrozen: true, targetFinalized: true, manifestSha256, pageCount: 1, entryCount: 5, requestCount: 4, states, modelCallsPerformed: false, controlsChanged: false }
+    sourceFrozen: true, targetFinalized: true, manifestSha256, pageCount: 1, entryCount: finalized.entryCount, requestCount: finalized.requestCount, states: finalized.states,
+    ...(Object.hasOwn(finalized, 'auxiliaryEntryCount') ? { auxiliaryEntryCount: finalized.auxiliaryEntryCount } : {}), modelCallsPerformed: false, controlsChanged: false, ...options.relay }
   const relayBytes = canonical(relay), relaySha = await digest(relayBytes), relayReport = { objectKey: `maintenance/terminal-quarantine/evidence/${relaySha}.json`, sha256: relaySha }
   await f.bucket.put(relayReport.objectKey, relayBytes)
   const prepareInput = { phase: 'prepare', expectedRevision: 0, scopeRegistrySha256: EXISTING_SCHOOLS_V2_SHA256, relayReport }
@@ -91,6 +106,81 @@ test('fixed audited bytes prepare without mutation, then one immutable CAS dispo
     f.activate(); f.db.sqlite.prepare('UPDATE maintenance_control SET revision=revision+1').run()
     const repeated = await reviewedTerminalQuarantine(f.env, body, now); assert.ok(repeated.phase === 'registered'); assert.equal(repeated.reused, true); assert.equal(f.events(), 1)
     assert.deepEqual((await readUnknownJobDisposition(f.env, await control(f.env), now)).summary.importedDoStates, { send_started: 1, completed: 1, unknown: 2, known_failed: 0 })
+  } finally { f.db.sqlite.close() }
+})
+
+test('optional auxiliary KV counts preserve old zero proof bytes and count only migrated evidence alongside zero or one gate', async () => {
+  for (const auxiliaryEntryCount of [undefined, 0, 2]) for (const gateCount of [0, 1]) {
+    const f = await fixture({ migration: { entryCount: 4 + (auxiliaryEntryCount ?? 0) + gateCount,
+      ...(auxiliaryEntryCount === undefined ? {} : { auxiliaryEntryCount }) } })
+    try {
+      const original = structuredClone(f.storage.values), prepared = await f.prepared()
+      assert.ok(prepared.phase === 'prepared')
+      assert.deepEqual(prepared.evidence.migration, { manifestSha256: await digest('test-only-full-finalized-do-manifest'),
+        finalizedAt: new Date(now - 1000).toISOString(), pageCount: 1, importedPages: 1, entryCount: 4 + (auxiliaryEntryCount ?? 0) + gateCount,
+        requestCount: 4, ...(auxiliaryEntryCount ? { auxiliaryEntryCount } : {}), states: { send_started: 1, completed: 1, unknown: 2, known_failed: 0 } })
+      assert.equal(Object.hasOwn(prepared.evidence.migration, 'auxiliaryEntryCount'), Boolean(auxiliaryEntryCount))
+      const registered = await reviewedTerminalQuarantine(f.env, f.approve(prepared), now)
+      assert.ok(registered.phase === 'registered'); assert.equal(registered.totalUnknown, 3); assert.equal(registered.quarantinedUnknown, 3)
+      assert.deepEqual(registered.importedDoStates, { send_started: 1, completed: 1, unknown: 2, known_failed: 0 })
+      assert.deepEqual(f.storage.values, original); assert.equal(f.network(), 0)
+    } finally { f.db.sqlite.close() }
+  }
+})
+
+test('malformed, unsafe or impossible auxiliary counts cannot turn migrated entries into model calls or conceal unknown outcomes', async () => {
+  for (const migration of [
+    { auxiliaryEntryCount: -1 }, { auxiliaryEntryCount: 0.5 }, { auxiliaryEntryCount: '2' }, { auxiliaryEntryCount: null },
+    { auxiliaryEntryCount: Number.MAX_SAFE_INTEGER + 1 }, { auxiliaryEntryCount: Number.MAX_SAFE_INTEGER, entryCount: Number.MAX_SAFE_INTEGER },
+    { auxiliaryEntryCount: 2, entryCount: 8 }, { auxiliaryEntryCount: 2, entryCount: 5 },
+    { auxiliaryEntryCount: 2, entryCount: 7, states: { send_started: 1, completed: 3, unknown: 2, known_failed: 0 } },
+  ]) {
+    const f = await fixture({ migration })
+    try {
+      const before = structuredClone(f.storage.values)
+      await assert.rejects(f.prepared(), /terminal_quarantine_(?:do_counts_invalid|finalized_do_required)/)
+      assert.equal(f.events(), 0); assert.deepEqual(f.storage.values, before); assert.equal(f.network(), 0)
+    } finally { f.db.sqlite.close() }
+  }
+})
+
+test('relay and actual finalized DO auxiliary counts must agree exactly, including the missing-zero convention', async () => {
+  for (const options of [
+    { migration: { auxiliaryEntryCount: 2, entryCount: 7 }, relay: { auxiliaryEntryCount: 1 } },
+    { migration: { auxiliaryEntryCount: 2, entryCount: 7 }, relay: { auxiliaryEntryCount: 0 } },
+    { relay: { auxiliaryEntryCount: 2 } }, { relay: { auxiliaryEntryCount: null } }, { relay: { auxiliaryEntryCount: -1 } },
+  ]) {
+    const f = await fixture(options)
+    try {
+      await assert.rejects(f.prepared(), /terminal_quarantine_(?:relay_do_mismatch|do_counts_invalid)/)
+      assert.equal(f.events(), 0); assert.equal(f.network(), 0)
+    } finally { f.db.sqlite.close() }
+  }
+})
+
+test('a changed finalized auxiliary count after review cannot publish the old prepared disposition', async () => {
+  const f = await fixture({ migration: { auxiliaryEntryCount: 2, entryCount: 7 } })
+  try {
+    const approved = f.approve(await f.prepared()), lock = await f.storage.get<Record<string, unknown>>(MODEL_STATE_MIGRATION_KEY)
+    await f.storage.put(MODEL_STATE_MIGRATION_KEY, { ...lock, auxiliaryEntryCount: 3, entryCount: 8 })
+    const before = structuredClone(f.storage.values)
+    await assert.rejects(reviewedTerminalQuarantine(f.env, approved, now), /terminal_quarantine_relay_do_mismatch/)
+    assert.equal(f.events(), 0); assert.deepEqual(f.storage.values, before); assert.equal(f.network(), 0)
+  } finally { f.db.sqlite.close() }
+})
+
+test('auxiliary history compatibility never waives three different legacy SQL model unknowns', async () => {
+  const f = await fixture({ migration: { auxiliaryEntryCount: 2, entryCount: 7 } })
+  try {
+    await f.register(); await f.inspectAndPublish(); f.activate()
+    for (let index = 0; index < 3; index++) f.db.sqlite.prepare("INSERT INTO maintenance_model_attempts(reservation_key,attempt_id,source_id,snapshot_sha256,pass,request_sha256,model,status,started_at,quota_json) VALUES(?,?,?,?,'primary',?,'MiniMax-M3','unknown',?,'{}')")
+      .run(await digest(`legacy-request-${index}`), `unrelated-legacy-unknown-${index}`, await digest(`https://test.edu.cn/${index}`), await digest(`legacy-raw-${index}`), await digest(`legacy-payload-${index}`), new Date(now - 1000).toISOString())
+    const state = await rolloutStatus(f.env, now)
+    assert.equal(state.state, 'holding'); assert.ok(state.reasons.includes('model_outcome_unresolved'))
+    assert.equal(state.unknownJobDisposition?.quarantinedUnknown, 3); assert.equal(state.unknownJobDisposition?.modelSuccessesClaimed, false)
+    assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) count FROM maintenance_model_attempts WHERE status='unknown'").get()!.count, 3)
+    assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) count FROM maintenance_jobs WHERE status='unknown'").get()!.count, 3)
+    assert.equal((await evaluateRollout(f.env, { expectedRevision: 0 }, now)).advanced, false); assert.equal(f.network(), 0)
   } finally { f.db.sqlite.close() }
 })
 
