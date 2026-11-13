@@ -24,6 +24,7 @@ export type MaintenanceEnv = {
   PIPELINE_DB: D1Database; SNAPSHOTS_BUCKET: Bucket;
   MAINTENANCE_QUEUE: QueueProducer<MaintenanceMessage>; MODEL_ADMISSION: DurableNamespace;
   MAINTENANCE_ADMIN_TOKEN?: string; MINIMAX_SUBSCRIPTION_KEY?: string;
+  MINIMAX_FLASH_CANARY?: string;
   CLOUDFLARE_BILLING_READ_TOKEN?: string;
   MODEL_STATE_MIGRATION_ID?: string; MODEL_STATE_MIGRATION_ROLE?: string;
   MODEL_STATE_MIGRATION_SOURCE_ACCOUNT_ID?: string; MODEL_STATE_MIGRATION_TARGET_ACCOUNT_ID?: string;
@@ -66,6 +67,7 @@ export type ModelRequest = {
 }
 export type ModelResult = {
   attemptId: string; output: unknown; artifactKey: string; artifactSha256: string; reused: boolean
+  modelProfile?: import('./flash-canary').FlashAudit
 }
 export class MaintenanceError extends Error {
   constructor(readonly code: string, readonly retryAfter: number | null = null) { super(code) }
