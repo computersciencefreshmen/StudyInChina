@@ -195,7 +195,10 @@ test('real workerd releases a frozen legacy handoff mutex, preserves all auxilia
     const readStats = await (await post(source.mf, '/test/storage-statistics', {})).json() as { writes: number; deletes: number }
     assert.equal(readStats.writes, 0); assert.equal(readStats.deletes, 0)
     assert.equal((await post(source.mf, '/model-state-migration/export', { migrationId, pageIndex: 0 })).status, 409)
-    assert.equal((await post(source.mf, '/model-state-migration/non-temporal-fetch-permit-recovery', { migrationId })).status, 409)
+    const generic = await post(source.mf, '/model-state-migration/non-temporal-fetch-permit-recovery', { migrationId, operationId: 'valid-native-generic-must-reject-handoff',
+      expectedGateSha256: await digest(canonical(gate)), expectedRequestLedgerSha256: 'f'.repeat(64), expectedNonTemporalSlots: { fetch: 1, model: 0 }, observedAt: inspected.observedAt,
+      operator: { operatorId: 'native-root', decision: 'retire_non_temporal_fetch_slots_preserve_requests', reason: 'The known handoff is not a generic fetch.', reviewedAt: new Date().toISOString() } })
+    assert.equal(generic.status, 409); assert.equal((await generic.json() as { error: string }).error, 'non_temporal_recovery_gate_schema_unknown')
     const body = { migrationId, operationId: 'native-root-reviewed-handoff-operation-v1', expectedGateSha256: await digest(canonical(gate)), expectedLedgerSha256: inspected.ledgerSha256,
       expectedFenceSha256: await digest(canonical(fence)), expectedHistorySha256: await digest(canonical(fence)), expectedTokenSha256: fence.tokenSha256, batchId, manifestSha256: fence.manifestSha256,
       observedAt: inspected.observedAt, operator: { operatorId: 'native-independent-root', decision: 'release_quiescent_handoff_operation_preserve_intent', reason: 'Quiescent legacy coordination only; preserve unknown outcomes and held intent.', reviewedAt: new Date().toISOString() } }

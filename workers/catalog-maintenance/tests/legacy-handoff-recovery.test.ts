@@ -49,7 +49,9 @@ test('private typed inspection covers every key and does not export or write; re
   assert.deepEqual(JSON.parse(s.pageBytes).entries.map((e: { key: string }) => e.key), [...before.keys()].sort())
   assert.equal(s.pageSha256, await digest(s.pageBytes)); assert.equal(s.cutoverReady, false); assert.equal(s.modelCalls, false); assert.equal(s.mutation, false)
   assert.deepEqual(f.storage.values, before); assert.deepEqual(f.storage.writes, [])
-  await assert.rejects(recoverNonTemporalPermits(f.storage, binding, MODEL_STATE_MIGRATION_KEY, {}, () => 0, now))
+  await assert.rejects(recoverNonTemporalPermits(f.storage, binding, MODEL_STATE_MIGRATION_KEY, { migrationId, operationId: 'valid-generic-action-must-not-retire-handoff',
+    expectedGateSha256: b.expectedGateSha256, expectedRequestLedgerSha256: 'd'.repeat(64), expectedNonTemporalSlots: { fetch: 1, model: 0 }, observedAt: new Date(now).toISOString(),
+    operator: { operatorId: 'root-test', decision: 'retire_non_temporal_fetch_slots_preserve_requests', reason: 'A well-formed generic request must still reject the intentional handoff.', reviewedAt: new Date(now).toISOString() } }, () => 0, now), /gate_schema_unknown/)
   const result = await f.recover(b), after = await f.storage.get<Record<string, unknown>>('gate')
   assert.equal(result.intentCompleted, false); assert.equal(result.modelCalls, false); assert.equal(result.requestValuesChanged, false)
   assert.deepEqual(f.storage.writes, ['gate']); assert.deepEqual(after!.offlineFence, f.fence); assert.deepEqual(after!.fetches, [])
