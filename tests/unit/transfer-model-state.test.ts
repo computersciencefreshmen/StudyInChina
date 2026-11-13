@@ -130,13 +130,43 @@ describe('private frozen model-state relay', () => {
   it('refuses partial, numeric-date or malformed diagnostics without target writes or raw output', async () => local(async directory => {
     const observed = { activeOperations: 1, serverTime: '2026-11-14T17:30:00.000Z', activeFetchPermitCount: 0,
       activeModelPermitCount: 0, latestPermitExpiresAt: null }
-    for (const malformed of [{ activeOperations: 1 }, { ...observed, serverTime: 1794677400000 }, { ...observed, latestPermitExpiresAt: 1794677400000 },
+    for (const malformed of [{ activeOperations: 1 }, { gateSha256: 'a'.repeat(64) }, { ...observed, serverTime: 1794677400000 }, { ...observed, latestPermitExpiresAt: 1794677400000 },
       { ...observed, activeOperations: -1 }, { ...observed, activeModelPermitCount: '0' }, { ...observed, serverTime: rawCanary }, { ...observed, latestPermitExpiresAt: sourceToken }]) {
       const peer = peers(snapshot(), (url, _body, normal) => url.endsWith('/freeze') ? Response.json({ ...normal, ...malformed,
         state: 'frozen', error: 'model_state_migration_inflight' }, { status: 409 }) : undefined)
       const report = await transferModelState(options(directory, peer.fetcher))
       expect(report).toMatchObject({ state: 'failed', code: 'source_diagnostics_invalid', sourceDiagnostics: null, targetFinalized: false })
       expect(peer.calls).toHaveLength(1); expect(JSON.stringify(report)).not.toContain(rawCanary); expect(JSON.stringify(report)).not.toContain(sourceToken)
+    }
+  }))
+
+  it('preserves finite unrepresentable expiry observations without unlocking or copying private gate state', async () => local(async directory => {
+    const observed = { activeOperations: 0, serverTime: '2026-11-14T17:30:00.000Z', activeFetchPermitCount: 1, activeModelPermitCount: 0,
+      latestPermitExpiresAt: null, unrepresentablePermitExpiryCount: 1, maxPermitExpiryMilliseconds: Number.MAX_VALUE, gateSha256: 'a'.repeat(64) }
+    const peer = peers(snapshot(), (url, _body, normal) => url.endsWith('/freeze') ? Response.json({ ...normal, ...observed,
+      state: 'frozen', error: 'model_state_migration_inflight' }, { status: 409 }) : undefined)
+    expect(await transferModelState(options(directory, peer.fetcher))).toMatchObject({ state: 'waiting', code: 'source_inflight',
+      sourceDiagnostics: observed, upstreamErrorCode: 'model_state_migration_inflight', targetFinalized: false })
+    expect(peer.calls).toHaveLength(1); expect(peer.imported.size).toBe(0)
+    for (const malformed of [{ ...observed, maxPermitExpiryMilliseconds: undefined }, { ...observed, gateSha256: sourceToken },
+      { ...observed, maxPermitExpiryMilliseconds: -1 }, { ...observed, maxPermitExpiryMilliseconds: Infinity },
+      { ...observed, unrepresentablePermitExpiryCount: -1 }, { ...observed, unrepresentablePermitExpiryCount: 0 },
+      { ...observed, latestPermitExpiresAt: '2026-11-15T17:30:00.000Z' }]) {
+      const rejected = peers(snapshot(), (url, _body, normal) => url.endsWith('/freeze') ? Response.json({ ...normal, ...malformed,
+        state: 'frozen', error: 'model_state_migration_inflight' }, { status: 409 }) : undefined)
+      expect(await transferModelState(options(directory, rejected.fetcher))).toMatchObject({ state: 'failed', code: 'source_diagnostics_invalid', sourceDiagnostics: null })
+      expect(rejected.calls).toHaveLength(1)
+    }
+  }))
+
+  it('keeps only a fixed allowlisted upstream failure before binding validation and never treats that error as a freeze proof', async () => local(async directory => {
+    for (const error of ['model_state_migration_gate_invalid', 'model_state_migration_lock_invalid', sourceToken, rawCanary]) {
+      const peer = peers(snapshot(), url => url.endsWith('/freeze') ? Response.json({ ok: false, error, stack: rawCanary, token: sourceToken }, { status: 409 }) : undefined)
+      const report = await transferModelState(options(directory, peer.fetcher))
+      expect(report).toMatchObject({ state: 'failed', code: 'source_freeze_rejected', sourceFrozen: false, targetFinalized: false, sourceDiagnostics: null,
+        upstreamErrorCode: error.startsWith('model_state_migration_') ? error : null })
+      expect(peer.calls).toHaveLength(1); expect(peer.imported.size).toBe(0)
+      expect(JSON.stringify(report)).not.toContain(sourceToken); expect(JSON.stringify(report)).not.toContain(rawCanary)
     }
   }))
 

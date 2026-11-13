@@ -15,7 +15,7 @@ async function fixture(priority = 1, status = 'queued') {
     recordScopeSha256: scope, identity: { name: { en: 'Physics' } }, year: null, intake: null, fields: { durationMonths: 48 }, reviewAfter: '2026-11-13' }
   await seed(f.env, { ...seedInput(), recordTargets: [target] }, now)
   await setControls(f.env, { expectedRevision: 0, legacyGuardSha256: TEST_GUARDS, enabled: true, modelsEnabled: true, canaryUniversityIds: ['uni-000'] }, now)
-  f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=? WHERE source_id=?').run(snapshot, sourceId)
+  f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').run(snapshot, 'f'.repeat(64), sourceId)
   f.db.sqlite.prepare(`INSERT INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json,lease_token,lease_until)
     VALUES('maintenance-one',?,'maintain',?,?,?,?,?,?,?,?,?,?)`).run(sourceId, status, priority, new Date(now - 1000).toISOString(), new Date(now).toISOString(), new Date(now).toISOString(),
       snapshot, 'maintenance/snapshots/test.json', canonical([{ id: 'program:program-one', sha256: scope }]), status === 'running' ? 'valid-owner' : null, status === 'running' ? new Date(now + 60000).toISOString() : null)

@@ -150,7 +150,8 @@ test('read-only diagnostics distinguish future permits from operations without r
     const freeze = await call(f, 'freeze', {}, 0, now), body = await freeze.json()
     assert.equal(freeze.status, 409)
     const expected = { activeOperations: 0, serverTime: '2026-11-14T17:30:00.000Z', activeFetchPermitCount: 1,
-      activeModelPermitCount: 1, latestPermitExpiresAt: '2026-11-16T17:30:00.000Z' }
+      activeModelPermitCount: 1, latestPermitExpiresAt: '2026-11-16T17:30:00.000Z', unrepresentablePermitExpiryCount: 0,
+      maxPermitExpiryMilliseconds: now + 172800000, gateSha256: await digest(canonical(original)) }
     for (const [key, value] of Object.entries(expected)) assert.equal(body[key], value)
     const snapshot = canonical([...f.storage.values])
     const status = await (await call(f, 'status', {}, 0, now)).json()
@@ -159,10 +160,27 @@ test('read-only diagnostics distinguish future permits from operations without r
     assert.deepEqual(await f.storage.get('gate'), original)
     for (const privateValue of ['PRIVATE-FETCH-TOKEN', 'PRIVATE-MODEL-TOKEN', 'PRIVATE-HOST.edu.cn', 'retainedField', 'nextHost']) assert.equal(JSON.stringify([body, status]).includes(privateValue), false)
     assert.equal((await call(f, 'export', { pageIndex: 0 }, 0, now)).status, 409)
-    for (const expiresAt of [Number.MAX_VALUE, -1]) {
+    const sentinel = { ...original, fetches: [{ token: 'PRIVATE-SENTINEL-PERMIT', expiresAt: Number.MAX_VALUE }] }
+    await f.storage.put('gate', sentinel)
+    const sentinelSnapshot = canonical([...f.storage.values])
+    for (const path of ['status', 'freeze']) {
+      const response = await call(f, path, {}, 0, now), observed = await response.json()
+      assert.equal(response.status, path === 'status' ? 200 : 409)
+      assert.equal(observed.activeFetchPermitCount, 1); assert.equal(observed.activeModelPermitCount, 1)
+      assert.equal(observed.unrepresentablePermitExpiryCount, 1); assert.equal(observed.maxPermitExpiryMilliseconds, Number.MAX_VALUE)
+      assert.equal(observed.latestPermitExpiresAt, null); assert.equal(observed.gateSha256, await digest(canonical(sentinel)))
+      assert.equal(JSON.stringify(observed).includes('PRIVATE-SENTINEL-PERMIT'), false)
+    }
+    const blocked = await call(f, 'export', { pageIndex: 0 }, 0, now)
+    assert.equal(blocked.status, 409); assert.equal((await blocked.json()).error, 'model_state_migration_inflight')
+    assert.equal(canonical([...f.storage.values]), sentinelSnapshot)
+    for (const expiresAt of [-1, -Number.MAX_VALUE, NaN, Infinity, -Infinity]) {
       await f.storage.put('gate', { ...gate(), fetches: [{ token: 'invalid', expiresAt }] })
-      assert.equal((await (await call(f, 'status', {}, 1, now)).json()).error, 'model_state_migration_gate_invalid')
-      assert.equal((await (await call(f, 'freeze', {}, 1, now)).json()).error, 'model_state_migration_gate_invalid')
+      for (const path of ['status', 'freeze']) {
+        const response = await call(f, path, {}, 1, now)
+        assert.equal(response.status, 409)
+        assert.match((await response.json()).error, /^model_state_migration_(gate|value)_invalid$/)
+      }
     }
   } finally { f.db.sqlite.close() }
 })
@@ -263,7 +281,9 @@ test('freeze drains an already paid model even after permit TTL, then exports it
   try {
     await seed(f.env, seedInput()); await setControls(f.env, { expectedRevision: 0, legacyGuardSha256: TEST_GUARDS, enabled: true, modelsEnabled: true, canaryUniversityIds: ['uni-000'] })
     const input: ModelRequest = { reservationKey: '1'.repeat(64), sourceId: await digest('https://test.edu.cn/catalog'), snapshotSha256: 'd'.repeat(64), universityIds: ['uni-000'], pass: 'primary', payload: 'paid result fixture', lane: 'expansion' }
-    const pending = gateRequest(f.env, '/model/run', input); await sent
+    f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').run(input.snapshotSha256, 'e'.repeat(64), input.sourceId)
+    const pending = gateRequest(f.env, '/model/run', input)
+    await Promise.race([sent, pending.then(async response => { throw new Error(`Fixture model was never sent: ${response.status} ${await response.text()}`) })])
     configure(f.env, 'source')
     const migration = (path: string, body: unknown) => gateRequest(f.env, `/model-state-migration/${path}`, body)
     const firstFreeze = await migration('freeze', { migrationId }), firstObserved = await firstFreeze.json()

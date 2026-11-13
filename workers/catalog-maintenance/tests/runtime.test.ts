@@ -44,6 +44,7 @@ test('hashless parent reservations cover admission-cycle children from the persi
   input.legacyGuards.entries.push({id:'parent-stop',universityId:'uni-000',sourceId:null,recordId:'program-parent',fields:'*',state:'unknown',artifactSha256:'e'.repeat(64),reason:'unknown complete parent request'}as never)
   await seed(f.env,{...input,recordTargets:[{recordId:'cycle-child',entityType:'admission-cycle',universityId:'uni-000',sourceIds:[sourceId],recordScopeSha256:'d'.repeat(64),identity:{name:{en:'Computer Science'},programId:'program-parent'},year:'2026-2027',intake:'spring',fields:{closesOn:null},reviewAfter:'2026-10-24'}]})
   await setControls(f.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:true,canaryUniversityIds:canary})
+  f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').run('1'.repeat(64),'2'.repeat(64),sourceId)
   const response=await gateRequest(f.env,'/model/run',{reservationKey:'f'.repeat(64),sourceId,universityIds:['uni-000'],snapshotSha256:'1'.repeat(64),pass:'primary',payload:'cycle-only request',lane:'maintenance',recordIds:['cycle-child']})
   assert.equal((await response.json()).error,'legacy_scope_stop_or_reservation');assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) count FROM maintenance_model_attempts').get()?.count,0);f.db.sqlite.close()
 })

@@ -21,6 +21,7 @@ import { acknowledge, prepareExport, readExport } from './exports'
 import { readMaintenanceControl, reconcileMaintenanceHead } from './head-reconciliation'
 import { prepareReconciliationTargets, registerReconciliationTargets } from './reconciliation-targets'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
+import { readUnknownJobDisposition, reviewedTerminalQuarantine } from './reviewed-terminal-quarantine'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
 import type { JobRow, MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
@@ -132,6 +133,8 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   if(url.pathname==='/health'&&request.method==='GET')return json({ok:true,service:'studyinchina-catalog-maintenance',version:'1.0.0',publicationPerformed:false})
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
   try {
+    if(url.pathname==='/job-dispositions'&&request.method==='GET')return json((await readUnknownJobDisposition(env,await control(env))).summary)
+    if(url.pathname==='/job-dispositions'&&request.method==='POST')return json(await reviewedTerminalQuarantine(env,await requestJson(request,32*1024)))
     if(url.pathname==='/model-state-migration/status'&&request.method==='GET')return await gateRequest(env,url.pathname,{})
     if(['/model-state-migration/freeze','/model-state-migration/export','/model-state-migration/import','/model-state-migration/finalize'].includes(url.pathname)&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,12*1024*1024))
     if(url.pathname==='/budget'&&request.method==='GET')return json(await budgetStatus(env))

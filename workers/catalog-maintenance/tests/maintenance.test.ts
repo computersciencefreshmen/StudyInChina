@@ -9,7 +9,7 @@ import { digest, gateRequest } from '../src/util'
 import type { ModelRequest } from '../src/types'
 import { makeEnv, quotaResponse, seedInput, TEST_CATALOG, TEST_GUARDS } from './fixture'
 
-async function enabled(fixture:ReturnType<typeof makeEnv>,models=true){await seed(fixture.env,seedInput());await setControls(fixture.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:models,canaryUniversityIds:['uni-000']})}
+async function enabled(fixture:ReturnType<typeof makeEnv>,models=true){await seed(fixture.env,seedInput());await setControls(fixture.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:models,canaryUniversityIds:['uni-000']});fixture.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=?').run('d'.repeat(64),'e'.repeat(64))}
 const modelRequest=async():Promise<ModelRequest>=>({reservationKey:await digest('request-one'),sourceId:await digest('https://test.edu.cn/catalog'),universityIds:['uni-000'],snapshotSha256:'d'.repeat(64),pass:'primary',payload:'explicit test payload',lane:'expansion',recordIds:[]})
 
 test('seed is fixed to272, initially disabled, immutable and complete before canary activation',async()=>{
@@ -57,8 +57,9 @@ test('legacy snapshot reservation blocks same bytes independent of prompt, but p
   const fixture=makeEnv(async input=>{if(String(input).includes('token_plan'))return quotaResponse();modelCalls++;return Response.json({content:[{type:'text',text:'{"programs":[]}'}],usage:{input_tokens:1,output_tokens:1},stop_reason:'end_turn'})})
   const input=seedInput(),request=await modelRequest();input.legacyGuards.entries.push({id:'old-scope',universityId:'uni-000',sourceId:request.sourceId,recordId:'old-record',fields:'*',state:'unknown',artifactSha256:'e'.repeat(64),reason:'historical ambiguous attempt',snapshotSha256:request.snapshotSha256} as never)
   await seed(fixture.env,input);await setControls(fixture.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:true,canaryUniversityIds:['uni-000']})
+  fixture.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=?').run(request.snapshotSha256,'e'.repeat(64))
   assert.equal((await (await gateRequest(fixture.env,'/model/run',request)).json()).error,'legacy_scope_stop_or_reservation');assert.equal(modelCalls,0)
-  const changed={...request,snapshotSha256:'f'.repeat(64),reservationKey:await digest('new-evidence')};assert.equal((await gateRequest(fixture.env,'/model/run',changed)).status,200);assert.equal(modelCalls,1);fixture.db.sqlite.close()
+  const changed={...request,snapshotSha256:'f'.repeat(64),reservationKey:await digest('new-evidence')};fixture.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=?').run(changed.snapshotSha256,'1'.repeat(64));assert.equal((await gateRequest(fixture.env,'/model/run',changed)).status,200);assert.equal(modelCalls,1);fixture.db.sqlite.close()
 })
 test('completed exact requests reuse immutable artifacts without consuming another model call',async()=>{
   let calls=0;const fixture=makeEnv(async input=>{if(String(input).includes('token_plan'))return quotaResponse();calls++;return Response.json({content:[{type:'text',text:'{"programs":[]}'}],usage:{input_tokens:5,output_tokens:2},stop_reason:'end_turn'})})

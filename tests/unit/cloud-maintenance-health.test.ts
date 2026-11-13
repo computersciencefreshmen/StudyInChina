@@ -40,6 +40,20 @@ const check = (report: ReturnType<typeof evaluateCloudMaintenanceHealth>, id: st
 function observed(programs = 5) { const status = ready(), coverage = snapshot(programs); status.coverage = { snapshotSha256: coverage.sha256 }; return { maintenance: status, coverage, release: release() } }
 
 describe('cloud-mode hourly operational observations', () => {
+  it('reports reviewed terminal quarantines separately while preserving unknown outcomes and the imported DO observation date boundary', () => {
+    const maintenance = { ...ready(), jobs: [{ status: 'unknown', count: 3 }], unknownJobDisposition: { state: 'active', totalUnknown: 3, quarantinedUnknown: 3, unresolvedUnknown: 0,
+      proofSha256: 'e'.repeat(64), importedDoStates: { unknown: 2, completed: 18, send_started: 1, known_failed: 0 }, replayAllowed: false, modelSuccessesClaimed: false } }
+    const report = evaluateCloudMaintenanceHealth({ ...observed(), maintenance }, { now })
+    expect(check(report, 'maintenance.unknown_outcomes')).toMatchObject({ status: 'unobserved', code: 'historical_or_guarded_unknown_outcomes', value: {
+      jobs: 3, totalUnknown: 3, quarantinedUnknown: 3, unresolvedUnknown: 0, importedDoUnknownAtMigration: 2, replayAllowed: false, modelSuccessesClaimed: false,
+    } })
+    expect(JSON.stringify(check(report, 'maintenance.unknown_outcomes').value)).toContain('not model successes')
+    expect(report.runtime.processingProgress).toBe('unobserved')
+    const mismatch = { ...maintenance, unknownJobDisposition: { ...maintenance.unknownJobDisposition, totalUnknown: 4 } }
+    expect(check(evaluateCloudMaintenanceHealth({ ...observed(), maintenance: mismatch }, { now }), 'maintenance.unknown_outcomes').value).not.toHaveProperty('quarantinedUnknown')
+    const failed = { ...maintenance, lastRuntimeTick: { ...maintenance.lastRuntimeTick, state: 'error', code: 'job_outcome_unknown' } }
+    expect(check(evaluateCloudMaintenanceHealth({ ...observed(), maintenance: failed }, { now }), 'maintenance.unknown_outcomes').status).toBe('fail')
+  })
   it('reports the actual daily quota wait without zero coverage, manual-pause inference or a fake processing-success claim', () => {
     const report = evaluateCloudMaintenanceHealth({ maintenance: quotaWait(), release: release() }, { now })
     expect(report.status).toBe('waiting'); expect(report.runtime.retryAt).toBe('2026-11-12T00:00:00.000Z')

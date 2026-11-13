@@ -58,7 +58,7 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|job-dispositions|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     let response: Response
     try {
@@ -159,7 +159,7 @@ async function main() {
       `pending_publication=${Boolean(pending)}\n${pending ? `source_commit=${pending.sourceCommit}\nreceipt=${pending.receiptPath}\n` : ''}`, { flag: 'a' })
     console.log(JSON.stringify({ pendingPublication: Boolean(pending), batchId: pending?.batchId ?? null })); return
   }
-  if (['status', 'quota', 'budget', 'schools', 'rollout'].includes(action) && !value) { console.log(JSON.stringify(await client.json(`/${action}`))); return }
+  if (['status', 'quota', 'budget', 'schools', 'rollout', 'job-dispositions'].includes(action) && !value) { console.log(JSON.stringify(await client.json(`/${action}`))); return }
   if (action === 'configure-budget' && !value) {
     console.log(JSON.stringify(await client.json('/budget', 'POST', { accountId: process.env.CLOUDFLARE_ACCOUNT_ID, baseUsd: 5, targetUsd: 10, pauseAtUsd: 9 }))); return
   }
@@ -189,13 +189,13 @@ async function main() {
     if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT, `has_export=${Boolean(batch)}\n`, { flag: 'a' })
     console.log(JSON.stringify({ batchId: batch?.batchId ?? null, proposals: batch?.proposals.length ?? 0 })); return
   }
-  if (['seed', 'targets', 'controls', 'ack', 'reconciliations'].includes(action) && value) {
+  if (['seed', 'targets', 'controls', 'ack', 'reconciliations', 'job-dispositions'].includes(action) && value) {
     const body = JSON.parse(await readFile(resolve(value), 'utf8'))
     const result = await client.json(`/${action}`, 'POST', body)
     console.log(JSON.stringify(result)); return
   }
   if (action === 'tick' && !value) { console.log(JSON.stringify(await client.json('/tick', 'POST', {}))); return }
-  throw new Error('Usage: catalog-maintenance-client.ts status | quota | budget | configure-budget | check-budget | resume-budget | schools | tick | recheck-backend | recover-publication | download <directory> | seed|targets|controls|ack|reconciliations <body.json>')
+  throw new Error('Usage: catalog-maintenance-client.ts status | quota | budget | configure-budget | check-budget | resume-budget | schools | job-dispositions [body.json] | tick | recheck-backend | recover-publication | download <directory> | seed|targets|controls|ack|reconciliations <body.json>')
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href)
   main().catch(error => { console.error(error instanceof Error && error.message.startsWith('maintenance_') ? error.message : 'maintenance_command_failed'); process.exitCode = 1 })

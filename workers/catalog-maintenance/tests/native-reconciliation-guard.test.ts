@@ -24,6 +24,7 @@ async function fixture() {
   const cfg=await control(f.env);assert.ok(cfg)
   await setControls(f.env,{expectedRevision:0,legacyGuardSha256:cfg.legacy_guard_sha256,enabled:true,modelsEnabled:true,canaryUniversityIds:['uni-000']})
   const sourceId=await digest('https://test.edu.cn/catalog')
+  f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').run('1'.repeat(64),'2'.repeat(64),sourceId)
   const model=()=>gateRequest(f.env,'/model/run',{reservationKey:'f'.repeat(64),sourceId,universityIds:['uni-000'],snapshotSha256:'1'.repeat(64),pass:'primary',payload:'official programme evidence only',lane:'expansion',recordIds:[]})
   async function installResume() {
     const current=await control(f.env);assert.ok(current)
