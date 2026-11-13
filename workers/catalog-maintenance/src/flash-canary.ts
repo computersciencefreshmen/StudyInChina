@@ -13,6 +13,7 @@ export type FlashAudit = { version: 1; model: typeof FLASH_MODEL; thinking: { ty
 export type FlashEnrollment = { version: 1; id: string; manifestSha256: string; sourceId: string; snapshotSha256: string; textSha256: string; recordIds: string[]; keys: Record<Pass, string>; profileSha256: string; historySha256: string; enrolledAt: string; calls: Array<{ reservationKey: string; pass: Pass; attemptId: string; startedAt: string; providerRequestSha256: string }> }
 export type FlashPlan = { config: Config; manifestSha256: string; keys: Record<Pass, string>; profileSha256: string; historySha256?: string }
 type HistoryItem = { key: string; attemptId: string; requestSha256: string; state: string; profileSha256: string | null }
+type HistoricalAttempt = { reservation_key: string; attempt_id: string; source_id: string; snapshot_sha256: string; request_sha256: string }
 export class FlashCanaryError extends Error { constructor(readonly code: string) { super(code) } }
 const fail = (code: string): never => { throw new FlashCanaryError(code) }
 const sameList = (a: unknown, b: unknown) => { try { return canonical(a) === canonical(b) } catch { return false } }
@@ -70,19 +71,55 @@ async function history(storage: DurableStorage): Promise<HistoryItem[]> {
   }
   return items
 }
-async function proveFreshHistory(storage: DurableStorage, env: MaintenanceEnv, cfg: Config, keys: Record<Pass, string>) {
-  const prior = await env.PIPELINE_DB.prepare('SELECT 1 AS present FROM maintenance_model_attempts WHERE source_id=? OR snapshot_sha256=? LIMIT 1').bind(cfg.sourceId, cfg.snapshotSha256).first()
-  if (prior || await storage.get(`request:${keys.primary}`) || await storage.get(`request:${keys['independent-review']}`)) return fail('flash_canary_scope_has_history')
-  const items = await history(storage)
-  for (let offset = 0; offset < items.length; offset += HISTORY_PAGE) {
-    const group = items.slice(offset, offset + HISTORY_PAGE)
-    const rows = (await env.PIPELINE_DB.prepare('SELECT reservation_key,attempt_id,source_id,snapshot_sha256,request_sha256 FROM maintenance_model_attempts WHERE attempt_id IN(SELECT value FROM json_each(?))')
-      .bind(JSON.stringify(group.map(item => item.attemptId))).all<{ reservation_key: string; attempt_id: string; source_id: string; snapshot_sha256: string; request_sha256: string }>()).results ?? []
-    for (const item of group) {
-      const row = rows.find(row => row.attempt_id === item.attemptId)
-      if (!row || `request:${row.reservation_key}` !== item.key || row.request_sha256 !== item.requestSha256) return fail('flash_canary_history_unattributed')
-      if (row.source_id === cfg.sourceId || row.snapshot_sha256 === cfg.snapshotSha256) return fail('flash_canary_scope_has_history')
+async function historicalText(env: MaintenanceEnv, cfg: Config, attempt: HistoricalAttempt) {
+  // A source's current pointer can move after a later capture. Bind every
+  // historical proof to the attempted raw snapshot, including PDF derivatives.
+  const key = `maintenance/snapshots/${attempt.source_id}/${attempt.snapshot_sha256}.json`
+  try {
+    const snapshot = await loadSnapshot(env, key)
+    if (snapshot.version !== 1 || snapshot.sourceId !== attempt.source_id || snapshot.rawSha256 !== attempt.snapshot_sha256
+      || !HASH.test(String(snapshot.textSha256)) || !HASH.test(String(snapshot.canonicalSha256)) || typeof snapshot.textKey !== 'string'
+      || !snapshot.textKey.startsWith('maintenance/text/') || snapshot.canonicalSha256 !== snapshot.textSha256
+      || snapshot.textArtifact && (snapshot.textArtifact.rawSnapshotSha256 !== attempt.snapshot_sha256 || snapshot.textArtifact.objectKey !== snapshot.textKey
+        || snapshot.textArtifact.sha256 !== snapshot.textSha256)) return fail('flash_canary_history_evidence_unproven')
+    if (snapshot.textSha256 === cfg.textSha256 || snapshot.canonicalSha256 === cfg.textSha256) return fail('flash_canary_scope_has_history')
+    const observations = (await env.PIPELINE_DB.prepare('SELECT canonical_sha256,snapshot_key FROM maintenance_observations WHERE source_id=? AND raw_sha256=? LIMIT ?')
+      .bind(attempt.source_id, attempt.snapshot_sha256, MAX_HISTORY + 1).all<{ canonical_sha256: string | null; snapshot_key: string | null }>()).results ?? []
+    if (observations.length > MAX_HISTORY) return fail('flash_canary_history_unbounded')
+    for (const observation of observations) {
+      if (observation.canonical_sha256 === cfg.textSha256) return fail('flash_canary_scope_has_history')
+      // A rich document's initial canonical hash can still be its raw hash;
+      // the strictly bound derivative above supplies its later text evidence.
+      if (observation.snapshot_key !== key || !HASH.test(String(observation.canonical_sha256))
+        || observation.canonical_sha256 !== snapshot.canonicalSha256 && observation.canonical_sha256 !== attempt.snapshot_sha256) return fail('flash_canary_history_evidence_unproven')
     }
+    const object = await env.SNAPSHOTS_BUCKET.get(snapshot.textKey)
+    if (!object || object.size !== undefined && object.size > 2 * 1024 * 1024) return fail('flash_canary_history_evidence_unproven')
+    const bytes = await object.arrayBuffer()
+    if (bytes.byteLength > 2 * 1024 * 1024 || await digest(bytes) !== snapshot.textSha256) return fail('flash_canary_history_evidence_unproven')
+  } catch (error) {
+    if (error instanceof FlashCanaryError) throw error
+    return fail('flash_canary_history_evidence_unproven')
+  }
+}
+async function proveFreshHistory(storage: DurableStorage, env: MaintenanceEnv, cfg: Config, keys: Record<Pass, string>, payload: Record<string, unknown>) {
+  const payloadHashes = await Promise.all((['primary', 'independent-review'] as const)
+    .map(pass => digest(canonical({ ...payload, task: `${pass}-existing-record-official-field-maintenance` }))))
+  if (await storage.get(`request:${keys.primary}`) || await storage.get(`request:${keys['independent-review']}`)) return fail('flash_canary_scope_has_history')
+  const items = await history(storage)
+  const rows = (await env.PIPELINE_DB.prepare('SELECT reservation_key,attempt_id,source_id,snapshot_sha256,request_sha256 FROM maintenance_model_attempts ORDER BY attempt_id LIMIT ?')
+    .bind(MAX_HISTORY + 1).all<HistoricalAttempt>()).results ?? []
+  if (rows.length > MAX_HISTORY) return fail('flash_canary_history_unbounded')
+  for (const item of items) {
+    const row = rows.find(row => row.attempt_id === item.attemptId)
+    if (!row || `request:${row.reservation_key}` !== item.key || row.request_sha256 !== item.requestSha256) return fail('flash_canary_history_unattributed')
+  }
+  const checkedSnapshots = new Set<string>()
+  for (const row of rows) {
+    if (![row.reservation_key, row.source_id, row.snapshot_sha256, row.request_sha256].every(value => typeof value === 'string' && HASH.test(value))) return fail('flash_canary_history_unattributed')
+    if (row.source_id === cfg.sourceId || row.snapshot_sha256 === cfg.snapshotSha256 || payloadHashes.includes(row.request_sha256)) return fail('flash_canary_scope_has_history')
+    const key = `${row.source_id}:${row.snapshot_sha256}`
+    if (!checkedSnapshots.has(key)) { await historicalText(env, cfg, row); checkedSnapshots.add(key) }
   }
   return digest(canonical(items))
 }
@@ -118,7 +155,7 @@ export async function prepareFlashCanary(storage: DurableStorage, env: Maintenan
     return { config: cfg, manifestSha256, keys, profileSha256 }
   }
   if (input.pass !== 'primary') return fail('flash_canary_primary_required')
-  return { config: cfg, manifestSha256, keys, profileSha256, historySha256: await proveFreshHistory(storage, env, cfg, keys) }
+  return { config: cfg, manifestSha256, keys, profileSha256, historySha256: await proveFreshHistory(storage, env, cfg, keys, payload) }
 }
 
 /** Called inside the existing permit/reservation transaction, using storage-only

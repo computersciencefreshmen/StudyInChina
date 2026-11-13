@@ -43,10 +43,15 @@ Official references checked on 2026-11-14:
 Admission retains budget, deployment controls, native-head, school/canary,
 source/snapshot, parent-record and legacy STOP checks. Before first enrollment it
 also proves that both original field reservation keys are absent and that no SQL
-attempt belongs to this source or raw snapshot. A complete bounded DO history scan
-must attribute every request to its original SQL attempt; missing attribution or
-history beyond the canary bound holds the trial. This covers DO-before-SQL crash
-states without clearing or guessing their scope.
+attempt belongs to this source, raw snapshot, or either pass's payload hash. A
+complete bounded DO history scan must attribute every request to its original SQL
+attempt. The complete bounded SQL history also checks each attempted historical
+snapshot's original extracted text, canonical hash, and available observation
+bindings. It uses the attempted raw snapshot rather than a source's mutable current
+pointer. Identical text under another URL/raw wrapper, missing or contradictory
+evidence, missing attribution, or history beyond the canary bound holds the trial.
+This covers semantic aliases and DO-before-SQL crash states without clearing or
+guessing their scope.
 
 Recheck the observed DO history fingerprint inside the enrollment transaction and
 require no active model permit. Persist enrollment inside `gate`, including the

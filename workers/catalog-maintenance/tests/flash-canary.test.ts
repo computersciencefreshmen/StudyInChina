@@ -41,7 +41,7 @@ async function fixture(sourceText = text) {
     rawSha256: rawSha, rawKey: `maintenance/raw/${rawSha}`, textKey: `maintenance/text/${textSha}`, textSha256: textSha, canonicalSha256: textSha, parserCandidates: [] }
   const snapshotKey = `maintenance/snapshots/${sourceId}/${rawSha}.json`
   await f.bucket.put(snapshotKey, canonical(snapshot)); await f.bucket.put(snapshot.textKey!, sourceText)
-  f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,snapshot_key=? WHERE source_id=?').run(rawSha, snapshotKey, sourceId)
+  f.db.sqlite.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=?,snapshot_key=? WHERE source_id=?').run(rawSha, textSha, snapshotKey, sourceId)
   const target: MaintenanceRecordTarget = { recordId: 'cycle-computer-science', entityType: 'admission-cycle', universityId: 'uni-000', sourceIds: [sourceId],
     recordScopeSha256: 'f'.repeat(64), identity: { programId: 'prog-computer-science', name: { en: 'Computer Science' }, degreeLevel: 'bachelor' }, year: '2027-2028', intake: 'autumn', reviewAfter: '2026-11-14', fields: {} }
   f.db.sqlite.prepare('INSERT INTO maintenance_record_targets(target_id,record_id,entity_type,university_id,record_scope_sha256,academic_year,intake,fields_json,target_json) VALUES(?,?,?,?,?,?,?,?,?)')
@@ -56,6 +56,18 @@ async function fixture(sourceText = text) {
   return { ...f, storage, requests, mode, sourceId, rawSha, textSha, snapshot, target, cfg, run, inputs, quotaCalls: () => quotaCalls }
 }
 async function errorCode(response: Response) { return (await response.json() as { error?: string }).error }
+async function oldEvidence(f: Awaited<ReturnType<typeof fixture>>, historicalText = 'A separate historical official document.', payloadSha = '9'.repeat(64), sqlOnly = false) {
+  const sourceId = await digest('https://test.edu.cn/historical-alias'), rawSha = await digest(`old wrapper:${historicalText}`)
+  const textSha = await digest(historicalText), snapshotKey = `maintenance/snapshots/${sourceId}/${rawSha}.json`, key = '8'.repeat(64)
+  const prior = { state: 'unknown', attemptId: 'unrelated-known-history', requestSha256: payloadSha }
+  const snapshot: CapturedSnapshot = { ...f.snapshot, sourceId, rawSha256: rawSha, rawKey: `maintenance/raw/${rawSha}`,
+    sourceUrl: 'https://test.edu.cn/historical-alias', textKey: `maintenance/text/${textSha}`, textSha256: textSha, canonicalSha256: textSha }
+  await f.bucket.put(snapshotKey, canonical(snapshot)); await f.bucket.put(snapshot.textKey!, historicalText)
+  if (!sqlOnly) await f.storage.put(`request:${key}`, prior)
+  f.db.sqlite.prepare("INSERT INTO maintenance_model_attempts(reservation_key,attempt_id,source_id,snapshot_sha256,pass,request_sha256,model,status,started_at,quota_json) VALUES(?,?,?,?,?,?,'MiniMax-M3','unknown',?,'{}')")
+    .run(key, prior.attemptId, sourceId, rawSha, 'primary', prior.requestSha256, new Date().toISOString())
+  return { key, prior, sourceId, rawSha, snapshotKey, snapshot }
+}
 
 test('normal field engine uses the original two keys, adaptive/low Flash wire and independently reviewed proposals', async () => {
   const f = await fixture()
@@ -124,13 +136,56 @@ test('old SQL attempts for either the source or a raw-byte alias hold profile en
 test('a fully attributed unknown for unrelated evidence is retained without blocking a fresh scope', async () => {
   const f = await fixture()
   try {
-    const key = '8'.repeat(64), prior = { state: 'unknown', attemptId: 'unrelated-known-history', requestSha256: '9'.repeat(64) }
-    await f.storage.put(`request:${key}`, prior)
-    f.db.sqlite.prepare("INSERT INTO maintenance_model_attempts(reservation_key,attempt_id,source_id,snapshot_sha256,pass,request_sha256,model,status,started_at,quota_json) VALUES(?,?,?,?,?,?,'MiniMax-M3','unknown',?,'{}')")
-      .run(key, prior.attemptId, '7'.repeat(64), '6'.repeat(64), 'primary', prior.requestSha256, new Date().toISOString())
+    const { key, prior } = await oldEvidence(f)
     assert.equal((await f.run()).proposals.length, 1); assert.equal(f.requests.length, 2)
     assert.deepEqual(await f.storage.get(`request:${key}`), prior)
     assert.equal(f.db.sqlite.prepare('SELECT status FROM maintenance_model_attempts WHERE attempt_id=?').get(prior.attemptId)?.status, 'unknown')
+  } finally { f.db.sqlite.close() }
+})
+
+for (const pass of [0, 1]) test(`a historical URL/raw alias of the ${pass === 0 ? 'primary' : 'review'} payload cannot enroll a new two-pass trial`, async () => {
+  const f = await fixture()
+  try {
+    const historical = await oldEvidence(f, 'Different old text isolates the payload comparison.', await digest(f.inputs[pass].payload))
+    await assert.rejects(f.run(), /flash_canary_scope_has_history/)
+    assert.equal(f.requests.length, 0); assert.equal(f.quotaCalls(), 0)
+    assert.deepEqual(await f.storage.get(`request:${historical.key}`), historical.prior)
+    assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_proposals').get()?.n, 0)
+    assert.equal((await f.storage.get<{ flashCanary?: unknown }>('gate'))?.flashCanary, undefined)
+  } finally { f.db.sqlite.close() }
+})
+
+for (const sqlOnly of [false, true]) test(`historical attempted text survives a moved source pointer${sqlOnly ? ' without a DO copy' : ''} and blocks all Flash sends`, async () => {
+  const f = await fixture()
+  try {
+    const old = await oldEvidence(f, text, '9'.repeat(64), sqlOnly)
+    const changed = 'The source now serves a genuinely different document.', changedSha = await digest(changed), changedRaw = '6'.repeat(64)
+    const changedKey = `maintenance/snapshots/${old.sourceId}/${changedRaw}.json`
+    await f.bucket.put(changedKey, canonical({ ...old.snapshot, rawSha256: changedRaw, textSha256: changedSha, canonicalSha256: changedSha, textKey: `maintenance/text/${changedSha}` }))
+    await f.bucket.put(`maintenance/text/${changedSha}`, changed)
+    f.db.sqlite.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256,canonical_sha256,snapshot_key) VALUES(?,?,?,'undergraduate_catalog',1,24,?,?,?,?)")
+      .run(old.sourceId, old.snapshot.sourceUrl, '["test.edu.cn"]', new Date().toISOString(), changedRaw, changedSha, changedKey)
+    await assert.rejects(f.run(), /flash_canary_scope_has_history/)
+    assert.equal(f.requests.length, 0); assert.equal(f.quotaCalls(), 0)
+    assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_proposals').get()?.n, 0)
+    if (!sqlOnly) assert.deepEqual(await f.storage.get(`request:${old.key}`), old.prior)
+  } finally { f.db.sqlite.close() }
+})
+
+for (const kind of ['missing-snapshot', 'wrong-binding', 'missing-text', 'wrong-text', 'conflicting-observation']) test(`unproven historical evidence holds the new trial: ${kind}`, async () => {
+  const f = await fixture()
+  try {
+    const old = await oldEvidence(f)
+    if (kind === 'missing-snapshot') f.bucket.objects.delete(old.snapshotKey)
+    if (kind === 'wrong-binding') await f.bucket.put(old.snapshotKey, canonical({ ...old.snapshot, rawSha256: '5'.repeat(64) }))
+    if (kind === 'missing-text') f.bucket.objects.delete(old.snapshot.textKey!)
+    if (kind === 'wrong-text') await f.bucket.put(old.snapshot.textKey!, 'Different bytes than the stored hash')
+    if (kind === 'conflicting-observation') f.db.sqlite.prepare('INSERT INTO maintenance_observations VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
+      .run('old-observation', 'old-job', old.sourceId, new Date().toISOString(), old.snapshot.sourceUrl, 200, old.rawSha, '4'.repeat(64), old.snapshotKey, 'text/plain', 'captured', 0)
+    await assert.rejects(f.run(), /flash_canary_history_evidence_unproven/)
+    assert.equal(f.requests.length, 0); assert.equal(f.quotaCalls(), 0)
+    assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_proposals').get()?.n, 0)
+    assert.deepEqual(await f.storage.get(`request:${old.key}`), old.prior)
   } finally { f.db.sqlite.close() }
 })
 
@@ -202,8 +257,8 @@ test('removing the trial keeps completed caches and unrelated normal M3 jobs usa
     await f.run(); delete f.env.MINIMAX_FLASH_CANARY
     assert.equal((await (await gateRequest(f.env, '/model/run', f.inputs[0])).json() as ModelResult).reused, true)
     const otherId = await digest('https://test.edu.cn/other-evidence')
-    f.db.sqlite.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at) VALUES(?,?,?,'undergraduate_catalog',1,24,?)")
-      .run(otherId, 'https://test.edu.cn/other-evidence', '["test.edu.cn"]', new Date().toISOString())
+    f.db.sqlite.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256,canonical_sha256) VALUES(?,?,?,'undergraduate_catalog',1,24,?,?,?)")
+      .run(otherId, 'https://test.edu.cn/other-evidence', '["test.edu.cn"]', new Date().toISOString(), '5'.repeat(64), await digest('ordinary M3 evidence'))
     f.db.sqlite.prepare('INSERT INTO maintenance_source_schools VALUES(?,?)').run(otherId, 'uni-000')
     const ordinary = { ...f.inputs[0], sourceId: otherId, snapshotSha256: '5'.repeat(64), reservationKey: '4'.repeat(64), recordIds: [], payload: 'ordinary M3 evidence' }
     assert.equal((await gateRequest(f.env, '/model/run', ordinary)).status, 200)

@@ -7,13 +7,14 @@ import { convertV4MiniflareOptions, Miniflare, Response as WorkerResponse } from
 import { canonical, digest } from '../src/util'
 import { FLASH_MODEL } from '../src/flash-canary'
 import type { CapturedSnapshot } from '../src/capture'
-import type { MaintenanceRecordTarget } from '../../../scripts/maintenance/field-contracts'
+import { maintainedFieldPaths, type MaintenanceRecordTarget } from '../../../scripts/maintenance/field-contracts'
+import type { ModelRequest } from '../src/types'
 
 const admin = 'flash-native-test-admin-not-a-real-secret', sourceId = 'd'.repeat(64), rawSha = 'e'.repeat(64), scope = 'a'.repeat(64)
 const text = 'International students applying to Computer Science. Autumn 2027 admissions. Application deadline: 2027-09-30.'
 type NativeBucket = { put(key: string, body: string): Promise<unknown>; get(key: string): Promise<{ arrayBuffer(): Promise<ArrayBuffer>; text(): Promise<string> } | null> }
 
-test('real workerd field engine completes the two-pass Flash profile through native DO, D1 and R2 with no external networking', { timeout: 120000 }, async t => {
+for (const scenario of ['fresh', 'payload-primary', 'payload-review', 'historical-text'] as const) test(`real workerd field engine through native DO, D1 and R2: ${scenario}`, { timeout: 120000 }, async t => {
   const textSha = await digest(text), snapshotKey = `maintenance/snapshots/${sourceId}/${rawSha}.json`
   const snapshot: CapturedSnapshot = { version: 1, sourceId, sourceUrl: 'https://runtime-test.edu.cn/catalog', finalUrl: 'https://runtime-test.edu.cn/catalog', checkedAt: new Date().toISOString(),
     contentType: 'text/plain', rawSha256: rawSha, rawKey: `maintenance/raw/${rawSha}`, textKey: `maintenance/text/${textSha}`, textSha256: textSha, canonicalSha256: textSha, parserCandidates: [] }
@@ -25,14 +26,40 @@ test('real workerd field engine completes the two-pass Flash profile through nat
     import { maintainFields } from './field-updates'
     import { source } from './repository'
     import { authorized } from './util'
-    export { ModelAdmission }
+    export class TestAdmission extends ModelAdmission {
+      constructor(state,env) { super(state,env); this.fixtureStorage=state.storage; this.fixtureEnv=env }
+      async fetch(request) {
+        const path=new URL(request.url).pathname
+        if (path.startsWith('/test/')) {
+          if (!authorized(request,this.fixtureEnv)) return new Response(null,{status:401})
+          const body=await request.json()
+          if (path==='/test/seed') { await this.fixtureStorage.put(body.key,body.value); return Response.json({ok:true}) }
+          if (path==='/test/read') return Response.json(await this.fixtureStorage.get(body.key))
+        }
+        return super.fetch(request)
+      }
+    }
     export default { async fetch(request, env) {
       if (!authorized(request, env)) return new Response(null, {status:401})
-      if (new URL(request.url).pathname !== '/test/field-job') return new Response(null, {status:404})
+      const path=new URL(request.url).pathname
+      if (path==='/test/seed' || path==='/test/read') return env.MODEL_ADMISSION.get(env.MODEL_ADMISSION.idFromName('subscription-account-v1'))
+        .fetch(new Request('https://admission.internal'+path,request))
+      if (path !== '/test/field-job' && path !== '/test/inputs') return new Response(null, {status:404})
       const snapshot = ${JSON.stringify(snapshot)}, target = ${JSON.stringify(target)}
       const row = await source(env, snapshot.sourceId)
       const job = {job_id:'native-flash-field-job',source_id:snapshot.sourceId,stage:'maintain',snapshot_sha256:snapshot.rawSha256,snapshot_key:${JSON.stringify(snapshotKey)}}
-      return Response.json(await maintainFields(env, job, row, snapshot, [target]))
+      if (path==='/test/inputs') {
+        const inputs=[]
+        await maintainFields(env,job,row,snapshot,[target],async (_env,input)=>{
+          inputs.push(input)
+          return {attemptId:'fixture-'+input.pass,output:{records:[{recordId:target.recordId,year:target.year,intake:target.intake,
+            applicabilityQuote:'International students applying to Computer Science.',scopeQuote:'Autumn 2027 admissions.',
+            patches:[{fieldPath:'closesOn',value:'2027-09-30',factStatus:'known',quote:'Application deadline: 2027-09-30.'}]}]},artifactKey:'fixture',artifactSha256:'a'.repeat(64),reused:false}
+        })
+        return Response.json(inputs)
+      }
+      try { return Response.json(await maintainFields(env, job, row, snapshot, [target])) }
+      catch (error) { return Response.json({proposals:[],error:error.code},{status:409}) }
     }}
   ` }, bundle: true, write: false, platform: 'browser', format: 'esm', target: 'es2022' })
   const calls: Array<{ url: string; body: string }> = []
@@ -43,7 +70,7 @@ test('real workerd field engine completes the two-pass Flash profile through nat
       // The production native-head guard remains unchanged; this isolated
       // transport fixture uses its existing explicit deployment opt-out.
       NATIVE_HEAD_RECONCILIATION_REQUIRED: 'false', SCOPE_REGISTRY_SHA256: scope },
-    durableObjects: { MODEL_ADMISSION: { className: 'ModelAdmission', useSQLite: true } }, d1Databases: { PIPELINE_DB: 'native-flash-db' }, r2Buckets: { SNAPSHOTS_BUCKET: 'native-flash-r2' },
+    durableObjects: { MODEL_ADMISSION: { className: 'TestAdmission', useSQLite: true } }, d1Databases: { PIPELINE_DB: 'native-flash-db' }, r2Buckets: { SNAPSHOTS_BUCKET: 'native-flash-r2' },
     outboundService: async request => {
       const body = await request.text(); calls.push({ url: request.url, body })
       if (request.url === 'https://api.minimax.cn/v1/token_plan/remains') {
@@ -67,14 +94,40 @@ test('real workerd field engine completes the two-pass Flash profile through nat
     await db.prepare("INSERT INTO maintenance_control(singleton,scope_sha256,input_catalog_sha256,seed_sha256,legacy_guard_sha256,enabled,models_enabled,seed_complete,targets_complete,canary_json,updated_at) VALUES(1,?,?,?,?,1,1,1,1,'[]',?)")
       .bind(scope, 'b'.repeat(64), 'c'.repeat(64), 'f'.repeat(64), new Date().toISOString()).run()
     await db.prepare('INSERT INTO maintenance_schools(university_id,name_json,seed_json,scope_sha256) VALUES(?,?,?,?)').bind('runtime-school', '{"en":"Runtime Test"}', '{}', scope).run()
-    await db.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256,snapshot_key) VALUES(?,?,?,'undergraduate_catalog',1,24,?,?,?)")
-      .bind(sourceId, snapshot.sourceUrl, '["runtime-test.edu.cn"]', new Date().toISOString(), rawSha, snapshotKey).run()
+    await db.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256,canonical_sha256,snapshot_key) VALUES(?,?,?,'undergraduate_catalog',1,24,?,?,?,?)")
+      .bind(sourceId, snapshot.sourceUrl, '["runtime-test.edu.cn"]', new Date().toISOString(), rawSha, textSha, snapshotKey).run()
     await db.prepare('INSERT INTO maintenance_source_schools VALUES(?,?)').bind(sourceId, 'runtime-school').run()
     await db.prepare('INSERT INTO maintenance_record_targets(target_id,record_id,entity_type,university_id,record_scope_sha256,academic_year,intake,fields_json,target_json) VALUES(?,?,?,?,?,?,?,?,?)')
       .bind(`admission-cycle:${target.recordId}`, target.recordId, target.entityType, target.universityId, target.recordScopeSha256, target.year, target.intake, '{}', canonical(target)).run()
     await db.prepare('INSERT INTO maintenance_target_sources VALUES(?,?)').bind(`admission-cycle:${target.recordId}`, sourceId).run()
     await bucket.put(snapshotKey, canonical(snapshot)); await bucket.put(snapshot.textKey!, text)
     const run = () => mf.dispatchFetch('https://native.test/test/field-job', { method: 'POST', headers: { authorization: `Bearer ${admin}` } })
+    if (scenario !== 'fresh') {
+      const post = (path: string, body: unknown) => mf.dispatchFetch(`https://native.test${path}`, { method: 'POST', headers: { authorization: `Bearer ${admin}`, 'content-type': 'application/json' }, body: JSON.stringify(body) })
+      const inputs = await (await post('/test/inputs', {})).json() as ModelRequest[]
+      const oldSourceId = await digest('https://runtime-test.edu.cn/historical-alias'), oldRaw = '3'.repeat(64)
+      const oldText = scenario === 'historical-text' ? text : 'Unrelated old evidence isolates the payload comparison.', oldTextSha = await digest(oldText)
+      const scopeKey = await digest(canonical([{ recordId: target.recordId, scope: target.recordScopeSha256, fields: maintainedFieldPaths(target.entityType) }]))
+      const oldKey = await digest(`field-maintenance-v1:${oldSourceId}:${oldRaw}:${scopeKey}:primary`)
+      const requestSha256 = scenario === 'historical-text' ? await digest('a different old task payload') : await digest(inputs[scenario === 'payload-primary' ? 0 : 1].payload)
+      const prior = { state: 'unknown', attemptId: 'native-historical-unknown', requestSha256 }
+      const oldSnapshot = { ...snapshot, sourceId: oldSourceId, rawSha256: oldRaw, rawKey: `maintenance/raw/${oldRaw}`,
+        sourceUrl: 'https://runtime-test.edu.cn/historical-alias', textKey: `maintenance/text/${oldTextSha}`, textSha256: oldTextSha, canonicalSha256: oldTextSha }
+      await bucket.put(`maintenance/snapshots/${oldSourceId}/${oldRaw}.json`, canonical(oldSnapshot)); await bucket.put(oldSnapshot.textKey, oldText)
+      // A later current pointer must not erase the original attempted document.
+      await db.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at,raw_sha256,canonical_sha256,snapshot_key) VALUES(?,?,?,'undergraduate_catalog',1,24,?,?,?,?)")
+        .bind(oldSourceId, oldSnapshot.sourceUrl, '["runtime-test.edu.cn"]', new Date().toISOString(), '4'.repeat(64), '5'.repeat(64), `maintenance/snapshots/${oldSourceId}/${'4'.repeat(64)}.json`).run()
+      await db.prepare("INSERT INTO maintenance_model_attempts(reservation_key,attempt_id,source_id,snapshot_sha256,pass,request_sha256,model,status,started_at,quota_json) VALUES(?,?,?,?,?,?,'MiniMax-M3','unknown',?,'{}')")
+        .bind(oldKey, prior.attemptId, oldSourceId, oldRaw, 'primary', requestSha256, new Date().toISOString()).run()
+      await post('/test/seed', { key: `request:${oldKey}`, value: prior })
+      const response = await run(), result = await response.json() as { proposals: unknown[]; error: string }
+      assert.equal(response.status, 409); assert.equal(result.error, 'flash_canary_scope_has_history'); assert.deepEqual(result.proposals, [])
+      assert.equal(calls.length, 0, 'neither quota nor model may be called for a historical semantic alias')
+      assert.deepEqual(await (await post('/test/read', { key: `request:${oldKey}` })).json(), prior)
+      assert.equal((await db.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').first<{ n: number }>())?.n, 1)
+      assert.equal((await db.prepare('SELECT COUNT(*) n FROM maintenance_proposals').first<{ n: number }>())?.n, 0)
+      return
+    }
     await t.test('native transaction list and field admission produce exactly two Flash attempts', async () => {
       const response = await run(), result = await response.json() as { proposals: unknown[]; held: unknown[] }
       assert.equal(response.status, 200, JSON.stringify(result)); assert.equal(result.proposals.length, 1); assert.deepEqual(result.held, [])
