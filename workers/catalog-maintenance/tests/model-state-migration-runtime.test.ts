@@ -139,6 +139,20 @@ test('real workerd migrates private DO history across namespaces, verifies real 
       const readStatus = () => source.mf.dispatchFetch('https://migration.test/model-state-migration/status', { headers: { authorization: `Bearer ${admin}` } })
       const status = await (await readStatus()).json() as Record<string, unknown>
       assert.equal(status.activeFetchPermitCount, 1); assert.equal(status.activeModelPermitCount, 1)
+      const sentinel = { ...gate, fetches: [{ token: 'PRIVATE-SENTINEL', expiresAt: Number.MAX_VALUE }] }
+      await post(source.mf, '/test/seed', [{ key: 'gate', value: sentinel }])
+      const sentinelSha = await digest(canonical(sentinel))
+      for (const response of [await readStatus(), await post(source.mf, '/model-state-migration/freeze', { migrationId })]) {
+        const observed = await response.json() as Record<string, unknown>
+        assert.ok([200, 409].includes(response.status)); assert.equal(observed.activeOperations, 0)
+        assert.equal(observed.activeFetchPermitCount, 1); assert.equal(observed.activeModelPermitCount, 1)
+        assert.equal(observed.latestPermitExpiresAt, null); assert.equal(observed.maxPermitExpiryMilliseconds, Number.MAX_VALUE)
+        assert.equal(observed.unrepresentablePermitExpiryCount, 1); assert.equal(observed.gateSha256, sentinelSha)
+        assert.equal(JSON.stringify(observed).includes('PRIVATE-SENTINEL'), false)
+      }
+      const sentinelExport = await post(source.mf, '/model-state-migration/export', { migrationId, pageIndex: 0 })
+      assert.equal(sentinelExport.status, 409); assert.equal((await sentinelExport.json() as { error: string }).error, 'model_state_migration_inflight')
+      assert.equal((await (await readStatus()).json() as Record<string, unknown>).gateSha256, sentinelSha)
       const expired = { ...gate, fetches: [{ token: 'PRIVATE-EXPIRED-FETCH', expiresAt: old }], models: [] }
       await post(source.mf, '/test/seed', [{ key: 'gate', value: expired }])
       await post(source.mf, '/test/pause-transaction', {})

@@ -11,6 +11,9 @@ const STATES = ['send_started', 'completed', 'unknown', 'known_failed'] as const
 const HOST = /^studyinchina-catalog-maintenance\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.workers\.dev$/
 const HASH = /^[a-f0-9]{64}$/
 const ACCOUNT = /^[a-f0-9]{32}$/
+const UPSTREAM_ERRORS = ['model_state_migration_gate_invalid', 'model_state_migration_value_invalid', 'model_state_migration_lock_invalid',
+  'model_state_migration_configuration_invalid', 'model_state_migration_id_mismatch', 'model_state_migration_role_mismatch',
+  'model_state_migration_disabled', 'model_state_migration_inflight', 'model_state_migration_unavailable'] as const
 type Counts = Record<typeof STATES[number], number>
 type Binding = { migrationId: string; sourceAccountId: string; targetAccountId: string }
 type Entry = { key: string; value: unknown }
@@ -23,12 +26,14 @@ type RelayCode = 'configuration_invalid' | 'source_inflight' | 'authentication_f
   | 'target_finalize_rejected' | 'target_receipt_invalid' | 'private_state_unavailable' | 'private_cleanup_failed'
 export type ModelStateSourceDiagnostics = {
   activeOperations: number; serverTime: string; activeFetchPermitCount: number; activeModelPermitCount: number; latestPermitExpiresAt: string | null
+  unrepresentablePermitExpiryCount?: number; maxPermitExpiryMilliseconds?: number | null; gateSha256?: string | null
 }
 export type ModelStateRelayReport = {
   format: 'studyinchina.model-state-migration-report'; version: 1; migrationId: string | null;
   state: 'finalized' | 'waiting' | 'failed'; code: RelayCode | null; sourceFrozen: boolean; targetFinalized: boolean;
   manifestSha256: string | null; pageCount: number | null; entryCount: number | null; requestCount: number | null; states: Counts | null;
   sourceDiagnostics: ModelStateSourceDiagnostics | null;
+  upstreamErrorCode: typeof UPSTREAM_ERRORS[number] | null;
   modelCallsPerformed: false; controlsChanged: false
 }
 export type ModelStateRelayOptions = {
@@ -58,14 +63,28 @@ function peerBinding(raw: Record<string, unknown>, migrationId: string): Binding
 }
 function sourceDiagnostics(raw: Record<string, unknown>): ModelStateSourceDiagnostics | null {
   const fields = ['activeOperations', 'serverTime', 'activeFetchPermitCount', 'activeModelPermitCount', 'latestPermitExpiresAt'] as const
+  const extra = ['unrepresentablePermitExpiryCount', 'maxPermitExpiryMilliseconds', 'gateSha256'] as const
   // Old source versions have no diagnostics. Partial or malformed observations
   // must never be presented as trustworthy zero counts or runner-local dates.
-  if (fields.every(field => raw[field] === undefined)) return null
+  if ([...fields, ...extra].every(field => raw[field] === undefined)) return null
   const iso = (value: unknown): value is string => typeof value === 'string' && Number.isFinite(Date.parse(value)) && new Date(value).toISOString() === value
   if (!integer(raw.activeOperations) || !integer(raw.activeFetchPermitCount) || !integer(raw.activeModelPermitCount) || !iso(raw.serverTime)
     || raw.latestPermitExpiresAt !== null && !iso(raw.latestPermitExpiresAt)) return fail('source_diagnostics_invalid')
+  const observed: Pick<ModelStateSourceDiagnostics, typeof extra[number]> = {}
+  if (extra.some(field => raw[field] !== undefined)) {
+    const maximum = raw.maxPermitExpiryMilliseconds, unrepresentable = raw.unrepresentablePermitExpiryCount
+    if (!integer(unrepresentable) || unrepresentable > raw.activeFetchPermitCount + raw.activeModelPermitCount
+      || maximum !== null && (typeof maximum !== 'number' || !Number.isFinite(maximum) || maximum < 0)
+      || raw.gateSha256 !== null && !HASH.test(String(raw.gateSha256))) return fail('source_diagnostics_invalid')
+    const asDate = maximum === null ? null : new Date(maximum as number)
+    const expectedIso = asDate && Number.isFinite(asDate.getTime()) ? asDate.toISOString() : null
+    if (raw.latestPermitExpiresAt !== expectedIso || (unrepresentable > 0) !== (maximum !== null && expectedIso === null)
+      || maximum === null && (raw.activeFetchPermitCount + raw.activeModelPermitCount > 0 || unrepresentable !== 0)
+      || raw.gateSha256 === null && maximum !== null) return fail('source_diagnostics_invalid')
+    Object.assign(observed, { unrepresentablePermitExpiryCount: unrepresentable, maxPermitExpiryMilliseconds: maximum, gateSha256: raw.gateSha256 })
+  }
   return { activeOperations: raw.activeOperations, serverTime: raw.serverTime, activeFetchPermitCount: raw.activeFetchPermitCount,
-    activeModelPermitCount: raw.activeModelPermitCount, latestPermitExpiresAt: raw.latestPermitExpiresAt as string | null }
+    activeModelPermitCount: raw.activeModelPermitCount, latestPermitExpiresAt: raw.latestPermitExpiresAt as string | null, ...observed }
 }
 async function boundedJson(response: Response) {
   if (!/^application\/json(?:\s*;|$)/i.test(response.headers.get('content-type') ?? '')) return fail('response_invalid')
@@ -123,7 +142,7 @@ function validateManifest(value: unknown, sha256: unknown, expected: Binding, pa
 export async function transferModelState(options: ModelStateRelayOptions): Promise<ModelStateRelayReport> {
   const report: ModelStateRelayReport = { format: 'studyinchina.model-state-migration-report', version: 1, migrationId: null,
     state: 'failed', code: null, sourceFrozen: false, targetFinalized: false, manifestSha256: null, pageCount: null,
-    entryCount: null, requestCount: null, states: null, sourceDiagnostics: null, modelCallsPerformed: false, controlsChanged: false }
+    entryCount: null, requestCount: null, states: null, sourceDiagnostics: null, upstreamErrorCode: null, modelCallsPerformed: false, controlsChanged: false }
   let privateDirectory: string | undefined, tempRoot: string | undefined
   try {
     if (!/^[a-zA-Z0-9][a-zA-Z0-9_.:-]{7,95}$/.test(options.migrationId) || !isAbsolute(options.runnerTemp)
@@ -147,12 +166,22 @@ export async function transferModelState(options: ModelStateRelayOptions): Promi
         await response.body?.cancel(); return fail('redirect_rejected')
       }
       if (response.status === 401 || response.status === 403) { await response.body?.cancel(); return fail('authentication_failed') }
-      if (!response.ok && !(path === '/freeze' && response.status === 409)) { await response.body?.cancel(); return fail(rejected) }
+      const rememberUpstream = (raw: Record<string, unknown>) => {
+        if (base === source && UPSTREAM_ERRORS.some(code => code === raw.error)) report.upstreamErrorCode = raw.error as typeof UPSTREAM_ERRORS[number]
+      }
+      if (!response.ok && !(path === '/freeze' && response.status === 409)) {
+        if (base === source && /^application\/json(?:\s*;|$)/i.test(response.headers.get('content-type') ?? '')) {
+          try { rememberUpstream(await boundedJson(response)) } catch { /* Keep the original fixed HTTP failure classification. */ }
+        } else await response.body?.cancel()
+        return fail(rejected)
+      }
       let raw: Record<string, unknown>
       try { raw = await boundedJson(response) } catch (error) { if (error instanceof RelayError) throw error; return fail('response_invalid') }
+      if (!response.ok) rememberUpstream(raw)
       return { raw, status: response.status }
     }
     const freeze = await request(source, '/freeze', { migrationId: options.migrationId }, 'source_freeze_rejected')
+    if (freeze.raw.ok !== true) return fail('source_freeze_rejected')
     const binding = peerBinding(freeze.raw, options.migrationId)
     if (freeze.raw.ok !== true || freeze.raw.role !== 'source' || freeze.raw.frozen !== true || !['frozen', 'exporting', 'exported'].includes(String(freeze.raw.state))) return fail('source_freeze_rejected')
     report.sourceFrozen = true
