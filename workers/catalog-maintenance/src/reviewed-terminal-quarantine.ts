@@ -12,7 +12,7 @@ const STATES = ['send_started', 'completed', 'unknown', 'known_failed'] as const
 const tupleFields = ['job_id', 'source_id', 'stage', 'status', 'attempt', 'created_at', 'updated_at', 'due_at', 'lease_token', 'lease_until', 'snapshot_sha256', 'snapshot_key', 'error_code', 'target_ids_json'] as const
 type Ref = { objectKey: string; sha256: string }
 type Counts = Record<typeof STATES[number], number>
-type Migration = { manifestSha256: string; finalizedAt: string; pageCount: number; importedPages: number; entryCount: number; requestCount: number; states: Counts }
+type Migration = { manifestSha256: string; finalizedAt: string; pageCount: number; importedPages: number; entryCount: number; requestCount: number; auxiliaryEntryCount?: number; states: Counts }
 type Evidence = { format: 'studyinchina.reviewed-terminal-quarantine-evidence'; version: 1; operationId: string; policySha256: string; migrationId: string;
   sourceAccountId: string; targetAccountId: string; targetDatabaseId: string; scopeRegistrySha256: string; registeredAgainstRevision: number;
   inputCatalogSha256: string; auditedAt: string; relayReport: Ref; scopeUpgrade: Ref; migration: Migration; jobsSha256: string;
@@ -66,14 +66,22 @@ function counts(v: unknown): Counts {
   if (!r || Object.keys(r).sort().join(',') !== [...STATES].sort().join(',') || STATES.some(state => !integer(r[state]))) return fail('terminal_quarantine_do_counts_invalid')
   return r as Counts
 }
+function auxiliaryEntries(value: Record<string, unknown>): number {
+  const count = value.auxiliaryEntryCount === undefined ? 0 : value.auxiliaryEntryCount
+  if (!integer(count)) return fail('terminal_quarantine_do_counts_invalid')
+  return count
+}
 function migration(v: unknown, now: number): Migration {
   const r = record(v)
   if (!r || !HASH.test(String(r.manifestSha256)) || !instant(r.finalizedAt, now) || !integer(r.pageCount) || r.pageCount < 1 || r.importedPages !== r.pageCount
     || !integer(r.entryCount) || !integer(r.requestCount)) return fail('terminal_quarantine_finalized_do_required')
-  const states = counts(r.states)
-  if (STATES.reduce((sum, state) => sum + states[state], 0) !== r.requestCount || ![r.requestCount, r.requestCount + 1].includes(r.entryCount)) return fail('terminal_quarantine_do_counts_invalid')
+  const states = counts(r.states), auxiliaryEntryCount = auxiliaryEntries(r), requestsAndAuxiliary = r.requestCount + auxiliaryEntryCount
+  // Legacy fence/adoption KV entries are migrated evidence, never model calls.
+  // Status has no gatePresent, so retain the original zero-or-one gate slot.
+  if (!Number.isSafeInteger(requestsAndAuxiliary) || STATES.reduce((sum, state) => sum + states[state], 0) !== r.requestCount
+    || ![0, 1].includes(r.entryCount - requestsAndAuxiliary)) return fail('terminal_quarantine_do_counts_invalid')
   return { manifestSha256: String(r.manifestSha256), finalizedAt: String(r.finalizedAt), pageCount: r.pageCount, importedPages: r.pageCount,
-    entryCount: r.entryCount, requestCount: r.requestCount, states }
+    entryCount: r.entryCount, requestCount: r.requestCount, ...(auxiliaryEntryCount ? { auxiliaryEntryCount } : {}), states }
 }
 function currentScope(env: MaintenanceEnv, cfg: Control | null): asserts cfg is Control {
   if (!cfg || cfg.scope_sha256 !== pinned.registrationScopeSha256 || env.SCOPE_REGISTRY_SHA256 !== cfg.scope_sha256 || env.SCOPE_SCHOOL_COUNT !== '295'
@@ -157,7 +165,8 @@ async function prepareEvidence(env: MaintenanceEnv, value: Record<string, unknow
   if (!actual || actual.ok !== true || !sameBinding(actual) || actual.role !== 'target' || actual.state !== 'finalized') return fail('terminal_quarantine_finalized_do_required')
   const finalized = migration(actual, now)
   if (relay.manifestSha256 !== finalized.manifestSha256 || relay.entryCount !== finalized.entryCount || relay.requestCount !== finalized.requestCount
-    || relay.pageCount !== finalized.pageCount || canonical(counts(relay.states)) !== canonical(finalized.states)) return fail('terminal_quarantine_relay_do_mismatch')
+    || auxiliaryEntries(relay) !== (finalized.auxiliaryEntryCount ?? 0) || relay.pageCount !== finalized.pageCount
+    || canonical(counts(relay.states)) !== canonical(finalized.states)) return fail('terminal_quarantine_relay_do_mismatch')
   await exactJobs(env); await audit(env)
   const artifacts: Evidence['artifacts'] = []
   for (const subject of pinned.jobs) {

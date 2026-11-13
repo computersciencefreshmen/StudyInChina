@@ -8,6 +8,7 @@ const protocol = [
   ['GET', '/model-state-migration/status'], ['GET', '/model-state-migration/gate-inspection'], ['GET', '/model-state-migration/ledger-summary'],
   ['POST', '/model-state-migration/freeze'], ['POST', '/model-state-migration/export'], ['POST', '/model-state-migration/import'],
   ['POST', '/model-state-migration/finalize'], ['POST', '/model-state-migration/non-temporal-fetch-permit-recovery'],
+  ['GET', '/model-state-migration/storage-inspection'], ['POST', '/model-state-migration/handoff-operation-recovery'],
 ] as const
 const databases: Array<ReturnType<typeof makeEnv>['db']> = []
 afterEach(() => { for (const db of databases.splice(0)) db.sqlite.close() })
@@ -56,7 +57,7 @@ test('source auth and exact protocol allowlist precede all ordinary HTTP reads, 
   assert.deepEqual(f.effects.admission, []); noStorage(f)
 })
 
-test('all eight exact migration protocol methods remain reachable without pre-protocol D1, R2 or provider effects', async () => {
+test('original protocol and two source-only additions remain reachable without pre-protocol storage or provider effects', async () => {
   const f = fixture()
   for (const [method, path] of protocol) {
     assert.equal((await f.request(method, path, false)).status, 401)

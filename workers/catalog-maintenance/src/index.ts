@@ -35,6 +35,7 @@ const sourceMigrationRoutes=new Set([
   'GET /model-state-migration/status','GET /model-state-migration/gate-inspection','GET /model-state-migration/ledger-summary',
   'POST /model-state-migration/freeze','POST /model-state-migration/export','POST /model-state-migration/import',
   'POST /model-state-migration/finalize','POST /model-state-migration/non-temporal-fetch-permit-recovery',
+  'GET /model-state-migration/storage-inspection','POST /model-state-migration/handoff-operation-recovery',
 ])
 async function finishDocumentPartition(env:MaintenanceEnv,job:JobRow,progress:Awaited<ReturnType<typeof runPartitionedDocument>>){
   if(progress.pending){
@@ -148,6 +149,8 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/job-dispositions'&&request.method==='POST')return json(await reviewedTerminalQuarantine(env,await requestJson(request,32*1024)))
     if(url.pathname==='/model-state-migration/status'&&request.method==='GET')return await gateRequest(env,url.pathname,{})
     if(url.pathname==='/model-state-migration/gate-inspection'&&request.method==='GET')return await gateRequest(env,url.pathname,{migrationId:env.MODEL_STATE_MIGRATION_ID})
+    if(url.pathname==='/model-state-migration/storage-inspection'&&request.method==='GET')return await gateRequest(env,url.pathname,{migrationId:env.MODEL_STATE_MIGRATION_ID,pageIndex:Number(url.searchParams.get('pageIndex')??0),...(url.searchParams.has('expectedStorageSha256')?{expectedStorageSha256:url.searchParams.get('expectedStorageSha256')}: {})})
+    if(url.pathname==='/model-state-migration/handoff-operation-recovery'&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,4096))
     if(url.pathname==='/model-state-migration/ledger-summary'&&request.method==='GET')return await gateRequest(env,url.pathname,{migrationId:env.MODEL_STATE_MIGRATION_ID})
     if(url.pathname==='/model-state-migration/non-temporal-fetch-permit-recovery'&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,4096))
     if(['/model-state-migration/freeze','/model-state-migration/export','/model-state-migration/import','/model-state-migration/finalize'].includes(url.pathname)&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,12*1024*1024))

@@ -48,6 +48,7 @@ test('real workerd source HTTP, scheduled and Queue entrances freeze before any 
       ['GET', '/model-state-migration/status'], ['GET', '/model-state-migration/gate-inspection'], ['GET', '/model-state-migration/ledger-summary'],
       ['POST', '/model-state-migration/freeze'], ['POST', '/model-state-migration/export'], ['POST', '/model-state-migration/import'],
       ['POST', '/model-state-migration/finalize'], ['POST', '/model-state-migration/non-temporal-fetch-permit-recovery'],
+      ['GET', '/model-state-migration/storage-inspection'], ['POST', '/model-state-migration/handoff-operation-recovery'],
     ]
     for (const [method, path] of protocol) {
       const response = await mf.dispatchFetch('https://freeze.test' + path, { method, headers, ...(method === 'POST' ? { body: '{}' } : {}) })

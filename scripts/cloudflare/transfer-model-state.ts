@@ -4,6 +4,7 @@ import { basename, dirname, isAbsolute, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { canonicalJson } from '../maintenance/contracts'
 import type { ModelStateManifest } from '../../workers/catalog-maintenance/src/model-state-migration'
+import { validateLegacyAuxiliaryEntry, validateLegacyOfflineGate, validateMigratedRequest } from '../../workers/catalog-maintenance/src/legacy-offline-state'
 
 const MAX_BODY = 12 * 1024 * 1024, MAX_PAGE = 4 * 1024 * 1024, MAX_PAGES = 4096
 const PRIVATE_PREFIX = 'catalog-model-state-private-'
@@ -13,7 +14,8 @@ const HASH = /^[a-f0-9]{64}$/
 const ACCOUNT = /^[a-f0-9]{32}$/
 const UPSTREAM_ERRORS = ['model_state_migration_gate_invalid', 'model_state_migration_value_invalid', 'model_state_migration_lock_invalid',
   'model_state_migration_configuration_invalid', 'model_state_migration_id_mismatch', 'model_state_migration_role_mismatch',
-  'model_state_migration_disabled', 'model_state_migration_inflight', 'model_state_migration_unavailable'] as const
+  'model_state_migration_disabled', 'model_state_migration_inflight', 'model_state_migration_unavailable',
+  'model_state_migration_legacy_state_invalid', 'model_state_migration_unknown_key', 'model_state_migration_reservation_invalid'] as const
 type Counts = Record<typeof STATES[number], number>
 type Binding = { migrationId: string; sourceAccountId: string; targetAccountId: string }
 type Entry = { key: string; value: unknown }
@@ -32,6 +34,7 @@ export type ModelStateRelayReport = {
   format: 'studyinchina.model-state-migration-report'; version: 1; migrationId: string | null;
   state: 'finalized' | 'waiting' | 'failed'; code: RelayCode | null; sourceFrozen: boolean; targetFinalized: boolean;
   manifestSha256: string | null; pageCount: number | null; entryCount: number | null; requestCount: number | null; states: Counts | null;
+  auxiliaryEntryCount?: number;
   sourceDiagnostics: ModelStateSourceDiagnostics | null;
   upstreamErrorCode: typeof UPSTREAM_ERRORS[number] | null;
   modelCallsPerformed: false; controlsChanged: false
@@ -111,14 +114,21 @@ function validatePage(raw: Record<string, unknown>, expected: Binding, index: nu
   try { page = record(JSON.parse(raw.pageBytes)) } catch { return fail('source_page_invalid') }
   if (!page || canonicalJson(page) !== raw.pageBytes || !same(page, expected) || page.format !== 'studyinchina.model-state-page' || page.version !== 1 || page.index !== index
     || !Array.isArray(page.entries) || page.entries.length > 32 || page.entries.length === 0 && raw.nextPageIndex !== null) return fail('source_page_invalid')
-  const states = zero(); let gatePresent = false, requestCount = 0, lastKey = previous
+  const states = zero(); let gatePresent = false, requestCount = 0, auxiliaryEntryCount = 0, lastKey = previous
   for (const value of page.entries) {
     const entry = record(value), state = record(entry?.value)
     if (!entry || Object.keys(entry).length !== 2 || typeof entry.key !== 'string' || lastKey !== null && entry.key <= lastKey || !state) return fail('source_page_invalid')
+    let auxiliary: boolean
+    try {
+      if (entry.key === 'gate') validateLegacyOfflineGate(state)
+      auxiliary = entry.key !== 'gate' && validateLegacyAuxiliaryEntry(entry.key, state)
+    } catch { return fail('source_page_invalid') }
     if (entry.key === 'gate') gatePresent = true
+    else if (auxiliary) auxiliaryEntryCount++
     else {
       if (!/^request:[a-f0-9]{64}$/.test(entry.key) || !STATES.includes(state.state as typeof STATES[number])
         || typeof state.attemptId !== 'string' || !state.attemptId || !HASH.test(String(state.requestSha256))) return fail('source_page_invalid')
+      try { validateMigratedRequest(state) } catch { return fail('source_page_invalid') }
       states[state.state as typeof STATES[number]]++; requestCount++
     }
     lastKey = entry.key
@@ -126,13 +136,16 @@ function validatePage(raw: Record<string, unknown>, expected: Binding, index: nu
   const typed = page as unknown as Page
   const info: PageInfo = { index, sha256: raw.pageSha256 as string, byteLength: bytes(raw.pageBytes), entryCount: typed.entries.length,
     firstKey: typed.entries[0]?.key ?? null, lastKey: typed.entries.at(-1)?.key ?? null, startAfter: previous }
-  return { info, pageBytes: raw.pageBytes, states, requestCount, gatePresent, lastKey }
+  return { info, pageBytes: raw.pageBytes, states, requestCount, auxiliaryEntryCount, gatePresent, lastKey }
 }
-function validateManifest(value: unknown, sha256: unknown, expected: Binding, pages: PageInfo[], counts: { entryCount: number; requestCount: number; gatePresent: boolean; states: Counts }) {
+function validateManifest(value: unknown, sha256: unknown, expected: Binding, pages: PageInfo[], counts: { entryCount: number; requestCount: number; auxiliaryEntryCount: number; gatePresent: boolean; states: Counts }) {
   const raw = record(value)
+  const auxiliaryEntryCount = raw?.auxiliaryEntryCount === undefined ? 0 : raw.auxiliaryEntryCount
   if (!raw || !HASH.test(String(sha256)) || hash(canonicalJson(raw)) !== sha256 || !same(raw, expected) || raw.format !== 'studyinchina.model-state-manifest' || raw.version !== 1
     || typeof raw.frozenAt !== 'string' || !Number.isFinite(Date.parse(raw.frozenAt)) || !Array.isArray(raw.pages) || !raw.pages.length || raw.pages.length > MAX_PAGES
-    || raw.entryCount !== counts.entryCount || raw.requestCount !== counts.requestCount || raw.gatePresent !== counts.gatePresent || !record(raw.states)
+    || !integer(auxiliaryEntryCount) || auxiliaryEntryCount !== counts.auxiliaryEntryCount
+    || raw.entryCount !== counts.entryCount || raw.requestCount !== counts.requestCount || raw.entryCount !== counts.requestCount + Number(counts.gatePresent) + auxiliaryEntryCount
+    || raw.gatePresent !== counts.gatePresent || !record(raw.states)
     || canonicalJson(raw.states) !== canonicalJson(counts.states) || canonicalJson(raw.pages) !== canonicalJson(pages)) return fail('source_manifest_invalid')
   return raw as unknown as ModelStateManifest
 }
@@ -193,13 +206,14 @@ export async function transferModelState(options: ModelStateRelayOptions): Promi
     if (freeze.raw.error !== undefined) return fail('source_freeze_rejected')
     const pinnedManifestSha256 = freeze.raw.manifestSha256
     if (pinnedManifestSha256 !== null && !HASH.test(String(pinnedManifestSha256))) return fail('source_manifest_invalid')
-    const pages: PageInfo[] = [], totals = { entryCount: 0, requestCount: 0, gatePresent: false, states: zero() }
+    const pages: PageInfo[] = [], auxiliaryCountsByPage: number[] = [], totals = { entryCount: 0, requestCount: 0, auxiliaryEntryCount: 0, gatePresent: false, states: zero() }
     let lastKey: string | null = null, manifest: ModelStateManifest | undefined, manifestSha256: string | undefined
     for (let index = 0; index < MAX_PAGES; index++) {
       const response = await request(source, '/export', { migrationId: options.migrationId, pageIndex: index }, 'source_export_rejected')
       const page = validatePage(response.raw, binding, index, lastKey)
       await writeFile(join(privateDirectory, `page-${String(index).padStart(4, '0')}.json`), page.pageBytes, { mode: 0o600, flag: 'wx' })
       pages.push(page.info); totals.entryCount += page.info.entryCount; totals.requestCount += page.requestCount
+      auxiliaryCountsByPage.push(page.auxiliaryEntryCount); totals.auxiliaryEntryCount += page.auxiliaryEntryCount
       if (page.gatePresent && totals.gatePresent) return fail('source_page_invalid')
       totals.gatePresent ||= page.gatePresent
       for (const state of STATES) totals.states[state] += page.states[state]
@@ -220,6 +234,7 @@ export async function transferModelState(options: ModelStateRelayOptions): Promi
     if (!manifest || !manifestSha256) return fail('source_manifest_missing')
     await writeFile(join(privateDirectory, 'manifest.json'), canonicalJson({ manifest, manifestSha256 }), { mode: 0o600, flag: 'wx' })
     report.manifestSha256 = manifestSha256; report.pageCount = pages.length; report.entryCount = totals.entryCount; report.requestCount = totals.requestCount; report.states = totals.states
+    if (totals.auxiliaryEntryCount) report.auxiliaryEntryCount = totals.auxiliaryEntryCount
     for (const page of pages) {
       const pageBytes = await readFile(join(privateDirectory, `page-${String(page.index).padStart(4, '0')}.json`), 'utf8')
       if (hash(pageBytes) !== page.sha256 || bytes(pageBytes) !== page.byteLength) return fail('private_state_unavailable')
@@ -227,11 +242,14 @@ export async function transferModelState(options: ModelStateRelayOptions): Promi
       if (imported.raw.ok !== true || !same(imported.raw, binding) || imported.raw.role !== 'target' || !['importing', 'finalized'].includes(String(imported.raw.state))
         || imported.raw.manifestSha256 !== manifestSha256 || imported.raw.pageCount !== pages.length || !integer(imported.raw.importedPages) || imported.raw.importedPages < page.index + 1
         || imported.raw.importedPages > pages.length) return fail('target_receipt_invalid')
+      const importedAuxiliaryCount = imported.raw.auxiliaryEntryCount === undefined ? 0 : imported.raw.auxiliaryEntryCount
+      if (!integer(importedAuxiliaryCount) || importedAuxiliaryCount !== auxiliaryCountsByPage.slice(0, imported.raw.importedPages).reduce((sum, count) => sum + count, 0)) return fail('target_receipt_invalid')
     }
     const finalized = await request(target, '/finalize', { migrationId: options.migrationId, manifestSha256 }, 'target_finalize_rejected')
     if (finalized.raw.ok !== true || !same(finalized.raw, binding) || finalized.raw.role !== 'target' || finalized.raw.state !== 'finalized'
       || finalized.raw.manifestSha256 !== manifestSha256 || finalized.raw.pageCount !== pages.length || finalized.raw.importedPages !== pages.length
       || finalized.raw.entryCount !== totals.entryCount || finalized.raw.requestCount !== totals.requestCount || canonicalJson(finalized.raw.states) !== canonicalJson(totals.states)
+      || (finalized.raw.auxiliaryEntryCount === undefined ? 0 : finalized.raw.auxiliaryEntryCount) !== totals.auxiliaryEntryCount
       || typeof finalized.raw.finalizedAt !== 'string' || !Number.isFinite(Date.parse(finalized.raw.finalizedAt))) return fail('target_receipt_invalid')
     report.targetFinalized = true; report.state = 'finalized'
   } catch (error) {

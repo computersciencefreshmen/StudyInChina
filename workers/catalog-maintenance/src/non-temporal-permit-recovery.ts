@@ -33,7 +33,7 @@ const same = (a: unknown, b: unknown) => canonical(a) === canonical(b)
 
 /** Typed JSON fingerprinting covers every value. Reject representations that
  * the existing canonical JSON migration cannot preserve exactly. */
-function typed(value: unknown, depth = 0): unknown {
+export function typed(value: unknown, depth = 0): unknown {
   if (depth > 64) return fail('value_too_deep')
   if (value === null) return ['null']
   if (typeof value === 'string' || typeof value === 'boolean') return [typeof value, value]
@@ -80,7 +80,7 @@ function gate(value: unknown, allowAudit = true): Gate {
   if (byteLength(canonical(g)) > MAX_GATE_BYTES) return fail('gate_audit_too_large')
   return g as Gate
 }
-function sourceLock(value: unknown, binding: Binding): Lock {
+export function sourceLock(value: unknown, binding: Binding): Lock {
   const l = record(value), allowed = ['version', 'migrationId', 'sourceAccountId', 'targetAccountId', 'role', 'phase', 'frozenAt', 'pages', 'states', 'entryCount', 'requestCount', 'gatePresent']
   if (binding.role !== 'source' || !l || !keys(l, allowed) || l.version !== 1 || l.role !== 'source' || l.phase !== 'frozen'
     || l.migrationId !== binding.migrationId || l.sourceAccountId !== binding.sourceAccountId || l.targetAccountId !== binding.targetAccountId
