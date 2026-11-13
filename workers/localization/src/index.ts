@@ -1,4 +1,5 @@
 import { configuredTargetLocales, translationLimits } from './config'
+import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
 import { asLocalizationError, LocalizationError } from './errors'
 import { planTranslationBatch, processTranslationQueueBatch } from './pipeline'
 import { D1LocalizationRepository } from './repository'
@@ -61,6 +62,12 @@ export async function handleFetch(
   }
 
   if (request.method === 'POST' && url.pathname === '/v1/batches') {
+    const budget = await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)
+    if (!budget.allowed) {
+      const blocked = response({ ok: false, error: 'background_budget_blocked', budget }, 503)
+      blocked.headers.set('Retry-After', String(BACKGROUND_BUDGET_RETRY_SECONDS))
+      return blocked
+    }
     let body: unknown
     try {
       body = await request.json()
@@ -93,6 +100,10 @@ export async function handleQueue(
   batch: QueueMessageBatch<unknown>,
   environment: LocalizationEnv,
 ): Promise<void> {
+  if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) {
+    for (const message of batch.messages) message.retry({ delaySeconds: BACKGROUND_BUDGET_RETRY_SECONDS })
+    return
+  }
   const maxAttempts = translationLimits(environment).maxAttempts
   for (const message of batch.messages) {
     try {
@@ -116,6 +127,7 @@ export async function handleScheduled(
   controller: ScheduledControllerLike,
   environment: LocalizationEnv,
 ): Promise<void> {
+  if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) return
   const limits = translationLimits(environment)
   if (!limits.enabled) {
     controller.noRetry?.()

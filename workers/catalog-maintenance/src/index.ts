@@ -1,5 +1,8 @@
 import { ModelAdmission } from './admission'
+import { holdBudgetQueueMessage } from './budget-queue-hold'
 import { readPlanQuotaReport } from './quota-report'
+import { budgetStatus, configureBudget, checkBudget, resumeBudget } from './budget'
+import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS, BUDGET_POLICY_KEY, BUDGET_OBSERVATION_KEY } from '../../shared/background-budget'
 import { submitCoverageSnapshot } from './coverage'
 import { registerScopeUpgradeRequest, processScopeUpgrade, scopeUpgradeStatus } from './scope-upgrade'
 import { captureSource } from './capture'
@@ -21,7 +24,7 @@ import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
 import type { JobRow, MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
-import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus,quotaWait,rememberQuotaWait } from './runtime'
+import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus,quotaWait,rememberQuotaWait,recheckBackend } from './runtime'
 import { isDailyD1QuotaError } from './backend-errors'
 import { after, authorized, HASH, json, nowIso, requestJson } from './util'
 
@@ -98,7 +101,7 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
     const code=error instanceof MaintenanceError?error.code:'execution_failed'
     const retry=error instanceof MaintenanceError?error.retryAfter:null
     const unknown=/outcome_unknown|prior_model_outcome|lease_expired/.test(code)
-    const admissionWait=/^(?:fetch_capacity|model_capacity|model_http_429|model_waiting_control|model_not_sent|quota_|maintenance_quota_reserved)/.test(code),willRetry=retry!==null&&(admissionWait||job.attempt<4)
+    const admissionWait=/^(?:fetch_capacity|model_capacity|model_http_429|model_waiting_control|model_not_sent|quota_|budget_|maintenance_quota_reserved)/.test(code),willRetry=retry!==null&&(admissionWait||job.attempt<4)
     if(admissionWait)await env.PIPELINE_DB.prepare('UPDATE maintenance_jobs SET attempt=MAX(0,attempt-1) WHERE job_id=? AND lease_token=?').bind(job.job_id,job.lease_token).run()
     await finishJob(env,job,unknown?'unknown':willRetry?'retry':'held',code,retry??0)
     if(job.stage==='capture'&&!admissionWait)await env.PIPELINE_DB.batch([env.PIPELINE_DB.prepare('UPDATE maintenance_sources SET failures=failures+1,last_attempt_at=?,error_code=?,due_at=? WHERE source_id=?').bind(nowIso(),code,after((retry??(code.startsWith('robots_')?14*86400:86400))*1000),job.source_id),env.PIPELINE_DB.prepare('UPDATE maintenance_schools SET last_attempt_at=? WHERE university_id IN(SELECT university_id FROM maintenance_source_schools WHERE source_id=?)').bind(nowIso(),job.source_id)])
@@ -107,6 +110,14 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
   }
 }
 export async function handleQueue(batch:MaintenanceBatch,env:MaintenanceEnv):Promise<void> {
+  const budget=await readBackgroundBudgetGate(env.SNAPSHOTS_BUCKET)
+  if(!budget.allowed){
+    for(const message of batch.messages){
+      try{if(await holdBudgetQueueMessage(env,message.body)){message.ack();continue}}catch{/* Retain queue retry until the R2 marker is confirmed. */}
+      message.retry({delaySeconds:BACKGROUND_BUDGET_RETRY_SECONDS})
+    }
+    return
+  }
   await Promise.all(batch.messages.map(async message=>{try{
     const waiting=await quotaWait(env)
     if(waiting){message.retry({delaySeconds:Math.max(60,Math.min(43200,Math.ceil((Date.parse(waiting.retryAt)-Date.now())/1000)))});return}
@@ -121,7 +132,16 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   if(url.pathname==='/health'&&request.method==='GET')return json({ok:true,service:'studyinchina-catalog-maintenance',version:'1.0.0',publicationPerformed:false})
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
   try {
+    if(url.pathname==='/budget'&&request.method==='GET')return json(await budgetStatus(env))
+    if(url.pathname==='/budget'&&request.method==='POST')return json(await configureBudget(env,await requestJson(request,2048)))
+    if(url.pathname==='/budget/check'&&request.method==='POST')return json(await checkBudget(env))
+    if(url.pathname==='/budget/resume'&&request.method==='POST')return json(await resumeBudget(env,await requestJson(request,1024)))
     if(url.pathname==='/quota'&&request.method==='GET')return json(await readPlanQuotaReport(env))
+    if(url.pathname==='/backend/recheck'&&request.method==='POST')return json(await recheckBackend(env,await requestJson(request,1024)))
+    if(request.method==='POST'&&['/seed','/bootstrap','/scope-upgrades','/coverage','/targets','/documents','/reconciliations','/exports','/rollout','/head-reconcile-targets'].includes(url.pathname)){
+      const budget=await readBackgroundBudgetGate(env.SNAPSHOTS_BUCKET)
+      if(!budget.allowed)return json({ok:false,error:'budget_wait',code:budget.code},503)
+    }
     if(url.pathname==='/seed'&&request.method==='POST')return json(await seed(env,await requestJson(request,8*1024*1024),Date.now(),true))
     if(url.pathname==='/bootstrap'&&request.method==='POST')return json(await registerBootstrapRequest(env,request))
     if(url.pathname==='/scope-upgrades'&&request.method==='POST')return json(await registerScopeUpgradeRequest(env,request))
@@ -153,6 +173,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/ack'&&request.method==='POST')return json(await acknowledge(env,await requestJson(request,65536)))
     if(url.pathname==='/artifacts'&&request.method==='GET') {
       const key=url.searchParams.get('key')??''
+      if(key===BUDGET_POLICY_KEY||key===BUDGET_OBSERVATION_KEY||key.startsWith('maintenance/runtime/budget-observations/'))return json({ok:false,error:'budget_artifact_private'},403)
       if(!/^maintenance\/[a-zA-Z0-9/_-]+(?:\.[a-zA-Z0-9]+)?$/.test(key)||key.includes('..'))throw new MaintenanceError('artifact_key_invalid')
       const object=await env.SNAPSHOTS_BUCKET.get(key)
       if(!object)return json({ok:false,error:'artifact_not_found'},404)

@@ -193,6 +193,106 @@ test('only a proven automatic revision chain may supersede an entirely unstaged 
   f.db.sqlite.close()
 })
 
+const recoveryTime=Date.parse('2026-11-13T04:44:36.480Z')
+async function driftedPendingFixture() {
+  const f=await fixture(),upgrade={...f.upgrade,expectedRevision:7,recordTargets:[]}
+  f.db.sqlite.prepare('UPDATE maintenance_control SET revision=7').run()
+  const hash=await uploadFixture(f,upgrade)
+  f.db.sqlite.prepare('UPDATE maintenance_control SET revision=8').run()
+  f.db.sqlite.prepare("INSERT INTO maintenance_events VALUES('same-head-revalidation','targets_revalidated',?,?)")
+    .run(new Date(recoveryTime).toISOString(),canonicalJson({fromRevision:7,toRevision:8,inputCatalogSha256:TEST_CATALOG}))
+  f.db.sqlite.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at) VALUES('old-source','https://old0.edu.cn/catalog','[\"old0.edu.cn\"]','undergraduate_catalog',1,168,?)")
+    .run(new Date(recoveryTime).toISOString())
+  return{...f,upgrade,hash}
+}
+function addRunning(f:Awaited<ReturnType<typeof driftedPendingFixture>>,id:string,stage:string,lease:string|null) {
+  const at=new Date(recoveryTime-86400000).toISOString()
+  f.db.sqlite.prepare("INSERT INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,lease_token,lease_until) VALUES(?,'old-source',?,'running',10,?,?,?,?,?)")
+    .run(id,stage,at,at,at,lease===null?null:`lease-${id}`,lease)
+}
+
+test('pending scope reclaims only expired execution leases so the proven revision 7 to 8 chain can finish automatically',async()=>{
+  const f=await driftedPendingFixture()
+  try{
+    addRunning(f,'expired-capture','capture',new Date(recoveryTime-60000).toISOString())
+    addRunning(f,'expired-model-job','maintain',new Date(recoveryTime-60000).toISOString())
+    f.db.sqlite.prepare("INSERT INTO maintenance_jobs(job_id,source_id,stage,status,due_at,created_at,updated_at) VALUES('prior-unknown','old-source','extract','unknown',?,?,?)")
+      .run('2026-11-11','2026-11-11','2026-11-11')
+    f.db.sqlite.prepare("INSERT INTO maintenance_model_attempts(reservation_key,attempt_id,source_id,snapshot_sha256,pass,request_sha256,model,status,started_at,quota_json) VALUES('unknown-reservation','unknown-attempt','old-source','snapshot','primary','request','MiniMax-M3','unknown','2026-11-11','{}')").run()
+    f.db.sqlite.prepare("INSERT INTO maintenance_legacy_guards VALUES('prior-guard',NULL,NULL,NULL,'\"*\"','unknown',?,'original unknown reservation',NULL)").run(TEST_GUARDS)
+    const before=await control(f.env),unknownAttempt=f.db.sqlite.prepare('SELECT * FROM maintenance_model_attempts').get()
+    assert.equal((await scopeUpgradeStatus(f.env,f.hash)).canSupersede,false)
+    assert.equal(await resumePendingScopeUpgrade(f.env),true,'the normal scheduler is gated by this intent')
+    assert.equal((await processScopeUpgrade(f.env,f.hash,recoveryTime)).state,'waiting_for_automatic_head_reconciliation')
+    assert.deepEqual(await control(f.env),before,'lease recovery never rebases or changes controls')
+    assert.deepEqual(f.db.sqlite.prepare('SELECT status,lease_token,lease_until,error_code FROM maintenance_jobs WHERE job_id=?').get('expired-capture'),
+      Object.assign(Object.create(null),{status:'retry',lease_token:null,lease_until:null,error_code:'execution_lease_expired'}))
+    assert.equal(f.db.sqlite.prepare("SELECT status FROM maintenance_jobs WHERE job_id='expired-model-job'").get()?.status,'unknown')
+    assert.equal(f.db.sqlite.prepare("SELECT status FROM maintenance_jobs WHERE job_id='prior-unknown'").get()?.status,'unknown')
+    assert.deepEqual(f.db.sqlite.prepare('SELECT * FROM maintenance_model_attempts').get(),unknownAttempt)
+    assert.equal((await scopeUpgradeStatus(f.env,f.hash)).canSupersede,true)
+    const nextHash=await uploadFixture(f,{...f.upgrade,expectedRevision:8},f.hash)
+    let result=await processScopeUpgrade(f.env,nextHash,recoveryTime)
+    for(let i=0;i<20&&!result.completed;i++)result=await processScopeUpgrade(f.env,nextHash,recoveryTime)
+    assert.equal(result.completed,true)
+    await processScopeUpgrade(f.env,nextHash,recoveryTime)
+    const refresh=f.messages.findLast(message=>message.targetRefreshSha256)?.targetRefreshSha256
+    assert.ok(refresh);await continueTargetRefresh(f.env,refresh,false)
+    await processScopeUpgrade(f.env,nextHash,recoveryTime)
+    assert.equal(await resumePendingScopeUpgrade(f.env),false)
+    assert.equal((await control(f.env))?.scope_sha256,f.upgrade.nextScope.sha256)
+    assert.equal((await control(f.env))?.enabled,1);assert.equal((await control(f.env))?.models_enabled,1)
+    assert.equal(f.db.sqlite.prepare("SELECT status FROM maintenance_jobs WHERE job_id='prior-unknown'").get()?.status,'unknown')
+    assert.equal(f.db.sqlite.prepare('SELECT state FROM maintenance_legacy_guards').get()?.state,'unknown')
+    assert.deepEqual(f.db.sqlite.prepare('SELECT * FROM maintenance_model_attempts').get(),unknownAttempt)
+  }finally{f.db.sqlite.close()}
+})
+
+test('future, exactly current, missing and invalid running leases still block supersession',async()=>{
+  for(const lease of [new Date(recoveryTime+60000).toISOString(),new Date(recoveryTime).toISOString(),null,'unreadable-lease']){
+    const f=await driftedPendingFixture()
+    try{
+      addRunning(f,'live-or-unproven','capture',lease)
+      await processScopeUpgrade(f.env,f.hash,recoveryTime)
+      assert.equal(f.db.sqlite.prepare("SELECT status FROM maintenance_jobs WHERE job_id='live-or-unproven'").get()?.status,'running')
+      assert.equal((await scopeUpgradeStatus(f.env,f.hash)).canSupersede,false)
+      assert.equal((await control(f.env))?.revision,8)
+    }finally{f.db.sqlite.close()}
+  }
+})
+
+test('expired job reclamation never releases a reserved or send-started model attempt',async()=>{
+  for(const state of ['reserved','send_started']){
+    const f=await driftedPendingFixture()
+    try{
+      addRunning(f,'expired-job','maintain',new Date(recoveryTime-60000).toISOString())
+      f.db.sqlite.prepare("INSERT INTO maintenance_model_attempts(reservation_key,attempt_id,source_id,snapshot_sha256,pass,request_sha256,model,status,started_at,quota_json) VALUES('reservation','attempt','old-source','snapshot','primary','request','MiniMax-M3',?,'2026-11-11','{}')").run(state)
+      await processScopeUpgrade(f.env,f.hash,recoveryTime)
+      assert.equal(f.db.sqlite.prepare('SELECT status FROM maintenance_model_attempts').get()?.status,state)
+      assert.equal(f.db.sqlite.prepare("SELECT status FROM maintenance_jobs WHERE job_id='expired-job'").get()?.status,'unknown')
+      assert.equal((await scopeUpgradeStatus(f.env,f.hash)).canSupersede,false)
+    }finally{f.db.sqlite.close()}
+  }
+})
+
+test('expired leases cannot bridge a missing automatic revision proof or override a manual control revision',async()=>{
+  for(const manual of [false,true]){
+    const f=await driftedPendingFixture()
+    try{
+      addRunning(f,'expired-capture','capture',new Date(recoveryTime-60000).toISOString())
+      f.db.sqlite.prepare("DELETE FROM maintenance_events WHERE event_id='same-head-revalidation'").run()
+      if(manual)f.db.sqlite.prepare("INSERT INTO maintenance_events VALUES('operator','controls_changed',?,?)")
+        .run(new Date(recoveryTime).toISOString(),canonicalJson({revision:8}))
+      const before=await control(f.env)
+      const result=await processScopeUpgrade(f.env,f.hash,recoveryTime)
+      assert.equal((await scopeUpgradeStatus(f.env,f.hash)).canSupersede,false)
+      assert.deepEqual(await control(f.env),before)
+      assert.equal(result.state,manual?'handed_off':'waiting_for_automatic_head_reconciliation')
+      assert.equal(await resumePendingScopeUpgrade(f.env),!manual)
+    }finally{f.db.sqlite.close()}
+  }
+})
+
 test('manual revisions or any staged SQL plan cannot be superseded automatically', async () => {
   const f = await fixture(), oldHash = await uploadFixture(f, f.upgrade)
   f.db.sqlite.prepare('UPDATE maintenance_control SET revision=4,enabled=0,models_enabled=0').run()

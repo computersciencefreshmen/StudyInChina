@@ -7,6 +7,8 @@ export type MaintenanceBatch = QueueMessageBatch<MaintenanceMessage>
 export interface BucketObject { text(): Promise<string>; arrayBuffer(): Promise<ArrayBuffer>; size?: number;etag?:string }
 export interface Bucket {
   get(key: string): Promise<BucketObject | null>
+  list?(options: { prefix: string; limit: number }): Promise<{ objects: Array<{ key: string }>; truncated: boolean; cursor?: string }>
+  delete?(key: string): Promise<void>
   put(key: string, body: string | ArrayBuffer | Uint8Array|ReadableStream<Uint8Array>, options?: { onlyIf?: { etagDoesNotMatch?: string;etagMatches?:string }; httpMetadata?: { contentType?: string } }): Promise<unknown>
 }
 export interface DurableStorage {
@@ -21,6 +23,7 @@ export type MaintenanceEnv = {
   PIPELINE_DB: D1Database; SNAPSHOTS_BUCKET: Bucket;
   MAINTENANCE_QUEUE: QueueProducer<MaintenanceMessage>; MODEL_ADMISSION: DurableNamespace;
   MAINTENANCE_ADMIN_TOKEN?: string; MINIMAX_SUBSCRIPTION_KEY?: string;
+  CLOUDFLARE_BILLING_READ_TOKEN?: string;
   MAINTENANCE_ENABLED?: string; MINIMAX_MODEL?: string; MINIMAX_ANTHROPIC_BASE?: string;
   NATIVE_HEAD_RECONCILIATION_REQUIRED?: string;
   SCOPE_REGISTRY_SHA256?: string; SCOPE_SCHOOL_COUNT?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;

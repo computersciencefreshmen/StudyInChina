@@ -212,6 +212,16 @@ export async function processScopeUpgrade(env: MaintenanceEnv, hash: string, now
   const upgrade = await readUpgrade(env, hash)
   if (await env.SNAPSHOTS_BUCKET.get(handoffKey(hash))) return { ok: true, completed: false, upgradeSha256: hash, state: 'handed_off' }
   await env.PIPELINE_DB.prepare(SCOPE_UPGRADE_SCHEMA).run()
+  // A pending scope intent gates enqueueDue, whose normal lease sweep would
+  // otherwise never run. Only proven expired executions may be reclaimed here:
+  // captures are read-only retries; model work remains unknown, never replayed.
+  // Unexpired/malformed leases and reserved/send_started model attempts still
+  // fail the existing idle fence. This does not change any control revision.
+  await env.PIPELINE_DB.prepare(`UPDATE maintenance_jobs
+    SET status=CASE WHEN stage='capture' THEN 'retry' ELSE 'unknown' END,
+      error_code='execution_lease_expired',lease_token=NULL,lease_until=NULL,enqueued_at=NULL,due_at=?,updated_at=?
+    WHERE status='running' AND julianday(lease_until) IS NOT NULL AND julianday(lease_until)<julianday(?)`)
+    .bind(new Date(now+60000).toISOString(),nowIso(now),nowIso(now)).run()
   let row = await env.PIPELINE_DB.prepare('SELECT * FROM maintenance_scope_upgrades WHERE upgrade_sha256=?').bind(hash).first<UpgradeRow>()
   if (row?.status === 'completed') return { ok: true, completed: true, reused: true, upgradeSha256: hash,
     recovery: await finishScopeUpgradeInCloud(env, hash, upgrade, row) }

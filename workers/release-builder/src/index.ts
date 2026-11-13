@@ -1,4 +1,5 @@
 import { withAutomationHeartbeat } from '../../shared/automation-heartbeat'
+import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
 import { assertAutomatedReleaseHealth } from './health-gate'
 import { CATALOG_COLUMNS } from './catalog-schema'
 import {
@@ -640,6 +641,7 @@ async function dispatchReleaseJobs(
 }
 
 export async function scheduleReleaseJobs(controller: ScheduledControllerLike, environment: ReleaseBuilderEnv): Promise<void> {
+  if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) return
   await withAutomationHeartbeat(environment.PIPELINE_DB, 'release-builder', () => dispatchReleaseJobs(controller, environment))
 }
 
@@ -647,6 +649,10 @@ export async function handleQueue(
   batch: QueueMessageBatch<unknown>,
   environment: ReleaseBuilderEnv,
 ): Promise<void> {
+  if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) {
+    for (const message of batch.messages) message.retry({ delaySeconds: BACKGROUND_BUDGET_RETRY_SECONDS })
+    return
+  }
   const maximumAttempts = boundedInteger(environment.MAX_QUEUE_ATTEMPTS, 4, 1, 10)
   for (const message of batch.messages) {
     if (!isReleaseQueueJob(message.body)) {

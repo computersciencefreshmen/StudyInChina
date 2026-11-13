@@ -37,6 +37,9 @@ describe('maintenance bridge HTTP boundary', () => {
     const client = { json: vi.fn(), artifact: vi.fn() }
     client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait' }, control: null })
     expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, canRecover: false, reason: 'quota_wait' })
+    client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'budget_wait' }, control: null,
+      budget: { allowed: false, state: 'paused', code: 'budget_paused' } })
+    expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, canRecover: false, reason: 'budget_wait' })
     client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'ready' }, control: null })
     expect(await maintenanceRuntimeGate(client)).toMatchObject({ canStart: false, canRecover: false, reason: 'seed_not_ready' })
     client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'backend_unavailable' } })

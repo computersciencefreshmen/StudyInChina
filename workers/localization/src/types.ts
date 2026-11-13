@@ -1,3 +1,5 @@
+import type { BudgetStateBucket } from '../../shared/background-budget'
+
 export const LOCALIZATION_SERVICE_VERSION = '1.0.0'
 export const TRANSLATION_SCHEMA_VERSION = 'studyinchina.translation.v1'
 export const TRANSLATION_PROMPT_VERSION = 'studyinchina-translation-v1'
@@ -190,6 +192,7 @@ export interface ScheduledControllerLike {
 }
 
 export interface LocalizationEnv {
+  BUDGET_STATE_BUCKET?: BudgetStateBucket
   PIPELINE_DB: D1Database
   LOCALIZATION_QUEUE: QueueProducer<TranslationQueueBatch>
   LOCALIZATION_ADMIN_TOKEN?: string

@@ -383,15 +383,37 @@ export async function markJobRunning(
   job: IngestionJob,
   attempt: number,
   now: string,
-): Promise<void> {
+): Promise<boolean> {
   const result = await environment.INGESTION_DB.prepare(
     `UPDATE ingestion_jobs
         SET status = 'running', attempt = ?2, started_at = COALESCE(started_at, ?3), updated_at = ?3
-      WHERE job_id = ?1`,
+      WHERE job_id = ?1 AND source_id = ?4 AND reason = ?5 AND scheduled_at = ?6
+        AND completed_at IS NULL
+        AND ((status = 'queued' AND attempt = 0 AND started_at IS NULL AND outcome IS NULL AND error_code IS NULL)
+          OR (status = 'retrying' AND attempt < ?2
+            AND (started_at IS NOT NULL OR (error_code = 'job_start_failed' AND outcome IS NULL))))`,
   )
-    .bind(job.jobId, attempt, now)
+    .bind(job.jobId, attempt, now, job.sourceId, job.reason, job.scheduledAt)
     .run()
   ensureSuccess(result, 'mark ingestion job running')
+  return Number(result.meta?.changes ?? 0) === 1
+}
+
+export type BudgetHeldJobState = {
+  source_id: string; reason: string; scheduled_at: string; status: string; attempt: number
+  started_at: string | null; completed_at: string | null; outcome: string | null; error_code: string | null
+  manifest_json: string | null; source_enabled: number | null
+}
+
+/** One exact job/source lookup, never a scan of the historical queued pool. */
+export async function readBudgetHeldJobState(
+  environment: Pick<IngestionEnv, 'INGESTION_DB'>,
+  jobId: string,
+): Promise<BudgetHeldJobState | null> {
+  return environment.INGESTION_DB.prepare(`SELECT j.source_id,j.reason,j.scheduled_at,j.status,j.attempt,
+      j.started_at,j.completed_at,j.outcome,j.error_code,s.manifest_json,s.enabled AS source_enabled
+    FROM ingestion_jobs j LEFT JOIN ingestion_sources s ON s.source_id=j.source_id WHERE j.job_id=?1`)
+    .bind(jobId).first<BudgetHeldJobState>()
 }
 
 export async function recordNoChange(
@@ -622,7 +644,11 @@ export async function recordJobFailure(
               error_message = ?5,
               completed_at = CASE WHEN ?2 = 'failed' THEN ?6 ELSE completed_at END,
               updated_at = ?6
-        WHERE job_id = ?1`,
+        WHERE job_id = ?1
+          AND (?4 <> 'job_start_failed'
+            OR (status = 'queued' AND attempt = 0 AND started_at IS NULL AND outcome IS NULL AND error_code IS NULL)
+            OR (status = 'retrying' AND attempt < ?3
+              AND (started_at IS NOT NULL OR (error_code = 'job_start_failed' AND outcome IS NULL))))`,
     ).bind(
       parameters.job.jobId,
       parameters.retrying ? 'retrying' : 'failed',

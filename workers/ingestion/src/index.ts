@@ -1,8 +1,9 @@
 import { registerAutomaticSourceBindings } from './automatic-source-bindings'
 import { handleOperations } from './operations'
 import { withAutomationHeartbeat } from '../../shared/automation-heartbeat'
+import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
 import { registerDiscoveredSources } from './source-discovery'
-import { asIngestionError } from './errors'
+import { asIngestionError, IngestionError } from './errors'
 import {
   infrastructureCostPolicy,
   permitsBrowserForSource,
@@ -11,6 +12,8 @@ import {
 } from './cost-policy'
 import { sha256Hex } from './hash'
 import { processIngestionJob } from './pipeline'
+import { ensureReadBudgetIndexes } from './read-budget-indexes'
+import { drainBudgetHeldJobs, isIngestionJob, rememberBudgetHeldJob } from './budget-held-jobs'
 import {
   claimJob,
   acquireDomainLease,
@@ -42,24 +45,6 @@ function jsonResponse(body: unknown, status = 200): Response {
   })
 }
 
-function isIngestionJob(value: unknown): value is IngestionJob {
-  if (!value || typeof value !== 'object') return false
-  const job = value as Record<string, unknown>
-  return (
-    job.version === 1 &&
-    typeof job.jobId === 'string' &&
-    job.jobId.length > 0 &&
-    typeof job.sourceId === 'string' &&
-    /^[a-z0-9][a-z0-9_-]{0,127}$/.test(job.sourceId) &&
-    (job.reason === 'scheduled' ||
-      job.reason === 'discovery' ||
-      job.reason === 'manual' ||
-      job.reason === 'retry') &&
-    typeof job.scheduledAt === 'string' &&
-    !Number.isNaN(new Date(job.scheduledAt).getTime())
-  )
-}
-
 async function enqueueClaimedJob(environment: IngestionEnv, job: IngestionJob): Promise<boolean> {
   if (!(await claimJob(environment, job))) return false
   try {
@@ -80,6 +65,8 @@ async function scheduleDueSources(
   const limit = boundedInteger(environment.SCHEDULE_BATCH_LIMIT, 20, 1, 250)
   const costPolicy = infrastructureCostPolicy(environment.INFRA_FORECAST_CNY)
   const errors: unknown[] = []
+  try { await drainBudgetHeldJobs(environment, limit) }
+  catch (error) { errors.push(error) }
   if (costPolicy.allowDiscovery) {
     try { await registerDiscoveredSources(environment, scheduledAt) }
     catch (error) { errors.push(error) }
@@ -120,6 +107,16 @@ async function handleQueue(
   batch: QueueMessageBatch<unknown>,
   environment: IngestionEnv,
 ): Promise<void> {
+  if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) {
+    const errors: unknown[] = []
+    for (const message of batch.messages) {
+      try { await rememberBudgetHeldJob(environment, message.body) }
+      catch (error) { errors.push(error) }
+      finally { message.retry({ delaySeconds: BACKGROUND_BUDGET_RETRY_SECONDS }) }
+    }
+    if (errors.length) throw new AggregateError(errors, 'Some budget-held ingestion jobs could not be persisted')
+    return
+  }
   const maximumAttempts = boundedInteger(environment.MAX_QUEUE_ATTEMPTS, 4, 1, 10)
   for (const message of batch.messages) {
     const receivedAt = new Date()
@@ -147,6 +144,8 @@ async function handleQueue(
     }
 
     const job = message.body
+    const attempt = (job.deliveryAttemptOffset ?? 0) + message.attempts
+    if (!Number.isSafeInteger(attempt) || attempt < 1) throw new Error('invalid_ingestion_delivery_attempt')
     const source = await loadSourceState(environment, job.sourceId)
     const lease = source
       ? await acquireDomainLease(
@@ -157,7 +156,7 @@ async function handleQueue(
       : null
     if (source && !lease) {
       try {
-        await environment.INGESTION_QUEUE.send(job, { delaySeconds: 5 })
+        await environment.INGESTION_QUEUE.send({ ...job, deliveryAttemptOffset: attempt - 1 }, { delaySeconds: 5 })
         message.ack()
       } catch {
         message.retry({ delaySeconds: 5 })
@@ -165,18 +164,24 @@ async function handleQueue(
       continue
     }
     try {
-      await markJobRunning(environment, job, message.attempts, receivedAt.toISOString())
+      let claimed: boolean
+      try { claimed = await markJobRunning(environment, job, attempt, receivedAt.toISOString()) }
+      catch (error) { throw new IngestionError(error instanceof Error ? error.message : String(error), 'job_start_failed', true) }
+      if (!claimed) {
+        message.ack()
+        continue
+      }
       await processIngestionJob(environment, job, fetch, receivedAt)
       message.ack()
     } catch (error) {
       const ingestionError = asIngestionError(error)
-      const shouldRetry = ingestionError.retryable && message.attempts < maximumAttempts
+      const shouldRetry = ingestionError.retryable && attempt < maximumAttempts
       const retryAt = shouldRetry ? undefined : new Date(receivedAt.getTime() + 7 * 24 * 60 * 60 * 1_000).toISOString()
       try {
         await recordJobFailure(environment, {
           job,
           sourceId: job.sourceId,
-          attempt: message.attempts,
+          attempt,
           code: ingestionError.code,
           message: ingestionError.message,
           retrying: shouldRetry,
@@ -184,8 +189,8 @@ async function handleQueue(
           nextFetchAt: retryAt,
         })
       } catch {
-        if (message.attempts < maximumAttempts) {
-          message.retry({ delaySeconds: retryDelaySeconds(message.attempts) })
+        if (attempt < maximumAttempts) {
+          message.retry({ delaySeconds: retryDelaySeconds(attempt) })
           continue
         }
       }
@@ -193,7 +198,7 @@ async function handleQueue(
       if (shouldRetry) {
         message.retry({
           delaySeconds: retryDelaySeconds(
-            message.attempts,
+            attempt,
             ingestionError.retryAfterSeconds,
           ),
         })
@@ -202,10 +207,10 @@ async function handleQueue(
 
       const failure: IngestionFailure = {
         version: 1,
-        failureId: await sha256Hex(`${job.jobId}:${message.attempts}:${ingestionError.code}`),
+        failureId: await sha256Hex(`${job.jobId}:${attempt}:${ingestionError.code}`),
         job,
         failedAt: receivedAt.toISOString(),
-        attempt: message.attempts,
+        attempt,
         code: ingestionError.code,
         message: ingestionError.message.slice(0, 1_000),
         retryable: ingestionError.retryable,
@@ -254,6 +259,12 @@ async function handleFetch(request: Request, environment: IngestionEnv): Promise
     if (typeof sourceId !== 'string' || !/^[a-z0-9][a-z0-9_-]{0,127}$/.test(sourceId)) {
       return jsonResponse({ ok: false, error: 'invalid_source_id' }, 400)
     }
+    const budget = await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)
+    if (!budget.allowed) {
+      const response = jsonResponse({ ok: false, error: 'background_budget_blocked', budget }, 503)
+      response.headers.set('Retry-After', String(BACKGROUND_BUDGET_RETRY_SECONDS))
+      return response
+    }
     const source = await loadSourceState(environment, sourceId)
     if (!source) {
       return jsonResponse({ ok: false, error: 'source_not_found' }, 404)
@@ -295,6 +306,8 @@ const worker = {
     controller: ScheduledControllerLike,
     environment: IngestionEnv,
   ): Promise<void> {
+    if (!(await readBackgroundBudgetGate(environment.BUDGET_STATE_BUCKET)).allowed) return
+    if ((await ensureReadBudgetIndexes(environment)).state === 'quota_wait') return
     await withAutomationHeartbeat(environment.INGESTION_DB, 'ingestion',
       () => scheduleDueSources(controller, environment))
   },
