@@ -83,6 +83,7 @@
     "maintenance:cloud": "tsx scripts/automation/catalog-maintenance-client.ts",
     "maintenance:prepare": "tsx scripts/automation/prepare-maintenance-catalog.ts",
     "test:catalog-maintenance": "tsx --test workers/catalog-maintenance/tests/*.test.ts",
+    "test:account-migration": "tsx --test workers/account-migration/tests/*.test.ts",
     "check:worker:maintenance": "wrangler deploy --dry-run --config workers/catalog-maintenance/wrangler.jsonc",
     "test:automation": "vitest run tests/unit/automation-"
   },

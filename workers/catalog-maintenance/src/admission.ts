@@ -4,6 +4,7 @@ import { control } from './repository'
 import { isDailyD1QuotaError } from './backend-errors'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { hasUrgentMaintenance } from './admission-priority'
+import { assertModelStateBusinessOpen, assertModelStateCleanupOpen, handleModelStateMigration, ModelStateMigrationError } from './model-state-migration'
 import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
@@ -101,19 +102,26 @@ function modelRequest(value:unknown):ModelRequest {
   return raw as unknown as ModelRequest
 }
 export class ModelAdmission {
+  private activeOperations = 0
   constructor(private readonly state:DurableState,private readonly env:MaintenanceEnv,private readonly fetcher:typeof fetch=fetch) {}
-  private async mutate<T>(fn:(state:GateState)=>T):Promise<T> {
-    return this.state.storage.transaction(async txn=>{const state=await txn.get<GateState>('gate')??initial(); const now=Date.now();state.fetches=state.fetches.filter(p=>p.expiresAt>now);state.models=state.models.filter(p=>p.expiresAt>now);for(const [host,next]of Object.entries(state.nextHost))if(next<now-60000)delete state.nextHost[host];const result=fn(state);await txn.put('gate',state);return result})
+  private async mutate<T>(fn:(state:GateState)=>T,newAdmission=false):Promise<T> {
+    return this.state.storage.transaction(async txn=>{if(newAdmission)await assertModelStateBusinessOpen(txn,this.env);else await assertModelStateCleanupOpen(txn,this.env);const state=await txn.get<GateState>('gate')??initial(); const now=Date.now();state.fetches=state.fetches.filter(p=>p.expiresAt>now);state.models=state.models.filter(p=>p.expiresAt>now);for(const [host,next]of Object.entries(state.nextHost))if(next<now-60000)delete state.nextHost[host];const result=fn(state);await txn.put('gate',state);return result})
   }
   async fetch(request:Request):Promise<Response> {
     if(!authorized(request,this.env)) return json({ok:false,error:'unauthorized'},401)
     try {
-      const path=new URL(request.url).pathname,raw=record(await requestJson(request,1024*1024))
+      const path=new URL(request.url).pathname,raw=record(await requestJson(request,path.startsWith('/model-state-migration/')?12*1024*1024:1024*1024))
       if(!raw) return json({ok:false,error:'invalid_request'},400)
+      if(path.startsWith('/model-state-migration/'))return await handleModelStateMigration(this.state.storage,this.env,path,raw,this.activeOperations)
+      // Count the whole asynchronous operation, including completion writes after
+      // a provider response. A freeze stops new admissions but lets these drain.
+      this.activeOperations++
+      try {
+      if(path!=='/fetch/release'&&path!=='/status')await assertModelStateBusinessOpen(this.state.storage,this.env)
       if(path==='/fetch/acquire') {
         const host=String(raw.host??'')
         if(!/^[a-z0-9.-]{3,253}$/.test(host)||!host.includes('.')||host.includes('..')) return json({ok:false,error:'invalid_host'},400)
-        const permit=await this.mutate(state=>{const now=Date.now();if(state.fetches.length>=8||state.fetches.some(p=>p.host===host)||(state.nextHost[host]??0)>now)return null;const next={token:crypto.randomUUID(),host,expiresAt:now+120000};state.fetches.push(next);return next})
+        const permit=await this.mutate(state=>{const now=Date.now();if(state.fetches.length>=8||state.fetches.some(p=>p.host===host)||(state.nextHost[host]??0)>now)return null;const next={token:crypto.randomUUID(),host,expiresAt:now+120000};state.fetches.push(next);return next},true)
         return permit?json({ok:true,token:permit.token}):json({ok:false,error:'fetch_capacity_or_host_cooldown',retryAfter:30},429)
       }
       if(path==='/fetch/release') {
@@ -123,7 +131,9 @@ export class ModelAdmission {
       if(path==='/model/run') return await this.run(modelRequest(raw))
       if(path==='/status') { const gate=await this.state.storage.get<GateState>('gate')??initial();return json({ok:true,activeFetches:gate.fetches.filter(p=>p.expiresAt>Date.now()).length,activeModels:gate.models.filter(p=>p.expiresAt>Date.now()).length,healthyResponses:gate.successes,cooldownUntil:gate.cooldownUntil?nowIso(gate.cooldownUntil):null}) }
       return json({ok:false,error:'not_found'},404)
+      } finally { this.activeOperations-- }
     } catch(error) {
+      if(error instanceof ModelStateMigrationError)return json({ok:false,error:error.code},409)
       // A database quota failure before admission has not executed a model.
       // Preserve it as bounded waiting work instead of permanently holding it.
       if(isDailyD1QuotaError(error)){
@@ -182,6 +192,7 @@ export class ModelAdmission {
     if(!admission.allow) return json({ok:false,error:admission.code,retryAfter:admission.retryAfter},429)
     const token=crypto.randomUUID(),attemptId=crypto.randomUUID()
     const accepted=await this.state.storage.transaction(async txn=>{
+      await assertModelStateBusinessOpen(txn,this.env)
       const current=await txn.get<Reservation>(key)
       if(current&&(current.state!=='known_failed'||!current.retryable||(current.notBefore??0)>Date.now()||current.requestSha256!==requestSha256))return false
       const gate=await txn.get<GateState>('gate')??initial(),now=Date.now();gate.models=gate.models.filter(p=>p.expiresAt>now)

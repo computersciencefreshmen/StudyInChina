@@ -26,7 +26,7 @@ import type { JobRow, MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } fro
 import { MaintenanceError } from './types'
 import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus,quotaWait,rememberQuotaWait,recheckBackend } from './runtime'
 import { isDailyD1QuotaError } from './backend-errors'
-import { after, authorized, HASH, json, nowIso, requestJson } from './util'
+import { after, authorized, gateRequest, HASH, json, nowIso, requestJson } from './util'
 
 export { ModelAdmission }
 async function finishDocumentPartition(env:MaintenanceEnv,job:JobRow,progress:Awaited<ReturnType<typeof runPartitionedDocument>>){
@@ -132,6 +132,8 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   if(url.pathname==='/health'&&request.method==='GET')return json({ok:true,service:'studyinchina-catalog-maintenance',version:'1.0.0',publicationPerformed:false})
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
   try {
+    if(url.pathname==='/model-state-migration/status'&&request.method==='GET')return await gateRequest(env,url.pathname,{})
+    if(['/model-state-migration/freeze','/model-state-migration/export','/model-state-migration/import','/model-state-migration/finalize'].includes(url.pathname)&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,12*1024*1024))
     if(url.pathname==='/budget'&&request.method==='GET')return json(await budgetStatus(env))
     if(url.pathname==='/budget'&&request.method==='POST')return json(await configureBudget(env,await requestJson(request,2048)))
     if(url.pathname==='/budget/check'&&request.method==='POST')return json(await checkBudget(env))

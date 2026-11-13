@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "studyinchina-account-migration-SOURCE-OR-TARGET",
+  "account_id": "REPLACE_WITH_EXPLICIT_ACCOUNT_ID",
+  "main": "src/main.ts",
+  "compatibility_date": "2026-09-18",
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": { "enabled": false },
+  "vars": {
+    "MIGRATION_ROLE": "source",
+    "MIGRATION_ID": "REPLACE_WITH_UNIQUE_MIGRATION_ID",
+    "SOURCE_FROZEN": "false",
+    "SOURCE_URL": "https://REPLACE_WITH_FIXED_SOURCE_WORKER_HOST",
+    "SOURCE_HOST": "REPLACE_WITH_FIXED_SOURCE_WORKER_HOST"
+  },
+  // Supply MIGRATION_TRANSFER_TOKEN via a hidden Wrangler secret prompt only.
+  // Use the same new 64-hex token for this migration's two temporary Workers.
+  "r2_buckets": [
+    { "binding": "SNAPSHOTS_BUCKET", "bucket_name": "studyinchina-source-snapshots" },
+    { "binding": "RELEASES_BUCKET", "bucket_name": "studyinchina-releases" },
+    { "binding": "BACKUPS_BUCKET", "bucket_name": "studyinchina-backups" }
+  ]
+}
