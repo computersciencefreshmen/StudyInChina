@@ -30,6 +30,12 @@ import { isDailyD1QuotaError } from './backend-errors'
 import { after, authorized, gateRequest, HASH, json, nowIso, requestJson } from './util'
 
 export { ModelAdmission }
+const sourceMigrationFrozen=(env:MaintenanceEnv)=>env.MODEL_STATE_MIGRATION_ROLE==='source'
+const sourceMigrationRoutes=new Set([
+  'GET /model-state-migration/status','GET /model-state-migration/gate-inspection','GET /model-state-migration/ledger-summary',
+  'POST /model-state-migration/freeze','POST /model-state-migration/export','POST /model-state-migration/import',
+  'POST /model-state-migration/finalize','POST /model-state-migration/non-temporal-fetch-permit-recovery',
+])
 async function finishDocumentPartition(env:MaintenanceEnv,job:JobRow,progress:Awaited<ReturnType<typeof runPartitionedDocument>>){
   if(progress.pending){
     // A successful bounded continuation is not a failed model attempt.
@@ -111,6 +117,10 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
   }
 }
 export async function handleQueue(batch:MaintenanceBatch,env:MaintenanceEnv):Promise<void> {
+  if(sourceMigrationFrozen(env)){
+    for(const message of batch.messages)message.retry({delaySeconds:3600})
+    return
+  }
   const budget=await readBackgroundBudgetGate(env.SNAPSHOTS_BUCKET)
   if(!budget.allowed){
     for(const message of batch.messages){
@@ -130,8 +140,9 @@ export async function handleQueue(batch:MaintenanceBatch,env:MaintenanceEnv):Pro
 }
 export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Response> {
   const url=new URL(request.url)
-  if(url.pathname==='/health'&&request.method==='GET')return json({ok:true,service:'studyinchina-catalog-maintenance',version:'1.0.0',publicationPerformed:false})
+  if(!sourceMigrationFrozen(env)&&url.pathname==='/health'&&request.method==='GET')return json({ok:true,service:'studyinchina-catalog-maintenance',version:'1.0.0',publicationPerformed:false})
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
+  if(sourceMigrationFrozen(env)&&!sourceMigrationRoutes.has(`${request.method} ${url.pathname}`))return json({ok:false,error:'account_migration_frozen'},503)
   try {
     if(url.pathname==='/job-dispositions'&&request.method==='GET')return json((await readUnknownJobDisposition(env,await control(env))).summary)
     if(url.pathname==='/job-dispositions'&&request.method==='POST')return json(await reviewedTerminalQuarantine(env,await requestJson(request,32*1024)))
@@ -197,5 +208,5 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     return json({ok:false,error:code},code==='export_not_found'?404:409)
   }
 }
-const worker={fetch:handleFetch,queue:handleQueue,async scheduled(_controller:unknown,env:MaintenanceEnv){await runCloudTick(env)}}
+const worker={fetch:handleFetch,queue:handleQueue,async scheduled(_controller:unknown,env:MaintenanceEnv){if(sourceMigrationFrozen(env))return;await runCloudTick(env)}}
 export default worker

@@ -146,7 +146,7 @@ test('real workerd private gate inspection reads only a frozen source gate witho
     const before = await (await post(source.mf, '/test/read-private-state', {})).json()
     await post(source.mf, '/test/reset-storage-statistics', {})
     assert.equal((await source.mf.dispatchFetch('https://migration.test' + path)).status, 401)
-    assert.equal((await post(source.mf, path, {})).status, 404)
+    assert.equal((await post(source.mf, path, {})).status, 503)
     assert.equal((await read(target.mf)).status, 409)
     const response = await read(source.mf), result = await response.json() as Record<string, unknown>
     assert.equal(response.status, 200); assert.equal(response.headers.get('cache-control'), 'no-store')

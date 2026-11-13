@@ -54,7 +54,7 @@ test('only authenticated external GET can receive private state; other methods a
   const before = structuredClone(f.storage.values)
   assert.equal((await handleFetch(new Request('https://worker' + path), f.env)).status, 401); assert.deepEqual(f.storage.reads, [])
   const wrongMethod = await handleFetch(new Request('https://worker' + path, { method: 'POST', headers }), f.env)
-  assert.equal(wrongMethod.status, 404); assert.deepEqual(f.storage.reads, [])
+  assert.equal(wrongMethod.status, 503); assert.deepEqual(f.storage.reads, [])
   const response = await handleFetch(new Request('https://worker' + path, { headers }), f.env)
   assert.equal(response.status, 200); assert.equal(response.headers.get('cache-control'), 'no-store')
   assert.equal((await response.json() as { canonicalGateJson: string }).canonicalGateJson, canonical(f.gate))
