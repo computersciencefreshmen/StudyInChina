@@ -1,6 +1,8 @@
 import type { DurableStorage, MaintenanceEnv } from './types'
 import { canonical, digest, HASH, json, record } from './util'
 import { inspectFrozenSourceGate, NonTemporalPermitRecoveryError, recoverNonTemporalPermits, requestLedgerSummary } from './non-temporal-permit-recovery'
+import { validateLegacyAuxiliaryEntry, validateLegacyOfflineGate, validateMigratedRequest } from './legacy-offline-state'
+import { inspectFrozenStorage, LegacyHandoffRecoveryError, recoverHandoffOperation } from './legacy-handoff-recovery'
 
 // Private DO storage only: these bytes must never enter the generic R2 artifact API.
 export const MODEL_STATE_MIGRATION_KEY = '__model_state_migration_v1'
@@ -12,8 +14,8 @@ type Config = Binding & { role: 'source' | 'target' }
 type Entry = { key: string; value: unknown }
 type Page = Binding & { format: 'studyinchina.model-state-page'; version: 1; index: number; entries: Entry[] }
 type PageRef = { index: number; sha256: string; byteLength: number; entryCount: number; firstKey: string | null; lastKey: string | null; startAfter: string | null }
-export type ModelStateManifest = Binding & { format: 'studyinchina.model-state-manifest'; version: 1; frozenAt: string; pages: PageRef[]; entryCount: number; requestCount: number; gatePresent: boolean; states: Counts }
-type Lock = Config & { version: 1; phase: 'frozen' | 'exporting' | 'exported' | 'importing' | 'finalized'; frozenAt: string; pages: PageRef[]; states: Counts; entryCount: number; requestCount: number; gatePresent: boolean; manifest?: ModelStateManifest; manifestSha256?: string; importedPages?: number; finalizedAt?: string }
+export type ModelStateManifest = Binding & { format: 'studyinchina.model-state-manifest'; version: 1; frozenAt: string; pages: PageRef[]; entryCount: number; requestCount: number; gatePresent: boolean; auxiliaryEntryCount?: number; states: Counts }
+type Lock = Config & { version: 1; phase: 'frozen' | 'exporting' | 'exported' | 'importing' | 'finalized'; frozenAt: string; pages: PageRef[]; states: Counts; entryCount: number; requestCount: number; auxiliaryEntryCount?: number; gatePresent: boolean; manifest?: ModelStateManifest; manifestSha256?: string; importedPages?: number; finalizedAt?: string }
 
 export class ModelStateMigrationError extends Error {
   constructor(readonly code: string) { super(code) }
@@ -47,7 +49,8 @@ function checkedLock(value: unknown): Lock | undefined {
   if (value === undefined) return undefined
   const raw = record(value)
   if (!raw || raw.version !== 1 || !['source', 'target'].includes(String(raw.role)) || !['frozen', 'exporting', 'exported', 'importing', 'finalized'].includes(String(raw.phase))
-    || typeof raw.migrationId !== 'string' || typeof raw.sourceAccountId !== 'string' || typeof raw.targetAccountId !== 'string' || !Array.isArray(raw.pages)) return fail('model_state_migration_lock_invalid')
+    || typeof raw.migrationId !== 'string' || typeof raw.sourceAccountId !== 'string' || typeof raw.targetAccountId !== 'string' || !Array.isArray(raw.pages)
+    || raw.auxiliaryEntryCount !== undefined && !integer(raw.auxiliaryEntryCount)) return fail('model_state_migration_lock_invalid')
   return value as Lock
 }
 function matchLock(lock: Lock | undefined, cfg: Config): Lock {
@@ -86,10 +89,15 @@ function validateEntry(entry: Entry) {
       if (!p || typeof p.token !== 'string' || !finite(p.expiresAt)) return fail('model_state_migration_gate_invalid')
     }
     if (Object.values(value.nextHost as Record<string, unknown>).some(v => !finite(v))) return fail('model_state_migration_gate_invalid')
+    try { validateLegacyOfflineGate(entry.value) } catch { return fail('model_state_migration_legacy_state_invalid') }
     return
   }
-  if (!/^request:[a-f0-9]{64}$/.test(entry.key)) return fail('model_state_migration_unknown_key')
+  if (!/^request:[a-f0-9]{64}$/.test(entry.key)) {
+    try { if (validateLegacyAuxiliaryEntry(entry.key, entry.value)) return } catch { return fail('model_state_migration_legacy_state_invalid') }
+    return fail('model_state_migration_unknown_key')
+  }
   if (!STATES.includes(value.state as typeof STATES[number]) || typeof value.attemptId !== 'string' || !value.attemptId || !HASH.test(String(value.requestSha256))) return fail('model_state_migration_reservation_invalid')
+  try { validateMigratedRequest(entry.value) } catch { return fail('model_state_migration_reservation_invalid') }
 }
 function hasInflight(gate: unknown, now: number) {
   if (gate === undefined) return false
@@ -120,11 +128,12 @@ async function diagnostics(gate: unknown, activeOperations: number, now: number)
   if (latest !== null && Number.isFinite(new Date(latest).getTime())) result.latestPermitExpiresAt = new Date(latest).toISOString()
   return result
 }
-function addCounts(lock: Pick<Lock, 'states' | 'entryCount' | 'requestCount' | 'gatePresent'>, entries: Entry[]) {
+function addCounts(lock: Pick<Lock, 'states' | 'entryCount' | 'requestCount' | 'auxiliaryEntryCount' | 'gatePresent'>, entries: Entry[]) {
   for (const entry of entries) {
     lock.entryCount++
     if (entry.key === 'gate') lock.gatePresent = true
-    else { lock.requestCount++; lock.states[(entry.value as { state: typeof STATES[number] }).state]++ }
+    else if (/^request:[a-f0-9]{64}$/.test(entry.key)) { lock.requestCount++; lock.states[(entry.value as { state: typeof STATES[number] }).state]++ }
+    else lock.auxiliaryEntryCount = (lock.auxiliaryEntryCount ?? 0) + 1
   }
 }
 async function readPage(storage: DurableStorage, cfg: Binding, index: number, startAfter: string | null) {
@@ -148,22 +157,24 @@ async function readPage(storage: DurableStorage, cfg: Binding, index: number, st
 }
 function manifestFrom(lock: Lock): ModelStateManifest {
   return { format: 'studyinchina.model-state-manifest', version: 1, ...binding(lock), frozenAt: lock.frozenAt,
-    pages: lock.pages, entryCount: lock.entryCount, requestCount: lock.requestCount, gatePresent: lock.gatePresent, states: lock.states }
+    pages: lock.pages, entryCount: lock.entryCount, requestCount: lock.requestCount, gatePresent: lock.gatePresent, states: lock.states,
+    ...(lock.auxiliaryEntryCount ? { auxiliaryEntryCount: lock.auxiliaryEntryCount } : {}) }
 }
 function status(lock: Lock | undefined, cfg: Config) {
   return { ok: true, ...binding(cfg), role: cfg.role, state: lock?.phase ?? 'not_started', pageCount: lock?.pages.length ?? 0,
     importedPages: lock?.importedPages ?? 0, entryCount: lock?.entryCount ?? null, requestCount: lock?.requestCount ?? null,
-    states: lock?.states ?? null, manifestSha256: lock?.manifestSha256 ?? null, finalizedAt: lock?.finalizedAt ?? null }
+    states: lock?.states ?? null, manifestSha256: lock?.manifestSha256 ?? null, finalizedAt: lock?.finalizedAt ?? null,
+    ...(lock?.auxiliaryEntryCount ? { auxiliaryEntryCount: lock.auxiliaryEntryCount } : {}) }
 }
 async function parseManifest(raw: Record<string, unknown>, cfg: Config) {
   const manifest = record(raw.manifest)
   if (!manifest || !HASH.test(String(raw.manifestSha256)) || await digest(canonical(manifest)) !== raw.manifestSha256
     || manifest.format !== 'studyinchina.model-state-manifest' || manifest.version !== 1 || !same(manifest as unknown as Binding, cfg)
     || typeof manifest.frozenAt !== 'string' || !Number.isFinite(Date.parse(manifest.frozenAt)) || !Array.isArray(manifest.pages) || !manifest.pages.length || manifest.pages.length > MAX_PAGES
-    || !integer(manifest.entryCount) || !integer(manifest.requestCount) || typeof manifest.gatePresent !== 'boolean') return fail('model_state_migration_manifest_invalid')
+    || !integer(manifest.entryCount) || !integer(manifest.requestCount) || !integer(manifest.auxiliaryEntryCount === undefined ? 0 : manifest.auxiliaryEntryCount) || typeof manifest.gatePresent !== 'boolean') return fail('model_state_migration_manifest_invalid')
   const states = record(manifest.states)
   if (!states || Object.keys(states).length !== STATES.length || STATES.some(s => !integer(states[s])) || STATES.reduce((n, s) => n + Number(states[s]), 0) !== manifest.requestCount
-    || manifest.entryCount !== manifest.requestCount + Number(manifest.gatePresent)) return fail('model_state_migration_manifest_invalid')
+    || manifest.entryCount !== manifest.requestCount + Number(manifest.gatePresent) + Number(manifest.auxiliaryEntryCount ?? 0)) return fail('model_state_migration_manifest_invalid')
   let count = 0, previous: string | null = null
   for (let i = 0; i < manifest.pages.length; i++) {
     const p = record(manifest.pages[i])
@@ -203,6 +214,12 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
       return json({ ...status(lock, cfg), ...await diagnostics(await storage.get('gate'), activeOperations, now) })
     }
     requireId(raw, cfg)
+    if (path === '/model-state-migration/storage-inspection' || path === '/model-state-migration/handoff-operation-recovery') {
+      requireRole(cfg, 'source')
+      return json(path.endsWith('/storage-inspection')
+        ? await inspectFrozenStorage(storage, cfg, MODEL_STATE_MIGRATION_KEY, raw, activeOperationsNow, now)
+        : await recoverHandoffOperation(storage, cfg, MODEL_STATE_MIGRATION_KEY, raw, activeOperationsNow, now))
+    }
     if (path === '/model-state-migration/gate-inspection') {
       requireRole(cfg, 'source')
       return json(await inspectFrozenSourceGate(storage, cfg, MODEL_STATE_MIGRATION_KEY, activeOperationsNow, now))
@@ -277,19 +294,19 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
       return await storage.transaction(async txn => {
         const lock = matchLock(checkedLock(await txn.get(MODEL_STATE_MIGRATION_KEY)), cfg)
         if (!lock.manifest || lock.manifestSha256 !== raw.manifestSha256 || lock.importedPages !== lock.pages.length) return fail('model_state_migration_incomplete')
-        const totals = { states: zero(), entryCount: 0, requestCount: 0, gatePresent: false }
+        const totals = { states: zero(), entryCount: 0, requestCount: 0, auxiliaryEntryCount: 0, gatePresent: false }
         for (let i = 0; i < lock.pages.length; i++) {
           const page = await readPage(txn, cfg, i, lock.pages[i].startAfter)
           if (canonical(page.ref) !== canonical(lock.pages[i]) || page.complete !== (i === lock.pages.length - 1)) return fail('model_state_migration_target_changed')
           addCounts(totals, page.page.entries)
         }
-        if (totals.entryCount !== lock.manifest.entryCount || totals.requestCount !== lock.manifest.requestCount || totals.gatePresent !== lock.manifest.gatePresent || canonical(totals.states) !== canonical(lock.manifest.states)) return fail('model_state_migration_target_changed')
+        if (totals.entryCount !== lock.manifest.entryCount || totals.requestCount !== lock.manifest.requestCount || totals.auxiliaryEntryCount !== (lock.manifest.auxiliaryEntryCount ?? 0) || totals.gatePresent !== lock.manifest.gatePresent || canonical(totals.states) !== canonical(lock.manifest.states)) return fail('model_state_migration_target_changed')
         lock.phase = 'finalized'; lock.finalizedAt ??= new Date(now).toISOString(); await txn.put(MODEL_STATE_MIGRATION_KEY, lock)
         return json(status(lock, cfg))
       })
     }
     return json({ ok: false, error: 'not_found' }, 404)
   } catch (error) {
-    return json({ ok: false, error: error instanceof ModelStateMigrationError || error instanceof NonTemporalPermitRecoveryError ? error.code : 'model_state_migration_unavailable' }, 409)
+    return json({ ok: false, error: error instanceof ModelStateMigrationError || error instanceof NonTemporalPermitRecoveryError || error instanceof LegacyHandoffRecoveryError ? error.code : 'model_state_migration_unavailable' }, 409)
   }
 }

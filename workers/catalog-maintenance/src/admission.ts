@@ -8,6 +8,7 @@ import { claimFlashCanary, FLASH_MODEL, flashAudit, FlashCanaryError, prepareFla
 import { assertModelStateBusinessOpen, assertModelStateCleanupOpen, handleModelStateMigration, ModelStateMigrationError } from './model-state-migration'
 import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
 import { noReplayReason } from './reviewed-terminal-quarantine'
+import type { LegacyOfflineFence } from './legacy-offline-state'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
 
@@ -16,10 +17,11 @@ export type PlanQuota = FiveHourQuota & (
   { weeklyUnlimited?: false; weeklyRemaining: number; weeklyStart: string; weeklyReset: string }
   | { weeklyUnlimited: true; weeklyRemaining: null; weeklyStart: null; weeklyReset: null }
 )
-type Permit = { token: string; host?: string; lane?: string; expiresAt: number }
-type GateState = { fetches: Permit[]; models: Permit[]; nextHost: Record<string,number>; successes: number; cooldownUntil: number;modelLimit:number;flashCanary?:FlashEnrollment }
+type Permit = { token: string; host?: string; lane?: string; expiresAt: number; kind?: 'handoff'|'export';batchId?:string;manifestSha256?:string }
+type GateState = { fetches: Permit[]; models: Permit[]; nextHost: Record<string,number>; successes: number; cooldownUntil: number;modelLimit:number;flashCanary?:FlashEnrollment;offlineFence?:LegacyOfflineFence }
 type Reservation = { state: 'send_started'|'completed'|'unknown'|'known_failed'; attemptId: string; requestSha256: string; result?: ModelResult;retryable?:boolean;notBefore?:number;attemptCount?:number;modelProfile?:FlashAudit }
 const initial = (): GateState => ({fetches:[],models:[],nextHost:{},successes:0,cooldownUntil:0,modelLimit:2})
+const offlineFenced = (state: GateState | undefined) => state !== undefined && Object.hasOwn(state, 'offlineFence')
 const ENDPOINTS=new Set(['https://api.minimaxi.com/anthropic','https://api.minimax.cn/anthropic','https://api.minimax.io/anthropic'])
 const MAX_MODEL_BODY=2*1024*1024
 
@@ -107,7 +109,7 @@ export class ModelAdmission {
   private activeOperations = 0
   constructor(private readonly state:DurableState,private readonly env:MaintenanceEnv,private readonly fetcher:typeof fetch=fetch) {}
   private async mutate<T>(fn:(state:GateState)=>T,newAdmission=false):Promise<T> {
-    return this.state.storage.transaction(async txn=>{if(newAdmission)await assertModelStateBusinessOpen(txn,this.env);else await assertModelStateCleanupOpen(txn,this.env);const state=await txn.get<GateState>('gate')??initial(); const now=Date.now();state.fetches=state.fetches.filter(p=>p.expiresAt>now);state.models=state.models.filter(p=>p.expiresAt>now);for(const [host,next]of Object.entries(state.nextHost))if(next<now-60000)delete state.nextHost[host];const result=fn(state);await txn.put('gate',state);return result})
+    return this.state.storage.transaction(async txn=>{if(newAdmission)await assertModelStateBusinessOpen(txn,this.env);else await assertModelStateCleanupOpen(txn,this.env);const state=await txn.get<GateState>('gate')??initial(); const now=Date.now();if(!offlineFenced(state)){state.fetches=state.fetches.filter(p=>p.expiresAt>now);state.models=state.models.filter(p=>p.expiresAt>now);for(const [host,next]of Object.entries(state.nextHost))if(next<now-60000)delete state.nextHost[host]}const result=fn(state);await txn.put('gate',state);return result})
   }
   async fetch(request:Request):Promise<Response> {
     if(!authorized(request,this.env)) return json({ok:false,error:'unauthorized'},401)
@@ -123,11 +125,12 @@ export class ModelAdmission {
       if(path==='/fetch/acquire') {
         const host=String(raw.host??'')
         if(!/^[a-z0-9.-]{3,253}$/.test(host)||!host.includes('.')||host.includes('..')) return json({ok:false,error:'invalid_host'},400)
-        const permit=await this.mutate(state=>{const now=Date.now();if(state.fetches.length>=8||state.fetches.some(p=>p.host===host)||(state.nextHost[host]??0)>now)return null;const next={token:crypto.randomUUID(),host,expiresAt:now+120000};state.fetches.push(next);return next},true)
+        if(offlineFenced(await this.state.storage.get<GateState>('gate')))return json({ok:false,error:'fetch_capacity_offline_fenced',retryAfter:300},429)
+        const permit=await this.mutate(state=>{const now=Date.now();if(offlineFenced(state))return null;if(state.fetches.length>=8||state.fetches.some(p=>p.host===host)||(state.nextHost[host]??0)>now)return null;const next={token:crypto.randomUUID(),host,expiresAt:now+120000};state.fetches.push(next);return next},true)
         return permit?json({ok:true,token:permit.token}):json({ok:false,error:'fetch_capacity_or_host_cooldown',retryAfter:30},429)
       }
       if(path==='/fetch/release') {
-        await this.mutate(state=>{const permit=state.fetches.find(p=>p.token===raw.token);if(permit?.host)state.nextHost[permit.host]=Date.now()+5000;state.fetches=state.fetches.filter(p=>p.token!==raw.token)})
+        await this.mutate(state=>{const permit=state.fetches.find(p=>p.token===raw.token&&!p.kind);if(permit?.host)state.nextHost[permit.host]=Date.now()+5000;state.fetches=state.fetches.filter(p=>p.token!==raw.token||Boolean(p.kind))})
         return json({ok:true})
       }
       if(path==='/model/run') return await this.run(modelRequest(raw))
@@ -147,6 +150,7 @@ export class ModelAdmission {
     }
   }
   private async run(input:ModelRequest):Promise<Response> {
+    if(offlineFenced(await this.state.storage.get<GateState>('gate')))return json({ok:false,error:'model_capacity_offline_fenced',retryAfter:300},429)
     const budget=await readBackgroundBudgetGate(this.env.SNAPSHOTS_BUCKET)
     if(!budget.allowed)return json({ok:false,error:'budget_wait',code:budget.code,retryAfter:BACKGROUND_BUDGET_RETRY_SECONDS},429)
     const cfg=await control(this.env)
@@ -204,6 +208,7 @@ export class ModelAdmission {
       const current=await txn.get<Reservation>(key)
       if(current&&(current.state!=='known_failed'||!current.retryable||(current.notBefore??0)>Date.now()||current.requestSha256!==requestSha256))return false
       const gate=await txn.get<GateState>('gate')??initial(),now=Date.now();gate.models=gate.models.filter(p=>p.expiresAt>now)
+      if(offlineFenced(gate))return false
       const target=admission.low?1:Math.min(4,Math.max(1,Number(this.env.MODEL_CONCURRENCY)||4),gate.modelLimit??2)
       const expansionLimit=urgent?Math.max(1,target-1):target
       if(gate.cooldownUntil>now||gate.models.length>=target||input.lane==='expansion'&&gate.models.filter(p=>p.lane==='expansion').length>=expansionLimit)return false

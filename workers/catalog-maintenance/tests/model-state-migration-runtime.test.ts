@@ -87,7 +87,7 @@ async function bundle() {
           const path = new URL(request.url).pathname
           if (path.startsWith('/test/')) {
             if (!authorized(request, env)) return new Response(null, {status:401})
-            const targetPath = path === '/test/model' ? '/model/run' : path === '/test/release' ? '/fetch/release' : path
+            const targetPath = path === '/test/model' ? '/model/run' : path === '/test/release' ? '/fetch/release' : path === '/test/fetch' ? '/fetch/acquire' : path
             return env.MODEL_ADMISSION.get(env.MODEL_ADMISSION.idFromName('subscription-account-v1'))
               .fetch(new Request('https://admission.internal' + targetPath, request))
           }
@@ -167,6 +167,62 @@ test('real workerd private gate inspection reads only a frozen source gate witho
     assert.deepEqual(source.outbound, []); assert.deepEqual(target.outbound, [])
     assert.equal((await source.bucket.list({ prefix: '' })).objects.length, 0)
     assert.equal((await source.db.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').first<{ n: number }>())?.n, 0)
+  } finally { await target.mf.dispose(); await source.mf.dispose() }
+})
+
+test('real workerd releases a frozen legacy handoff mutex, preserves all auxiliary/request bytes and keeps target business fenced', { timeout: 120000 }, async () => {
+  const script = await bundle(), source = await runtime(script, 'source'), target = await runtime(script, 'target')
+  try {
+    const at = Date.now(), batchId = 'offline-native-legacy-test'
+    const fence = { batchId, phase: 'held_for_handoff', tokenSha256: 'a'.repeat(64), scopeRegistrySha256: scope, inputCatalogSha256: 'b'.repeat(64),
+      acquiredAt: new Date(at - 86400000).toISOString(), manifestSha256: 'c'.repeat(64), releaseRequestedAt: new Date(at - 3600000).toISOString(), epoch: 18,
+      retiredManifests: ['d'.repeat(64)], sourceManifestHistory: ['e'.repeat(64)], rowsStarted: false }
+    const gate = { fetches: [{ token: 'PRIVATE-NATIVE-HANDOFF-TOKEN', kind: 'handoff', batchId, manifestSha256: fence.manifestSha256, expiresAt: Number.MAX_SAFE_INTEGER }],
+      models: [], nextHost: {}, successes: 6, cooldownUntil: at + 60000, modelLimit: 2, offlineFence: fence }
+    const lock = { version: 1, migrationId, sourceAccountId, targetAccountId, role: 'source', phase: 'frozen', frozenAt: new Date(at - 121000).toISOString(), pages: [],
+      states: { send_started: 0, completed: 0, unknown: 0, known_failed: 0 }, entryCount: 0, requestCount: 0, gatePresent: false }
+    const originals = [{ key: 'gate', value: gate }, { key: `offline-fence:${batchId}`, value: fence }, { key: `offline-adoption:${batchId}`, value: {} },
+      ...['completed', 'unknown', 'send_started', 'known_failed'].map((state, i) => ({ key: `request:${String(i + 1).repeat(64)}`, value: { state, attemptId: `native-legacy-${i}`, requestSha256: 'f'.repeat(64) } }))]
+    await post(source.mf, '/test/seed', [{ key: '__model_state_migration_v1', value: lock }, ...originals])
+    const privateBefore = await (await post(source.mf, '/test/read-private-state', {})).json()
+    await post(source.mf, '/test/reset-storage-statistics', {})
+    const headers = { authorization: `Bearer ${admin}` }, inspectUrl = 'https://migration.test/model-state-migration/storage-inspection?pageIndex=0'
+    assert.equal((await source.mf.dispatchFetch(inspectUrl)).status, 401)
+    const inspection = await source.mf.dispatchFetch(inspectUrl, { headers }), inspected = await inspection.json() as Record<string, unknown>
+    assert.equal(inspection.status, 200); assert.equal(inspected.entryCount, 8); assert.equal(inspected.requestCount, 4); assert.equal(inspected.auxiliaryEntryCount, 2)
+    assert.equal(inspected.pageSha256, await digest(String(inspected.pageBytes))); assert.equal(inspected.cutoverReady, false)
+    assert.deepEqual(await (await post(source.mf, '/test/read-private-state', {})).json(), privateBefore)
+    const readStats = await (await post(source.mf, '/test/storage-statistics', {})).json() as { writes: number; deletes: number }
+    assert.equal(readStats.writes, 0); assert.equal(readStats.deletes, 0)
+    assert.equal((await post(source.mf, '/model-state-migration/export', { migrationId, pageIndex: 0 })).status, 409)
+    assert.equal((await post(source.mf, '/model-state-migration/non-temporal-fetch-permit-recovery', { migrationId })).status, 409)
+    const body = { migrationId, operationId: 'native-root-reviewed-handoff-operation-v1', expectedGateSha256: await digest(canonical(gate)), expectedLedgerSha256: inspected.ledgerSha256,
+      expectedFenceSha256: await digest(canonical(fence)), expectedHistorySha256: await digest(canonical(fence)), expectedTokenSha256: fence.tokenSha256, batchId, manifestSha256: fence.manifestSha256,
+      observedAt: inspected.observedAt, operator: { operatorId: 'native-independent-root', decision: 'release_quiescent_handoff_operation_preserve_intent', reason: 'Quiescent legacy coordination only; preserve unknown outcomes and held intent.', reviewedAt: new Date().toISOString() } }
+    const path = '/model-state-migration/handoff-operation-recovery'
+    const response = await post(source.mf, path, body), receipt = await response.json() as Record<string, unknown>
+    assert.equal(response.status, 200, JSON.stringify(receipt)); assert.equal(receipt.intentCompleted, false); assert.equal(receipt.modelCalls, false)
+    assert.equal((await (await post(source.mf, path, body)).json() as { reused: boolean }).reused, true)
+    const after = await (await post(source.mf, '/test/read-private-state', {})).json() as { entries: Array<[string, unknown]> }, afterMap = new Map(after.entries)
+    for (const entry of originals.filter(e => e.key !== 'gate')) assert.deepEqual(afterMap.get(entry.key), entry.value)
+    const recoveredGate = afterMap.get('gate') as Record<string, unknown>
+    assert.deepEqual(recoveredGate.offlineFence, fence); assert.deepEqual(recoveredGate.fetches, [])
+    assert.equal((recoveredGate.offlineHandoffOperationRecovery as Record<string, unknown>).originalGateJson, canonical(gate))
+    const exportedResponse = await post(source.mf, '/model-state-migration/export', { migrationId, pageIndex: 0 }), exported = await exportedResponse.json() as Record<string, unknown>
+    assert.equal(exportedResponse.status, 200); assert.equal((exported.manifest as Record<string, unknown>).auxiliaryEntryCount, 2)
+    assert.equal((await post(target.mf, '/model-state-migration/import', { migrationId, ...exported })).status, 200)
+    assert.equal((await post(target.mf, '/model-state-migration/finalize', { migrationId, manifestSha256: exported.manifestSha256 })).status, 200)
+    const imported = await (await post(target.mf, '/test/read-private-state', {})).json() as { entries: Array<[string, unknown]> }, importedMap = new Map(imported.entries)
+    for (const [key, value] of afterMap) if (key !== '__model_state_migration_v1') assert.deepEqual(importedMap.get(key), value)
+    await post(target.mf, '/test/activate', {}); await post(target.mf, '/test/reset-storage-statistics', {})
+    for (const [route, value] of [['/test/model', input('2'.repeat(64))], ['/test/fetch', { host: 'official.edu.cn' }]] as const) {
+      const blocked = await post(target.mf, route, value)
+      assert.equal(blocked.status, 429); assert.match((await blocked.json() as { error: string }).error, /offline_fenced/)
+    }
+    const finalStats = await (await post(target.mf, '/test/storage-statistics', {})).json() as { writes: number }
+    assert.equal(finalStats.writes, 0); assert.deepEqual(source.outbound, []); assert.deepEqual(target.outbound, [])
+    assert.equal((await source.db.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').first<{ n: number }>())?.n, 0)
+    assert.equal((await target.db.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').first<{ n: number }>())?.n, 0)
   } finally { await target.mf.dispose(); await source.mf.dispose() }
 })
 function post(mf: Miniflare, path: string, body: unknown) {
