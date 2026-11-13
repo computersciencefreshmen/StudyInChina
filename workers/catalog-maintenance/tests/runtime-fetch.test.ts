@@ -6,6 +6,7 @@ import { build } from 'esbuild'
 import { convertV4MiniflareOptions, Miniflare, Response as WorkerResponse } from 'miniflare'
 import type { ModelRequest, ModelResult } from '../src/types'
 import { TERMINAL_QUARANTINE_POLICY } from '../src/reviewed-terminal-quarantine'
+import { LEGACY_MODEL_NO_REPLAY_POLICY } from '../src/legacy-model-guards'
 
 const sourceId = 'd'.repeat(64), snapshotSha256 = 'e'.repeat(64), scope = 'a'.repeat(64)
 const adminToken = 'runtime-test-admin-token-not-a-real-secret'
@@ -153,6 +154,29 @@ test('real workerd permanently rejects quarantined sources and canonical-text al
     const attempts = await db.prepare('SELECT COUNT(*) count FROM maintenance_model_attempts').first()
     assert.equal(attempts?.count, 0)
   } finally { await mf.dispose() }
+})
+
+test('real workerd denies all legacy model unknown sources, raw and full-text aliases before quota, provider or new SQL reservation', { timeout:120000 }, async()=>{
+  const {mf,db,calls}=await runtimeFixture()
+  try{
+    for(const[index,s]of LEGACY_MODEL_NO_REPLAY_POLICY.subjects.entries()){
+      await db.prepare("INSERT INTO maintenance_sources(source_id,url,allowed_hosts_json,category,enabled,interval_hours,due_at) VALUES(?,?,?,'undergraduate_catalog',1,24,?)")
+        .bind(s.source.source_id,s.source.url,s.source.allowed_hosts_json,new Date().toISOString()).run()
+      await db.prepare('INSERT INTO maintenance_source_schools VALUES(?,?)').bind(s.source.source_id,'runtime-school').run()
+      const direct=await runModel(mf,{...modelRequest(String(index+1).repeat(64)),sourceId:s.source.source_id,snapshotSha256:'0'.repeat(64)})
+      assert.equal(direct.status,409);assert.equal((await direct.json() as {error:string}).error,'legacy_model_replay_protected')
+      for(const pass of ['primary','independent-review'] as const){
+        await db.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').bind(snapshotSha256,s.textSha256,sourceId).run()
+        const alias=await runModel(mf,{...modelRequest(String(index+5).repeat(64)),pass,payload:JSON.stringify({newContract:index,newScope:true})})
+        assert.equal(alias.status,409);assert.equal((await alias.json() as {error:string}).error,'legacy_model_replay_protected')
+      }
+      await db.prepare('UPDATE maintenance_sources SET raw_sha256=?,canonical_sha256=? WHERE source_id=?').bind(s.attempt.snapshot_sha256,'f'.repeat(64),sourceId).run()
+      const raw=await runModel(mf,{...modelRequest('9'.repeat(64)),snapshotSha256:s.attempt.snapshot_sha256})
+      assert.equal(raw.status,409);assert.equal((await raw.json() as {error:string}).error,'legacy_model_replay_protected')
+    }
+    assert.equal(calls.length,0)
+    assert.equal((await db.prepare('SELECT COUNT(*) count FROM maintenance_model_attempts').first())?.count,0)
+  }finally{await mf.dispose()}
 })
 
 test('real workerd fetch admits supported manual requests and refuses credentialed redirects', { timeout: 120000 }, async t => {
