@@ -22,6 +22,7 @@ import { readMaintenanceControl, reconcileMaintenanceHead } from './head-reconci
 import { prepareReconciliationTargets, registerReconciliationTargets } from './reconciliation-targets'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { readUnknownJobDisposition, reviewedTerminalQuarantine } from './reviewed-terminal-quarantine'
+import { legacyModelNoReplayReason, registerLegacyModelGuards, readLegacyModelDisposition } from './legacy-model-guards'
 import { claimJob, continueSeed,continueTargetRefresh,control, event, finishJob, recordTargets, refreshTargets, seed, setControls, source, sourceSchools } from './repository'
 import type { JobRow, MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './types'
 import { MaintenanceError } from './types'
@@ -71,6 +72,12 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
   try {
     const row=await source(env,job.source_id)
     if(!row?.enabled)throw new MaintenanceError('source_disabled')
+    // Stop protected aliases before the document partitioner sees the retained
+    // unknown attempt. A deliberate denial is held, never a new unknown outcome.
+    if(job.stage!=='capture'&&job.snapshot_sha256){
+      const protectedReason=await legacyModelNoReplayReason(env,{sourceId:row.source_id,snapshotSha256:job.snapshot_sha256,reservationKey:job.job_id,payload:'',pass:'primary',lane:'expansion',universityIds:[]},row)
+      if(protectedReason==='legacy_model_replay_protected')throw new MaintenanceError(protectedReason)
+    }
     if(job.stage==='capture') {
       const outcome=await captureSource(env,job,row)
       await finishJob(env,job,outcome==='rich-document'?'held':'done',outcome==='rich-document'?'rich_document_requires_extraction':null)
@@ -145,9 +152,12 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
   if(sourceMigrationFrozen(env)&&!sourceMigrationRoutes.has(`${request.method} ${url.pathname}`))return json({ok:false,error:'account_migration_frozen'},503)
   try {
+    if(url.pathname==='/legacy-model-guards'&&request.method==='GET')return json((await readLegacyModelDisposition(env,await control(env))).summary)
+    if(url.pathname==='/legacy-model-guards'&&request.method==='POST')return json(await registerLegacyModelGuards(env,await requestJson(request,1024)))
     if(url.pathname==='/job-dispositions'&&request.method==='GET')return json((await readUnknownJobDisposition(env,await control(env))).summary)
     if(url.pathname==='/job-dispositions'&&request.method==='POST')return json(await reviewedTerminalQuarantine(env,await requestJson(request,32*1024)))
     if(url.pathname==='/model-state-migration/status'&&request.method==='GET')return await gateRequest(env,url.pathname,{})
+    if(['/model-state-migration/reconciliation-promote','/model-state-migration/reconciliation-adopt','/model-state-migration/reconciliation-finalize'].includes(url.pathname)&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,2048))
     if(url.pathname==='/model-state-migration/gate-inspection'&&request.method==='GET')return await gateRequest(env,url.pathname,{migrationId:env.MODEL_STATE_MIGRATION_ID})
     if(url.pathname==='/model-state-migration/storage-inspection'&&request.method==='GET')return await gateRequest(env,url.pathname,{migrationId:env.MODEL_STATE_MIGRATION_ID,pageIndex:Number(url.searchParams.get('pageIndex')??0),...(url.searchParams.has('expectedStorageSha256')?{expectedStorageSha256:url.searchParams.get('expectedStorageSha256')}: {})})
     if(url.pathname==='/model-state-migration/handoff-operation-recovery'&&request.method==='POST')return await gateRequest(env,url.pathname,await requestJson(request,4096))

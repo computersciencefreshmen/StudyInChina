@@ -1,6 +1,7 @@
 // Pure validators shared by the Worker and the private Node relay. They never
 // normalize stored values or interpret a held handoff as a model outcome.
 import { canonicalJson } from '../../../scripts/maintenance/contracts'
+import { validateLegacyReconciliationArchive, validateLegacyReconciliationGate, validateLegacyReconciliationState } from './legacy-reconciliation-state'
 
 const HASH = /^[a-f0-9]{64}$/, BATCH = /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,100}$/
 const object = (v: unknown): v is Record<string, unknown> => Boolean(v && typeof v === 'object' && !Array.isArray(v) && Object.getPrototypeOf(v) === Object.prototype)
@@ -55,6 +56,17 @@ export function validateLegacyOfflineFence(value: unknown, batchId?: string): as
 }
 
 export function validateLegacyAuxiliaryEntry(key: string, value: unknown): boolean {
+  const reconciliation = /^(legacy-reconciliation|legacy-reconciliation-archive):([a-f0-9]{64})$/.exec(key)
+  if (reconciliation) {
+    if (reconciliation[1] === 'legacy-reconciliation') validateLegacyReconciliationState(value, reconciliation[2])
+    else {
+      validateLegacyReconciliationArchive(value, reconciliation[2])
+      validateLegacyOfflineGate(JSON.parse(value.originalGateJson))
+      for (const entry of value.auxiliaryEntries) if (!validateLegacyAuxiliaryEntry(entry.key, entry.value)) return invalid()
+    }
+    return true
+  }
+  if (key.startsWith('legacy-reconciliation')) return invalid()
   const match = /^(offline-fence|offline-adoption):([a-zA-Z0-9][a-zA-Z0-9_-]{0,100})$/.exec(key)
   if (!match) { if (key.startsWith('offline-')) return invalid(); return false }
   if (match[1] === 'offline-fence') { validateLegacyOfflineFence(value, match[2]); return true }
@@ -70,6 +82,10 @@ export function validateLegacyAuxiliaryEntry(key: string, value: unknown): boole
 
 export function validateLegacyOfflineGate(value: unknown): void {
   if (!object(value)) return invalid()
+  if (Object.hasOwn(value, 'legacyOfflineReconciliation')) {
+    if (Object.hasOwn(value, 'offlineFence') || Object.hasOwn(value, 'offlineHandoffOperationRecovery')) return invalid()
+    validateLegacyReconciliationGate(value.legacyOfflineReconciliation)
+  }
   const legacy = value.offlineFence !== undefined || value.offlineHandoffOperationRecovery !== undefined
   if (legacy && !keys(value, ['fetches', 'models', 'nextHost', 'successes', 'cooldownUntil', 'modelLimit', 'offlineFence', 'offlineHandoffOperationRecovery'], ['fetches', 'models', 'nextHost', 'successes', 'cooldownUntil'])) return invalid()
   if (value.offlineFence !== undefined) validateLegacyOfflineFence(value.offlineFence)
