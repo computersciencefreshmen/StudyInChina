@@ -113,7 +113,7 @@ export class ModelAdmission {
     try {
       const path=new URL(request.url).pathname,raw=record(await requestJson(request,path.startsWith('/model-state-migration/')?12*1024*1024:1024*1024))
       if(!raw) return json({ok:false,error:'invalid_request'},400)
-      if(path.startsWith('/model-state-migration/'))return await handleModelStateMigration(this.state.storage,this.env,path,raw,this.activeOperations)
+      if(path.startsWith('/model-state-migration/'))return await handleModelStateMigration(this.state.storage,this.env,path,raw,this.activeOperations,Date.now(),()=>this.activeOperations)
       // Count the whole asynchronous operation, including completion writes after
       // a provider response. A freeze stops new admissions but lets these drain.
       this.activeOperations++

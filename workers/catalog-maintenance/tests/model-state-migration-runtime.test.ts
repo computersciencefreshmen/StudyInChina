@@ -56,6 +56,7 @@ async function bundle() {
               for (const entry of await request.json()) await this.fixtureStorage.put(entry.key, entry.value)
               return Response.json({ok:true})
             }
+            if (path === '/test/read-private-state') return Response.json({entries:[...await this.fixtureStorage.list()]})
             if (path === '/test/activate') {
               for (const key of ['MODEL_STATE_MIGRATION_ID','MODEL_STATE_MIGRATION_ROLE','MODEL_STATE_MIGRATION_SOURCE_ACCOUNT_ID','MODEL_STATE_MIGRATION_TARGET_ACCOUNT_ID']) delete this.fixtureEnv[key]
               this.fixtureEnv.MAINTENANCE_ENABLED = 'true'
@@ -238,4 +239,86 @@ test('real workerd migrates private DO history across namespaces, verifies real 
     const status = await source.mf.dispatchFetch('https://migration.test/model-state-migration/status', { headers: { authorization: `Bearer ${admin}` } })
     assert.equal((await status.json() as { state: string }).state, 'exported')
   } finally { await target?.mf.dispose(); await source.mf.dispose() }
+})
+
+test('real workerd retires only a reviewed non-temporal FETCH slot and migrates the complete private audit and unchanged requests', { timeout: 120000 }, async t => {
+  const script = await bundle(), source = await runtime(script, 'source'), target = await runtime(script, 'target')
+  try {
+    const at = Date.now(), frozenAt = new Date(at - 121000).toISOString()
+    const gate = { fetches: [{ token: 'PRIVATE-NON-TEMPORAL-FETCH', host: 'private.edu.cn', expiresAt: Number.MAX_SAFE_INTEGER }, { token: 'PRIVATE-EXPIRED-FETCH', expiresAt: at - 1000 }],
+      models: [{ token: 'PRIVATE-EXPIRED-MODEL', lane: 'maintenance', expiresAt: at - 1000 }], nextHost: { 'private.edu.cn': at + 50000 }, successes: 5, cooldownUntil: at + 50000, modelLimit: 1 }
+    const lock = { version: 1, migrationId, sourceAccountId, targetAccountId, role: 'source', phase: 'frozen', frozenAt, pages: [],
+      states: { send_started: 0, completed: 0, unknown: 0, known_failed: 0 }, entryCount: 0, requestCount: 0, gatePresent: false }
+    const output = { facts: 'PRIVATE-ORIGINAL-PAID-EVIDENCE', exact: { zh: '原始事实', amount: 0 } }
+    const artifact = canonical({ attemptId: 'native-original-1', output }), artifactSha256 = await digest(artifact), artifactKey = `maintenance/models/${'1'.repeat(64)}/${artifactSha256}.json`
+    await source.bucket.put(artifactKey, artifact); await target.bucket.put(artifactKey, artifact)
+    const requestSha256 = await digest(payload)
+    const requests = ['completed', 'unknown', 'send_started', 'known_failed'].map((state, index) => ({ key: `request:${String(index + 1).repeat(64)}`,
+      value: { state, attemptId: `native-original-${index + 1}`, requestSha256, attemptCount: 4,
+        ...(state === 'known_failed' ? { retryable: true, notBefore: at + 3600000 } : {}),
+        ...(state === 'completed' ? { result: { attemptId: 'native-original-1', output, artifactKey, artifactSha256, reused: false } } : {}) } }))
+    await post(source.mf, '/test/seed', [{ key: '__model_state_migration_v1', value: lock }, { key: 'gate', value: gate }, ...requests])
+    const summary = async () => {
+      const response = await source.mf.dispatchFetch('https://migration.test/model-state-migration/ledger-summary', { headers: { authorization: `Bearer ${admin}` } })
+      assert.equal(response.status, 200); return await response.json() as Record<string, unknown>
+    }
+    const endpoint = '/model-state-migration/non-temporal-fetch-permit-recovery'
+    const operatorBody = (s: Record<string, unknown>) => ({ migrationId, operationId: 'native-root-reviewed-fetch-retirement', expectedGateSha256: s.gateSha256,
+      expectedRequestLedgerSha256: s.requestLedgerSha256, expectedNonTemporalSlots: { fetch: 1, model: 0 }, observedAt: s.observedAt,
+      operator: { operatorId: 'independent-local-native-test', decision: 'retire_non_temporal_fetch_slots_preserve_requests', reason: 'Observed MAX_SAFE non-temporal FETCH; all paid request outcomes remain intact.', reviewedAt: new Date().toISOString() } })
+    let before: Record<string, unknown>, body: ReturnType<typeof operatorBody>, result: Record<string, unknown>
+    await t.test('a temporal future model slot and an unrepresentable model slot both hold before mutation', async () => {
+      for (const expiresAt of [Date.now() + 60000, Number.MAX_SAFE_INTEGER]) {
+        await post(source.mf, '/test/seed', [{ key: 'gate', value: { ...gate, models: [{ token: 'PRIVATE-MODEL-HOLD', expiresAt }] } }])
+        const s = await summary(); assert.equal(s.eligible, false)
+        const denied = await post(source.mf, endpoint, operatorBody(s)); assert.equal(denied.status, 409)
+        const error = await denied.json() as { error: string }
+        assert.match(error.error, /normal_permits_active|model_permit_requires_separate_review/)
+      }
+      await post(source.mf, '/test/seed', [{ key: 'gate', value: gate }])
+    })
+    await t.test('only explicit authenticated fresh gate and full-ledger CAS can retire the anomalous FETCH', async () => {
+      before = await summary(); assert.equal(before.complete, true); assert.equal(before.eligible, true); assert.equal(before.requestCount, 4)
+      assert.equal(before.gateSha256, await digest(canonical(gate)))
+      const unauthenticated = await source.mf.dispatchFetch('https://migration.test' + endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(operatorBody(before)) })
+      assert.equal(unauthenticated.status, 401)
+      const wrong = await post(source.mf, endpoint, { ...operatorBody(before), expectedRequestLedgerSha256: '0'.repeat(64) }); assert.equal(wrong.status, 409)
+      assert.equal((await post(source.mf, '/model-state-migration/export', { migrationId, pageIndex: 0 })).status, 409)
+      body = operatorBody(await summary())
+      const response = await post(source.mf, endpoint, body); result = await response.json() as Record<string, unknown>
+      assert.equal(response.status, 200, JSON.stringify(result)); assert.equal(result.reused, false); assert.equal(result.requestLedgerSha256, before.requestLedgerSha256)
+      assert.deepEqual(result.retiredSlots, { fetch: 1, model: 0 }); assert.equal(result.sourceUnlocked, false)
+      const repeat = await post(source.mf, endpoint, body); assert.equal(repeat.status, 200); assert.equal((await repeat.json() as { reused: boolean }).reused, true)
+      const after = await summary(); assert.equal(after.requestLedgerSha256, before.requestLedgerSha256); assert.equal(after.recoveryRecorded, true)
+      for (const marker of ['PRIVATE-', 'private.edu.cn', 'request:', '原始事实']) assert.equal(JSON.stringify([before, result, after]).includes(marker), false)
+    })
+    await t.test('existing full DO migration preserves gate audit, every request value, model counters and source freeze', async () => {
+      const exportedResponse = await post(source.mf, '/model-state-migration/export', { migrationId, pageIndex: 0 })
+      assert.equal(exportedResponse.status, 200)
+      const exported = await exportedResponse.json() as { pageBytes: string; pageSha256: string; manifest: unknown; manifestSha256: string }
+      const entries = (JSON.parse(exported.pageBytes) as { entries: Array<{ key: string; value: unknown }> }).entries
+      assert.deepEqual(entries.filter(entry => entry.key.startsWith('request:')), requests)
+      const exportedGate = entries.find(entry => entry.key === 'gate')!.value as Record<string, unknown>, audit = exportedGate.nonTemporalFetchPermitRecovery as Record<string, unknown>
+      assert.equal(audit.originalGateJson, canonical(gate)); assert.equal(audit.originalGateSha256, before.gateSha256)
+      assert.equal(audit.beforeRequestLedgerSha256, before.requestLedgerSha256); assert.equal(audit.afterRequestLedgerSha256, before.requestLedgerSha256)
+      assert.deepEqual(exportedGate.models, gate.models); assert.equal(exportedGate.modelLimit, gate.modelLimit); assert.equal(exportedGate.cooldownUntil, gate.cooldownUntil); assert.equal(exportedGate.successes, gate.successes)
+      assert.deepEqual(audit.removedSlots, [{ kind: 'fetch', index: 0, permit: gate.fetches[0] }])
+      assert.equal((await post(target.mf, '/model-state-migration/import', { migrationId, ...exported })).status, 200)
+      assert.equal((await post(target.mf, '/model-state-migration/finalize', { migrationId, manifestSha256: exported.manifestSha256 })).status, 200)
+      const targetRaw = await (await post(target.mf, '/test/read-private-state', {})).json() as { entries: Array<[string, unknown]> }
+      const values = new Map(targetRaw.entries)
+      assert.deepEqual(values.get('gate'), exportedGate)
+      for (const request of requests) assert.deepEqual(values.get(request.key), request.value)
+      assert.equal((await post(source.mf, endpoint, body)).status, 409, 'an exported namespace cannot be changed by a recovery retry')
+      await post(source.mf, '/test/activate', {}); await post(target.mf, '/test/activate', {})
+      assert.equal((await post(source.mf, '/test/model', input('2'.repeat(64)))).status, 409)
+      for (const key of ['2', '3']) {
+        const replay = await post(target.mf, '/test/model', input(key.repeat(64))); assert.equal(replay.status, 409)
+        assert.equal((await replay.json() as { error: string }).error, 'prior_model_outcome_requires_review')
+      }
+      assert.deepEqual(source.outbound, []); assert.deepEqual(target.outbound, [])
+      assert.equal((await source.db.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').first<{ n: number }>())?.n, 0)
+      assert.equal((await target.db.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').first<{ n: number }>())?.n, 0)
+    })
+  } finally { await target.mf.dispose(); await source.mf.dispose() }
 })
