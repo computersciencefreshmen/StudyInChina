@@ -153,6 +153,29 @@ function receipt(gateSha: string, audit: Audit, ledger: Ledger, reused: boolean)
     complete: true, requestLedgerSha256: ledger.sha256, requestCount: ledger.requestCount, requestStates: ledger.states, retiredSlots: audit.expectedNonTemporalSlots,
     recoveredAt: audit.recoveredAt, modelCallsPerformed: false, requestValuesChanged: false, sourceUnlocked: false }
 }
+/** Private operator inspection only. Deliberately does not call gate()/scan():
+ * the purpose is to inspect an otherwise rejected gate without admitting it. */
+export async function inspectFrozenSourceGate(storage: DurableStorage, binding: Binding, lockKey: string, active: () => number, now: number) {
+  clock(now, active)
+  return storage.transaction(async txn => {
+    if (active() !== 0) return fail('active_operations')
+    const lock = sourceLock(await txn.get(lockKey), binding), value = await txn.get('gate')
+    if (value === undefined) return fail('gate_required')
+    const gateJson = canonical(value), gateByteLength = byteLength(gateJson)
+    if (gateByteLength > MAX_GATE_BYTES) return fail('gate_inspection_too_large')
+    const gateSha256 = await digest(gateJson)
+    if (active() !== 0) return fail('active_operations')
+    // Canonical JSON normalizes -0 to 0. Count that representation separately
+    // so inspection can explain its strict rejection without changing it.
+    const negativeZeros = (v: unknown): number => typeof v === 'number' ? Number(Object.is(v, -0))
+      : Array.isArray(v) ? v.reduce((n, item) => n + negativeZeros(item), 0)
+        : v && typeof v === 'object' ? Object.values(v).reduce<number>((n, item) => n + negativeZeros(item), 0) : 0
+    return { ok: true, format: 'studyinchina.private-source-gate-inspection', version: 1, ...binding,
+      state: 'frozen', frozenAt: lock.frozenAt, pageCount: 0, activeOperations: 0,
+      canonicalGateJson: gateJson, gateSha256, gateByteLength, negativeZeroValueCount: negativeZeros(value),
+      observedAt: new Date(now).toISOString(), cutoverReady: false, modelCalls: false, mutation: false, sourceUnlocked: false }
+  })
+}
 export async function requestLedgerSummary(storage: DurableStorage, binding: Binding, lockKey: string, active: () => number, now: number) {
   clock(now, active)
   return storage.transaction(async txn => {

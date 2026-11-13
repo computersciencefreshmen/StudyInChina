@@ -28,9 +28,15 @@ async function bundle() {
         constructor(state, env) {
           const runtimeEnv = { ...env }
           let owner
+          const statistics = { reads: [], writes: 0, deletes: 0, lists: 0 }
+          const tracked = store => ({
+            get: key => { statistics.reads.push(key); return store.get(key) },
+            put: (key, value) => { statistics.writes++; return store.put(key, value) },
+            delete: key => { statistics.deletes++; return store.delete(key) },
+            list: options => { statistics.lists++; return store.list(options) }
+          })
           const fixtureWrappedStorage = {
-            get: key => state.storage.get(key), put: (key, value) => state.storage.put(key, value),
-            delete: key => state.storage.delete(key), list: options => state.storage.list(options),
+            ...tracked(state.storage),
             transaction: async callback => {
               // Suspend a real cleanup operation before its native transaction;
               // concurrent migration diagnostics must observe its actual counter.
@@ -40,13 +46,14 @@ async function bundle() {
                 await new Promise(resolve => { owner.fixtureReleaseTransaction = resolve })
                 owner.fixtureTransactionBlocked = false
               }
-              return state.storage.transaction(callback)
+              return state.storage.transaction(txn => callback(tracked(txn)))
             }
           }
           super({ storage: fixtureWrappedStorage }, runtimeEnv)
           owner = this
           this.fixtureStorage = state.storage
           this.fixtureEnv = runtimeEnv
+          this.fixtureStatistics = statistics
         }
         async fetch(request) {
           const path = new URL(request.url).pathname
@@ -57,6 +64,12 @@ async function bundle() {
               return Response.json({ok:true})
             }
             if (path === '/test/read-private-state') return Response.json({entries:[...await this.fixtureStorage.list()]})
+            if (path === '/test/storage-statistics') return Response.json(this.fixtureStatistics)
+            if (path === '/test/reset-storage-statistics') {
+              this.fixtureStatistics.reads.length = 0
+              this.fixtureStatistics.writes = this.fixtureStatistics.deletes = this.fixtureStatistics.lists = 0
+              return Response.json({ok:true})
+            }
             if (path === '/test/activate') {
               for (const key of ['MODEL_STATE_MIGRATION_ID','MODEL_STATE_MIGRATION_ROLE','MODEL_STATE_MIGRATION_SOURCE_ACCOUNT_ID','MODEL_STATE_MIGRATION_TARGET_ACCOUNT_ID']) delete this.fixtureEnv[key]
               this.fixtureEnv.MAINTENANCE_ENABLED = 'true'
@@ -117,6 +130,45 @@ async function runtime(script: string, role: 'source' | 'target') {
     return { mf, db, bucket, outbound }
   } catch (error) { await mf.dispose(); throw error }
 }
+
+test('real workerd private gate inspection reads only a frozen source gate without writes, requests, models or export progress', { timeout: 120000 }, async () => {
+  const script = await bundle(), source = await runtime(script, 'source'), target = await runtime(script, 'target')
+  const path = '/model-state-migration/gate-inspection', headers = { authorization: `Bearer ${admin}` }
+  const read = (mf: Miniflare) => mf.dispatchFetch('https://migration.test' + path, { headers })
+  try {
+    const gate = { fetches: [{ token: 'PRIVATE-NATIVE-ORIGINAL-PERMIT', expiresAt: Number.MAX_SAFE_INTEGER }], models: [],
+      nextHost: { 'PRIVATE-NON-HOST-KEY': Date.now() + 60000 }, successes: 0, cooldownUntil: 0, modelLimit: 2,
+      unknownExtension: { privateValue: 'PRIVATE-ORIGINAL-GATE-CONTENT' } }
+    const lock = { version: 1, migrationId, sourceAccountId, targetAccountId, role: 'source', phase: 'frozen', frozenAt: new Date(Date.now() - 121000).toISOString(), pages: [],
+      states: { send_started: 0, completed: 0, unknown: 0, known_failed: 0 }, entryCount: 0, requestCount: 0, gatePresent: false }
+    await post(source.mf, '/test/seed', [{ key: '__model_state_migration_v1', value: lock }, { key: 'gate', value: gate },
+      { key: `request:${'7'.repeat(64)}`, value: { private: 'PRIVATE-REQUEST-MUST-NOT-BE-READ-OR-RETURNED' } }])
+    const before = await (await post(source.mf, '/test/read-private-state', {})).json()
+    await post(source.mf, '/test/reset-storage-statistics', {})
+    assert.equal((await source.mf.dispatchFetch('https://migration.test' + path)).status, 401)
+    assert.equal((await post(source.mf, path, {})).status, 404)
+    assert.equal((await read(target.mf)).status, 409)
+    const response = await read(source.mf), result = await response.json() as Record<string, unknown>
+    assert.equal(response.status, 200); assert.equal(response.headers.get('cache-control'), 'no-store')
+    assert.equal(result.canonicalGateJson, canonical(gate)); assert.equal(result.gateSha256, await digest(canonical(gate)))
+    assert.equal(result.gateByteLength, new TextEncoder().encode(String(result.canonicalGateJson)).length)
+    assert.equal(result.cutoverReady, false); assert.equal(result.modelCalls, false); assert.equal(result.mutation, false); assert.equal(result.sourceUnlocked, false)
+    assert.equal(JSON.stringify(result).includes('PRIVATE-REQUEST-MUST-NOT-BE-READ'), false)
+    const stats = await (await post(source.mf, '/test/storage-statistics', {})).json()
+    assert.deepEqual(stats, { reads: ['__model_state_migration_v1', 'gate'], writes: 0, deletes: 0, lists: 0 })
+    assert.deepEqual(await (await post(source.mf, '/test/read-private-state', {})).json(), before)
+    const summary = await source.mf.dispatchFetch('https://migration.test/model-state-migration/ledger-summary', { headers })
+    assert.equal(summary.status, 409); assert.equal((await summary.json() as { error: string }).error, 'non_temporal_recovery_gate_schema_unknown')
+    const exported = await post(source.mf, '/model-state-migration/export', { migrationId, pageIndex: 0 })
+    assert.equal(exported.status, 409); assert.equal((await exported.json() as { error: string }).error, 'model_state_migration_inflight')
+    assert.deepEqual(await (await post(source.mf, '/test/read-private-state', {})).json(), before)
+    const afterStats = await (await post(source.mf, '/test/storage-statistics', {})).json() as { writes: number; deletes: number }
+    assert.equal(afterStats.writes, 0); assert.equal(afterStats.deletes, 0)
+    assert.deepEqual(source.outbound, []); assert.deepEqual(target.outbound, [])
+    assert.equal((await source.bucket.list({ prefix: '' })).objects.length, 0)
+    assert.equal((await source.db.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').first<{ n: number }>())?.n, 0)
+  } finally { await target.mf.dispose(); await source.mf.dispose() }
+})
 function post(mf: Miniflare, path: string, body: unknown) {
   return mf.dispatchFetch(`https://migration.test${path}`, { method: 'POST', headers: { authorization: `Bearer ${admin}`, 'content-type': 'application/json' }, body: JSON.stringify(body) })
 }
