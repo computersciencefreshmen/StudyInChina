@@ -27,7 +27,24 @@ async function bundle() {
       export class TestAdmission extends ModelAdmission {
         constructor(state, env) {
           const runtimeEnv = { ...env }
-          super(state, runtimeEnv)
+          let owner
+          const fixtureWrappedStorage = {
+            get: key => state.storage.get(key), put: (key, value) => state.storage.put(key, value),
+            delete: key => state.storage.delete(key), list: options => state.storage.list(options),
+            transaction: async callback => {
+              // Suspend a real cleanup operation before its native transaction;
+              // concurrent migration diagnostics must observe its actual counter.
+              if (owner.fixturePauseNextTransaction) {
+                owner.fixturePauseNextTransaction = false
+                owner.fixtureTransactionBlocked = true
+                await new Promise(resolve => { owner.fixtureReleaseTransaction = resolve })
+                owner.fixtureTransactionBlocked = false
+              }
+              return state.storage.transaction(callback)
+            }
+          }
+          super({ storage: fixtureWrappedStorage }, runtimeEnv)
+          owner = this
           this.fixtureStorage = state.storage
           this.fixtureEnv = runtimeEnv
         }
@@ -44,6 +61,9 @@ async function bundle() {
               this.fixtureEnv.MAINTENANCE_ENABLED = 'true'
               return Response.json({ok:true})
             }
+            if (path === '/test/pause-transaction') { this.fixturePauseNextTransaction = true; return Response.json({ok:true}) }
+            if (path === '/test/transaction-state') return Response.json({blocked:this.fixtureTransactionBlocked === true})
+            if (path === '/test/resume-transaction') { this.fixtureReleaseTransaction?.(); return Response.json({ok:true}) }
           }
           return super.fetch(request)
         }
@@ -53,7 +73,7 @@ async function bundle() {
           const path = new URL(request.url).pathname
           if (path.startsWith('/test/')) {
             if (!authorized(request, env)) return new Response(null, {status:401})
-            const targetPath = path === '/test/model' ? '/model/run' : path
+            const targetPath = path === '/test/model' ? '/model/run' : path === '/test/release' ? '/fetch/release' : path
             return env.MODEL_ADMISSION.get(env.MODEL_ADMISSION.idFromName('subscription-account-v1'))
               .fetch(new Request('https://admission.internal' + targetPath, request))
           }
@@ -106,6 +126,45 @@ test('real workerd migrates private DO history across namespaces, verifies real 
   let target: Awaited<ReturnType<typeof runtime>> | undefined
   try {
     target = await runtime(script, 'target')
+    await t.test('native read-only diagnostics distinguish long future permits from a real suspended cleanup operation', async () => {
+      const future = Date.now() + 86400000, old = Date.now() - 60000
+      const gate = { fetches: [{ token: 'PRIVATE-FUTURE-FETCH', host: 'PRIVATE.edu.cn', expiresAt: future }],
+        models: [{ token: 'PRIVATE-FUTURE-MODEL', expiresAt: future + 1000 }], nextHost: {}, successes: 0, cooldownUntil: 0, modelLimit: 1 }
+      await post(source.mf, '/test/seed', [{ key: 'gate', value: gate }])
+      const freeze = await post(source.mf, '/model-state-migration/freeze', { migrationId }), observed = await freeze.json() as Record<string, unknown>
+      assert.equal(freeze.status, 409); assert.equal(observed.activeOperations, 0)
+      assert.equal(observed.activeFetchPermitCount, 1); assert.equal(observed.activeModelPermitCount, 1)
+      assert.equal(observed.latestPermitExpiresAt, new Date(future + 1000).toISOString())
+      assert.ok(Math.abs(Date.parse(String(observed.serverTime)) - Date.now()) < 10000)
+      const readStatus = () => source.mf.dispatchFetch('https://migration.test/model-state-migration/status', { headers: { authorization: `Bearer ${admin}` } })
+      const status = await (await readStatus()).json() as Record<string, unknown>
+      assert.equal(status.activeFetchPermitCount, 1); assert.equal(status.activeModelPermitCount, 1)
+      const expired = { ...gate, fetches: [{ token: 'PRIVATE-EXPIRED-FETCH', expiresAt: old }], models: [] }
+      await post(source.mf, '/test/seed', [{ key: 'gate', value: expired }])
+      await post(source.mf, '/test/pause-transaction', {})
+      const pending = post(source.mf, '/test/release', { token: 'unrelated-cleanup' })
+      try {
+        let blocked = false
+        for (let i = 0; i < 100; i++) {
+          blocked = (await (await post(source.mf, '/test/transaction-state', {})).json() as { blocked: boolean }).blocked
+          if (blocked) break
+          await new Promise(resolve => setTimeout(resolve, 10))
+        }
+        assert.equal(blocked, true, 'a real ModelAdmission operation must be suspended')
+        const waiting = await post(source.mf, '/model-state-migration/freeze', { migrationId }), busy = await waiting.json() as Record<string, unknown>
+        assert.equal(waiting.status, 409); assert.equal(busy.activeOperations, 1)
+        assert.equal(busy.activeFetchPermitCount, 0); assert.equal(busy.activeModelPermitCount, 0)
+        assert.equal(busy.latestPermitExpiresAt, new Date(old).toISOString())
+        const busyStatus = await (await readStatus()).json() as Record<string, unknown>
+        assert.equal(busyStatus.activeOperations, 1)
+        assert.equal((await post(source.mf, '/model-state-migration/export', { migrationId, pageIndex: 0 })).status, 409)
+        for (const value of ['PRIVATE-FUTURE-FETCH', 'PRIVATE-FUTURE-MODEL', 'PRIVATE.edu.cn', 'PRIVATE-EXPIRED-FETCH']) assert.equal(JSON.stringify([observed, status, busy, busyStatus]).includes(value), false)
+      } finally { await post(source.mf, '/test/resume-transaction', {}) }
+      assert.equal((await pending).status, 200)
+      const drained = await post(source.mf, '/model-state-migration/freeze', { migrationId }), done = await drained.json() as Record<string, unknown>
+      assert.equal(drained.status, 200); assert.equal(done.activeOperations, 0)
+      assert.equal(done.activeFetchPermitCount, 0); assert.equal(done.activeModelPermitCount, 0); assert.equal(done.latestPermitExpiresAt, null)
+    })
     const requestSha256 = await digest(payload), output = { evidence: 'historical paid result' }
     const artifactBytes = canonical({ attemptId: 'old-completed', output }), artifactSha256 = await digest(artifactBytes)
     const artifactKey = `maintenance/models/${'1'.repeat(64)}/${artifactSha256}.json`

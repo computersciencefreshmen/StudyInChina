@@ -135,8 +135,35 @@ test('a malformed existing gate cannot roll back the durable source freeze', asy
   try {
     await f.storage.put('gate', { unexpected: 'uninterpretable original state' })
     assert.equal((await (await call(f, 'freeze')).json()).error, 'model_state_migration_gate_invalid')
+    assert.equal((await (await call(f, 'status')).json()).error, 'model_state_migration_gate_invalid')
     assert.ok(f.storage.values.has(MODEL_STATE_MIGRATION_KEY))
     unconfigure(f.env); await assert.rejects(assertModelStateBusinessOpen(f.storage, f.env), /model_state_migration_locked/)
+  } finally { f.db.sqlite.close() }
+})
+
+test('read-only diagnostics distinguish future permits from operations without revealing private gate fields', async () => {
+  const f = fixture('source'), now = Date.parse('2026-11-14T17:30:00.000Z')
+  try {
+    const original = { ...gate(), fetches: [{ token: 'PRIVATE-FETCH-TOKEN', host: 'PRIVATE-HOST.edu.cn', expiresAt: now + 86400000 }, { token: 'expired', expiresAt: now }],
+      models: [{ token: 'PRIVATE-MODEL-TOKEN', expiresAt: now + 172800000 }] }
+    await f.storage.put('gate', original)
+    const freeze = await call(f, 'freeze', {}, 0, now), body = await freeze.json()
+    assert.equal(freeze.status, 409)
+    const expected = { activeOperations: 0, serverTime: '2026-11-14T17:30:00.000Z', activeFetchPermitCount: 1,
+      activeModelPermitCount: 1, latestPermitExpiresAt: '2026-11-16T17:30:00.000Z' }
+    for (const [key, value] of Object.entries(expected)) assert.equal(body[key], value)
+    const snapshot = canonical([...f.storage.values])
+    const status = await (await call(f, 'status', {}, 0, now)).json()
+    for (const [key, value] of Object.entries(expected)) assert.equal(status[key], value)
+    assert.equal(canonical([...f.storage.values]), snapshot, 'status neither cleans permits nor changes the frozen lock')
+    assert.deepEqual(await f.storage.get('gate'), original)
+    for (const privateValue of ['PRIVATE-FETCH-TOKEN', 'PRIVATE-MODEL-TOKEN', 'PRIVATE-HOST.edu.cn', 'retainedField', 'nextHost']) assert.equal(JSON.stringify([body, status]).includes(privateValue), false)
+    assert.equal((await call(f, 'export', { pageIndex: 0 }, 0, now)).status, 409)
+    for (const expiresAt of [Number.MAX_VALUE, -1]) {
+      await f.storage.put('gate', { ...gate(), fetches: [{ token: 'invalid', expiresAt }] })
+      assert.equal((await (await call(f, 'status', {}, 1, now)).json()).error, 'model_state_migration_gate_invalid')
+      assert.equal((await (await call(f, 'freeze', {}, 1, now)).json()).error, 'model_state_migration_gate_invalid')
+    }
   } finally { f.db.sqlite.close() }
 })
 
@@ -239,10 +266,17 @@ test('freeze drains an already paid model even after permit TTL, then exports it
     const pending = gateRequest(f.env, '/model/run', input); await sent
     configure(f.env, 'source')
     const migration = (path: string, body: unknown) => gateRequest(f.env, `/model-state-migration/${path}`, body)
-    assert.equal((await migration('freeze', { migrationId })).status, 409)
+    const firstFreeze = await migration('freeze', { migrationId }), firstObserved = await firstFreeze.json()
+    assert.equal(firstFreeze.status, 409); assert.equal(firstObserved.activeOperations, 1); assert.equal(firstObserved.activeModelPermitCount, 1)
     const state = await f.storage.get<{ models: Array<{ expiresAt: number }> }>('gate'); state!.models[0].expiresAt = 0; await f.storage.put('gate', state)
+    const expiredFreeze = await migration('freeze', { migrationId }), expiredObserved = await expiredFreeze.json()
+    assert.equal(expiredFreeze.status, 409); assert.equal(expiredObserved.activeOperations, 1)
+    assert.equal(expiredObserved.activeModelPermitCount, 0); assert.equal(expiredObserved.activeFetchPermitCount, 0)
+    assert.equal(expiredObserved.latestPermitExpiresAt, '1970-01-01T00:00:00.000Z')
     assert.equal((await migration('export', { migrationId, pageIndex: 0 })).status, 409)
     release(); assert.equal((await pending).status, 200)
+    const drained = await (await migration('freeze', { migrationId })).json()
+    assert.equal(drained.activeOperations, 0); assert.equal(drained.activeModelPermitCount, 0); assert.equal(drained.latestPermitExpiresAt, null)
     const response = await migration('export', { migrationId, pageIndex: 0 }), result = await response.json()
     assert.equal(response.status, 200, JSON.stringify(result)); assert.equal(result.manifest.states.completed, 1)
     assert.equal(JSON.parse(result.pageBytes).entries.find((e: { key: string }) => e.key.startsWith('request:')).value.result.output.paidResult, 'preserved')

@@ -111,6 +111,33 @@ describe('private frozen model-state relay', () => {
     const report = await transferModelState(options(directory, peer.fetcher))
     expect(report).toMatchObject({ state: 'waiting', code: 'source_inflight', sourceFrozen: true, targetFinalized: false, pageCount: null, requestCount: null, states: null })
     expect(peer.calls).toHaveLength(1); expect(await readdir(directory)).toEqual([])
+    expect(report.sourceDiagnostics).toBeNull()
+  }))
+
+  it('retains only validated source-clock diagnostics in the redacted inflight report', async () => local(async directory => {
+    const observed = { activeOperations: 0, serverTime: '2026-11-14T17:30:00.000Z', activeFetchPermitCount: 1,
+      activeModelPermitCount: 0, latestPermitExpiresAt: '2026-11-15T17:30:00.000Z' }
+    const peer = peers(snapshot(), (url, _body, normal) => url.endsWith('/freeze') ? Response.json({ ...normal, ...observed,
+      state: 'frozen', manifestSha256: null, error: 'model_state_migration_inflight', gate: rawCanary, token: sourceToken,
+      host: sourceHost, requestKey: 'request:PRIVATE-DO-KEY' }, { status: 409 }) : undefined)
+    const report = await transferModelState(options(directory, peer.fetcher))
+    expect(report).toMatchObject({ state: 'waiting', code: 'source_inflight', sourceFrozen: true, sourceDiagnostics: observed })
+    expect(Object.keys(report.sourceDiagnostics!).sort()).toEqual(Object.keys(observed).sort())
+    for (const privateValue of [rawCanary, sourceToken, sourceHost, sourceAccountId, 'PRIVATE-DO-KEY']) expect(JSON.stringify(report)).not.toContain(privateValue)
+    expect(peer.calls).toHaveLength(1); expect(await readdir(directory)).toEqual([])
+  }))
+
+  it('refuses partial, numeric-date or malformed diagnostics without target writes or raw output', async () => local(async directory => {
+    const observed = { activeOperations: 1, serverTime: '2026-11-14T17:30:00.000Z', activeFetchPermitCount: 0,
+      activeModelPermitCount: 0, latestPermitExpiresAt: null }
+    for (const malformed of [{ activeOperations: 1 }, { ...observed, serverTime: 1794677400000 }, { ...observed, latestPermitExpiresAt: 1794677400000 },
+      { ...observed, activeOperations: -1 }, { ...observed, activeModelPermitCount: '0' }, { ...observed, serverTime: rawCanary }, { ...observed, latestPermitExpiresAt: sourceToken }]) {
+      const peer = peers(snapshot(), (url, _body, normal) => url.endsWith('/freeze') ? Response.json({ ...normal, ...malformed,
+        state: 'frozen', error: 'model_state_migration_inflight' }, { status: 409 }) : undefined)
+      const report = await transferModelState(options(directory, peer.fetcher))
+      expect(report).toMatchObject({ state: 'failed', code: 'source_diagnostics_invalid', sourceDiagnostics: null, targetFinalized: false })
+      expect(peer.calls).toHaveLength(1); expect(JSON.stringify(report)).not.toContain(rawCanary); expect(JSON.stringify(report)).not.toContain(sourceToken)
+    }
   }))
 
   it('accepts a fresh source whose complete manifest is first available on the last page', async () => local(async directory => {

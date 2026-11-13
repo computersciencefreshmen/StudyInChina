@@ -96,6 +96,26 @@ function hasInflight(gate: unknown, now: number) {
   const value = gate as { fetches: Array<{ expiresAt: number }>; models: Array<{ expiresAt: number }> }
   return [...value.fetches, ...value.models].some(p => p.expiresAt > now)
 }
+/** Observation only: never prune permits or mutate a frozen snapshot. Dates are
+ * absolute ISO timestamps, while the active counts use the server's clock. */
+function diagnostics(gate: unknown, activeOperations: number, now: number) {
+  if (!integer(activeOperations) || !finite(now) || !Number.isFinite(new Date(now).getTime())) return fail('model_state_migration_diagnostics_invalid')
+  const result = { activeOperations, serverTime: new Date(now).toISOString(), activeFetchPermitCount: 0, activeModelPermitCount: 0, latestPermitExpiresAt: null as string | null }
+  if (gate === undefined) return result
+  validateEntry({ key: 'gate', value: gate })
+  const value = gate as { fetches: Array<{ expiresAt: number }>; models: Array<{ expiresAt: number }> }
+  let latest: number | null = null
+  for (const [permits, field] of [[value.fetches, 'activeFetchPermitCount'], [value.models, 'activeModelPermitCount']] as const) {
+    for (const permit of permits) {
+      if (!Number.isFinite(new Date(permit.expiresAt).getTime())) return fail('model_state_migration_gate_invalid')
+      if (permit.expiresAt > now) result[field]++
+      latest = latest === null ? permit.expiresAt : Math.max(latest, permit.expiresAt)
+    }
+  }
+  // Include an expired latest permit too: an active operation can outlive TTL.
+  if (latest !== null) result.latestPermitExpiresAt = new Date(latest).toISOString()
+  return result
+}
 function addCounts(lock: Pick<Lock, 'states' | 'entryCount' | 'requestCount' | 'gatePresent'>, entries: Entry[]) {
   for (const entry of entries) {
     lock.entryCount++
@@ -176,7 +196,7 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
     if (path === '/model-state-migration/status') {
       const lock = checkedLock(await storage.get(MODEL_STATE_MIGRATION_KEY))
       if (lock) matchLock(lock, cfg)
-      return json(status(lock, cfg))
+      return json({ ...status(lock, cfg), ...diagnostics(await storage.get('gate'), activeOperations, now) })
     }
     requireId(raw, cfg)
     if (path === '/model-state-migration/freeze') {
@@ -188,8 +208,9 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
         return lock
       })
       // Commit the freeze even if validation of old state subsequently fails.
-      const inflight = activeOperations > 0 || hasInflight(await storage.get('gate'), now)
-      return json({ ...status(lock, cfg), frozen: true, ...(inflight ? { error: 'model_state_migration_inflight' } : {}) }, inflight ? 409 : 200)
+      const observed = diagnostics(await storage.get('gate'), activeOperations, now)
+      const inflight = observed.activeOperations > 0 || observed.activeFetchPermitCount > 0 || observed.activeModelPermitCount > 0
+      return json({ ...status(lock, cfg), ...observed, frozen: true, ...(inflight ? { error: 'model_state_migration_inflight' } : {}) }, inflight ? 409 : 200)
     }
     if (path === '/model-state-migration/export') {
       requireRole(cfg, 'source')
