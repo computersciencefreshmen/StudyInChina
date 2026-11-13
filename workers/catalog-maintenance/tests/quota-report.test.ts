@@ -130,6 +130,7 @@ test('provider diagnostics distinguish network, rejected responses and bounded i
     for (const [provider, state, reason] of [
       [async () => { throw new Error(`private ${f.env.MINIMAX_SUBSCRIPTION_KEY}`) }, 'network_unavailable', 'provider_transport_failed'],
       [async () => redirected, 'response_rejected', 'redirect_or_url_mismatch'],
+      [async () => new Response('private redirect body', { status: 302, headers: { location: 'https://unexpected.example/private-secret' } }), 'response_rejected', 'redirect_or_url_mismatch'],
       [async () => unexpected, 'response_rejected', 'redirect_or_url_mismatch'],
       [async () => new Response(`invalid private ${f.env.MINIMAX_SUBSCRIPTION_KEY}`), 'unreadable_response', 'invalid_or_oversized_json'],
       [async () => new Response('{}', { headers: { 'content-length': String(129 * 1024) } }), 'unreadable_response', 'invalid_or_oversized_json'],
@@ -156,7 +157,7 @@ test('quota reads use the official CLI API origins with JSON headers and never f
       let calls = 0
       const report = await readPlanQuotaReport({ ...f.env, MINIMAX_ANTHROPIC_BASE: base }, async (input, options) => {
         calls++; assert.equal(input, endpoint)
-        assert.equal(options?.method, 'GET'); assert.equal(options.redirect, 'error')
+        assert.equal(options?.method, 'GET'); assert.equal(options.redirect, 'manual')
         assert.equal(new Headers(options.headers).get('content-type'), 'application/json')
         return quotaResponse()
       })
