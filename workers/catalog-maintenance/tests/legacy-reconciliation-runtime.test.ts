@@ -67,7 +67,8 @@ test('real workerd/D1/R2: native conditional promotion, 171 exact cache adoption
     let promoted = await call('promote'); while (promoted.nextOffset !== null) promoted = await call('promote', promoted.nextOffset)
     // Production endpoint cannot use the fixture's injected verifier.
     const unregistered = await dispatch('/model-state-migration/reconciliation-adopt', body())
-    assert.notEqual(unregistered.status, 200)
+    assert.equal(unregistered.status, 409)
+    assert.equal((await unregistered.json() as { error: string }).error, 'legacy_model_guard_package_mismatch')
     let adopted = await call('adopt'); while (adopted.nextOffset !== null) adopted = await call('adopt', adopted.nextOffset)
     assert.equal(adopted.adoptedCount, 171); assert.ok(adopted.adoptedLedgerSha256)
     const final = await buildFixtureFinalReceipt(data.p, data.sha, adopted.adoptedLedgerSha256!)

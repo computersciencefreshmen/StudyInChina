@@ -1,4 +1,5 @@
 import type { DurableStorage, MaintenanceEnv } from './types'
+import { MaintenanceError } from './types'
 import { canonical, digest, HASH, json, record } from './util'
 import { inspectFrozenSourceGate, NonTemporalPermitRecoveryError, recoverNonTemporalPermits, requestLedgerSummary } from './non-temporal-permit-recovery'
 import { validateLegacyAuxiliaryEntry, validateLegacyOfflineGate, validateMigratedRequest } from './legacy-offline-state'
@@ -312,6 +313,7 @@ export async function handleModelStateMigration(storage: DurableStorage, env: Ma
     }
     return json({ ok: false, error: 'not_found' }, 404)
   } catch (error) {
-    return json({ ok: false, error: error instanceof ModelStateMigrationError || error instanceof NonTemporalPermitRecoveryError || error instanceof LegacyHandoffRecoveryError ? error.code : 'model_state_migration_unavailable' }, 409)
+    const reviewedReconciliationCode = error instanceof MaintenanceError && /^legacy_(?:reconciliation|model_guard)_[a-z0-9_]{1,100}$/.test(error.code)
+    return json({ ok: false, error: error instanceof ModelStateMigrationError || error instanceof NonTemporalPermitRecoveryError || error instanceof LegacyHandoffRecoveryError || reviewedReconciliationCode ? (error as { code: string }).code : 'model_state_migration_unavailable' }, 409)
   }
 }
