@@ -281,10 +281,10 @@ export async function readUnknownJobDisposition(env: MaintenanceEnv, cfg: Contro
 
 /** The health read and the atomic rollout commit use this same exact tuple
  * predicate. A changed row or a fourth unknown remains an unresolved blocker. */
-export function dispositionFence(disposition: VerifiedDisposition) {
-  const unknown = `NOT EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.status='unknown' AND j.job_id NOT IN(${matchingQuarantinedJobsSql()}))`
+export function dispositionFence(disposition: VerifiedDisposition, additional: { sql: string; bindings: string[] } = {sql:'SELECT NULL WHERE 0',bindings:[]}) {
+  const unknown = `NOT EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.status='unknown' AND j.job_id NOT IN(${matchingQuarantinedJobsSql()}) AND j.job_id NOT IN(${additional.sql}))`
   const commit = disposition.commit ? ` AND (SELECT COUNT(*) FROM (${matchingQuarantinedJobsSql()}))=3 AND EXISTS(SELECT 1 FROM maintenance_events WHERE event_id=? AND kind='reviewed_terminal_quarantine' AND details_json=?) AND ${lineageSql} AND ${absenceSql()}` : ''
-  return { sql: `${unknown}${commit}`, bindings: [disposition.pinnedJobsJson, ...(disposition.commit ? [disposition.pinnedJobsJson, disposition.commit.eventId, disposition.commit.detailsJson, ...lineageBindings(disposition.commit.scopeUpgrade), ...auditBindings(), ...auditBindings()] : [])] }
+  return { sql: `${unknown}${commit}`, bindings: [disposition.pinnedJobsJson, ...additional.bindings, ...(disposition.commit ? [disposition.pinnedJobsJson, disposition.commit.eventId, disposition.commit.detailsJson, ...lineageBindings(disposition.commit.scopeUpgrade), ...auditBindings(), ...auditBindings()] : [])] }
 }
 
 export const TERMINAL_QUARANTINE_POLICY = pinned

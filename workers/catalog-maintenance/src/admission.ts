@@ -10,6 +10,8 @@ import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../..
 import { noReplayReason } from './reviewed-terminal-quarantine'
 import { legacyModelNoReplayReason } from './legacy-model-guards'
 import { archiveModelResponse, ModelResponseEvidenceError } from './model-response-evidence'
+import { prepareRuntimeModelGuards, registerRuntimeModelGuards, runtimeModelNoReplayReason } from './runtime-model-guards'
+import { MaintenanceError } from './types'
 import type { LegacyOfflineFence } from './legacy-offline-state'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
@@ -108,6 +110,7 @@ function modelRequest(value:unknown):ModelRequest {
 }
 export class ModelAdmission {
   private activeOperations = 0
+  private runtimeGuardBusy = false
   constructor(private readonly state:DurableState,private readonly env:MaintenanceEnv,private readonly fetcher:typeof fetch=fetch) {}
   private async mutate<T>(fn:(state:GateState)=>T,newAdmission=false):Promise<T> {
     return this.state.storage.transaction(async txn=>{if(newAdmission)await assertModelStateBusinessOpen(txn,this.env);else await assertModelStateCleanupOpen(txn,this.env);const state=await txn.get<GateState>('gate')??initial(); const now=Date.now();if(!offlineFenced(state)){state.fetches=state.fetches.filter(p=>p.expiresAt>now);state.models=state.models.filter(p=>p.expiresAt>now);for(const [host,next]of Object.entries(state.nextHost))if(next<now-60000)delete state.nextHost[host]}const result=fn(state);await txn.put('gate',state);return result})
@@ -117,6 +120,18 @@ export class ModelAdmission {
     try {
       const path=new URL(request.url).pathname,raw=record(await requestJson(request,path.startsWith('/model-state-migration/')?12*1024*1024:1024*1024))
       if(!raw) return json({ok:false,error:'invalid_request'},400)
+      if(this.runtimeGuardBusy)return json({ok:false,error:'model_capacity_runtime_guard_registration',retryAfter:30},429)
+      if(path==='/runtime-model-guards/prepare'||path==='/runtime-model-guards/register'){
+        if(this.activeOperations!==0)throw new MaintenanceError('runtime_model_guard_admission_not_idle')
+        // Set synchronously before the first await. It covers quota/preflight work,
+        // not merely the send permits recorded in durable storage.
+        this.runtimeGuardBusy=true
+        try{
+          await assertModelStateBusinessOpen(this.state.storage,this.env)
+          const handler=path.endsWith('/prepare')?prepareRuntimeModelGuards:registerRuntimeModelGuards
+          return json(await handler(this.env,this.state.storage,raw,()=>this.activeOperations))
+        }finally{this.runtimeGuardBusy=false}
+      }
       if(path.startsWith('/model-state-migration/'))return await handleModelStateMigration(this.state.storage,this.env,path,raw,this.activeOperations,Date.now(),()=>this.activeOperations)
       // Count the whole asynchronous operation, including completion writes after
       // a provider response. A freeze stops new admissions but lets these drain.
@@ -139,6 +154,7 @@ export class ModelAdmission {
       return json({ok:false,error:'not_found'},404)
       } finally { this.activeOperations-- }
     } catch(error) {
+      if(error instanceof MaintenanceError&&error.code.startsWith('runtime_model_guard_'))return json({ok:false,error:error.code},409)
       if(error instanceof FlashCanaryError)return json({ok:false,error:error.code},409)
       if(error instanceof ModelStateMigrationError)return json({ok:false,error:error.code},409)
       // A database quota failure before admission has not executed a model.
@@ -163,6 +179,8 @@ export class ModelAdmission {
     const schools=(await this.env.PIPELINE_DB.prepare('SELECT x.university_id FROM maintenance_source_schools x JOIN maintenance_schools u ON u.university_id=x.university_id WHERE x.source_id=? AND u.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1)').bind(input.sourceId).all<{university_id:string}>()).results??[]
     if(!source||input.universityIds.some(id=>!schools.some(s=>s.university_id===id))) return json({ok:false,error:'model_scope_not_seeded'},409)
     if(source.raw_sha256&&source.raw_sha256!==input.snapshotSha256)return json({ok:false,error:'source_snapshot_superseded'},409)
+    const runtimeReplay=await runtimeModelNoReplayReason(this.env,input)
+    if(runtimeReplay)return json({ok:false,error:runtimeReplay,replayAllowed:false},409)
     const legacyReplay=await legacyModelNoReplayReason(this.env,input,source)
     if(legacyReplay==='legacy_model_replay_protected')return json({ok:false,error:legacyReplay,replayAllowed:false},409)
     const noReplay=await noReplayReason(this.env,input,source)
@@ -216,6 +234,9 @@ export class ModelAdmission {
       const target=admission.low?1:Math.min(4,Math.max(1,Number(this.env.MODEL_CONCURRENCY)||4),gate.modelLimit??2)
       const expansionLimit=urgent?Math.max(1,target-1):target
       if(gate.cooldownUntil>now||gate.models.length>=target||input.lane==='expansion'&&gate.models.filter(p=>p.lane==='expansion').length>=expansionLimit)return false
+      // Registration is exclusive with this whole operation; recheck the permanent
+      // registry at the final admission boundary as well as before preflight.
+      if(await runtimeModelNoReplayReason(this.env,input))throw new MaintenanceError('runtime_model_guard_replay_protected')
       await claimFlashCanary(txn,gate,input,flash,audit,attemptId)
       gate.models.push({token,lane:input.lane,expiresAt:now+120000})
       await txn.put('gate',gate);await txn.put<Reservation>(key,{state:'send_started',attemptId,requestSha256,attemptCount:(current?.attemptCount??0)+1,...auditFields});return true

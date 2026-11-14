@@ -58,7 +58,7 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|job-dispositions|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|job-dispositions|runtime-model-guards(?:\/(?:prepare|register))?|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     let response: Response
     try {
@@ -189,6 +189,7 @@ async function main() {
     if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT, `has_export=${Boolean(batch)}\n`, { flag: 'a' })
     console.log(JSON.stringify({ batchId: batch?.batchId ?? null, proposals: batch?.proposals.length ?? 0 })); return
   }
+  if (['prepare-runtime-model-guards','register-runtime-model-guards'].includes(action) && value) { console.log(JSON.stringify(await client.json('/runtime-model-guards/'+(action.startsWith('prepare')?'prepare':'register'),'POST',JSON.parse(await readFile(resolve(value),'utf8'))))); return }
   if (['seed', 'targets', 'controls', 'ack', 'reconciliations', 'job-dispositions'].includes(action) && value) {
     const body = JSON.parse(await readFile(resolve(value), 'utf8'))
     const result = await client.json(`/${action}`, 'POST', body)

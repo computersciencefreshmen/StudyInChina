@@ -1,3 +1,4 @@
+import { runtimeModelNoReplayReason, readRuntimeModelDisposition } from './runtime-model-guards'
 import { ModelAdmission } from './admission'
 import { holdBudgetQueueMessage } from './budget-queue-hold'
 import { readPlanQuotaReport } from './quota-report'
@@ -75,6 +76,7 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
     // Stop protected aliases before the document partitioner sees the retained
     // unknown attempt. A deliberate denial is held, never a new unknown outcome.
     if(job.stage!=='capture'&&job.snapshot_sha256){
+      if(await runtimeModelNoReplayReason(env,{sourceId:row.source_id,snapshotSha256:job.snapshot_sha256,reservationKey:job.job_id,payload:''}))throw new MaintenanceError('runtime_model_replay_protected')
       const protectedReason=await legacyModelNoReplayReason(env,{sourceId:row.source_id,snapshotSha256:job.snapshot_sha256,reservationKey:job.job_id,payload:'',pass:'primary',lane:'expansion',universityIds:[]},row)
       if(protectedReason==='legacy_model_replay_protected')throw new MaintenanceError(protectedReason)
     }
@@ -179,6 +181,12 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/scope-upgrades'&&request.method==='POST')return json(await registerScopeUpgradeRequest(env,request))
     if(url.pathname==='/scope-upgrades'&&request.method==='GET')return json(await scopeUpgradeStatus(env,url.searchParams.get('sha256')??''))
     if(url.pathname==='/coverage'&&request.method==='POST')return json(await submitCoverageSnapshot(env,await requestJson(request,2*1024*1024)))
+    if(request.method==='POST'&&['/runtime-model-guards/prepare','/runtime-model-guards/register'].includes(url.pathname))return gateRequest(env,url.pathname,await requestJson(request,8192))
+    if(request.method==='GET'&&url.pathname==='/runtime-model-guards'){
+      const cfg=await control(env);if(!cfg)throw new MaintenanceError('seed_not_ready')
+      const observed=await readRuntimeModelDisposition(env,cfg)
+      return json({format:'studyinchina.runtime-model-no-replay-status',version:1,state:observed.state,registeredAttempts:observed.attempts.length,registeredJobs:observed.jobs.length,replayAllowed:false,unknownOutcomesChanged:false})
+    }
     if(url.pathname==='/controls'&&request.method==='POST')return json(await setControls(env,await requestJson(request,32768)))
     if(url.pathname==='/control'&&request.method==='GET')return json(await readMaintenanceControl(env))
     if(url.pathname==='/head-reconcile'&&request.method==='POST')return json(await reconcileMaintenanceHead(env,await requestJson(request,4096)))
