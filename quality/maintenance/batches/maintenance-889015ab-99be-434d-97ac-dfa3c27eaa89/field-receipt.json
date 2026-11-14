@@ -1,0 +1,60 @@
+{
+  "format": "studyinchina.field-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-889015ab-99be-434d-97ac-dfa3c27eaa89",
+  "batchSha256": "170bc76c2a55bbefb745c9fd9728e8393fb843127c6444332e03c0aa467a33ab",
+  "inputCatalogSha256": "13f18c53d50ab48499a4fd9a8644a3fcce8dcb294fa1e659c60eac084c194d3e",
+  "outputCatalogSha256": "ddc1b23eb9095620e874f467f0d959e1efc9cfe62d38fe67d82a8c778c2a569c",
+  "acceptedAt": "2026-11-14T17:40:34.736Z",
+  "accepted": [
+    {
+      "proposalId": "maintenance-field-859f5bb47ff9a7eec3409e552c456b04bcd451dd1a5a0f6dcc380b0c972a41ff",
+      "recordId": "program-china-foreign-affairs-university-international-relations-master",
+      "fieldPaths": [
+        "durationMonths",
+        "durationMonthsMax"
+      ]
+    },
+    {
+      "proposalId": "maintenance-field-5eb1646776281c6506b65d715589d4cd0aa89f83aad4ba5756c97c486260f49e",
+      "recordId": "prog-gap-prog-mew-nss-bwu-international-trade-master",
+      "fieldPaths": [
+        "durationMonths",
+        "durationMonthsMax"
+      ]
+    }
+  ],
+  "fieldBindings": [
+    {
+      "entityType": "program",
+      "recordId": "program-china-foreign-affairs-university-international-relations-master",
+      "fieldPath": "durationMonths",
+      "verificationSha256": "524024416e14f3ebe60ea6dd447a4b3f2d020665726d2c82b0c6383772dbe146"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-china-foreign-affairs-university-international-relations-master",
+      "fieldPath": "durationMonthsMax",
+      "verificationSha256": "6579cf42904e7e80b8507bba5dfe0580f191bc6809a63b39d9349f35c16e124e"
+    },
+    {
+      "entityType": "program",
+      "recordId": "prog-gap-prog-mew-nss-bwu-international-trade-master",
+      "fieldPath": "durationMonths",
+      "verificationSha256": "e2436b39838a01296c86d3cdcefd7d6035e9f0fa82262bf4772705e42a95486e"
+    },
+    {
+      "entityType": "program",
+      "recordId": "prog-gap-prog-mew-nss-bwu-international-trade-master",
+      "fieldPath": "durationMonthsMax",
+      "verificationSha256": "372993d0a7799b4014a95cc607e262d5c8ab9413452c4643a5479df21dc6aa3a"
+    }
+  ],
+  "held": [
+    {
+      "proposalId": "maintenance-field-24dbdb971616559d6842f027990192aa6a8e61627655782a0f61036900c0f454",
+      "reason": "[\n  {\n    \"code\": \"custom\",\n    \"message\": \"Maximum duration must be at least the minimum duration\",\n    \"path\": [\n      \"programs\",\n      204\n    ]\n  }\n]"
+    }
+  ],
+  "sha256": "5b708bbc265db531b673e554bb1b474d06988be3f098c018f15c3bf5b88007f9"
+}
