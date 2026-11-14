@@ -202,7 +202,7 @@ pages; failed attempts and successful captures remain separate metrics. A tick
 cadence is not a freshness SLA. An exhausted shared account waits for its UTC
 reset rather than creating another database or buying capacity.
 
-`TICK_JOB_LIMIT` accepts only the exact strings `"8"`, `"16"`, or `"32"`.
+`TICK_JOB_LIMIT` accepts only the exact strings `"8"`, `"16"`, `"32"`, or `"64"`.
 Missing or malformed values (including whitespace, decimals and other integers)
 fall back to eight: a deployment typo must not silently increase work or stop an
 otherwise valid scheduler. The example Wrangler configuration keeps `"8"`.
@@ -210,14 +210,23 @@ Higher values require an explicit operator configuration change; no deployment
 or activation is performed by this code change. The configured limit is included
 in each `scheduler_tick` event, alongside the actual successful queue-send count.
 
-The larger settings change only how much work waits in the queue. Candidate
-reservoirs stay at 40 sources / 120 jobs, model concurrency remains at most four,
+The larger settings change only how much work waits in the queue. The 8/16/32
+settings retain 40 source candidates / 40 candidates per lane / 120 total jobs.
+Only the explicit 64 setting uses 64 source candidates / 64 per lane / 192 total
+jobs, so smaller reservoirs cannot truncate its maintenance or scholarship share.
+These SQL bounds come only from the strict enum, never an environment string.
+Model concurrency remains at most four,
 and quota margins, canary scope, school rotation, 2:1 programme/scholarship shares,
 unknown-outcome protections and 429 cooldown are unchanged. The 15-minute cadence
 and publication writer lock are unchanged. Retries and document continuations are
 existing separate queue deliveries, not additional initial scheduler slots.
 At 32, a fully populated tick can make 32 capture INSERTs plus 32 enqueue UPDATEs
-and its existing bounded preflight queries. This is intended for Workers Paid;
+and its existing bounded preflight queries. At 64 those writes can total 128;
+local real-workerd/D1/R2 regression measured 136 prepared statements, with at most
+eight bound parameters each, for an ordinary 64-capture tick with no followup.
+This is a fixture measurement, not an account-wide usage or latency guarantee;
+native-head proof and pending target-followup checks have their own bounded cost.
+The 32 and 64 opt-ins are intended for Workers Paid;
 it is not a promise of compatibility with Free's 50-D1-query invocation limit.
 No query binds one parameter per dispatched job, and no new whole-table scan or
 large JSON parameter is introduced. See [D1 limits](https://developers.cloudflare.com/d1/platform/limits/).

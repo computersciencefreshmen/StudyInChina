@@ -84,18 +84,18 @@ describe('official expansion semantic audit', () => {
     )
     expect(wmu?.coverage.tuition).toBe('unknown')
     expect(wmu?.name.en).toContain('MBBS/BDS')
-    expect(wmu?.summary.en).toContain('first pay the full tuition')
+    expect(wmu?.summary?.en).toContain('first pay the full tuition')
 
     const nau = scholarships.find(
       (scholarship) => scholarship.id === 'scholarship-nanjing-audit-university-mofcom-maud',
     )
     expect(nau?.deadline).toBeNull()
-    expect(nau?.summary.en).toContain('annual recommended date')
+    expect(nau?.summary?.en).toContain('annual recommended date')
 
     for (const id of ['scholarship-sustech-president', 'scholarship-sustech-tuition-waiver']) {
       const scholarship = scholarships.find((item) => item.id === id)
-      expect(scholarship?.summary.en).toContain('undergraduate-only')
-      expect(scholarship?.summary.en).toContain('test waiver')
+      expect(scholarship?.summary?.en).toContain('undergraduate-only')
+      expect(scholarship?.summary?.en).toContain('test waiver')
     }
   })
 })

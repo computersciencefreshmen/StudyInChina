@@ -15,6 +15,7 @@ import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { readUnknownJobDisposition } from './reviewed-terminal-quarantine'
 import { readLegacyModelDisposition } from './legacy-model-guards'
 import { prepareTargetFollowup, seedTargetFollowupJobs, targetFollowupEvent, type FollowupQueueScope, type FollowupRef } from './target-followup'
+import { readRecordTargetGraph, retainTargetGraphHold } from './target-graph'
 
 export async function control(env: MaintenanceEnv): Promise<Control | null> {
   return env.PIPELINE_DB.prepare('SELECT * FROM maintenance_control WHERE singleton=1').first<Control>()
@@ -214,6 +215,9 @@ const schedulingSchoolIdsSql = `(SELECT json_group_array(xu.university_id) FROM 
 
 export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'full'|'dispatch_only'|'administrative_only'='full') {
   const jobLimit = tickJobLimit(env)
+  // Only the reviewed 64-slot opt-in enlarges reservoirs. SQL interpolates these
+  // closed numeric constants, never the original environment string.
+  const candidateLimit = jobLimit === 64 ? 64 : 40, poolLimit = candidateLimit * 3
   const cfg = await control(env)
   if(mode==='dispatch_only'&&(!cfg?.seed_complete||!cfg.targets_complete))return{enabled:false,queued:0,administrativeContinuationRequired:true,seedComplete:Boolean(cfg?.seed_complete),targetsComplete:Boolean(cfg?.targets_complete)}
   if(cfg&&!cfg.seed_complete&&cfg.seed_plan_sha256){await env.MAINTENANCE_QUEUE.send({version:1,jobId:cfg.seed_sha256,seedSha256:cfg.seed_sha256});return{enabled:false,queued:1}}
@@ -266,7 +270,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'fu
   ),ranked AS (
     SELECT *,ROW_NUMBER() OVER(PARTITION BY scheduling_school_id ORDER BY scheduling_urgent DESC,COALESCE(last_attempt_at,''),due_at,source_id) school_order FROM source_priority
   ),chosen AS MATERIALIZED (
-    SELECT * FROM ranked ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),COALESCE(last_attempt_at,''),due_at,source_id LIMIT 40
+    SELECT * FROM ranked ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),COALESCE(last_attempt_at,''),due_at,source_id LIMIT ${candidateLimit}
   ) SELECT chosen.*,${schedulingSchoolIdsSql} school_ids_json,
     (SELECT json_group_array(json_object('closesOn',json_extract(t.fields_json,'$.closesOn'),'deadline',json_extract(t.fields_json,'$.deadline')))
       FROM maintenance_target_sources x JOIN maintenance_record_targets t ON t.target_id=x.target_id WHERE x.source_id=chosen.source_id AND t.active=1) scheduling_fields_json FROM chosen`)
@@ -301,7 +305,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'fu
   ),ranked AS (
     SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id) lane_order FROM school_ranked
   ),chosen AS MATERIALIZED (
-    SELECT * FROM ranked WHERE lane_order<=40 ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id LIMIT 120
+    SELECT * FROM ranked WHERE lane_order<=${candidateLimit} ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id LIMIT ${poolLimit}
   ) SELECT chosen.*,${schedulingSchoolIdsSql} school_ids_json FROM chosen`)
     .bind(metadata,cfg.canary_json,nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete)
     .all<JobRow&{source_last_success_at:string|null;school_ids_json:string;source_category:string;scheduling_school_id:string;school_last_attempt_at:string|null;school_last_dispatched_tick:number}>()).results ?? []
@@ -330,7 +334,8 @@ export async function queueExtraction(env:MaintenanceEnv,row:SourceRow,snapshotS
   const hasAward=categories.some(category=>['university_scholarship','faculty_scholarship','government_scholarship'].includes(category))
   const stages=hasAward&&categories.every(category=>category.includes('scholarship'))?['award']:hasAward?['extract','award']:['extract']
   if(!followup)for(const stage of stages){const id=await digest(`${stage}:${row.source_id}:${snapshotSha256}:identity-v1`);await env.PIPELINE_DB.prepare("INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,due_at,created_at,updated_at,snapshot_sha256,snapshot_key) VALUES(?,?,?,'queued',?,?,?,?,?)").bind(id,row.source_id,stage,nowIso(now),nowIso(now),nowIso(now),snapshotSha256,key).run()}
-  const cfg=await control(env),available=cfg?.targets_complete?await recordTargets(env,row.source_id):[],targets=followup?available.filter(target=>followup.pins.some(pin=>pin.id===`${target.entityType}:${target.recordId}`&&pin.sha256===target.recordScopeSha256)):available,operations:SqlOperation[]=[],priority=captureCadence(row,targets.map(target=>target.fields),now).priority===0?0:1
+  const cfg=await control(env),graph=cfg?.targets_complete?await readRecordTargetGraph(env,row.source_id):null,available=graph?.targets??[],targets=followup?available.filter(target=>followup.pins.some(pin=>pin.id===`${target.entityType}:${target.recordId}`&&pin.sha256===target.recordScopeSha256)):available,operations:SqlOperation[]=[],priority=captureCadence(row,targets.map(target=>target.fields),now).priority===0?0:1
+  if(graph)await retainTargetGraphHold(env,graph,snapshotSha256)
   if(followup&&(!followup.pins.length||followup.pins.length>20||new Set(followup.pins.map(pin=>pin.id)).size!==followup.pins.length||targets.length!==followup.pins.length))throw new MaintenanceError('target_followup_target_changed')
   for(let index=0;index<targets.length;index+=20) {
     const chunk=targets.slice(index,index+20),pins=chunk.map(t=>({id:`${t.entityType}:${t.recordId}`,sha256:t.recordScopeSha256}))
@@ -350,14 +355,8 @@ export async function queueExtraction(env:MaintenanceEnv,row:SourceRow,snapshotS
     ])
   }
 }
-export async function recordTargets(env:MaintenanceEnv,sourceId:string,depth=0,seen=new Set<string>()):Promise<RecordTarget[]> {
-  if(seen.has(sourceId))return[]
-  if(seen.size>=8)throw new MaintenanceError('source_parent_partition_required')
-  seen.add(sourceId)
-  const rows=(await env.PIPELINE_DB.prepare('SELECT t.target_json FROM maintenance_record_targets t JOIN maintenance_target_sources x ON x.target_id=t.target_id WHERE x.source_id=? AND t.active=1 ORDER BY t.target_id').bind(sourceId).all<{target_json:string}>()).results??[]
-  const targets=rows.map(row=>maintenanceRecordTargetSchema.parse(JSON.parse(row.target_json)))
-  if(depth<2){const lineage=await env.SNAPSHOTS_BUCKET.get(`maintenance/discovery-lineage/${sourceId}.json`);if(lineage){const value=record(JSON.parse(await lineage.text()));if(value?.sourceId!==sourceId||!Array.isArray(value.parents)||value.parents.some(id=>typeof id!=='string'||!HASH.test(id)))throw new MaintenanceError('source_lineage_invalid');for(const parent of value.parents as string[]){for(const target of await recordTargets(env,parent,depth+1,seen))if(target.entityType==='program'&&!targets.some(current=>current.entityType===target.entityType&&current.recordId===target.recordId))targets.push({...target,sourceIds:[...new Set([...target.sourceIds,sourceId])]})}}}
-  return targets
+export async function recordTargets(env:MaintenanceEnv,sourceId:string):Promise<RecordTarget[]> {
+  return (await readRecordTargetGraph(env,sourceId)).targets
 }
 /** Bound UTF-8 JSON, including row-string escaping and array punctuation. */
 function targetRevalidationManifests(rows:Array<{target_id:string;record_scope_sha256:string;target_json:string}>):string[] {

@@ -32,6 +32,7 @@ export type MaintenanceEnv = {
   NATIVE_HEAD_RECONCILIATION_REQUIRED?: string;
   SCOPE_REGISTRY_SHA256?: string; SCOPE_SCHOOL_COUNT?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;
   USER_AGENT?: string; FETCH_CONCURRENCY?: string; MODEL_CONCURRENCY?: string;
+  /** Exact 8/16/32/64; every other value preserves the eight-job default. */
   TICK_JOB_LIMIT?: string;
 }
 export type Control = {

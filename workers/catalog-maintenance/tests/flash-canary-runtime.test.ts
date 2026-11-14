@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
@@ -10,7 +11,7 @@ import type { CapturedSnapshot } from '../src/capture'
 import { maintainedFieldPaths, type MaintenanceRecordTarget } from '../../../scripts/maintenance/field-contracts'
 import type { ModelRequest } from '../src/types'
 
-const admin = 'flash-native-test-admin-not-a-real-secret', sourceId = 'd'.repeat(64), rawSha = 'e'.repeat(64), scope = 'a'.repeat(64)
+const admin = 'flash-native-test-admin-not-a-real-secret', sourceId = createHash('sha256').update('https://runtime-test.edu.cn/catalog').digest('hex'), rawSha = 'e'.repeat(64), scope = 'a'.repeat(64)
 const text = 'International students applying to Computer Science. Autumn 2027 admissions. Application deadline: 2027-09-30.'
 type NativeBucket = { put(key: string, body: string): Promise<unknown>; get(key: string): Promise<{ arrayBuffer(): Promise<ArrayBuffer>; text(): Promise<string> } | null> }
 
@@ -61,7 +62,7 @@ for (const scenario of ['fresh', 'payload-primary', 'payload-review', 'historica
       try { return Response.json(await maintainFields(env, job, row, snapshot, [target])) }
       catch (error) { return Response.json({proposals:[],error:error.code},{status:409}) }
     }}
-  ` }, bundle: true, write: false, platform: 'browser', format: 'esm', target: 'es2022' })
+  ` }, bundle: true, write: false, platform: 'browser', external: ['node:crypto'], format: 'esm', target: 'es2022' })
   const calls: Array<{ url: string; body: string }> = []
   const mf = new Miniflare(convertV4MiniflareOptions({ name: 'native-flash-canary-test', modules: true, script: bundled.outputFiles[0].text,
     compatibilityDate: '2026-09-18', host: '127.0.0.1', port: 0, cf: false, telemetry: { enabled: false },

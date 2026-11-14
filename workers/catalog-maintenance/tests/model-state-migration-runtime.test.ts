@@ -96,7 +96,7 @@ async function bundle() {
       }
     `,
     resolveDir: fileURLToPath(new URL('../src/', import.meta.url)), sourcefile: 'model-migration-runtime-entry.ts', loader: 'ts',
-  }, bundle: true, format: 'esm', platform: 'browser', target: 'es2022', write: false })
+  }, bundle: true, format: 'esm', platform: 'browser', external: ['node:crypto'], target: 'es2022', write: false })
   return built.outputFiles[0].text
 }
 async function runtime(script: string, role: 'source' | 'target') {

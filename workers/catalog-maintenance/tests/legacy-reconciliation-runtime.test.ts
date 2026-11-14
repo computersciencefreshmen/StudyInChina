@@ -32,7 +32,7 @@ async function bundle() {
       }
     }
     export default {fetch(request,env){const path=new URL(request.url).pathname;if(path.startsWith('/test/'))return env.MODEL_ADMISSION.get(env.MODEL_ADMISSION.idFromName('subscription-account-v1')).fetch(request);return handleFetch(request,env)}}
-  `, sourcefile: 'legacy-reconciliation-native-fixture.ts', resolveDir: fileURLToPath(new URL('../src/', import.meta.url)), loader: 'ts' }, bundle: true, format: 'esm', platform: 'browser', target: 'es2022', write: false })).outputFiles[0].text
+  `, sourcefile: 'legacy-reconciliation-native-fixture.ts', resolveDir: fileURLToPath(new URL('../src/', import.meta.url)), loader: 'ts' }, bundle: true, format: 'esm', platform: 'browser', external: ['node:crypto'], target: 'es2022', write: false })).outputFiles[0].text
 }
 
 test('real workerd/D1/R2: native conditional promotion, 171 exact cache adoptions and final event close intent only after last verification; no egress', { timeout: 120000 }, async () => {

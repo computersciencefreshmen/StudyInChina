@@ -18,7 +18,7 @@ async function fixture(mode: ProviderMode, configured = true) {
   const bundled = await build({
     entryPoints: [fileURLToPath(new URL('../src/entry.ts', import.meta.url))],
     bundle: true, format: 'esm', platform: 'browser', target: 'es2022',
-    write: false, external: ['cloudflare:workers'],
+    write: false, external: ['cloudflare:workers', 'node:crypto'],
   })
   const calls: Array<{ url: string; method: string }> = []
   const mf = new Miniflare(convertV4MiniflareOptions({
