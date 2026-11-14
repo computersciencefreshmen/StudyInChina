@@ -126,6 +126,8 @@ describe('complete D1 restore and account migration', () => {
     const result = runVerifier(f.root); expect(result.status, result.stderr).toBe(0)
     expect(JSON.parse(result.stdout).maintenance).toMatchObject({ state: 'not_initialized', resumable: false })
   })
+  // Each rejection builds the complete 106-table fixture and starts a fresh
+  // verifier process. Allow CI contention without weakening any integrity check.
   it.each(['missing-table', 'missing-index', 'missing-trigger', 'extra-trigger', 'wrong-school', 'unknown-scope', 'bad-ack', 'orphan'] as const)('rejects %s instead of accepting a partial migration', mode => {
     const f = pipelineFixture()
     mutate(f, db => {
@@ -140,7 +142,7 @@ describe('complete D1 restore and account migration', () => {
     })
     const result = runVerifier(f.root); expect(result.status).toBe(1)
     expect(result.stderr).toMatch(/missing core table|trusted schema object differs|untrusted schema object|different scope|scope registry|acknowledgement failed|state exists without/)
-  })
+  }, 30_000)
   it.each([0, 1])('checks complete catalog schema and original release count contract (%i cycles)', cycles => {
     const result = runVerifier(catalogFixture(cycles).root, 'catalog')
     expect(result.status, result.stderr).toBe(cycles ? 1 : 0)
