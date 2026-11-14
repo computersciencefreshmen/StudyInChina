@@ -4,6 +4,7 @@ import { CatalogSqlApi } from './sql-api'
 import { InvalidCursorError } from './sql-cursor'
 import { chinaCalendarDate, InvalidSearchQueryError } from './sql-data'
 import { handleAdminTelemetry } from './admin-telemetry'
+import { handleAdminMiniMaxMonitor } from './admin-minimax-monitor'
 import { handleAdminExecutor } from './admin-executor'
 import { handleAdminReleases } from './admin-releases'
 
@@ -392,11 +393,12 @@ async function internalBundleResponse(request: Request, env: CatalogApiEnv) {
 async function handle(request: Request, env: CatalogApiEnv) {
   const url = new URL(request.url)
   if (env.ACCOUNT_MIGRATION_FROZEN === 'true' && [
-    '/internal/v1/admin-telemetry', '/internal/v1/admin-executor', '/internal/v1/admin-releases',
+    '/internal/v1/admin-telemetry', '/internal/v1/admin-executor', '/internal/v1/admin-releases', '/internal/v1/admin-minimax-monitor',
   ].includes(url.pathname)) {
     return json({ error: { code: 'account_migration_frozen' } }, 503, { 'Retry-After': '3600' })
   }
   if (url.pathname === '/internal/v1/admin-telemetry') return handleAdminTelemetry(request, env)
+  if (url.pathname === '/internal/v1/admin-minimax-monitor') return handleAdminMiniMaxMonitor(request, env)
   if (url.pathname === '/internal/v1/admin-executor') return handleAdminExecutor(request, env)
   if (url.pathname === '/internal/v1/admin-releases') return handleAdminReleases(request, env)
   if (request.method === 'OPTIONS' && url.pathname.startsWith('/api/v1/')) {

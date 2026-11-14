@@ -43,6 +43,7 @@ export type AdminRun = {
   summaryAt: string | null; fatal: string | null; tokenUsage: TokenUsage
 }
 export type AdminSnapshot = {
+  cloudMiniMax?: import('./cloud-minimax-contract').CloudMiniMaxSnapshot | null
   continuousPipeline?: import('./minimax-continuous-contract').MiniMaxContinuousStatus | null
   catalogMaintenance?: import('./catalog-maintenance-contract').CatalogMaintenanceObservation | null
   generatedAt: string

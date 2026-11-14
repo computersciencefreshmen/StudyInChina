@@ -8,6 +8,7 @@ import { ThemePreference, useSiteTheme } from '@/components/ui/ThemePreference'
 import { CraftBrandMark } from '@/components/ui/CraftBrandMark'
 import { WorkbenchIcon, type IconName } from './WorkbenchIcon'
 import { MiniMaxUsagePanel } from './MiniMaxUsagePanel'
+import { CloudMiniMaxPanel } from './CloudMiniMaxPanel'
 import { MiniMaxAutomationPanel } from './MiniMaxAutomationPanel'
 import { AdminThemeSwitcher } from './AdminThemeSwitcher'
 import { ReleaseHistoryPanel } from './ReleaseHistoryPanel'
@@ -140,6 +141,7 @@ export function AdminDashboard({ snapshot, connection, onStart, onRefresh, onLog
         {!demo ? <AdminThemeSwitcher selected={selectedTheme} /> : null}
         {refreshing || refreshedAt ? <p className={styles.refreshFeedback} role="status">{refreshing ? '正在同步最新数据…' : `已同步最新数据 · ${date(refreshedAt)}`}</p> : null}
         {verificationReceipt ? <p className={styles.refreshFeedback} role="status">{verificationReceipt}</p> : null}
+        {!demo && (section === 'overview' || section === 'tasks' || section === 'usage') ? <CloudMiniMaxPanel value={snapshot.cloudMiniMax} now={Date.parse(snapshot.generatedAt)} /> : null}
         {demo ? <p className={styles.demoNotice}>主题展示使用示例任务数据；真实工作台在登录后读取实际数据。</p> : snapshot.capabilities.reason ? <p className={styles.infoNotice}>{snapshot.capabilities.reason}</p> : null}
         {section === 'overview' ? <>
           <div className={styles.metrics}>{totals.map(item => <article key={item.label} className={styles.metricCard}><div><span>{item.label}</span><WorkbenchIcon name={item.icon} size={18} /></div><strong>{number(item.value)}</strong><p>{item.detail}</p></article>)}</div>

@@ -28,6 +28,9 @@ export interface R2Bucket {
 
 export type CatalogApiEnv = {
   CATALOG_DB: D1Database
+  PIPELINE_DB?: D1Database
+  SOURCE_SNAPSHOTS?: R2Bucket
+  MAINTENANCE_MONITOR?: { readQuota(): Promise<unknown> }
   RELEASES_BUCKET: R2Bucket
   CATALOG_API_TOKEN?: string
   ADMIN_TELEMETRY_TOKEN?: string

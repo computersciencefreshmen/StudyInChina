@@ -18,6 +18,7 @@ function fixture() {
     configs.set(worker, config); originalHashes.set(path, createHash('sha256').update(bytes).digest('hex'))
     const bindings = [
       ...Object.entries(config.vars ?? {}).map(([name, text]) => ({ name, type: 'plain_text', text })),
+      ...(config.services ?? []).map((b: { binding: string; service: string; entrypoint: string }) => ({ name: b.binding, type: 'service', service: b.service, entrypoint: b.entrypoint })),
       { name: 'LIVE_ONLY_VALUE', type: 'plain_text', text: `private fixture ${worker}: preserve spaces/quotes " and 中文` },
       ...(config.d1_databases ?? []).map((b: { binding: string; database_id: string }) => ({ name: b.binding, type: 'd1', database_id: b.database_id })),
       ...(config.r2_buckets ?? []).map((b: { binding: string; bucket_name: string }) => ({ name: b.binding, type: 'r2_bucket', bucket_name: b.bucket_name })),
@@ -59,6 +60,7 @@ describe('private cross-account Worker configurations', () => {
       expect(staged.queues?.producers).toEqual(f.configs.get(worker).queues?.producers)
       expect(active.triggers?.crons).toEqual(f.configs.get(worker).triggers?.crons)
       expect(active.queues?.consumers).toEqual(f.configs.get(worker).queues?.consumers)
+      expect(active.services).toEqual(f.configs.get(worker).services)
       for (const database of active.d1_databases) {
         expect(database.database_id).toBe(database.database_name === 'studyinchina-pipeline' ? f.options.pipelineId : f.options.catalogId)
         expect(isAbsolute(database.migrations_dir)).toBe(true)
@@ -106,5 +108,18 @@ describe('private cross-account Worker configurations', () => {
     const previous = readFileSync(join(f.options.outputDirectory, 'manifest.json'), 'utf8')
     expect(() => buildAccountMigrationConfigs(f.options)).toThrow('must_be_empty')
     expect(readFileSync(join(f.options.outputDirectory, 'manifest.json'), 'utf8')).toBe(previous)
+  })
+  it.each(['wrong-service', 'wrong-entrypoint', 'wrong-environment', 'cross-account', 'props'] as const)('rejects unreviewed monitor service metadata: %s', mode => {
+    const f = fixture()
+    change(f, 'catalog-api', meta => {
+      const binding = meta.resources.bindings.find((b: { type: string }) => b.type === 'service')
+      if (mode === 'wrong-service') binding.service = 'unrelated-worker'
+      if (mode === 'wrong-entrypoint') binding.entrypoint = 'Administrator'
+      if (mode === 'wrong-environment') binding.environment = 'staging'
+      if (mode === 'cross-account') binding.cross_account_grant = 'unreviewed-grant'
+      if (mode === 'props') binding.props = { administrator: true }
+    })
+    expect(() => buildAccountMigrationConfigs(f.options)).toThrow('source_service_mismatch')
+    expect(() => readFileSync(join(f.options.outputDirectory, 'manifest.json'))).toThrow()
   })
 })
