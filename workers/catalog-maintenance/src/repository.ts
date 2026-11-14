@@ -215,6 +215,9 @@ const schedulingSchoolIdsSql = `(SELECT json_group_array(xu.university_id) FROM 
 
 export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'full'|'dispatch_only'|'administrative_only'='full') {
   const jobLimit = tickJobLimit(env)
+  // Only the reviewed 64-slot opt-in enlarges reservoirs. SQL interpolates these
+  // closed numeric constants, never the original environment string.
+  const candidateLimit = jobLimit === 64 ? 64 : 40, poolLimit = candidateLimit * 3
   const cfg = await control(env)
   if(mode==='dispatch_only'&&(!cfg?.seed_complete||!cfg.targets_complete))return{enabled:false,queued:0,administrativeContinuationRequired:true,seedComplete:Boolean(cfg?.seed_complete),targetsComplete:Boolean(cfg?.targets_complete)}
   if(cfg&&!cfg.seed_complete&&cfg.seed_plan_sha256){await env.MAINTENANCE_QUEUE.send({version:1,jobId:cfg.seed_sha256,seedSha256:cfg.seed_sha256});return{enabled:false,queued:1}}
@@ -267,7 +270,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'fu
   ),ranked AS (
     SELECT *,ROW_NUMBER() OVER(PARTITION BY scheduling_school_id ORDER BY scheduling_urgent DESC,COALESCE(last_attempt_at,''),due_at,source_id) school_order FROM source_priority
   ),chosen AS MATERIALIZED (
-    SELECT * FROM ranked ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),COALESCE(last_attempt_at,''),due_at,source_id LIMIT 40
+    SELECT * FROM ranked ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),COALESCE(last_attempt_at,''),due_at,source_id LIMIT ${candidateLimit}
   ) SELECT chosen.*,${schedulingSchoolIdsSql} school_ids_json,
     (SELECT json_group_array(json_object('closesOn',json_extract(t.fields_json,'$.closesOn'),'deadline',json_extract(t.fields_json,'$.deadline')))
       FROM maintenance_target_sources x JOIN maintenance_record_targets t ON t.target_id=x.target_id WHERE x.source_id=chosen.source_id AND t.active=1) scheduling_fields_json FROM chosen`)
@@ -302,7 +305,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'fu
   ),ranked AS (
     SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id) lane_order FROM school_ranked
   ),chosen AS MATERIALIZED (
-    SELECT * FROM ranked WHERE lane_order<=40 ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id LIMIT 120
+    SELECT * FROM ranked WHERE lane_order<=${candidateLimit} ORDER BY scheduling_urgent DESC,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id LIMIT ${poolLimit}
   ) SELECT chosen.*,${schedulingSchoolIdsSql} school_ids_json FROM chosen`)
     .bind(metadata,cfg.canary_json,nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete)
     .all<JobRow&{source_last_success_at:string|null;school_ids_json:string;source_category:string;scheduling_school_id:string;school_last_attempt_at:string|null;school_last_dispatched_tick:number}>()).results ?? []
