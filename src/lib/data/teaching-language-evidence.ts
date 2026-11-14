@@ -14,11 +14,17 @@ const degreeWords = { bachelor: /\bundergraduate|\bbachelor|本科|学士/iu, ma
 
 export function teachingLanguageEvidenceIsSpecific(identity: { name: unknown; degreeLevel?: unknown }, value: unknown, quote: string): boolean {
   if (!Array.isArray(value) || !value.length || new Set(value).size !== value.length || value.some(v => typeof v !== 'string' || !languages[v])) return false
+  // A cropped FAQ question is not an assertion. Require a complete declarative
+  // quote, not a punctuation-free prefix which could precede a question mark in
+  // the saved source. Multi-sentence retractions cannot lend their first clause.
+  if (/[?？]/u.test(quote) || !/[.。]\s*$/u.test(quote)) return false
   const names = identity.name && typeof identity.name === 'object' && !Array.isArray(identity.name)
     ? Object.values(identity.name).filter((n): n is string => typeof n === 'string' && normalize(n).length >= 2).map(normalize) : []
   // Preserve sentence/row boundaries before collapsing whitespace. A separate
   // applicability quote cannot lend its programme name to a mixed-language title.
-  for (const part of quote.normalize('NFKC').split(/[\r\n.!?;。！？；]/u)) {
+  const parts = quote.normalize('NFKC').split(/[\r\n.!;。！；]/u).map(normalize).filter(Boolean)
+  if (parts.length !== 1) return false
+  for (const part of parts) {
     const sentence = normalize(part)
     if (!sentence || /\b(?:not|untrue|except|unless|may|might|could|some|varies|depending)\b|并非|不是|不以|部分|除外|可能|取决/iu.test(sentence)) continue
     const degrees = Object.entries(degreeWords).filter(([, words]) => words.test(sentence)).map(([degree]) => degree)

@@ -58,4 +58,11 @@ describe('canonical import rejects a previously ready mixed-directory language l
       expect(result.receipt.accepted).toEqual([]); expect(result.receipt.held[0].reason).toBe('program_teaching_language_scope_unproven')
     }
   })
+  it('holds an interrogative or retracted known-language claim in an otherwise valid independently reviewed ready candidate', async () => {
+    for (const quote of ['Computer Science and Technology is taught in Chinese and English? No.', 'Computer Science and Technology is taught in Chinese and English. No.']) {
+      const result = await importQuote(quote, quote)
+      expect(result.receipt.accepted).toEqual([]); expect(result.receipt.held[0].reason).toBe('program_teaching_language_scope_unproven')
+      expect(result.entries).toEqual([])
+    }
+  })
 })

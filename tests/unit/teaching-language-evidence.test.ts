@@ -28,6 +28,10 @@ describe('specific teaching-language evidence shared by extraction and import', 
     'It is untrue that Computer Science and Technology is taught in Chinese and English.',
     'All master programmes listed here, including Computer Science and Technology, are taught in Chinese and English.',
     'Computer Science and Technology is taught in Chinese and English depending on the programme.',
+    'Computer Science and Technology is taught in Chinese and English? No.',
+    'Computer Science and Technology is taught in Chinese and English？No.',
+    'Computer Science and Technology is taught in Chinese and English. No.',
+    'Computer Science and Technology is taught in Chinese and English',
   ])('holds mixed headings, cross-programme, ambiguous, negated or wrong-degree evidence: %s', quote => expect(supports(identity, ['Chinese', 'English'], quote)).toBe(false))
   it('does not borrow a language from the programme name or silently omit a stated instruction language', () => {
     expect(supports({ name: { en: 'Chinese Studies' } }, ['Chinese', 'English'], 'Chinese Studies is taught in English.')).toBe(false)
@@ -37,6 +41,8 @@ describe('specific teaching-language evidence shared by extraction and import', 
     const value = { recordId: target.recordId, year: null, intake: null, scopeQuote: null, applicabilityQuote: oldApplicability,
       patches: [{ fieldPath: 'teachingLanguages', value: ['Chinese', 'English'], factStatus: 'known', quote: oldTitle }] }
     expect(parseFieldExtraction({ records: [value] }, `${oldTitle}\n${oldApplicability}`, [target]).size).toBe(0)
+    const question = 'Computer Science and Technology is taught in Chinese and English? No.'
+    expect(parseFieldExtraction({ records: [{ ...value, applicabilityQuote: question, patches: [{ ...value.patches[0], quote: question }] }] }, question, [target]).size).toBe(0)
     const quote = 'Computer Science and Technology is taught in Chinese and English.'
     expect(parseFieldExtraction({ records: [{ ...value, applicabilityQuote: quote, patches: [{ ...value.patches[0], quote }] }] }, quote, [target]).get(target.recordId)?.patches).toHaveLength(1)
   })

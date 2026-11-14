@@ -12,6 +12,9 @@ assigning the stated languages to the exact official programme name. A language
 inside the programme name itself cannot be counted. Reject mixed headings,
 cross-sentence/name borrowing, conditional/negative assertions, mismatched degree
 scope and partial selections from an explicitly bilingual language list.
+Require one complete period-terminated declarative quote. FAQ questions,
+punctuation-free prefixes and multiple-sentence assertions/retractions remain
+held, so a question mark or a later denial cannot be discarded during splitting.
 
 The initial implementation conservatively recognizes direct teaching predicates
 or instruction-language labels. A common policy is accepted only when the same
