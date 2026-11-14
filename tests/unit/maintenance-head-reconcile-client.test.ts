@@ -1,12 +1,35 @@
-import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
+import { createHash } from 'node:crypto'
 import { mkdir, mkdtemp, readFile, rm } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { gunzipSync } from 'node:zlib'
 import manifest from '../../content/maintenance/head-reconciliation-2026-11-10.v1.json'
 import { automaticallyReconcileMaintenanceHead, reconcileMaintenanceHead, requireTrustedAutomaticReconciliationRunner, requireTrustedReconciliationRunner, uploadReconciliationTargets, type verifyReconciliationHistory } from '../../scripts/automation/reconcile-maintenance-head'
 import { MaintenanceHttpError, type MaintenanceClient } from '../../scripts/automation/catalog-maintenance-client'
 import { buildMaintenanceTargets } from '../../scripts/automation/build-maintenance-bootstrap'
-import { loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
+import { catalogSha256, loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
 import { canonicalJson, maintenanceScopeSchema } from '../../scripts/maintenance/contracts'
+import { bundleSchema } from '../../src/lib/data/schema'
+import type { DataBundle } from '../../src/lib/data/types'
+
+// This suite exercises an immutable historical operation. Current publication
+// candidates must not change the catalogue represented by its fixed manifest.
+let historicalBundle: DataBundle
+vi.mock('../../scripts/maintenance/build-scope', async importOriginal => {
+  const actual = await importOriginal<typeof import('../../scripts/maintenance/build-scope')>()
+  return { ...actual, loadMaintenanceBundle: vi.fn(() => structuredClone(historicalBundle)) }
+})
+beforeAll(async () => {
+  const compressed = await readFile(resolve('tests/fixtures/maintenance-head-reconciliation/catalog-390c009.json.gz'))
+  const fixture = JSON.parse(gunzipSync(compressed, { maxOutputLength: 16 * 1024 * 1024 }).toString('utf8'))
+  expect(fixture).toMatchObject({ format: 'studyinchina.immutable-native-reconciliation-test-catalogue', version: 1,
+    sourceCommit: manifest.sourceCommit, inputCatalogSha256: manifest.newInputCatalogSha256 })
+  expect(fixture.sourceFiles.map((file: { path: string }) => file.path).sort()).toEqual(
+    ['admission-cycles', 'cities', 'programs', 'scholarships', 'sources', 'universities'].map(name => `content/data/${name}.json`))
+  historicalBundle = bundleSchema.parse(fixture.bundle)
+  expect(await catalogSha256(historicalBundle)).toBe(manifest.newInputCatalogSha256)
+})
+beforeEach(() => { vi.mocked(loadMaintenanceBundle).mockReset().mockImplementation(() => structuredClone(historicalBundle)) })
 
 // Contract parsing/hashing has its own suites. These fixtures represent the
 // validated response so these tests isolate ordering, CAS and failure recovery.
@@ -34,6 +57,17 @@ const outputDirectory = async () => {
 const verifyHistory = vi.fn<typeof verifyReconciliationHistory>().mockResolvedValue({ operationId: manifest.operationId, manifestSha256: manifest.sha256,
   oldCommit: manifest.oldCommit, bridgeCommit: manifest.bridgeCommit, sourceCommit: manifest.sourceCommit, currentCommit: manifest.sourceCommit,
   nativeReceiptCount: 61, acceptedCount: 198, archivedPaths: 133, currentCatalogSha256: manifest.newInputCatalogSha256, reviewedFilesCommitted: true, limitation: 'test fixture' })
+
+describe('immutable reconciliation catalogue fixture', () => {
+  it('reproduces the original upload count, byte length and digest from the real historical catalogue', async () => {
+    const scope = maintenanceScopeSchema.parse(JSON.parse(await readFile(resolve('content/maintenance/scope-272.v1.json'), 'utf8')))
+    const targets = buildMaintenanceTargets(historicalBundle, scope)
+    const bytes = new TextEncoder().encode(canonicalJson({ inputCatalogSha256: manifest.newInputCatalogSha256, recordTargets: targets }))
+    expect(targets).toHaveLength(manifest.targetUpload.targetCount)
+    expect(bytes.byteLength).toBe(manifest.targetUpload.byteLength)
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(manifest.targetUpload.sha256)
+  })
+})
 
 function fixture(options: { holdTargets?: boolean; operatorChange?: boolean; loseAckResponse?: boolean; badExport?: boolean } = {}) {
   const state: Snapshot = { format: 'studyinchina.maintenance-control', control: originalControl(),
@@ -168,9 +202,11 @@ describe('guarded cloud automatic continuation', () => {
     context.state.control.input_catalog_sha256 = 'e'.repeat(64); context.state.control.targets_complete = 0
     context.state.control.enabled = 0; context.state.control.models_enabled = 0; context.state.control.revision++
     const posts = context.requests.filter(request => request.method === 'POST').length
+    vi.mocked(loadMaintenanceBundle).mockClear().mockImplementation(() => { throw new Error('completed history must not rebuild the later catalogue') })
     const auto = await automatic(context, vi.fn<typeof verifyReconciliationHistory>().mockRejectedValue(new Error('old catalogue history must not be replayed')))
     expect(await auto.run()).toMatchObject({ ready: true, reason: 'already_reconciled', enabled: false, inputCatalogSha256: 'e'.repeat(64) })
     expect(auto.verify).not.toHaveBeenCalled(); expect(context.requests.filter(request => request.method === 'POST')).toHaveLength(posts)
+    expect(loadMaintenanceBundle).not.toHaveBeenCalled()
   })
   it('does not resume over an intervening operator revision or incomplete target checkpoint', async () => {
     for (const context of [fixture({ operatorChange: true }), fixture({ holdTargets: true })]) {
@@ -226,6 +262,16 @@ describe('pinned native Git head repair client', () => {
     expect(context.state.control.enabled).toBe(0)
     expect(context.requests.some(request => request.path === '/ack' || request.path === '/head-reconcile-targets')).toBe(false)
     expect(context.state.reconciliation.advanced).toBeNull()
+  })
+  it('still rejects a changed catalogue before uploading targets and leaves the operation paused', async () => {
+    const changed = structuredClone(historicalBundle)
+    changed.programs[0].name.en = `${changed.programs[0].name.en ?? changed.programs[0].name.zh} future catalogue`
+    vi.mocked(loadMaintenanceBundle).mockReturnValueOnce(changed)
+    const context = fixture()
+    await expect(context.run()).rejects.toThrow('maintenance_reconcile_target_upload_pin')
+    expect(context.state.control).toMatchObject({ enabled: 0, models_enabled: 0, revision: 4, targets_complete: 0 })
+    expect(context.requests.some(request => request.path === '/head-reconcile-targets')).toBe(false)
+    expect(context.state.reconciliation.resumed).toBeNull()
   })
   it('recovers a lost rejection reply by reusing the same deterministic acknowledgement', async () => {
     const context = fixture({ loseAckResponse: true })
