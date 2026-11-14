@@ -9,6 +9,7 @@ import { assertModelStateBusinessOpen, assertModelStateCleanupOpen, handleModelS
 import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS } from '../../shared/background-budget'
 import { noReplayReason } from './reviewed-terminal-quarantine'
 import { legacyModelNoReplayReason } from './legacy-model-guards'
+import { archiveModelResponse, ModelResponseEvidenceError } from './model-response-evidence'
 import type { LegacyOfflineFence } from './legacy-offline-state'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
@@ -24,7 +25,6 @@ type Reservation = { state: 'send_started'|'completed'|'unknown'|'known_failed';
 const initial = (): GateState => ({fetches:[],models:[],nextHost:{},successes:0,cooldownUntil:0,modelLimit:2})
 const offlineFenced = (state: GateState | undefined) => state !== undefined && Object.hasOwn(state, 'offlineFence')
 const ENDPOINTS=new Set(['https://api.minimaxi.com/anthropic','https://api.minimax.cn/anthropic','https://api.minimax.io/anthropic'])
-const MAX_MODEL_BODY=2*1024*1024
 
 const percent = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 100
 // Official MiniMax CLI types and quota renderer define status 3 as unlimited.
@@ -221,7 +221,7 @@ export class ModelAdmission {
       await txn.put('gate',gate);await txn.put<Reservation>(key,{state:'send_started',attemptId,requestSha256,attemptCount:(current?.attemptCount??0)+1,...auditFields});return true
     })
     if(!accepted)return json({ok:false,error:'model_capacity_or_reserved',retryAfter:30},429)
-    let sent=false
+    let sent=false,responseUsage:unknown=undefined
     try {
       await this.env.PIPELINE_DB.prepare("INSERT INTO maintenance_model_attempts(reservation_key,attempt_id,source_id,snapshot_sha256,pass,request_sha256,model,status,started_at,quota_json) VALUES(?,?,?,?,?,?,?,'send_started',?,?)").bind(input.reservationKey,attemptId,input.sourceId,input.snapshotSha256,input.pass,requestSha256,audit?.model??'MiniMax-M3',nowIso(),JSON.stringify(audit?{...quota,modelProfile:audit}:quota)).run()
       // The durable send_started reservation precedes the network request. A crash
@@ -241,38 +241,51 @@ export class ModelAdmission {
       const response=await fetcher(endpoint,{method:'POST',redirect:'manual',signal,headers:{authorization:`Bearer ${this.env.MINIMAX_SUBSCRIPTION_KEY}`,'content-type':'application/json','anthropic-version':'2023-06-01'},body:wireBytes})
       // A sent request with an unexpected response stays protected by the
       // existing unknown-outcome reservation; it never authorizes a replay.
-      if(response.status>=300&&response.status<400||response.redirected||(response.url&&response.url!==endpoint))throw new Error('model_redirect_rejected')
-      let body:Record<string,unknown>={}
-      try{body=JSON.parse(new TextDecoder().decode(await readBoundedBody(response,MAX_MODEL_BODY,signal)))as Record<string,unknown>}catch{if(response.status!==429)throw new Error('model_response_unreadable')}
+      if(response.status>=300&&response.status<400||response.redirected||(response.url&&response.url!==endpoint)){await response.body?.cancel().catch(()=>undefined);throw new Error('model_redirect_rejected')}
+      // Save and read back the whole HTTP body before parsing model output.
+      // Evidence failure still retains the sent reservation as unknown.
+      const received=await archiveModelResponse(this.env,response,input,attemptId,requestSha256,audit?.model??'MiniMax-M3',signal,audit)
+      responseUsage=received.usage
+      const recorded=await this.env.PIPELINE_DB.prepare("UPDATE maintenance_model_attempts SET usage_json=? WHERE reservation_key=? AND attempt_id=? AND status='send_started'").bind(JSON.stringify(responseUsage),input.reservationKey,attemptId).run()
+      if(recorded.meta?.changes!==1)throw new Error('model_response_record_unconfirmed')
+      const body=received.body??{}
       if(!response.ok) {
         const retryable=response.status===429,count=(prior?.attemptCount??0)+1,retryHeader=response.headers.get('retry-after'),requestedDelay=retryHeader?/^\d+$/.test(retryHeader)?Number(retryHeader):Math.ceil((Date.parse(retryHeader)-Date.now())/1000):0
         const delay=Math.max(60,Math.min(3600,Number.isFinite(requestedDelay)&&requestedDelay>0?requestedDelay:60*2**Math.min(count-1,6)))
         await this.state.storage.put<Reservation>(key,{state:'known_failed',attemptId,requestSha256,retryable,notBefore:Date.now()+delay*1000,attemptCount:count,...auditFields})
-        await this.completeAttempt(input.reservationKey,attemptId,'known_failed',`model_http_${response.status}`,body.usage)
+        await this.completeAttempt(input.reservationKey,attemptId,'known_failed',`model_http_${response.status}`,responseUsage)
         if(retryable){await this.mutate(gate=>{gate.cooldownUntil=Date.now()+delay*1000;gate.successes=0;gate.modelLimit=Math.max(1,Math.floor((gate.modelLimit??2)/2))});return json({ok:false,error:'model_http_429',retryAfter:delay},429)}
         return json({ok:false,error:`model_http_${response.status}`},409)
       }
+      if(!received.body)return await this.rejectReceivedOutput(key,input.reservationKey,attemptId,requestSha256,(prior?.attemptCount??0)+1,auditFields,'model_response_invalid',responseUsage)
       if(audit&&body.model!==FLASH_MODEL)throw new Error('flash_provider_model_unconfirmed')
       const content=Array.isArray(body.content)?body.content.map(record).filter(p=>p?.type==='text').map(p=>p?.text).filter(p=>typeof p==='string').join(''):''
-      if(!content||body.stop_reason==='max_tokens')throw new Error('incomplete_model_output')
-      const output=JSON.parse(content.trim().replace(/^```(?:json)?\s*|\s*```$/g,'')) as unknown
+      if(body.stop_reason==='max_tokens')return await this.rejectReceivedOutput(key,input.reservationKey,attemptId,requestSha256,(prior?.attemptCount??0)+1,auditFields,'model_output_truncated',responseUsage)
+      if(!content)return await this.rejectReceivedOutput(key,input.reservationKey,attemptId,requestSha256,(prior?.attemptCount??0)+1,auditFields,'model_output_invalid',responseUsage)
+      let output:unknown
+      try{output=JSON.parse(content.trim().replace(/^```(?:json)?\s*|\s*```$/g,'')) as unknown}catch{return await this.rejectReceivedOutput(key,input.reservationKey,attemptId,requestSha256,(prior?.attemptCount??0)+1,auditFields,'model_output_invalid',responseUsage)}
       const completedAudit:FlashAudit|undefined=audit?{...audit,responseModel:FLASH_MODEL}:undefined,completedAuditFields=completedAudit?{modelProfile:completedAudit}:{}
-      const artifact=canonical({attemptId,reservationKey:input.reservationKey,requestSha256,sourceId:input.sourceId,snapshotSha256:input.snapshotSha256,pass:input.pass,model:audit?.model??'MiniMax-M3',...completedAuditFields,output,usage:body.usage??null,completedAt:nowIso()})
+      const artifact=canonical({attemptId,reservationKey:input.reservationKey,requestSha256,sourceId:input.sourceId,snapshotSha256:input.snapshotSha256,pass:input.pass,model:audit?.model??'MiniMax-M3',...completedAuditFields,output,usage:body.usage??null,providerResponse:received.reference,completedAt:nowIso()})
       const artifactSha256=await digest(artifact),artifactKey=`maintenance/models/${input.reservationKey}/${artifactSha256}.json`
       await this.env.SNAPSHOTS_BUCKET.put(artifactKey,artifact,{httpMetadata:{contentType:'application/json'}})
       const result:ModelResult={attemptId,output,artifactKey,artifactSha256,reused:false,...completedAuditFields}
-      await this.env.PIPELINE_DB.prepare("UPDATE maintenance_model_attempts SET status='completed',completed_at=?,output_key=?,output_sha256=?,usage_json=? WHERE reservation_key=? AND attempt_id=? AND status='send_started'").bind(nowIso(),artifactKey,artifactSha256,JSON.stringify(body.usage??null),input.reservationKey,attemptId).run()
+      await this.env.PIPELINE_DB.prepare("UPDATE maintenance_model_attempts SET status='completed',completed_at=?,output_key=?,output_sha256=?,usage_json=? WHERE reservation_key=? AND attempt_id=? AND status='send_started'").bind(nowIso(),artifactKey,artifactSha256,JSON.stringify(responseUsage),input.reservationKey,attemptId).run()
       await this.state.storage.put<Reservation>(key,{state:'completed',attemptId,requestSha256,result,...completedAuditFields})
       await this.mutate(gate=>{gate.successes++;if(gate.successes>=8){gate.modelLimit=Math.min(4,(gate.modelLimit??2)+1);gate.successes=0}})
       return json({ok:true,...result})
-    } catch {
+    } catch(error) {
       const state=sent?'unknown':'known_failed'
       await this.state.storage.put<Reservation>(key,{state,attemptId,requestSha256,retryable:!sent,notBefore:Date.now()+60000,attemptCount:(prior?.attemptCount??0)+1,...auditFields})
-      await this.completeAttempt(input.reservationKey,attemptId,state,sent?'model_outcome_unknown':'model_not_sent').catch(()=>undefined)
+      await this.completeAttempt(input.reservationKey,attemptId,state,sent?error instanceof ModelResponseEvidenceError?'model_response_evidence_unconfirmed':'model_outcome_unknown':'model_not_sent',responseUsage).catch(()=>undefined)
       return sent?json({ok:false,error:'model_outcome_unknown'},409):json({ok:false,error:'model_not_sent',retryAfter:60},429)
     } finally { await this.mutate(gate=>{gate.models=gate.models.filter(p=>p.token!==token)}) }
   }
-  private async completeAttempt(key:string,attemptId:string,status:'known_failed'|'unknown',code:string,usage:unknown=null) {
-    await this.env.PIPELINE_DB.prepare('UPDATE maintenance_model_attempts SET status=?,completed_at=?,error_code=?,usage_json=? WHERE reservation_key=? AND attempt_id=?').bind(status,nowIso(),code,JSON.stringify(usage??null),key,attemptId).run()
+  private async rejectReceivedOutput(key:string,reservationKey:string,attemptId:string,requestSha256:string,attemptCount:number,auditFields:{modelProfile?:FlashAudit},code:string,usage:unknown){
+    await this.state.storage.put<Reservation>(key,{state:'known_failed',attemptId,requestSha256,retryable:false,attemptCount,...auditFields})
+    await this.completeAttempt(reservationKey,attemptId,'known_failed',code,usage)
+    return json({ok:false,error:code},409)
+  }
+  private async completeAttempt(key:string,attemptId:string,status:'known_failed'|'unknown',code:string,usage?:unknown) {
+    await this.env.PIPELINE_DB.prepare('UPDATE maintenance_model_attempts SET status=?,completed_at=?,error_code=?,usage_json=COALESCE(?,usage_json) WHERE reservation_key=? AND attempt_id=?').bind(status,nowIso(),code,usage===undefined?null:JSON.stringify(usage??null),key,attemptId).run()
   }
 }
