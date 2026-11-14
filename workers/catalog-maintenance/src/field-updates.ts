@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { quotedTrackScope } from '../../../src/lib/data/cycle-scope'
+import { teachingLanguageEvidenceIsSpecific } from '../../../src/lib/data/teaching-language-evidence'
 import {
   canonicalJson, maintenanceProposalSchema, proposalContentSha256, type MaintenanceProposal,
 } from '../../../scripts/maintenance/contracts'
@@ -147,6 +148,8 @@ export function parseFieldExtraction(output: unknown, text: string, targets: Mai
     const paths = new Set<string>()
     const patches = record.patches.filter(patch => {
       if (!allowed.includes(patch.fieldPath) || paths.has(patch.fieldPath)) return false
+      if (target.entityType === 'program' && patch.fieldPath === 'teachingLanguages'
+        && !teachingLanguageEvidenceIsSpecific({ name: target.identity.name, degreeLevel: target.identity.degreeLevel }, patch.value, patch.quote)) return false
       if (target.entityType === 'program' && Array.isArray(target.identity.teachingLanguages) && target.identity.teachingLanguages.length > 1
         && /languageRequirements|eligibility|applicationMaterials/u.test(patch.fieldPath)) return false
       if (target.entityType === 'admission-cycle' && !record.teachingLanguage && Array.isArray(target.identity.teachingLanguages) && target.identity.teachingLanguages.length > 1 && /languageRequirements|eligibility|applicationMaterials/u.test(patch.fieldPath)) return false
