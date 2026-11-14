@@ -170,8 +170,15 @@ export async function runCloudTick(env:MaintenanceEnv){
     if(held.sent||held.failed){tick.state=held.failed?'error':'running';tick.code=held.code;tick.queued=held.sent;return saveTick(env,tick)}
     if(await resumePendingScopeUpgrade(env)){tick.state='waiting_for_seed';tick.code='scope_upgrade_pending';tick.queued=1;return saveTick(env,tick)}
     const pointer=await bootstrapPointer(env)
-    if(!pointer){const uploaded=await readObject(env,UPLOAD_POINTER);if(uploaded){const pending=JSON.parse(uploaded.text)as UploadPointer;await env.MAINTENANCE_QUEUE.send({version:1,jobId:pending.rawSha256,bootstrapUploadSha256:pending.rawSha256})}}
     let cfg=await control(env)
+    // A complete existing seed is owned by its current controls, not by a raw
+    // initial upload left behind without a validated bootstrap pointer. Retain
+    // that upload unchanged; do not add a validation message to normal dispatch.
+    // With no complete seed, validation is itself this tick's bounded work.
+    if(!pointer&&!cfg?.seed_complete){
+      const uploaded=await readObject(env,UPLOAD_POINTER)
+      if(uploaded){const pending=JSON.parse(uploaded.text)as UploadPointer;await env.MAINTENANCE_QUEUE.send({version:1,jobId:pending.rawSha256,bootstrapUploadSha256:pending.rawSha256});tick.state='waiting_for_seed';tick.code='pending_bootstrap_validation_queued';tick.queued=1;return saveTick(env,tick)}
+    }
     if(!cfg&&pointer){await env.MAINTENANCE_QUEUE.send({version:1,jobId:pointer.seedSha256,bootstrapSeedSha256:pointer.seedSha256});tick.state='waiting_for_seed';tick.code='pending_bootstrap_seed_queued';tick.queued=1}
     else if(!cfg){tick.state='waiting_for_bootstrap';tick.code='no_seed_or_pending_bootstrap'}
     else{
