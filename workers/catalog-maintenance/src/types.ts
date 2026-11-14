@@ -32,6 +32,7 @@ export type MaintenanceEnv = {
   NATIVE_HEAD_RECONCILIATION_REQUIRED?: string;
   SCOPE_REGISTRY_SHA256?: string; SCOPE_SCHOOL_COUNT?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;
   USER_AGENT?: string; FETCH_CONCURRENCY?: string; MODEL_CONCURRENCY?: string;
+  TICK_JOB_LIMIT?: string;
 }
 export type Control = {
   singleton: number; scope_sha256: string; input_catalog_sha256: string; seed_sha256: string;

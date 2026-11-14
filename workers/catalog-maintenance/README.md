@@ -55,9 +55,10 @@ same text/evidence pipeline with their full decoded JSON and original raw bytes.
 They do not receive rule-approved facts or HTML link extraction. Existing full-
 document partition limits still apply; unsupported binary formats remain held.
 
-The finite eight-job dispatch pool contains candidates from both expansion and
-maintenance before selection. During the first actual school-check round, ten
-15-minute ticks reserve 56 expansion/24 maintenance slots; afterwards they reserve
+The finite dispatch pool (eight jobs by default) contains candidates from both expansion and
+maintenance before selection. At the default eight-job limit, while complete
+five-programme school coverage remains unproven, ten 15-minute ticks reserve
+56 expansion/24 maintenance slots; afterwards they reserve
 24/56. Urgent priorities run first and either lane borrows idle slots. Rechecking
 a successfully captured source uses maintenance capacity. Acquisition scheduling
 uses old canonical deadline scalars only as hints: a future deadline within seven
@@ -193,12 +194,33 @@ runs every 15 minutes only with `CATALOG_MAINTENANCE_MODE=cloud` and
 `CATALOG_MAINTENANCE_TICK_ENABLED=true`. It receives the maintenance service token,
 never a MiniMax key. Existing Cloudflare crons, databases and plans are unchanged.
 
-Free shared daily D1 quotas and per-invocation query/CPU limits constrain actual
-throughput. Each tick plans and dispatches at most eight sources/jobs. Schools
+Shared D1 quotas and per-invocation query/CPU limits constrain actual
+throughput. Each normal scheduler tick plans and dispatches at most `TICK_JOB_LIMIT`
+sources/jobs (default eight). Schools
 never actually attempted are prioritized before revisiting one school's many
 pages; failed attempts and successful captures remain separate metrics. A tick
 cadence is not a freshness SLA. An exhausted shared account waits for its UTC
 reset rather than creating another database or buying capacity.
+
+`TICK_JOB_LIMIT` accepts only the exact strings `"8"`, `"16"`, or `"32"`.
+Missing or malformed values (including whitespace, decimals and other integers)
+fall back to eight: a deployment typo must not silently increase work or stop an
+otherwise valid scheduler. The example Wrangler configuration keeps `"8"`.
+Higher values require an explicit operator configuration change; no deployment
+or activation is performed by this code change. The configured limit is included
+in each `scheduler_tick` event, alongside the actual successful queue-send count.
+
+The larger settings change only how much work waits in the queue. Candidate
+reservoirs stay at 40 sources / 120 jobs, model concurrency remains at most four,
+and quota margins, canary scope, school rotation, 2:1 programme/scholarship shares,
+unknown-outcome protections and 429 cooldown are unchanged. The 15-minute cadence
+and publication writer lock are unchanged. Retries and document continuations are
+existing separate queue deliveries, not additional initial scheduler slots.
+At 32, a fully populated tick can make 32 capture INSERTs plus 32 enqueue UPDATEs
+and its existing bounded preflight queries. This is intended for Workers Paid;
+it is not a promise of compatibility with Free's 50-D1-query invocation limit.
+No query binds one parameter per dispatched job, and no new whole-table scan or
+large JSON parameter is introduced. See [D1 limits](https://developers.cloudflare.com/d1/platform/limits/).
 
 Initial registration uses authenticated `POST /bootstrap` with raw JSON
 `{seed:<current bootstrap>,activation:{canaryUniversityIds:<exact five IDs>,modelsEnabled:true}}`.
