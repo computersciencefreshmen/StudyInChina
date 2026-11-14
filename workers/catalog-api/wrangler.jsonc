@@ -9,7 +9,9 @@
   "preview_urls": false,
   "observability": { "enabled": true },
   "vars": { "ADMIN_RELEASE_CONTROL_ENABLED": "false" },
+  "services": [{ "binding": "MAINTENANCE_MONITOR", "service": "studyinchina-catalog-maintenance", "entrypoint": "MaintenanceMonitor" }],
   "d1_databases": [
+    { "binding": "PIPELINE_DB", "database_name": "studyinchina-pipeline", "database_id": "43e2d4a5-54a4-4932-97f3-755be12ef8bb", "migrations_dir": "../../infra/d1/pipeline/migrations" },
     {
       "binding": "CATALOG_DB",
       "database_name": "studyinchina-catalog",
@@ -18,6 +20,7 @@
     }
   ],
   "r2_buckets": [
+    { "binding": "SOURCE_SNAPSHOTS", "bucket_name": "studyinchina-source-snapshots" },
     {
       "binding": "RELEASES_BUCKET",
       "bucket_name": "studyinchina-releases"

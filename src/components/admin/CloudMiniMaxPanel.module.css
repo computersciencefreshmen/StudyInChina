@@ -1,0 +1,24 @@
+.panel { margin-bottom: 24px; min-width: 0; }
+.quotas { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 24px 0 16px; }
+.quotas article { padding: 20px; border: 1px solid var(--wb-border); border-radius: 18px; background: var(--wb-background); min-width: 0; }
+.quotas span, .stats span { color: var(--wb-muted); font-size: 13px; }
+.quotas strong { display: block; font-family: var(--atlas-font-display); color: var(--wb-accent); font-weight: 400; font-size: clamp(36px,5vw,60px); line-height: 1.4; font-variant-numeric: tabular-nums; }
+.quotas p, .meta, .note, .coverage { font-size: 13px; line-height: 1.8; color: var(--wb-muted); }
+.meta { margin: 12px 0; }
+.note { margin: 12px 0 18px; }
+.stats { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 18px; border-top: 1px solid var(--wb-border); padding-top: 20px; margin-top: 24px; }
+.stats strong { display: block; font-size: 28px; font-weight: 400; font-family: var(--atlas-font-display); font-variant-numeric: tabular-nums; }
+.tableScroll { overflow: auto; max-width: 100%; }
+.tableScroll table { border-collapse: collapse; width: 100%; font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tableScroll caption { text-align: left; padding: 12px 0; color: var(--wb-muted); white-space: normal; }
+.tableScroll th, .tableScroll td { text-align: right; border-bottom: 1px solid var(--wb-border); padding: 11px 9px; }
+.tableScroll th:first-child { text-align: left; }
+.tableScroll tbody th { font-weight: 400; }
+.period { background: var(--wb-background); }
+.coverage { border-left: 3px solid var(--wb-accent); padding: 8px 14px; color: var(--wb-ink); }
+.recent summary { cursor: pointer; padding-block: 15px; font-size: 14px; }
+.recent ul { list-style: none; padding: 0; }
+.recent li { display: flex; gap: 12px; justify-content: space-between; padding: 10px 0; border-top: 1px solid var(--wb-border); font-size: 12px; overflow-wrap: anywhere; }
+.recent strong { font-weight: 500; }
+@media(max-width:700px) { .quotas { gap: 12px; } .quotas article { padding: 14px; } .stats { grid-template-columns: repeat(2,minmax(0,1fr)); } .recent li { flex-direction: column; gap: 4px; } }
+@media(max-width:380px) { .quotas { grid-template-columns: 1fr; } }

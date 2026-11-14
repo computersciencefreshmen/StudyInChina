@@ -16,11 +16,14 @@ const canonical = value => value === null || typeof value !== 'object' ? JSON.st
 const fail = (code, worker = '', binding = '') => { throw new Error([code, worker, binding].filter(Boolean).join(':')) }
 
 function resourceBindings(config, worker) {
-  for (const key of ['services', 'kv_namespaces', 'vectorize', 'hyperdrive', 'dispatch_namespaces', 'pipelines', 'send_email', 'containers']) {
+  for (const key of ['kv_namespaces', 'vectorize', 'hyperdrive', 'dispatch_namespaces', 'pipelines', 'send_email', 'containers']) {
     if (config[key] && (!Array.isArray(config[key]) || config[key].length)) fail('unsupported_config_resources', worker, key)
   }
+  if (config.services !== undefined && (!Array.isArray(config.services) || config.services.length !== 1 || worker !== 'catalog-api'
+    || canonical(config.services[0]) !== canonical({ binding: 'MAINTENANCE_MONITOR', service: 'studyinchina-catalog-maintenance', entrypoint: 'MaintenanceMonitor' }))) fail('unsupported_config_resources', worker, 'services')
   if (config.env || config.unsafe || config.assets || config.site) fail('config_requires_explicit_review', worker)
   return [
+    ...(config.services ?? []).map(binding => ({ name: binding.binding, type: 'service', binding })),
     ...(config.d1_databases ?? []).map(binding => ({ name: binding.binding, type: 'd1', binding })),
     ...(config.r2_buckets ?? []).map(binding => ({ name: binding.binding, type: 'r2_bucket', binding })),
     ...(config.queues?.producers ?? []).map(binding => ({ name: binding.binding, type: 'queue', binding })),
@@ -93,6 +96,11 @@ export function buildAccountMigrationConfigs({ sourceAccountId, targetAccountId,
       } else if (binding.type === 'queue') {
         if (binding.queue_name !== wanted.queue) fail('source_queue_mismatch', worker, binding.name)
         resources.push({ name: binding.name, type: binding.type, queueName: wanted.queue, recreateInTargetAccount: true })
+      } else if (binding.type === 'service') {
+        if (binding.service !== wanted.service || binding.entrypoint !== wanted.entrypoint
+          || binding.environment !== undefined && binding.environment !== 'production'
+          || Object.keys(binding).some(key => !['name','type','service','entrypoint','environment'].includes(key))) fail('source_service_mismatch', worker, binding.name)
+        resources.push({ name: binding.name, type: binding.type, serviceName: wanted.service, entrypoint: wanted.entrypoint, recreateInTargetAccount: true, crossAccountGrant: false })
       } else if (binding.type === 'durable_object_namespace') {
         if (binding.class_name !== wanted.class_name || wanted.script_name || binding.script_name || !(ACCOUNT.test(binding.namespace_id ?? '') || UUID.test(binding.namespace_id ?? ''))) fail('source_durable_object_mismatch', worker, binding.name)
         resources.push({ name: binding.name, type: binding.type, className: binding.class_name, sourceNamespaceId: binding.namespace_id, targetNamespaceId: null, requiresStateMigration: true })

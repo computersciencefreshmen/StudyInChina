@@ -92,9 +92,16 @@ export function evaluateCloudMaintenanceHealth(input: CloudHealthInput, options:
   const quarantineObserved = totalUnknown !== null && quarantinedUnknown !== null && unresolvedUnknown !== null && totalUnknown === unknownJobs
     && quarantinedUnknown + unresolvedUnknown === totalUnknown && disposition?.replayAllowed === false && disposition.modelSuccessesClaimed === false
     && (quarantinedUnknown === 0 || disposition.state === 'active' && sha(disposition.proofSha256))
+  const runtime = row(status?.runtimeUnknownDisposition)
+  const runtimeObserved = runtime?.replayAllowed === false && runtime.modelSuccessesClaimed === false && runtime.unknownOutcomesChanged === false
+    && count(runtime.totalUnknownJobs) === unknownJobs && count(runtime.totalUnknownModels) === unknownModels
+    && ['leaseQuarantinedJobs','runtimeProtectedJobs','unresolvedJobs','legacyProtectedModels','runtimeProtectedModels','unresolvedModels'].every(key => count(runtime[key]) !== null)
+    && Number(runtime.leaseQuarantinedJobs) + Number(runtime.runtimeProtectedJobs) + Number(runtime.unresolvedJobs) === unknownJobs
+    && Number(runtime.legacyProtectedModels) + Number(runtime.runtimeProtectedModels) + Number(runtime.unresolvedModels) === unknownModels
   add('maintenance.unknown_outcomes', currentUnknownFailure ? 'fail' : unknownJobs === null || unknownModels === null || historicalUnknowns ? 'unobserved' : 'pass',
     currentUnknownFailure ? 'current_unknown_outcome_blocker' : unknownJobs === null || unknownModels === null ? 'outcomes_unobserved' : historicalUnknowns ? 'historical_or_guarded_unknown_outcomes' : 'no_unknown_outcomes_observed',
     { jobs: unknownJobs, modelAttempts: unknownModels,
+      ...(runtimeObserved ? { runtimeDisposition: runtime } : {}),
       ...(quarantineObserved ? { totalUnknown, quarantinedUnknown, unresolvedUnknown, quarantineProofSha256: disposition?.proofSha256 ?? null,
         importedDoUnknownAtMigration: count(row(disposition?.importedDoStates)?.unknown),
         replayAllowed: false, modelSuccessesClaimed: false } : {}),

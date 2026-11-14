@@ -10,6 +10,7 @@ import { ledgerTokenUsage, sumTokenUsage } from './telemetry-contract'
 import { telemetryIsStale } from './telemetry-contract'
 import { currentQuotaObservation, EXECUTOR_RUN_ID, projectUsageLedger } from './executor-contract'
 import { readRemoteTelemetry, remoteExecutorConfiguration, remoteExecutorConnected, remoteExecutorControllable } from './remote-executor'
+import { readCloudMiniMax } from './cloud-minimax'
 import type { ProcessProbe } from '../../../scripts/ingestion/minimax-quota-supervisor'
 
 const RUN_ID = EXECUTOR_RUN_ID
@@ -198,12 +199,12 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
   const generatedAt = new Date().toISOString()
   const todayDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
   if (!capabilities.localMonitoring) {
-    const remote = await readRemoteTelemetry()
+    const [remote, cloudMiniMax] = await Promise.all([readRemoteTelemetry(), readCloudMiniMax()])
     const connected = remoteExecutorConnected(remote)
     const controls = remoteExecutorConfiguration()?.controlEnabled === true && remoteExecutorControllable(remote)
     const automation = remote?.automation ? { ...remote.automation, connected, quota: currentQuotaObservation(remote.automation.quota) } : null
     const ledger = remote?.ledger ? { ...remote.ledger, todayDay } : null
-    return { generatedAt, catalog: cachedCatalog.value, runs: remote?.runs || [],
+    return { generatedAt: new Date().toISOString(), cloudMiniMax, catalog: cachedCatalog.value, runs: remote?.runs || [],
       capabilities: { ...capabilities, startVerification: connected && controls, automationControl: connected && controls,
         credentialSource: connected ? 'ccswitch' : capabilities.credentialSource, reason: connected && controls ? null
           : !remote ? capabilities.reason
@@ -216,9 +217,10 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
       ...(remote?.continuousPipeline ? { continuousPipeline: remote.continuousPipeline } : {}),
       ...(remote?.catalogMaintenance ? { catalogMaintenance: remote.catalogMaintenance } : {}) }
   }
-  const [runs, savedLedger, automation] = await Promise.all([
+  const [runs, savedLedger, automation, cloudMiniMax] = await Promise.all([
     readLocalVerificationRuns(), boundedJson(join(process.cwd(), '.tmp/minimax-verification/usage-ledger.json'), 512 * 1_024),
     import('../../../scripts/ingestion/minimax-admin-control').then(module => module.readExecutorStatus()).catch(() => null),
+    readCloudMiniMax(),
   ])
   const ledger = projectUsageLedger(savedLedger, todayDay)
   const savedUsage = sumUsage(runs.map(run => run.tokenUsage))
@@ -226,7 +228,7 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
   const continuous = minimaxContinuousStatusSchema.safeParse(await boundedJson(join(process.cwd(), MINIMAX_CONTINUOUS_STATUS_PATH), 16 * 1024))
   const { readCatalogMaintenanceObservation } = await import('../../../scripts/ingestion/admin-catalog-maintenance-collector')
   const catalogMaintenance = await readCatalogMaintenanceObservation(process.cwd(), Date.parse(generatedAt))
-  return { generatedAt, catalog: cachedCatalog.value, runs, capabilities: { ...capabilities,
+  return { generatedAt: new Date().toISOString(), cloudMiniMax, catalog: cachedCatalog.value, runs, capabilities: { ...capabilities,
       automationControl: Boolean(automation && automation.reason !== 'process_identity_unconfirmed') },
     telemetry: { source: capabilities.localMonitoring ? 'local' : 'unavailable', observedAt: capabilities.localMonitoring ? generatedAt : null, stale: !capabilities.localMonitoring },
     model: { configured: model(process.env.MINIMAX_MODEL || process.env.ANTHROPIC_MODEL) ?? runs.find(run => run.model)?.model ?? null },

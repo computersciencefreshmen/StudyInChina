@@ -229,12 +229,12 @@ export async function readLegacyModelDisposition(env: MaintenanceEnv,cfg: Contro
 
 // The registration and final reconciliation readers are defined below. Keeping
 // their SQL fence next to this exact tuple predicate avoids ID-only waivers.
-export function legacyModelDispositionFence(disposition: VerifiedLegacyModelDisposition, staleBefore: string) {
+export function legacyModelDispositionFence(disposition: VerifiedLegacyModelDisposition, staleBefore: string, additional: {sql:string;bindings:string[]} = {sql:'SELECT NULL WHERE 0',bindings:[]}) {
   const stale = "NOT EXISTS(SELECT 1 FROM maintenance_model_attempts WHERE status IN('reserved','send_started') AND started_at<?)"
-  if (!disposition.commit) return { sql: `NOT EXISTS(SELECT 1 FROM maintenance_model_attempts WHERE status='unknown') AND ${stale}`, bindings: [staleBefore] }
+  if (!disposition.commit) return { sql: `NOT EXISTS(SELECT 1 FROM maintenance_model_attempts WHERE status='unknown' AND attempt_id NOT IN(${additional.sql})) AND ${stale}`, bindings: [...additional.bindings,staleBefore] }
   const c = disposition.commit, matches = matchingLegacyUnknownAttemptsSql()
-  return { sql: `(${stale}) AND (SELECT COUNT(*) FROM (${matches}))=3 AND NOT EXISTS(SELECT 1 FROM maintenance_model_attempts WHERE status='unknown' AND attempt_id NOT IN(${matches})) AND (SELECT COUNT(*) FROM (${matchingSourcesSql()}))=3 AND EXISTS(SELECT 1 FROM maintenance_events WHERE event_id=? AND kind='legacy_model_guards_registered' AND details_json=?) AND EXISTS(SELECT 1 FROM maintenance_events WHERE event_id=? AND kind='legacy_offline_reconciliation' AND details_json=?)${c.lineage ? " AND EXISTS(SELECT 1 FROM maintenance_scope_upgrades WHERE previous_scope_sha256=? AND next_scope_sha256=? AND status='completed' AND receipt_key=? AND receipt_sha256=?)" : ''}`,
-    bindings: [staleBefore, attemptsJson, attemptsJson, sourcesJson, c.registrationEventId, c.registrationDetails, c.reconciliationEventId, c.reconciliationDetails, ...(c.lineage ? [c.lineage.previous,c.lineage.next,c.lineage.key,c.lineage.sha256] : [])] }
+  return { sql: `(${stale}) AND (SELECT COUNT(*) FROM (${matches}))=3 AND NOT EXISTS(SELECT 1 FROM maintenance_model_attempts WHERE status='unknown' AND attempt_id NOT IN(${matches}) AND attempt_id NOT IN(${additional.sql})) AND (SELECT COUNT(*) FROM (${matchingSourcesSql()}))=3 AND EXISTS(SELECT 1 FROM maintenance_events WHERE event_id=? AND kind='legacy_model_guards_registered' AND details_json=?) AND EXISTS(SELECT 1 FROM maintenance_events WHERE event_id=? AND kind='legacy_offline_reconciliation' AND details_json=?)${c.lineage ? " AND EXISTS(SELECT 1 FROM maintenance_scope_upgrades WHERE previous_scope_sha256=? AND next_scope_sha256=? AND status='completed' AND receipt_key=? AND receipt_sha256=?)" : ''}`,
+    bindings: [staleBefore, attemptsJson, attemptsJson, ...additional.bindings, sourcesJson, c.registrationEventId, c.registrationDetails, c.reconciliationEventId, c.reconciliationDetails, ...(c.lineage ? [c.lineage.previous,c.lineage.next,c.lineage.key,c.lineage.sha256] : [])] }
 }
 
 // Referenced by the registration reader; ordinary control revisions do not

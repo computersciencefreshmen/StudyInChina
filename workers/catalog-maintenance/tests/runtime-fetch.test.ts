@@ -7,6 +7,7 @@ import { convertV4MiniflareOptions, Miniflare, Response as WorkerResponse } from
 import type { ModelRequest, ModelResult } from '../src/types'
 import { TERMINAL_QUARANTINE_POLICY } from '../src/reviewed-terminal-quarantine'
 import { LEGACY_MODEL_NO_REPLAY_POLICY } from '../src/legacy-model-guards'
+import { digest } from '../src/util'
 
 const sourceId = 'd'.repeat(64), snapshotSha256 = 'e'.repeat(64), scope = 'a'.repeat(64)
 const adminToken = 'runtime-test-admin-token-not-a-real-secret'
@@ -49,6 +50,10 @@ async function runtimeFixture() {
               const object = await env.SNAPSHOTS_BUCKET.get(new URL(request.url).searchParams.get('key'))
               return Response.json(JSON.parse(await object.text()))
             }
+            if (path === '/raw-artifact') {
+              const object = await env.SNAPSHOTS_BUCKET.get(new URL(request.url).searchParams.get('key'))
+              return object ? new Response(await object.arrayBuffer()) : new Response(null, { status: 404 })
+            }
             if (path === '/model') {
               const id = env.MODEL_ADMISSION.idFromName('runtime-test-account')
               return env.MODEL_ADMISSION.get(id).fetch(new Request('https://admission.internal/model/run', request))
@@ -64,7 +69,7 @@ async function runtimeFixture() {
     bundle: true, format: 'esm', platform: 'browser', target: 'es2022', write: false,
   })
   const calls: Array<{ url: string; method: string; authorization: string | null; body: string }> = []
-  const provider = { quotaRedirect: 0, modelRedirect: 0, redirectLocation: redirectUrl }
+  const provider = { quotaRedirect: 0, modelRedirect: 0, redirectLocation: redirectUrl, modelBody: null as string | null, modelStatus: 200 }
   const mf = new Miniflare(convertV4MiniflareOptions({
     name: 'maintenance-runtime-fetch-test', modules: true, script: bundled.outputFiles[0].text,
     // The lockfile's local workerd supports dates through 2026-09-18. Its real
@@ -96,6 +101,7 @@ async function runtimeFixture() {
       }
       if (request.url === modelUrl) {
         if (provider.modelRedirect) return new WorkerResponse(null, { status: provider.modelRedirect, headers: { location: provider.redirectLocation } })
+        if (provider.modelBody !== null) return new WorkerResponse(provider.modelBody, { status: provider.modelStatus })
         return WorkerResponse.json({ content: [{ type: 'text', text: '{"evidence":"test-only"}' }],
           stop_reason: 'end_turn', usage: { input_tokens: 1, output_tokens: 1 } })
       }
@@ -134,6 +140,51 @@ function runModel(mf: Miniflare, input: ModelRequest) {
   return mf.dispatchFetch('https://runtime.test/model', { method: 'POST',
     headers: { authorization: `Bearer ${adminToken}`, 'content-type': 'application/json' }, body: JSON.stringify(input) })
 }
+
+test('real workerd archives raw HTTP bytes and usage before known-invalid output classification; ambiguous requests never resend', { timeout: 120000 }, async t => {
+  const { mf, db, calls, provider } = await runtimeFixture()
+  try {
+    const readArtifact = (key: string) => mf.dispatchFetch(`https://runtime.test/raw-artifact?key=${encodeURIComponent(key)}`)
+    const cases = [
+      { body: JSON.stringify({ model: 'MiniMax-M3', content: [{ type: 'text', text: 'not JSON' }], stop_reason: 'end_turn', usage: { input_tokens: 12, output_tokens: 8 } }), code: 'model_output_invalid', status: 'known_failed' },
+      { body: JSON.stringify({ content: [{ type: 'text', text: '{"partial":true}' }], stop_reason: 'max_tokens', usage: { input_tokens: 12, output_tokens: 8192 } }), code: 'model_output_truncated', status: 'known_failed' },
+      { body: '{', code: 'model_response_invalid', status: 'known_failed' },
+      { body: '', code: 'model_response_invalid', status: 'known_failed' },
+    ]
+    for (const [i, c] of cases.entries()) await t.test(c.code + ':' + i, async () => {
+      provider.modelBody = c.body
+      const input = modelRequest(String(i + 1).repeat(64)), start = calls.length, result = await (await runModel(mf, input)).json() as { error: string }
+      assert.equal(result.error, c.code)
+      const row = await db.prepare('SELECT status,error_code,usage_json,attempt_id,output_key FROM maintenance_model_attempts WHERE reservation_key=?').bind(input.reservationKey).first()
+      assert.equal(row?.status, c.status); assert.equal(row?.error_code, c.code); assert.equal(row?.output_key, null)
+      const usage = JSON.parse(String(row?.usage_json)), ref = usage.providerResponse
+      if (i < 2) { assert.equal(usage.input_tokens, 12); assert.equal(usage.output_tokens, i === 1 ? 8192 : 8) }
+      else assert.equal(usage.usage, null)
+      const body = await readArtifact(ref.body.objectKey), envelope = await readArtifact(ref.objectKey)
+      assert.equal(body.status, 200); assert.equal(envelope.status, 200)
+      assert.equal(await body.text(), c.body); assert.equal(await digest(c.body), ref.body.sha256)
+      const envelopeText = await envelope.text(); assert.equal(await digest(envelopeText), ref.sha256)
+      const evidence = JSON.parse(envelopeText)
+      assert.equal(evidence.attemptId, row?.attempt_id); assert.equal(evidence.httpStatus, 200); assert.equal(evidence.complete, true)
+      assert.equal(evidence.requestedModel, 'MiniMax-M3'); assert.equal(evidence.requestSha256, await digest(input.payload))
+      assert.equal(envelopeText.includes(subscriptionKey), false)
+      const repeated = await runModel(mf, input)
+      assert.equal((await repeated.json() as { error: string }).error, 'prior_model_outcome_requires_review')
+      assert.equal(calls.slice(start).filter(call => call.url === modelUrl).length, 1)
+    })
+    await t.test('429 has immutable non-JSON response evidence and retains cooldown', async () => {
+      provider.modelBody = 'busy'; provider.modelStatus = 429
+      const input = modelRequest('5'.repeat(64)), start = calls.length, response = await runModel(mf, input)
+      assert.equal(response.status, 429)
+      const row = await db.prepare('SELECT status,error_code,usage_json FROM maintenance_model_attempts WHERE reservation_key=?').bind(input.reservationKey).first()
+      assert.equal(row?.status, 'known_failed'); assert.equal(row?.error_code, 'model_http_429')
+      const usage = JSON.parse(String(row?.usage_json)); assert.equal(usage.providerResponse.httpStatus, 429)
+      assert.equal(await (await readArtifact(usage.providerResponse.body.objectKey)).text(), 'busy')
+      assert.equal((await runModel(mf, input)).status, 429)
+      assert.equal(calls.slice(start).filter(call => call.url === modelUrl).length, 1)
+    })
+  } finally { await mf.dispose() }
+})
 
 test('real workerd permanently rejects quarantined sources and canonical-text aliases before any provider or SQL attempt', { timeout: 120000 }, async () => {
   const { mf, db, calls } = await runtimeFixture()

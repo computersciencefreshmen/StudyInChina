@@ -1,3 +1,4 @@
+import { readRuntimeModelDisposition, runtimeDispositionFence, runtimeUnknownSummary } from './runtime-model-guards'
 import { control,event } from './repository'
 import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
@@ -11,7 +12,7 @@ type School={university_id:string;last_attempt_at:string|null}
 type Inspection={university_id:string;source_id:string;url:string;due_at:string;last_attempt_at:string;kind:'captured'|'blocked';observation_id:string|null;checked_at:string|null;raw_sha256:string|null;snapshot_key:string|null;job_id:string|null;error_code:string|null}
 type Published={batch_id:string;acknowledgement_sha256:string;acknowledgement_json:string}
 type Advance={scopeRegistrySha256:string;currentCanaryIds:string[];nextCanaryIds:string[];inspectedSchoolIds:string[]}
-export type RolloutState={format:'studyinchina.maintenance-rollout';version:1;observedAt:string;backendState:'ready'|'quota_wait'|'backend_unavailable';expectedRevision:number|null;scopeRegistrySha256:string|null;state:'holding'|'eligible'|'full_scope';reasons:string[];currentCanaryIds:string[];currentBatchIds:string[];nextCanaryIds:string[];addedSchoolIds:string[];inspectedSchoolIds:string[];inspections:Inspection[];unknownJobDisposition:UnknownJobDisposition|null;unknownModelDisposition:LegacyModelDisposition|null;publication:{batchId:string;sourceCommit:string;deploymentId:string;stableProofSha256:string;acknowledgementSha256:string}|null}
+export type RolloutState={format:'studyinchina.maintenance-rollout';version:1;observedAt:string;backendState:'ready'|'quota_wait'|'backend_unavailable';expectedRevision:number|null;scopeRegistrySha256:string|null;state:'holding'|'eligible'|'full_scope';reasons:string[];currentCanaryIds:string[];currentBatchIds:string[];nextCanaryIds:string[];addedSchoolIds:string[];inspectedSchoolIds:string[];inspections:Inspection[];runtimeUnknownDisposition:Awaited<ReturnType<typeof runtimeUnknownSummary>>|null;unknownJobDisposition:UnknownJobDisposition|null;unknownModelDisposition:LegacyModelDisposition|null;publication:{batchId:string;sourceCommit:string;deploymentId:string;stableProofSha256:string;acknowledgementSha256:string}|null}
 const timestamp=(value:unknown,now:number)=>typeof value==='string'&&Number.isFinite(Date.parse(value))&&Date.parse(value)<=now
 // First inspection is a real successful observation OR an explicit completed
 // blocking capture attempt. It is deliberately weaker than school reconciliation.
@@ -42,12 +43,13 @@ async function verifyCapturedReference(env:MaintenanceEnv,proof:Inspection,now:n
   return Boolean(raw&&(raw.size===undefined||raw.size>0))
 }
 export async function rolloutStatus(env:MaintenanceEnv,now=Date.now()):Promise<RolloutState>{
-  const result:RolloutState={format:'studyinchina.maintenance-rollout',version:1,observedAt:nowIso(now),backendState:'ready',expectedRevision:null,scopeRegistrySha256:null,state:'holding',reasons:[],currentCanaryIds:[],currentBatchIds:[],nextCanaryIds:[],addedSchoolIds:[],inspectedSchoolIds:[],inspections:[],unknownJobDisposition:null,unknownModelDisposition:null,publication:null}
+  const result:RolloutState={format:'studyinchina.maintenance-rollout',version:1,observedAt:nowIso(now),backendState:'ready',expectedRevision:null,scopeRegistrySha256:null,state:'holding',reasons:[],currentCanaryIds:[],currentBatchIds:[],nextCanaryIds:[],addedSchoolIds:[],inspectedSchoolIds:[],inspections:[],runtimeUnknownDisposition:null,unknownJobDisposition:null,unknownModelDisposition:null,publication:null}
   try{
     const cfg=await control(env)
     if(!cfg){result.reasons.push('seed_not_ready');return result}
     const disposition=await readUnknownJobDisposition(env,cfg,now);result.unknownJobDisposition=disposition.summary
     const modelDisposition=await readLegacyModelDisposition(env,cfg,now);result.unknownModelDisposition=modelDisposition.summary
+    const runtimeDisposition=await readRuntimeModelDisposition(env,cfg),unknownSummary=await runtimeUnknownSummary(env,runtimeDisposition,Boolean(disposition.commit),Boolean(modelDisposition.commit));result.runtimeUnknownDisposition=unknownSummary
     result.expectedRevision=cfg.revision;result.scopeRegistrySha256=cfg.scope_sha256
     const current=JSON.parse(cfg.canary_json)as string[];result.currentCanaryIds=current
     if(env.MAINTENANCE_ENABLED!=='true')result.reasons.push('deployment_activation_gate_disabled')
@@ -72,8 +74,8 @@ export async function rolloutStatus(env:MaintenanceEnv,now=Date.now()):Promise<R
     // Total unknown history stays visible; only the exact reviewed job tuples
     // may leave its unresolved rollout count. Separately, reviewed legacy model
     // outcomes remain unknown and require their own permanent no-replay proof.
-    if(modelDisposition.summary.unresolvedUnknown||modelDisposition.summary.staleActive)result.reasons.push('model_outcome_unresolved')
-    if(disposition.summary.unresolvedUnknown||health.unknown_jobs!==disposition.summary.totalUnknown)result.reasons.push('job_outcome_unknown')
+    if(unknownSummary.unresolvedModels||modelDisposition.summary.staleActive)result.reasons.push('model_outcome_unresolved')
+    if(unknownSummary.unresolvedJobs||health.unknown_jobs!==disposition.summary.totalUnknown)result.reasons.push('job_outcome_unknown')
     const published=(await env.PIPELINE_DB.prepare("SELECT batch_id,acknowledgement_sha256,acknowledgement_json FROM maintenance_exports WHERE status='published' AND scope_sha256=? ORDER BY created_at DESC LIMIT 10").bind(cfg.scope_sha256).all<Published>()).results??[]
     for(const row of published){const ack=record(JSON.parse(row.acknowledgement_json));if(ack?.outcome==='published'&&ack.batchId===row.batch_id&&HASH.test(row.acknowledgement_sha256)&&await digest(canonical(ack))===row.acknowledgement_sha256&&/^([a-f0-9]{40}|[a-f0-9]{64})$/.test(String(ack.sourceCommit))&&/^dpl_[a-zA-Z0-9]{1,100}$/.test(String(ack.deploymentId))&&HASH.test(String(ack.stableProofSha256))&&Array.isArray(ack.acceptedProposalIds)&&ack.acceptedProposalIds.length){result.publication={batchId:row.batch_id,sourceCommit:String(ack.sourceCommit),deploymentId:String(ack.deploymentId),stableProofSha256:String(ack.stableProofSha256),acknowledgementSha256:row.acknowledgement_sha256};break}}
     if(!result.publication)result.reasons.push('maintenance_publication_not_proven')
@@ -106,11 +108,11 @@ export async function evaluateRollout(env:MaintenanceEnv,value:unknown,now=Date.
   const saved=await saveDecision(env,decision,'advance_proposed',now),guardId=crypto.randomUUID(),inspectedIds=JSON.stringify(decision.inspectedSchoolIds),current=JSON.stringify(decision.currentCanaryIds),next=JSON.stringify(decision.nextCanaryIds),cfg=await control(env)
   if(!cfg)throw new MaintenanceError('rollout_control_unavailable')
   try{
-    const reviewed=dispositionFence(await readUnknownJobDisposition(env,cfg,now)),modelReviewed=legacyModelDispositionFence(await readLegacyModelDisposition(env,cfg,now),nowIso(now-120000))
+    const runtimeReviewed=runtimeDispositionFence(await readRuntimeModelDisposition(env,cfg)),reviewed=dispositionFence(await readUnknownJobDisposition(env,cfg,now),runtimeReviewed.jobs),modelReviewed=legacyModelDispositionFence(await readLegacyModelDisposition(env,cfg,now),nowIso(now-120000),runtimeReviewed.attempts)
     // CHECK fences the entire transaction. Safety changes between evidence read
     // and commit abort the scope update; checking changes after commit is unsafe.
     await env.PIPELINE_DB.batch([
-      env.PIPELINE_DB.prepare(`INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND enabled=1 AND models_enabled=1 AND seed_complete=1 AND targets_complete=1 AND scope_sha256=? AND revision=? AND canary_json=?) AND ${safetyFence} AND ${reviewed.sql} AND ${modelReviewed.sql} AND EXISTS(SELECT 1 FROM maintenance_exports WHERE batch_id=? AND status='published' AND acknowledgement_sha256=?) AND (SELECT COUNT(DISTINCT x.university_id) FROM maintenance_source_schools x JOIN maintenance_sources s ON s.source_id=x.source_id JOIN json_each(?) chosen ON chosen.value=x.university_id WHERE s.enabled=1 AND ${inspectedSource})=? THEN 1 ELSE 0 END))`).bind(guardId,decision.scopeRegistrySha256,decision.expectedRevision,current,nowIso(now),...reviewed.bindings,...modelReviewed.bindings,decision.publication!.batchId,decision.publication!.acknowledgementSha256,inspectedIds,decision.inspectedSchoolIds.length),
+      env.PIPELINE_DB.prepare(`INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND enabled=1 AND models_enabled=1 AND seed_complete=1 AND targets_complete=1 AND scope_sha256=? AND revision=? AND canary_json=?) AND ${safetyFence} AND ${reviewed.sql} AND ${modelReviewed.sql} AND ${runtimeReviewed.sql} AND EXISTS(SELECT 1 FROM maintenance_exports WHERE batch_id=? AND status='published' AND acknowledgement_sha256=?) AND (SELECT COUNT(DISTINCT x.university_id) FROM maintenance_source_schools x JOIN maintenance_sources s ON s.source_id=x.source_id JOIN json_each(?) chosen ON chosen.value=x.university_id WHERE s.enabled=1 AND ${inspectedSource})=? THEN 1 ELSE 0 END))`).bind(guardId,decision.scopeRegistrySha256,decision.expectedRevision,current,nowIso(now),...reviewed.bindings,...modelReviewed.bindings,...runtimeReviewed.bindings,decision.publication!.batchId,decision.publication!.acknowledgementSha256,inspectedIds,decision.inspectedSchoolIds.length),
       env.PIPELINE_DB.prepare('UPDATE maintenance_control SET canary_json=?,revision=revision+1,updated_at=? WHERE singleton=1 AND revision=? AND enabled=1 AND models_enabled=1').bind(next,nowIso(now),decision.expectedRevision),
       env.PIPELINE_DB.prepare("INSERT INTO maintenance_events VALUES(?,'rollout_advanced',?,?)").bind(crypto.randomUUID(),nowIso(now),canonical({objectKey:saved.objectKey,sha256:saved.sha256,fromRevision:decision.expectedRevision,toRevision:decision.expectedRevision!+1})),
       env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(guardId),
