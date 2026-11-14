@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import { quotedTrackScope } from '../../src/lib/data/cycle-scope'
+import { teachingLanguageEvidenceIsSpecific } from '../../src/lib/data/teaching-language-evidence'
 import { cyclePatchHasQuoteSupport, cyclePatchSchema } from './cycle-contracts'
 import type { DataBundle, Program, AdmissionCycle, Scholarship, Source } from '../../src/lib/data/types'
 import { bundleSchema } from '../../src/lib/data/schema'
@@ -124,6 +125,8 @@ export async function importFieldCandidates(options: {
       target.sourceIds = [...new Set([...target.sourceIds, sourceId])]
       for (const patch of fields.patches) {
         if (!proposal.fieldEvidence.some(entry => entry.fieldPath === patch.fieldPath)) throw new Error('field_specific_evidence_missing')
+        if (entityType === 'program' && patch.fieldPath === 'teachingLanguages'
+          && !teachingLanguageEvidenceIsSpecific(record as Program, patch.value, proposal.fieldEvidence.find(entry => entry.fieldPath === patch.fieldPath)!.quote)) throw new Error('program_teaching_language_scope_unproven')
         if (entityType === 'program' && (record as Program).teachingLanguages.length > 1 && /languageRequirements|eligibility|applicationMaterials/u.test(patch.fieldPath)) throw new Error('multilingual_conditions_require_cycle_scope')
         if (entityType === 'admissionCycle') {
           const cyclePatch = cyclePatchSchema.safeParse(patch), quote = proposal.fieldEvidence.find(entry => entry.fieldPath === patch.fieldPath)?.quote
