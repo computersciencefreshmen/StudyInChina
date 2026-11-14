@@ -28,7 +28,7 @@ test('real workerd source HTTP, scheduled and Queue entrances freeze before any 
       return worker.fetch(request,frozen)
     }}
   `, resolveDir: fileURLToPath(new URL('../src/', import.meta.url)), sourcefile: 'source-entry-freeze-runtime.ts', loader: 'ts' },
-    bundle: true, format: 'esm', platform: 'browser', target: 'es2022', write: false })
+    bundle: true, format: 'esm', platform: 'browser', external: ['node:crypto'], target: 'es2022', write: false })
   const outbound: string[] = []
   const mf = new Miniflare(convertV4MiniflareOptions({ name: 'source-entry-freeze-test', script: bundled.outputFiles[0].text, modules: true,
     compatibilityDate: '2026-09-18', host: '127.0.0.1', port: 0, cf: false, telemetry: { enabled: false },

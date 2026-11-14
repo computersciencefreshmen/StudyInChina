@@ -14,7 +14,7 @@ test('real workerd tick capabilities authenticate and dispatch cannot resume poi
       if (new URL(request.url).pathname === '/test-sends') return Response.json({ sends })
       return handleFetch(request, { ...env, MAINTENANCE_QUEUE: { async send() { sends++ } } })
     } }
-  `, sourcefile: 'tick-modes-test-entry.ts', resolveDir: fileURLToPath(new URL('../src/', import.meta.url)), loader: 'ts' }, bundle: true, format: 'esm', platform: 'browser', target: 'es2022', write: false })
+  `, sourcefile: 'tick-modes-test-entry.ts', resolveDir: fileURLToPath(new URL('../src/', import.meta.url)), loader: 'ts' }, bundle: true, format: 'esm', platform: 'browser', external: ['node:crypto'], target: 'es2022', write: false })
   let egress = 0
   const mf = new Miniflare(convertV4MiniflareOptions({ name: 'tick-modes-runtime-test', modules: true, script: bundled.outputFiles[0].text, compatibilityDate: '2026-09-18', host: '127.0.0.1', port: 0, cf: false, telemetry: { enabled: false }, bindings: { MAINTENANCE_ADMIN_TOKEN: 'local-tick-test-not-a-secret', MAINTENANCE_ENABLED: 'true' }, d1Databases: { PIPELINE_DB: 'tick-modes-db' }, r2Buckets: { SNAPSHOTS_BUCKET: 'tick-modes-bucket' }, outboundService: async () => { egress++; return new WorkerResponse('external access forbidden', { status: 502 }) } }))
   try {

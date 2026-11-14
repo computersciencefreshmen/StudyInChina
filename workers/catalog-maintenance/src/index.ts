@@ -1,4 +1,5 @@
 import { runtimeModelNoReplayReason, readRuntimeModelDisposition } from './runtime-model-guards'
+import { registerOfficialSourceCandidates } from './source-candidates'
 import { ModelAdmission } from './admission'
 import { holdBudgetQueueMessage } from './budget-queue-hold'
 import { readPlanQuotaReport } from './quota-report'
@@ -180,6 +181,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/bootstrap'&&request.method==='POST')return json(await registerBootstrapRequest(env,request))
     if(url.pathname==='/scope-upgrades'&&request.method==='POST')return json(await registerScopeUpgradeRequest(env,request))
     if(url.pathname==='/scope-upgrades'&&request.method==='GET')return json(await scopeUpgradeStatus(env,url.searchParams.get('sha256')??''))
+    if(url.pathname==='/source-candidates'&&request.method==='POST')return json(await registerOfficialSourceCandidates(env,await requestJson(request,32768)))
     if(url.pathname==='/coverage'&&request.method==='POST')return json(await submitCoverageSnapshot(env,await requestJson(request,2*1024*1024)))
     if(request.method==='POST'&&['/runtime-model-guards/prepare','/runtime-model-guards/register'].includes(url.pathname))return gateRequest(env,url.pathname,await requestJson(request,8192))
     if(request.method==='GET'&&url.pathname==='/runtime-model-guards'){

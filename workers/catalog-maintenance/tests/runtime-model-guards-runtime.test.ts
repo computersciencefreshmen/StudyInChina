@@ -30,7 +30,7 @@ test('real workerd HTTP→existing DO→D1/R2 prepares/registers exact unknowns,
       if(path==='/fixture-state'||path==='/fixture-model')return env.MODEL_ADMISSION.get(env.MODEL_ADMISSION.idFromName('subscription-account-v1')).fetch(new Request('https://admission.internal'+(path==='/fixture-model'?'/model/run':path),request))
       return worker.fetch(request,env)
     }}
-  `,resolveDir:fileURLToPath(new URL('../src/',import.meta.url)),sourcefile:'runtime-model-guards-native.ts',loader:'ts'},bundle:true,format:'esm',platform:'browser',target:'es2022',write:false})
+  `,resolveDir:fileURLToPath(new URL('../src/',import.meta.url)),sourcefile:'runtime-model-guards-native.ts',loader:'ts'},bundle:true,format:'esm',platform:'browser', external: ['node:crypto'],target:'es2022',write:false})
   const outbound:string[]=[]
   const mf=new Miniflare(convertV4MiniflareOptions({name:'runtime-model-guards-native',script:bundled.outputFiles[0].text,modules:true,compatibilityDate:'2026-09-18',host:'127.0.0.1',port:0,cf:false,telemetry:{enabled:false},
     bindings:{MAINTENANCE_ADMIN_TOKEN:token,MAINTENANCE_ENABLED:'true',MINIMAX_MODEL:'MiniMax-M3',MINIMAX_SUBSCRIPTION_KEY:'not-a-real-provider-key',NATIVE_HEAD_RECONCILIATION_REQUIRED:'false',SCOPE_REGISTRY_SHA256:EXISTING_SCHOOLS_V2_SHA256,SCOPE_SCHOOL_COUNT:'295',MINIMAX_FLASH_CANARY:'{}'},

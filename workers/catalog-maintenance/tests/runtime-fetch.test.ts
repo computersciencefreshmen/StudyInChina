@@ -66,7 +66,7 @@ async function runtimeFixture() {
       sourcefile: 'runtime-fetch-entry.ts',
       loader: 'ts',
     },
-    bundle: true, format: 'esm', platform: 'browser', target: 'es2022', write: false,
+    bundle: true, format: 'esm', platform: 'browser', external: ['node:crypto'], target: 'es2022', write: false,
   })
   const calls: Array<{ url: string; method: string; authorization: string | null; body: string }> = []
   const provider = { quotaRedirect: 0, modelRedirect: 0, redirectLocation: redirectUrl, modelBody: null as string | null, modelStatus: 200 }

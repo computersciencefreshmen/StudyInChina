@@ -17,7 +17,7 @@ test('real workerd unblocks an expired lease behind the scope gate without chang
     import {processScopeUpgrade,scopeUpgradeStatus} from './scope-upgrade'
     export default {async fetch(request,env){return Response.json(new URL(request.url).pathname==='/process'
       ?await processScopeUpgrade(env,'${hash}',${now}):await scopeUpgradeStatus(env,'${hash}'))}}
-  `,resolveDir:fileURLToPath(new URL('../src/',import.meta.url)),loader:'ts'},bundle:true,platform:'browser',format:'esm',target:'es2022',write:false})
+  `,resolveDir:fileURLToPath(new URL('../src/',import.meta.url)),loader:'ts'},bundle:true,platform:'browser', external: ['node:crypto'],format:'esm',target:'es2022',write:false})
   const mf=new Miniflare(convertV4MiniflareOptions({name:'scope-upgrade-lease-recovery-test',modules:true,script:bundled.outputFiles[0].text,
     compatibilityDate:'2026-09-18',host:'127.0.0.1',port:0,cf:false,telemetry:{enabled:false},
     bindings:{SCOPE_REGISTRY_SHA256:nextScope.sha256,SCOPE_SCHOOL_COUNT:'295',MAINTENANCE_ENABLED:'true',NATIVE_HEAD_RECONCILIATION_REQUIRED:'true'},

@@ -62,7 +62,7 @@ for (const scenario of ['fresh', 'payload-primary', 'payload-review', 'historica
       try { return Response.json(await maintainFields(env, job, row, snapshot, [target])) }
       catch (error) { return Response.json({proposals:[],error:error.code},{status:409}) }
     }}
-  ` }, bundle: true, write: false, platform: 'browser', format: 'esm', target: 'es2022' })
+  ` }, bundle: true, write: false, platform: 'browser', external: ['node:crypto'], format: 'esm', target: 'es2022' })
   const calls: Array<{ url: string; body: string }> = []
   const mf = new Miniflare(convertV4MiniflareOptions({ name: 'native-flash-canary-test', modules: true, script: bundled.outputFiles[0].text,
     compatibilityDate: '2026-09-18', host: '127.0.0.1', port: 0, cf: false, telemetry: { enabled: false },

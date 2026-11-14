@@ -81,7 +81,7 @@ test('real workerd and R2 persist actual parsed billing evidence and gate mainte
         return handleFetch(request, checked)
       } }
     `,
-  }, bundle: true, format: 'esm', platform: 'browser', target: 'es2022', write: false })
+  }, bundle: true, format: 'esm', platform: 'browser', external: ['node:crypto'], target: 'es2022', write: false })
   const calls: Array<{ url: string; method: string }> = []
   const billing = { usage: 4 }
   const mf = new Miniflare(convertV4MiniflareOptions({
