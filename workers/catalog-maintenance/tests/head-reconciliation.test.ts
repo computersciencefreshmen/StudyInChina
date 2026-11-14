@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
+import { gunzipSync } from 'node:zlib'
 import { maintenanceCandidateExportSchema, maintenanceScopeSchema } from '../../../scripts/maintenance/contracts'
 import { acknowledge, prepareExport } from '../src/exports'
 import { handleFetch, processMessage } from '../src/index'
@@ -13,7 +14,7 @@ import type { D1PreparedStatement } from '../../publisher/src/types'
 import type { ReconciliationTargetsUpload } from '../src/types'
 import { prepareReconciliationTargets, registerReconciliationTargets } from '../src/reconciliation-targets'
 import { buildMaintenanceTargets } from '../../../scripts/automation/build-maintenance-bootstrap'
-import { loadMaintenanceBundle } from '../../../scripts/maintenance/build-scope'
+import { bundleSchema } from '../../../src/lib/data/schema'
 import originalScopeJson from '../../../content/maintenance/scope-272.v1.json'
 import upgradedScopeJson from '../../../content/maintenance/scope-295.v2.json'
 import { EXISTING_SCHOOLS_V2_SHA256 } from '../src/scope-config'
@@ -21,7 +22,12 @@ import { processScopeUpgrade } from '../src/scope-upgrade'
 
 const originalExport = maintenanceCandidateExportSchema.parse(JSON.parse(readFileSync(new URL('../../../quality/maintenance/reconciliation/2026-11-10/prepared-export.json', import.meta.url), 'utf8')))
 const originalScope=maintenanceScopeSchema.parse(originalScopeJson)
-const currentTargets=buildMaintenanceTargets(loadMaintenanceBundle(process.cwd()),originalScope)
+// Exercise the fixed historical operation with its original catalogue. New
+// publications must not change the size/checksum of this immutable upload.
+const historicalCatalog=JSON.parse(gunzipSync(readFileSync(new URL('../../../tests/fixtures/maintenance-head-reconciliation/catalog-390c009.json.gz',import.meta.url)),{maxOutputLength:16*1024*1024}).toString('utf8'))
+assert.equal(historicalCatalog.sourceCommit,pin.sourceCommit)
+assert.equal(historicalCatalog.inputCatalogSha256,pin.newInputCatalogSha256)
+const currentTargets=buildMaintenanceTargets(bundleSchema.parse(historicalCatalog.bundle),originalScope)
 const targetPayload={inputCatalogSha256:pin.newInputCatalogSha256,recordTargets:currentTargets}
 const targetBytes=new TextEncoder().encode(canonical(targetPayload))
 
