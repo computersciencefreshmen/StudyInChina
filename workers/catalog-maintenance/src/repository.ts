@@ -8,6 +8,7 @@ import { coalesceOperations,type SqlOperation } from './sql-plan'
 import { schedulingCoverageBand, selectScheduledJobs } from './scheduling'
 import { captureCadence } from './cadence'
 import { expectedScopeSchoolCount } from './scope-config'
+import { tickJobLimit } from './dispatch-config'
 import { getTodayDate } from '../../../src/lib/data/freshness'
 import { readCoverageSnapshot, validateCoverageSnapshot, storeCoverageSnapshot, publishCoverageSnapshot, coverageEvent, type CoverageSnapshot } from './coverage'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
@@ -211,6 +212,7 @@ const schedulingSchoolsSql = `school_meta AS MATERIALIZED (
 const schedulingSchoolIdsSql = `(SELECT json_group_array(xu.university_id) FROM maintenance_source_schools xu JOIN maintenance_schools su ON su.university_id=xu.university_id WHERE xu.source_id=chosen.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1))`
 
 export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
+  const jobLimit = tickJobLimit(env)
   const cfg = await control(env)
   if(cfg&&!cfg.seed_complete&&cfg.seed_plan_sha256){await env.MAINTENANCE_QUEUE.send({version:1,jobId:cfg.seed_sha256,seedSha256:cfg.seed_sha256});return{enabled:false,queued:1}}
   if(cfg&&!cfg.targets_complete){const refresh=await env.PIPELINE_DB.prepare("SELECT refresh_sha256 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=? ORDER BY created_at DESC LIMIT 1").bind(cfg.input_catalog_sha256).first<{refresh_sha256:string}>();if(refresh){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refresh.refresh_sha256,targetRefreshSha256:refresh.refresh_sha256});return{enabled:false,queued:1}}}
@@ -268,7 +270,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
     .all<SourceRow&{school_ids_json:string;scheduling_fields_json:string;scheduling_school_id:string;school_last_attempt_at:string|null;school_last_dispatched_tick:number;scheduling_urgent:number}>()).results ?? []
   const due = selectScheduledJobs(candidates.map(row => Object.assign(withSchoolPriority(row), {
     stage:'capture',priority:row.scheduling_urgent ? 0 : 10,source_last_success_at:row.last_success_at,source_category:row.category,
-  })), {limit:8,firstRoundComplete,now})
+  })), {limit:jobLimit,firstRoundComplete,now})
   for (const row of due) {
     const id = await digest(`capture:${row.source_id}:${row.due_at}`)
     const fields=JSON.parse((row as SourceRow&{scheduling_fields_json:string}).scheduling_fields_json)as Array<Record<string,unknown>>
@@ -299,7 +301,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
   ) SELECT chosen.*,${schedulingSchoolIdsSql} school_ids_json FROM chosen`)
     .bind(metadata,cfg.canary_json,nowIso(now),after(-900000,now),cfg.models_enabled,cfg.targets_complete)
     .all<JobRow&{source_last_success_at:string|null;school_ids_json:string;source_category:string;scheduling_school_id:string;school_last_attempt_at:string|null;school_last_dispatched_tick:number}>()).results ?? []
-  const jobs=selectScheduledJobs(pool.map(withSchoolPriority),{limit:8,firstRoundComplete,now})
+  const jobs=selectScheduledJobs(pool.map(withSchoolPriority),{limit:jobLimit,firstRoundComplete,now})
   let queued = 0
   for (const job of jobs) {
     await env.MAINTENANCE_QUEUE.send({version:1,jobId:job.job_id})
@@ -308,7 +310,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
   const schoolRotationSaved=queued?await saveSchoolRotation(env,rotation,cfg.scope_sha256,scopeIds,[...new Set(jobs.map(job=>job.scheduling_school_id))],now):false
   // Read-only fetches may be retried after a lost lease. A model send cannot.
   await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET status=CASE WHEN stage='capture' THEN 'retry' ELSE 'unknown' END,error_code='execution_lease_expired',lease_token=NULL,lease_until=NULL,due_at=?,enqueued_at=NULL,updated_at=? WHERE status='running' AND lease_until<?").bind(after(60000,now),nowIso(now),nowIso(now)).run()
-  await event(env,'scheduler_tick',{queued,discoveredDueSources:due.length,firstRoundComplete,coverageSnapshotSha256:coverage?.sha256 ?? null,maintenanceShare:firstRoundComplete?0.7:0.3,schoolRotationSaved},now)
+  await event(env,'scheduler_tick',{queued,jobLimit,discoveredDueSources:due.length,firstRoundComplete,coverageSnapshotSha256:coverage?.sha256 ?? null,maintenanceShare:firstRoundComplete?0.7:0.3,schoolRotationSaved},now)
   return {enabled:true,queued}
 }
 export async function claimJob(env: MaintenanceEnv,id:string,now=Date.now()):Promise<JobRow|null> {
