@@ -7,9 +7,13 @@ import { classifyProgramField, programFieldTaxonomy } from '../../src/lib/data/f
 import { getDataReleaseDate } from '../../src/lib/data/release'
 import { buildLegacyRelease, readLegacyBundle } from '../../scripts/catalog/build-release'
 
-function applyMigrations(database: DatabaseSync) {
+function applyMigrations(database: DatabaseSync, today?: string) {
+  if (today && !/^\d{4}-\d{2}-\d{2}$/.test(today)) throw new Error('invalid_test_clock')
   for (const file of ['0001_release_core.sql', '0002_programs_scholarships.sql', '0003_search_views.sql', '0004_atomic_release_cutover.sql', '0005_public_projection_hardening.sql', '0009_release_compatibility_artifacts.sql']) {
-    database.exec(readFileSync(join(process.cwd(), 'infra', 'd1', 'catalog', 'migrations', file), 'utf8'))
+    const sql = readFileSync(join(process.cwd(), 'infra', 'd1', 'catalog', 'migrations', file), 'utf8')
+    // SQLite's native clock is independent of JavaScript fake timers. Evaluate
+    // the unchanged freshness predicates at the fixture's explicit release day.
+    database.exec(today ? sql.replaceAll("date('now')", `date('${today}')`) : sql)
   }
 }
 
@@ -34,6 +38,43 @@ describe('legacy JSON release builder', () => {
       sourceIds: ['source-test-no-application'], verifiedAt: fixtureDate,
       reviewAfter: fixtureDate, status: 'verified',
     })
+    // Current SQL views must be exercised by explicit test evidence. Adding an
+    // identity can advance the release date after every real programme expires.
+    const projectionSourceId = 'source-test-current-projection'
+    bundle.sources.push({
+      id: projectionSourceId, url: 'https://example.edu.cn/catalogue',
+      title: 'Synthetic catalogue evidence', publisher: 'Test fixture', kind: 'program',
+      language: 'en', official: true, accessedAt: fixtureDate,
+    })
+    const projectionAudit = {
+      sourceIds: [projectionSourceId], verifiedAt: fixtureDate,
+      reviewAfter: fixtureDate, status: 'verified' as const,
+    }
+    bundle.cities.push({
+      id: 'city-test-current-projection', slug: 'test-current-projection',
+      name: { en: 'Synthetic city' }, province: null, region: 'north',
+      coordinates: null, overview: null, climate: null, foodHighlights: [], sights: [],
+      ...projectionAudit,
+    })
+    bundle.universities.push({
+      id: 'uni-test-current-projection', slug: 'test-current-projection',
+      name: { en: 'Synthetic university' }, cityId: 'city-test-current-projection',
+      region: 'north', officialUrl: 'https://example.edu.cn', admissionsUrl: null,
+      summary: { en: 'Synthetic current university summary' }, featured: false,
+      ...projectionAudit,
+    })
+    bundle.programs.push({
+      id: 'program-test-current-projection', slug: 'test-current-projection',
+      universityId: 'uni-test-current-projection', name: { en: 'Synthetic Computer Science' },
+      degreeLevel: 'bachelor', discipline: 'engineering', teachingLanguages: ['en'],
+      durationMonths: 48, programUrl: 'https://example.edu.cn/catalogue',
+      applyUrl: null, languageRequirements: [], ...projectionAudit,
+    })
+    const expiredDate = new Date(Date.parse(`${fixtureDate}T00:00:00.000Z`) - 86_400_000).toISOString().slice(0, 10)
+    bundle.programs.push({
+      ...bundle.programs.at(-1)!, id: 'program-test-expired-projection', slug: 'test-expired-projection',
+      verifiedAt: expiredDate, reviewAfter: expiredDate,
+    })
     const artifacts = buildLegacyRelease(bundle)
     const envelope = JSON.parse(artifacts.envelope)
     expect(envelope.data).toEqual(bundle)
@@ -49,7 +90,7 @@ describe('legacy JSON release builder', () => {
     )
 
     const database = new DatabaseSync(':memory:')
-    applyMigrations(database)
+    applyMigrations(database, fixtureDate)
     database.exec(artifacts.sql)
     database.exec(artifacts.sql)
     const release = database.prepare('SELECT release_id, release_status, schema_version, content_sha256 FROM current_release').get() as Record<string, unknown>
@@ -148,9 +189,8 @@ describe('legacy JSON release builder', () => {
     const currentDiscipline = database.prepare(`
       SELECT program_id, discipline_code
       FROM current_program_disciplines
-      ORDER BY program_id
-      LIMIT 1
-    `).get() as { program_id: string; discipline_code: string }
+      WHERE program_id = ?
+    `).get('program-test-current-projection') as { program_id: string; discipline_code: string }
     expect(currentDiscipline).toBeTruthy()
     const sourceProgram = bundle.programs.find(
       (program) => program.id === currentDiscipline.program_id,
@@ -165,6 +205,12 @@ describe('legacy JSON release builder', () => {
       field_status: 'known',
       value_json: JSON.stringify(currentDiscipline.discipline_code),
     })
+    expect(database.prepare(`
+      SELECT program_id FROM current_program_disciplines WHERE program_id = ?
+    `).get('program-test-expired-projection')).toBeUndefined()
+    expect(database.prepare(`
+      SELECT program_id FROM program_disciplines WHERE release_id = ? AND program_id = ?
+    `).get(artifacts.release.id, 'program-test-expired-projection')).toBeTruthy()
 
     const summaryFacts = database.prepare(`
       SELECT
@@ -186,7 +232,8 @@ describe('legacy JSON release builder', () => {
         ON institution.release_id = localized.release_id
        AND institution.institution_id = localized.record_id
       WHERE localized.field_name = 'summary'
-      ORDER BY localized.record_id, localized.locale
+      AND localized.record_id = 'uni-test-current-projection'
+      ORDER BY localized.locale
       LIMIT 1
     `).get() as { record_id: string; locale: string; text_value: string }
     expect(currentSummary.text_value.length).toBeGreaterThan(0)
