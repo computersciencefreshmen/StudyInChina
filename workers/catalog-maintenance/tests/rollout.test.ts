@@ -4,6 +4,7 @@ import { control,seed,setControls } from '../src/repository'
 import { evaluateRollout,rolloutStatus } from '../src/rollout'
 import { handleFetch } from '../src/index'
 import { canonical,digest } from '../src/util'
+import { MaintenanceError } from '../src/types'
 import { makeEnv,seedInput,TEST_CATALOG,TEST_GUARDS,TEST_SCOPE } from './fixture'
 
 const start=Date.parse('2026-10-24T04:00:00.000Z'),first=Array.from({length:5},(_,index)=>`uni-${String(index).padStart(3,'0')}`)
@@ -34,6 +35,8 @@ test('rollout requires five real first inspections and a maintained published ba
     const ready=await rolloutStatus(f.env,start);assert.equal(ready.state,'eligible');assert.equal(ready.inspections.filter(proof=>proof.kind==='blocked').length,1)
     const advanced=await evaluateRollout(f.env,{expectedRevision:1},start)
     assert.equal(advanced.advanced,true);assert.equal(advanced.addedSchoolIds.length,20);assert.equal(JSON.parse((await control(f.env))!.canary_json).length,25)
+    assert.equal(advanced.commitDiagnostic,undefined)
+    assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) count FROM maintenance_transaction_guards').get()?.count,0)
     const waiting=await rolloutStatus(f.env,start+60000);assert.equal(waiting.state,'holding');assert.equal(waiting.currentBatchIds.length,20);assert.ok(waiting.reasons.some(reason=>reason.startsWith('school_first_inspection_unproven:')))
   }finally{f.db.sqlite.close()}
 })
@@ -70,8 +73,63 @@ test('pause and stale callers cannot resume or expand; a pause racing the R2 dec
     const put=f.bucket.put.bind(f.bucket);let pause=true
     f.bucket.put=async(key,value,options)=>{if(pause&&key.startsWith('maintenance/rollout/decisions/')){pause=false;f.db.sqlite.prepare('UPDATE maintenance_control SET enabled=0,revision=revision+1').run()}return put(key,value,options)}
     const raced=await evaluateRollout(f.env,{expectedRevision:1},start);assert.equal(raced.advanced,false);assert.ok(raced.reasons.includes('rollout_commit_conflict'));assert.equal((await control(f.env))!.enabled,0);assert.equal((await control(f.env))!.revision,2);assert.deepEqual(JSON.parse((await control(f.env))!.canary_json),first)
+    assert.equal(raced.commitDiagnostic?.stage,'commit');assert.equal(raced.commitDiagnostic?.category,'check_constraint');assert.deepEqual(raced.commitDiagnostic?.bindings?.unexpectedParameterTypes,[])
+    assert.equal(f.db.sqlite.prepare("SELECT COUNT(*) count FROM maintenance_events WHERE kind='rollout_advanced'").get()?.count,0)
+    assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) count FROM maintenance_transaction_guards').get()?.count,0)
     assert.ok((await evaluateRollout(f.env,{expectedRevision:2},start)).reasons.includes('operator_pause_preserved'))
   }finally{f.db.sqlite.close()}
+})
+
+test('fresh disposition reader failures are distinguished from atomic commit without exposing backend errors',async()=>{
+  for(const stage of ['read_runtime_disposition','read_terminal_quarantine','read_legacy_disposition'] as const){
+    const f=await fixture();await f.publication();for(const id of first)await f.inspect(id,true)
+    try{
+      let proposed=false,batches=0
+      const put=f.bucket.put.bind(f.bucket),get=f.bucket.get.bind(f.bucket),prepare=f.db.prepare.bind(f.db),batch=f.db.batch.bind(f.db)
+      f.bucket.put=async(key,value,options)=>{const result=await put(key,value,options);if(key.startsWith('maintenance/rollout/decisions/')&&typeof value==='string'&&JSON.parse(value).outcome==='advance_proposed')proposed=true;return result}
+      f.bucket.get=async key=>{if(proposed&&stage==='read_runtime_disposition'&&key==='maintenance/runtime-model-guards/index.v1.json')throw new Error('R2_ERROR unavailable Bearer secret-do-not-output SELECT private');return get(key)}
+      f.db.prepare=sql=>{if(proposed&&(stage==='read_terminal_quarantine'&&sql==="SELECT COUNT(*) count FROM maintenance_jobs WHERE status='unknown'"||stage==='read_legacy_disposition'&&sql.startsWith("SELECT SUM(status='unknown') total")))throw new Error('D1_ERROR: no such table secret-do-not-output SELECT private');return prepare(sql)}
+      f.db.batch=async statements=>{batches++;return batch(statements)}
+      const result=await evaluateRollout(f.env,{expectedRevision:1},start)
+      assert.equal(result.advanced,false);assert.deepEqual(result.reasons,['rollout_commit_conflict']);assert.equal(result.commitDiagnostic?.stage,stage)
+      assert.equal(result.commitDiagnostic?.category,stage==='read_runtime_disposition'?'backend':'sql');assert.equal(result.commitDiagnostic?.bindings,undefined);assert.equal(batches,0)
+      const held=JSON.parse(await(await get(result.receiptKey))!.text()),event=f.db.sqlite.prepare("SELECT details_json FROM maintenance_events WHERE kind='rollout_held' ORDER BY rowid DESC LIMIT 1").get()
+      assert.deepEqual(held.decision.commitDiagnostic,result.commitDiagnostic);assert.deepEqual(JSON.parse(String(event?.details_json)).commitDiagnostic,result.commitDiagnostic)
+      assert.doesNotMatch(JSON.stringify({result,held,event}),/secret-do-not-output|Bearer|SELECT private/)
+      assert.equal((await control(f.env))!.revision,1);assert.deepEqual(JSON.parse((await control(f.env))!.canary_json),first)
+    }finally{f.db.sqlite.close()}
+  }
+})
+
+test('commit bind failure is labelled before batch, HTTP/receipt/event contain only safe shape diagnostics',async()=>{
+  const f=await fixture();await f.publication();for(const id of first)await f.inspect(id,true)
+  try{
+    let batches=0;const prepare=f.db.prepare.bind(f.db),batch=f.db.batch.bind(f.db)
+    f.db.prepare=sql=>{const statement=prepare(sql);if(sql.startsWith('INSERT INTO maintenance_transaction_guards'))statement.bind=()=>{throw new Error('D1_TYPE_ERROR: secret-parameter-value Bearer private-key')};return statement}
+    f.db.batch=async statements=>{batches++;return batch(statements)}
+    const response=await handleFetch(new Request('https://worker/rollout',{method:'POST',headers:{authorization:`Bearer ${f.env.MAINTENANCE_ADMIN_TOKEN}`,'content-type':'application/json'},body:JSON.stringify({expectedRevision:1})}),f.env)
+    assert.equal(response.status,200)
+    const result=await response.json() as Awaited<ReturnType<typeof evaluateRollout>>
+    assert.equal(result.advanced,false);assert.equal(result.commitDiagnostic?.stage,'commit');assert.equal(result.commitDiagnostic?.category,'d1_parameter_type');assert.ok(result.commitDiagnostic!.bindings!.parameterCount>0)
+    assert.deepEqual(result.commitDiagnostic?.bindings?.unexpectedParameterTypes,[]);assert.equal(batches,0)
+    const receipt=await(await f.bucket.get(result.receiptKey))!.text(),events=f.db.sqlite.prepare("SELECT details_json FROM maintenance_events WHERE kind='rollout_held'").all()
+    assert.doesNotMatch(JSON.stringify({result,receipt,events}),/secret-parameter-value|Bearer|private-key/)
+    assert.equal((await control(f.env))!.revision,1)
+  }finally{f.db.sqlite.close()}
+})
+
+test('commit quota and fixed MaintenanceError diagnostics preserve existing holding reasons and controls',async()=>{
+  for(const error of [new Error('D1_ERROR 7500 daily read quota exceeded private-secret'),new MaintenanceError('runtime_model_guard_index_invalid')]){
+    const f=await fixture();await f.publication();for(const id of first)await f.inspect(id,true)
+    try{
+      f.db.batch=async()=>{throw error}
+      const result=await evaluateRollout(f.env,{expectedRevision:1},start)
+      assert.equal(result.advanced,false);assert.deepEqual(result.reasons,[error instanceof MaintenanceError?'rollout_commit_conflict':'quota_wait'])
+      assert.equal(result.commitDiagnostic?.stage,'commit');assert.equal(result.commitDiagnostic?.category,error instanceof MaintenanceError?'maintenance':'quota')
+      assert.equal(result.backendState,error instanceof MaintenanceError?'ready':'quota_wait');assert.equal((await control(f.env))!.revision,1)
+      assert.doesNotMatch(JSON.stringify(result),/private-secret/)
+    }finally{f.db.sqlite.close()}
+  }
 })
 test('quota failure persists a holding receipt in R2 and endpoints require the service token',async()=>{
   const f=await fixture(),headers={authorization:`Bearer ${f.env.MAINTENANCE_ADMIN_TOKEN}`}

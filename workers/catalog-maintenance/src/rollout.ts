@@ -7,12 +7,13 @@ import { canonical,digest,HASH,nowIso,record } from './util'
 import { expectedScopeSchoolCount } from './scope-config'
 import { dispositionFence, readUnknownJobDisposition, type UnknownJobDisposition } from './reviewed-terminal-quarantine'
 import { readLegacyModelDisposition, legacyModelDispositionFence, type LegacyModelDisposition } from './legacy-model-guards'
+import { rolloutBindingDiagnostic, rolloutCommitDiagnostic, type RolloutBindingDiagnostic, type RolloutCommitDiagnostic, type RolloutCommitStage } from './rollout-diagnostics'
 
 type School={university_id:string;last_attempt_at:string|null}
 type Inspection={university_id:string;source_id:string;url:string;due_at:string;last_attempt_at:string;kind:'captured'|'blocked';observation_id:string|null;checked_at:string|null;raw_sha256:string|null;snapshot_key:string|null;job_id:string|null;error_code:string|null}
 type Published={batch_id:string;acknowledgement_sha256:string;acknowledgement_json:string}
 type Advance={scopeRegistrySha256:string;currentCanaryIds:string[];nextCanaryIds:string[];inspectedSchoolIds:string[]}
-export type RolloutState={format:'studyinchina.maintenance-rollout';version:1;observedAt:string;backendState:'ready'|'quota_wait'|'backend_unavailable';expectedRevision:number|null;scopeRegistrySha256:string|null;state:'holding'|'eligible'|'full_scope';reasons:string[];currentCanaryIds:string[];currentBatchIds:string[];nextCanaryIds:string[];addedSchoolIds:string[];inspectedSchoolIds:string[];inspections:Inspection[];runtimeUnknownDisposition:Awaited<ReturnType<typeof runtimeUnknownSummary>>|null;unknownJobDisposition:UnknownJobDisposition|null;unknownModelDisposition:LegacyModelDisposition|null;publication:{batchId:string;sourceCommit:string;deploymentId:string;stableProofSha256:string;acknowledgementSha256:string}|null}
+export type RolloutState={format:'studyinchina.maintenance-rollout';version:1;observedAt:string;backendState:'ready'|'quota_wait'|'backend_unavailable';expectedRevision:number|null;scopeRegistrySha256:string|null;state:'holding'|'eligible'|'full_scope';reasons:string[];currentCanaryIds:string[];currentBatchIds:string[];nextCanaryIds:string[];addedSchoolIds:string[];inspectedSchoolIds:string[];inspections:Inspection[];runtimeUnknownDisposition:Awaited<ReturnType<typeof runtimeUnknownSummary>>|null;unknownJobDisposition:UnknownJobDisposition|null;unknownModelDisposition:LegacyModelDisposition|null;publication:{batchId:string;sourceCommit:string;deploymentId:string;stableProofSha256:string;acknowledgementSha256:string}|null;commitDiagnostic?:RolloutCommitDiagnostic}
 const timestamp=(value:unknown,now:number)=>typeof value==='string'&&Number.isFinite(Date.parse(value))&&Date.parse(value)<=now
 // First inspection is a real successful observation OR an explicit completed
 // blocking capture attempt. It is deliberately weaker than school reconciliation.
@@ -107,16 +108,27 @@ export async function evaluateRollout(env:MaintenanceEnv,value:unknown,now=Date.
   // event attests that its controls mutation actually committed.
   const saved=await saveDecision(env,decision,'advance_proposed',now),guardId=crypto.randomUUID(),inspectedIds=JSON.stringify(decision.inspectedSchoolIds),current=JSON.stringify(decision.currentCanaryIds),next=JSON.stringify(decision.nextCanaryIds),cfg=await control(env)
   if(!cfg)throw new MaintenanceError('rollout_control_unavailable')
+  let stage:RolloutCommitStage='read_runtime_disposition',bindings:RolloutBindingDiagnostic|undefined
   try{
-    const runtimeReviewed=runtimeDispositionFence(await readRuntimeModelDisposition(env,cfg)),reviewed=dispositionFence(await readUnknownJobDisposition(env,cfg,now),runtimeReviewed.jobs),modelReviewed=legacyModelDispositionFence(await readLegacyModelDisposition(env,cfg,now),nowIso(now-120000),runtimeReviewed.attempts)
+    const runtimeDisposition=await readRuntimeModelDisposition(env,cfg)
+    stage='read_terminal_quarantine'
+    const terminalDisposition=await readUnknownJobDisposition(env,cfg,now)
+    stage='read_legacy_disposition'
+    const legacyDisposition=await readLegacyModelDisposition(env,cfg,now)
+    stage='build_fences'
+    const runtimeReviewed=runtimeDispositionFence(runtimeDisposition),reviewed=dispositionFence(terminalDisposition,runtimeReviewed.jobs),modelReviewed=legacyModelDispositionFence(legacyDisposition,nowIso(now-120000),runtimeReviewed.attempts)
+    const guardBindings=[guardId,decision.scopeRegistrySha256,decision.expectedRevision,current,nowIso(now),...reviewed.bindings,...modelReviewed.bindings,...runtimeReviewed.bindings,decision.publication!.batchId,decision.publication!.acknowledgementSha256,inspectedIds,decision.inspectedSchoolIds.length],updateBindings=[next,nowIso(now),decision.expectedRevision],eventBindings=[crypto.randomUUID(),nowIso(now),canonical({objectKey:saved.objectKey,sha256:saved.sha256,fromRevision:decision.expectedRevision,toRevision:decision.expectedRevision!+1})],deleteBindings=[guardId]
+    bindings=rolloutBindingDiagnostic([guardBindings,updateBindings,eventBindings,deleteBindings])
+    // Set this before prepare/bind: a local D1 bind rejection never reaches batch.
+    stage='commit'
     // CHECK fences the entire transaction. Safety changes between evidence read
     // and commit abort the scope update; checking changes after commit is unsafe.
     await env.PIPELINE_DB.batch([
-      env.PIPELINE_DB.prepare(`INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND enabled=1 AND models_enabled=1 AND seed_complete=1 AND targets_complete=1 AND scope_sha256=? AND revision=? AND canary_json=?) AND ${safetyFence} AND ${reviewed.sql} AND ${modelReviewed.sql} AND ${runtimeReviewed.sql} AND EXISTS(SELECT 1 FROM maintenance_exports WHERE batch_id=? AND status='published' AND acknowledgement_sha256=?) AND (SELECT COUNT(DISTINCT x.university_id) FROM maintenance_source_schools x JOIN maintenance_sources s ON s.source_id=x.source_id JOIN json_each(?) chosen ON chosen.value=x.university_id WHERE s.enabled=1 AND ${inspectedSource})=? THEN 1 ELSE 0 END))`).bind(guardId,decision.scopeRegistrySha256,decision.expectedRevision,current,nowIso(now),...reviewed.bindings,...modelReviewed.bindings,...runtimeReviewed.bindings,decision.publication!.batchId,decision.publication!.acknowledgementSha256,inspectedIds,decision.inspectedSchoolIds.length),
-      env.PIPELINE_DB.prepare('UPDATE maintenance_control SET canary_json=?,revision=revision+1,updated_at=? WHERE singleton=1 AND revision=? AND enabled=1 AND models_enabled=1').bind(next,nowIso(now),decision.expectedRevision),
-      env.PIPELINE_DB.prepare("INSERT INTO maintenance_events VALUES(?,'rollout_advanced',?,?)").bind(crypto.randomUUID(),nowIso(now),canonical({objectKey:saved.objectKey,sha256:saved.sha256,fromRevision:decision.expectedRevision,toRevision:decision.expectedRevision!+1})),
-      env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(guardId),
+      env.PIPELINE_DB.prepare(`INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND enabled=1 AND models_enabled=1 AND seed_complete=1 AND targets_complete=1 AND scope_sha256=? AND revision=? AND canary_json=?) AND ${safetyFence} AND ${reviewed.sql} AND ${modelReviewed.sql} AND ${runtimeReviewed.sql} AND EXISTS(SELECT 1 FROM maintenance_exports WHERE batch_id=? AND status='published' AND acknowledgement_sha256=?) AND (SELECT COUNT(DISTINCT x.university_id) FROM maintenance_source_schools x JOIN maintenance_sources s ON s.source_id=x.source_id JOIN json_each(?) chosen ON chosen.value=x.university_id WHERE s.enabled=1 AND ${inspectedSource})=? THEN 1 ELSE 0 END))`).bind(...guardBindings),
+      env.PIPELINE_DB.prepare('UPDATE maintenance_control SET canary_json=?,revision=revision+1,updated_at=? WHERE singleton=1 AND revision=? AND enabled=1 AND models_enabled=1').bind(...updateBindings),
+      env.PIPELINE_DB.prepare("INSERT INTO maintenance_events VALUES(?,'rollout_advanced',?,?)").bind(...eventBindings),
+      env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(...deleteBindings),
     ])
     return{...decision,state:decision.nextCanaryIds.length?'advanced':'full_scope',advanced:true,newRevision:decision.expectedRevision!+1,receiptKey:saved.objectKey,receiptSha256:saved.sha256}
-  }catch(error){decision.state='holding';decision.reasons=[backend(error)==='quota_wait'?'quota_wait':'rollout_commit_conflict'];decision.backendState=backend(error)==='quota_wait'?'quota_wait':'ready';const held=await saveDecision(env,decision,'holding',now);await event(env,'rollout_held',{objectKey:held.objectKey,sha256:held.sha256,reasons:decision.reasons},now).catch(()=>undefined);return{...decision,advanced:false,receiptKey:held.objectKey,receiptSha256:held.sha256}}
+  }catch(error){decision.state='holding';decision.reasons=[backend(error)==='quota_wait'?'quota_wait':'rollout_commit_conflict'];decision.backendState=backend(error)==='quota_wait'?'quota_wait':'ready';decision.commitDiagnostic=rolloutCommitDiagnostic(stage,error,bindings);const held=await saveDecision(env,decision,'holding',now);await event(env,'rollout_held',{objectKey:held.objectKey,sha256:held.sha256,reasons:decision.reasons,commitDiagnostic:decision.commitDiagnostic},now).catch(()=>undefined);return{...decision,advanced:false,receiptKey:held.objectKey,receiptSha256:held.sha256}}
 }
