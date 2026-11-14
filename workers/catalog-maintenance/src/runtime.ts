@@ -21,7 +21,8 @@ type Activation={canaryUniversityIds:string[];modelsEnabled:true}
 type BootstrapPointer={format:'studyinchina.pending-bootstrap';version:1;envelopeKey:string;envelopeSha256:string;seedSha256:string;scopeRegistrySha256:string;activation:Activation}
 type UploadPointer={format:'studyinchina.pending-bootstrap-upload';version:1;rawKey:string;rawSha256:string;scopeRegistrySha256:string;activation:Activation}
 type TickState='running'|'disabled'|'waiting_for_bootstrap'|'waiting_for_seed'|'waiting_for_activation'|'quota_wait'|'budget_wait'|'error'
-export type RuntimeTick={format:'studyinchina.cloud-maintenance-tick';version:1;tickId:string;observedAt:string;state:TickState;code:string;queued:number|null;seedComplete:boolean|null;targetsComplete:boolean|null;modelsEnabled:boolean|null;canarySchoolCount:number|null;retryAt:string|null;budgetQueueHoldDrain?:BudgetHoldDrain}
+export type TickMode='full'|'dispatch_only'|'administrative_only'
+export type RuntimeTick={format:'studyinchina.cloud-maintenance-tick';version:1;tickId:string;observedAt:string;state:TickState;code:string;queued:number|null;seedComplete:boolean|null;targetsComplete:boolean|null;modelsEnabled:boolean|null;canarySchoolCount:number|null;retryAt:string|null;budgetQueueHoldDrain?:BudgetHoldDrain;mode?:TickMode}
 type DailyHistory={date:string;ticks:RuntimeTick[];truncated:boolean}
 const jsonOptions={httpMetadata:{contentType:'application/json'}}
 async function readObject(env:MaintenanceEnv,key:string,max=512*1024):Promise<{object:BucketObject;text:string}|null>{const object=await env.SNAPSHOTS_BUCKET.get(key);if(!object)return null;if(object.size!==undefined&&object.size>max)throw new MaintenanceError('runtime_artifact_too_large');const text=await object.text();if(new TextEncoder().encode(text).byteLength>max)throw new MaintenanceError('runtime_artifact_too_large');return{object,text}}
@@ -150,8 +151,11 @@ export async function recheckBackend(env:MaintenanceEnv,value:unknown,now=Date.n
   }
 }
 async function saveTick(env:MaintenanceEnv,tick:RuntimeTick){
-  const day=getTodayDate(new Date(tick.observedAt)),key=`maintenance/runtime/ticks/${day}/${tick.tickId}.json`
+  const day=getTodayDate(new Date(tick.observedAt)),key=`maintenance/runtime/${tick.mode==='administrative_only'?'administrative-ticks':'ticks'}/${day}/${tick.tickId}.json`
   await immutable(env,key,canonical(tick))
+  // Administrative continuity is auditable, but is not another scheduler
+  // sample and must not replace the latest ordinary tick or its soak history.
+  if(tick.mode==='administrative_only')return{...tick,receiptKey:key,receiptSha256:await digest(canonical(tick))}
   await updateJson(env,`maintenance/runtime/days/${day}.json`,raw=>{const previous=record(raw),ticks=Array.isArray(previous?.ticks)?previous.ticks as RuntimeTick[]:[];const all=[...ticks.filter(t=>t.tickId!==tick.tickId),tick].sort((a,b)=>a.observedAt.localeCompare(b.observedAt));return{date:day,ticks:all.slice(-1024),truncated:previous?.truncated===true||all.length>1024}})
   await updateJson(env,LATEST,raw=>{const previous=record(raw);return typeof previous?.observedAt==='string'&&previous.observedAt>tick.observedAt?previous:tick})
   if(tick.state==='running'&&tick.seedComplete&&tick.targetsComplete&&tick.modelsEnabled&&tick.canarySchoolCount===0){const existing=await readObject(env,FIRST_ELIGIBLE);if(!existing)await immutable(env,FIRST_ELIGIBLE,canonical({tickId:tick.tickId,observedAt:tick.observedAt})).catch(()=>undefined)}
@@ -159,13 +163,25 @@ async function saveTick(env:MaintenanceEnv,tick:RuntimeTick){
 }
 /** The only scheduler required is an authenticated GitHub cloud tick. Existing
  * account crons and billing settings are not changed. */
-export async function runCloudTick(env:MaintenanceEnv){
-  const tick:RuntimeTick={format:'studyinchina.cloud-maintenance-tick',version:1,tickId:crypto.randomUUID(),observedAt:nowIso(),state:'disabled',code:'not_observed',queued:null,seedComplete:null,targetsComplete:null,modelsEnabled:null,canarySchoolCount:null,retryAt:null}
+export async function runCloudTick(env:MaintenanceEnv,mode:TickMode='full'){
+  const tick:RuntimeTick={format:'studyinchina.cloud-maintenance-tick',version:1,tickId:crypto.randomUUID(),observedAt:nowIso(),state:'disabled',code:'not_observed',queued:null,seedComplete:null,targetsComplete:null,modelsEnabled:null,canarySchoolCount:null,retryAt:null,...(mode==='full'?{}:{mode})}
   try{
     const budget=await readBackgroundBudgetGate(env.SNAPSHOTS_BUCKET)
     if(!budget.allowed){tick.state='budget_wait';tick.code=budget.code;return saveTick(env,tick)}
     const waiting=await quotaWait(env)
     if(waiting){tick.state='quota_wait';tick.code='daily_quota_wait_cached';tick.retryAt=waiting.retryAt;return saveTick(env,tick)}
+    if(mode==='dispatch_only'){
+      // This path never reads or resumes any administrative pointer, even if
+      // one appears after this control read. enqueueDue rechecks readiness and
+      // cannot take its seed/target continuation branches in this mode.
+      const cfg=await control(env)
+      tick.seedComplete=Boolean(cfg?.seed_complete);tick.targetsComplete=Boolean(cfg?.targets_complete);tick.modelsEnabled=Boolean(cfg?.models_enabled);tick.canarySchoolCount=cfg?(JSON.parse(cfg.canary_json)as string[]).length:null
+      const result=await enqueueDue(env,Date.now(),'dispatch_only')
+      if('administrativeContinuationRequired'in result){tick.seedComplete=result.seedComplete??null;tick.targetsComplete=result.targetsComplete??null}
+      tick.queued=result.queued;tick.state=result.enabled?'running':'administrativeContinuationRequired'in result?'waiting_for_seed':'disabled'
+      tick.code=result.enabled?'bounded_scheduler_completed':'administrativeContinuationRequired'in result?'administrative_continuation_required':'existing_controls_preserved'
+      return saveTick(env,tick)
+    }
     const held=await drainBudgetQueueHolds(env);tick.budgetQueueHoldDrain=held
     if(held.sent||held.failed){tick.state=held.failed?'error':'running';tick.code=held.code;tick.queued=held.sent;return saveTick(env,tick)}
     if(await resumePendingScopeUpgrade(env)){tick.state='waiting_for_seed';tick.code='scope_upgrade_pending';tick.queued=1;return saveTick(env,tick)}
@@ -184,7 +200,7 @@ export async function runCloudTick(env:MaintenanceEnv){
     else{
       if(pointer&&cfg.seed_sha256!==pointer.seedSha256)throw new MaintenanceError('pending_bootstrap_existing_seed_conflict')
       tick.seedComplete=Boolean(cfg.seed_complete);tick.targetsComplete=Boolean(cfg.targets_complete);tick.modelsEnabled=Boolean(cfg.models_enabled);tick.canarySchoolCount=(JSON.parse(cfg.canary_json)as string[]).length
-      if(!cfg.seed_complete){const result=await enqueueDue(env);tick.state='waiting_for_seed';tick.code='durable_seed_in_progress';tick.queued=result.queued}
+      if(!cfg.seed_complete){const result=await enqueueDue(env,Date.now(),mode);tick.state='waiting_for_seed';tick.code='durable_seed_in_progress';tick.queued=result.queued}
       else{
         if(cfg.revision===0&&pointer&&env.MAINTENANCE_ENABLED==='true'){
           cfg=await setControls(env,{expectedRevision:0,legacyGuardSha256:cfg.legacy_guard_sha256,enabled:true,modelsEnabled:pointer.activation.modelsEnabled,canaryUniversityIds:pointer.activation.canaryUniversityIds})
@@ -192,10 +208,10 @@ export async function runCloudTick(env:MaintenanceEnv){
         }
         // Revision >0 belongs to the existing control owner. A retrying initial
         // bootstrap never overrides a manual pause or later canary decision.
-        const result=await enqueueDue(env)
+        const result=await enqueueDue(env,Date.now(),mode)
         tick.queued=result.queued;tick.targetsComplete=Boolean(cfg.targets_complete);tick.modelsEnabled=Boolean(cfg.models_enabled);tick.canarySchoolCount=(JSON.parse(cfg.canary_json)as string[]).length
         tick.state=result.enabled?'running':cfg.revision===0&&pointer?'waiting_for_activation':'disabled'
-        tick.code=result.enabled?'bounded_scheduler_completed':env.MAINTENANCE_ENABLED!=='true'?'deployment_activation_gate_disabled':'nativeHeadReconciliationRequired'in result?'native_head_reconciliation_required':cfg.targets_complete?'existing_controls_preserved':'target_refresh_in_progress'
+        tick.code=result.enabled?'bounded_scheduler_completed':mode==='administrative_only'&&cfg.targets_complete?'administrative_no_work':env.MAINTENANCE_ENABLED!=='true'?'deployment_activation_gate_disabled':'nativeHeadReconciliationRequired'in result?'native_head_reconciliation_required':cfg.targets_complete?'existing_controls_preserved':'target_refresh_in_progress'
       }
     }
   }catch(error){const backend=backendCode(error);tick.state=backend==='quota_wait'?'quota_wait':'error';tick.code=error instanceof MaintenanceError?error.code:backend;tick.retryAt=backend==='quota_wait'?(await rememberQuotaWait(env)).retryAt:null}

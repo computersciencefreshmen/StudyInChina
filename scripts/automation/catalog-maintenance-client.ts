@@ -58,7 +58,7 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|job-dispositions|runtime-model-guards(?:\/(?:prepare|register))?|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|job-dispositions|runtime-model-guards(?:\/(?:prepare|register))?|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick(?:\/(?:dispatch|administrative))?|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     let response: Response
     try {
@@ -122,6 +122,18 @@ export async function recoverPendingMaintenancePublication(client: MaintenanceCl
     || canonicalJson(receipt.held.map(entry => entry.proposalId).sort()) !== canonicalJson(ack.heldProposalIds)
     || canonicalJson([...(receipt.unchangedProposalIds ?? [])].sort()) !== canonicalJson(ack.unchangedProposalIds ?? [])) throw new Error('maintenance_publication_receipt_changed')
   return { batchId: pending.batchId, sourceCommit: ack.sourceCommit, receiptPath }
+}
+
+/** An older Worker ignores POST /tick bodies. Confirm explicit support using
+ * its authenticated, fixed metadata GET before any isolated-mode submission. */
+export async function requestIsolatedTick(client: Pick<MaintenanceClient,'json'>, mode:'dispatch_only'|'administrative_only') {
+  const capabilities=await client.json('/tick') as {format?:string;version?:number;modes?:unknown}
+  if(capabilities?.format!=='studyinchina.maintenance-tick-modes'||capabilities.version!==1||!Array.isArray(capabilities.modes)||!capabilities.modes.includes(mode))throw new Error('maintenance_tick_mode_unavailable')
+  // Distinct paths are essential: during rollback/mixed versions, an older
+  // POST /tick would ignore mode and execute full administrative work.
+  const result=await client.json(mode==='dispatch_only'?'/tick/dispatch':'/tick/administrative','POST',{mode}) as {format?:string;mode?:string}
+  if(result?.format!=='studyinchina.cloud-maintenance-tick'||result.mode!==mode)throw new Error('maintenance_tick_mode_response_invalid')
+  return result
 }
 
 export async function downloadMaintenanceExport(client: MaintenanceClient, directory: string, limit = 100): Promise<CandidateExport | null> {
@@ -196,7 +208,8 @@ async function main() {
     console.log(JSON.stringify(result)); return
   }
   if (action === 'tick' && !value) { console.log(JSON.stringify(await client.json('/tick', 'POST', {}))); return }
-  throw new Error('Usage: catalog-maintenance-client.ts status | quota | budget | configure-budget | check-budget | resume-budget | schools | job-dispositions [body.json] | tick | recheck-backend | recover-publication | download <directory> | seed|targets|controls|ack|reconciliations <body.json>')
+  if (['tick-dispatch','tick-administrative'].includes(action) && !value) { console.log(JSON.stringify(await requestIsolatedTick(client,action==='tick-dispatch'?'dispatch_only':'administrative_only'))); return }
+  throw new Error('Usage: catalog-maintenance-client.ts status | quota | budget | configure-budget | check-budget | resume-budget | schools | job-dispositions [body.json] | tick | tick-dispatch | tick-administrative | recheck-backend | recover-publication | download <directory> | seed|targets|controls|ack|reconciliations <body.json>')
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href)
   main().catch(error => { console.error(error instanceof Error && error.message.startsWith('maintenance_') ? error.message : 'maintenance_command_failed'); process.exitCode = 1 })

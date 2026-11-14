@@ -211,11 +211,13 @@ const schedulingSchoolsSql = `school_meta AS MATERIALIZED (
 )`
 const schedulingSchoolIdsSql = `(SELECT json_group_array(xu.university_id) FROM maintenance_source_schools xu JOIN maintenance_schools su ON su.university_id=xu.university_id WHERE xu.source_id=chosen.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1))`
 
-export async function enqueueDue(env: MaintenanceEnv, now = Date.now()) {
+export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'full'|'dispatch_only'|'administrative_only'='full') {
   const jobLimit = tickJobLimit(env)
   const cfg = await control(env)
+  if(mode==='dispatch_only'&&(!cfg?.seed_complete||!cfg.targets_complete))return{enabled:false,queued:0,administrativeContinuationRequired:true,seedComplete:Boolean(cfg?.seed_complete),targetsComplete:Boolean(cfg?.targets_complete)}
   if(cfg&&!cfg.seed_complete&&cfg.seed_plan_sha256){await env.MAINTENANCE_QUEUE.send({version:1,jobId:cfg.seed_sha256,seedSha256:cfg.seed_sha256});return{enabled:false,queued:1}}
   if(cfg&&!cfg.targets_complete){const refresh=await env.PIPELINE_DB.prepare("SELECT refresh_sha256 FROM maintenance_target_refreshes WHERE status='staged' AND input_catalog_sha256=? ORDER BY created_at DESC LIMIT 1").bind(cfg.input_catalog_sha256).first<{refresh_sha256:string}>();if(refresh){await env.MAINTENANCE_QUEUE.send({version:1,jobId:refresh.refresh_sha256,targetRefreshSha256:refresh.refresh_sha256});return{enabled:false,queued:1}}}
+  if(mode==='administrative_only')return{enabled:false,queued:0}
   if (env.MAINTENANCE_ENABLED !== 'true' || !cfg?.enabled || !cfg.seed_complete) return {enabled:false,queued:0}
   if(!(await nativeReconciliationGate(env)).ready)return{enabled:false,queued:0,nativeHeadReconciliationRequired:true}
   const suppliedCoverage = await readCoverageSnapshot(env,cfg.input_catalog_sha256,cfg.scope_sha256,now)

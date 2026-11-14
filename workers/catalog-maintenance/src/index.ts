@@ -29,7 +29,7 @@ import type { JobRow, MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } fro
 import { MaintenanceError } from './types'
 import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus,quotaWait,rememberQuotaWait,recheckBackend } from './runtime'
 import { isDailyD1QuotaError } from './backend-errors'
-import { after, authorized, gateRequest, HASH, json, nowIso, requestJson } from './util'
+import { after, authorized, gateRequest, HASH, json, nowIso, requestJson, record } from './util'
 
 export { ModelAdmission }
 const sourceMigrationFrozen=(env:MaintenanceEnv)=>env.MODEL_STATE_MIGRATION_ROLE==='source'
@@ -203,7 +203,14 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
       const rows=(await env.PIPELINE_DB.prepare("SELECT * FROM maintenance_exports WHERE status='applied' ORDER BY created_at LIMIT 50").all<{batch_id:string;input_catalog_sha256:string;scope_sha256:string;created_at:string;acknowledgement_json:string}>()).results??[]
       return json({publications:rows.map(row=>({batchId:row.batch_id,inputCatalogSha256:row.input_catalog_sha256,scopeRegistrySha256:row.scope_sha256,createdAt:row.created_at,status:'applied',acknowledgement:JSON.parse(row.acknowledgement_json)}))})
     }
-    if(url.pathname==='/tick'&&request.method==='POST')return json(await runCloudTick(env))
+    if(url.pathname==='/tick'&&request.method==='GET')return json({format:'studyinchina.maintenance-tick-modes',version:1,modes:['full','dispatch_only','administrative_only']})
+    if(['/tick','/tick/dispatch','/tick/administrative'].includes(url.pathname)&&request.method==='POST'){
+      const body=request.body?record(await requestJson(request,4096)):{}
+      if(!body||Object.keys(body).some(key=>key!=='mode')||body.mode!==undefined&&(typeof body.mode!=='string'||!['full','dispatch_only','administrative_only'].includes(body.mode)))throw new MaintenanceError('tick_mode_invalid')
+      const pathMode=url.pathname==='/tick/dispatch'?'dispatch_only':url.pathname==='/tick/administrative'?'administrative_only':undefined
+      if(pathMode&&body.mode!==undefined&&body.mode!==pathMode)throw new MaintenanceError('tick_mode_invalid')
+      return json(await runCloudTick(env,(pathMode??body.mode) as 'full'|'dispatch_only'|'administrative_only'|undefined))
+    }
     if(url.pathname==='/proposals'&&request.method==='GET') {
       const rows=(await env.PIPELINE_DB.prepare('SELECT proposal_id,status,proposal_json FROM maintenance_proposals ORDER BY created_at DESC LIMIT 100').all()).results??[]
       return json({format:'studyinchina.maintenance-proposals',rows})
