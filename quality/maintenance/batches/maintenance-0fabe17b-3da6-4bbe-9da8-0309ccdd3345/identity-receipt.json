@@ -1,0 +1,55 @@
+{
+  "format": "studyinchina.identity-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-0fabe17b-3da6-4bbe-9da8-0309ccdd3345",
+  "batchSha256": "cff1d8c7249c1ea4f53f90fb4bc045b8822e904c1feb3047d52e74fdcad4eb44",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "inputCatalogSha256": "e1bd1e868f392e3258b79606aeebab9424ac43fff32b9aad312eeeb1742f48a7",
+  "outputCatalogSha256": "7e2419a991163906c20b81ac8e7c04e71939b5aa8f1c80d19a20acdc3bb21ada",
+  "acceptedAt": "2026-11-14T22:13:48.160Z",
+  "accepted": [
+    {
+      "proposalId": "maintenance-d333a1587e59d53d5578fbd5af0c64d18ae0291ee4ef7d51440ad8482ee4e115",
+      "recordId": "program-dadea218a8094e1038b5330a",
+      "canonicalKey": "uni-nanjing-medical-university|bachelor|degree|name:临床医学中文授课专业",
+      "action": "created",
+      "verifiedName": {
+        "en": "Bachelor Program in Clinical Medicine",
+        "zh": "临床医学(中文授课)专业"
+      },
+      "verifiedSourceUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm"
+    }
+  ],
+  "unchanged": [],
+  "held": [
+    {
+      "proposalId": "maintenance-field-2074360edde15d0f1a52b5f53c1afa0a95a2b445fd1fc9184eecd56396073b73",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    },
+    {
+      "proposalId": "maintenance-field-ad1e488bb662cf7a2445a291535063166b2bc92a5116e3115fcd4489bf5985e0",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    },
+    {
+      "proposalId": "maintenance-scholarship-2012dc81146c7de62a680604860594d68e6935d44e1473e252323061b4f0dc7f",
+      "reason": "entity_type_has_no_identity_consumer"
+    },
+    {
+      "proposalId": "maintenance-scholarship-8ca8e6e417a8e2b10f58e4ff996fe268b2690329cd76ae9d076a020f2ef400a9",
+      "reason": "entity_type_has_no_identity_consumer"
+    },
+    {
+      "proposalId": "maintenance-field-9d1e072b358f957575630afc0e394a2f78e7cb6eb9ce59d7d53d0694d8011f33",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    },
+    {
+      "proposalId": "maintenance-scholarship-f79f2657ca8724380e93e050a33655b29ae86017c38af41242ff97cce0d4da8a",
+      "reason": "entity_type_has_no_identity_consumer"
+    },
+    {
+      "proposalId": "maintenance-field-2c7f64768809ac74cd178206f57ccd4ff24dcc93f75e0013fa32e120f7a115eb",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    }
+  ],
+  "sha256": "4cf7d5b7d3003725387236835cac14716d05135285c45366474c2aa367f8eba8"
+}
