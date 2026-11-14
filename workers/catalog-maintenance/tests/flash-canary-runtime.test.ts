@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
@@ -10,7 +11,7 @@ import type { CapturedSnapshot } from '../src/capture'
 import { maintainedFieldPaths, type MaintenanceRecordTarget } from '../../../scripts/maintenance/field-contracts'
 import type { ModelRequest } from '../src/types'
 
-const admin = 'flash-native-test-admin-not-a-real-secret', sourceId = 'd'.repeat(64), rawSha = 'e'.repeat(64), scope = 'a'.repeat(64)
+const admin = 'flash-native-test-admin-not-a-real-secret', sourceId = createHash('sha256').update('https://runtime-test.edu.cn/catalog').digest('hex'), rawSha = 'e'.repeat(64), scope = 'a'.repeat(64)
 const text = 'International students applying to Computer Science. Autumn 2027 admissions. Application deadline: 2027-09-30.'
 type NativeBucket = { put(key: string, body: string): Promise<unknown>; get(key: string): Promise<{ arrayBuffer(): Promise<ArrayBuffer>; text(): Promise<string> } | null> }
 

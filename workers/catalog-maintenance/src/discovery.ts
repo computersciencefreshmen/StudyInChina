@@ -36,7 +36,11 @@ async function saveLineage(env:MaintenanceEnv,child:string,parent:string,frontie
   for(let attempt=0;attempt<4;attempt++){
     const object=await env.SNAPSHOTS_BUCKET.get(key),old=object?record(JSON.parse(await object.text())):null,parents=new Set(Array.isArray(old?.parents)?old.parents.filter((id):id is string=>typeof id==='string'&&HASH.test(id)):[])
     parents.add(parent)
-    const saved=await env.SNAPSHOTS_BUCKET.put(key,canonical({version:1,sourceId:child,parents:[...parents].sort(),frontierSha256}),{onlyIf:object?.etag?{etagMatches:object.etag}:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}})
+    // Retain a receipt for each actual discovered edge. The former latest-only
+    // pointer cannot substantiate every historical navigation parent.
+    const prior=record(old?.parentFrontiers),parentFrontiers=Object.fromEntries(Object.entries(prior??{}).filter(([id,sha])=>HASH.test(id)&&typeof sha==='string'&&HASH.test(sha)))
+    parentFrontiers[parent]=frontierSha256
+    const saved=await env.SNAPSHOTS_BUCKET.put(key,canonical({version:1,sourceId:child,parents:[...parents].sort(),frontierSha256,parentFrontiers}),{onlyIf:object?.etag?{etagMatches:object.etag}:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}})
     if(saved!==null)return
   }
   throw new MaintenanceError('discovery_lineage_conflict')
