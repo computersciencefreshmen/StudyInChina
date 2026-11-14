@@ -3,6 +3,7 @@ import type { Control, MaintenanceEnv, ModelRequest } from './types'
 import { MaintenanceError } from './types'
 import { canonical, digest, gateRequest, HASH, nowIso, record } from './util'
 import { EXISTING_SCHOOLS_V2_SHA256, scopeUpgradeLineage } from './scope-config'
+import { sqlAnd } from './sql-and'
 
 const PREFIX = 'maintenance/terminal-quarantine/'
 const KIND = 'reviewed_terminal_quarantine'
@@ -130,7 +131,7 @@ export async function noReplayReason(env: MaintenanceEnv, input: ModelRequest, s
 /** Every immutable job column available in the captured audit is compared.
  * The JSON contains three small rows, never the catalogue/target manifest. */
 export function matchingQuarantinedJobsSql() {
-  return `SELECT j.job_id FROM maintenance_jobs j JOIN json_each(?) q ON j.job_id=json_extract(q.value,'$.job_id') WHERE ${tupleFields.map(field => `j.${field} IS json_extract(q.value,'$.${field}')`).join(' AND ')}`
+  return `SELECT j.job_id FROM maintenance_jobs j JOIN json_each(?) q ON j.job_id=json_extract(q.value,'$.job_id') WHERE ${sqlAnd(tupleFields.map(field => `j.${field} IS json_extract(q.value,'$.${field}')`))}`
 }
 function auditSql(alias: string) {
   return `(${alias}.source_id IN(SELECT value FROM json_each(?)) OR ${alias}.snapshot_sha256 IN(SELECT value FROM json_each(?))

@@ -7,6 +7,7 @@ import { canonicalLegacyRequestDescriptors, type LegacyReconciliationPackage } f
 import { isPinnedScopeTransition, scopeUpgradeLineage } from './scope-config'
 import { isDailyD1QuotaError } from './backend-errors'
 import { normalizeEvidenceText } from '../../ingestion/src/rules'
+import { sqlAnd } from './sql-and'
 
 export const LEGACY_UNKNOWN_POLICY_SHA256 = '82fe0f4a9a594ba6c890a3c37df0cc52b05a58cc571435aa3d9558e1fada6028'
 export const LEGACY_UNKNOWN_GUARD_SET_SHA256 = 'b7964b3f6a65c3fc81b291a7a95c6c5daba74431d1a605f74a03d4eca736f536'
@@ -66,7 +67,7 @@ export async function legacyModelNoReplayReason(env: MaintenanceEnv, input: Mode
 
 /** Full immutable SQL tuples, including nullable result/usage/quota columns. */
 export function matchingLegacyUnknownAttemptsSql() {
-  return `SELECT a.attempt_id FROM maintenance_model_attempts a JOIN json_each(?) p ON a.attempt_id=json_extract(p.value,'$.attempt_id') WHERE ${fields.map(f => `a.${f} IS json_extract(p.value,'$.${f}')`).join(' AND ')}`
+  return `SELECT a.attempt_id FROM maintenance_model_attempts a JOIN json_each(?) p ON a.attempt_id=json_extract(p.value,'$.attempt_id') WHERE ${sqlAnd(fields.map(f => `a.${f} IS json_extract(p.value,'$.${f}')`))}`
 }
 export async function verifyLegacyUnknownRows(env: MaintenanceEnv) {
   await policy()

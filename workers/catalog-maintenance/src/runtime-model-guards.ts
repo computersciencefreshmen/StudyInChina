@@ -6,6 +6,7 @@ import { normalizeEvidenceText } from '../../ingestion/src/rules'
 import { EXISTING_SCHOOLS_V2_SHA256 } from './scope-config'
 import { LEGACY_MODEL_NO_REPLAY_POLICY } from './legacy-model-guards'
 import { TERMINAL_QUARANTINE_POLICY } from './reviewed-terminal-quarantine'
+import { sqlAnd } from './sql-and'
 
 // This registry is a permanent STOP ledger, not a provider outcome correction.
 const PREFIX = 'maintenance/runtime-model-guards/'
@@ -107,7 +108,7 @@ async function subject(env:MaintenanceEnv,sourceId:string,rawSha256:string,readR
 function sourceMatchesSql(){return `SELECT s.source_id FROM json_each(?) p JOIN maintenance_sources s ON s.source_id=json_extract(p.value,'$.sourceId') AND s.url=json_extract(p.value,'$.url') WHERE (SELECT COUNT(*) FROM maintenance_source_schools x WHERE x.source_id=s.source_id)=json_array_length(p.value,'$.schoolIds') AND NOT EXISTS(SELECT 1 FROM json_each(p.value,'$.schoolIds') chosen LEFT JOIN maintenance_source_schools x ON x.source_id=s.source_id AND x.university_id=chosen.value WHERE x.source_id IS NULL)`}
 export function runtimeMatchingSql(table:'maintenance_jobs'|'maintenance_model_attempts') {
   const fields=table==='maintenance_jobs'?jobFields:attemptFields,key=table==='maintenance_jobs'?'job_id':'attempt_id'
-  return `SELECT a.${key} FROM json_each(?) p JOIN ${table} a ON ${fields.map(k=>`a.${k} IS json_extract(p.value,'$.${k}')`).join(' AND ')}`
+  return `SELECT a.${key} FROM json_each(?) p JOIN ${table} a ON ${sqlAnd(fields.map(k=>`a.${k} IS json_extract(p.value,'$.${k}')`))}`
 }
 async function exactRows(env:MaintenanceEnv,p:Proof){
   for(const [table,rows]of [['maintenance_model_attempts',p.attempts],['maintenance_jobs',p.jobs]]as const){const found=(await env.PIPELINE_DB.prepare(runtimeMatchingSql(table)).bind(canonical(rows)).all()).results??[];if(found.length!==rows.length)fail('tuple_changed')}
@@ -203,7 +204,7 @@ export function runtimeDispositionFence(value:RuntimeModelDisposition){
   const clauses:string[]=[],bindings:unknown[]=[]
   for(const p of value.proofs){clauses.push(`EXISTS(SELECT 1 FROM maintenance_events WHERE event_id=? AND kind=? AND details_json=?)`);bindings.push(eventId(p.proof.operationId),KIND,p.detailsJson);clauses.push(`(SELECT COUNT(*) FROM(${sourceMatchesSql()}))=?`);bindings.push(canonical(p.proof.subjects),p.proof.subjects.length)}
   for(const [table,rows]of [['maintenance_model_attempts',value.attempts],['maintenance_jobs',value.jobs]]as const){clauses.push(`(SELECT COUNT(*) FROM(${runtimeMatchingSql(table)}))=?`);bindings.push(canonical(rows),rows.length)}
-  return{sql:clauses.join(' AND '),bindings,attempts:{sql:runtimeMatchingSql('maintenance_model_attempts'),bindings:[canonical(value.attempts)]},jobs:{sql:runtimeMatchingSql('maintenance_jobs'),bindings:[canonical(value.jobs)]}}
+  return{sql:sqlAnd(clauses),bindings,attempts:{sql:runtimeMatchingSql('maintenance_model_attempts'),bindings:[canonical(value.attempts)]},jobs:{sql:runtimeMatchingSql('maintenance_jobs'),bindings:[canonical(value.jobs)]}}
 }
 
 /** Compose disjoint reviewed sets by identity, retaining every unregistered unknown. */
