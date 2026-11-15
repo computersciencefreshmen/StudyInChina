@@ -1,0 +1,90 @@
+{
+  "format": "studyinchina.identity-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-fbd84256-9191-4002-b826-4ba2c7eb084e",
+  "batchSha256": "fb89aa977e64c7a66fda25e73d4d1d694a4333377533f555542295d9979c4167",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "inputCatalogSha256": "c2d22e1316392dc5d64569b501683f825ee6b127f39f508a01010b351793c69e",
+  "outputCatalogSha256": "22982dc1a3d6029908a33780d2d3492ba7233202e7ce0ec6e74f072bd7a125d8",
+  "acceptedAt": "2026-11-15T14:26:03.915Z",
+  "accepted": [
+    {
+      "proposalId": "maintenance-211251f09e67b3baba2ac362ba34cb3fdb05a65062046931983be63770dd8375",
+      "recordId": "prog-gap-local-strong-muhn-b-clinical-medicine-cn",
+      "canonicalKey": "uni-hainan-medical-university|bachelor|degree|name:临床医学",
+      "action": "identity_accepted",
+      "verifiedName": {
+        "en": "Clinical Medicine",
+        "zh": "临床医学"
+      },
+      "verifiedSourceUrl": "https://www.muhn.edu.cn/gjxy/info/1432/30304.htm"
+    },
+    {
+      "proposalId": "maintenance-5072ecd65a7f50a64b6337f92452628d6c7a8e134ea1fb7581abd89e704de73c",
+      "recordId": "program-befcda9b5fbf8e687adb8bc0",
+      "canonicalKey": "uni-hainan-medical-university|bachelor|degree|name:护理学",
+      "action": "created",
+      "verifiedName": {
+        "en": "Nursing",
+        "zh": "护理学"
+      },
+      "verifiedSourceUrl": "https://www.muhn.edu.cn/gjxy/info/1432/30304.htm"
+    },
+    {
+      "proposalId": "maintenance-8f3c0b51e2e23d47c3dbc7171f5fe9fb22db02dd24ad9f647dc7ecac956c07fa",
+      "recordId": "program-085ebae5642cd84e53539db8",
+      "canonicalKey": "uni-hainan-medical-university|master|degree|name:公共卫生专硕",
+      "action": "created",
+      "verifiedName": {
+        "en": "Master of Public Health (Professional Master)",
+        "zh": "公共卫生(专硕)"
+      },
+      "verifiedSourceUrl": "https://www.muhn.edu.cn/gjxy/info/1432/30304.htm"
+    },
+    {
+      "proposalId": "maintenance-a81b8e0f997be54053a0d284ac7d58632f283694147455301893733b45314dc6",
+      "recordId": "program-66ab45a75eec3be43e6a2ff1",
+      "canonicalKey": "uni-hainan-medical-university|bachelor|degree|name:中医学含针灸推拿中西医结合专业",
+      "action": "created",
+      "verifiedName": {
+        "en": "Traditional Chinese Medicine (including Acupuncture, Tuina, and Integrated Traditional Chinese and Western Medicine programs)",
+        "zh": "中医学(含针灸推拿、中西医结合专业)"
+      },
+      "verifiedSourceUrl": "https://www.muhn.edu.cn/gjxy/info/1432/30304.htm"
+    },
+    {
+      "proposalId": "maintenance-d3b7f8364ce182bd0e575ca72d1896fffe7c81bdb168262924c432e9953a685f",
+      "recordId": "program-08c518ac40f075eafa8f013f",
+      "canonicalKey": "uni-hainan-medical-university|bachelor|degree|name:社会医学与卫生事业管理",
+      "action": "created",
+      "verifiedName": {
+        "en": "Social Medicine and Health Management",
+        "zh": "社会医学与卫生事业管理"
+      },
+      "verifiedSourceUrl": "https://www.muhn.edu.cn/gjxy/info/1432/30304.htm"
+    },
+    {
+      "proposalId": "maintenance-12d22ef0968113ba34e5bd9a71c03dda9c6fe26d55b7ca80716fbfb7365b2c3a",
+      "recordId": "program-0f3cfb07a2f5b62735383ecf",
+      "canonicalKey": "uni-dongguan-university-of-technology|master|degree|name:085405软件工程专业介绍仅面向2026年国际硕士",
+      "action": "created",
+      "verifiedName": {
+        "en": "Introduction to Software Engineering",
+        "zh": "085405 软件工程专业介绍(仅面向2026年国际硕士)"
+      },
+      "verifiedSourceUrl": "https://yjs.dgut.edu.cn/info/1842/21696.htm"
+    }
+  ],
+  "unchanged": [],
+  "held": [
+    {
+      "proposalId": "maintenance-field-3acb3ce8037d036eb4b3fcc66769ee1f61fc0730d262c063c53a70cca487a67f",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    },
+    {
+      "proposalId": "maintenance-field-fefaf68be88844269205715d6a8c9c35a0fa4c2da0e39d8ff80b066bfad21366",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    }
+  ],
+  "sha256": "0786c7e6c2ec4148d05f20b5c105b9695fe5cd581a46dc39abd3c7adb8a37a30"
+}
