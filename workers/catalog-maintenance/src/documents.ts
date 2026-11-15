@@ -32,6 +32,8 @@ export async function listPendingDocuments(env: MaintenanceEnv, limit = DOCUMENT
   const cfg = await control(env)
   if (!cfg?.seed_complete) throw new MaintenanceError('maintenance_seed_incomplete')
   const canary = JSON.parse(cfg.canary_json) as string[]
+  // One ID per binding exceeds D1's 100-variable limit after 99 schools.
+  // A single JSON school set preserves membership; [] still means all schools.
   const rows = (await env.PIPELINE_DB.prepare(`
     SELECT s.source_id,s.url,s.raw_sha256,s.snapshot_key FROM maintenance_sources s
     WHERE s.enabled=1 AND s.raw_sha256 IS NOT NULL AND s.snapshot_key IS NOT NULL
@@ -41,9 +43,9 @@ export async function listPendingDocuments(env: MaintenanceEnv, limit = DOCUMENT
       WHERE d.source_id=s.source_id AND d.raw_sha256=s.raw_sha256)
     AND NOT EXISTS(SELECT 1 FROM maintenance_document_failures f
       WHERE f.source_id=s.source_id AND f.raw_sha256=s.raw_sha256)
-    ${canary.length ? `AND EXISTS(SELECT 1 FROM maintenance_source_schools x WHERE x.source_id=s.source_id AND x.university_id IN(${canary.map(() => '?').join(',')}))` : ''}
+    ${canary.length ? `AND EXISTS(SELECT 1 FROM maintenance_source_schools x WHERE x.source_id=s.source_id AND x.university_id IN(SELECT value FROM json_each(?)))` : ''}
     ORDER BY s.last_success_at,s.source_id LIMIT ?
-  `).bind(...canary, limit).all<{ source_id: string; url: string; raw_sha256: string; snapshot_key: string }>()).results ?? []
+  `).bind(...(canary.length ? [JSON.stringify(canary)] : []), limit).all<{ source_id: string; url: string; raw_sha256: string; snapshot_key: string }>()).results ?? []
   const documents: PendingDocument[] = []
   for (const row of rows) {
     const snapshot = await loadSnapshot(env, row.snapshot_key)
