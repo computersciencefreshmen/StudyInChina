@@ -1,0 +1,60 @@
+{
+  "format": "studyinchina.field-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-6c5fe65b-d53b-4541-b15e-7b2214449370",
+  "batchSha256": "0fa5488b4570acb71b44620a3069a3d738616521ca4cfc1c73b93ba44b05e34c",
+  "inputCatalogSha256": "acce8d4e940ce27f6803ff0025da3b6547d2adcd90d4d1d146c202bbd7c734d0",
+  "outputCatalogSha256": "c2d22e1316392dc5d64569b501683f825ee6b127f39f508a01010b351793c69e",
+  "acceptedAt": "2026-11-15T12:19:26.923Z",
+  "accepted": [
+    {
+      "proposalId": "maintenance-field-0922c6a476634a62f74d584c6f682c068fbae94f5cb18c93d02218a79e28e63e",
+      "recordId": "program-4131012044-bachelor-a868920158666b81ea87",
+      "fieldPaths": [
+        "durationMonths",
+        "durationMonthsMax",
+        "applyUrl"
+      ]
+    },
+    {
+      "proposalId": "maintenance-field-16aac3e71b9872d784341c618d990fc870b86f2d336e838cbaf8d4ef7586efcc",
+      "recordId": "program-jiangsu-university-business-administration-master",
+      "fieldPaths": [
+        "durationMonths"
+      ]
+    }
+  ],
+  "fieldBindings": [
+    {
+      "entityType": "program",
+      "recordId": "program-4131012044-bachelor-a868920158666b81ea87",
+      "fieldPath": "durationMonths",
+      "verificationSha256": "3ebd7967588600788d2b6b0b7c566b9e357b5dedf452864a2616da96d63fd31c"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-4131012044-bachelor-a868920158666b81ea87",
+      "fieldPath": "durationMonthsMax",
+      "verificationSha256": "3933d1598f9c8e7cd9b0c35a42b714c8a411971168cdc22fdbf7a28537109fa8"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-4131012044-bachelor-a868920158666b81ea87",
+      "fieldPath": "applyUrl",
+      "verificationSha256": "0ed2beacbfe7db88d4e4521143feca6d435ac2b7b72ed95e3e19cb222c292045"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-jiangsu-university-business-administration-master",
+      "fieldPath": "durationMonths",
+      "verificationSha256": "10baf60d0ec9a6dc21c3ccd596e7edd7c2f179722e2541c74134a3ce15d953d9"
+    }
+  ],
+  "held": [
+    {
+      "proposalId": "maintenance-field-1d08308ae16e1eda9bf47fa384e433c5aea276b2a028837a83dd9e851eacb432",
+      "reason": "[\n  {\n    \"code\": \"custom\",\n    \"message\": \"Maximum duration must be at least the minimum duration\",\n    \"path\": [\n      \"programs\",\n      2079\n    ]\n  }\n]"
+    }
+  ],
+  "sha256": "42054ab20eb942c5dbb491a0a5077fb6b85d48140200bd5d79e2228cd2b10f51"
+}
