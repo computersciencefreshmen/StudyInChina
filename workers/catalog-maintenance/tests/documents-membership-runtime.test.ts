@@ -17,8 +17,24 @@ test('native D1/R2 selects full 225/295 memberships and empty-all scope with <=2
       try{
         for(const table of ['maintenance_source_schools','maintenance_sources','maintenance_schools','maintenance_control','maintenance_observations'])await db.prepare(`DELETE FROM ${table}`).run()
         for(const table of ['maintenance_schools','maintenance_sources','maintenance_source_schools','maintenance_control','maintenance_observations']){
-          const statements=f.db.sqlite.prepare(`SELECT * FROM ${table}`).all().map(row=>db.prepare(`INSERT INTO ${table}(${Object.keys(row).join(',')}) VALUES(${Object.keys(row).map(()=>'?').join(',')})`).bind(...Object.values(row)))
+          // Only these literal local fixture tables are imported. Batch rows to
+          // avoid hundreds of synchronous Miniflare proxy property reads before
+          // an awaited RPC, without retrying or hiding a bridge failure.
+          const rows=f.db.sqlite.prepare(`SELECT * FROM ${table}`).all()
+          if(!rows.length)continue
+          const columns=Object.keys(rows[0]);assert.ok(columns.length>0&&columns.length<=100)
+          assert.ok(columns.every(column=>/^[a-z_][a-z0-9_]*$/.test(column)))
+          const rowsPerStatement=Math.floor(100/columns.length),statements=[]
+          for(let offset=0;offset<rows.length;offset+=rowsPerStatement){
+            const group=rows.slice(offset,offset+rowsPerStatement)
+            assert.ok(group.every(row=>Object.keys(row).join(',')===columns.join(',')))
+            const values=group.flatMap(row=>columns.map(column=>row[column]))
+            assert.ok(values.length>0&&values.length<=100)
+            statements.push(db.prepare(`INSERT INTO ${table}(${columns.join(',')}) VALUES${group.map(()=>`(${columns.map(()=>'?').join(',')})`).join(',')}`).bind(...values))
+            if(statements.length===8)await db.batch(statements.splice(0))
+          }
           if(statements.length)await db.batch(statements)
+          assert.equal(await db.prepare(`SELECT COUNT(*) count FROM ${table}`).first('count'),rows.length)
         }
         for(const [key,bytes]of f.bucket.objects)await bucket.put(key,bytes)
         let sql='',values:unknown[]=[],writes=0,modelCalls=0,queueCalls=0

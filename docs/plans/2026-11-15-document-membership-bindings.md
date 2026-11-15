@@ -42,3 +42,11 @@ Private live evidence is retained under the Growth worktree's ignored
 or document/model content are included in this change. A successful normal
 post-deployment PDF workflow remains the operational verification; the code fix
 and a green test suite alone do not establish end-to-end pipeline health.
+
+CI run `43700069343` later failed during native fixture loading on an internal
+Miniflare synchronous-proxy message-ID assertion, before the production document
+selector ran. The same code and fixture had passed two earlier complete CI runs;
+the underlying bridge instability remains unproven. Fixture loading now uses
+multirow inserts bounded to 100 bindings and eight statements per awaited batch.
+No retry, assertion removal, timeout increase or production change accompanies
+this test-only adjustment.
