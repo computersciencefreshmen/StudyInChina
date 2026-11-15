@@ -1,0 +1,48 @@
+{
+  "format": "studyinchina.field-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-f7ced22b-ad2e-4bb4-82b8-2bffde15e13c",
+  "batchSha256": "86a367490557e42f99ee9830a2e7d258fd8418ddca4f3142ca76150a975310e2",
+  "inputCatalogSha256": "f7eac111576aae898a8ac18e4234531916f8f96688a8abe3d87c01f32eb965c7",
+  "outputCatalogSha256": "1fbfc146ecc4a717e36c6a86dff35cd6c83c30c58381e31233981d5d7ac632af",
+  "acceptedAt": "2026-11-15T00:39:24.244Z",
+  "accepted": [
+    {
+      "proposalId": "maintenance-field-6f00a8358fe246c558884ea0099720a8f708cdbe51de7c7d48a06b616eb60bfb",
+      "recordId": "program-dadea218a8094e1038b5330a",
+      "fieldPaths": [
+        "durationMonths",
+        "durationMonthsMax"
+      ]
+    },
+    {
+      "proposalId": "maintenance-field-23f0d04fee830320c44b1f5f6c189fe84a8f297b5cbf498e3c7364ec47a6544f",
+      "recordId": "sch-gap-sch-mew-ne-imu-autonomous-region-postgraduate",
+      "fieldPaths": [
+        "applicationUrl"
+      ]
+    }
+  ],
+  "fieldBindings": [
+    {
+      "entityType": "program",
+      "recordId": "program-dadea218a8094e1038b5330a",
+      "fieldPath": "durationMonths",
+      "verificationSha256": "1a427b2170e905644a621a40235d6f6455a45b5e5dab4069c2871e21d6f3566a"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-dadea218a8094e1038b5330a",
+      "fieldPath": "durationMonthsMax",
+      "verificationSha256": "deff675218597df39aa4006e773e8becf7564f3150666c7c27670b5fa70688cf"
+    },
+    {
+      "entityType": "scholarship",
+      "recordId": "sch-gap-sch-mew-ne-imu-autonomous-region-postgraduate",
+      "fieldPath": "applicationUrl",
+      "verificationSha256": "1e4e682cb1d80476f5a2f035abf2eff2358a223f73c40c4fd38fb543e27950f9"
+    }
+  ],
+  "held": [],
+  "sha256": "2225d18e99701a9a4f4ca46ddd8f63614351bb00ab9b8096bead575d5c420aa1"
+}

@@ -1,0 +1,31 @@
+{
+  "format": "studyinchina.identity-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-f7ced22b-ad2e-4bb4-82b8-2bffde15e13c",
+  "batchSha256": "86a367490557e42f99ee9830a2e7d258fd8418ddca4f3142ca76150a975310e2",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "inputCatalogSha256": "f7eac111576aae898a8ac18e4234531916f8f96688a8abe3d87c01f32eb965c7",
+  "outputCatalogSha256": "f7eac111576aae898a8ac18e4234531916f8f96688a8abe3d87c01f32eb965c7",
+  "acceptedAt": "2026-11-15T00:39:24.244Z",
+  "accepted": [],
+  "unchanged": [],
+  "held": [
+    {
+      "proposalId": "maintenance-field-6f00a8358fe246c558884ea0099720a8f708cdbe51de7c7d48a06b616eb60bfb",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    },
+    {
+      "proposalId": "maintenance-scholarship-a366fc3d4d2b31b571d23dc9e7505acd939301507f73f8b30a27ff846d946a95",
+      "reason": "entity_type_has_no_identity_consumer"
+    },
+    {
+      "proposalId": "maintenance-scholarship-f0f3d0b42ca02a24e163c418799e9606a3e854d9b7362e6ab4853cd3eec720d2",
+      "reason": "entity_type_has_no_identity_consumer"
+    },
+    {
+      "proposalId": "maintenance-field-23f0d04fee830320c44b1f5f6c189fe84a8f297b5cbf498e3c7364ec47a6544f",
+      "reason": "entity_type_has_no_identity_consumer"
+    }
+  ],
+  "sha256": "f2510d5c7578e7b37d3b7ab3ddac229cc18fd7f8bac0036474506fb4d18721db"
+}
