@@ -1,0 +1,27 @@
+{
+  "format": "studyinchina.identity-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-2c5dc529-ba63-461b-83a6-95b2e679938a",
+  "batchSha256": "d525e44de5b9ddfc3b0d0ccd2bc080302d72dcf2d1dfda9cd0656303ec3540e0",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "inputCatalogSha256": "1fbfc146ecc4a717e36c6a86dff35cd6c83c30c58381e31233981d5d7ac632af",
+  "outputCatalogSha256": "1fbfc146ecc4a717e36c6a86dff35cd6c83c30c58381e31233981d5d7ac632af",
+  "acceptedAt": "2026-11-15T02:40:51.997Z",
+  "accepted": [],
+  "unchanged": [],
+  "held": [
+    {
+      "proposalId": "maintenance-field-4477924f4905cfa60dc9853513b3cb77e32684a02873d52154bca4d1fe10b39b",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    },
+    {
+      "proposalId": "maintenance-scholarship-f8c4ff30dba4021c1db6b5ba28c2198114539621cfec9ad77da917f8ac65fa14",
+      "reason": "entity_type_has_no_identity_consumer"
+    },
+    {
+      "proposalId": "maintenance-field-5cb9d8b463b4cd4f00563e13a78127c5f9c43ef2629d13301a935d6f4494bb63",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    }
+  ],
+  "sha256": "98572b12c1035a7e64db490c98adb69239d817916da0add605dc83588dcf66bc"
+}
