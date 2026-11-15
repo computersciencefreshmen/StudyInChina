@@ -1,0 +1,39 @@
+{
+  "format": "studyinchina.identity-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-e5ee000b-644a-419b-9180-3a7393d94636",
+  "batchSha256": "0df6d6f9eb85ff8bf34503d9f6eb83a165246f986fea7f1146e2d5502698ba33",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "inputCatalogSha256": "d97753bb84ba294526a3c5afa1020dac14571ffd82b14708d416ecfcd409a1a6",
+  "outputCatalogSha256": "ff503b552a855797ff9760da097a399ac56666df83c9b4391fae40b4b9b469cd",
+  "acceptedAt": "2026-11-15T04:55:32.854Z",
+  "accepted": [
+    {
+      "proposalId": "maintenance-a57a352cc943ddda46127132d2c74c440a0674d8ac81b16fa914be19a79216bc",
+      "recordId": "program-7236172926f91972d433ad57",
+      "canonicalKey": "uni-shantou-university|language|language|name:chineselanguagecourse",
+      "action": "created",
+      "verifiedName": {
+        "en": "Chinese Language Course",
+        "zh": "Chinese Language Course"
+      },
+      "verifiedSourceUrl": "https://sie.stu.edu.cn/en/study.aspx?flowNo=2"
+    }
+  ],
+  "unchanged": [],
+  "held": [
+    {
+      "proposalId": "maintenance-scholarship-38f30b3ba95c1d252b5472fbfb1820b2ed14d5975c4e31e6b730f251fef46f43",
+      "reason": "entity_type_has_no_identity_consumer"
+    },
+    {
+      "proposalId": "maintenance-scholarship-7b74f96d7bb53fe65ccab2cd7cee96d03b029aaa9d6e6d139ada672558a5df39",
+      "reason": "entity_type_has_no_identity_consumer"
+    },
+    {
+      "proposalId": "maintenance-field-5a5af837af16499d3dc8f1293a7772f43bbf07b6dfe3db0df9ac81bae222b6ea",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    }
+  ],
+  "sha256": "e3f6e538f46cefeeb8caa0efd682d711197f7b3c422ccfea045c74100fb96afb"
+}
