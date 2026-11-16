@@ -2,13 +2,92 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {selectRefillCandidates,dispatchRefillCandidates,readRefillDispatchStatus,declineRefillDispatch} from '../src/refill-dispatch'
 import {refillProofBudget,REFILL_PROOF_TIME_MS} from '../src/refill-proof-budget'
-import {canonical} from '../src/util'
+import {canonical,digest} from '../src/util'
+import {publishCoverageSnapshot} from '../src/coverage'
+import {seedInput,TEST_CATALOG,TEST_SCOPE} from './fixture'
 import {refillFixture,refillNow} from './refill-dispatch-fixture'
 import {installUnknownProof} from './refill-proof-budget-fixture'
 import {maintenanceRecordTargetSchema} from '../../../scripts/maintenance/field-contracts'
 
 const select=(f:Awaited<ReturnType<typeof refillFixture>>,limit=8)=>selectRefillCandidates(f.env,{kind:'model',limit,excludeJobIds:[],now:refillNow})
 const delay=(ms:number)=>new Promise<void>(resolve=>setTimeout(resolve,ms))
+
+test('new priority-zero and review-urgent guides remain visible ahead of a persisted positive scan offset',async()=>{
+ for(const urgency of ['priority','review']as const){
+  const f=await refillFixture(40)
+  try{
+   f.db.sqlite.exec("UPDATE maintenance_jobs SET status='done' WHERE stage<>'extract'")
+   await select(f,1)
+   const key=[...f.bucket.objects.keys()].find(key=>key.startsWith('maintenance/refill-dispatch/scan/'))!,hint=JSON.parse(await(await f.bucket.get(key))!.text())
+   hint.offsets.programme=32;hint.visited=[];await f.bucket.put(key,canonical(hint))
+   const urgent=f.jobs.filter(job=>job.stage==='extract').at(-1)!
+   if(urgency==='priority')f.db.sqlite.prepare('UPDATE maintenance_jobs SET priority=0 WHERE job_id=?').run(urgent.jobId)
+   else{
+    const content={format:'studyinchina.school-program-coverage'as const,version:1 as const,scopeRegistrySha256:TEST_SCOPE,inputCatalogSha256:TEST_CATALOG,evaluatedOn:'2026-11-16',schools:seedInput().schools.map((school,index)=>({universityId:school.universityId,rawProgramCount:index===39?1:0,directoryProgramCount:index===39?1:0,currentProgramCount:index===39?1:0,minimumProgramCount:5 as const,gap:index===39?4:5,coverageBand:index===39?'one'as const:'zero'as const,countedProgramIds:index===39?['urgent-programme']:[],directoryScholarshipCount:0,currentScholarshipCount:0,reviewAfter:index===39?'2026-11-17':null}))}
+    await publishCoverageSnapshot(f.env,{...content,sha256:await digest(canonical(content))},refillNow)
+   }
+   const plan=await select(f,1)
+   assert.equal(plan.candidates[0]?.jobId,urgent.jobId,urgency)
+   assert.equal(JSON.parse(await(await f.bucket.get(key))!.text()).offsets.programme,32,'urgent head does not reset the existing page cursor')
+   assert.equal(f.messages.length,0);assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').get()?.n,0)
+  }finally{f.db.sqlite.close()}
+ }
+})
+
+test('at most two complete candidate proofs overlap, with serialized hint CAS and stable planned order',async()=>{
+ const f=await refillFixture(12)
+ try{
+  f.db.sqlite.exec("UPDATE maintenance_jobs SET status='done' WHERE stage<>'extract'")
+  const initial=await select(f,8),expected=initial.candidates.map(candidate=>candidate.jobId)
+  for(const key of f.bucket.objects.keys())if(key.startsWith('maintenance/refill-dispatch/scan/'))f.bucket.objects.delete(key)
+  let active=0,peak=0,hintWrites=0,hintPeak=0
+  const db=f.env.PIPELINE_DB,put=f.bucket.put.bind(f.bucket),get=f.bucket.get.bind(f.bucket)
+  f.env.PIPELINE_DB={prepare(sql){const original=db.prepare(sql);const wrap=(s:typeof original):typeof original=>({bind(...values){return wrap(s.bind(...values))},async first<T>(){if(sql==='SELECT * FROM maintenance_sources WHERE source_id=?'){active++;peak=Math.max(peak,active)}return s.first<T>()},all:s.all.bind(s),run:s.run.bind(s)});return wrap(original)},batch:db.batch.bind(db)}
+  f.bucket.get=async key=>{await delay(10);return get(key)}
+  f.bucket.put=async(key,body,options)=>{const hint=key.startsWith('maintenance/refill-dispatch/scan/');if(hint){hintWrites++;hintPeak=Math.max(hintPeak,hintWrites)}await delay(10);try{const result=await put(key,body,options);if(key.startsWith('maintenance/refill-dispatch/candidates/'))active--;return result}finally{if(hint)hintWrites--}}
+  const plan=await select(f,8)
+  assert.equal(plan.candidates.length,8);assert.deepEqual(plan.candidates.map(candidate=>candidate.jobId),expected)
+  assert.equal(peak,2);assert.equal(active,0);assert.equal(hintPeak,1)
+  assert.equal(plan.selection.attempts,8);assert.ok(plan.selection.cachedBytes<=16*1024*1024);assert.equal(f.messages.length,0)
+ }finally{f.db.sqlite.close()}
+})
+
+test('a stalled maintenance proof cannot hide an already saved programme proof until after the shared deadline',{timeout:15000},async()=>{
+ const f=await refillFixture(12)
+ try{
+  f.db.sqlite.exec("UPDATE maintenance_jobs SET status='done' WHERE stage IN('capture','award'); UPDATE maintenance_jobs SET priority=1 WHERE stage='maintain'")
+  const initial=await select(f,8)
+  assert.equal(initial.candidates[0].stage,'maintain');assert.equal(initial.candidates[1].stage,'maintain')
+  const programme=initial.candidates.find(candidate=>candidate.stage==='extract')!,blocked=initial.candidates[0].sourceId
+  assert.notEqual(programme.sourceId,blocked)
+  for(const key of f.bucket.objects.keys())if(key.startsWith('maintenance/refill-dispatch/scan/'))f.bucket.objects.delete(key)
+  const get=f.bucket.get.bind(f.bucket);let stalled=0
+  f.bucket.get=async key=>{if(key.includes(blocked)&&key.endsWith('.bin')){stalled++;return new Promise(()=>{})}return get(key)}
+  const began=performance.now(),result=await select(f,8),elapsed=performance.now()-began
+  assert.equal(stalled,1);assert.equal(result.selection.timedOut,true);assert.equal(result.selection.attempts,2)
+  assert.ok(elapsed>=REFILL_PROOF_TIME_MS-100&&elapsed<12000)
+  assert.deepEqual(result.candidates.map(candidate=>candidate.jobId),[programme.jobId])
+  assert.ok(f.bucket.objects.has(result.candidates[0].proofKey))
+  assert.equal(f.messages.length,0);assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').get()?.n,0)
+ }finally{f.db.sqlite.close()}
+})
+
+test('one failed proof drains its bounded sibling before propagating a backend error',async()=>{
+ const f=await refillFixture(4)
+ try{
+  f.db.sqlite.exec("UPDATE maintenance_jobs SET status='done' WHERE stage<>'extract'")
+  const initial=await select(f,2)
+  for(const key of f.bucket.objects.keys())if(key.startsWith('maintenance/refill-dispatch/scan/'))f.bucket.objects.delete(key)
+  const get=f.bucket.get.bind(f.bucket);let siblingFinished=false
+  f.bucket.get=async key=>{
+   if(key.endsWith('.bin')&&key.includes(initial.candidates[0].sourceId))throw Error('test_backend_failure')
+   if(key.endsWith('.bin')&&key.includes(initial.candidates[1].sourceId)){await delay(100);siblingFinished=true}
+   return get(key)
+  }
+  await assert.rejects(select(f,2),/test_backend_failure/)
+  assert.equal(siblingFinished,true);assert.equal(f.messages.length,0)
+ }finally{f.db.sqlite.close()}
+})
 
 test('repeated scans never defer a verified future retry or lose its precise due date',async()=>{
  const f=await refillFixture(1)

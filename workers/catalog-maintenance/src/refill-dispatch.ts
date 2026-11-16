@@ -119,23 +119,45 @@ async function selectWithinBudget(env:MaintenanceEnv,options:SelectionOptions,bu
   ),anchored AS(SELECT *,ROW_NUMBER() OVER(PARTITION BY job_id ORDER BY review_urgent DESC,coverage_band,school_last_dispatched_tick,scheduling_school_id) anchor_order FROM associations),school_ranked AS(
     SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END,scheduling_school_id ORDER BY priority,due_at,job_id) school_order FROM anchored WHERE anchor_order=1
   ),ranked AS(SELECT *,ROW_NUMBER() OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END ORDER BY CASE WHEN priority<=0 OR review_urgent=1 THEN 0 ELSE 1 END,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id) lane_order FROM school_ranked
-  ),chosen AS MATERIALIZED(SELECT ranked.* FROM ranked CROSS JOIN scan_offsets scan WHERE lane_order>json_extract(scan.value,CASE WHEN maintenance_lane=1 THEN '$.maintenance' WHEN award_lane=1 THEN '$.award' ELSE '$.programme' END) AND lane_order<=32+json_extract(scan.value,CASE WHEN maintenance_lane=1 THEN '$.maintenance' WHEN award_lane=1 THEN '$.award' ELSE '$.programme' END) ORDER BY CASE WHEN priority<=0 OR review_urgent=1 THEN 0 ELSE 1 END,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id LIMIT ${POOL})
+  ),windowed AS(SELECT ranked.*,CASE WHEN lane_order>json_extract(scan.value,CASE WHEN maintenance_lane=1 THEN '$.maintenance' WHEN award_lane=1 THEN '$.award' ELSE '$.programme' END) AND lane_order<=32+json_extract(scan.value,CASE WHEN maintenance_lane=1 THEN '$.maintenance' WHEN award_lane=1 THEN '$.award' ELSE '$.programme' END) THEN 1 ELSE 0 END scan_page FROM ranked CROSS JOIN scan_offsets scan
+  ),paged AS(SELECT windowed.*,SUM(scan_page) OVER(PARTITION BY maintenance_lane,CASE WHEN maintenance_lane=0 THEN award_lane ELSE 0 END) scan_page_total FROM windowed
+  ),chosen AS MATERIALIZED(SELECT paged.* FROM paged WHERE scan_page=1 OR((priority<=0 OR review_urgent=1) AND lane_order<=8) ORDER BY CASE WHEN priority<=0 OR review_urgent=1 THEN 0 ELSE 1 END,coverage_band,school_order,school_last_dispatched_tick,COALESCE(school_last_attempt_at,''),priority,due_at,job_id LIMIT ${POOL})
   SELECT chosen.*,${schedulingSchoolIdsSql} school_ids_json FROM chosen`).bind(ctx.metadata,cfg.canary_json,canonical(scan.offsets),excluded,nowIso(now),nowIso(now-900000)).all<Record<string,unknown>>()).results??[]
   const prepared=await Promise.all(rows.map(async row=>({row,stamp:await scan.fingerprint(tuple(row,jobFields)),lane:Number(row.maintenance_lane)?'maintenance'as const:Number(row.award_lane)?'award'as const:'programme'as const,stage:String(row.stage),priority:Number(row.priority),source_last_success_at:row.source_last_success_at as string|null,source_category:award(String(row.source_category))?'scholarships':String(row.source_category),coverage_count:row.coverage_band===0?0:row.coverage_band===1?1:row.coverage_band===2?2:5,scheduling_school_id:String(row.scheduling_school_id),school_last_dispatched_tick:Number(row.school_last_dispatched_tick),school_last_attempt_at:row.school_last_attempt_at as string|null,review_after:row.review_urgent?new Date(now+8*3600000).toISOString().slice(0,10):null})))
   let available=prepared.filter(p=>!scan.seen(String(p.row.job_id),p.stamp))
   const scheduling={limit:options.limit,firstRoundComplete:ctx.firstRoundComplete,now,slotOffset:fair.slot_offset,expansionOffset:fair.expansion_offset}
   let planned=selectScheduledJobs(available,scheduling)
   const triedLanes=new Set<string>(),candidates=progress.candidates
+  const order=new Map<typeof available[number],number>(),completed=new Map<number,DispatchCandidate>();let nextOrder=0
+  const rememberPlan=()=>{for(const value of planned)if(!order.has(value))order.set(value,nextOrder++)}
+  const urgency=(value:typeof available[number])=>value.priority<=0?2:value.review_after?1:0
+  rememberPlan()
   while(candidates.length<options.limit&&available.length&&budget.counts.attempts<8){
-    if(!planned.length){const untried=available.filter(p=>!triedLanes.has(p.lane));planned=selectScheduledJobs(untried.length?untried:available,{...scheduling,limit:options.limit-candidates.length})}
-    const value=planned.shift();if(!value)break
-    available=available.filter(p=>p!==value);triedLanes.add(value.lane)
-    if(!budget.attempt())break
-    await scan.visit(String(value.row.job_id),value.stamp,value.lane)
-    const proof=await prove(env,fence,tuple(value.row,jobFields))
-    if(proof){const j=proof.job,stored=await storeProof(env,proof);candidates.push({jobId:String(j.job_id),sourceId:String(j.source_id),stage:j.stage as JobRow['stage'],status:j.status as 'queued'|'retry',attempt:Number(j.attempt),updatedAt:String(j.updated_at),enqueuedAt:j.enqueued_at as string|null,leaseToken:j.lease_token as string|null,leaseUntil:j.lease_until as string|null,snapshotSha256:j.snapshot_sha256 as string|null,snapshotKey:j.snapshot_key as string|null,dueAt:String(j.due_at),kind:options.kind,schedulingSchoolId:value.scheduling_school_id,maintenanceLane:Boolean(value.row.maintenance_lane),awardLane:Boolean(value.row.award_lane),...stored})}
+    if(!planned.length){const untried=available.filter(p=>!triedLanes.has(p.lane));planned=selectScheduledJobs(untried.length?untried:available,{...scheduling,limit:options.limit-candidates.length});rememberPlan()}
+    const batch:typeof available=[]
+    while(batch.length<Math.min(2,options.limit-candidates.length)&&planned.length&&budget.counts.attempts<8){
+      let index=0
+      if(batch.length){const first=batch[0],otherLane=planned.findIndex(value=>urgency(value)===urgency(first)&&value.lane!==first.lane);index=otherLane>=0?otherLane:planned.findIndex(value=>urgency(value)===urgency(first));if(index<0)break}
+      const [value]=planned.splice(index,1)
+      available=available.filter(p=>p!==value);triedLanes.add(value.lane)
+      if(!budget.attempt())break
+      // Hint CAS writes remain sequential, before either proof starts. A slow
+      // maintenance graph cannot occupy both slots when its reserve includes
+      // another lane of the same urgency. This changes no reserve membership.
+      await scan.visit(String(value.row.job_id),value.stamp,value.lane);batch.push(value)
+    }
+    if(!batch.length)break
+    const results=await Promise.allSettled(batch.map(async value=>{
+      const proof=await prove(env,fence,tuple(value.row,jobFields))
+      if(proof){const j=proof.job,stored=await storeProof(env,proof);budget.check();completed.set(order.get(value)!,{jobId:String(j.job_id),sourceId:String(j.source_id),stage:j.stage as JobRow['stage'],status:j.status as 'queued'|'retry',attempt:Number(j.attempt),updatedAt:String(j.updated_at),enqueuedAt:j.enqueued_at as string|null,leaseToken:j.lease_token as string|null,leaseUntil:j.lease_until as string|null,snapshotSha256:j.snapshot_sha256 as string|null,snapshotKey:j.snapshot_key as string|null,dueAt:String(j.due_at),kind:options.kind,schedulingSchoolId:value.scheduling_school_id,maintenanceLane:Boolean(value.row.maintenance_lane),awardLane:Boolean(value.row.award_lane),...stored});candidates.splice(0,candidates.length,...[...completed].sort((a,b)=>a[0]-b[0]).map(([,candidate])=>candidate))}
+    }))
+    // A backend failure must not remove the shared deadline while its sibling
+    // proof is still reading. Drain the bounded pair or let that deadline win.
+    for(const result of results)if(result.status==='rejected')throw result.reason
   }
-  for(const lane of ['maintenance','programme','award']as const)await scan.page(lane,prepared.filter(p=>p.lane===lane).map(p=>({id:String(p.row.job_id),stamp:p.stamp})),32)
+  // The urgent prefix is a separate reservoir, not part of the cursor page.
+  // A POOL truncation must not reset or advance a partially returned page.
+  for(const lane of ['maintenance','programme','award']as const){const page=prepared.filter(p=>p.lane===lane&&Number(p.row.scan_page)===1),expected=Number(prepared.find(p=>p.lane===lane)?.row.scan_page_total??0);if(page.length===expected)await scan.page(lane,page.map(p=>({id:String(p.row.job_id),stamp:p.stamp})),32)}
   let nextDueAt:string|null=null
   if(!candidates.length&&budget.counts.attempts<8){const future=(await env.PIPELINE_DB.prepare(`SELECT j.* FROM maintenance_jobs j JOIN maintenance_sources s ON s.source_id=j.source_id WHERE ${eligibility} AND j.due_at>? AND EXISTS(SELECT 1 FROM maintenance_source_schools x JOIN maintenance_schools u ON u.university_id=x.university_id WHERE x.source_id=j.source_id AND u.scope_sha256=? AND (json_array_length(?)=0 OR x.university_id IN(SELECT value FROM json_each(?)))) ORDER BY j.due_at,j.job_id LIMIT 8 OFFSET ?`).bind(excluded,nowIso(now),cfg.scope_sha256,cfg.canary_json,cfg.canary_json,scan.offsets.future).all<Record<string,unknown>>()).results??[];const page=await Promise.all(future.map(async row=>({row,id:String(row.job_id),stamp:await scan.fingerprint(tuple(row,jobFields))})));for(const value of page){if(scan.seen(value.id,value.stamp))continue;if(!budget.attempt())break;await scan.visit(value.id,value.stamp,'future');if(await prove(env,fence,tuple(value.row,jobFields))){await scan.forget(value.id);nextDueAt=String(value.row.due_at);break}}await scan.page('future',page,8)}
   return{fence,candidates,nextDueAt,scanRetryAt:available.length||budget.counts.attempts===8||Object.values(scan.offsets).some(Boolean)?new Date(now+10000).toISOString():null}
