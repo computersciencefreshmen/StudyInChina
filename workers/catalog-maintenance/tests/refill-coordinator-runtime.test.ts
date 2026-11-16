@@ -25,7 +25,7 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
             for(const row of candidates){if(saved.outstanding[row.jobId].phase!=='sending'||saved.outstanding[row.jobId].dispatchToken!==input.dispatchToken)throw Error('queue_egress_preceded_durable_intent')}
             for(const row of candidates)await env.DB.prepare('INSERT INTO test_sends VALUES(?,?,?)').bind(input.dispatchToken,row.jobId,input.epochSha256).run()
             return {sent:candidates.map(row=>row.jobId),notSent:[],unconfirmed:[]}
-          },plan:async()=>null,observe:async()=>true,dispatchStatus:async()=>({entries:[]}),decline:async()=>({declined:false,reason:'test_no_decline'})
+          },plan:async()=>null,observe:async()=>true,decline:async()=>({declined:false,reason:'test_no_decline'})
         })
         this.nativeState=state
         this.latch=latch
@@ -56,7 +56,7 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
     // here is a D1 test receipt, and no real provider/queue resource is present.
     plugins: [{ name: 'isolated-refill-repository', setup(builder) {
       builder.onResolve({ filter: /^\.\/refill-dispatch$/ }, () => ({ path: 'test-only-refill-repository', namespace: 'refill-fixture' }))
-      builder.onLoad({ filter: /.*/, namespace: 'refill-fixture' }, () => ({ contents: 'export const selectRefillCandidates=()=>{throw Error("unexpected_default_selector")};export const dispatchRefillCandidates=()=>{throw Error("unexpected_default_dispatcher")};export const planDueCaptureJobs=()=>{throw Error("unexpected_default_planner")};export const observeRefillDispatch=()=>{throw Error("unexpected_default_observer")};export const readRefillDispatchStatus=()=>{throw Error("unexpected_default_ledger")};export const declineRefillDispatch=()=>{throw Error("unexpected_default_decline")}' }))
+      builder.onLoad({ filter: /.*/, namespace: 'refill-fixture' }, () => ({ contents: 'export const selectRefillCandidates=()=>{throw Error("unexpected_default_selector")};export const dispatchRefillCandidates=()=>{throw Error("unexpected_default_dispatcher")};export const planDueCaptureJobs=()=>{throw Error("unexpected_default_planner")};export const observeRefillDispatch=()=>{throw Error("unexpected_default_observer")};export const readRefillDispatchStatus=async(env,token,options)=>{if(options?.includeJobState!==false)throw Error("redundant_subject_proof_read");await env.DB.prepare("INSERT INTO test_ledger_reads VALUES(0)").run();return {entries:[]}};export const declineRefillDispatch=()=>{throw Error("unexpected_default_decline")}' }))
     } }] })
   let egress = 0
   const mf = new Miniflare(convertV4MiniflareOptions({ name: 'native-refill-coordinator', modules: true, script: bundled.outputFiles[0].text,
@@ -72,6 +72,7 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
     const db = await mf.getD1Database('DB'), at = new Date().toISOString()
     await db.prepare('CREATE TABLE test_jobs(job_id TEXT PRIMARY KEY,source_id TEXT,stage TEXT,status TEXT,attempt INTEGER,updated_at TEXT,lease_token TEXT,protected_model INTEGER)').run()
     await db.prepare('CREATE TABLE test_sends(dispatch_token TEXT,job_id TEXT,epoch TEXT,PRIMARY KEY(dispatch_token,job_id))').run()
+    await db.prepare('CREATE TABLE test_ledger_reads(include_job_state INTEGER)').run()
     for (let n = 1; n <= 12; n++) await db.prepare("INSERT INTO test_jobs VALUES(?,?,'extract','queued',0,?,NULL,0)").bind(hash(n), hash(n + 100), at).run()
     const call = async (path: string, body?: unknown) => {
       const response = await mf.dispatchFetch('https://refill.test' + path, { method: body === undefined ? 'GET' : 'POST', headers: { authorization: 'Bearer ' + admin, 'content-type': 'application/json' }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) })
@@ -109,6 +110,8 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
       assert.equal(fast.refillLatencyP95Ms, null); assert.equal(fast.modelTaskBusyPercent, null)
     } finally { if (timeout) clearTimeout(timeout); await call('/test/unblock-select', {}); await pending }
     assert.equal(acquired, true)
+    assert.ok(Number(await db.prepare('SELECT COUNT(*) n FROM test_ledger_reads').first('n')) > 0)
+    assert.equal(await db.prepare('SELECT SUM(include_job_state) n FROM test_ledger_reads').first('n'), 0)
     assert.equal(egress, 0)
     t.diagnostic('Real native DO storage and D1; 8 durable dispatch receipts, 2 actual stage permits, 0 external egress; unknown row unchanged.')
   } finally { await mf.dispose() }
