@@ -8,6 +8,7 @@ import { bundleSchema } from '../../src/lib/data/schema'
 import { htmlToText, normalizeEvidenceText } from '../../workers/ingestion/src/rules'
 import { hasProgramInternationalScopeEvidence } from '../../workers/catalog-maintenance/src/program-international-scope'
 import { canonicalIdentityJson, identityAcceptanceLedgerSchema, identityFingerprint, verifiedNameMatchesRaw, type IdentityAcceptanceLedger, type VerifiedProgramName, type ReviewedProgramAliasAudit } from '../../src/lib/data/identity-acceptance'
+import { reviewedHtmlProgramAliasProfiles } from '../../src/lib/data/reviewed-html-program-alias'
 import { loadReviewedProgramAliases, resolveReviewedProgramAlias, type ReviewedProgramAliasRef } from './reviewed-program-alias'
 import { rejectWindowsOcrEnvelopeAsNative, requireExplicitKnownWindowsOcrParser, verifyWindowsOcrReviewedSource, WINDOWS_OCR_PARSER, type ReviewedWindowsOcrSourceRef } from './windows-ocr-reviewed-source'
 import { OPENXML_WORKBOOK_PARSER, verifyLiteralWorkbookText } from './openxml-workbook-source'
@@ -287,6 +288,12 @@ export async function importIdentityCandidates(options: {
         && binding.canonicalKey.includes('|code:') && binding.canonicalKey !== key)) throw new Error('official_code_conflicts_with_existing_binding')
       const action = record ? 'identity_accepted' as const : 'created' as const
       if (!record && fields.programUrl !== proposal.source.url) throw new Error('new_identity_program_url_requires_matching_source')
+      // These pages have independently reviewed, closed identity sets. A new
+      // spelling cannot silently create another neighbour; exact/bound/reviewed
+      // mappings above still retain their original IDs and evidence checks.
+      if (!record && reviewedHtmlProgramAliasProfiles.some(profile => profile.universityId === school.universityId
+        && profile.degreeLevel === fields.degreeLevel && profile.sourceUrl === fields.programUrl))
+        throw new Error('reviewed_html_alias_same_source_identity_requires_review')
       if (bound && record && bound.recordId !== record.id) throw new Error('canonical_key_already_bound_to_another_record')
       if (record && hasAcceptedIdentityWithOfficialUrl(bundle, acceptances, 'program', record, proposal.source.url, options.acceptedAt, fields.name, reviewedAlias?.audit, proposal.source.url)) {
         unchanged.push({ proposalId: proposal.id, recordId: record.id, reason: 'identity_and_official_source_unchanged' })
