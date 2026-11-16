@@ -16,6 +16,7 @@ import { parseScholarshipCatalogFilters, scholarshipCatalogHref, queryScholarshi
 import { createD1CatalogRepository, createJsonCatalogRepository, deriveCatalogRelease } from '@/lib/catalog'
 import { CatalogApiService } from '@/lib/catalog-api/service'
 import { rankingParams } from '@/lib/catalog-api/http'
+import { addFixturePublicCore } from '../fixtures/public-program-core'
 
 const today = '2026-09-29'
 function rank(system: UniversityRanking['system'], rankMin: number, rankMax = rankMin, year = 2026): UniversityRanking {
@@ -38,7 +39,11 @@ function fixture(): DataBundle {
     { ...scholarships[0]!, ...audit, id: 'rank-award', slug: 'rank-award', universityIds: [schools[0]!.id, schools[1]!.id], programIds: [], deadline: null },
     { ...scholarships[0]!, ...audit, id: 'program-award', slug: 'program-award', universityIds: [], programIds: [linkedPrograms[0]!.id], deadline: null },
   ] as DataBundle['scholarships']
-  return { sources: [{ id: 'rank-fixture-official', url: 'https://example.edu/admissions', title: 'Official ranking filter fixture', publisher: 'Test university', kind: 'admissions', language: 'en', official: true, accessedAt: today }, ...linkedPrograms.map((program, index) => ({ id: `rank-program-source-${index}`, url: program.programUrl, title: 'Official program fixture', publisher: 'Test university', kind: 'program' as const, language: 'en' as const, official: true, accessedAt: today }))], cities: [{ ...cities[0]!, ...audit }] as DataBundle['cities'], universities: schools, programs: linkedPrograms, scholarships: linkedScholarships, admissionCycles: [] }
+  const data: DataBundle = { sources: [{ id: 'rank-fixture-official', url: 'https://example.edu/admissions', title: 'Official ranking filter fixture', publisher: 'Test university', kind: 'admissions', language: 'en', official: true, accessedAt: today }, ...linkedPrograms.map((program, index) => ({ id: `rank-program-source-${index}`, url: program.programUrl, title: 'Official program fixture', publisher: 'Test university', kind: 'program' as const, language: 'en' as const, official: true, accessedAt: today }))], cities: [{ ...cities[0]!, ...audit }] as DataBundle['cities'], universities: schools, programs: linkedPrograms, scholarships: linkedScholarships, admissionCycles: [] }
+  // Ranking behaviour is tested on legitimate core-complete public records;
+  // incomplete-programme withholding is covered by the quality-policy suite.
+  for (const program of data.programs) addFixturePublicCore(data, program, today)
+  return data
 }
 
 describe('university ranking filters', () => {
