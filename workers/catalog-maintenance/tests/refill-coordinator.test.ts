@@ -1,0 +1,278 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import { CatalogRefillCoordinator, readRefillGate, type RefillDependencies } from '../src/refill-coordinator'
+import { acquireRefillPermit, wakeRefill } from '../src/refill-client'
+import { type RefillCandidate, type RefillEnv, type RefillFence, type RefillJobState, type RefillStorage } from '../src/refill-contract'
+
+const hash = (n: number) => n.toString(16).padStart(64, '0')
+const token = hash(12345)
+class Storage implements RefillStorage {
+  values = new Map<string, unknown>()
+  alarm: number | null = null
+  async get<T>(key: string): Promise<T | undefined> { return structuredClone(this.values.get(key)) as T | undefined }
+  async put<T>(key: string, value: T) { this.values.set(key, structuredClone(value)) }
+  async delete(key: string) { return this.values.delete(key) }
+  async transaction<T>(run: (txn: RefillStorage) => Promise<T>): Promise<T> { return run(this) }
+  async setAlarm(at: number) { this.alarm = at }
+  async deleteAlarm() { this.alarm = null }
+  async getAlarm() { return this.alarm }
+}
+type Dispatch = { ids: string[]; token: string; epoch: string; at: number }
+function fixture(options: { models?: number; captures?: number; flag?: string; role?: string; modelLimit?: string } = {}) {
+  let now = Date.parse('2026-11-16T10:00:00Z')
+  const storage = new Storage(), rows = new Map<string, RefillJobState>(), dispatches: Dispatch[] = []
+  const env = { CONTINUOUS_REFILL_ENABLED: options.flag ?? 'true', MODEL_STATE_MIGRATION_ROLE: options.role ?? 'target', REFILL_MODEL_LIMIT: options.modelLimit ?? '2', MAINTENANCE_ADMIN_TOKEN: token } as RefillEnv
+  const fence: RefillFence = { scopeSha256: hash(1), inputCatalogSha256: hash(2), revision: 3, canaryJson: '["school-a"]' }
+  const add = (n: number, stage: RefillJobState['stage']) => {
+    const row: RefillJobState = { jobId: hash(n), sourceId: hash(n + 10_000), stage, status: 'queued', attempt: 0, updatedAt: new Date(now).toISOString(), leaseToken: null, leaseUntil: null, protectedModel: false, inScope: true }
+    rows.set(row.jobId, row); return row
+  }
+  for (let n = 1; n <= (options.models ?? 24); n++) add(n, 'extract')
+  for (let n = 1001; n <= 1000 + (options.captures ?? 8); n++) add(n, 'capture')
+  let gateOpen = true, modelOpen = true, expansionOpen = true, gateCalls = 0, selectionCalls = 0
+  const candidate = (row: RefillJobState): RefillCandidate => ({ jobId: row.jobId, sourceId: row.sourceId, stage: row.stage,
+    status: row.status as 'queued' | 'retry', attempt: row.attempt, updatedAt: row.updatedAt, enqueuedAt: null, leaseToken: row.leaseToken })
+  const deps: RefillDependencies = {
+    now: () => now,
+    gate: async () => { gateCalls++; return { fence: { ...fence }, capture: gateOpen, model: gateOpen && modelOpen, expansion: expansionOpen && modelOpen, reason: gateOpen ? modelOpen ? 'ready' : 'quota_exhausted_or_overflow_margin' : 'budget_paused', retryAt: now + 300_000 } },
+    jobs: async (_env, ids) => ids.flatMap(id => { const row = rows.get(id); return row ? [{ ...row }] : [] }),
+    plan: async () => undefined,
+    observe: async () => true,
+    dispatchStatus: async () => ({ entries: [] }),
+    select: async (_env, { kind, limit, excludeJobIds, allowExpansion }) => { selectionCalls++; return { fence: { ...fence }, candidates: [...rows.values()].filter(row => row.inScope && ['queued', 'retry'].includes(row.status) && !row.protectedModel && (row.stage === 'capture') === (kind === 'capture') && (kind === 'capture' || allowExpansion !== false || row.stage === 'maintain') && !excludeJobIds.includes(row.jobId)).slice(0, limit).map(candidate) } },
+    dispatch: async (_env, _fence, candidates, input) => {
+      const saved = await storage.get<{ outstanding: Record<string, { phase: string; dispatchToken: string }> }>('refill-v1')
+      for (const row of candidates) { assert.equal(saved!.outstanding[row.jobId].phase, 'sending'); assert.equal(saved!.outstanding[row.jobId].dispatchToken, input.dispatchToken) }
+      dispatches.push({ ids: candidates.map(row => row.jobId), token: input.dispatchToken, epoch: input.epochSha256, at: now })
+      return { sent: candidates.map(row => row.jobId), notSent: [], unconfirmed: [] }
+    },
+  }
+  let coordinator = new CatalogRefillCoordinator({ storage }, env, deps)
+  const call = async (path: string, body?: unknown, auth = token) => {
+    const response = await coordinator.fetch(new Request('https://catalog-refill.internal' + path, { method: body === undefined ? 'GET' : 'POST', headers: { authorization: 'Bearer ' + auth, 'content-type': 'application/json' }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) }))
+    return { status: response.status, value: await response.json() as Record<string, unknown> }
+  }
+  const alarm = async (advance = 10_000) => { now += advance; await coordinator.alarm() }
+  const start = async () => { await call('/wake', { reason: 'watchdog' }); await alarm() }
+  const metadata = (id: string) => { const d = dispatches.findLast(item => item.ids.includes(id))!; return { jobId: id, dispatchToken: d.token, epochSha256: d.epoch } }
+  return { storage, env, rows, fence, deps, dispatches, add, call, alarm, start, metadata, now: () => now,
+    restart: () => { coordinator = new CatalogRefillCoordinator({ storage }, env, deps) },
+    setGate: (open: boolean, models = open) => { gateOpen = open; modelOpen = models },
+    setExpansion: (open: boolean) => { expansionOpen = open },
+    counts: () => ({ gateCalls, selectionCalls }) }
+}
+
+test('requires exact enable flag and freezes the source account before any backend or queue work', async () => {
+  for (const options of [{ flag: 'false' }, { flag: 'TRUE' }, { role: 'source' }]) {
+    const f = fixture(options)
+    await f.call('/wake', { reason: 'watchdog' }); await f.alarm()
+    assert.equal(f.counts().gateCalls, 0); assert.equal(f.dispatches.length, 0); assert.equal(f.storage.alarm, null)
+  }
+  assert.equal((await wakeRefill({} as RefillEnv, { reason: 'watchdog' })).enabled, false)
+  assert.equal((await acquireRefillPermit({} as RefillEnv, { jobId: hash(1), dispatchToken: 'old' })).allowed, false)
+  assert.equal((await acquireRefillPermit({} as RefillEnv, { jobId: hash(1) })).allowed, true)
+})
+
+test('persists complete selection and send-start before egress; one alarm sends at most eight', async () => {
+  const f = fixture()
+  await f.start()
+  assert.equal(f.dispatches.flatMap(d => d.ids).length, 8)
+  await f.alarm()
+  assert.equal(f.dispatches.flatMap(d => d.ids).length, 10)
+  const status = (await f.call('/status')).value
+  assert.deepEqual(status.model, { pending: 8, inflight: 0, eligible: null, limit: 2, epochUsed: 8, epochCap: 256 })
+  assert.equal((status.capture as { pending: number }).pending, 2)
+  assert.equal(JSON.stringify(status).includes('dispatchToken'), false)
+  assert.equal((await f.call('/status', undefined, 'wrong')).status, 401)
+})
+
+test('real model permits enforce the pilot cap and duplicate deliveries do not share a permit', async () => {
+  const f = fixture(); await f.start()
+  const a = await f.call('/acquire', f.metadata(hash(1)))
+  const b = await f.call('/acquire', f.metadata(hash(2)))
+  const c = await f.call('/acquire', f.metadata(hash(3)))
+  assert.equal(a.value.allowed, true); assert.equal(b.value.allowed, true)
+  assert.equal(c.value.allowed, false); assert.equal(c.value.reason, 'refill_stage_capacity')
+  assert.equal((await f.call('/acquire', f.metadata(hash(1)))).value.allowed, false)
+  const status = (await f.call('/status')).value
+  assert.equal((status.model as { inflight: number }).inflight, 2)
+})
+
+test('four-model opt-in works, malformed configuration keeps the two-permit pilot', async () => {
+  for (const [limit, expected] of [['4', 4], ['8', 2], ['4.0', 2], ['', 2]] as const) {
+    const f = fixture({ modelLimit: limit }); await f.start()
+    const results = await Promise.all(Array.from({ length: 5 }, (_, n) => f.call('/acquire', f.metadata(hash(n + 1)))))
+    assert.equal(results.filter(r => r.value.allowed).length, expected)
+  }
+})
+
+test('old ordinary capture messages also respect two real permits when model backlog exists', async () => {
+  const f = fixture();
+  const results = await Promise.all([1001, 1002, 1003, 1004].map(n => f.call('/acquire', { jobId: hash(n) })))
+  assert.equal(results.filter(r => r.value.allowed).length, 2)
+  assert.ok(f.counts().selectionCalls > 0)
+})
+
+test('capture may borrow idle model slots only when no eligible model backlog exists', async () => {
+  const f = fixture({ models: 0 });
+  const results = await Promise.all([1001, 1002, 1003, 1004, 1005].map(n => f.call('/acquire', { jobId: hash(n) })))
+  assert.equal(results.filter(r => r.value.allowed).length, 4)
+})
+
+test('completion hints cannot release running, expired-lease or unknown model work', async () => {
+  const f = fixture(); await f.start()
+  const metadata = f.metadata(hash(1)), acquired = (await f.call('/acquire', metadata)).value
+  const row = f.rows.get(hash(1))!; row.status = 'running'; row.attempt++; row.leaseToken = 'lease'; row.leaseUntil = new Date(f.now() - 1).toISOString()
+  const release = { jobId: hash(1), permitToken: acquired.permitToken }
+  assert.equal((await f.call('/release', release)).value.released, false)
+  row.status = 'unknown'; row.protectedModel = true
+  await f.alarm(120_000)
+  assert.equal((await f.call('/release', release)).value.released, false)
+  assert.equal((await f.call('/status')).value.uncertainDeliveries, 1)
+  row.status = 'done'; row.protectedModel = false
+  assert.equal((await f.call('/release', release)).value.released, true)
+  assert.equal((await f.call('/acquire', metadata)).value.allowed, false)
+})
+
+test('D1 retry state returns capacity even when a pre-send wait restored attempt count', async () => {
+  const f = fixture(); await f.start()
+  const acquired = (await f.call('/acquire', f.metadata(hash(1)))).value
+  const row = f.rows.get(hash(1))!; row.status = 'running'; row.attempt = 1; row.leaseToken = 'actual-lease'
+  assert.equal((await f.call('/claimed', { jobId: row.jobId, permitToken: acquired.permitToken, leaseToken: 'wrong' })).value.confirmed, false)
+  assert.equal((await f.call('/claimed', { jobId: row.jobId, permitToken: acquired.permitToken, leaseToken: row.leaseToken })).value.confirmed, true)
+  row.status = 'retry'; row.attempt = 0; row.updatedAt = new Date(f.now() + 1000).toISOString()
+  assert.equal((await f.call('/release', { jobId: row.jobId, permitToken: acquired.permitToken })).value.released, true)
+})
+
+test('lost queue-send outcome survives restart and time passage without automatic replay', async () => {
+  const f = fixture({ captures: 0 })
+  let sends = 0
+  f.deps.dispatch = async () => { sends++; throw new Error('queue_reply_lost') }
+  f.restart(); await f.start()
+  assert.equal(sends, 1)
+  f.restart(); await f.alarm(16 * 60_000)
+  assert.equal(sends, 1)
+  assert.equal((await f.call('/status')).value.uncertainDeliveries, 8)
+})
+
+test('epoch changes reject old queue messages, preserve active permits and never reset window charges', async () => {
+  const f = fixture(); await f.start()
+  const old = f.metadata(hash(1)); await f.call('/acquire', old)
+  const row = f.rows.get(hash(1))!; row.status = 'running'; row.attempt++
+  const before = ((await f.call('/status')).value.model as { epochUsed: number }).epochUsed
+  f.fence.revision++; await f.alarm()
+  assert.equal((await f.call('/acquire', old)).value.allowed, false)
+  const after = (await f.call('/status')).value.model as { inflight: number; epochUsed: number }
+  assert.equal(after.inflight, 1); assert.ok(after.epochUsed >= before)
+})
+
+test('a changed timestamp alone cannot prove a same-attempt retry completed', async () => {
+  const f = fixture(); await f.start()
+  const acquired = (await f.call('/acquire', f.metadata(hash(1)))).value
+  const row = f.rows.get(hash(1))!; row.status = 'retry'; row.updatedAt = new Date(f.now() + 1000).toISOString()
+  assert.equal((await f.call('/release', { jobId: row.jobId, permitToken: acquired.permitToken })).value.released, false)
+})
+
+test('maintenance can use its reserved quota without expansion pending jobs stealing its watermark', async () => {
+  const f = fixture(); await f.start(); f.setExpansion(false); f.add(500, 'maintain')
+  await f.alarm()
+  assert.ok(f.dispatches.find(d => d.ids.includes(hash(500))))
+  assert.equal((await f.call('/acquire', f.metadata(hash(1)))).value.allowed, false)
+  assert.equal((await f.call('/acquire', f.metadata(hash(500)))).value.allowed, true)
+})
+
+test('prepared-before-send recovery uses the same durable token exactly once', async () => {
+  const f = fixture({ captures: 0 }); await f.start()
+  const saved = await f.storage.get<{ outstanding: Record<string, { phase: string }> }>('refill-v1')
+  for (const entry of Object.values(saved!.outstanding)) entry.phase = 'prepared'
+  await f.storage.put('refill-v1', saved)
+  const originalToken = f.dispatches[0].token; f.dispatches.length = 0
+  f.restart(); await f.alarm()
+  assert.equal(f.dispatches.length, 1); assert.equal(f.dispatches[0].token, originalToken)
+  await f.alarm(); assert.equal(f.dispatches.length, 1)
+})
+
+test('only an authoritative not_sent receipt frees a lost-send reservation for new work', async () => {
+  const f = fixture({ captures: 0 }); await f.start()
+  const dispatch = f.dispatches[0]
+  const saved = await f.storage.get<{ outstanding: Record<string, { phase: string }> }>('refill-v1')
+  for (const entry of Object.values(saved!.outstanding)) entry.phase = 'uncertain'
+  await f.storage.put('refill-v1', saved)
+  f.deps.dispatchStatus = async () => ({ entries: dispatch.ids.map(jobId => ({ jobId, status: 'not_sent', epochSha256: dispatch.epoch })) })
+  f.restart(); await f.alarm()
+  assert.equal(f.dispatches.length, 2); assert.notEqual(f.dispatches[1].token, dispatch.token)
+})
+
+test('the watchdog plans new capture/followup jobs once per window; completion never scans sources', async () => {
+  const f = fixture({ models: 0, captures: 0 }); let plans = 0
+  f.deps.plan = async () => { plans++ }; f.restart()
+  await f.call('/wake', { reason: 'watchdog', planCaptures: true }); await f.alarm()
+  assert.equal(plans, 1)
+  await f.call('/wake', { reason: 'watchdog', planCaptures: true }); await f.alarm()
+  await f.call('/wake', { reason: 'completion' }); await f.alarm()
+  assert.equal(plans, 1)
+  await f.alarm(15 * 60_000)
+  await f.call('/wake', { reason: 'watchdog', planCaptures: true }); await f.alarm()
+  assert.equal(plans, 2)
+})
+
+test('extended dispatch fences compare by current scope/catalog/revision/canary only', async () => {
+  const f = fixture(), select = f.deps.select
+  f.deps.select = async (...args) => { const plan = await select(...args); return { ...plan, fence: { ...plan.fence!, selectedAt: new Date(f.now()).toISOString(), fairness: { revision: 0 } } } }
+  f.restart(); await f.start(); assert.equal(f.dispatches.flatMap(d => d.ids).length, 8)
+})
+
+test('real provider quota freshness and maintenance reservation are evaluated after the GET completes', async () => {
+  const original = globalThis.fetch, now = Date.now(), start = now - 3_600_000
+  let calls = 0, remaining = 93, models = 1
+  const cfg = { singleton: 1, scope_sha256: hash(1), input_catalog_sha256: hash(2), revision: 1, canary_json: '[]', enabled: 1, get models_enabled() { return models }, seed_complete: 1, targets_complete: 1 }
+  const env = { CONTINUOUS_REFILL_ENABLED: 'true', MAINTENANCE_ENABLED: 'true', MINIMAX_MODEL: 'MiniMax-M3', MINIMAX_SUBSCRIPTION_KEY: 'fake-test-only', SCOPE_REGISTRY_SHA256: hash(1),
+    SNAPSHOTS_BUCKET: { get: async () => null }, PIPELINE_DB: { prepare: (sql: string) => ({ first: async () => sql.includes('SELECT * FROM maintenance_control') ? cfg : { present: 1 }, bind() { return this } }) } } as unknown as RefillEnv
+  globalThis.fetch = async input => {
+    assert.equal(String(input), 'https://api.minimax.cn/v1/token_plan/remains'); calls++
+    await new Promise(resolve => setTimeout(resolve, 5))
+    return Response.json({ base_resp: { status_code: 0 }, model_remains: [{ model_name: 'general', current_interval_remaining_percent: remaining, current_interval_status: 1,
+      current_weekly_status: 3, start_time: start, end_time: start + 5 * 3_600_000 }] })
+  }
+  try {
+    const full = await readRefillGate(env, now, true)
+    assert.equal(full.model, true); assert.equal(full.expansion, true)
+    remaining = 15
+    const reserved = await readRefillGate(env, Date.now(), true)
+    assert.equal(reserved.model, true); assert.equal(reserved.expansion, false)
+    remaining = 5
+    const exhausted = await readRefillGate(env, Date.now(), true)
+    assert.equal(exhausted.model, false); assert.equal(exhausted.capture, true)
+    const before = calls; models = 0
+    const disabled = await readRefillGate(env, Date.now(), true)
+    assert.equal(disabled.capture, true); assert.equal(disabled.model, false); assert.equal(calls, before)
+  } finally { globalThis.fetch = original }
+})
+
+test('budget/quota waits sleep until retryAt despite a burst of completion notifications', async () => {
+  const f = fixture(); f.setGate(false); await f.start()
+  const next = f.storage.alarm
+  for (let n = 0; n < 30; n++) await f.call('/wake', { reason: 'completion' })
+  assert.equal(f.storage.alarm, next)
+  const calls = f.counts().gateCalls; await f.alarm(10_000)
+  assert.equal(f.counts().gateCalls, calls); assert.equal(f.dispatches.length, 0)
+})
+
+test('watchdog repairs an absent alarm without repeating a send', async () => {
+  const f = fixture(); await f.start()
+  const expected = f.storage.alarm; f.storage.alarm = null
+  await f.call('/wake', { reason: 'watchdog' })
+  assert.equal(f.storage.alarm, expected); assert.equal(f.dispatches.length, 1)
+})
+
+test('window budget bounds sustained dispatch to 256 model and 64 capture jobs', async () => {
+  const f = fixture({ models: 400, captures: 100 }); await f.start()
+  for (let turn = 0; turn < 65; turn++) {
+    for (const dispatch of f.dispatches) for (const id of dispatch.ids) f.rows.get(id)!.status = 'done'
+    await f.alarm()
+  }
+  const sent = f.dispatches.flatMap(d => d.ids)
+  assert.equal(sent.filter(id => Number.parseInt(id, 16) < 1000).length, 256)
+  assert.equal(sent.filter(id => Number.parseInt(id, 16) >= 1000).length, 64)
+  assert.equal(new Set(sent).size, sent.length)
+})
