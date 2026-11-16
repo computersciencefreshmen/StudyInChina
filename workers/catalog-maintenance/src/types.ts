@@ -2,7 +2,7 @@ import type { D1Database, QueueMessageBatch, QueueProducer } from '../../publish
 import type { MaintenanceRecordTarget } from '../../../scripts/maintenance/field-contracts'
 
 export type ReconciliationTargetsUpload = { manifestSha256: string; bodySha256: string; byteLength: number; expectedRevision: number; uploadKey: string }
-export type MaintenanceMessage = { version: 1; jobId: string;seedSha256?:string;targetRefreshSha256?:string;bootstrapUploadSha256?:string;bootstrapSeedSha256?:string;discoveryManifestSha256?:string;discoveryOffset?:number;reconciliationTargetsUpload?:ReconciliationTargetsUpload;scopeUpgradeSha256?:string }
+export type MaintenanceMessage = { version: 1; jobId: string;seedSha256?:string;targetRefreshSha256?:string;bootstrapUploadSha256?:string;bootstrapSeedSha256?:string;discoveryManifestSha256?:string;discoveryOffset?:number;reconciliationTargetsUpload?:ReconciliationTargetsUpload;scopeUpgradeSha256?:string;refill?:{dispatchToken:string;epochSha256:string} }
 export type MaintenanceBatch = QueueMessageBatch<MaintenanceMessage>
 export interface BucketObject { text(): Promise<string>; arrayBuffer(): Promise<ArrayBuffer>; size?: number;etag?:string }
 export interface Bucket {
@@ -17,12 +17,16 @@ export interface DurableStorage {
   delete(key: string): Promise<boolean>
   transaction<T>(body: (txn: DurableStorage) => Promise<T>): Promise<T>
   list?<T>(options: { startAfter?: string; limit: number }): Promise<Map<string, T>>
+  getAlarm?(): Promise<number | null>
+  setAlarm?(scheduledTime: number): Promise<void>
+  deleteAlarm?(): Promise<void>
 }
 export interface DurableState { storage: DurableStorage }
 export interface DurableNamespace { idFromName(name: string): unknown; get(id: unknown): { fetch(request: Request): Promise<Response> } }
 export type MaintenanceEnv = {
   PIPELINE_DB: D1Database; SNAPSHOTS_BUCKET: Bucket;
   MAINTENANCE_QUEUE: QueueProducer<MaintenanceMessage>; MODEL_ADMISSION: DurableNamespace;
+  REFILL_COORDINATOR?: DurableNamespace;
   MAINTENANCE_ADMIN_TOKEN?: string; MINIMAX_SUBSCRIPTION_KEY?: string;
   MINIMAX_FLASH_CANARY?: string;
   CLOUDFLARE_BILLING_READ_TOKEN?: string;
@@ -34,6 +38,12 @@ export type MaintenanceEnv = {
   USER_AGENT?: string; FETCH_CONCURRENCY?: string; MODEL_CONCURRENCY?: string;
   /** Exact 8/16/32/64; every other value preserves the eight-job default. */
   TICK_JOB_LIMIT?: string;
+  /** Opt-in continuous dispatch, independent of the existing model reservation ledger. */
+  CONTINUOUS_REFILL_ENABLED?: string;
+  /** The continuous model-stage pilot admits two jobs; only literal 4 raises it. */
+  REFILL_MODEL_LIMIT?: string;
+  /** Only fresh, versioned jobs may use smaller model batches. */
+  MODEL_BATCH_CONTRACT_VERSION?: string;
 }
 export type Control = {
   singleton: number; scope_sha256: string; input_catalog_sha256: string; seed_sha256: string;

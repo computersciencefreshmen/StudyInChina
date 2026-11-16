@@ -61,6 +61,9 @@ function pipelineFixture(count = 272) {
     newInputCatalogSha256: hash, acceptedProposalIds: ['proposal'], heldProposalIds: [], deploymentId: 'dpl_verified', stableProofSha256: hash })
   f.db.prepare("INSERT INTO maintenance_exports VALUES('published-batch',?,?,?,?,?,'published',?,?)")
     .run(hash, registry.sha256, 'maintenance/exports/proof.json', hash, now, createHash('sha256').update(ack).digest('hex'), ack)
+  f.db.prepare("INSERT INTO maintenance_refill_dispatches(dispatch_token,job_id,epoch_sha256,kind,stage,scope_sha256,input_catalog_sha256,control_revision,fence_json,candidate_json,candidate_sha256,job_json,status,claimed_at) VALUES('retained-dispatch','job',?,'model','maintain',?,?,8,'{}','{}',?,'{}','unconfirmed',?)")
+    .run(hash, registry.sha256, hash, hash, now)
+  f.db.prepare("INSERT INTO maintenance_refill_fairness VALUES(?,'model',4,28,19)").run(registry.sha256)
   f.db.close(); return f
 }
 function runVerifier(root: string, kind = 'pipeline') {
@@ -119,14 +122,19 @@ describe('complete D1 restore and account migration', () => {
       scopeRegistrySha256: scope(count).sha256, jobs: [{ status: 'unknown', count: 1 }], modelAttempts: [{ status: 'unknown', count: 1 }],
       exports: [{ status: 'published', count: 1 }], resumable: false, evidenceObjectsVerified: false, durableObjectReservationsVerified: false })
     mutate(f, db => expect(db.prepare('SELECT revision FROM maintenance_control').get()?.revision).toBe(8))
-    expect(JSON.parse(result.stdout).logicalTables).toHaveLength(106)
+    const logicalTables = JSON.parse(result.stdout).logicalTables
+    expect(logicalTables).toHaveLength(108)
+    expect(logicalTables).toEqual(expect.arrayContaining([
+      expect.objectContaining({ table: 'maintenance_refill_dispatches', rows: 1 }),
+      expect.objectContaining({ table: 'maintenance_refill_fairness', rows: 1 }),
+    ]))
   })
   it('accepts a fully migrated empty maintenance subsystem without claiming execution recovery', () => {
     const f = fixture('pipeline'); f.db.close()
     const result = runVerifier(f.root); expect(result.status, result.stderr).toBe(0)
     expect(JSON.parse(result.stdout).maintenance).toMatchObject({ state: 'not_initialized', resumable: false })
   })
-  // Each rejection builds the complete 106-table fixture and starts a fresh
+  // Each rejection builds the complete 108-table fixture and starts a fresh
   // verifier process. Allow CI contention without weakening any integrity check.
   it.each(['missing-table', 'missing-index', 'missing-trigger', 'extra-trigger', 'wrong-school', 'unknown-scope', 'bad-ack', 'orphan'] as const)('rejects %s instead of accepting a partial migration', mode => {
     const f = pipelineFixture()
@@ -256,6 +264,8 @@ describe('complete D1 restore and account migration', () => {
       executeDataPlan(target, output); executeIndependent(target, after)
       expect(tableLogicalSummaries(target, f.trusted.tables)).toEqual(manifest.tables)
       expect(target.prepare('SELECT status FROM maintenance_jobs').get()?.status).toBe('unknown')
+      expect(target.prepare('SELECT dispatch_token,status FROM maintenance_refill_dispatches').get()).toMatchObject({ dispatch_token: 'retained-dispatch', status: 'unconfirmed' })
+      expect(target.prepare('SELECT revision,slot_offset,expansion_offset FROM maintenance_refill_fairness').get()).toMatchObject({ revision: 4, slot_offset: 28, expansion_offset: 19 })
       executeIndependent(target, before); executeDataPlan(target, output); executeIndependent(target, after)
       expect(tableLogicalSummaries(target, f.trusted.tables)).toEqual(manifest.tables)
       expect(target.prepare('PRAGMA foreign_key_check').all()).toEqual([])
@@ -273,7 +283,7 @@ describe('complete D1 restore and account migration', () => {
     const f = pipelineFixture(), data = dump(f, `\nINSERT INTO maintenance_jobs(job_id,source_id,stage,status,due_at,created_at,updated_at,error_code) VALUES('linebreak','source','capture','held','${now}','${now}','${now}',replace('first\\nsecond','\\n',char(10)));`)
     const prepared = spawnSync(process.execPath, ['--no-warnings', 'scripts/cloudflare/prepare-account-migration-d1.mjs', '--kind', 'pipeline', '--data-only', data, '--output', join(f.root, 'prepared')], { encoding: 'utf8' })
     expect(prepared.status, prepared.stderr).toBe(0)
-    expect(JSON.parse(prepared.stdout)).toMatchObject({ kind: 'pipeline', tables: 106, requiresBoundData: false })
+    expect(JSON.parse(prepared.stdout)).toMatchObject({ kind: 'pipeline', tables: 108, requiresBoundData: false })
     const sql = readFileSync(join(f.root, 'prepared/03-data.sql'), 'utf8')
     expect(sql).toContain("'first\nsecond'")
   })

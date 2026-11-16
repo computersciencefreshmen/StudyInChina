@@ -30,12 +30,23 @@ export const cloudLedgerSchema = z.object({
   coverage: z.object({ evaluatedOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), stale: z.boolean(), schools: count,
     zero: count, one: count, twoToFour: count, fivePlus: count, currentPrograms: count, currentScholarships: count }).strict().nullable(),
 }).strict()
+export type CloudLedger = z.infer<typeof cloudLedgerSchema>
+const refillLane = z.object({ pending: count, inflight: count, eligible: count.nullable(), limit: count.max(8), epochUsed: count, epochCap: count })
+/** Display projection only: delivery tokens, source keys and request ledgers are stripped. */
+export const cloudRefillSchema = z.object({
+  format: z.literal('studyinchina.continuous-refill'), version: z.literal(1), observedAt: timestamp,
+  enabled: z.boolean(), state: z.enum(['disabled', 'waiting', 'running', 'idle']), reason: z.string().regex(/^[a-zA-Z0-9_:.-]{1,120}$/),
+  model: refillLane, capture: refillLane, lastRefillAt: timestamp.nullable(), nextWakeAt: timestamp.nullable(), uncertainDeliveries: count,
+  revision: count.nullable().optional(), gateRetryAt: timestamp.nullable().optional(),
+  refillLatencyP95Ms: count.nullable().optional(), refillLatencySamples: count.optional(),
+  modelTaskBusyPercent: percent.nullable().optional(), modelCallsPerformed: z.literal(false),
+})
+export type CloudRefillSnapshot = z.infer<typeof cloudRefillSchema>
 export const cloudMiniMaxSchema = z.object({ version: z.literal(1), generatedAt: timestamp, quota: cloudQuotaSchema,
-  ledgerState: z.enum(['fresh', 'stale', 'unavailable']), ledger: cloudLedgerSchema.nullable(),
+  ledgerState: z.enum(['fresh', 'stale', 'unavailable']), ledger: cloudLedgerSchema.nullable(), refill: cloudRefillSchema.nullable().optional(),
   code: z.enum(['observed', 'backend_unavailable', 'binding_missing']), modelCallsPerformed: z.literal(false),
 }).strict()
 export type CloudMiniMaxSnapshot = z.infer<typeof cloudMiniMaxSchema>
-export type CloudLedger = z.infer<typeof cloudLedgerSchema>
 export const CLOUD_MONITOR_REFRESH_MS = 45_000
 export const CLOUD_MONITOR_STALE_MS = 120_000
 export function unknownCloudQuota(now = Date.now()): CloudQuotaSnapshot {

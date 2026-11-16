@@ -6,6 +6,23 @@ import { cloudSnapshot, CLOUD_NOW } from '../fixtures/cloud-minimax'
 import { adminSnapshot } from '../fixtures/admin-workbench'
 afterEach(() => { cleanup(); vi.useRealTimers() })
 describe('mobile cloud MiniMax panel', () => {
+  it('distinguishes continuous dispatch from model calls and ages its independent observation', () => {
+    const value = cloudSnapshot()
+    value.refill = { format: 'studyinchina.continuous-refill', version: 1, observedAt: new Date(CLOUD_NOW).toISOString(), enabled: true,
+      state: 'running', reason: 'bounded_refill_completed', model: { pending: 3, inflight: 2, eligible: null, limit: 2, epochUsed: 17, epochCap: 256 },
+      capture: { pending: 1, inflight: 1, eligible: null, limit: 2, epochUsed: 5, epochCap: 64 }, lastRefillAt: new Date(CLOUD_NOW).toISOString(),
+      nextWakeAt: null, uncertainDeliveries: 1, modelCallsPerformed: false, refillLatencyP95Ms: null, refillLatencySamples: 0 }
+    const { rerender } = render(<CloudMiniMaxPanel value={value} now={CLOUD_NOW} />)
+    const section = screen.getByLabelText('持续采集状态')
+    expect(section).toHaveTextContent('持续补位中')
+    expect(within(section).getByText('合格模型积压').closest('div')).toHaveTextContent('未知')
+    expect(section).toHaveTextContent('模型 17 / 256，抓取 5 / 64')
+    expect(section).toHaveTextContent('派发量不是模型调用量')
+    expect(section).not.toHaveTextContent('补位延迟 P95 0')
+    rerender(<CloudMiniMaxPanel value={value} now={CLOUD_NOW + 121_000} />)
+    expect(screen.getByLabelText('持续采集状态')).toHaveTextContent('历史状态 · 待更新')
+    expect(screen.getByLabelText('持续采集状态')).not.toHaveTextContent('持续补位中')
+  })
   it('shows live quota, unlimited weekly status and actual Flash ledger independently of a disconnected desktop executor', () => {
     const data = adminSnapshot(); data.generatedAt = new Date(CLOUD_NOW).toISOString(); data.telemetry = { source: 'unavailable', observedAt: null, stale: true }; data.cloudMiniMax = cloudSnapshot()
     render(<AdminDashboard snapshot={data} connection="polling" />)

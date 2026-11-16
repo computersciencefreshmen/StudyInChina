@@ -1,4 +1,5 @@
 import { readBoundedBody } from '../../ingestion/src/body'
+import { IngestionError } from '../../ingestion/src/errors'
 import { parseOfficialCatalogHtml } from '../../ingestion/src/catalog-parser'
 import { isRobotsPathAllowed } from '../../ingestion/src/robots'
 import { htmlToText, normalizeEvidenceText } from '../../ingestion/src/rules'
@@ -17,6 +18,39 @@ export type CapturedSnapshot = {
   parserCandidates:unknown[];textArtifact?:{objectKey:string;sha256:string;rawSnapshotSha256:string;parser:'poppler'|'tesseract'|'browser-dom'|'official-response-text-v1'}
 }
 const pause=(ms:number)=>new Promise<void>(done=>setTimeout(done,ms))
+const transientTransportCodes=new Set(['ECONNRESET','ECONNREFUSED','EPIPE','ETIMEDOUT','EAI_AGAIN','UND_ERR_CONNECT_TIMEOUT','UND_ERR_HEADERS_TIMEOUT','UND_ERR_BODY_TIMEOUT','UND_ERR_SOCKET'])
+/** Only errors from the transport call/read boundary are eligible. A TypeError
+ * from parsing, storage, or application code is never relabelled as a network
+ * outage, and provider messages/URLs are never retained in the public code. */
+function transientTransport(error:unknown):boolean {
+  if(error instanceof DOMException)return error.name==='AbortError'||error.name==='TimeoutError'||error.name==='NetworkError'
+  if(!(error instanceof Error))return false
+  const cause=record((error as Error&{cause?:unknown}).cause),code=(error as Error&{code?:unknown}).code
+  return transientTransportCodes.has(String(cause?.code))||transientTransportCodes.has(String(code))
+    ||new Set(['Network connection lost.','Network connection reset.']).has(error.message)
+    ||error instanceof TypeError&&new Set(['fetch failed','Failed to fetch','NetworkError when attempting to fetch resource.','terminated']).has(error.message)
+}
+export function captureRetrySeconds(attempt:number):60|300|900 {
+  return attempt<=1?60:attempt===2?300:900
+}
+async function captureFetch(fetcher:typeof fetch,url:URL,init:RequestInit,job:JobRow,robots=false) {
+  let transportError:unknown
+  const guarded:typeof fetch=async(input,options)=>{try{return await fetcher(input,options)}catch(error){transportError=error;throw error}}
+  try{return await fetchWithValidatedRedirects(guarded,url,{allowedHosts:[url.hostname]},init,3,5000)}
+  catch(error){
+    if(error instanceof IngestionError&&error.code==='network_error'&&transientTransport(transportError))throw new MaintenanceError(robots?'robots_fetch_failed':'source_fetch_failed',captureRetrySeconds(job.attempt))
+    // Redirect/security failures and unclassified exceptions remain permanent.
+    if(error instanceof IngestionError&&error.code!=='network_error')throw new MaintenanceError(robots?'robots_fetch_failed':'source_fetch_rejected')
+    throw transportError??error
+  }
+}
+async function captureBody(response:Response,maximumBytes:number,signal:AbortSignal,job:JobRow,robots=false) {
+  try{return await readBoundedBody(response,maximumBytes,signal)}catch(error){
+    if(error instanceof IngestionError&&error.code==='response_timeout'||transientTransport(error))throw new MaintenanceError(robots?'robots_read_failed':'source_read_failed',captureRetrySeconds(job.attempt))
+    if(error instanceof IngestionError)throw new MaintenanceError(robots?'robots_body_rejected':'source_body_rejected')
+    throw error
+  }
+}
 export function decodeOfficialBody(bytes:ArrayBuffer,contentType:string):string {
   const prefix=new TextDecoder('utf-8').decode(bytes.slice(0,2048))
   const charset=/charset\s*=\s*["']?\s*([a-zA-Z0-9_-]+)/i.exec(contentType)?.[1]??/<meta\b[^>]*charset\s*=\s*["']?\s*([a-zA-Z0-9_-]+)/i.exec(prefix)?.[1]??'utf-8'
@@ -42,9 +76,9 @@ export async function captureSource(env:MaintenanceEnv,job:JobRow,row:SourceRow,
     let robots=cached
     if(!robots) {
       const signal=AbortSignal.timeout(20000),robotsUrl=new URL('/robots.txt',url)
-      const fetched=await fetchWithValidatedRedirects(fetcher,robotsUrl,{allowedHosts:[url.hostname]},{headers:{'user-agent':userAgent},signal},3,5000).catch(()=>{throw new MaintenanceError('robots_fetch_failed',3600)})
+      const fetched=await captureFetch(fetcher,robotsUrl,{headers:{'user-agent':userAgent},signal},job,true)
       const status=fetched.response.status
-      const body=status===200?new TextDecoder().decode(await readBoundedBody(fetched.response,256*1024,signal)):null
+      const body=status===200?new TextDecoder().decode(await captureBody(fetched.response,256*1024,signal,job,true)):null
       if(status!==200)await fetched.response.body?.cancel()
       robots={status,body}
       await env.PIPELINE_DB.prepare('INSERT INTO maintenance_robots VALUES(?,?,?,?) ON CONFLICT(host) DO UPDATE SET status=excluded.status,body=excluded.body,expires_at=excluded.expires_at').bind(url.hostname,status,body,after(24*3600000,now)).run()
@@ -55,10 +89,10 @@ export async function captureSource(env:MaintenanceEnv,job:JobRow,row:SourceRow,
     const signal=AbortSignal.timeout(20000)
     // A complete body is deliberately retained. An HTTP304 or link-health check
     // alone does not renew factual review dates or certify an old extraction.
-    const fetched=await fetchWithValidatedRedirects(fetcher,url,{allowedHosts:[url.hostname]},{headers:{'user-agent':userAgent,accept:'text/html,application/json,application/pdf,text/plain;q=0.8'},signal},3,5000).catch(()=>{throw new MaintenanceError('source_fetch_failed',3600)})
+    const fetched=await captureFetch(fetcher,url,{headers:{'user-agent':userAgent,accept:'text/html,application/json,application/pdf,text/plain;q=0.8'},signal},job)
     if(!fetched.response.ok){await fetched.response.body?.cancel();throw new MaintenanceError(`source_http_${fetched.response.status}`,[429,500,502,503,504].includes(fetched.response.status)?3600:null)}
     const contentType=fetched.response.headers.get('content-type')??'application/octet-stream'
-    const bytes=await readBoundedBody(fetched.response,/^application\/pdf/i.test(contentType)?10*1024*1024:2*1024*1024,signal),rawSha256=await digest(bytes)
+    const bytes=await captureBody(fetched.response,/^application\/pdf/i.test(contentType)?10*1024*1024:2*1024*1024,signal,job),rawSha256=await digest(bytes)
     const rawKey=`maintenance/snapshots/${row.source_id}/${rawSha256}.bin`,checkedAt=nowIso()
     await env.SNAPSHOTS_BUCKET.put(rawKey,bytes,{httpMetadata:{contentType}})
     const jsonSupported=/^application\/(?:json|[a-z0-9!#$&^_.+-]+\+json)(?:\s*;|$)/i.test(contentType)

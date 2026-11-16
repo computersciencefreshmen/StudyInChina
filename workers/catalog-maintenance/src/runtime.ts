@@ -8,6 +8,7 @@ import { resumePendingScopeUpgrade } from './scope-upgrade'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { readBackgroundBudgetGate } from '../../shared/background-budget'
 import { drainBudgetQueueHolds, type BudgetHoldDrain } from './budget-queue-hold'
+import { continuousRefillEnabled, readRefillStatus, wakeRefill } from './refill-client'
 
 const POINTER='maintenance/bootstrap-pending/initial.v1.json'
 const UPLOAD_POINTER='maintenance/bootstrap-pending/upload.v1.json'
@@ -23,6 +24,16 @@ type UploadPointer={format:'studyinchina.pending-bootstrap-upload';version:1;raw
 type TickState='running'|'disabled'|'waiting_for_bootstrap'|'waiting_for_seed'|'waiting_for_activation'|'quota_wait'|'budget_wait'|'error'
 export type TickMode='full'|'dispatch_only'|'administrative_only'
 export type RuntimeTick={format:'studyinchina.cloud-maintenance-tick';version:1;tickId:string;observedAt:string;state:TickState;code:string;queued:number|null;seedComplete:boolean|null;targetsComplete:boolean|null;modelsEnabled:boolean|null;canarySchoolCount:number|null;retryAt:string|null;budgetQueueHoldDrain?:BudgetHoldDrain;mode?:TickMode}
+async function dispatchOrdinaryWork(env:MaintenanceEnv,now:number,mode:TickMode){
+  const cfg=continuousRefillEnabled(env)&&mode!=='administrative_only'?await control(env):null
+  if(env.MAINTENANCE_ENABLED==='true'&&cfg?.enabled&&cfg.seed_complete&&cfg.targets_complete){
+    if(!(await nativeReconciliationGate(env)).ready)return{enabled:false,queued:0,nativeHeadReconciliationRequired:true as const}
+    const result=await wakeRefill(env,{reason:'watchdog',planCaptures:true})
+    // This is a wake receipt, not a count of Queue.send or provider requests.
+    return{enabled:result.enabled===true,queued:null,continuousRefill:true as const}
+  }
+  return enqueueDue(env,now,mode)
+}
 type DailyHistory={date:string;ticks:RuntimeTick[];truncated:boolean}
 const jsonOptions={httpMetadata:{contentType:'application/json'}}
 async function readObject(env:MaintenanceEnv,key:string,max=512*1024):Promise<{object:BucketObject;text:string}|null>{const object=await env.SNAPSHOTS_BUCKET.get(key);if(!object)return null;if(object.size!==undefined&&object.size>max)throw new MaintenanceError('runtime_artifact_too_large');const text=await object.text();if(new TextEncoder().encode(text).byteLength>max)throw new MaintenanceError('runtime_artifact_too_large');return{object,text}}
@@ -176,10 +187,10 @@ export async function runCloudTick(env:MaintenanceEnv,mode:TickMode='full'){
       // cannot take its seed/target continuation branches in this mode.
       const cfg=await control(env)
       tick.seedComplete=Boolean(cfg?.seed_complete);tick.targetsComplete=Boolean(cfg?.targets_complete);tick.modelsEnabled=Boolean(cfg?.models_enabled);tick.canarySchoolCount=cfg?(JSON.parse(cfg.canary_json)as string[]).length:null
-      const result=await enqueueDue(env,Date.now(),'dispatch_only')
+      const result=await dispatchOrdinaryWork(env,Date.now(),'dispatch_only')
       if('administrativeContinuationRequired'in result){tick.seedComplete=result.seedComplete??null;tick.targetsComplete=result.targetsComplete??null}
       tick.queued=result.queued;tick.state=result.enabled?'running':'administrativeContinuationRequired'in result?'waiting_for_seed':'disabled'
-      tick.code=result.enabled?'bounded_scheduler_completed':'administrativeContinuationRequired'in result?'administrative_continuation_required':'existing_controls_preserved'
+      tick.code='continuousRefill'in result?'continuous_refill_wake_recorded':result.enabled?'bounded_scheduler_completed':'administrativeContinuationRequired'in result?'administrative_continuation_required':'existing_controls_preserved'
       return saveTick(env,tick)
     }
     const held=await drainBudgetQueueHolds(env);tick.budgetQueueHoldDrain=held
@@ -208,10 +219,10 @@ export async function runCloudTick(env:MaintenanceEnv,mode:TickMode='full'){
         }
         // Revision >0 belongs to the existing control owner. A retrying initial
         // bootstrap never overrides a manual pause or later canary decision.
-        const result=await enqueueDue(env,Date.now(),mode)
+        const result=await dispatchOrdinaryWork(env,Date.now(),mode)
         tick.queued=result.queued;tick.targetsComplete=Boolean(cfg.targets_complete);tick.modelsEnabled=Boolean(cfg.models_enabled);tick.canarySchoolCount=(JSON.parse(cfg.canary_json)as string[]).length
         tick.state=result.enabled?'running':cfg.revision===0&&pointer?'waiting_for_activation':'disabled'
-        tick.code=result.enabled?'bounded_scheduler_completed':mode==='administrative_only'&&cfg.targets_complete?'administrative_no_work':env.MAINTENANCE_ENABLED!=='true'?'deployment_activation_gate_disabled':'nativeHeadReconciliationRequired'in result?'native_head_reconciliation_required':cfg.targets_complete?'existing_controls_preserved':'target_refresh_in_progress'
+        tick.code='continuousRefill'in result?'continuous_refill_wake_recorded':result.enabled?'bounded_scheduler_completed':mode==='administrative_only'&&cfg.targets_complete?'administrative_no_work':env.MAINTENANCE_ENABLED!=='true'?'deployment_activation_gate_disabled':'nativeHeadReconciliationRequired'in result?'native_head_reconciliation_required':cfg.targets_complete?'existing_controls_preserved':'target_refresh_in_progress'
       }
     }
   }catch(error){const backend=backendCode(error);tick.state=backend==='quota_wait'?'quota_wait':'error';tick.code=error instanceof MaintenanceError?error.code:backend;tick.retryAt=backend==='quota_wait'?(await rememberQuotaWait(env)).retryAt:null}
@@ -236,7 +247,8 @@ async function soak(env:MaintenanceEnv,now=Date.now()){
 }
 export async function runtimeStatus(env:MaintenanceEnv){
   const [latest,observation,pointer,uploaded]=await Promise.all([readObject(env,LATEST),soak(env),bootstrapPointer(env,false),readObject(env,UPLOAD_POINTER)])
-  const runtime={lastRuntimeTick:latest?JSON.parse(latest.text)as RuntimeTick:null,soak:observation,bootstrapUploadPending:uploaded?JSON.parse(uploaded.text)as UploadPointer:null,bootstrapPending:pointer?{bootstrapSha256:pointer.envelopeSha256,seedSha256:pointer.seedSha256,scopeRegistrySha256:pointer.scopeRegistrySha256,activation:pointer.activation}:null}
+  const refill=env.REFILL_COORDINATOR?await readRefillStatus(env).catch(()=>null):null
+  const runtime={refill,lastRuntimeTick:latest?JSON.parse(latest.text)as RuntimeTick:null,soak:observation,bootstrapUploadPending:uploaded?JSON.parse(uploaded.text)as UploadPointer:null,bootstrapPending:pointer?{bootstrapSha256:pointer.envelopeSha256,seedSha256:pointer.seedSha256,scopeRegistrySha256:pointer.scopeRegistrySha256,activation:pointer.activation}:null}
   const budget=await readBackgroundBudgetGate(env.SNAPSHOTS_BUCKET)
   if(!budget.allowed)return{format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:false,modelEnabled:false,scopeCount:null,control:null,jobs:null,proposals:null,sources:null,modelAttempts:null,coverage:null,websiteBackendChanged:false,...runtime,budget,
     backend:{state:'budget_wait' as const,retryAt:null,errorKind:null,diagnosticKey:null,diagnosticSha256:null},productionRunningClaim:false}

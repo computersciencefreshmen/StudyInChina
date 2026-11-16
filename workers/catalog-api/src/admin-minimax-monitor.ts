@@ -1,4 +1,4 @@
-import { cloudMiniMaxSchema, cloudLedgerSchema, cloudQuotaSchema, unknownCloudQuota, CLOUD_MONITOR_REFRESH_MS, type CloudLedger, type CloudQuotaSnapshot } from '../../../src/lib/admin/cloud-minimax-contract'
+import { cloudMiniMaxSchema, cloudLedgerSchema, cloudQuotaSchema, cloudRefillSchema, unknownCloudQuota, CLOUD_MONITOR_REFRESH_MS, type CloudLedger, type CloudQuotaSnapshot, type CloudRefillSnapshot } from '../../../src/lib/admin/cloud-minimax-contract'
 import { coverageSnapshotSchema } from '../../catalog-maintenance/src/coverage'
 import { canonicalJson } from '../../../scripts/maintenance/contracts'
 import type { CatalogApiEnv } from './types'
@@ -91,6 +91,8 @@ export async function handleAdminMiniMaxMonitor(request: Request, env: CatalogAp
   if (request.method !== 'GET') return new Response(null, { status: 405, headers: { ...headers, Allow: 'GET' } })
   let quota = unknownCloudQuota(now)
   try { if (env.MAINTENANCE_MONITOR) quota = cloudQuotaSchema.parse(await env.MAINTENANCE_MONITOR.readQuota()) } catch { /* Preserve ledger availability independently. */ }
+  let refill: CloudRefillSnapshot | null = null
+  try { if (env.MAINTENANCE_MONITOR?.readRefill) refill = cloudRefillSchema.parse(await env.MAINTENANCE_MONITOR.readRefill()) } catch { /* An older or unavailable refill service never hides the usage ledger. */ }
   let entry = cache.get(env)
   if (!entry) { entry = { until: 0, ledger: null, failed: false }; cache.set(env, entry) }
   if (!entry.pending && entry.until <= now) {
@@ -99,7 +101,7 @@ export async function handleAdminMiniMaxMonitor(request: Request, env: CatalogAp
   }
   if (entry.pending) await entry.pending
   const ledgerState = !entry.ledger ? 'unavailable' : entry.failed || now - Date.parse(entry.ledger.observedAt) > 120_000 ? 'stale' : 'fresh'
-  const result = cloudMiniMaxSchema.parse({ version: 1, generatedAt: iso(now), quota, ledgerState, ledger: entry.ledger,
+  const result = cloudMiniMaxSchema.parse({ version: 1, generatedAt: iso(now), quota, ledgerState, ledger: entry.ledger, refill,
     code: !env.PIPELINE_DB ? 'binding_missing' : entry.failed ? 'backend_unavailable' : 'observed', modelCallsPerformed: false })
   return Response.json(result, { headers })
 }

@@ -7,16 +7,17 @@ import { MaintenanceError } from './types'
 import { canonical, digest, HASH, record } from './util'
 import { htmlToText } from '../../ingestion/src/rules'
 import { decodeOfficialBody } from './capture'
+import { MATERIAL_BATCH_LIMITS,readMaterialBatchContract } from './material-batch-contract'
 
 export type PartitionEngine = 'program' | 'scholarship' | 'fields' | 'cycles'
 type Span = { start: number; end: number; sha256: string; boundary: 'chapter' | 'paragraph' | 'continuous' | 'end' }
 export type DocumentPartitionManifest = {
   format: 'studyinchina.complete-document-partitions'; version: 1; sourceId: string; rawSnapshotSha256: string;
-  textSha256: string; textKey: string; textLength: number; chapterOffsets: number[]; partitions: Span[]; fullCoverage: true; sha256: string
+  textSha256: string; textKey: string; textLength: number; chapterOffsets: number[]; partitions: Span[]; fullCoverage: true; sha256: string; materialBatchContractVersion?:2
 }
 export type DocumentPartitionContext = {
   manifestKey: string; manifestSha256: string; partitionIndex: number; unitIndex: number; rawSnapshotSha256: string;
-  fullTextSha256: string; fullText: string; text: string; body: Span; contexts: Span[]; snapshot: CapturedSnapshot
+  fullTextSha256: string; fullText: string; text: string; body: Span; contexts: Span[]; snapshot: CapturedSnapshot; materialBatchContractVersion?:2
 }
 export type PartitionSegmentResult = { proposals: MaintenanceProposal[]; held: Array<{ recordId: string; reason: string }>; capacityLimited?: boolean }
 type ResultRef = { key: string; sha256: string }
@@ -29,14 +30,14 @@ const quoteContexts = new WeakMap<DocumentPartitionContext, { full: string; rang
 
 /** Every UTF-16 source position belongs to exactly one owned span. Headings and
  * paragraphs are preferred; oversized sections remain explicit continuous spans. */
-export async function buildDocumentPartitions(sourceId: string, snapshot: CapturedSnapshot, text: string, chapterOffsets: number[] = []): Promise<DocumentPartitionManifest> {
+export async function buildDocumentPartitions(sourceId: string, snapshot: CapturedSnapshot, text: string, chapterOffsets: number[] = [], materialVersion:1|2=1): Promise<DocumentPartitionManifest> {
   if (!snapshot.textKey || !snapshot.textSha256 || await digest(text) !== snapshot.textSha256) throw new MaintenanceError('partition_full_text_binding_invalid')
-  const partitions: Span[] = []
+  const partitions: Span[] = [],bodyLimit=materialVersion===2?12_000:BODY_LIMIT
   for (let start = 0; start < text.length;) {
-    const hardEnd = Math.min(text.length, start + BODY_LIMIT)
+    const hardEnd = Math.min(text.length, start + bodyLimit)
     let end = hardEnd, boundary: Span['boundary'] = hardEnd === text.length ? 'end' : 'continuous'
     if (hardEnd < text.length) {
-      const minimum = start + Math.floor(BODY_LIMIT / 2), window = text.slice(minimum, hardEnd)
+      const minimum = start + Math.floor(bodyLimit / 2), window = text.slice(minimum, hardEnd)
       const headings = [...text.slice(start, hardEnd).matchAll(/(?:\n|\f)(?:#{1,6}\s|第[一二三四五六七八九十百\d]+[章节]|\d{1,2}[.、]\s)/gu)]
         .map(match => start + (match.index ?? 0)).filter(offset => offset > start)
       const chapter = [...headings, ...chapterOffsets.filter(offset => offset > start && offset <= hardEnd)].sort((a, b) => a - b).at(-1)
@@ -59,7 +60,7 @@ export async function buildDocumentPartitions(sourceId: string, snapshot: Captur
   if (!partitions.length || partitions.length > MAX_PARTS) throw new MaintenanceError('partition_capacity_requires_review')
   const content = { format: 'studyinchina.complete-document-partitions' as const, version: 1 as const, sourceId,
     rawSnapshotSha256: snapshot.rawSha256, textSha256: snapshot.textSha256, textKey: snapshot.textKey,
-    textLength: text.length, chapterOffsets, partitions, fullCoverage: true as const }
+    textLength: text.length, chapterOffsets, partitions, fullCoverage: true as const,...(materialVersion===2?{materialBatchContractVersion:2 as const}:{}) }
   return { ...content, sha256: await digest(canonical(content)) }
 }
 
@@ -129,6 +130,7 @@ function quotesInProposal(proposal: MaintenanceProposal): string[] {
 export async function runPartitionedDocument(env: MaintenanceEnv, job: JobRow, row: SourceRow, snapshot: CapturedSnapshot,
   engine: PartitionEngine, targets: MaintenanceRecordTarget[],
   runSegment: (context: DocumentPartitionContext, targets: MaintenanceRecordTarget[]) => Promise<PartitionSegmentResult>) {
+  const materialVersion=await readMaterialBatchContract(job,engine,targets)
   const threshold = engine === 'program' || engine === 'scholarship' ? 50_000 : 100_000
   const unhandled = { handled: false, pending: false, ready: 0, held: 0, completeDocumentScan: false,
     completeSchoolCatalogueClaimed: false, conflictingClaims: 0, unfinishedSections: 0 }
@@ -137,7 +139,7 @@ export async function runPartitionedDocument(env: MaintenanceEnv, job: JobRow, r
   if (!object || object.size !== undefined && object.size > MAX_TEXT_BYTES) throw new MaintenanceError('partition_full_text_unavailable')
   const fullText = await object.text()
   if (await digest(fullText) !== snapshot.textSha256 || snapshot.sourceId !== row.source_id || snapshot.rawSha256 !== job.snapshot_sha256) throw new MaintenanceError('partition_snapshot_binding_invalid')
-  if (fullText.length <= threshold) return unhandled
+  if (materialVersion===1&&fullText.length <= threshold) return unhandled
   const chapterOffsets: number[] = []
   if (/html/iu.test(snapshot.contentType)) {
     const raw = await env.SNAPSHOTS_BUCKET.get(snapshot.rawKey)
@@ -150,9 +152,9 @@ export async function runPartitionedDocument(env: MaintenanceEnv, job: JobRow, r
       if (position >= 0) { chapterOffsets.push(position); after = position + label.length }
     }
   }
-  const manifest = await buildDocumentPartitions(row.source_id, snapshot, fullText, chapterOffsets), manifestKey = `maintenance/partitions/manifests/${manifest.sha256}.json`
+  const manifest = await buildDocumentPartitions(row.source_id, snapshot, fullText, chapterOffsets,materialVersion), manifestKey = `maintenance/partitions/manifests/${manifest.sha256}.json`
   await immutable(env, manifestKey, canonical(manifest))
-  const sortedTargets = [...targets].sort((a, b) => a.recordId.localeCompare(b.recordId)), targetLimit = engine === 'cycles' ? 10 : 20
+  const sortedTargets = [...targets].sort((a, b) => a.recordId.localeCompare(b.recordId)), targetLimit = materialVersion===2?MATERIAL_BATCH_LIMITS[engine]:engine === 'cycles' ? 10 : 20
   const batches = Math.max(1, Math.ceil(sortedTargets.length / targetLimit)), totalUnits = manifest.partitions.length * batches
   if (totalUnits > 1024) throw new MaintenanceError('partition_target_capacity_requires_review')
   const targetScopeSha256 = await digest(canonical(sortedTargets)), auditScope = await digest(canonical({ jobId: job.job_id, checkedAt: snapshot.checkedAt, targetScopeSha256, engine }))
@@ -177,7 +179,7 @@ export async function runPartitionedDocument(env: MaintenanceEnv, job: JobRow, r
     .bind(row.source_id, snapshot.rawSha256, row.source_id, snapshot.textSha256, row.source_id, snapshot.textSha256,
       row.source_id, snapshot.rawSha256, row.source_id, snapshot.textSha256, row.source_id, snapshot.textSha256).first<{ status: string; started_at: string | null }>()
   if (inFlight) {
-    if (inFlight.status === 'unknown' || !inFlight.started_at || !Number.isFinite(Date.parse(inFlight.started_at)) || Date.parse(inFlight.started_at) <= Date.now() - 120000) throw new MaintenanceError('partition_original_source_outcome_unknown')
+    if (inFlight.status === 'unknown' || !inFlight.started_at || !Number.isFinite(Date.parse(inFlight.started_at)) || Date.parse(inFlight.started_at) <= Date.now() - 120000) throw new MaintenanceError(materialVersion===2?'material_batch_source_history_protected':'partition_original_source_outcome_unknown')
     throw new MaintenanceError('model_capacity_partition_source_busy', 20)
   }
   if (cursor.nextUnit < totalUnits) {
@@ -197,7 +199,7 @@ export async function runPartitionedDocument(env: MaintenanceEnv, job: JobRow, r
     const context: DocumentPartitionContext = { manifestKey, manifestSha256: manifest.sha256, partitionIndex: partIndex, unitIndex: unit,
       rawSnapshotSha256: snapshot.rawSha256, fullTextSha256: snapshot.textSha256, fullText,
       text: [...contexts.map(span => fullText.slice(span.start, span.end)), fullText.slice(body.start, body.end)].join('\n\n'), body, contexts,
-      snapshot: { ...snapshot, ...(!snapshot.textArtifact ? { textArtifact: { objectKey: snapshot.textKey, sha256: snapshot.textSha256,
+      ...(materialVersion===2?{materialBatchContractVersion:2 as const}:{}),snapshot: { ...snapshot, ...(!snapshot.textArtifact ? { textArtifact: { objectKey: snapshot.textKey, sha256: snapshot.textSha256,
         rawSnapshotSha256: snapshot.rawSha256, parser: 'official-response-text-v1' as const } } : {}) } }
     const resultPrefix = `maintenance/partitions/results/${job.job_id}/${auditScope}/${unit}/`, resultPointerKey = `${resultPrefix}pointer.json`
     const priorResult = await env.SNAPSHOTS_BUCKET.get(resultPointerKey)
