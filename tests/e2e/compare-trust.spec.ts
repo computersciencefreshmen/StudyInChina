@@ -1,5 +1,5 @@
 import { expect, test, type Locator, type Page } from '@playwright/test'
-import { directoryData, rawData, TODAY } from './catalog-fixture'
+import { directoryData, rawData, TODAY, readPublicProgramIds } from './catalog-fixture'
 import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 import { formatProgramDuration } from '../../src/lib/data/duration'
 import { selectAdmissionCycle } from '../../src/lib/data/admission'
@@ -92,9 +92,7 @@ test('real-date APIs and saved comparisons exclude expired identities without le
     expect(body.data.items.map((item: { program: { id: string } }) => item.program.id)).toEqual(visibleIds)
     for (const program of expired) expect(body.data.items.some((item: { program: { id: string } }) => item.program.id === program.id)).toBe(false)
   }
-  const listResponse = await page.request.get('/api/v1/programs?view=directory&limit=24')
-  expect(listResponse.ok()).toBe(true)
-  expect((await listResponse.json()).data.map((item: { id: string }) => item.id).sort())
+  expect((await readPublicProgramIds(page.request)).sort())
     .toEqual(publicData.programs.map(program => program.id).sort())
   await seedFavorites(page, ids)
   const loaded = page.waitForResponse(response => new URL(response.url()).pathname === '/api/v1/programs/compare')
