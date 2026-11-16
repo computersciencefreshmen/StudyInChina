@@ -1,0 +1,1485 @@
+{
+  "format": "studyinchina.curated-official-programme-review",
+  "version": 1,
+  "reviewedAt": "2026-11-16T16:46:42.000Z",
+  "reviewAfter": "2026-12-17",
+  "reviewerId": "codex-independent-ai-assisted-official-source-audit:xmu-2027-core-20261117",
+  "method": "Codex independent AI-assisted official-source audit with exact original HTML hashes, origin-cell rowspan expansion, and visual inspection of the saved original HTML. User authorized this workflow; this is not a claim of personal human sign-off by Henry.",
+  "baseCommit": "ea51e6c97b773889e192db0f2463a6938e997f1e",
+  "inputCatalogSha256": "2a63c6a4af79c0d780734bf6c889507f0fcd712e5e4519d738dc0c6f9e1b793a",
+  "outputCatalogSha256": "f307329dc1680eb22fadf0ba8ca49414aa6f5016345e81baffb2971012973b5e",
+  "privateProofSha256": "f59077f2b99f3f2030db34588d3dc615a33b3554339300eab1dc7bc77d3ce27f",
+  "universityId": "uni-xiamen-university",
+  "academicYear": "2027",
+  "academicYearRangeNotInferred": true,
+  "teachingLanguage": "Chinese",
+  "applicationRound": "self-funded",
+  "sources": [
+    {
+      "id": "src-reviewed-xmu-2027-bachelor-guide-cn",
+      "url": "https://admissions.xmu.edu.cn/cn/info/1019/2036.htm",
+      "rawSha256": "0640b24ecc86004e9cea70bef223f45ffee2510d63e2e7df3095dd84efeadf13",
+      "accessedAt": "2026-11-16T16:22:43.595Z",
+      "paragraphTextSha256": "8f69029c163c4a8d2d94f001d7dd924ccbba07732e1bb85f800a30bcf1ec150a",
+      "parser": "python-htmlparser-paragraph-and-origin-cell-v1"
+    },
+    {
+      "id": "src-reviewed-xmu-2027-chinese-bachelor-majors",
+      "url": "https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm",
+      "rawSha256": "fc5852dcdb41d9e5e8f13c61f1f38e2a55a50e66623a7453e1926b9a47779c5a",
+      "accessedAt": "2026-11-16T16:22:44.114Z",
+      "paragraphTextSha256": "17f0de577499165a0f422ac0fcd219e3062871ed9fae651d3db844f84cfae12e",
+      "parser": "python-htmlparser-paragraph-and-origin-cell-v1"
+    },
+    {
+      "id": null,
+      "url": "https://admissions.xmu.edu.cn/info/1061/4620.htm",
+      "rawSha256": "aec4be1e183c1ea2aa151ccbc8eff0245209994b4ed850f21c96bf6a26ca7cf6",
+      "accessedAt": "2026-11-16T16:22:43.592Z",
+      "paragraphTextSha256": "79a756989aea4292d8a964f65080b0820faccff01581d317a2470a628fdc2eef",
+      "parser": "python-htmlparser-paragraph-and-origin-cell-v1"
+    }
+  ],
+  "sourceChain": {
+    "guideUrl": "https://admissions.xmu.edu.cn/cn/info/1019/2036.htm",
+    "programmeCatalogueUrl": "https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm",
+    "linkedApplicationPortal": "https://application.xmu.edu.cn/",
+    "exactAnchorEvidence": [
+      {
+        "sourceName": "guide-cn",
+        "locator": "html:a[href=\"https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm\"]",
+        "quote": "<a href=\"https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm\" target=\"_blank\"><span style=\"color:#337AB7\">https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm</span></a>",
+        "quoteSha256": "9063ee512ac65497cf74f50a0e618835f56f0ddc7b3420af70a17dda4c1ba151"
+      },
+      {
+        "sourceName": "guide-cn",
+        "locator": "html:a[href=\"https://application.xmu.edu.cn/\"]",
+        "quote": "<a href=\"https://application.xmu.edu.cn/\" target=\"_blank\"><span style=\"color:#337AB7\">application.xmu.edu.cn</span></a>",
+        "quoteSha256": "932a396a30b4e6fad6b7ec57d713e8b9eec576d11a2b7471aac15b113788a023"
+      }
+    ]
+  },
+  "programmeRows": [
+    {
+      "officialRowNumber": 8,
+      "htmlRowIndex": 8,
+      "campus": "思明校区",
+      "degreeLabel": "本科",
+      "school": "经济学院",
+      "department": "财政系",
+      "officialProgramCode": "020201K",
+      "verifiedName": {
+        "zh": "财政学"
+      },
+      "teachingLanguageLabel": "汉语",
+      "durationYears": 4,
+      "studyModeLabel": "全日制",
+      "originCells": [
+        {
+          "text": "8",
+          "originRowIndex": 8,
+          "originCellIndex": 0,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "思明校区",
+          "originRowIndex": 8,
+          "originCellIndex": 1,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "本科",
+          "originRowIndex": 8,
+          "originCellIndex": 2,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "经济学院",
+          "originRowIndex": 8,
+          "originCellIndex": 3,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "财政系",
+          "originRowIndex": 8,
+          "originCellIndex": 4,
+          "rowspan": 2,
+          "colspan": 1
+        },
+        {
+          "text": "020201K",
+          "originRowIndex": 8,
+          "originCellIndex": 5,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "财政学",
+          "originRowIndex": 8,
+          "originCellIndex": 6,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "汉语",
+          "originRowIndex": 8,
+          "originCellIndex": 7,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "4",
+          "originRowIndex": 8,
+          "originCellIndex": 8,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "全日制",
+          "originRowIndex": 8,
+          "originCellIndex": 9,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "秘书：苏盈莹 电话：0086 (0)592 2182396 邮箱：syy@xmu.edu.cn",
+          "originRowIndex": 8,
+          "originCellIndex": 10,
+          "rowspan": 6,
+          "colspan": 1
+        }
+      ],
+      "rowHtmlSha256": "ce1094f0f4f9c13d0824984e04ebd3ff6965a13a684ec888de4065463de6e434",
+      "locator": "html:table[1]/tbody/tr[9] (zero-based parser row 8; official row 8)",
+      "rawRange": {
+        "start": 43969,
+        "end": 47886,
+        "unit": "Unicode_code_points"
+      }
+    },
+    {
+      "officialRowNumber": 9,
+      "htmlRowIndex": 9,
+      "campus": "思明校区",
+      "degreeLabel": "本科",
+      "school": "经济学院",
+      "department": "财政系",
+      "officialProgramCode": "020202",
+      "verifiedName": {
+        "zh": "税收学"
+      },
+      "teachingLanguageLabel": "汉语",
+      "durationYears": 4,
+      "studyModeLabel": "全日制",
+      "originCells": [
+        {
+          "text": "9",
+          "originRowIndex": 9,
+          "originCellIndex": 0,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "思明校区",
+          "originRowIndex": 8,
+          "originCellIndex": 1,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "本科",
+          "originRowIndex": 8,
+          "originCellIndex": 2,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "经济学院",
+          "originRowIndex": 8,
+          "originCellIndex": 3,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "财政系",
+          "originRowIndex": 8,
+          "originCellIndex": 4,
+          "rowspan": 2,
+          "colspan": 1
+        },
+        {
+          "text": "020202",
+          "originRowIndex": 9,
+          "originCellIndex": 1,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "税收学",
+          "originRowIndex": 9,
+          "originCellIndex": 2,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "汉语",
+          "originRowIndex": 8,
+          "originCellIndex": 7,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "4",
+          "originRowIndex": 8,
+          "originCellIndex": 8,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "全日制",
+          "originRowIndex": 8,
+          "originCellIndex": 9,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "秘书：苏盈莹 电话：0086 (0)592 2182396 邮箱：syy@xmu.edu.cn",
+          "originRowIndex": 8,
+          "originCellIndex": 10,
+          "rowspan": 6,
+          "colspan": 1
+        }
+      ],
+      "rowHtmlSha256": "a734b5a48d2064f33c92dca809fe19dafbd0cea8e49c25b851d2c1fcfec2b104",
+      "locator": "html:table[1]/tbody/tr[10] (zero-based parser row 9; official row 9)",
+      "rawRange": {
+        "start": 47886,
+        "end": 48954,
+        "unit": "Unicode_code_points"
+      }
+    },
+    {
+      "officialRowNumber": 10,
+      "htmlRowIndex": 10,
+      "campus": "思明校区",
+      "degreeLabel": "本科",
+      "school": "经济学院",
+      "department": "国际经济与贸易系",
+      "officialProgramCode": "020401",
+      "verifiedName": {
+        "zh": "国际经济与贸易"
+      },
+      "teachingLanguageLabel": "汉语",
+      "durationYears": 4,
+      "studyModeLabel": "全日制",
+      "originCells": [
+        {
+          "text": "10",
+          "originRowIndex": 10,
+          "originCellIndex": 0,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "思明校区",
+          "originRowIndex": 8,
+          "originCellIndex": 1,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "本科",
+          "originRowIndex": 8,
+          "originCellIndex": 2,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "经济学院",
+          "originRowIndex": 8,
+          "originCellIndex": 3,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "国际经济与贸易系",
+          "originRowIndex": 10,
+          "originCellIndex": 1,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "020401",
+          "originRowIndex": 10,
+          "originCellIndex": 2,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "国际经济与贸易",
+          "originRowIndex": 10,
+          "originCellIndex": 3,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "汉语",
+          "originRowIndex": 8,
+          "originCellIndex": 7,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "4",
+          "originRowIndex": 8,
+          "originCellIndex": 8,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "全日制",
+          "originRowIndex": 8,
+          "originCellIndex": 9,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "秘书：苏盈莹 电话：0086 (0)592 2182396 邮箱：syy@xmu.edu.cn",
+          "originRowIndex": 8,
+          "originCellIndex": 10,
+          "rowspan": 6,
+          "colspan": 1
+        }
+      ],
+      "rowHtmlSha256": "6e08d068444aa044f5801ab43e7c7b8ad2f436b1fd84d077a2679a5641bf01b6",
+      "locator": "html:table[1]/tbody/tr[11] (zero-based parser row 10; official row 10)",
+      "rawRange": {
+        "start": 48954,
+        "end": 50323,
+        "unit": "Unicode_code_points"
+      }
+    },
+    {
+      "officialRowNumber": 11,
+      "htmlRowIndex": 11,
+      "campus": "思明校区",
+      "degreeLabel": "本科",
+      "school": "经济学院",
+      "department": "金融系",
+      "officialProgramCode": "020302",
+      "verifiedName": {
+        "zh": "金融工程"
+      },
+      "teachingLanguageLabel": "汉语",
+      "durationYears": 4,
+      "studyModeLabel": "全日制",
+      "originCells": [
+        {
+          "text": "11",
+          "originRowIndex": 11,
+          "originCellIndex": 0,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "思明校区",
+          "originRowIndex": 8,
+          "originCellIndex": 1,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "本科",
+          "originRowIndex": 8,
+          "originCellIndex": 2,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "经济学院",
+          "originRowIndex": 8,
+          "originCellIndex": 3,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "金融系",
+          "originRowIndex": 11,
+          "originCellIndex": 1,
+          "rowspan": 2,
+          "colspan": 1
+        },
+        {
+          "text": "020302",
+          "originRowIndex": 11,
+          "originCellIndex": 2,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "金融工程",
+          "originRowIndex": 11,
+          "originCellIndex": 3,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "汉语",
+          "originRowIndex": 8,
+          "originCellIndex": 7,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "4",
+          "originRowIndex": 8,
+          "originCellIndex": 8,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "全日制",
+          "originRowIndex": 8,
+          "originCellIndex": 9,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "秘书：苏盈莹 电话：0086 (0)592 2182396 邮箱：syy@xmu.edu.cn",
+          "originRowIndex": 8,
+          "originCellIndex": 10,
+          "rowspan": 6,
+          "colspan": 1
+        }
+      ],
+      "rowHtmlSha256": "e7e8af6c8bfe253ee1006f54224f00972ac4c4c8fba166043944f4c66e4e0268",
+      "locator": "html:table[1]/tbody/tr[12] (zero-based parser row 11; official row 11)",
+      "rawRange": {
+        "start": 50323,
+        "end": 51696,
+        "unit": "Unicode_code_points"
+      }
+    },
+    {
+      "officialRowNumber": 12,
+      "htmlRowIndex": 12,
+      "campus": "思明校区",
+      "degreeLabel": "本科",
+      "school": "经济学院",
+      "department": "金融系",
+      "officialProgramCode": "020301K",
+      "verifiedName": {
+        "zh": "金融学"
+      },
+      "teachingLanguageLabel": "汉语",
+      "durationYears": 4,
+      "studyModeLabel": "全日制",
+      "originCells": [
+        {
+          "text": "12",
+          "originRowIndex": 12,
+          "originCellIndex": 0,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "思明校区",
+          "originRowIndex": 8,
+          "originCellIndex": 1,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "本科",
+          "originRowIndex": 8,
+          "originCellIndex": 2,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "经济学院",
+          "originRowIndex": 8,
+          "originCellIndex": 3,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "金融系",
+          "originRowIndex": 11,
+          "originCellIndex": 1,
+          "rowspan": 2,
+          "colspan": 1
+        },
+        {
+          "text": "020301K",
+          "originRowIndex": 12,
+          "originCellIndex": 1,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "金融学",
+          "originRowIndex": 12,
+          "originCellIndex": 2,
+          "rowspan": 1,
+          "colspan": 1
+        },
+        {
+          "text": "汉语",
+          "originRowIndex": 8,
+          "originCellIndex": 7,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "4",
+          "originRowIndex": 8,
+          "originCellIndex": 8,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "全日制",
+          "originRowIndex": 8,
+          "originCellIndex": 9,
+          "rowspan": 6,
+          "colspan": 1
+        },
+        {
+          "text": "秘书：苏盈莹 电话：0086 (0)592 2182396 邮箱：syy@xmu.edu.cn",
+          "originRowIndex": 8,
+          "originCellIndex": 10,
+          "rowspan": 6,
+          "colspan": 1
+        }
+      ],
+      "rowHtmlSha256": "29b25318ab124447a249287ba0c0535f9bd739dc473a713feeb97f47db8613f9",
+      "locator": "html:table[1]/tbody/tr[13] (zero-based parser row 12; official row 12)",
+      "rawRange": {
+        "start": 51696,
+        "end": 52766,
+        "unit": "Unicode_code_points"
+      }
+    }
+  ],
+  "commonPolicy": {
+    "academicYear": "2027",
+    "intake": "autumn",
+    "typicalEnrollmentMonth": 9,
+    "opensOn": "2026-12-01",
+    "closesOn": "2027-05-31",
+    "timeZone": "Asia/Shanghai",
+    "applicationRound": "self-funded",
+    "tuitionCny": 26000,
+    "tuitionPeriod": "academic-year",
+    "applicationFeeCny": 400,
+    "eligibility": [
+      {
+        "zh": "年龄18–30周岁（截止2027年9月1日前），身心健康，持外国有效普通护照的非中国籍公民；未满18周岁者须提供监护担保书。"
+      },
+      {
+        "zh": "高中毕业或应届高中毕业，具备大学申请资格，学业成绩良好。"
+      },
+      {
+        "zh": "外籍华人等须按申请系统要求提交国籍状况预审材料，并在入学时携带相关纸质文件；未通过国籍预审或入学后国籍认定者，丧失申请、入学或学籍资格。"
+      },
+      {
+        "zh": "适用国籍法及教育部要求的出生即获外籍的华裔或移民转国籍申请者，须持有效外国护照或国籍证明4年（含）以上，且截至2027年4月30日前最近4年内实际在外国居住2年以上；一年内实际境外居住满9个月可按一年计算，以出入境签章为准。"
+      },
+      {
+        "zh": "须提交CSCA成绩单；经管法类必考文科中文和数学，数学测试语言须与授课语言一致。汉语言专业适用的HSK免考专业中文规则不适用于本经济学院专业。"
+      },
+      {
+        "zh": "奖学金申请者还须符合对应奖学金的年龄及其他要求；本周期仅为自费生申请轮次。"
+      }
+    ],
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+      }
+    ],
+    "allEvidence": [
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 8,
+        "locator": "html:p (paragraph parser index 8)",
+        "quote": "1.年龄在18-30周岁（截止2027年9月1日前），身心健康，持外国有效普通护照的非中国籍公民。未满18周岁的申请者须提供监护担保书。",
+        "quoteSha256": "d78a24d10c07496bfd93892bbea11caffc9565a68333d7319b3673fd7b249489"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 9,
+        "locator": "html:p (paragraph parser index 9)",
+        "quote": "2.高中毕业文凭或应届高中毕业生，具备大学申请资格，学业成绩良好。",
+        "quoteSha256": "7a7bd97966bd0c60ae59becc704a1dc33997c94c058f9e1b076859e3131a7b1b"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 10,
+        "locator": "html:p (paragraph parser index 10)",
+        "quote": "3.奖学金项目申请人，需符合各项目年龄及其他要求。",
+        "quoteSha256": "36794d396d66bc36a17243caa2dab0318e7301a1015cde37ca8ea2d27159fdd9"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 12,
+        "locator": "html:p (paragraph parser index 12)",
+        "quote": "1．根据有关规定，外籍华人含已加入外国国籍的原中国公民及其外国籍子女、中国公民的外国籍子女，根据国籍状况的不同，须按照申请系统提示填写相关信息和上传国籍状况预审所需材料，并于入学时携带相关纸质文件到校，入学后中国公安机关出入境管理部门将对其开展国籍认定。未能通过国籍状况预审或国籍认定者，自动丧失申请资格及后续可能取得的入学资格或学籍。",
+        "quoteSha256": "54e68129eda456c3c1e0972e17d6c52dc68b5bd957796e6001fe235085cc847f"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 13,
+        "locator": "html:p (paragraph parser index 13)",
+        "quote": "2．依据《中华人民共和国国籍法》第五条，父母双方或一方为中国公民并定居在外国，本人出生在外国且出生时即具有外国国籍的，不具有中国国籍。自2021年起，其申请作为国际学生进入我校本专科阶段学习，除符合学校的其他报名资格外，还应持有有效的外国护照或国籍证明文件4年（含）以上，且最近4年（截至入学年度的4月30日前）之内有在外国实际居住2年以上的记录（一年中实际在外国居住满9个月可按一年计算，以入境和出境签章为准）。祖国大陆（内地）、香港、澳门和台湾居民在移民并获得外国国籍后申请作为国际学生进入我校本专科阶段学习的，也应满足此项要求。",
+        "quoteSha256": "bcd3dbfae75cdf52d167358eff7345e1f86cf226567da607c1f06cb3fe451317"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 16,
+        "locator": "html:p (paragraph parser index 16)",
+        "quote": "（1）人文社科、经管法、艺术类和中医学专业：需达到HSK5级210分及以上（国际中文教育学院/海外教育学院汉语言专业的HSK要求详见学院网站）。",
+        "quoteSha256": "b1596ca5fedddcdd56df82a22ca9421c0126a0359928d2ed77707e08bc690bf9"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 18,
+        "locator": "html:p (paragraph parser index 18)",
+        "quote": "（3）高中阶段以中文作为授课语言的申请者，可凭高中出具的授课语言证明代替HSK证书。马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。",
+        "quoteSha256": "95213c75317975ae666b8fd3023886258273990610c4b89371ec3a8f31e09570"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 36,
+        "locator": "html:p (paragraph parser index 36)",
+        "quote": "注：1.以上申请时间适用在“厦门大学境外学生申请系统”报名的学历生项目，均为北京时间，逾期不受理。",
+        "quoteSha256": "28fbd7933422e0c10478cc60276cbe74ff0661ebc7169e7c50193e3fd8a50f63"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 39,
+        "locator": "html:p (paragraph parser index 39)",
+        "quote": "登录厦门大学境外学生申请系统（application.xmu.edu.cn，以下简称“申请系统”），在线提交申请并缴纳报名费。",
+        "quoteSha256": "68dccb1d67a7abfccbb5da84bccb1a1766f57bd540a42034f88c94d61532dd38"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 48,
+        "locator": "html:p (paragraph parser index 48)",
+        "quote": "6.来华留学本科入学学业水平测试（CSCA）成绩单。",
+        "quoteSha256": "ccd9c6669bc10fc28dedb6575985cf456e95e29ee74a52fa6ba04f6151d45192"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 92,
+        "locator": "html:p (paragraph parser index 92)",
+        "quote": "入学时间：秋季入学，一般在9月份。",
+        "quoteSha256": "e7c3772b05c7ef428f8202e45fccbcb8e3b0537f31b178098bf6b3ee5384e8e1"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 96,
+        "locator": "html:p (paragraph parser index 96)",
+        "quote": "（一）报名费：400元人民币。",
+        "quoteSha256": "60dcc1dc42461aa6e51112098bbc3a99b212d914cdce539312271933e2cb7183"
+      },
+      {
+        "sourceName": "guide-cn",
+        "paragraphIndex": 99,
+        "locator": "html:p (paragraph parser index 99)",
+        "quote": "文科类：24000元人民币/年；理工医类、经管法类、艺术类、体育类及海外教育学院汉语言专业：26000元人民币/年。",
+        "quoteSha256": "869d94d38ce5fac1fb2e4a6b4994004cfa490a8d883e3ad98c4315143a9b39f2"
+      },
+      {
+        "sourceName": "guide-cn",
+        "locator": "html:tr indexes [0, 1, 2, 3, 4]; application-round-table; source rowspans retained",
+        "quote": "开始时间 | 截止时间 | 项目类型 | 2026年12月1日 | 2027年2月20日 | 中国政府奖学金B类 | 2027年4月30日 | 福建省政府外国留学生奖学金 | 厦门大学国际学生新生奖学金 | 2027年5月31日 | 自费生",
+        "quoteSha256": "8d24cd64226bbd94710cbde119cb42f59dbeaa522871303a32b0e0228f8a8585"
+      },
+      {
+        "sourceName": "guide-cn",
+        "locator": "html:tr indexes [6, 8]; csca-table; source rowspans retained",
+        "quote": "专业中文 | 文科中文 | 申请文科、经管法、艺术类、体育类专业必考 | 建筑学、城乡规划专业可按照文科类或理科类CSCA测试科目要求招生；国际中文教育学院汉语言专业申请人可凭有效期内HSK四级证书免考专业中文测试 | 数学 | 必考 | 测试语言须与授课语言一致",
+        "quoteSha256": "a4cd608f1938338fd207a87193e7d335f4afa27e6b0ec514429bd48fcc2032cb"
+      },
+      {
+        "sourceName": "guide-cn",
+        "locator": "html:a[href=\"https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm\"]",
+        "quote": "<a href=\"https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm\" target=\"_blank\"><span style=\"color:#337AB7\">https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm</span></a>",
+        "quoteSha256": "9063ee512ac65497cf74f50a0e618835f56f0ddc7b3420af70a17dda4c1ba151"
+      },
+      {
+        "sourceName": "guide-cn",
+        "locator": "html:a[href=\"https://application.xmu.edu.cn/\"]",
+        "quote": "<a href=\"https://application.xmu.edu.cn/\" target=\"_blank\"><span style=\"color:#337AB7\">application.xmu.edu.cn</span></a>",
+        "quoteSha256": "932a396a30b4e6fad6b7ec57d713e8b9eec576d11a2b7471aac15b113788a023"
+      }
+    ]
+  },
+  "visualReview": {
+    "originalScreenshot": "table-economics-original.png",
+    "screenshotSha256": "37fae170be8121c9845f2eebeb956404c86ef9352a22a957b831151a8e16c3d8",
+    "observed": "Original saved HTML rendered in headless Edge, all external requests blocked. Rows 8–12 read visually. The row-8 shared cells extend through row 13 (rowspan=6): 思明校区、本科、经济学院、汉语、4、全日制. 财政系 spans rows 8–9; 金融系 spans rows 11–12.",
+    "reviewer": "Codex AI-assisted independent source review; no claim of Henry personal human sign-off"
+  },
+  "identityDedupe": [
+    {
+      "catalogue": "snapshot",
+      "programmeCount": 2302,
+      "rawProgrammeFileSha256": "387339f9c655ba017d537c2ba92c27f03825c2ded6073394319991ea27d93f1d",
+      "matches": [
+        {
+          "officialProgramCode": "020201K",
+          "verifiedName": {
+            "zh": "财政学"
+          },
+          "existingExactIds": []
+        },
+        {
+          "officialProgramCode": "020202",
+          "verifiedName": {
+            "zh": "税收学"
+          },
+          "existingExactIds": []
+        },
+        {
+          "officialProgramCode": "020401",
+          "verifiedName": {
+            "zh": "国际经济与贸易"
+          },
+          "existingExactIds": []
+        },
+        {
+          "officialProgramCode": "020302",
+          "verifiedName": {
+            "zh": "金融工程"
+          },
+          "existingExactIds": []
+        },
+        {
+          "officialProgramCode": "020301K",
+          "verifiedName": {
+            "zh": "金融学"
+          },
+          "existingExactIds": []
+        }
+      ],
+      "existingXmuBa": [
+        {
+          "id": "program-xiamen-university-digital-media-art-bachelor",
+          "name": {
+            "en": "Digital Media Art",
+            "zh": "数字媒体艺术"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/EN_BA.htm"
+        },
+        {
+          "id": "program-xiamen-university-environmental-design-bachelor",
+          "name": {
+            "en": "Environmental Design",
+            "zh": "环境设计"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/EN_BA.htm"
+        },
+        {
+          "id": "program-xiamen-university-visual-communication-design-bachelor",
+          "name": {
+            "en": "Visual Communication Design",
+            "zh": "视觉传达设计"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/EN_BA.htm"
+        },
+        {
+          "id": "prog-gap-clw-sw-xmu-chinese-business-bachelor",
+          "name": {
+            "en": "Chinese for Business",
+            "zh": "商务汉语",
+            "ru": "Деловой китайский язык"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://oec.xmu.edu.cn/en/Program1/Undergraduate_Programs.htm"
+        },
+        {
+          "id": "prog-gap-clw-sw-xmu-chinese-education-bachelor",
+          "name": {
+            "en": "Chinese for Education",
+            "zh": "教育汉语",
+            "ru": "Китайский язык для образования"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://oec.xmu.edu.cn/en/Program1/Undergraduate_Programs.htm"
+        },
+        {
+          "id": "program-xiamen-university-clinical-medicine-mbbs-bachelor-english",
+          "name": {
+            "en": "Clinical Medicine (MBBS)",
+            "zh": "临床医学（MBBS）"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/EN_BA.htm"
+        }
+      ]
+    },
+    {
+      "catalogue": "SIC-xmu-reviewed-2027",
+      "programmeCount": 2302,
+      "rawProgrammeFileSha256": "dbc2af7976dcb9170506eee355ccf72a1202919ec685c4bc4db25a03220c8fe4",
+      "matches": [
+        {
+          "officialProgramCode": "020201K",
+          "verifiedName": {
+            "zh": "财政学"
+          },
+          "existingExactIds": []
+        },
+        {
+          "officialProgramCode": "020202",
+          "verifiedName": {
+            "zh": "税收学"
+          },
+          "existingExactIds": []
+        },
+        {
+          "officialProgramCode": "020401",
+          "verifiedName": {
+            "zh": "国际经济与贸易"
+          },
+          "existingExactIds": []
+        },
+        {
+          "officialProgramCode": "020302",
+          "verifiedName": {
+            "zh": "金融工程"
+          },
+          "existingExactIds": []
+        },
+        {
+          "officialProgramCode": "020301K",
+          "verifiedName": {
+            "zh": "金融学"
+          },
+          "existingExactIds": []
+        }
+      ],
+      "existingXmuBa": [
+        {
+          "id": "program-xiamen-university-digital-media-art-bachelor",
+          "name": {
+            "en": "Digital Media Art",
+            "zh": "数字媒体艺术"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/EN_BA.htm"
+        },
+        {
+          "id": "program-xiamen-university-environmental-design-bachelor",
+          "name": {
+            "en": "Environmental Design",
+            "zh": "环境设计"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/EN_BA.htm"
+        },
+        {
+          "id": "program-xiamen-university-visual-communication-design-bachelor",
+          "name": {
+            "en": "Visual Communication Design",
+            "zh": "视觉传达设计"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/EN_BA.htm"
+        },
+        {
+          "id": "prog-gap-clw-sw-xmu-chinese-business-bachelor",
+          "name": {
+            "en": "Chinese for Business",
+            "zh": "商务汉语",
+            "ru": "Деловой китайский язык"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://oec.xmu.edu.cn/en/Program1/Undergraduate_Programs.htm"
+        },
+        {
+          "id": "prog-gap-clw-sw-xmu-chinese-education-bachelor",
+          "name": {
+            "en": "Chinese for Education",
+            "zh": "教育汉语",
+            "ru": "Китайский язык для образования"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://oec.xmu.edu.cn/en/Program1/Undergraduate_Programs.htm"
+        },
+        {
+          "id": "program-xiamen-university-clinical-medicine-mbbs-bachelor-english",
+          "name": {
+            "en": "Clinical Medicine (MBBS)",
+            "zh": "临床医学（MBBS）"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/EN_BA.htm"
+        }
+      ]
+    }
+  ],
+  "beforePrograms": [],
+  "reviewedPrograms": [
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-xiamen-university-bachelor-chinese-020201k",
+      "slug": "xiamen-university-bachelor-chinese-020201k",
+      "universityId": "uni-xiamen-university",
+      "name": {
+        "zh": "财政学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "business",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm",
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "经济学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        },
+        "campus": {
+          "zh": "思明校区"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-xiamen-university-bachelor-chinese-020202",
+      "slug": "xiamen-university-bachelor-chinese-020202",
+      "universityId": "uni-xiamen-university",
+      "name": {
+        "zh": "税收学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "business",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm",
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "经济学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        },
+        "campus": {
+          "zh": "思明校区"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-xiamen-university-bachelor-chinese-020401",
+      "slug": "xiamen-university-bachelor-chinese-020401",
+      "universityId": "uni-xiamen-university",
+      "name": {
+        "zh": "国际经济与贸易"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "business",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm",
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "经济学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        },
+        "campus": {
+          "zh": "思明校区"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-xiamen-university-bachelor-chinese-020302",
+      "slug": "xiamen-university-bachelor-chinese-020302",
+      "universityId": "uni-xiamen-university",
+      "name": {
+        "zh": "金融工程"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "business",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm",
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "经济学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        },
+        "campus": {
+          "zh": "思明校区"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-xiamen-university-bachelor-chinese-020301k",
+      "slug": "xiamen-university-bachelor-chinese-020301k",
+      "universityId": "uni-xiamen-university",
+      "name": {
+        "zh": "金融学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "business",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm",
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "经济学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        },
+        "campus": {
+          "zh": "思明校区"
+        }
+      }
+    }
+  ],
+  "reviewedAdmissionCycles": [
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "年龄18–30周岁（截止2027年9月1日前），身心健康，持外国有效普通护照的非中国籍公民；未满18周岁者须提供监护担保书。"
+        },
+        {
+          "zh": "高中毕业或应届高中毕业，具备大学申请资格，学业成绩良好。"
+        },
+        {
+          "zh": "外籍华人等须按申请系统要求提交国籍状况预审材料，并在入学时携带相关纸质文件；未通过国籍预审或入学后国籍认定者，丧失申请、入学或学籍资格。"
+        },
+        {
+          "zh": "适用国籍法及教育部要求的出生即获外籍的华裔或移民转国籍申请者，须持有效外国护照或国籍证明4年（含）以上，且截至2027年4月30日前最近4年内实际在外国居住2年以上；一年内实际境外居住满9个月可按一年计算，以出入境签章为准。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；经管法类必考文科中文和数学，数学测试语言须与授课语言一致。汉语言专业适用的HSK免考专业中文规则不适用于本经济学院专业。"
+        },
+        {
+          "zh": "奖学金申请者还须符合对应奖学金的年龄及其他要求；本周期仅为自费生申请轮次。"
+        }
+      ],
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "id": "cycle-xiamen-university-bachelor-chinese-020201k-2027-autumn-self-funded",
+      "programId": "program-xiamen-university-bachelor-chinese-020201k",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "2027年秋季入学，一般在9月份。申请时间均为北京时间；自费生申请2026年12月1日开始，2027年5月31日截止。中文授课经管法类学费26000元人民币/年，报名费400元不予退回。本周期不采用中国政府奖学金B类2月20日或厦门大学新生奖学金4月30日截止时间。HSK替代文件仅按官方语言条款提交，不代表免除本专业CSCA考试。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "年龄18–30周岁（截止2027年9月1日前），身心健康，持外国有效普通护照的非中国籍公民；未满18周岁者须提供监护担保书。"
+        },
+        {
+          "zh": "高中毕业或应届高中毕业，具备大学申请资格，学业成绩良好。"
+        },
+        {
+          "zh": "外籍华人等须按申请系统要求提交国籍状况预审材料，并在入学时携带相关纸质文件；未通过国籍预审或入学后国籍认定者，丧失申请、入学或学籍资格。"
+        },
+        {
+          "zh": "适用国籍法及教育部要求的出生即获外籍的华裔或移民转国籍申请者，须持有效外国护照或国籍证明4年（含）以上，且截至2027年4月30日前最近4年内实际在外国居住2年以上；一年内实际境外居住满9个月可按一年计算，以出入境签章为准。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；经管法类必考文科中文和数学，数学测试语言须与授课语言一致。汉语言专业适用的HSK免考专业中文规则不适用于本经济学院专业。"
+        },
+        {
+          "zh": "奖学金申请者还须符合对应奖学金的年龄及其他要求；本周期仅为自费生申请轮次。"
+        }
+      ],
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "id": "cycle-xiamen-university-bachelor-chinese-020202-2027-autumn-self-funded",
+      "programId": "program-xiamen-university-bachelor-chinese-020202",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "2027年秋季入学，一般在9月份。申请时间均为北京时间；自费生申请2026年12月1日开始，2027年5月31日截止。中文授课经管法类学费26000元人民币/年，报名费400元不予退回。本周期不采用中国政府奖学金B类2月20日或厦门大学新生奖学金4月30日截止时间。HSK替代文件仅按官方语言条款提交，不代表免除本专业CSCA考试。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "年龄18–30周岁（截止2027年9月1日前），身心健康，持外国有效普通护照的非中国籍公民；未满18周岁者须提供监护担保书。"
+        },
+        {
+          "zh": "高中毕业或应届高中毕业，具备大学申请资格，学业成绩良好。"
+        },
+        {
+          "zh": "外籍华人等须按申请系统要求提交国籍状况预审材料，并在入学时携带相关纸质文件；未通过国籍预审或入学后国籍认定者，丧失申请、入学或学籍资格。"
+        },
+        {
+          "zh": "适用国籍法及教育部要求的出生即获外籍的华裔或移民转国籍申请者，须持有效外国护照或国籍证明4年（含）以上，且截至2027年4月30日前最近4年内实际在外国居住2年以上；一年内实际境外居住满9个月可按一年计算，以出入境签章为准。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；经管法类必考文科中文和数学，数学测试语言须与授课语言一致。汉语言专业适用的HSK免考专业中文规则不适用于本经济学院专业。"
+        },
+        {
+          "zh": "奖学金申请者还须符合对应奖学金的年龄及其他要求；本周期仅为自费生申请轮次。"
+        }
+      ],
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "id": "cycle-xiamen-university-bachelor-chinese-020401-2027-autumn-self-funded",
+      "programId": "program-xiamen-university-bachelor-chinese-020401",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "2027年秋季入学，一般在9月份。申请时间均为北京时间；自费生申请2026年12月1日开始，2027年5月31日截止。中文授课经管法类学费26000元人民币/年，报名费400元不予退回。本周期不采用中国政府奖学金B类2月20日或厦门大学新生奖学金4月30日截止时间。HSK替代文件仅按官方语言条款提交，不代表免除本专业CSCA考试。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "年龄18–30周岁（截止2027年9月1日前），身心健康，持外国有效普通护照的非中国籍公民；未满18周岁者须提供监护担保书。"
+        },
+        {
+          "zh": "高中毕业或应届高中毕业，具备大学申请资格，学业成绩良好。"
+        },
+        {
+          "zh": "外籍华人等须按申请系统要求提交国籍状况预审材料，并在入学时携带相关纸质文件；未通过国籍预审或入学后国籍认定者，丧失申请、入学或学籍资格。"
+        },
+        {
+          "zh": "适用国籍法及教育部要求的出生即获外籍的华裔或移民转国籍申请者，须持有效外国护照或国籍证明4年（含）以上，且截至2027年4月30日前最近4年内实际在外国居住2年以上；一年内实际境外居住满9个月可按一年计算，以出入境签章为准。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；经管法类必考文科中文和数学，数学测试语言须与授课语言一致。汉语言专业适用的HSK免考专业中文规则不适用于本经济学院专业。"
+        },
+        {
+          "zh": "奖学金申请者还须符合对应奖学金的年龄及其他要求；本周期仅为自费生申请轮次。"
+        }
+      ],
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "id": "cycle-xiamen-university-bachelor-chinese-020302-2027-autumn-self-funded",
+      "programId": "program-xiamen-university-bachelor-chinese-020302",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "2027年秋季入学，一般在9月份。申请时间均为北京时间；自费生申请2026年12月1日开始，2027年5月31日截止。中文授课经管法类学费26000元人民币/年，报名费400元不予退回。本周期不采用中国政府奖学金B类2月20日或厦门大学新生奖学金4月30日截止时间。HSK替代文件仅按官方语言条款提交，不代表免除本专业CSCA考试。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-xmu-2027-chinese-bachelor-majors",
+        "src-reviewed-xmu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "5级210分及以上；高中阶段中文授课者可提供高中授课语言证明代替HSK证书；马来西亚华文独立中学学生可提交统考（UEC）成绩单作为替代文件。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "年龄18–30周岁（截止2027年9月1日前），身心健康，持外国有效普通护照的非中国籍公民；未满18周岁者须提供监护担保书。"
+        },
+        {
+          "zh": "高中毕业或应届高中毕业，具备大学申请资格，学业成绩良好。"
+        },
+        {
+          "zh": "外籍华人等须按申请系统要求提交国籍状况预审材料，并在入学时携带相关纸质文件；未通过国籍预审或入学后国籍认定者，丧失申请、入学或学籍资格。"
+        },
+        {
+          "zh": "适用国籍法及教育部要求的出生即获外籍的华裔或移民转国籍申请者，须持有效外国护照或国籍证明4年（含）以上，且截至2027年4月30日前最近4年内实际在外国居住2年以上；一年内实际境外居住满9个月可按一年计算，以出入境签章为准。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；经管法类必考文科中文和数学，数学测试语言须与授课语言一致。汉语言专业适用的HSK免考专业中文规则不适用于本经济学院专业。"
+        },
+        {
+          "zh": "奖学金申请者还须符合对应奖学金的年龄及其他要求；本周期仅为自费生申请轮次。"
+        }
+      ],
+      "applyUrl": "https://application.xmu.edu.cn/",
+      "id": "cycle-xiamen-university-bachelor-chinese-020301k-2027-autumn-self-funded",
+      "programId": "program-xiamen-university-bachelor-chinese-020301k",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "2027年秋季入学，一般在9月份。申请时间均为北京时间；自费生申请2026年12月1日开始，2027年5月31日截止。中文授课经管法类学费26000元人民币/年，报名费400元不予退回。本周期不采用中国政府奖学金B类2月20日或厦门大学新生奖学金4月30日截止时间。HSK替代文件仅按官方语言条款提交，不代表免除本专业CSCA考试。"
+      }
+    }
+  ],
+  "audit": {
+    "existingNonemptyFieldsChanged": [],
+    "existingRecordsChanged": [],
+    "newProgrammes": 5,
+    "newAnnualCycles": 5,
+    "noHistoricalRawRecordDeleted": true,
+    "noHistoricalReceiptChanged": true,
+    "legacyNenuProgrammesPreserved": 5,
+    "newProgrammeIdsHaveNoPriorValues": true,
+    "sourceDerivedNamesOnly": [
+      "zh"
+    ]
+  },
+  "afterProgrammeSha256": {
+    "program-xiamen-university-bachelor-chinese-020201k": "b7be55a541dc4088c4f7b0ba7ba8993b1bb68867b5366e79fec8a6d4088d6acf",
+    "program-xiamen-university-bachelor-chinese-020202": "4415e6206dbf32b555af47717dd19ce157abe40514f4c1f40ffe6b403d090ff4",
+    "program-xiamen-university-bachelor-chinese-020401": "b4699271ab861b9122476f9bc8c0a54658912bf5cf6be87dac72012c1ea296c7",
+    "program-xiamen-university-bachelor-chinese-020302": "af6c60a4940777ec00ef66ff518b7cdfc0d16057f1c028fdbf5209791a2e7f47",
+    "program-xiamen-university-bachelor-chinese-020301k": "00505b7d58e00ffa0d26633d53d1ff2762bbb7a8bc9b4160297be37d1c780038"
+  },
+  "newCycleSha256": {
+    "cycle-xiamen-university-bachelor-chinese-020201k-2027-autumn-self-funded": "345494ab4eb085a59b5b6a215ca4d515c0e10cd71f481a2b60918d98c50dbde2",
+    "cycle-xiamen-university-bachelor-chinese-020202-2027-autumn-self-funded": "43202b4ba31676bf9e9e53648bfeb2ae7fd7f713d55f0678606c3a8927517c24",
+    "cycle-xiamen-university-bachelor-chinese-020401-2027-autumn-self-funded": "adfbe419046153d7829c3081fc6951cc28dd11533314ad5d9eec9bb725d6f485",
+    "cycle-xiamen-university-bachelor-chinese-020302-2027-autumn-self-funded": "5e5b5ccfeb65d2377b3a3d3f4af0cd0e348814418cfa43b12c813368bc8518a0",
+    "cycle-xiamen-university-bachelor-chinese-020301k-2027-autumn-self-funded": "179a44d445306b8902e14f0b57276431548733e2a83348c7ddb312ebb7af1e3a"
+  },
+  "annualScopeSha256": {
+    "cycle-xiamen-university-bachelor-chinese-020201k-2027-autumn-self-funded": "a62e9a61c40c7b60f234fc76b51d48b1e688a0c0e7694fa20960b245d85a8d43",
+    "cycle-xiamen-university-bachelor-chinese-020202-2027-autumn-self-funded": "ded75fb53b0a23ed13f21acd3b57def066922ddd5f3c4582fa371d7e5dec1f5c",
+    "cycle-xiamen-university-bachelor-chinese-020401-2027-autumn-self-funded": "14fcbdb7a3d1c49ce51fa39ecaaa18ece801c54320b87b8fc9622f67c06eb409",
+    "cycle-xiamen-university-bachelor-chinese-020302-2027-autumn-self-funded": "0be7b632c5d4b75b03b45fd99d516f1a9498ee82ace645287d7cf0216d36be18",
+    "cycle-xiamen-university-bachelor-chinese-020301k-2027-autumn-self-funded": "b4976ede53eeeb7ec0286e9ea8a5323be385763c17f9ef0aaf4c80f37afae4e5"
+  },
+  "preservedRecordsSha256": {
+    "sources": "a77288f70265d4756aa73ba11b53e0519afbcdbb06e28cfa15d15e2499151547",
+    "cities": "a7aed7e8ec99bf2ea03eff84f30ac837eab3f8a7772cc4057b15ab80143522cb",
+    "universities": "daadc4bc90e7b533926074380ef599c0be1773c51d9947e37ff9b7fcdcbac983",
+    "programs": "9f92b0e568ef7a23533c48bcedbb0d394de7bb48cb33d8fb19eeb1209fbbd63f",
+    "admissionCycles": "0493cc08ce5aa82aeebb532da36804511369464a458dd13b33951946a94a6e34",
+    "scholarships": "d0d84c62f481f54bd1067656bb510f7b5c5caddd581e3e5fca084e98e73f6be1"
+  },
+  "modelCalls": false,
+  "paidModelCalls": 0,
+  "cloudWrites": 0,
+  "oldModelLedgerMutations": false,
+  "push": false,
+  "merge": false,
+  "sha256": "c874d0e388bd5e156aa0cb5a9c5a9d3091ec9e701034c4c081cfbfe01ab04a13"
+}
