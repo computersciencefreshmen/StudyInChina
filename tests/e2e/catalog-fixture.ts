@@ -19,9 +19,9 @@ export async function readPublicProgramIds(request: APIRequestContext): Promise<
   const ids: string[] = [], cursors = new Set<string>()
   let cursor: string | null = null
   do {
-    const query = new URLSearchParams({ view: 'directory', limit: '10' })
+    const query = new URLSearchParams({ limit: '10' })
     if (cursor) query.set('cursor', cursor)
-    const response = await request.get(`/api/v1/programs?${query}`)
+    const response = await request.get(`/api/v1/directory/programs?${query}`)
     expect(response.ok()).toBe(true)
     const body = await response.json()
     expect(body.meta.release.evaluatedForDate).toBe(TODAY)

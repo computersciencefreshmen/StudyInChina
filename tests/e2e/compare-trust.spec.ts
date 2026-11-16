@@ -1,5 +1,5 @@
 import { expect, test, type Locator, type Page } from '@playwright/test'
-import { directoryData, rawData, TODAY, readPublicProgramIds } from './catalog-fixture'
+import { currentData, directoryData, rawData, TODAY, readPublicProgramIds } from './catalog-fixture'
 import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 import { formatProgramDuration } from '../../src/lib/data/duration'
 import { selectAdmissionCycle } from '../../src/lib/data/admission'
@@ -83,13 +83,16 @@ test('real-date APIs and saved comparisons exclude expired identities without le
   expect(visibleIds).toHaveLength(2)
   const ids = [...missingIds, ...visibleIds]
   // No route interception and no browser clock override: exercise the real public gate.
-  for (const view of ['', '&view=directory']) {
+  for (const [view, data] of [['', currentData], ['&view=directory', directoryData]] as const) {
+    const availableIds = new Set(selectDetailedPublicPrograms(data, TODAY, rawData).programs.map(program => program.id))
+    const expectedMissingIds = ids.filter(id => !availableIds.has(id))
+    const expectedVisibleIds = ids.filter(id => availableIds.has(id))
     const response = await page.request.get(`/api/v1/programs/compare?ids=${encodeURIComponent(ids.join(','))}${view}`)
     expect(response.ok()).toBe(true)
     const body = await response.json()
     expect(body.meta.release.evaluatedForDate).toBe(TODAY)
-    expect(body.data.missingIds).toEqual(missingIds)
-    expect(body.data.items.map((item: { program: { id: string } }) => item.program.id)).toEqual(visibleIds)
+    expect(body.data.missingIds).toEqual(expectedMissingIds)
+    expect(body.data.items.map((item: { program: { id: string } }) => item.program.id)).toEqual(expectedVisibleIds)
     for (const program of expired) expect(body.data.items.some((item: { program: { id: string } }) => item.program.id === program.id)).toBe(false)
   }
   expect((await readPublicProgramIds(page.request)).sort())
