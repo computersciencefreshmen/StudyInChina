@@ -21,7 +21,7 @@ as the only producer of ordinary jobs.
   stage permits start at two.
 - Each 15-minute epoch may allocate at most 256 model jobs and 64 captures.
   Counters survive repeated wakes and failed deliveries. Small refills carry
-  scheduling offsets so 70/30 maintenance shares and the programme/programme/
+  scheduling offsets so the initial 70/30 expansion/maintenance shares and the programme/programme/
   scholarship cycle remain fair across an entire epoch, including one-job fills.
 - Completed jobs, newly available text and retry due times wake the same
   coordinator. Empty work, operator pause, budget/DB/provider waits, changed
