@@ -16,7 +16,8 @@ beforeAll(async () => {
   const cycle = original.admissionCycles.find(cycle => cycle.status === 'verified' && cycle.academicYear === '2027-2028' && cycle.intake === 'autumn')!
   // Keep the complete fixed school/scope contract, but parse only the tested parent's data per import.
   bundle = { ...original, programs: original.programs.filter(program => program.id === cycle.programId),
-    admissionCycles: original.admissionCycles.filter(item => item.programId === cycle.programId), scholarships: [] }
+    admissionCycles: original.admissionCycles.filter(item => item.programId === cycle.programId).map(item => item.id === cycle.id
+      ? { ...item, closesOn: null, dateStatus: 'rolling' as const } : item), scholarships: [] }
 })
 
 async function fixture(sourceText?: string | ((degree: string) => string), closesOn = '2027-09-30') {

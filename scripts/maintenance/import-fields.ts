@@ -29,6 +29,26 @@ function setField(record: unknown, path: string, value: unknown) {
   }
   target[parts.at(-1)!] = structuredClone(value)
 }
+function currentField(record: unknown, path: string): unknown {
+  let value = record
+  for (const part of path.split('.')) {
+    if (!value || typeof value !== 'object' || !Object.hasOwn(value, part)) return undefined
+    value = (value as Record<string, unknown>)[part]
+  }
+  return value
+}
+/** Automatic verification can add missing facts, never authorize replacing one.
+ * Zero/false are facts. Objects with any keys are conservatively nonempty. */
+export function automaticFieldPatchHoldReason(previous: unknown, proposed: unknown, humanReviewed: boolean): string | null {
+  if (humanReviewed) return 'field_human_review_requires_manual_change'
+  const empty = previous === undefined || previous === null || typeof previous === 'string' && !previous.trim()
+    || Array.isArray(previous) && previous.length === 0
+    || typeof previous === 'object' && previous !== null && !Array.isArray(previous) && Object.keys(previous).length === 0
+  if (!empty) return fieldValueSha256(previous) === fieldValueSha256(proposed)
+    ? 'field_existing_same_value_preserved' : 'field_existing_value_requires_human_review'
+  if (previous !== undefined && fieldValueSha256(previous) === fieldValueSha256(proposed)) return 'field_empty_value_unchanged'
+  return null
+}
 function addDays(day: string, days: number) { return new Date(Date.parse(`${day}T00:00:00Z`) + days * 86_400_000).toISOString().slice(0, 10) }
 function reviewDate(record: Program | AdmissionCycle | Scholarship, day: string) {
   const deadline = 'closesOn' in record ? record.closesOn : 'deadline' in record ? record.deadline : null
@@ -146,6 +166,14 @@ export async function importFieldCandidates(options: {
           receiptPath: options.receiptPath, receiptSha256: '0'.repeat(64) }
         if (!validateFieldVerification(validBundle, verification, today)) throw new Error(`field_value_or_window_invalid:${patch.fieldPath}`)
         proposalEntries.push(verification)
+      }
+      if (proposal.review!.method === 'independent_model') {
+        for (const patch of fields.patches) {
+          const humanReviewed = [...entries, ...staged].some(entry => entry.entityType === entityType
+            && entry.recordId === record.id && entry.fieldPath === patch.fieldPath && entry.review.method === 'independent')
+          const reason = automaticFieldPatchHoldReason(currentField(record, patch.fieldPath), patch.value, humanReviewed)
+          if (reason) throw new Error(`${reason}:${patch.fieldPath}`)
+        }
       }
       bundle = validBundle; staged.push(...proposalEntries)
       accepted.push({ proposalId: proposal.id, recordId: record.id, fieldPaths: fields.patches.map(patch => patch.fieldPath) })
