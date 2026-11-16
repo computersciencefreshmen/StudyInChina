@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { quotedTrackScope } from '../../src/lib/data/cycle-scope'
+import { quotedAdmissionIntake, quotedTrackScope } from '../../src/lib/data/cycle-scope'
 import { teachingLanguageEvidenceIsSpecific } from '../../src/lib/data/teaching-language-evidence'
 import { cyclePatchHasQuoteSupport, cyclePatchSchema } from './cycle-contracts'
 import type { DataBundle, Program, AdmissionCycle, Scholarship, Source } from '../../src/lib/data/types'
@@ -78,9 +78,8 @@ function assertAnnualScope(proposal: MaintenanceProposal, record: Program | Admi
     if (proposal.scope.teachingLanguage !== cycle.teachingLanguage || proposal.scope.applicationRound !== cycle.applicationRound) throw new Error('cycle_language_or_round_scope_mismatch')
     for (const evidence of proposal.fieldEvidence.filter(entry => entry.fieldPath !== '$applicability')) if (!quotedTrackScope(cycle, evidence.quote, true)) throw new Error('cycle_track_evidence_required')
     if (proposal.scope.year !== cycle.academicYear || proposal.scope.intake !== cycle.intake) throw new Error('cycle_scope_mismatch')
-    const intakeYear = cycle.intake === 'spring' ? cycle.academicYear.slice(5) : cycle.academicYear.slice(0, 4)
     if (!proposal.fieldEvidence.some(entry => entry.fieldPath === '$scope'
-      && new RegExp(`\\b${intakeYear}\\b`, 'u').test(entry.quote) && seasonal(entry.quote, cycle.intake))) throw new Error('cycle_year_or_intake_evidence_required')
+      && quotedAdmissionIntake(cycle.academicYear, cycle.intake, entry.quote))) throw new Error('cycle_year_or_intake_evidence_required')
   }
   if (proposal.entityType === 'scholarship') {
     const fields = fieldPatchFieldsSchema.parse(proposal.fields)

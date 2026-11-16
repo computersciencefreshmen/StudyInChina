@@ -1,3 +1,4 @@
+import { parseAdmissionYear } from '@/lib/data/cycle-scope'
 import type {
   AdmissionCycleRecord,
   ApiEnvelope,
@@ -219,7 +220,7 @@ function cycleRecord(
   const application = isObject(attributes.application) ? attributes.application : {}
   const id = text(value.id)
   const academicYear = text(attributes.academicYear)
-  if (!id || !academicYear || !/^\d{4}-\d{4}$/u.test(academicYear)) {
+  if (!id || !academicYear || !parseAdmissionYear(academicYear)) {
     invalid('Catalog compare cycle identity is invalid.')
   }
   const state = APPLICATION_STATES.has(application.state as AdmissionCycleRecord['applicationState'])

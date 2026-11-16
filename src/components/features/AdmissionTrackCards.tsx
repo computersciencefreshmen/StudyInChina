@@ -21,8 +21,8 @@ export function AdmissionTrackCards({ program, cycles, sources, locale, today }:
       return <article className="atlas-card" key={cycle.id} data-track-cycle={cycle.id}>
         <h2>{cycle.academicYear} · {cycle.intake === 'spring' ? messages.programs.springIntake : cycle.intake === 'autumn' ? messages.programs.autumnIntake : messages.programs.otherIntake} · {cycle.teachingLanguage ? languageLabel(cycle.teachingLanguage, locale) : messages.common.language}{cycle.applicationRound ? ` · ${cycle.applicationRound}` : ''}</h2>
         <dl>
-          {known('opensOn') && cycle.opensOn ? <div><dt>{messages.programs.opens}</dt><dd>{formatDate(cycle.opensOn, locale, '')}</dd></div> : null}
-          {known('closesOn') && cycle.closesOn ? <div><dt>{messages.common.deadline}</dt><dd>{formatDate(cycle.closesOn, locale, '')}</dd></div> : null}
+          {known('opensOn') && cycle.opensOn ? <div><dt>{messages.programs.opens}</dt><dd><time dateTime={cycle.opensOn}>{formatDate(cycle.opensOn, locale, '')}</time></dd></div> : null}
+          {known('closesOn') && cycle.closesOn ? <div><dt>{messages.common.deadline}</dt><dd><time dateTime={cycle.closesOn}>{formatDate(cycle.closesOn, locale, '')}</time></dd></div> : null}
           {known('tuitionCny') && cycle.tuitionCny !== null && known('tuitionStatus') && known('tuitionPeriod') && cycle.tuitionPeriod ? <div><dt>{cycle.tuitionStatus === 'reference' ? referenceCopy.label : messages.common.tuition}</dt><dd>{formatCny(cycle.tuitionCny, locale, '')} · {periodLabels[cycle.tuitionPeriod]}</dd></div> : null}
           {known('applicationFeeCny') && cycle.applicationFeeCny !== null ? <div><dt>{messages.programs.fee}</dt><dd>{formatCny(cycle.applicationFeeCny, locale, '')}</dd></div> : null}
           {known('languageRequirements') && cycle.languageRequirements?.length ? <div><dt>{messages.common.requirements}</dt><dd>{cycle.languageRequirements.map(requirement => `${requirement.test}${requirement.minimum ? `: ${requirement.minimum}` : ''}`).join(' · ')}</dd></div> : null}

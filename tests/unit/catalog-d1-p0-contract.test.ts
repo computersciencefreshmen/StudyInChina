@@ -1,3 +1,5 @@
+import { parseD1ProgramComparison } from '@/lib/catalog/d1-compare'
+import { parseD1ProgramList } from '@/lib/catalog/d1-list'
 import { describe, expect, it, vi } from 'vitest'
 import {
   CatalogRepositoryError,
@@ -154,6 +156,21 @@ const normalizedComparison = {
 }
 
 describe('D1 P0 release and compare contracts', () => {
+  it.each(['2027', '2027-2028'])('preserves source year %s through D1 list and compare adapters', year => {
+    const wire = structuredClone(normalizedComparison), item = wire.data.items[0]
+    item.currentCycle.attributes.academicYear = year
+    const compared = parseD1ProgramComparison(wire, ['prog-safe-1'], '2026-08-10')
+    expect(compared.data.items[0].currentCycle?.academicYear).toBe(year)
+    const listed = parseD1ProgramList({ data: [{ ...item.program, currentCycle: item.currentCycle }], meta: { release } }, '2026-08-10')
+    expect(listed.items[0].currentCycle?.academicYear).toBe(year)
+  })
+  it.each(['unknown', '2027-2029'])('does not admit invalid year %s through D1 adapters', year => {
+    const wire = structuredClone(normalizedComparison), item = wire.data.items[0]
+    item.currentCycle.attributes.academicYear = year
+    expect(() => parseD1ProgramComparison(wire, ['prog-safe-1'], '2026-08-10')).toThrow('cycle identity is invalid')
+    expect(parseD1ProgramList({ data: [{ ...item.program, currentCycle: item.currentCycle }], meta: { release } }, '2026-08-10').items[0].currentCycle).toBeNull()
+  })
+
   it('preserves extended Worker release truth while accepting legacy payloads', () => {
     expect(parseCatalogReleaseInfo(release)).toEqual(release)
     const legacy = parseCatalogReleaseInfo({

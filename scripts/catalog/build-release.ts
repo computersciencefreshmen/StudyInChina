@@ -475,9 +475,20 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
     addSearch(statements, releaseId, program.id, 'program', program.name, program.details?.overview ?? program.name, `${program.degreeLevel} ${program.discipline} ${program.teachingLanguages.join(' ')}`)
   }
 
+  // The normalized schema distinguishes rounds/language tracks within the same
+  // programme, literal year and intake by sequence. Keep each source cycle ID
+  // intact; otherwise INSERT OR IGNORE would silently drop the second round.
+  const cycleSequences = new Map<string, number>()
   for (const cycle of bundle.admissionCycles) {
+    const sequenceKey = JSON.stringify([cycle.programId, cycle.academicYear, cycle.intake])
+    const sequence = (cycleSequences.get(sequenceKey) ?? 0) + 1
+    cycleSequences.set(sequenceKey, sequence)
     const program = bundle.programs.find((item) => item.id === cycle.programId)
     if (!program) throw new Error(`Program not found for cycle ${cycle.id}`)
+    // Explicit annual routes, including an unknown/null route, must never be
+    // replaced by the legacy programme-level application entry.
+    const applyUrl = Object.hasOwn(cycle, 'applyUrl') ? cycle.applyUrl ?? null : program.applyUrl
+    const roundLabel = cycle.applicationRound ?? null
     const cycleRecord = cycle.dateStatus === 'previous-cycle-reference'
       ? { ...cycle, status: 'archived' as const }
       : cycle
@@ -488,7 +499,7 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       program_id: cycle.programId,
       academic_year: cycle.academicYear,
       intake_code: cycle.intake,
-      sequence: 1,
+      sequence,
       starts_on: null,
       ends_on: null,
       cycle_status: cycle.dateStatus === 'previous-cycle-reference' ? 'archived' : 'announced',
@@ -514,27 +525,27 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       owner_record_id: cycle.id,
       route_type: 'university_portal',
       access_mode: 'public_individual',
-      apply_url: program.applyUrl,
+      apply_url: applyUrl,
       is_primary: true,
     }))
     addSources(statements, releaseId, routeId, cycle.sourceIds)
     for (const [field, value] of Object.entries({
       access_mode: 'public_individual',
-      apply_url: program.applyUrl,
+      apply_url: applyUrl,
     })) addField(statements, releaseId, routeId, cycleRecord, field, value, dataDate, official)
     statements.push(recordRow(releaseId, { ...cycleRecord, id: windowId }, 'application_window', { cycle, windowId }))
     statements.push(insert('application_windows', {
       release_id: releaseId,
       application_window_id: windowId,
       application_route_id: routeId,
-      round_label: null,
+      round_label: roundLabel,
       opens_on: cycle.dateStatus === 'rolling' ? null : cycle.opensOn,
       closes_on: cycle.dateStatus === 'rolling' ? null : cycle.closesOn,
       rolling: cycle.dateStatus === 'rolling',
     }))
     addSources(statements, releaseId, windowId, cycle.sourceIds)
     for (const [field, value] of Object.entries({
-      round_label: null,
+      round_label: roundLabel,
       opens_on: cycle.dateStatus === 'rolling' ? null : cycle.opensOn,
       closes_on: cycle.dateStatus === 'rolling' ? null : cycle.closesOn,
       rolling: cycle.dateStatus === 'rolling',

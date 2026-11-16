@@ -1,0 +1,234 @@
+{
+  "format": "studyinchina.local-reviewed-core-validation",
+  "version": 1,
+  "evaluatedForDate": "2026-11-17",
+  "baseCommit": "d4cb8d711cfa0c1abeca260c900f3c56568e6fef",
+  "checks": {
+    "unitTestFiles": 6,
+    "unitTestsPassed": 70,
+    "unitTestsFailed": 0,
+    "typeScript": "passed: tsc --noEmit --incremental false",
+    "lint": "passed: eslint tests/unit/nwafu-reviewed-2027.test.ts --max-warnings=0",
+    "diffCheck": "passed",
+    "dataSchema": "passed with directory-safe expiry; expired historical raw rows and receipts retained"
+  },
+  "strictDirectory": {
+    "format": "studyinchina.directory-validation",
+    "formatVersion": 1,
+    "evaluatedForDate": "2026-11-17",
+    "integrityPassed": true,
+    "cohortSchools": 272,
+    "directoryCounts": {
+      "universities": 278,
+      "programs": 1147,
+      "scholarships": 26
+    },
+    "currentFactsCounts": {
+      "universities": 245,
+      "programs": 15,
+      "admissionCycles": 15,
+      "scholarships": 0
+    },
+    "schoolCoverage": {
+      "directoryWithPrograms": 229,
+      "directoryWithoutPrograms": 49,
+      "rawWithoutPrograms": 6
+    },
+    "currentCycleStates": {
+      "open": 5,
+      "upcoming": 5,
+      "closed": 0,
+      "rolling": 0,
+      "dates-published": 5,
+      "not-announced": 0,
+      "previous-cycle": 0
+    },
+    "coverageComplete": false,
+    "notice": "Integrity success certifies accepted data and safe projection only. It does not certify complete school catalogues or open applications."
+  },
+  "rawCounts": {
+    "universities": 295,
+    "programs": 2312,
+    "cities": 62,
+    "scholarships": 414,
+    "sources": 2924
+  },
+  "historicalOverdueRawRecordsRetained": 1839,
+  "preservation": {
+    "sources": {
+      "historicalRowsPreserved": 2922,
+      "newRows": 2,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "eb1ea113cd6471ba4bf1e31085620755d2a66f8263bb6a69f3f75933268984d9"
+    },
+    "cities": {
+      "historicalRowsPreserved": 62,
+      "newRows": 0,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "a7aed7e8ec99bf2ea03eff84f30ac837eab3f8a7772cc4057b15ab80143522cb"
+    },
+    "universities": {
+      "historicalRowsPreserved": 295,
+      "newRows": 0,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "daadc4bc90e7b533926074380ef599c0be1773c51d9947e37ff9b7fcdcbac983"
+    },
+    "programs": {
+      "historicalRowsPreserved": 2307,
+      "newRows": 5,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "36c1bc37fa9e75520ad7cf2d66ea19093d6c6cb2875bdd44e6e98b81f6f72057"
+    },
+    "admission-cycles": {
+      "historicalRowsPreserved": 1664,
+      "newRows": 5,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "a52ad6c8b3e9ddae8170553c91ed5656d45478b7344e8c3497e563bab802add9"
+    },
+    "scholarships": {
+      "historicalRowsPreserved": 414,
+      "newRows": 0,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "d0d84c62f481f54bd1067656bb510f7b5c5caddd581e3e5fca084e98e73f6be1"
+    },
+    "identityAcceptances": {
+      "historicalRowsPreserved": 1513,
+      "newRows": 5,
+      "originalEntriesSha256": "d77241674f246be714a87974909dd5f18433d951f683f887bba69c2c071bd636"
+    }
+  },
+  "publicQualityPolicy": "studyinchina.public-program-core.v2",
+  "currentCoreProgrammes": 15,
+  "nwafuCoreProgrammeCount": 5,
+  "xmuCoreProgrammeCount": 5,
+  "nenuCoreProgrammeCount": 5,
+  "nwafuProgrammes": [
+    {
+      "id": "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese",
+      "name": {
+        "en": "Teaching Chinese to Speakers of Other Languages",
+        "zh": "汉语国际教育"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese",
+      "name": {
+        "en": "Data Science and Big Data Technology",
+        "zh": "数据科学与大数据技术"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese",
+      "name": {
+        "en": "Computer Science and Technology",
+        "zh": "计算机科学与技术"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-northwest-a-and-f-university-business-administration-bachelor-chinese",
+      "name": {
+        "en": "Business Administration",
+        "zh": "工商管理"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese",
+      "name": {
+        "en": "Agricultural Water Conservancy Engineering",
+        "zh": "农业水利工程"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    }
+  ],
+  "nwafuCycles": [
+    {
+      "id": "cycle-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese-2027-self-funded",
+      "academicYear": "2027",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "open",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    },
+    {
+      "id": "cycle-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese-2027-self-funded",
+      "academicYear": "2027",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "open",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    },
+    {
+      "id": "cycle-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese-2027-self-funded",
+      "academicYear": "2027",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "open",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    },
+    {
+      "id": "cycle-northwest-a-and-f-university-business-administration-bachelor-chinese-2027-self-funded",
+      "academicYear": "2027",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "open",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    },
+    {
+      "id": "cycle-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese-2027-self-funded",
+      "academicYear": "2027",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "open",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    }
+  ],
+  "modelApiCalls": 0,
+  "cloudWrites": 0,
+  "privateUploads": 0,
+  "push": false,
+  "merge": false
+}

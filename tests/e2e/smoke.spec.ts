@@ -2,8 +2,7 @@ import { expect, test } from '@playwright/test'
 import { mockMapTiles } from './map-fixture'
 
 test.beforeEach(async ({ page }) => { await mockMapTiles(page) })
-import { TODAY, directoryData, rawData } from './catalog-fixture'
-import { selectAdmissionCycle } from '../../src/lib/data/admission'
+import { TODAY, directoryData, rawData, readPublicProgramIds } from './catalog-fixture'
 import { isCurrentVerifiedRecord } from '../../src/lib/data/freshness'
 import { getProgramDisplayDetails } from '../../src/lib/data/program-details'
 import { scholarshipAppliesToProgram } from '../../src/lib/data/scholarship-scope'
@@ -14,6 +13,7 @@ import {
 } from '../../src/i18n/release-announcement'
 import { isIndexableProgram } from '../../src/lib/seo/indexability'
 import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
+import { localize } from '../../src/lib/data/format'
 
 const locales = ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const
 const coreRoutes = ['', 'universities', 'programs', 'scholarships', 'cities', 'guides'] as const
@@ -212,27 +212,27 @@ test('accepted thin and stale programs are absent in all six public locales', as
 })
 
 test('reviewed public programs expose their exact current annual core and official routes', async ({ page }) => {
-  expect(publicData.programs).toHaveLength(5)
-  const list = await page.request.get('/api/v1/programs?view=directory&limit=24')
-  expect(list.ok()).toBe(true)
-  const body = await list.json()
-  expect(body.data.map((item: { id: string }) => item.id).sort()).toEqual(publicData.programs.map(program => program.id).sort())
+  test.setTimeout(90_000)
+  expect(publicData.programs.length).toBeGreaterThanOrEqual(5)
+  expect((await readPublicProgramIds(page.request)).sort()).toEqual(publicData.programs.map(program => program.id).sort())
   for (const program of publicData.programs) {
-    const cycle = selectAdmissionCycle(publicData.admissionCycles, program.id, TODAY)!
-    expect(cycle, program.id).toBeDefined()
-    expect(cycle.eligibility?.length).toBeGreaterThan(0)
-    expect(cycle.languageRequirements?.length).toBeGreaterThan(0)
-    expect(cycle.applyUrl).toBeTruthy()
+    const cycles = publicData.admissionCycles.filter(cycle => cycle.programId === program.id)
+    expect(cycles.length, program.id).toBeGreaterThan(0)
     const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
     expect(response?.ok(), program.slug).toBe(true)
-    await expect(page.getByRole('heading', { level: 1 })).toContainText(program.name.en!)
-    const track = page.locator(`[data-track-cycle="${cycle.id}"]`)
-    await expect(track).toContainText(cycle.academicYear)
-    await expect(track).toContainText('HSK')
-    for (const condition of cycle.eligibility!) if (condition.en) await expect(track).toContainText(condition.en)
-    await expect(track.getByRole('link', { name: /Apply on official site/ })).toHaveAttribute('href', cycle.applyUrl!)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(localize(program.name, 'en'))
+    for (const cycle of cycles) {
+      expect(cycle.eligibility?.length).toBeGreaterThan(0)
+      expect(cycle.languageRequirements?.length).toBeGreaterThan(0)
+      expect(cycle.applyUrl).toBeTruthy()
+      const track = page.locator(`[data-track-cycle="${cycle.id}"]`)
+      await expect(track).toContainText(cycle.academicYear)
+      for (const requirement of cycle.languageRequirements!) await expect(track).toContainText(requirement.test)
+      for (const condition of cycle.eligibility!) if (condition.en) await expect(track).toContainText(condition.en)
+      await expect(track.getByRole('link', { name: /Apply on official site/ })).toHaveAttribute('href', cycle.applyUrl!)
+      if (cycle.closesOn) await expect(track.locator(`time[datetime="${cycle.closesOn}"]`).first()).toBeVisible()
+    }
     await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', program.programUrl)
-    if (cycle.closesOn) await expect(page.locator(`time[datetime="${cycle.closesOn}"]`).first()).toBeVisible()
     // Missing marketing fragments are not invented to satisfy the core gate.
     if (!getProgramDisplayDetails(program)?.curriculumHighlights.length) {
       await expect(page.getByRole('heading', { name: 'Curriculum highlights', exact: true })).toHaveCount(0)

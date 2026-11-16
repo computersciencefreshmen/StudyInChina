@@ -1,0 +1,171 @@
+{
+  "format": "studyinchina.local-reviewed-core-validation",
+  "version": 1,
+  "evaluatedForDate": "2026-11-17",
+  "baseCommit": "ea51e6c97b773889e192db0f2463a6938e997f1e",
+  "checks": {
+    "unitTestFiles": 5,
+    "unitTestsPassed": 56,
+    "unitTestsFailed": 0,
+    "typeScript": "passed: tsc --noEmit --incremental false",
+    "lint": "passed: eslint tests/unit/xmu-reviewed-2027.test.ts --max-warnings=0",
+    "diffCheck": "passed",
+    "dataSchema": "passed with directory-safe expiry; historical overdue raw rows preserved"
+  },
+  "strictDirectory": {
+    "format": "studyinchina.directory-validation",
+    "formatVersion": 1,
+    "evaluatedForDate": "2026-11-17",
+    "integrityPassed": true,
+    "cohortSchools": 272,
+    "directoryCounts": {
+      "universities": 278,
+      "programs": 1142,
+      "scholarships": 26
+    },
+    "currentFactsCounts": {
+      "universities": 245,
+      "programs": 10,
+      "admissionCycles": 10,
+      "scholarships": 0
+    },
+    "schoolCoverage": {
+      "directoryWithPrograms": 228,
+      "directoryWithoutPrograms": 50,
+      "rawWithoutPrograms": 6
+    },
+    "currentCycleStates": {
+      "open": 0,
+      "upcoming": 5,
+      "closed": 0,
+      "rolling": 0,
+      "dates-published": 5,
+      "not-announced": 0,
+      "previous-cycle": 0
+    },
+    "coverageComplete": false,
+    "notice": "Integrity success certifies accepted data and safe projection only. It does not certify complete school catalogues or open applications."
+  },
+  "publicQualityPolicy": "studyinchina.public-program-core.v2",
+  "currentCorePrograms": 10,
+  "xmuCoreProgrammeCount": 5,
+  "nenuCoreProgrammeCount": 5,
+  "xmuProgrammes": [
+    {
+      "id": "program-xiamen-university-bachelor-chinese-020201k",
+      "name": {
+        "zh": "财政学"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-xiamen-university-bachelor-chinese-020202",
+      "name": {
+        "zh": "税收学"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-xiamen-university-bachelor-chinese-020401",
+      "name": {
+        "zh": "国际经济与贸易"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-xiamen-university-bachelor-chinese-020302",
+      "name": {
+        "zh": "金融工程"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-xiamen-university-bachelor-chinese-020301k",
+      "name": {
+        "zh": "金融学"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    }
+  ],
+  "xmuCycles": [
+    {
+      "id": "cycle-xiamen-university-bachelor-chinese-020201k-2027-autumn-self-funded",
+      "academicYear": "2027",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    },
+    {
+      "id": "cycle-xiamen-university-bachelor-chinese-020202-2027-autumn-self-funded",
+      "academicYear": "2027",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    },
+    {
+      "id": "cycle-xiamen-university-bachelor-chinese-020401-2027-autumn-self-funded",
+      "academicYear": "2027",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    },
+    {
+      "id": "cycle-xiamen-university-bachelor-chinese-020302-2027-autumn-self-funded",
+      "academicYear": "2027",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    },
+    {
+      "id": "cycle-xiamen-university-bachelor-chinese-020301k-2027-autumn-self-funded",
+      "academicYear": "2027",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2026-12-01",
+      "closesOn": "2027-05-31",
+      "tuitionCny": 26000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 400
+    }
+  ],
+  "modelApiCalls": 0,
+  "cloudWrites": 0,
+  "push": false,
+  "merge": false
+}

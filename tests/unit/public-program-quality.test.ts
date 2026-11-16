@@ -7,7 +7,7 @@ import { hasDetailedPublicProgram, selectDetailedPublicPrograms, PUBLIC_PROGRAM_
 import { assertPublicProgramQualityBackend, getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
 import { JsonCatalogRepository } from '@/lib/catalog/json'
 import { directoryRevision } from '@/lib/catalog/directory-revision'
-import { decodeCursor } from '@/lib/catalog-api/cursor'
+import { decodeCursor, encodeCursor } from '@/lib/catalog-api/cursor'
 import { CatalogApiService, releaseFromBundle } from '@/lib/catalog-api/service'
 
 vi.mock('@/lib/data/identity-acceptance-store', () => ({ readIdentityAcceptances: () => [] }))
@@ -42,6 +42,35 @@ describe('public programme core quality policy', () => {
     expect(getPublicCatalogSnapshot(raw, today).current.programs).toHaveLength(1)
     expect(getPublicCatalogSnapshot(raw, today).directory.programs).toHaveLength(1)
     expect(JSON.stringify(raw)).toBe(before)
+  })
+
+  it('publishes a source-backed literal admission year without fabricating a range or weakening core facts', () => {
+    const raw = fixture(), cycle = raw.admissionCycles[0]
+    cycle.academicYear = '2027'
+    expect(getPublicCatalogSnapshot(raw, today).directory.admissionCycles[0].academicYear).toBe('2027')
+    for (const year of ['', 'unknown', '2027-2029', '2025', '2030']) {
+      cycle.academicYear = year
+      expect(hasDetailedPublicProgram(raw.programs[0], [cycle], today)).toBe(false)
+    }
+    cycle.academicYear = '2027'; cycle.closesOn = null; cycle.dateStatus = 'not-announced'
+    expect(hasDetailedPublicProgram(raw.programs[0], [cycle], today)).toBe(false)
+  })
+
+  it('keeps literal and range API filters and cursor bindings distinct', () => {
+    const raw = fixture(), p = raw.programs[0], c = raw.admissionCycles[0]
+    raw.programs.push({ ...structuredClone(p), id: 'range', slug: 'range' })
+    raw.admissionCycles.push({ ...structuredClone(c), id: 'range-cycle', programId: 'range' })
+    c.academicYear = '2027'
+    const directory = getPublicCatalogSnapshot(raw, today).directory
+    const service = new CatalogApiService(directory, releaseFromBundle(directory, today), today)
+    expect(service.listPrograms({ academicYear: '2027' }).data.map(row => row.id)).toEqual(['program'])
+    expect(service.listPrograms({ academicYear: '2027-2028' }).data.map(row => row.id)).toEqual(['range'])
+    const cursor = encodeCursor('programs', { academicYear: '2027' }, 'program', 'program')
+    expect(() => decodeCursor(cursor, 'programs', { academicYear: '2027' })).not.toThrow()
+    expect(() => decodeCursor(cursor, 'programs', { academicYear: '2027-2028' })).toThrow('Invalid cursor')
+    const priorPolicy = createHash('sha256').update(JSON.stringify(['studyinchina.public-program-core.v1', 'programs', []])).digest('base64url')
+    const priorCursor = Buffer.from(JSON.stringify({ v: 2, resource: 'programs', queryFingerprint: priorPolicy, sortKey: 'program', id: 'program' })).toString('base64url')
+    expect(() => decodeCursor(priorCursor, 'programs', {})).toThrow('Invalid cursor')
   })
 
   it.each(['language', 'eligibility', 'route', 'duration', 'teachingLanguage', 'cycle', 'official'])(
@@ -141,7 +170,7 @@ describe('public programme core quality policy', () => {
     const raw = fixture(), oldRevision = createHash('sha256').update('studyinchina.directory-projection.v1\n').update(today).update('\n')
       .update(JSON.stringify(raw)).update('\n').update('[]').update('\n').update('[]').digest('hex')
     expect(directoryRevision(raw, today, [], [])).not.toBe(oldRevision)
-    expect(PUBLIC_PROGRAM_QUALITY_POLICY).toBe('studyinchina.public-program-core.v1')
+    expect(PUBLIC_PROGRAM_QUALITY_POLICY).toBe('studyinchina.public-program-core.v2')
     const oldFingerprint = createHash('sha256').update(JSON.stringify(['programs', []])).digest('base64url')
     const oldApi = Buffer.from(JSON.stringify({ v: 2, resource: 'programs', queryFingerprint: oldFingerprint, sortKey: 'program', id: 'program' })).toString('base64url')
     expect(() => decodeCursor(oldApi, 'programs', {})).toThrow('Invalid cursor')

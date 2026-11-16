@@ -58,6 +58,14 @@ async function fixture(year = '2028-2029') {
 }
 
 describe('new annual admission-cycle import', () => {
+  it('preserves a reviewed literal year and all existing range rows without guessing a range', async () => {
+    const f = await fixture('2027'), result = await f.run()
+    expect(result.cycleReceipt.held).toEqual([])
+    expect(result.bundle.admissionCycles.at(-1)?.academicYear).toBe('2027')
+    expect(result.bundle.admissionCycles.slice(0, -1)).toEqual(f.bundle.admissionCycles)
+    expect(result.entries.every(entry => entry.recordScopeSha256 === fieldRecordScopeSha256('admissionCycle', result.bundle.admissionCycles.at(-1)!))).toBe(true)
+  })
+
   it('holds a new intake whose source is ten days old even when independent review happened today', async () => {
     const f = await fixture(); f.proposal.source.checkedAt = '2026-10-14T00:00:00.000Z'; await f.seal(undefined, now)
     const result = await f.run()

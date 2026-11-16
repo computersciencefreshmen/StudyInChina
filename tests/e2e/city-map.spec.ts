@@ -37,6 +37,6 @@ test('tile failures keep the city list and selected guide usable', async ({ page
   await page.route('https://tile.openstreetmap.org/**', route => route.abort())
   await page.goto('/en/cities?view=map&q=Beijing', { waitUntil: 'domcontentloaded' })
   await expect(page.getByText('The basemap is unavailable. City markers and the list remain usable.')).toBeVisible()
-  await page.locator('.city-map-results button').click()
+  await page.locator('.city-map-results button[data-city-id="city-beijing"]').click()
   await expect(page.getByRole('link', { name: /Explore city & universities/ })).toHaveAttribute('href', '/en/cities/beijing')
 })
