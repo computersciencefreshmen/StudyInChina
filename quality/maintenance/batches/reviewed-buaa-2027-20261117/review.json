@@ -1,0 +1,2067 @@
+{
+  "format": "studyinchina.curated-official-programme-review",
+  "version": 1,
+  "reviewedAt": "2026-11-16T16:49:06.515Z",
+  "reviewAfter": "2026-12-16",
+  "reviewerId": "codex-ai-independent-tool-and-visual-review:buaa-2027-core-20261117",
+  "method": "Codex independent AI-assisted audit using official source capture, tool extraction and visual review of PDF pages 1–3. User authorized the workflow; this is not a claim of Henry or any other personal human sign-off.",
+  "baseCommit": "ea51e6c97b773889e192db0f2463a6938e997f1e",
+  "privatePacketContentSha256": "ee3916671a6de2991e4f293076614aee80544aee41ad47b75037f5268259129a",
+  "inputCatalogSha256": "2a63c6a4af79c0d780734bf6c889507f0fcd712e5e4519d738dc0c6f9e1b793a",
+  "outputCatalogSha256": "27124ee11df6c068a6a1d9c78f69c02278babb8c6dd7862f019cc0e9f393eb6e",
+  "universityId": "uni-beihang-university",
+  "academicYear": "2027",
+  "yearRepresentation": "official-single-admission-year",
+  "sources": [
+    {
+      "id": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "title": "2027年北京航空航天大学国际本科生项目招生简章",
+      "publisher": "北京航空航天大学国际学院",
+      "kind": "admissions",
+      "language": "zh",
+      "official": true,
+      "accessedAt": "2026-11-17",
+      "rawSha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAtTimestamp": "2026-11-16T16:12:01.913540+00:00"
+    },
+    {
+      "id": "src-reviewed-buaa-2027-csca",
+      "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+      "title": "2027 年北京航空航天大学国际学生本科专业 CSCA 测试科目要求",
+      "publisher": "北京航空航天大学国际学院",
+      "kind": "program",
+      "language": "zh",
+      "official": true,
+      "accessedAt": "2026-11-17",
+      "rawSha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+      "accessedAtTimestamp": "2026-11-16T16:12:03.248312+00:00"
+    },
+    {
+      "id": "src-reviewed-buaa-2027-portal",
+      "url": "https://admission.buaa.edu.cn/",
+      "title": "北京航空航天大学国际学生在线申请系统",
+      "publisher": "北京航空航天大学",
+      "kind": "admissions",
+      "language": "zh",
+      "official": true,
+      "accessedAt": "2026-11-17",
+      "rawSha256": "58397f04aa8f7cceeb873f5cf779a7f54cc3aa27572ec4750f1cf8f3e85a5e39",
+      "accessedAtTimestamp": "2026-11-16T16:42:25.317228+00:00"
+    }
+  ],
+  "programmeRows": [
+    {
+      "recordId": "program-beihang-university-materials-science-and-engineering-bachelor",
+      "existingProgramId": "program-beihang-university-materials-science-and-engineering-bachelor",
+      "verifiedName": {
+        "en": "Materials Science and Engineering",
+        "zh": "材料科学与工程"
+      },
+      "guideRow": {
+        "sourceId": "src-reviewed-buaa-2027-guide",
+        "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+        "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+        "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+        "locator": {
+          "type": "original-html-table-row",
+          "section": "六、专业目录 / 中文授课专业 / 理工类",
+          "matches": [
+            {
+              "originalHtmlLineStart": 362,
+              "originalHtmlLineEnd": 365,
+              "originalText": "School of Materials Science and Engineering 材料科学与工程学院 Materials Science and Engineering 材料科学与工程"
+            }
+          ]
+        }
+      },
+      "pdfRow": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            1
+          ],
+          "matches": [
+            {
+              "page": 1,
+              "extractedTextLine": 13,
+              "originalText": "MaterialsScienceandEngineering Chinese"
+            },
+            {
+              "page": 1,
+              "extractedTextLine": 15,
+              "originalText": "材料科学与工程 中文授课"
+            },
+            {
+              "page": 1,
+              "extractedTextLine": 16,
+              "originalText": "SchoolofMaterialsScienceandEngineering 理科中文、数学、物理、化学"
+            },
+            {
+              "page": 1,
+              "extractedTextLine": 17,
+              "originalText": "材料科学与工程学院 Chinese(forScienceDisciplines),"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Materials Science and Engineering",
+            "majorZh": "材料科学与工程",
+            "schoolEn": "School of Materials Science and Engineering",
+            "schoolZh": "材料科学与工程学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理、化学",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics, Chemistry",
+          "rawTableRows": [
+            {
+              "page": 1,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 2,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                "SchoolofMaterialsScienceandEngineering\n材料科学与工程学院",
+                "MaterialsScienceandEngineering\n材料科学与工程",
+                "Chinese\n中文授课",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics,Chemistry\n理科中文、数学、物理、化学"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "cscaSubjectsZh": "理科中文、数学、物理、化学"
+    },
+    {
+      "recordId": "program-beihang-university-nanomaterials-and-technology-bachelor",
+      "existingProgramId": null,
+      "verifiedName": {
+        "en": "Nanomaterials and Technology",
+        "zh": "纳米材料与技术"
+      },
+      "guideRow": {
+        "sourceId": "src-reviewed-buaa-2027-guide",
+        "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+        "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+        "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+        "locator": {
+          "type": "original-html-table-row",
+          "section": "六、专业目录 / 中文授课专业 / 理工类",
+          "matches": [
+            {
+              "originalHtmlLineStart": 366,
+              "originalHtmlLineEnd": 368,
+              "originalText": "Nanomaterials and Technology 纳米材料与技术"
+            }
+          ]
+        }
+      },
+      "pdfRow": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            1
+          ],
+          "matches": [
+            {
+              "page": 1,
+              "extractedTextLine": 18,
+              "originalText": "NanomaterialsandTechnology Chinese"
+            },
+            {
+              "page": 1,
+              "extractedTextLine": 20,
+              "originalText": "纳米材料与技术 中文授课"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Nanomaterials and Technology",
+            "majorZh": "纳米材料与技术",
+            "schoolEn": "School of Materials Science and Engineering",
+            "schoolZh": "材料科学与工程学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理、化学",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics, Chemistry",
+          "rawTableRows": [
+            {
+              "page": 1,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 3,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                null,
+                "NanomaterialsandTechnology\n纳米材料与技术",
+                "Chinese\n中文授课",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics,Chemistry\n理科中文、数学、物理、化学"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "cscaSubjectsZh": "理科中文、数学、物理、化学"
+    },
+    {
+      "recordId": "program-beihang-university-electronic-information-engineering-bachelor",
+      "existingProgramId": null,
+      "verifiedName": {
+        "en": "Electronic Information Engineering",
+        "zh": "电子信息工程"
+      },
+      "guideRow": {
+        "sourceId": "src-reviewed-buaa-2027-guide",
+        "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+        "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+        "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+        "locator": {
+          "type": "original-html-table-row",
+          "section": "六、专业目录 / 中文授课专业 / 理工类",
+          "matches": [
+            {
+              "originalHtmlLineStart": 369,
+              "originalHtmlLineEnd": 372,
+              "originalText": "School of Electronic Information Engineering 电子信息工程学院 Electronic Information Engineering 电子信息工程"
+            }
+          ]
+        }
+      },
+      "pdfRow": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            1,
+            2
+          ],
+          "matches": [
+            {
+              "page": 1,
+              "extractedTextLine": 23,
+              "originalText": "SchoolofElectronicInformationEngineering ElectronicInformationEngineering Chinese"
+            },
+            {
+              "page": 2,
+              "extractedTextLine": 3,
+              "originalText": "电子信息工程学院 电子信息工程 中文授课 理科中文、数学、物理"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Electronic Information Engineering",
+            "majorZh": "电子信息工程",
+            "schoolEn": "School of Electronic Information Engineering",
+            "schoolZh": "电子信息工程学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics",
+          "rawTableRows": [
+            {
+              "page": 1,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 4,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                "SchoolofElectronicInformationEngineering",
+                "ElectronicInformationEngineering",
+                "Chinese",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics"
+              ]
+            },
+            {
+              "page": 2,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 2,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                "电子信息工程学院",
+                "电子信息工程",
+                "中文授课",
+                "理科中文、数学、物理"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "cscaSubjectsZh": "理科中文、数学、物理"
+    },
+    {
+      "recordId": "program-beihang-university-communication-engineering-bachelor",
+      "existingProgramId": null,
+      "verifiedName": {
+        "en": "Communication Engineering",
+        "zh": "通信工程"
+      },
+      "guideRow": {
+        "sourceId": "src-reviewed-buaa-2027-guide",
+        "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+        "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+        "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+        "locator": {
+          "type": "original-html-table-row",
+          "section": "六、专业目录 / 中文授课专业 / 理工类",
+          "matches": [
+            {
+              "originalHtmlLineStart": 373,
+              "originalHtmlLineEnd": 375,
+              "originalText": "Communication Engineering 通信工程"
+            }
+          ]
+        }
+      },
+      "pdfRow": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            2
+          ],
+          "matches": [
+            {
+              "page": 2,
+              "extractedTextLine": 5,
+              "originalText": "CommunicationEngineering Chinese"
+            },
+            {
+              "page": 2,
+              "extractedTextLine": 7,
+              "originalText": "通信工程 中文授课"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Communication Engineering",
+            "majorZh": "通信工程",
+            "schoolEn": "School of Electronic Information Engineering",
+            "schoolZh": "电子信息工程学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics",
+          "rawTableRows": [
+            {
+              "page": 2,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 3,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                null,
+                "CommunicationEngineering\n通信工程",
+                "Chinese\n中文授课",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics\n理科中文、数学、物理"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "cscaSubjectsZh": "理科中文、数学、物理"
+    },
+    {
+      "recordId": "program-beihang-university-computer-science-and-technology-bachelor",
+      "existingProgramId": "program-beihang-university-computer-science-and-technology-bachelor",
+      "verifiedName": {
+        "en": "Computer Science and Technology",
+        "zh": "计算机科学与技术"
+      },
+      "guideRow": {
+        "sourceId": "src-reviewed-buaa-2027-guide",
+        "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+        "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+        "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+        "locator": {
+          "type": "original-html-table-row",
+          "section": "六、专业目录 / 中文授课专业 / 理工类",
+          "matches": [
+            {
+              "originalHtmlLineStart": 406,
+              "originalHtmlLineEnd": 409,
+              "originalText": "School of Computer Science and Engineering 计算机学院 Computer Science and Technology 计算机科学与技术"
+            }
+          ]
+        }
+      },
+      "pdfRow": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            3
+          ],
+          "matches": [
+            {
+              "page": 3,
+              "extractedTextLine": 12,
+              "originalText": "ComputerScienceandTechnology Chinese"
+            },
+            {
+              "page": 3,
+              "extractedTextLine": 14,
+              "originalText": "计算机科学与技术 中文授课"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Computer Science and Technology",
+            "majorZh": "计算机科学与技术",
+            "schoolEn": "School of Computer Science and Engineering",
+            "schoolZh": "计算机学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics",
+          "rawTableRows": [
+            {
+              "page": 3,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 4,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                "SchoolofComputerScienceandEngineering\n计算机学院",
+                "ComputerScienceandTechnology\n计算机科学与技术",
+                "Chinese\n中文授课",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics\n理科中文、数学、物理"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "cscaSubjectsZh": "理科中文、数学、物理"
+    }
+  ],
+  "beforePrograms": [
+    {
+      "sourceIds": [
+        "src-program-review-a0b027c76197"
+      ],
+      "verifiedAt": "2026-07-26",
+      "reviewAfter": "2026-08-25",
+      "status": "stale",
+      "id": "program-beihang-university-materials-science-and-engineering-bachelor",
+      "slug": "beihang-university-materials-science-and-engineering-bachelor",
+      "universityId": "uni-beihang-university",
+      "name": {
+        "en": "Materials Science and Engineering",
+        "zh": "Materials Science and Engineering",
+        "ru": "Материаловедение и инженерия"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": null,
+      "programUrl": "https://is.buaa.edu.cn/en/info/1515/3312.htm",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    },
+    {
+      "sourceIds": [
+        "src-program-review-a0b027c76197",
+        "src-maintenance-identity-0e4ef29eda4fb4776255da4a"
+      ],
+      "verifiedAt": "2026-07-26",
+      "reviewAfter": "2026-08-25",
+      "status": "stale",
+      "id": "program-beihang-university-computer-science-and-technology-bachelor",
+      "slug": "beihang-university-computer-science-and-technology-bachelor",
+      "universityId": "uni-beihang-university",
+      "name": {
+        "en": "Computer Science and Technology",
+        "zh": "Computer Science and Technology",
+        "ru": "Компьютерные науки и технологии"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": null,
+      "programUrl": "https://is.buaa.edu.cn/en/info/1515/3312.htm",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    }
+  ],
+  "existingNonemptyFieldAudit": [
+    {
+      "recordId": "program-beihang-university-materials-science-and-engineering-bachelor",
+      "beforeSha256": "04f995d6dbf1893f69db2bd8d8538bc672db9bb80995d52306fa86a1e79fd63c",
+      "nonemptyFields": [
+        {
+          "path": "sourceIds",
+          "value": [
+            "src-program-review-a0b027c76197"
+          ],
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "verifiedAt",
+          "value": "2026-07-26",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "reviewAfter",
+          "value": "2026-08-25",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "status",
+          "value": "stale",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "id",
+          "value": "program-beihang-university-materials-science-and-engineering-bachelor",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "slug",
+          "value": "beihang-university-materials-science-and-engineering-bachelor",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "universityId",
+          "value": "uni-beihang-university",
+          "disposition": "Rechecked from official Chinese bachelor science/engineering directory and CSCA table."
+        },
+        {
+          "path": "name",
+          "value": {
+            "en": "Materials Science and Engineering",
+            "zh": "Materials Science and Engineering",
+            "ru": "Материаловедение и инженерия"
+          },
+          "disposition": "Official en/zh names independently reviewed; old ru retained raw but excluded by scoped-name projection."
+        },
+        {
+          "path": "degreeLevel",
+          "value": "bachelor",
+          "disposition": "Rechecked from official Chinese bachelor science/engineering directory and CSCA table."
+        },
+        {
+          "path": "discipline",
+          "value": "engineering",
+          "disposition": "Rechecked from official Chinese bachelor science/engineering directory and CSCA table."
+        },
+        {
+          "path": "teachingLanguages",
+          "value": [
+            "Chinese"
+          ],
+          "disposition": "Rechecked from official Chinese bachelor science/engineering directory and CSCA table."
+        },
+        {
+          "path": "programUrl",
+          "value": "https://is.buaa.edu.cn/en/info/1515/3312.htm",
+          "disposition": "Superseded with current official 2027 guide; original URL archived."
+        },
+        {
+          "path": "verificationScope",
+          "value": "identity",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        }
+      ],
+      "wholeRecordRenewed": false
+    },
+    {
+      "recordId": "program-beihang-university-computer-science-and-technology-bachelor",
+      "beforeSha256": "ed4a01bfaa6f46f9fa113dabcde60ce2ba0e7e922cf0d6dc2ca0ca9dbe40cc5c",
+      "nonemptyFields": [
+        {
+          "path": "sourceIds",
+          "value": [
+            "src-program-review-a0b027c76197",
+            "src-maintenance-identity-0e4ef29eda4fb4776255da4a"
+          ],
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "verifiedAt",
+          "value": "2026-07-26",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "reviewAfter",
+          "value": "2026-08-25",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "status",
+          "value": "stale",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "id",
+          "value": "program-beihang-university-computer-science-and-technology-bachelor",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "slug",
+          "value": "beihang-university-computer-science-and-technology-bachelor",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        },
+        {
+          "path": "universityId",
+          "value": "uni-beihang-university",
+          "disposition": "Rechecked from official Chinese bachelor science/engineering directory and CSCA table."
+        },
+        {
+          "path": "name",
+          "value": {
+            "en": "Computer Science and Technology",
+            "zh": "Computer Science and Technology",
+            "ru": "Компьютерные науки и технологии"
+          },
+          "disposition": "Official en/zh names independently reviewed; old ru retained raw but excluded by scoped-name projection."
+        },
+        {
+          "path": "degreeLevel",
+          "value": "bachelor",
+          "disposition": "Rechecked from official Chinese bachelor science/engineering directory and CSCA table."
+        },
+        {
+          "path": "discipline",
+          "value": "engineering",
+          "disposition": "Rechecked from official Chinese bachelor science/engineering directory and CSCA table."
+        },
+        {
+          "path": "teachingLanguages",
+          "value": [
+            "Chinese"
+          ],
+          "disposition": "Rechecked from official Chinese bachelor science/engineering directory and CSCA table."
+        },
+        {
+          "path": "programUrl",
+          "value": "https://is.buaa.edu.cn/en/info/1515/3312.htm",
+          "disposition": "Superseded with current official 2027 guide; original URL archived."
+        },
+        {
+          "path": "verificationScope",
+          "value": "identity",
+          "disposition": "Retained as historical identity/audit metadata; not renewed as whole-record facts."
+        }
+      ],
+      "wholeRecordRenewed": false
+    }
+  ],
+  "previousIdentityAcceptances": [
+    {
+      "entityType": "program",
+      "recordId": "program-beihang-university-computer-science-and-technology-bachelor",
+      "identitySha256": "a9de66c316b44ff8e967e310d35fc0717de4083e8ab822d658e48bc5f5ee81a4",
+      "sourceIds": [
+        "src-program-review-a0b027c76197",
+        "src-maintenance-identity-0e4ef29eda4fb4776255da4a"
+      ],
+      "acceptedAt": "2026-10-29T09:12:39.314Z",
+      "reviewer": "deterministic:literal-official-program-identity-with-codes-v2:independent-source-reading",
+      "receiptPath": "quality/minimum-one/2026-10-27/batch010/identity-import-receipt.json",
+      "receiptSha256": "cf2cc9a3c56fe54a1331463d18cf4a4bc64f930335278cecb39bb2b8888e7562",
+      "verifiedName": {
+        "en": "Computer Science and Technology"
+      }
+    }
+  ],
+  "reviewedPrograms": [
+    {
+      "sourceIds": [
+        "src-program-review-a0b027c76197",
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca"
+      ],
+      "verifiedAt": "2026-07-26",
+      "reviewAfter": "2026-08-25",
+      "status": "stale",
+      "id": "program-beihang-university-materials-science-and-engineering-bachelor",
+      "slug": "beihang-university-materials-science-and-engineering-bachelor",
+      "universityId": "uni-beihang-university",
+      "name": {
+        "en": "Materials Science and Engineering",
+        "zh": "材料科学与工程",
+        "ru": "Материаловедение и инженерия"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    },
+    {
+      "id": "program-beihang-university-nanomaterials-and-technology-bachelor",
+      "slug": "beihang-university-nanomaterials-and-technology-bachelor",
+      "universityId": "uni-beihang-university",
+      "name": {
+        "en": "Nanomaterials and Technology",
+        "zh": "纳米材料与技术"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity",
+      "sourceIds": [
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca"
+      ],
+      "status": "stale",
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-11-17"
+    },
+    {
+      "id": "program-beihang-university-electronic-information-engineering-bachelor",
+      "slug": "beihang-university-electronic-information-engineering-bachelor",
+      "universityId": "uni-beihang-university",
+      "name": {
+        "en": "Electronic Information Engineering",
+        "zh": "电子信息工程"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity",
+      "sourceIds": [
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca"
+      ],
+      "status": "stale",
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-11-17"
+    },
+    {
+      "id": "program-beihang-university-communication-engineering-bachelor",
+      "slug": "beihang-university-communication-engineering-bachelor",
+      "universityId": "uni-beihang-university",
+      "name": {
+        "en": "Communication Engineering",
+        "zh": "通信工程"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity",
+      "sourceIds": [
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca"
+      ],
+      "status": "stale",
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-11-17"
+    },
+    {
+      "sourceIds": [
+        "src-program-review-a0b027c76197",
+        "src-maintenance-identity-0e4ef29eda4fb4776255da4a",
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca"
+      ],
+      "verifiedAt": "2026-07-26",
+      "reviewAfter": "2026-08-25",
+      "status": "stale",
+      "id": "program-beihang-university-computer-science-and-technology-bachelor",
+      "slug": "beihang-university-computer-science-and-technology-bachelor",
+      "universityId": "uni-beihang-university",
+      "name": {
+        "en": "Computer Science and Technology",
+        "zh": "计算机科学与技术",
+        "ru": "Компьютерные науки и технологии"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    }
+  ],
+  "reviewedAdmissionCycles": [
+    {
+      "id": "cycle-2027-buaa-materials-science-and-engineering-bachelor-chinese",
+      "programId": "program-beihang-university-materials-science-and-engineering-bachelor",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-30",
+      "dateStatus": "published",
+      "tuitionCny": null,
+      "applicationFeeCny": null,
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK五级及以上，成绩不低于180分；须提交有效期两年内的成绩报告。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号）等有关规定。"
+        },
+        {
+          "zh": "申请人须身心健康，品行端正，对华友好，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+        },
+        {
+          "zh": "CSCA必考科目：理科中文、数学、物理、化学。申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷。"
+        }
+      ],
+      "applyUrl": "https://admission.buaa.edu.cn/",
+      "sourceIds": [
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca",
+        "src-reviewed-buaa-2027-portal"
+      ],
+      "status": "stale",
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-11-17",
+      "notes": {
+        "zh": "本条仅适用于2027年中文授课本科项目。正式录取日期：2027年7月；入学日期：2027年9月，具体日期以录取通知书为准。CSCA最低分数未在所核验文件中公布。来源仅声明2027年，未将其改写为2027–2028学年。费用未在本轮核心字段中发布。"
+      }
+    },
+    {
+      "id": "cycle-2027-buaa-nanomaterials-and-technology-bachelor-chinese",
+      "programId": "program-beihang-university-nanomaterials-and-technology-bachelor",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-30",
+      "dateStatus": "published",
+      "tuitionCny": null,
+      "applicationFeeCny": null,
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK五级及以上，成绩不低于180分；须提交有效期两年内的成绩报告。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号）等有关规定。"
+        },
+        {
+          "zh": "申请人须身心健康，品行端正，对华友好，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+        },
+        {
+          "zh": "CSCA必考科目：理科中文、数学、物理、化学。申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷。"
+        }
+      ],
+      "applyUrl": "https://admission.buaa.edu.cn/",
+      "sourceIds": [
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca",
+        "src-reviewed-buaa-2027-portal"
+      ],
+      "status": "stale",
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-11-17",
+      "notes": {
+        "zh": "本条仅适用于2027年中文授课本科项目。正式录取日期：2027年7月；入学日期：2027年9月，具体日期以录取通知书为准。CSCA最低分数未在所核验文件中公布。来源仅声明2027年，未将其改写为2027–2028学年。费用未在本轮核心字段中发布。"
+      }
+    },
+    {
+      "id": "cycle-2027-buaa-electronic-information-engineering-bachelor-chinese",
+      "programId": "program-beihang-university-electronic-information-engineering-bachelor",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-30",
+      "dateStatus": "published",
+      "tuitionCny": null,
+      "applicationFeeCny": null,
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK五级及以上，成绩不低于180分；须提交有效期两年内的成绩报告。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号）等有关规定。"
+        },
+        {
+          "zh": "申请人须身心健康，品行端正，对华友好，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+        },
+        {
+          "zh": "CSCA必考科目：理科中文、数学、物理。申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷。"
+        }
+      ],
+      "applyUrl": "https://admission.buaa.edu.cn/",
+      "sourceIds": [
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca",
+        "src-reviewed-buaa-2027-portal"
+      ],
+      "status": "stale",
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-11-17",
+      "notes": {
+        "zh": "本条仅适用于2027年中文授课本科项目。正式录取日期：2027年7月；入学日期：2027年9月，具体日期以录取通知书为准。CSCA最低分数未在所核验文件中公布。来源仅声明2027年，未将其改写为2027–2028学年。费用未在本轮核心字段中发布。"
+      }
+    },
+    {
+      "id": "cycle-2027-buaa-communication-engineering-bachelor-chinese",
+      "programId": "program-beihang-university-communication-engineering-bachelor",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-30",
+      "dateStatus": "published",
+      "tuitionCny": null,
+      "applicationFeeCny": null,
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK五级及以上，成绩不低于180分；须提交有效期两年内的成绩报告。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号）等有关规定。"
+        },
+        {
+          "zh": "申请人须身心健康，品行端正，对华友好，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+        },
+        {
+          "zh": "CSCA必考科目：理科中文、数学、物理。申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷。"
+        }
+      ],
+      "applyUrl": "https://admission.buaa.edu.cn/",
+      "sourceIds": [
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca",
+        "src-reviewed-buaa-2027-portal"
+      ],
+      "status": "stale",
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-11-17",
+      "notes": {
+        "zh": "本条仅适用于2027年中文授课本科项目。正式录取日期：2027年7月；入学日期：2027年9月，具体日期以录取通知书为准。CSCA最低分数未在所核验文件中公布。来源仅声明2027年，未将其改写为2027–2028学年。费用未在本轮核心字段中发布。"
+      }
+    },
+    {
+      "id": "cycle-2027-buaa-computer-science-and-technology-bachelor-chinese",
+      "programId": "program-beihang-university-computer-science-and-technology-bachelor",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-30",
+      "dateStatus": "published",
+      "tuitionCny": null,
+      "applicationFeeCny": null,
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK五级及以上，成绩不低于180分；须提交有效期两年内的成绩报告。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号）等有关规定。"
+        },
+        {
+          "zh": "申请人须身心健康，品行端正，对华友好，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+        },
+        {
+          "zh": "CSCA必考科目：理科中文、数学、物理。申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷。"
+        }
+      ],
+      "applyUrl": "https://admission.buaa.edu.cn/",
+      "sourceIds": [
+        "src-reviewed-buaa-2027-guide",
+        "src-reviewed-buaa-2027-csca",
+        "src-reviewed-buaa-2027-portal"
+      ],
+      "status": "stale",
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-11-17",
+      "notes": {
+        "zh": "本条仅适用于2027年中文授课本科项目。正式录取日期：2027年7月；入学日期：2027年9月，具体日期以录取通知书为准。CSCA最低分数未在所核验文件中公布。来源仅声明2027年，未将其改写为2027–2028学年。费用未在本轮核心字段中发布。"
+      }
+    }
+  ],
+  "afterProgrammeSha256": {
+    "program-beihang-university-materials-science-and-engineering-bachelor": "2dbf73f02fdab4621cd838df995ab45bf8fbe7d7e6de9bf4dca2dc62afab05bc",
+    "program-beihang-university-nanomaterials-and-technology-bachelor": "3d771ac8512a83f2fa6b24031189920ba90d1c51e571e3db529c90fc5aae3c17",
+    "program-beihang-university-electronic-information-engineering-bachelor": "7efb2f60be13f7e30c29a5a2c43f5bc57d4b62daefcadfa6c802dd46e92318aa",
+    "program-beihang-university-communication-engineering-bachelor": "e6d5e12064f5ad775317c18af491e608efe2b61b2119cb540503d186ef196a4a",
+    "program-beihang-university-computer-science-and-technology-bachelor": "834cd6441988160c9dddd2abfe6ed7f61777cbb31116dae06d3458e63a540b7e"
+  },
+  "newCycleSha256": {
+    "cycle-2027-buaa-materials-science-and-engineering-bachelor-chinese": "d1ca47937eaaf644b9da791e4171a09b06915419fe4c4afcab93ef8e9551f0f6",
+    "cycle-2027-buaa-nanomaterials-and-technology-bachelor-chinese": "da8d779af1f4c0681588946668bc000b8f1284ce0bbb2af615fecea38737c483",
+    "cycle-2027-buaa-electronic-information-engineering-bachelor-chinese": "9ba2a69c2d07e2ba8c4f6e4cd2faf1a406eb2149ddff328ad9046fa1f43bb19e",
+    "cycle-2027-buaa-communication-engineering-bachelor-chinese": "bfc3e4fe0c4595d2510bbeb1dad22e6e961b29eb09cc2c93a59e62a61f7a7642",
+    "cycle-2027-buaa-computer-science-and-technology-bachelor-chinese": "e83f1b8414f81f9bb0ce21f897b9668150079bdf4aa37805100d403f6ca1dc1e"
+  },
+  "fieldReviewContentSha256": [
+    "f43aa76cc3e4094aeb2edd492de7c710054b675aaf284466c4fd2d9c558ddae1",
+    "51319b9383384eee5faa86b15db39c2ee9a60fe2a179697e408406db85ffeb43",
+    "1f5e66b28acc46b49eb25ff12acb04bbbfe2258a7f4666b1746018ba9f68fe9c",
+    "211128407e0809f52670151824c15cbc5ea48a4c78ce4f4496a5d55bc735971f",
+    "26df4dd1e54f297b4017653a0ce26b106e8dfb3aa4787b628d04c3922901e9a0",
+    "d10dd0aa389582687364a11166f72096b5f3f8810df8fa5bc467ffee3b1e00ed",
+    "660b2a6f254285f9cd467085d22c0d77a78fd84113089f55b58e5d6d984ec2ed",
+    "234b003c9b9429f4d53c97b7a18e868f869a96e8ab8c292136f665fd5d04793c",
+    "a634b79465410c174d0bf02fe80652e23a2dcf048351066d2dc53dc9b75a6fbc",
+    "19469f2ef085626f957e90eb38d398e25c79491e714f6c41d3eac320dad31a45",
+    "5f5b5ea6ad0833fcd836ee11e2171df35266454c2984ccd7c49a11c944dee9d6",
+    "3639908cdf1658424fd93f125e394ce5a65ea0846110ccdfed3573d283c62b77",
+    "ca0635a4dd5e0c6c6860db37ace25846c2e8ad20f6e71dfad504f9455c81faf9",
+    "ab187bd32d3e2ff7f6816a67ce6763da430decd1e9b8a2932b38c85597b28d22",
+    "6889f232f15d72235bca0133c81961ed513c226dd5bff71d135b849dfb8fd24c",
+    "4dbb6f62a2976150f4030c08101fa1f8e891ce80ee189cc63a0dfc6bfce84699",
+    "bb3866ee848a6b9ecc37cff7ac566967357f5a155d50444e99f1b97d8f7bf9a1",
+    "ce2f555b8f0757e538b394c6bbcbfc9c80c882b546ce4b882d6b6d946e401c6b",
+    "118ed3c4b5eed955446c919b96d2d125e564074b03bf4ca7b3306836885db929",
+    "3a326d57278cdae22c1dd4fee3039500c9f5e1c802fa5a89d9e19f9fa8007998",
+    "dac9ba2b8a2a70bc2d1d7dc740b858204a34056135ca5f587021bde8c21515fd",
+    "1ac62f9b9fb2f8db6b9d495a46b94670aed982a35eac80986052e640bf2971bd",
+    "b87fa56aa872424508cd564c13f46109f97e644a6b84bb3b712b2e45b286b2d3",
+    "8f50ee6ed4e058033976c881a9dedeb0eaab3d94e9f9203c95d936e8cbdb6862",
+    "b2236065afcc5620044d088bd645b1d6d7a87437bc256f061d5cb3530f28c2dc",
+    "2e816d5b2ea33558d70f42797f2d7bb34a4f141a31138ae20a5a23afe2d45910",
+    "82ebcd53c489d44989557b9980eff9a1e1909bfb6d5184a9a1b8f3acbe8c9a7e",
+    "a74a9fe99c954b6359a7dc4e01ede57fe23df3ef6acce57b8a37d3ec9c4166a6",
+    "a0c7a57bb5757d49f7b71df19f2a85e017c999ec18ff269f637b5c2231100249",
+    "15f37d07310a5d301a9bf1a9f74ad295fd40ff2ab37dd850e5b97d219dddd69a",
+    "a7f35c08d599e4362b426cb6c84d051035e0a02295919ef2272bb1f097cb0500",
+    "8598ab1484040a3b9aca47624c71cd1cdd602be1ebd9145c186d920762e7267b",
+    "85d489e447a4d5f6487ac1aa347a84b7e8eacc2a7dbd615b9ff65ef9868e08c0",
+    "a70248488a4312d38e4cde4f32441605d4691d25bce0a5d2020581ba9105c6c3",
+    "2a392e5c5c403205cb6b65a82367e35abd1063509f7447c4a7f6e7bdad8fb47d",
+    "e25d20551676ab069d1877b9cae1b49a3c13c4172a794b89bd2df5a27af96e84",
+    "1f9a7af8eb87311a3b26d66ff982a91b5965287709669dea93a8b24a9541b4fc",
+    "926eebd8c4a2316a86e85d056973b938d112fa907cf1fd0222a137fdfeecb987",
+    "6ff1b951a074420f8d0a1d4a22124a30187e5c7216d64b3c2f01d827dc721143",
+    "411ee98b48bebfcbc615f71713a335593b4530e5906891533920b80b104ce6c4"
+  ],
+  "compoundEligibilityEvidence": [
+    {
+      "programId": "program-beihang-university-materials-science-and-engineering-bachelor",
+      "primaryGuideEvidence": [
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 249,
+                "originalText": "1.申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》 《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号） 等有关规定。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 250,
+                "originalText": "2.申请人须身心健康，品行端正 ，对华友好 ，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 265,
+                "originalText": "申请人须参加由国家留学基金管理委员会组织的来华留学本科入学学业水平测试（China Scholastic Competency Assessment,以下简称“CSCA测试”)并取得测试成绩，具体测试时间和内容请登录CSCA官方网站( www.csca.cn )查询 ， 我校各专业测试科目要求详见《北京航空航天大学国际学生本科CSCA测试科目要求》 。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-csca",
+          "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+          "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+          "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+          "locator": {
+            "type": "pdf-page-row-and-local-extracted-text-lines",
+            "pagesOneBased": [
+              1
+            ],
+            "matches": [
+              {
+                "page": 1,
+                "extractedTextLine": 4,
+                "originalText": " 申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷"
+              },
+              {
+                "page": 1,
+                "extractedTextLine": 5,
+                "originalText": " 申请英文授课项目的学生，请务必选择CSCA测试科目英文语种试卷，无需参加专业中文测试。"
+              }
+            ]
+          },
+          "visualReview": {
+            "result": "row-checked"
+          }
+        }
+      ],
+      "supportingOfficialPdfEvidence": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            1
+          ],
+          "matches": [
+            {
+              "page": 1,
+              "extractedTextLine": 13,
+              "originalText": "MaterialsScienceandEngineering Chinese"
+            },
+            {
+              "page": 1,
+              "extractedTextLine": 15,
+              "originalText": "材料科学与工程 中文授课"
+            },
+            {
+              "page": 1,
+              "extractedTextLine": 16,
+              "originalText": "SchoolofMaterialsScienceandEngineering 理科中文、数学、物理、化学"
+            },
+            {
+              "page": 1,
+              "extractedTextLine": 17,
+              "originalText": "材料科学与工程学院 Chinese(forScienceDisciplines),"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Materials Science and Engineering",
+            "majorZh": "材料科学与工程",
+            "schoolEn": "School of Materials Science and Engineering",
+            "schoolZh": "材料科学与工程学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理、化学",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics, Chemistry",
+          "rawTableRows": [
+            {
+              "page": 1,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 2,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                "SchoolofMaterialsScienceandEngineering\n材料科学与工程学院",
+                "MaterialsScienceandEngineering\n材料科学与工程",
+                "Chinese\n中文授课",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics,Chemistry\n理科中文、数学、物理、化学"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "note": "The eligibility array joins general guide conditions with its linked official PDF subject row; the guide is the ledger primary source, not the sole supporting source."
+    },
+    {
+      "programId": "program-beihang-university-nanomaterials-and-technology-bachelor",
+      "primaryGuideEvidence": [
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 249,
+                "originalText": "1.申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》 《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号） 等有关规定。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 250,
+                "originalText": "2.申请人须身心健康，品行端正 ，对华友好 ，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 265,
+                "originalText": "申请人须参加由国家留学基金管理委员会组织的来华留学本科入学学业水平测试（China Scholastic Competency Assessment,以下简称“CSCA测试”)并取得测试成绩，具体测试时间和内容请登录CSCA官方网站( www.csca.cn )查询 ， 我校各专业测试科目要求详见《北京航空航天大学国际学生本科CSCA测试科目要求》 。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-csca",
+          "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+          "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+          "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+          "locator": {
+            "type": "pdf-page-row-and-local-extracted-text-lines",
+            "pagesOneBased": [
+              1
+            ],
+            "matches": [
+              {
+                "page": 1,
+                "extractedTextLine": 4,
+                "originalText": " 申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷"
+              },
+              {
+                "page": 1,
+                "extractedTextLine": 5,
+                "originalText": " 申请英文授课项目的学生，请务必选择CSCA测试科目英文语种试卷，无需参加专业中文测试。"
+              }
+            ]
+          },
+          "visualReview": {
+            "result": "row-checked"
+          }
+        }
+      ],
+      "supportingOfficialPdfEvidence": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            1
+          ],
+          "matches": [
+            {
+              "page": 1,
+              "extractedTextLine": 18,
+              "originalText": "NanomaterialsandTechnology Chinese"
+            },
+            {
+              "page": 1,
+              "extractedTextLine": 20,
+              "originalText": "纳米材料与技术 中文授课"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Nanomaterials and Technology",
+            "majorZh": "纳米材料与技术",
+            "schoolEn": "School of Materials Science and Engineering",
+            "schoolZh": "材料科学与工程学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理、化学",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics, Chemistry",
+          "rawTableRows": [
+            {
+              "page": 1,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 3,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                null,
+                "NanomaterialsandTechnology\n纳米材料与技术",
+                "Chinese\n中文授课",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics,Chemistry\n理科中文、数学、物理、化学"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "note": "The eligibility array joins general guide conditions with its linked official PDF subject row; the guide is the ledger primary source, not the sole supporting source."
+    },
+    {
+      "programId": "program-beihang-university-electronic-information-engineering-bachelor",
+      "primaryGuideEvidence": [
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 249,
+                "originalText": "1.申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》 《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号） 等有关规定。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 250,
+                "originalText": "2.申请人须身心健康，品行端正 ，对华友好 ，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 265,
+                "originalText": "申请人须参加由国家留学基金管理委员会组织的来华留学本科入学学业水平测试（China Scholastic Competency Assessment,以下简称“CSCA测试”)并取得测试成绩，具体测试时间和内容请登录CSCA官方网站( www.csca.cn )查询 ， 我校各专业测试科目要求详见《北京航空航天大学国际学生本科CSCA测试科目要求》 。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-csca",
+          "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+          "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+          "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+          "locator": {
+            "type": "pdf-page-row-and-local-extracted-text-lines",
+            "pagesOneBased": [
+              1
+            ],
+            "matches": [
+              {
+                "page": 1,
+                "extractedTextLine": 4,
+                "originalText": " 申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷"
+              },
+              {
+                "page": 1,
+                "extractedTextLine": 5,
+                "originalText": " 申请英文授课项目的学生，请务必选择CSCA测试科目英文语种试卷，无需参加专业中文测试。"
+              }
+            ]
+          },
+          "visualReview": {
+            "result": "row-checked"
+          }
+        }
+      ],
+      "supportingOfficialPdfEvidence": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            1,
+            2
+          ],
+          "matches": [
+            {
+              "page": 1,
+              "extractedTextLine": 23,
+              "originalText": "SchoolofElectronicInformationEngineering ElectronicInformationEngineering Chinese"
+            },
+            {
+              "page": 2,
+              "extractedTextLine": 3,
+              "originalText": "电子信息工程学院 电子信息工程 中文授课 理科中文、数学、物理"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Electronic Information Engineering",
+            "majorZh": "电子信息工程",
+            "schoolEn": "School of Electronic Information Engineering",
+            "schoolZh": "电子信息工程学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics",
+          "rawTableRows": [
+            {
+              "page": 1,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 4,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                "SchoolofElectronicInformationEngineering",
+                "ElectronicInformationEngineering",
+                "Chinese",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics"
+              ]
+            },
+            {
+              "page": 2,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 2,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                "电子信息工程学院",
+                "电子信息工程",
+                "中文授课",
+                "理科中文、数学、物理"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "note": "The eligibility array joins general guide conditions with its linked official PDF subject row; the guide is the ledger primary source, not the sole supporting source."
+    },
+    {
+      "programId": "program-beihang-university-communication-engineering-bachelor",
+      "primaryGuideEvidence": [
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 249,
+                "originalText": "1.申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》 《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号） 等有关规定。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 250,
+                "originalText": "2.申请人须身心健康，品行端正 ，对华友好 ，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 265,
+                "originalText": "申请人须参加由国家留学基金管理委员会组织的来华留学本科入学学业水平测试（China Scholastic Competency Assessment,以下简称“CSCA测试”)并取得测试成绩，具体测试时间和内容请登录CSCA官方网站( www.csca.cn )查询 ， 我校各专业测试科目要求详见《北京航空航天大学国际学生本科CSCA测试科目要求》 。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-csca",
+          "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+          "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+          "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+          "locator": {
+            "type": "pdf-page-row-and-local-extracted-text-lines",
+            "pagesOneBased": [
+              1
+            ],
+            "matches": [
+              {
+                "page": 1,
+                "extractedTextLine": 4,
+                "originalText": " 申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷"
+              },
+              {
+                "page": 1,
+                "extractedTextLine": 5,
+                "originalText": " 申请英文授课项目的学生，请务必选择CSCA测试科目英文语种试卷，无需参加专业中文测试。"
+              }
+            ]
+          },
+          "visualReview": {
+            "result": "row-checked"
+          }
+        }
+      ],
+      "supportingOfficialPdfEvidence": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            2
+          ],
+          "matches": [
+            {
+              "page": 2,
+              "extractedTextLine": 5,
+              "originalText": "CommunicationEngineering Chinese"
+            },
+            {
+              "page": 2,
+              "extractedTextLine": 7,
+              "originalText": "通信工程 中文授课"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Communication Engineering",
+            "majorZh": "通信工程",
+            "schoolEn": "School of Electronic Information Engineering",
+            "schoolZh": "电子信息工程学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics",
+          "rawTableRows": [
+            {
+              "page": 2,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 3,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                null,
+                "CommunicationEngineering\n通信工程",
+                "Chinese\n中文授课",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics\n理科中文、数学、物理"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "note": "The eligibility array joins general guide conditions with its linked official PDF subject row; the guide is the ledger primary source, not the sole supporting source."
+    },
+    {
+      "programId": "program-beihang-university-computer-science-and-technology-bachelor",
+      "primaryGuideEvidence": [
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 249,
+                "originalText": "1.申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》 《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号） 等有关规定。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 250,
+                "originalText": "2.申请人须身心健康，品行端正 ，对华友好 ，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-guide",
+          "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+          "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+          "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+          "locator": {
+            "type": "original-html-lines",
+            "matches": [
+              {
+                "originalHtmlLine": 265,
+                "originalText": "申请人须参加由国家留学基金管理委员会组织的来华留学本科入学学业水平测试（China Scholastic Competency Assessment,以下简称“CSCA测试”)并取得测试成绩，具体测试时间和内容请登录CSCA官方网站( www.csca.cn )查询 ， 我校各专业测试科目要求详见《北京航空航天大学国际学生本科CSCA测试科目要求》 。"
+              }
+            ]
+          }
+        },
+        {
+          "sourceId": "src-reviewed-buaa-2027-csca",
+          "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+          "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+          "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+          "locator": {
+            "type": "pdf-page-row-and-local-extracted-text-lines",
+            "pagesOneBased": [
+              1
+            ],
+            "matches": [
+              {
+                "page": 1,
+                "extractedTextLine": 4,
+                "originalText": " 申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷"
+              },
+              {
+                "page": 1,
+                "extractedTextLine": 5,
+                "originalText": " 申请英文授课项目的学生，请务必选择CSCA测试科目英文语种试卷，无需参加专业中文测试。"
+              }
+            ]
+          },
+          "visualReview": {
+            "result": "row-checked"
+          }
+        }
+      ],
+      "supportingOfficialPdfEvidence": {
+        "sourceId": "src-reviewed-buaa-2027-csca",
+        "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+        "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+        "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+        "locator": {
+          "type": "pdf-page-row-and-local-extracted-text-lines",
+          "pagesOneBased": [
+            3
+          ],
+          "matches": [
+            {
+              "page": 3,
+              "extractedTextLine": 12,
+              "originalText": "ComputerScienceandTechnology Chinese"
+            },
+            {
+              "page": 3,
+              "extractedTextLine": 14,
+              "originalText": "计算机科学与技术 中文授课"
+            }
+          ],
+          "tableRowIdentity": {
+            "majorEn": "Computer Science and Technology",
+            "majorZh": "计算机科学与技术",
+            "schoolEn": "School of Computer Science and Engineering",
+            "schoolZh": "计算机学院",
+            "mediumOfInstruction": "Chinese / 中文授课"
+          },
+          "verifiedOriginalSubjectCellZh": "理科中文、数学、物理",
+          "verifiedOriginalSubjectCellEn": "Chinese (for Science Disciplines), Mathematics, Physics",
+          "rawTableRows": [
+            {
+              "page": 3,
+              "tableOneBased": 1,
+              "rowOneBasedIncludingHeader": 4,
+              "columnOrder": [
+                "school",
+                "major",
+                "teachingLanguage",
+                "cscaSubjects"
+              ],
+              "originalExtractedCells": [
+                "SchoolofComputerScienceandEngineering\n计算机学院",
+                "ComputerScienceandTechnology\n计算机科学与技术",
+                "Chinese\n中文授课",
+                "Chinese(forScienceDisciplines),\nMathematics,Physics\n理科中文、数学、物理"
+              ]
+            }
+          ]
+        },
+        "visualReview": {
+          "result": "row-checked"
+        }
+      },
+      "note": "The eligibility array joins general guide conditions with its linked official PDF subject row; the guide is the ledger primary source, not the sole supporting source."
+    }
+  ],
+  "commonEvidence": {
+    "csca-general": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 265,
+            "originalText": "申请人须参加由国家留学基金管理委员会组织的来华留学本科入学学业水平测试（China Scholastic Competency Assessment,以下简称“CSCA测试”)并取得测试成绩，具体测试时间和内容请登录CSCA官方网站( www.csca.cn )查询 ， 我校各专业测试科目要求详见《北京航空航天大学国际学生本科CSCA测试科目要求》 。"
+          }
+        ]
+      }
+    },
+    "year": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 246,
+            "originalText": "2027年北京航空航天大学国际本科生项目招生简章"
+          }
+        ]
+      }
+    },
+    "eligibility-nationality": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 249,
+            "originalText": "1.申请人须为持有效外国护照的非中国籍公民，其国籍身份及申请资格须符合《中华人民共和国国籍法》 《教育部关于规范我高等学校接受国际学生有关工作的通知》（教外函〔2020〕12号） 等有关规定。"
+          }
+        ]
+      }
+    },
+    "eligibility-education-age": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 250,
+            "originalText": "2.申请人须身心健康，品行端正 ，对华友好 ，年龄原则上要求为18至22周岁，具有高中毕业及以上学历。"
+          }
+        ]
+      }
+    },
+    "hsk": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 252,
+            "originalText": "（1）申请中文授课项目，须提交有效期两年内的汉语水平考试（HSK）五级及以上成绩报告，成绩不低于180分。"
+          }
+        ]
+      }
+    },
+    "opens": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 257,
+            "originalText": "申请开始日期：2026年11月1日"
+          }
+        ]
+      }
+    },
+    "closes": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 258,
+            "originalText": "申请截止日期：2027年5月30日"
+          }
+        ]
+      }
+    },
+    "entry": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 261,
+            "originalText": "入学日期： 2027年9月（具体日期请以录取通知书为准）"
+          }
+        ]
+      }
+    },
+    "official-admission": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 260,
+            "originalText": "正式录取日期： 2027年7月"
+          }
+        ]
+      }
+    },
+    "portal": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 267,
+            "originalText": "登录北航国际学生在线申请系统（网址： http://admission.buaa.edu.cn/ ） , 使用申请人个人常用邮箱注册账户，并按要求填写报名信息表。"
+          }
+        ]
+      }
+    },
+    "duration": {
+      "sourceId": "src-reviewed-buaa-2027-guide",
+      "url": "https://is.buaa.edu.cn/info/1292/3117.htm",
+      "sha256": "2ee3f7a6e40cd9004b1bbdfd7ebbaabb0e7e06069f118235d8f3e8942eb23e84",
+      "accessedAt": "2026-11-16T16:12:01.913540+00:00",
+      "locator": {
+        "type": "original-html-lines",
+        "matches": [
+          {
+            "originalHtmlLine": 297,
+            "originalText": "学制： 4年"
+          }
+        ]
+      }
+    },
+    "csca-language-scope": {
+      "sourceId": "src-reviewed-buaa-2027-csca",
+      "url": "https://is.buaa.edu.cn/2027nianbeijinghangkonghangtiandaxueguojixueshengbenkezhuanyeCSCAceshikemuyaoqiu.pdf",
+      "sha256": "8651b20bd19327b0ca76013a33172a5794c4809c039af1a64bc572e0615e24d2",
+      "accessedAt": "2026-11-16T16:12:03.248312+00:00",
+      "locator": {
+        "type": "pdf-page-row-and-local-extracted-text-lines",
+        "pagesOneBased": [
+          1
+        ],
+        "matches": [
+          {
+            "page": 1,
+            "extractedTextLine": 4,
+            "originalText": " 申请中文授课项目的学生，请选择CSCA测试科目中文语种试卷"
+          },
+          {
+            "page": 1,
+            "extractedTextLine": 5,
+            "originalText": " 申请英文授课项目的学生，请务必选择CSCA测试科目英文语种试卷，无需参加专业中文测试。"
+          }
+        ]
+      },
+      "visualReview": {
+        "result": "row-checked"
+      }
+    }
+  },
+  "portalTransportVerification": {
+    "originalGuideUrl": "http://admission.buaa.edu.cn/",
+    "verifiedHttpsUrl": "https://admission.buaa.edu.cn/",
+    "httpStatus": 200,
+    "rawSha256": "58397f04aa8f7cceeb873f5cf779a7f54cc3aa27572ec4750f1cf8f3e85a5e39",
+    "accessedAt": "2026-11-16T16:42:25.317228+00:00",
+    "quote": "国际学生在线申请系统 / International Student Online Application System",
+    "scope": "Public landing page only; no login, account, or submission accessed."
+  },
+  "priorUnselectedProgramme": {
+    "sourceIds": [
+      "src-program-review-a0b027c76197"
+    ],
+    "verifiedAt": "2026-07-26",
+    "reviewAfter": "2026-08-25",
+    "status": "stale",
+    "id": "program-beihang-university-flight-vehicle-design-and-engineering-bachelor",
+    "slug": "beihang-university-flight-vehicle-design-and-engineering-bachelor",
+    "universityId": "uni-beihang-university",
+    "name": {
+      "en": "Flight Vehicle Design and Engineering",
+      "zh": "Flight Vehicle Design and Engineering",
+      "ru": "Проектирование и инженерия летательных аппаратов"
+    },
+    "degreeLevel": "bachelor",
+    "discipline": "art-design",
+    "teachingLanguages": [
+      "Chinese"
+    ],
+    "durationMonths": null,
+    "programUrl": "https://is.buaa.edu.cn/en/info/1515/3312.htm",
+    "applyUrl": null,
+    "languageRequirements": [],
+    "verificationScope": "identity"
+  },
+  "modelCalls": false,
+  "oldModelLedgerMutations": false,
+  "wholeExistingProgrammeRecordsRenewed": false,
+  "unknownFieldsRemainUnknown": [
+    "CSCA minimum scores",
+    "exact entry day",
+    "tuition/application fee (not published in this core-only review)"
+  ],
+  "sha256": "0677baea755a428e49577b659754720c239134901c5c5bb984dccd32c50cec7a"
+}
