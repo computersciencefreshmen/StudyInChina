@@ -1,21 +1,12 @@
 import { expect, test, type Locator, type Page } from '@playwright/test'
 import { directoryData, rawData, TODAY } from './catalog-fixture'
-import { CatalogApiService, releaseFromBundle } from '../../src/lib/catalog-api/service'
-import { readIdentityAcceptances } from '../../src/lib/data/identity-acceptance-store'
-import { readFieldVerifications } from '../../src/lib/data/field-verification-store'
-import { selectDiscoveryData } from '../../src/lib/data/discovery'
-import { selectPublishedData } from '../../src/lib/data/publication'
+import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 import { formatProgramDuration } from '../../src/lib/data/duration'
 import { localize } from '../../src/lib/data/format'
 import { FAVORITES_KEY } from '../../src/lib/favorites'
 import { LATEST_RELEASE_ANNOUNCEMENT_ID, RELEASE_ANNOUNCEMENT_STORAGE_KEY } from '../../src/i18n/release-announcement'
 
-const FIXTURE_DATE = '2026-10-28'
-const identities = readIdentityAcceptances()
-const historicalCurrent = selectPublishedData(rawData, FIXTURE_DATE, identities)
-const historicalDirectory = selectDiscoveryData(rawData, FIXTURE_DATE, identities, readFieldVerifications())
-const historicalService = new CatalogApiService(historicalDirectory,
-  releaseFromBundle(historicalDirectory, FIXTURE_DATE, { evaluatedForDate: FIXTURE_DATE }), FIXTURE_DATE)
+const publicData = selectDetailedPublicPrograms(directoryData, TODAY, rawData)
 
 async function seedFavorites(page: Page, ids: string[]) {
   await page.addInitScript(({ key, ids, announcementKey, announcementId }) => {
@@ -45,21 +36,10 @@ async function expectOfficialEvidence(comparison: Locator) {
   }
 }
 
-test('saved programs compare current and expired evidence on the original review day', async ({ page }) => {
-  const retained = historicalDirectory.programs.find(program => program.status === 'stale' && program.reviewAfter < FIXTURE_DATE
-    && program.durationMonths === null && program.applyUrl === null && !historicalDirectory.admissionCycles.some(cycle => cycle.programId === program.id))!
-  const current = historicalCurrent.programs.find(program => formatProgramDuration(program, 'zh', '个月'))!
-  expect(retained, 'comparison must include a genuinely accepted expired identity').toBeDefined()
-  expect(current, 'comparison must retain a current programme alongside it').toBeDefined()
-  const ids = [retained.id, current.id]
-  // Freeze only this browser and its controlled API fixture. The production
-  // server continues to evaluate real requests using the actual current day.
-  await page.clock.setFixedTime(new Date(`${FIXTURE_DATE}T04:00:00Z`))
-  await page.route('**/api/v1/programs/compare?**', async route => {
-    const params = new URL(route.request().url()).searchParams
-    expect(params.get('view')).toBe('directory')
-    await route.fulfill({ json: historicalService.comparePrograms(params.get('ids')!.split(',')) })
-  })
+test('saved reviewed programs compare actual current annual evidence and survive reload', async ({ page }) => {
+  const programs = publicData.programs.slice(0, 2)
+  expect(programs).toHaveLength(2)
+  const ids = programs.map(program => program.id)
   await seedFavorites(page, ids)
   const errors: string[] = []
   page.on('pageerror', error => errors.push(error.message))
@@ -68,24 +48,20 @@ test('saved programs compare current and expired evidence on the original review
   const response = await loaded
   expect(response.ok()).toBe(true)
   const body = await response.json()
-  const comparison = await selectComparison(page)
-  const retainedCard = comparison.getByRole('heading', { name: localize(retained.name, 'zh'), exact: true }).locator('..')
-  const currentCard = comparison.getByRole('heading', { name: localize(current.name, 'zh'), exact: true }).locator('..')
-  await expect(retainedCard.getByRole('link', { name: /前往官网申请/ })).toHaveCount(0)
-  // Accepted identity does not restore its expired admission dates, fees, or application link.
-  expect(body.meta.release.evaluatedForDate).toBe(FIXTURE_DATE)
+  expect(body.meta.release.evaluatedForDate).toBe(TODAY)
   expect(body.data.missingIds).toEqual([])
-  expect(body.data.items.find((item: { program: { id: string } }) => item.program.id === retained.id)).toMatchObject({
-    program: { id: retained.id, status: 'stale', durationMonths: null, applyUrl: null }, currentCycle: null,
-  })
-  expect(body.data.items.find((item: { program: { id: string } }) => item.program.id === current.id)).toMatchObject({
-    program: { id: current.id, status: 'verified', reviewAfter: current.reviewAfter },
-  })
-  await expect(currentCard.getByText('学制', { exact: true }).locator('..').locator('[data-fact-status="known"]'))
-    .toHaveText(formatProgramDuration(current, 'zh', '个月')!)
-  await expect(retainedCard.getByText('学制', { exact: true }).locator('..').locator('[data-fact-status="stale"]')).toBeVisible()
+  expect(body.data.items.map((item: { program: { id: string } }) => item.program.id)).toEqual(ids)
+  const comparison = await selectComparison(page)
+  for (const program of programs) {
+    const card = comparison.getByRole('heading', { name: localize(program.name, 'zh'), exact: true }).locator('..')
+    await expect(card.getByText('学制', { exact: true }).locator('..').locator('[data-fact-status="known"]'))
+      .toHaveText(formatProgramDuration(program, 'zh', '个月')!)
+    const item = body.data.items.find((item: { program: { id: string } }) => item.program.id === program.id)
+    expect(item.currentCycle.academicYear).toBe('2027-2028')
+    expect(item.currentCycle.closesOn).toBe('2027-06-25')
+    await expect(card.locator('time[datetime="2027-06-25"]')).toBeVisible()
+  }
   await expectOfficialEvidence(comparison)
-  // Wait for the restored UI; background analytics need not become idle.
   await page.reload({ waitUntil: 'domcontentloaded' })
   await expect(page.getByRole('checkbox')).toHaveCount(2)
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '[]'), FAVORITES_KEY)).toEqual(ids)
@@ -93,41 +69,41 @@ test('saved programs compare current and expired evidence on the original review
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true)
 })
 
-test('real-date APIs and saved comparisons keep expired identities without reviving current facts', async ({ page }) => {
+test('real-date APIs and saved comparisons exclude expired identities without leaking their facts', async ({ page }) => {
   const expired = directoryData.programs.filter(program => program.status === 'stale' && program.reviewAfter < TODAY
-    && program.durationMonths === null && program.applyUrl === null && !directoryData.admissionCycles.some(cycle => cycle.programId === program.id)).slice(0, 2)
-  expect(expired, 'the real-date directory must retain accepted expired identities').toHaveLength(2)
-  const ids = expired.map(program => program.id)
-  // No route interception and no browser clock override in this test.
-  const currentResponse = await page.request.get(`/api/v1/programs/compare?ids=${encodeURIComponent(ids.join(','))}`)
-  expect(currentResponse.ok()).toBe(true)
-  const currentBody = await currentResponse.json()
-  expect(currentBody.meta.release.evaluatedForDate).toBe(TODAY)
-  expect(currentBody.data.items).toEqual([])
-  expect(currentBody.data.missingIds).toEqual(ids)
-
-  const listResponse = await page.request.get('/api/v1/programs?limit=1')
+    && program.durationMonths === null && program.applyUrl === null
+    && !directoryData.admissionCycles.some(cycle => cycle.programId === program.id)).slice(0, 2)
+  expect(expired, 'use genuinely accepted expired identities as negative evidence').toHaveLength(2)
+  const missingIds = expired.map(program => program.id)
+  const visibleIds = publicData.programs.slice(0, 2).map(program => program.id)
+  expect(visibleIds).toHaveLength(2)
+  const ids = [...missingIds, ...visibleIds]
+  // No route interception and no browser clock override: exercise the real public gate.
+  for (const view of ['', '&view=directory']) {
+    const response = await page.request.get(`/api/v1/programs/compare?ids=${encodeURIComponent(ids.join(','))}${view}`)
+    expect(response.ok()).toBe(true)
+    const body = await response.json()
+    expect(body.meta.release.evaluatedForDate).toBe(TODAY)
+    expect(body.data.missingIds).toEqual(missingIds)
+    expect(body.data.items.map((item: { program: { id: string } }) => item.program.id)).toEqual(visibleIds)
+    for (const program of expired) expect(body.data.items.some((item: { program: { id: string } }) => item.program.id === program.id)).toBe(false)
+  }
+  const listResponse = await page.request.get('/api/v1/programs?view=directory&limit=24')
   expect(listResponse.ok()).toBe(true)
-  const listBody = await listResponse.json()
-  // When the whole snapshot is expired this must be empty; future new evidence
-  // may legitimately add current programmes without invalidating this contract.
-  expect(listBody.data).toHaveLength(Math.min(1, selectPublishedData(rawData, TODAY, identities).programs.length))
-
+  expect((await listResponse.json()).data.map((item: { id: string }) => item.id).sort())
+    .toEqual(publicData.programs.map(program => program.id).sort())
   await seedFavorites(page, ids)
   const loaded = page.waitForResponse(response => new URL(response.url()).pathname === '/api/v1/programs/compare')
   await page.goto('/zh/favorites', { waitUntil: 'networkidle' })
-  const directoryResponse = await loaded
-  expect(directoryResponse.ok()).toBe(true)
-  const body = await directoryResponse.json()
-  expect(body.meta.release.evaluatedForDate).toBe(TODAY)
-  expect(body.data.missingIds).toEqual([])
-  expect(body.data.items.map((item: { program: { id: string } }) => item.program.id)).toEqual(ids)
-  for (const item of body.data.items) expect(item).toMatchObject({
-    program: { status: 'stale', durationMonths: null, applyUrl: null }, currentCycle: null,
-  })
+  const body = await (await loaded).json()
+  expect(body.data.missingIds).toEqual(missingIds)
+  expect(body.data.items.map((item: { program: { id: string } }) => item.program.id)).toEqual(visibleIds)
   const comparison = await selectComparison(page)
-  await expect(comparison.getByRole('link', { name: /前往官网申请/ })).toHaveCount(0)
-  await expect(comparison.locator('[data-fact-status="known"]')).toHaveCount(0)
+  for (const program of expired) {
+    await expect(comparison.getByRole('heading', { name: localize(program.name, 'zh'), exact: true })).toHaveCount(0)
+    await expect(comparison.locator(`a[href$="/${program.slug}"]`)).toHaveCount(0)
+  }
   await expectOfficialEvidence(comparison)
+  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '[]'), FAVORITES_KEY)).toEqual(ids)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true)
 })

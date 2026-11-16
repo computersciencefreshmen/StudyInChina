@@ -2,8 +2,8 @@ import { expect, test } from '@playwright/test'
 import { mockMapTiles } from './map-fixture'
 
 test.beforeEach(async ({ page }) => { await mockMapTiles(page) })
-import { TODAY, currentData, directoryData, rawData } from './catalog-fixture'
-import { getApplicationState, selectAdmissionCycle } from '../../src/lib/data/admission'
+import { TODAY, directoryData, rawData } from './catalog-fixture'
+import { selectAdmissionCycle } from '../../src/lib/data/admission'
 import { isCurrentVerifiedRecord } from '../../src/lib/data/freshness'
 import { getProgramDisplayDetails } from '../../src/lib/data/program-details'
 import { scholarshipAppliesToProgram } from '../../src/lib/data/scholarship-scope'
@@ -13,32 +13,12 @@ import {
   RELEASE_ANNOUNCEMENT_STORAGE_KEY,
 } from '../../src/i18n/release-announcement'
 import { isIndexableProgram } from '../../src/lib/seo/indexability'
+import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 
 const locales = ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const
 const coreRoutes = ['', 'universities', 'programs', 'scholarships', 'cities', 'guides'] as const
 const releaseAnnouncementTestTitle = 'new catalogue releases announce data and product changes once'
-const publicData = directoryData
-const groundedProgramFixture = currentData.programs
-  .flatMap((program) => {
-    const cycle = selectAdmissionCycle(currentData.admissionCycles, program.id, TODAY)
-    const details = getProgramDisplayDetails(program)
-    return cycle && details && details.curriculumHighlights.length && details.eligibility.length && details.applicationMaterials.length
-      ? [{ program, cycle, applicationState: getApplicationState(cycle, TODAY) }]
-      : []
-  })
-  .sort((left, right) => {
-    const leftAccepting = left.applicationState === 'open' || left.applicationState === 'rolling'
-    const rightAccepting = right.applicationState === 'open' || right.applicationState === 'rolling'
-    const leftFreshThrough = left.program.reviewAfter.localeCompare(left.cycle.reviewAfter) < 0
-      ? left.program.reviewAfter
-      : left.cycle.reviewAfter
-    const rightFreshThrough = right.program.reviewAfter.localeCompare(right.cycle.reviewAfter) < 0
-      ? right.program.reviewAfter
-      : right.cycle.reviewAfter
-    return Number(leftAccepting) - Number(rightAccepting)
-      || rightFreshThrough.localeCompare(leftFreshThrough)
-      || left.program.slug.localeCompare(right.program.slug)
-  })[0]
+const publicData = selectDetailedPublicPrograms(directoryData, TODAY, rawData)
 
 test.beforeEach(async ({ page }, testInfo) => {
   if (testInfo.title === releaseAnnouncementTestTitle) return
@@ -213,95 +193,50 @@ test('the program catalogue exposes linked scholarships as a shareable evidence 
   await expect(page.locator('.record-card').first()).toBeVisible()
 })
 
-test('an accepted thin program stays reachable but is excluded from search indexing', async ({ page }) => {
-  const program = publicData.programs.find(program => !getProgramDisplayDetails(program) && !isIndexableProgram(program, publicData.admissionCycles, TODAY))!
-  expect(program, 'the fixture must be a real accepted directory identity').toBeDefined()
-  const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
-
-  expect(response?.ok()).toBe(true)
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
-})
-
-test('a stale program identity remains reachable while expired dynamic facts are withheld', async ({ page }) => {
-  const program = publicData.programs.find(program => program.status === 'stale')!
-  expect(program, 'only a genuinely accepted stale identity may remain routable').toBeDefined()
-  const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
-
-  expect(response?.ok()).toBe(true)
-  await expect(page.getByRole('heading', { level: 1 })).toContainText(program.name.en!)
-  await expect(page.getByText(/Needs review/).first()).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Curriculum highlights', exact: true })).toHaveCount(0)
-  await expect(page.getByRole('heading', { name: 'Eligibility', exact: true })).toHaveCount(0)
-  await expect(page.getByRole('heading', { name: 'Application materials', exact: true })).toHaveCount(0)
-  await expect(page.getByText('Opening soon', { exact: true })).toHaveCount(0)
-  for (const cycle of rawData.admissionCycles.filter(cycle => cycle.programId === program.id && cycle.closesOn)) {
-    await expect(page.locator(`[data-program-detail] time[datetime="${cycle.closesOn}"]`)).toHaveCount(0)
+test('accepted thin and stale programs are absent in all six public locales', async ({ page }) => {
+  const thin = directoryData.programs.find(program => !getProgramDisplayDetails(program)
+    && !isIndexableProgram(program, directoryData.admissionCycles, TODAY)
+    && !publicData.programs.some(visible => visible.id === program.id))!
+  const stale = directoryData.programs.find(program => program.status === 'stale'
+    && !publicData.programs.some(visible => visible.id === program.id))!
+  expect(thin, 'use a real accepted thin identity, not a fabricated draft').toBeDefined()
+  expect(stale, 'use a real accepted expired identity').toBeDefined()
+  for (const program of [thin, stale]) for (const locale of locales) {
+    const response = await page.goto(`/${locale}/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
+    expect(response?.status(), `${locale}/${program.slug}`).toBe(404)
+    await expect(page.locator('main')).toBeVisible()
+    await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
+    await expect(page.locator('[data-program-detail]')).toHaveCount(0)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
   }
-  await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', program.programUrl)
-  await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
 })
 
-test('program detail fragments and official routes follow current evidence', async ({ page }) => {
-  if (!groundedProgramFixture) {
-    // Real evidence can expire between releases. Test its withdrawal on an accepted
-    // identity rather than requiring yesterday's application facts to remain current.
-    const expiredFixture = rawData.programs.flatMap((original) => {
-      const details = original.details ?? original.supplementaryDetails
-      const program = publicData.programs.find(program => program.id === original.id && program.status === 'stale')
-      return program && original.reviewAfter < TODAY && original.verifiedAt <= original.reviewAfter
-        && details?.curriculumHighlights?.length && details.eligibility?.length && details.applicationMaterials?.length
-        ? [{ program, original, details }] : []
-    }).sort((left, right) => right.original.reviewAfter.localeCompare(left.original.reviewAfter)
-      || left.program.slug.localeCompare(right.program.slug))[0]
-    expect(expiredFixture, 'an accepted identity must retain real expired grounded fragments for the withdrawal check').toBeDefined()
-    const { program, original, details } = expiredFixture!
-    expect(currentData.programs.some(current => current.id === program.id)).toBe(false)
-    expect(getProgramDisplayDetails(program, TODAY)).toBeUndefined()
-    expect(original.reviewAfter < TODAY).toBe(true)
+test('reviewed public programs expose their exact current annual core and official routes', async ({ page }) => {
+  expect(publicData.programs).toHaveLength(5)
+  const list = await page.request.get('/api/v1/programs?view=directory&limit=24')
+  expect(list.ok()).toBe(true)
+  const body = await list.json()
+  expect(body.data.map((item: { id: string }) => item.id).sort()).toEqual(publicData.programs.map(program => program.id).sort())
+  for (const program of publicData.programs) {
+    const cycle = selectAdmissionCycle(publicData.admissionCycles, program.id, TODAY)!
+    expect(cycle, program.id).toBeDefined()
+    expect(cycle.eligibility?.length).toBeGreaterThan(0)
+    expect(cycle.languageRequirements?.length).toBeGreaterThan(0)
+    expect(cycle.applyUrl).toBeTruthy()
     const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
-
-    expect(response?.ok()).toBe(true)
+    expect(response?.ok(), program.slug).toBe(true)
     await expect(page.getByRole('heading', { level: 1 })).toContainText(program.name.en!)
-    await expect(page.locator('[data-discovery-notice]')).toContainText('A catalogue entry does not mean applications are open.')
-    await expect(page.getByText(/Needs review/).first()).toBeVisible()
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
-    for (const heading of ['Curriculum highlights', 'Eligibility', 'Application materials']) {
-      await expect(page.getByRole('heading', { name: heading, exact: true })).toHaveCount(0)
-    }
-    for (const fragment of [...details.curriculumHighlights!, ...details.eligibility!, ...details.applicationMaterials!]) {
-      if (fragment.en) await expect(page.locator('[data-program-detail]').getByText(fragment.en, { exact: true })).toHaveCount(0)
-    }
+    const track = page.locator(`[data-track-cycle="${cycle.id}"]`)
+    await expect(track).toContainText(cycle.academicYear)
+    await expect(track).toContainText('HSK')
+    for (const condition of cycle.eligibility!) if (condition.en) await expect(track).toContainText(condition.en)
+    await expect(track.getByRole('link', { name: /Apply on official site/ })).toHaveAttribute('href', cycle.applyUrl!)
     await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', program.programUrl)
-    await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
-    return
-  }
-
-  const { program, cycle, applicationState } = groundedProgramFixture
-  expect(program.name.en, program.id).toBeTruthy()
-  const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
-
-  expect(response?.ok()).toBe(true)
-  await expect(page.getByRole('heading', { level: 1 })).toContainText(program.name.en ?? '')
-  await expect(page.getByRole('heading', { name: 'Curriculum highlights', exact: true })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Eligibility', exact: true })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Application materials', exact: true })).toBeVisible()
-  if (isIndexableProgram(program, publicData.admissionCycles, TODAY)) {
-    await expect(page.locator('meta[name="robots"]')).toHaveCount(0)
-  } else {
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
-  }
-  await expect(page.getByRole('link', { name: /Official source/ }).first())
-    .toHaveAttribute('href', program.programUrl)
-  if (cycle.closesOn) {
-    await expect(page.locator(`time[datetime="${cycle.closesOn}"]`).first()).toBeVisible()
-  }
-
-  if ((applicationState === 'open' || applicationState === 'rolling') && program.applyUrl) {
-    await expect(page.getByRole('link', { name: /Apply on official site/ }).first())
-      .toHaveAttribute('href', program.applyUrl)
-  } else {
-    await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
+    if (cycle.closesOn) await expect(page.locator(`time[datetime="${cycle.closesOn}"]`).first()).toBeVisible()
+    // Missing marketing fragments are not invented to satisfy the core gate.
+    if (!getProgramDisplayDetails(program)?.curriculumHighlights.length) {
+      await expect(page.getByRole('heading', { name: 'Curriculum highlights', exact: true })).toHaveCount(0)
+    }
   }
 })
 

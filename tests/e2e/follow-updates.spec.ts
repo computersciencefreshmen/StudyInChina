@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test'
 import { LATEST_RELEASE_ANNOUNCEMENT_ID, RELEASE_ANNOUNCEMENT_STORAGE_KEY } from '../../src/i18n/release-announcement'
 import { SITE_NOTIFICATIONS_KEY } from '../../src/lib/site-notifications'
+import { directoryData, rawData, TODAY } from './catalog-fixture'
+import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(({ key, id }) => window.localStorage.setItem(key, id), {
@@ -12,7 +14,11 @@ test('school and program follow entries save locally without email controls', as
   let posts = 0
   page.on('request', request => { if (request.method() === 'POST') posts++ })
   await page.route('**/api/notifications', route => route.fulfill({ json: { available: true, observations: [], observedAt: Date.now(), revision: 'empty' } }))
-  await page.goto('/zh/universities/tsinghua-university', { waitUntil: 'domcontentloaded' })
+  const publicData = selectDetailedPublicPrograms(directoryData, TODAY, rawData)
+  const program = publicData.programs.find(program => program.id === 'program-d80dce5cbd9ef5807e5aafe7')!
+  expect(program, 'use the actually reviewed NENU Fine Arts programme').toBeDefined()
+  const university = publicData.universities.find(university => university.id === program.universityId)!
+  await page.goto(`/zh/universities/${university.slug}`, { waitUntil: 'domcontentloaded' })
   const entry = page.getByRole('region', { name: '关注重要更新' })
   await expect(entry).toBeVisible()
   await entry.getByRole('button', { name: '在网站关注' }).click()
@@ -21,7 +27,8 @@ test('school and program follow entries save locally without email controls', as
   await expect(entry.getByRole('textbox')).toHaveCount(0)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
   await entry.screenshot({ path: '.tmp/follow-university-' + testInfo.project.name + '.png' })
-  const programHref = await page.locator('main a[href^="/zh/programs/"]').first().getAttribute('href')
+  const programHref = `/zh/programs/${program.slug}`
+  await expect(page.locator(`main a[href="${programHref}"]`).first()).toBeVisible()
   expect(programHref).toBeTruthy()
   await page.goto(programHref!, { waitUntil: 'domcontentloaded' })
   await entry.getByRole('button', { name: '在网站关注' }).click()
@@ -29,6 +36,9 @@ test('school and program follow entries save locally without email controls', as
   await expect(entry.getByRole('textbox')).toHaveCount(0)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
   await entry.screenshot({ path: '.tmp/follow-program-' + testInfo.project.name + '.png' })
+  expect(await page.evaluate(key => JSON.parse(window.localStorage.getItem(key) || '{}').follows.length, SITE_NOTIFICATIONS_KEY)).toBe(2)
+  await page.reload({ waitUntil: 'domcontentloaded' })
+  await expect(entry.getByRole('button', { name: '取消站内关注' })).toBeVisible()
   expect(posts).toBe(0)
 })
 
