@@ -241,6 +241,8 @@ export class CatalogRefillCoordinator {
     const first = batch[0]
     const fence = await this.state.storage.get<RefillFence>(`plan:${first.dispatchToken}`)
     if (!fence || !first.fenceSha256 || await digest(canonical(fence)) !== first.fenceSha256) throw new Error('refill_dispatch_plan_invalid')
+    const members = await this.state.storage.get<string[]>(`plan-members:${first.dispatchToken}`)
+    if (!members || canonical([...members].sort()) !== canonical(batch.map(entry => entry.candidate.jobId).sort())) throw new Error('refill_dispatch_group_incomplete')
     const sendingAt = this.deps.now()
     this.resetBudget(saved, sendingAt)
     const cap = first.kind === 'model' ? REFILL_LIMITS.modelPerWindow : REFILL_LIMITS.capturePerWindow
@@ -288,17 +290,16 @@ export class CatalogRefillCoordinator {
         await this.save(saved)
       }
       let remaining = REFILL_LIMITS.batch, selected = 0, nextDueAt: number | null = null
-      const prepared = Object.values(saved.outstanding).filter(entry => entry.phase === 'prepared' && entry.epochSha256 === saved.epochSha256
-        && (entry.kind === 'capture' ? current.capture : current.model && (current.expansion !== false || entry.candidate.stage === 'maintain')))
+      const prepared = Object.values(saved.outstanding).filter(entry => entry.phase === 'prepared')
       for (const dispatchToken of new Set(prepared.map(entry => entry.dispatchToken))) {
-        const group = prepared.filter(entry => entry.dispatchToken === dispatchToken)
+        const group = Object.values(saved.outstanding).filter(entry => entry.dispatchToken === dispatchToken)
+        if (group.length > remaining || !group.every(entry => entry.phase === 'prepared' && entry.epochSha256 === saved.epochSha256
+          && (entry.kind === 'capture' ? current.capture : current.model && (current.expansion !== false || entry.candidate.stage === 'maintain')))) continue
         const cap = group[0].kind === 'model' ? REFILL_LIMITS.modelPerWindow : REFILL_LIMITS.capturePerWindow
-        let room = cap - saved.used[group[0].kind]
-        const batch = group.filter(entry => entry.chargeWindow === saved.window || room-- > 0).slice(0, remaining)
-        if (!batch.length) break
+        if (group.filter(entry => entry.chargeWindow !== saved.window).length > cap - saved.used[group[0].kind]) continue
         // A persisted prepared state proves send-start was never confirmed. A
         // sending/uncertain state is NEVER taken through this recovery path.
-        await this.send(saved, batch); remaining -= batch.length; selected += batch.length
+        await this.send(saved, group); remaining -= group.length; selected += group.length
       }
       for (const kind of ['model', 'capture'] as const) {
         const count = kind === 'model' && current.expansion === false
@@ -322,6 +323,7 @@ export class CatalogRefillCoordinator {
         // Full canary/fairness proofs live once per plan. Repeating a 295-school
         // fence for every outstanding job could exceed a DO value's size limit.
         await this.state.storage.put(`plan:${dispatchToken}`, plan.fence)
+        await this.state.storage.put(`plan-members:${dispatchToken}`, plan.candidates.map(candidate => candidate.jobId))
         for (const candidate of plan.candidates) {
           saved.outstanding[candidate.jobId] = { candidate, fenceSha256, epochSha256: saved.epochSha256, dispatchToken, kind, phase: 'prepared', createdAt: now, chargeWindow: saved.window, permit: null }
           saved.used[kind]++
@@ -367,6 +369,7 @@ export class CatalogRefillCoordinator {
       if (!entry || !input.dispatchToken || input.epochSha256 !== saved.epochSha256 || entry.dispatchToken !== input.dispatchToken || entry.epochSha256 !== saved.epochSha256) return denied('refill_delivery_epoch_invalid', 300)
       if (await this.state.storage.get(`closed:${input.dispatchToken}:${input.jobId}`)) return denied('refill_delivery_closed', 300)
     } else if (entry && entry.epochSha256 !== saved.epochSha256) return denied('refill_previous_epoch_inflight', 30)
+    if (entry?.phase === 'prepared') return denied('refill_prepared_dispatch_pending', 30)
     if (entry?.permit) return denied('refill_permit_already_held')
     this.resetBudget(saved, now)
     const kind = refillKind(job.stage), counts = this.counts(saved)

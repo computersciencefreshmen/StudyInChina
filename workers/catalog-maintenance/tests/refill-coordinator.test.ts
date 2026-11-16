@@ -57,6 +57,7 @@ function fixture(options: { models?: number; captures?: number; flag?: string; r
   const start = async () => { await call('/wake', { reason: 'watchdog' }); await alarm() }
   const metadata = (id: string) => { const d = dispatches.findLast(item => item.ids.includes(id))!; return { jobId: id, dispatchToken: d.token, epochSha256: d.epoch } }
   return { storage, env, rows, fence, deps, dispatches, add, call, alarm, start, metadata, now: () => now,
+    advance: (milliseconds: number) => { now += milliseconds },
     restart: () => { coordinator = new CatalogRefillCoordinator({ storage }, env, deps) },
     setGate: (open: boolean, models = open) => { gateOpen = open; modelOpen = models },
     setExpansion: (open: boolean) => { expansionOpen = open },
@@ -341,4 +342,34 @@ test('prepared recovery crossing a window durably recharges before send and cann
   }
   assert.equal(f.dispatches.flatMap(d => d.ids).length, 256)
   assert.equal(((await f.call('/status')).value.model as { epochUsed: number }).epochUsed, 256)
+})
+
+test('a prepared token is never split to use two leftover slots or to bypass an expansion reserve', async () => {
+  const f = fixture({ models: 400, captures: 0 }); await f.start()
+  const saved = await f.storage.get<{ outstanding: Record<string, { phase: string }> }>('refill-v1')
+  for (const entry of Object.values(saved!.outstanding)) entry.phase = 'prepared'
+  await f.storage.put('refill-v1', saved); f.dispatches.length = 0
+  f.advance(15 * 60_000)
+  for (let n = 0; n < 254; n++) {
+    const row = f.rows.get(hash(399))!
+    row.status = 'queued'
+    const permit = (await f.call('/acquire', { jobId: row.jobId })).value
+    assert.equal(permit.allowed, true)
+    row.status = 'retry'; row.attempt++; row.updatedAt = new Date(f.now() + n + 1).toISOString()
+    assert.equal((await f.call('/release', { jobId: row.jobId, permitToken: permit.permitToken })).value.released, true)
+  }
+  await f.alarm()
+  assert.equal(f.dispatches.length, 0)
+  const remaining = await f.storage.get<{ outstanding: Record<string, { phase: string }> }>('refill-v1')
+  assert.equal(Object.values(remaining!.outstanding).filter(entry => entry.phase === 'prepared').length, 8)
+  assert.equal(((await f.call('/status')).value.model as { epochUsed: number }).epochUsed, 254)
+
+  const mixed = fixture({ models: 8, captures: 0 }); mixed.rows.get(hash(1))!.stage = 'maintain'; await mixed.start()
+  const original = mixed.dispatches[0]
+  const parked = await mixed.storage.get<{ outstanding: Record<string, { phase: string }> }>('refill-v1')
+  for (const entry of Object.values(parked!.outstanding)) entry.phase = 'prepared'
+  await mixed.storage.put('refill-v1', parked); mixed.dispatches.length = 0
+  mixed.setExpansion(false); mixed.add(500, 'maintain'); await mixed.alarm()
+  assert.equal(mixed.dispatches.some(sent => sent.token === original.token), false)
+  assert.ok(mixed.dispatches.some(sent => sent.ids.includes(hash(500))))
 })
