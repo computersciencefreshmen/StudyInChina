@@ -1,10 +1,15 @@
 import { createHash } from 'node:crypto'
-import { resolve } from 'node:path'
-import { describe, expect, it } from 'vitest'
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { isAbsolute, join, relative, resolve } from 'node:path'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import review from '../../quality/maintenance/batches/reviewed-buaa-2027-20261117/review.json'
 import receipt from '../../quality/maintenance/batches/reviewed-buaa-2027-20261117/identity-receipt.json'
+import fieldReceipt from '../../quality/maintenance/batches/reviewed-buaa-2027-20261117/field-receipt.json'
 import nenu from '../../quality/reviewed-nenu-2027-20261116/review.json'
+import * as scopeModule from '../../scripts/maintenance/build-scope'
 import { loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
+import { validateDirectory } from '../../scripts/quality/validate-directory'
 import { buildProgramCoverage } from '../../scripts/maintenance/program-coverage'
 import { readMaintenanceScope } from '../../scripts/maintenance/scope-registry'
 import { canonicalIdentityJson, identityFingerprint } from '@/lib/data/identity-acceptance'
@@ -27,8 +32,58 @@ const publicData = (data = raw, clock = TODAY, evidence = reviewedFields) => sel
   selectDiscoveryData(data, clock, identities, [...fields.filter(entry => !reviewedFields.includes(entry)), ...evidence]), clock,
 )
 const buaa = (data = raw, clock = TODAY, evidence = reviewedFields) => publicData(data, clock, evidence).programs.filter(row => row.universityId === UNIVERSITY)
+const temporaryRoots: string[] = []
+afterEach(() => {
+  vi.restoreAllMocks()
+  for (const temporaryRoot of temporaryRoots.splice(0)) {
+    const inside = relative(resolve(tmpdir()), resolve(temporaryRoot))
+    if (!inside.startsWith('studyinchina-buaa-strict-') || inside.includes('..') || isAbsolute(inside)) throw Error('Unexpected strict-test cleanup path')
+    rmSync(temporaryRoot, { recursive: true, force: true })
+  }
+})
 
 describe('independent BUAA 2027 source-backed core review', () => {
+  it('passes the actual strict directory validator with a separate standard field receipt for every reviewed leaf', async () => {
+    const { sha256: receiptSha, ...content } = fieldReceipt
+    expect(sha(content)).toBe(receiptSha)
+    expect(content.format).toBe('studyinchina.field-import-receipt')
+    expect(content.accepted).toHaveLength(10)
+    expect(content.fieldBindings).toHaveLength(40)
+    for (const entry of reviewedFields) {
+      expect(entry.receiptPath).toBe('quality/maintenance/batches/reviewed-buaa-2027-20261117/field-receipt.json')
+      expect(entry.receiptSha256).toBe(receiptSha)
+      expect(content.accepted.some(row => row.recordId === entry.recordId && row.fieldPaths.includes(entry.fieldPath))).toBe(true)
+      expect(content.fieldBindings).toContainEqual({ entityType: entry.entityType, recordId: entry.recordId,
+        fieldPath: entry.fieldPath, verificationSha256: fieldVerificationContentSha256(entry) })
+    }
+    expect((await validateDirectory(root, TODAY)).integrityPassed).toBe(true)
+  }, 30_000) // This exercises the complete real catalogue and receipt chain.
+
+  it.each(['identity-format', 'missing-accepted-path', 'missing-entity-type', 'changed-leaf-binding'])(
+    'strictly rejects a rehashed %s field receipt instead of accepting an identity or scalar-only check', async fault => {
+      const temporaryRoot = mkdtempSync(join(tmpdir(), 'studyinchina-buaa-strict-'))
+      temporaryRoots.push(temporaryRoot)
+      const dataDirectory = join(temporaryRoot, 'content/data'), scopeDirectory = join(temporaryRoot, 'content/maintenance')
+      const entry = structuredClone(reviewedFields[0]), receiptFile = resolve(temporaryRoot, entry.receiptPath)
+      for (const directory of [dataDirectory, scopeDirectory, resolve(receiptFile, '..')]) mkdirSync(directory, { recursive: true })
+      const content: Record<string, unknown> = structuredClone(fieldReceipt)
+      delete content.sha256
+      if (fault === 'identity-format') content.format = 'studyinchina.identity-import-receipt'
+      if (fault === 'missing-accepted-path') for (const accepted of content.accepted as Array<Record<string, unknown>>) accepted.fieldPaths = []
+      if (fault === 'missing-entity-type') for (const binding of content.fieldBindings as Array<Record<string, unknown>>) delete binding.entityType
+      if (fault === 'changed-leaf-binding') (content.fieldBindings as Array<Record<string, unknown>>)[0].verificationSha256 = '0'.repeat(64)
+      const changed = { ...content, sha256: sha(content) }
+      entry.receiptSha256 = changed.sha256
+      const write = (path: string, value: unknown) => writeFileSync(path, JSON.stringify(value))
+      write(receiptFile, changed)
+      write(join(dataDirectory, 'identity-acceptances.json'), { schemaVersion: 1, entries: [] })
+      write(join(dataDirectory, 'field-verifications.json'), { schemaVersion: 1, entries: [entry] })
+      writeFileSync(join(scopeDirectory, 'scope-272.v1.json'), readFileSync(join(root, 'content/maintenance/scope-272.v1.json')))
+      vi.spyOn(scopeModule, 'loadMaintenanceBundle').mockReturnValue(raw)
+      await expect(validateDirectory(temporaryRoot, TODAY)).rejects.toThrow('directory_field_receipt_binding_invalid')
+    },
+  )
+
   it('binds the immutable AI/tool/visual review, receipt and exact public-source hashes', () => {
     const { sha256: reviewSha, ...reviewContent } = review
     const { sha256: receiptSha, ...receiptContent } = receipt
