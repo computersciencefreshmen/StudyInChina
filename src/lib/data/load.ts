@@ -1,7 +1,7 @@
 import 'server-only'
 import { cache } from 'react'
 import { readValidatedCatalogBundle } from './raw-snapshot'
-import { getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
+import { assertPublicProgramQualityBackend, getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
 import { getTodayDate } from './freshness'
 import { createCatalogRepository, type CatalogRepository } from '@/lib/catalog'
 import { selectDiscoveryData } from './discovery'
@@ -10,6 +10,7 @@ import { readFieldVerifications } from './field-verification-store'
 import { isContentPreviewEnabled } from './preview'
 import type { DataBundle } from './types'
 import { canonicalUniversitySlug } from './slug-aliases'
+import { selectDetailedPublicPrograms } from './public-program-quality'
 
 export const getAllData = cache((): DataBundle => readValidatedCatalogBundle())
 
@@ -25,6 +26,7 @@ let catalogRepository: CatalogRepository | undefined
 
 function activeCatalogRepository(): CatalogRepository {
   catalogRepository ??= createCatalogRepository()
+  assertPublicProgramQualityBackend(catalogRepository.mode)
   return catalogRepository
 }
 
@@ -32,9 +34,9 @@ const getRepositoryData = cache(async (today: string): Promise<DataBundle> => {
   const data = await activeCatalogRepository().getBundle()
   const previewEnabled = isContentPreviewEnabled(process.env)
   if (!previewEnabled && activeCatalogRepository().mode === 'json') return getPublicCatalogSnapshot(data, today).directory
-  return previewEnabled ? data : selectDiscoveryData(data, today,
+  return previewEnabled ? data : selectDetailedPublicPrograms(selectDiscoveryData(data, today,
     activeCatalogRepository().mode === 'json' ? readIdentityAcceptances(undefined, { strictProjection: true }) : [],
-    activeCatalogRepository().mode === 'json' ? readFieldVerifications() : [])
+    activeCatalogRepository().mode === 'json' ? readFieldVerifications() : []), today, data)
 })
 
 /** Runtime page loader used by json, shadow, and d1 deployments. */

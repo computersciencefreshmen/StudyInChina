@@ -68,7 +68,7 @@ describe('directory cursor binding to review-ledger revisions', () => {
     expect(JSON.stringify(bundle)).toBe(before)
   })
 
-  it('rejects a JSON language-filter cursor when field-only review changes matching membership', async () => {
+  it('rejects a JSON language-filter cursor after a leaf review changes, even while core-incomplete identities stay hidden', async () => {
     const ledger = stores(), repository = new JsonCatalogRepository(() => bundle)
     ledger.setFields(programs.slice(0, 2).map(field))
     const first = await repository.listPrograms({ view: 'directory', today, language: 'English', limit: 1 })
@@ -76,7 +76,8 @@ describe('directory cursor binding to review-ledger revisions', () => {
     expect(first.nextCursor).toBeTruthy()
     ledger.setFields([field(programs[0])])
     const updated = await repository.listPrograms({ view: 'directory', today, language: 'English', limit: 1 })
-    expect(updated.total).toBe(first.total! - 1)
+    expect(updated.total).toBe(first.total)
+    expect(updated.items.some(item => programs.some(program => program.id === item.program.id))).toBe(false)
     await expect(repository.listPrograms({ view: 'directory', today, language: 'English', limit: 1, cursor: first.nextCursor! }))
       .rejects.toMatchObject({ code: 'INVALID_LIST_CURSOR' })
   })

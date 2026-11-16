@@ -11,6 +11,7 @@ import { maintenanceClientFromEnvironment } from './catalog-maintenance-client'
 import type { CanonicalMaintenanceReceipt } from './prepare-maintenance-catalog'
 import { canonicalJson } from '../maintenance/contracts'
 import { directoryRevision } from '../../src/lib/catalog/directory-revision'
+import { PUBLIC_PROGRAM_QUALITY_POLICY, selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 
 const PROJECT = 'prj_AgYJcsuat4kmLiinlvcBbZsYY3cg', OWNER = 'team_o5qghzfTOk24QwoYANzJ8hNH'
 const ORIGIN = 'https://studyinchina.vercel.app', sha = (value: unknown) => createHash('sha256').update(canonicalJson(value)).digest('hex')
@@ -35,7 +36,7 @@ export async function verifyMaintenancePublication(options: { root: string; sour
   const publicRead = async (path: string) => boundedJson(await fetcher(`${ORIGIN}${path}`, { redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(30_000) }))
   const today = getTodayDate(), raw = loadMaintenanceBundle(options.root), dataDirectory = resolve(options.root, 'content', 'data')
   const identities = readIdentityAcceptances(dataDirectory), fields = readFieldVerifications(dataDirectory)
-  const data = selectDiscoveryData(raw, today, identities, fields), revision = directoryRevision(raw, today, identities, fields)
+  const data = selectDetailedPublicPrograms(selectDiscoveryData(raw, today, identities, fields), today, raw), revision = directoryRevision(raw, today, identities, fields)
   const checked: Record<string, number> = {}
   for (const [entity, expected] of [['institutions', data.universities], ['programs', data.programs], ['scholarships', data.scholarships]] as const) {
     const ids = new Set<string>(), cursors = new Set<string>(); let cursor: string | null = null
@@ -81,9 +82,23 @@ export async function verifyMaintenancePublication(options: { root: string; sour
         detailsChecked++
       }
     }
+  // A published release may contain new internal identities that are still
+  // withheld from applicants. Prove those routes are absent, never call them
+  // publicly available merely because their canonical data was applied.
+  const visibleProgramIds = new Set(data.programs.map(record => record.id))
+  let hiddenProgramDetailsChecked = 0
+  for (const record of raw.programs.filter(record => changedIds.has(record.id) && !visibleProgramIds.has(record.id))) {
+    for (const locale of ['en', 'zh', 'ru', 'de', 'fr', 'es']) {
+      const response = await fetcher(`${ORIGIN}/${locale}/programs/${encodeURIComponent(record.slug)}`, { redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(30_000) })
+      await response.body?.cancel()
+      if (response.status !== 404 || response.redirected) throw new Error('publication_hidden_program_visible')
+      hiddenProgramDetailsChecked++
+    }
+  }
   const proof = { format: 'studyinchina.maintenance-stable-proof', formatVersion: 1, pass: true, checkedAt: new Date().toISOString(),
     today, sourceCommit: options.sourceCommit, deploymentId: deployment.id, batchId: options.receipt.batchId, canonicalReceiptSha256: options.receipt.sha256,
-    directoryCounts: checked, directoryRevision: revision, detailsChecked, checks: ['native-owner-project-exact-commit', 'all-directory-identities', 'unique-complete-pagination', 'projection-revision', 'current-date-json-backend', 'changed-six-language-details'] }
+    directoryCounts: checked, directoryRevision: revision, detailsChecked, publicProgramQualityPolicy: PUBLIC_PROGRAM_QUALITY_POLICY,
+    hiddenProgramDetailsChecked, checks: ['native-owner-project-exact-commit', 'all-directory-identities', 'unique-complete-pagination', 'projection-revision', 'current-date-json-backend', 'changed-six-language-details', 'hidden-program-six-language-absence'] }
   return { ...proof, sha256: sha(proof) }
 }
 
@@ -95,7 +110,9 @@ function readSavedProof(path: string, receipt: CanonicalMaintenanceReceipt, sour
     || proof.canonicalReceiptSha256 !== receipt.sha256 || !/^dpl_[a-zA-Z0-9]+$/u.test(proof.deploymentId)
     || !/^[a-f0-9]{64}$/u.test(proof.directoryRevision ?? '')
     || !Array.isArray(proof.checks) || !proof.checks.includes('native-owner-project-exact-commit')
-    || !proof.checks.includes('projection-revision')) throw new Error('publication_saved_proof_changed')
+    || !proof.checks.includes('projection-revision') || !proof.checks.includes('hidden-program-six-language-absence')
+    || proof.publicProgramQualityPolicy !== PUBLIC_PROGRAM_QUALITY_POLICY
+    || !Number.isSafeInteger(proof.hiddenProgramDetailsChecked) || proof.hiddenProgramDetailsChecked < 0) throw new Error('publication_saved_proof_changed')
   return proof
 }
 

@@ -6,14 +6,21 @@ import { selectDiscoveryData } from '@/lib/data/discovery'
 import { freezeSnapshot } from '@/lib/data/file-snapshot'
 import { directoryRevision } from './directory-revision'
 import { deriveCatalogRelease } from './release'
+import { selectDetailedPublicPrograms } from '@/lib/data/public-program-quality'
+import { CatalogRepositoryError, type CatalogBackendMode } from './types'
+
+/** Remote list/compare adapters cannot bypass a policy they cannot prove. */
+export function assertPublicProgramQualityBackend(mode: CatalogBackendMode) {
+  if (mode !== 'json') throw new CatalogRepositoryError('PUBLIC_PROGRAM_QUALITY_BACKEND_UNSUPPORTED', 'The public catalogue requires a locally verified quality projection.')
+}
 
 type Snapshot = ReturnType<typeof buildSnapshot>
 const snapshots = new WeakMap<DataBundle, { today: string; identities: unknown; fields: unknown; value: Snapshot }>()
 
 function buildSnapshot(bundle: DataBundle, today: string, identities: ReturnType<typeof readIdentityAcceptances>, fields: ReturnType<typeof readFieldVerifications>, immutable = true) {
   const value = {
-    current: selectPublishedData(bundle, today, identities),
-    directory: selectDiscoveryData(bundle, today, identities, fields),
+    current: selectDetailedPublicPrograms(selectPublishedData(bundle, today, identities), today, bundle),
+    directory: selectDetailedPublicPrograms(selectDiscoveryData(bundle, today, identities, fields), today, bundle),
     revision: directoryRevision(bundle, today, identities, fields),
     release: deriveCatalogRelease(bundle),
   }

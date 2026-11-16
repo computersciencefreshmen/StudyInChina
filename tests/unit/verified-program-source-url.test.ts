@@ -17,6 +17,7 @@ import { proposalContentSha256, exportContentSha256, type MaintenanceProposal } 
 import { validateDirectory } from '../../scripts/quality/validate-directory'
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
+import { addFixturePublicCore } from '../fixtures/public-program-core'
 
 const today = '2026-10-29', now = '2026-10-29T01:00:00.000Z'
 const oldUrl = 'https://example.edu/old-entry-404.pdf', verifiedUrl = 'https://example.edu/verified-official-catalogue.pdf'
@@ -86,7 +87,9 @@ describe('receipt-bound verified programme document URL', () => {
     expect(raw).toEqual(before); expect(raw.programs[0].programUrl).toBe(oldUrl)
   })
   it('uses the same URL in actual JSON directory, current, compare and saved-record queries', async () => {
-    const raw = fixture(true), entry = acceptance(raw)
+    const raw = fixture(true)
+    addFixturePublicCore(raw, raw.programs[0], today)
+    const entry = acceptance(raw)
     vi.spyOn(store, 'readIdentityAcceptances').mockReturnValue([entry])
     const repository = new JsonCatalogRepository(async () => raw)
     for (const query of [{ today }, { today, view: 'directory' as const }]) {
@@ -98,8 +101,12 @@ describe('receipt-bound verified programme document URL', () => {
     expect(selectPublishedData(raw, today, [entry]).programs.find(p => p.id === 'program')?.programUrl).toBe(verifiedUrl)
   })
   it('excludes the same comparison once the real evaluation date passes its review window', async () => {
-    const raw = fixture(true), entry = acceptance(raw)
+    const raw = fixture(true), reviewAfter = raw.programs[0].reviewAfter
+    addFixturePublicCore(raw, raw.programs[0], today)
+    raw.programs[0].reviewAfter = reviewAfter
+    const entry = acceptance(raw)
     vi.spyOn(store, 'readIdentityAcceptances').mockReturnValue([entry])
+    expect(await new JsonCatalogRepository(async () => raw).comparePrograms(['program'])).toMatchObject({ data: { items: [{ program: { id: 'program' } }] } })
     vi.setSystemTime(new Date('2026-11-11T01:00:00.000Z'))
     const result = await new JsonCatalogRepository(async () => raw).comparePrograms(['program'])
     expect(result).toMatchObject({ data: { items: [], missingIds: ['program'] } })

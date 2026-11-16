@@ -1,5 +1,6 @@
 import { Buffer } from 'node:buffer'
 import { createHash } from 'node:crypto'
+import { PUBLIC_PROGRAM_QUALITY_POLICY } from '@/lib/data/public-program-quality'
 
 export type CursorResource = 'institutions' | 'programs' | 'scholarships'
 
@@ -54,7 +55,7 @@ export function cursorQueryFingerprint(resource: CursorResource, query: object):
     .sort(([left], [right]) => left.localeCompare(right))
 
   return createHash('sha256')
-    .update(JSON.stringify([resource, entries]), 'utf8')
+    .update(JSON.stringify([PUBLIC_PROGRAM_QUALITY_POLICY, resource, entries]), 'utf8')
     .digest('base64url')
 }
 

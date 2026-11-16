@@ -8,6 +8,7 @@ import { matchesUniversityRankings, rankingFilterKeys } from '@/lib/data/ranking
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { CatalogApiService } from '@/lib/catalog-api/service'
 import { getPublicCatalogSnapshot } from './public-snapshot'
+import { PUBLIC_PROGRAM_QUALITY_POLICY } from '@/lib/data/public-program-quality'
 import { readValidatedCatalogBundle } from '@/lib/data/raw-snapshot'
 import { freezeSnapshot } from '@/lib/data/file-snapshot'
 import { selectLatestTuitionReference } from '@/lib/data/admission'
@@ -89,7 +90,7 @@ function queryFingerprint(
       && value !== undefined
     ))
     .sort(([left], [right]) => left.localeCompare(right))
-  return JSON.stringify([resource, entries])
+  return JSON.stringify([PUBLIC_PROGRAM_QUALITY_POLICY, resource, entries])
 }
 
 function requestedPage(

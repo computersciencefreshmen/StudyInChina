@@ -16,14 +16,16 @@ describe('scoped identity receipt deployment traces', () => {
   it('keeps receipt ancestors traversable by the Vercel input collector', () => {
     const collector = ignore().add('.env.local\n.env.*.local\n' + readFileSync(resolve(process.cwd(), '.vercelignore'), 'utf8'))
     for (const receipt of ['quality/minimum-one/2026-10-27/batch009/identity-import-receipt.json',
-      'quality/maintenance/batches/future-batch/identity-receipt.json']) {
+      'quality/maintenance/batches/future-batch/identity-receipt.json',
+      'quality/reviewed-nenu-2027-20261116/identity-receipt.json']) {
       const parts = receipt.split('/')
       // Vercel's collector checks directory paths without a trailing slash.
       for (let i = 1; i <= parts.length; i++) expect(collector.ignores(parts.slice(0, i).join('/')), receipt).toBe(false)
     }
     for (const path of ['quality/minimum-one/2026-10-27/batch009/export.json',
       'quality/minimum-one/2026-10-27/batch009/raw/source.bin', 'quality/maintenance/batches/future-batch/raw/source.html',
-      'quality/minimax-harvest/model-output.json', '.pipeline-build/private/source.bin', '.env.local']) expect(collector.ignores(path), path).toBe(true)
+      'quality/minimax-harvest/model-output.json', 'quality/reviewed-nenu-2027-20261116/review.json',
+      'quality/reviewed-nenu-2027-20261116/source.pdf', '.pipeline-build/private/source.bin', '.env.local']) expect(collector.ignores(path), path).toBe(true)
   })
   it('packages every current scoped receipt and both supported future writer layouts', () => {
     const ledger = JSON.parse(readFileSync(resolve(process.cwd(), 'content/data/identity-acceptances.json'), 'utf8')) as
@@ -36,6 +38,7 @@ describe('scoped identity receipt deployment traces', () => {
   it('does not expand receipt inclusion to captures, exports, private tools or credentials', () => {
     for (const path of ['quality/minimum-one/2026-10-27/batch007/source.pdf',
       'quality/minimum-one/2026-10-27/batch007/export.json', 'quality/maintenance/batches/future-batch/raw/source.html',
+      'quality/reviewed-nenu-2027-20261116/review.json', 'quality/reviewed-nenu-2027-20261116/source.pdf',
       '.pipeline-build/private/identity-import-receipt.json', '.official-harvest/raw/source.pdf', '.env.local']) expect(bundled(path), path).toBe(false)
     expect(includes['/api/v1/minimax-verification']).toContain('./content/verification/minimax.json')
   })

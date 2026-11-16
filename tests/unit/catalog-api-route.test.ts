@@ -3,6 +3,7 @@ import { GET as listPrograms } from '@/app/api/v1/programs/route'
 import { GET as getCurrentRelease } from '@/app/api/v1/releases/current/route'
 import { createCatalogRepository } from '@/lib/catalog'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
+import { selectDetailedPublicPrograms } from '@/lib/data/public-program-quality'
 import * as catalogApiRuntime from '@/lib/catalog-api/runtime'
 import { CatalogApiService, releaseFromBundle } from '@/lib/catalog-api/service'
 import { getTodayDate } from '@/lib/data/freshness'
@@ -98,10 +99,8 @@ describe('catalog API routes', () => {
     vi.useFakeTimers({ toFake: ['Date'] })
     vi.setSystemTime(new Date('2026-10-28T04:00:00Z'))
     const repository = createCatalogRepository()
-    const publicBundle = selectCatalogApiData(
-      await repository.getBundle(),
-      getTodayDate(),
-    )
+    const raw = await repository.getBundle()
+    const publicBundle = selectDetailedPublicPrograms(selectCatalogApiData(raw, getTodayDate()), getTodayDate(), raw)
     const response = await getCurrentRelease()
     const body = await response.json()
 

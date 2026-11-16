@@ -3,7 +3,7 @@ import { createCatalogRepository, deriveCatalogRelease, getCatalogRecordCounts, 
 import { getTodayDate } from '@/lib/data/freshness'
 import { discoveryCounts, selectDiscoveryData } from '@/lib/data/discovery'
 import { directoryRevision } from '@/lib/catalog/directory-revision'
-import { getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
+import { assertPublicProgramQualityBackend, getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
 import { directoryCoverage } from '@/lib/data/directory-coverage'
 import { CatalogApiService, type InstitutionQuery, type ProgramQuery, type ScholarshipQuery } from './service'
 import { selectCatalogApiData } from './projection'
@@ -30,6 +30,7 @@ function releaseInfo(release: Awaited<ReturnType<CatalogRepository['getRelease']
 
 function getRepository() {
   repository ??= createCatalogRepository()
+  assertPublicProgramQualityBackend(repository.mode)
   return repository
 }
 

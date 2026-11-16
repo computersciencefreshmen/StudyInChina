@@ -13,7 +13,9 @@ const actualApplicability = 'Computer Science Department of Computer Science and
 let bundle: DataBundle, scope: MaintenanceScope
 beforeAll(async () => {
   vi.stubGlobal('crypto', webcrypto)
-  const original = loadMaintenanceBundle(process.cwd()), program = original.programs.find(p => p.id === 'program-tsinghua-university-computer-science-bachelor')!
+  const original = loadMaintenanceBundle(process.cwd()), program = structuredClone(original.programs.find(p => p.id === 'program-tsinghua-university-computer-science-bachelor')!)
+  // These are evidence-specificity tests for filling a missing language leaf.
+  program.teachingLanguages = []
   scope = await buildMaintenanceScope(original, { scopeId: 'teaching-language-tests', createdAt: capturedAt })
   bundle = { ...original, programs: [program], admissionCycles: [], scholarships: [] }
 })

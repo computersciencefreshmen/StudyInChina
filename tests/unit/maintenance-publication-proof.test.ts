@@ -4,11 +4,13 @@ import type { CanonicalMaintenanceReceipt } from '../../scripts/automation/prepa
 import { resolve } from 'node:path'
 import { createHash } from 'node:crypto'
 import { canonicalJson } from '../../scripts/maintenance/contracts'
+import type { AdmissionCycle, Program } from '../../src/lib/data/types'
 
 const ledgers = vi.hoisted(() => ({ identities: vi.fn(() => []), fields: vi.fn(() => []), revision: vi.fn(() => '7'.repeat(64)),
-  raw: { admissionCycles: [] as Array<{ id: string; programId: string }> }, programs: [] as Array<{ id: string; slug: string }> }))
+  raw: { admissionCycles: [] as AdmissionCycle[], programs: [] as Program[], scholarships: [] }, programs: [] as Program[] }))
 vi.mock('../../scripts/maintenance/build-scope', () => ({ loadMaintenanceBundle: () => ledgers.raw }))
-vi.mock('../../src/lib/data/discovery', () => ({ selectDiscoveryData: () => ({ universities: [{ id: 'uni-proof', slug: 'uni-proof' }], programs: ledgers.programs, scholarships: [] }) }))
+vi.mock('../../src/lib/data/discovery', () => ({ selectDiscoveryData: () => ({ sources: [{ id: 'official', official: true }], cities: [],
+  universities: [{ id: 'uni-proof', slug: 'uni-proof' }], programs: ledgers.programs, scholarships: [], admissionCycles: ledgers.raw.admissionCycles }) }))
 vi.mock('../../src/lib/data/identity-acceptance-store', () => ({ readIdentityAcceptances: ledgers.identities }))
 vi.mock('../../src/lib/data/field-verification-store', () => ({ readFieldVerifications: ledgers.fields }))
 vi.mock('../../src/lib/catalog/directory-revision', () => ({ directoryRevision: ledgers.revision }))
@@ -23,7 +25,7 @@ vi.mock('node:fs', async importOriginal => {
   }
   return { ...mock, default: mock }
 })
-beforeEach(() => { local.files.clear(); ledgers.raw.admissionCycles.length = 0; ledgers.programs.length = 0
+beforeEach(() => { local.files.clear(); ledgers.raw.admissionCycles.length = 0; ledgers.raw.programs.length = 0; ledgers.programs.length = 0
   ledgers.identities.mockClear(); ledgers.fields.mockClear(); ledgers.revision.mockClear() })
 
 const commit = 'a'.repeat(40), project = 'prj_AgYJcsuat4kmLiinlvcBbZsYY3cg', owner = 'team_o5qghzfTOk24QwoYANzJ8hNH'
@@ -35,7 +37,17 @@ const receipt: CanonicalMaintenanceReceipt = {
   acceptedProposalIds: ['proposal-one'], held: [], identityReceiptSha256: '1'.repeat(64),
   scholarshipReceiptSha256: '2'.repeat(64), fieldReceiptSha256: '3'.repeat(64),
 }
-function fixture(options: { wrongCommit?: boolean; duplicate?: boolean; wrongDate?: boolean; wrongRevision?: boolean; revisionChangesOnPageTwo?: boolean } = {}) {
+function coreProgram(complete = true) {
+  const audit = { sourceIds: ['official'], status: 'verified' as const, verifiedAt: '2026-10-24', reviewAfter: '2026-11-01' }
+  ledgers.raw.admissionCycles.push({ ...audit, id: 'cycle-proof', programId: 'program-proof', academicYear: '2026-2027', intake: 'other',
+    closesOn: '2027-06-25', opensOn: null, dateStatus: 'published', tuitionCny: null, applicationFeeCny: null, factScope: 'partial' })
+  const program: Program = { ...audit, id: 'program-proof', slug: 'program-proof-slug', universityId: 'uni-proof', name: { en: 'Fine Arts' },
+    degreeLevel: 'bachelor', discipline: 'art-design', teachingLanguages: ['Chinese'], durationMonths: 48,
+    programUrl: 'https://fixture.edu/program', applyUrl: 'https://fixture.edu/apply', languageRequirements: [{ test: 'HSK', minimum: '5' }],
+    ...(complete ? { supplementaryDetails: { eligibility: [{ en: 'High-school graduate' }] } } : {}) }
+  ledgers.programs.push(program); ledgers.raw.programs.push(program)
+}
+function fixture(options: { wrongCommit?: boolean; duplicate?: boolean; wrongDate?: boolean; wrongRevision?: boolean; revisionChangesOnPageTwo?: boolean; hiddenProgram?: boolean; exposedHiddenProgram?: boolean } = {}) {
   return vi.fn<typeof fetch>().mockImplementation(async (input, init) => {
     const url = new URL(String(input))
     expect(init?.redirect).toBe('error')
@@ -47,9 +59,10 @@ function fixture(options: { wrongCommit?: boolean; duplicate?: boolean; wrongDat
     expect(url.origin).toBe('https://studyinchina.vercel.app')
     expect(init?.headers).toBeUndefined() // provider credentials never accompany a public readback
     if (url.pathname === '/api/v1/releases/current') return Response.json({ data: { evaluatedForDate: '2026-10-24', catalogBackend: 'json', directoryRevision: '7'.repeat(64) } })
-    if (/^\/(?:en|zh|ru|de|fr|es)\/programs\//u.test(url.pathname)) return new Response('<h1>Program</h1><div data-discovery-notice>Official source</div>')
+    if (/^\/(?:en|zh|ru|de|fr|es)\/programs\//u.test(url.pathname)) return new Response('<h1>Program</h1><div data-discovery-notice>Official source</div>',
+      { status: options.hiddenProgram && !options.exposedHiddenProgram ? 404 : 200 })
     return Response.json({ data: url.pathname.endsWith('/institutions') ? options.duplicate ? [{ id: 'uni-proof' }, { id: 'uni-proof' }] : [{ id: 'uni-proof' }] : [],
-      ...(!url.pathname.endsWith('/institutions') && url.pathname.endsWith('/programs') ? { data: ledgers.programs.map(program => ({ id: program.id })) } : {}),
+      ...(!url.pathname.endsWith('/institutions') && url.pathname.endsWith('/programs') ? { data: options.hiddenProgram ? [] : ledgers.programs.map(program => ({ id: program.id })) } : {}),
       meta: { release: { evaluatedForDate: options.wrongDate ? '2026-10-23' : '2026-10-24',
         directoryRevision: options.wrongRevision || options.revisionChangesOnPageTwo && url.searchParams.has('cursor') ? '8'.repeat(64) : '7'.repeat(64) },
         nextCursor: options.revisionChangesOnPageTwo && url.pathname.endsWith('/institutions') && !url.searchParams.has('cursor') ? 'page-two' : null } })
@@ -106,13 +119,23 @@ describe('production publication proof before acknowledgement', () => {
     expect(result.checks).toContain('projection-revision')
     expect(result.directoryRevision).toBe('7'.repeat(64))
   })
-  it('checks the parent programme detail in all six languages after an admission-cycle field patch', async () => {
-    ledgers.raw.admissionCycles.push({ id: 'cycle-proof', programId: 'program-proof' })
-    ledgers.programs.push({ id: 'program-proof', slug: 'program-proof-slug' })
+  it('checks the core-complete parent programme detail in all six languages after an admission-cycle field patch', async () => {
+    coreProgram()
     local.files.set(resolve(process.cwd(), 'quality', 'maintenance', 'batches', receipt.batchId, 'field-receipt.json'), JSON.stringify({ accepted: [{ recordId: 'cycle-proof', fieldPaths: ['closesOn'] }] }))
     const fetcher = fixture(), result = await verifyMaintenancePublication({ root: process.cwd(), sourceCommit: commit, receipt, vercelToken: token, fetcher })
     expect(result.detailsChecked).toBe(6)
     expect(fetcher.mock.calls.filter(([url]) => String(url).includes('/programs/program-proof-slug'))).toHaveLength(6)
+  })
+  it('proves a changed incomplete programme stays absent in all locales and refuses a public-detail leak before ACK', async () => {
+    coreProgram(false)
+    local.files.set(resolve(process.cwd(), 'quality', 'maintenance', 'batches', receipt.batchId, 'identity-receipt.json'), JSON.stringify({ accepted: [{ recordId: 'program-proof' }] }))
+    const result = await verifyMaintenancePublication({ root: process.cwd(), sourceCommit: commit, receipt, vercelToken: token, fetcher: fixture({ hiddenProgram: true }) })
+    expect(result).toMatchObject({ directoryCounts: { programs: 0 }, detailsChecked: 0, hiddenProgramDetailsChecked: 6,
+      publicProgramQualityPolicy: 'studyinchina.public-program-core.v1' })
+    const acknowledge = vi.fn()
+    await expect(publishMaintenanceProof({ root: process.cwd(), sourceCommit: commit, receipt, vercelToken: token, output: 'leak-proof.json',
+      fetcher: fixture({ hiddenProgram: true, exposedHiddenProgram: true }), acknowledge })).rejects.toThrow('publication_hidden_program_visible')
+    expect(acknowledge).not.toHaveBeenCalled()
   })
   it('refuses a saved old proof that never validated the projection revision', async () => {
     const output = 'old-revision-proof.json'
