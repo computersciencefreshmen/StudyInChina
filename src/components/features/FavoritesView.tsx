@@ -16,6 +16,7 @@ import type {
 import { formatCny, formatDate, localize } from '@/lib/data/format'
 import { formatProgramDuration } from '@/lib/data/duration'
 import { getApplicationState, type ApplicationState } from '@/lib/data/admission'
+import { isCurrentAdmissionYear, trackMatchesProgram } from '@/lib/data/cycle-scope'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
 import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { MAX_COMPARE } from '@/lib/favorites'
@@ -34,6 +35,8 @@ type ComparisonResponse = ApiEnvelope<{
   items: ComparisonItem[]
   missingIds: string[]
 }>
+
+type LoadedComparisonItem = ComparisonItem & { evaluatedForDate?: string }
 
 type FavoritesExperience = {
   loadError: string
@@ -65,7 +68,7 @@ function safeHttpsUrl(value: string | null | undefined): string | null {
   if (!value) return null
   try {
     const url = new URL(value)
-    return url.protocol === 'https:' ? url.toString() : null
+    return url.protocol === 'https:' && !url.username && !url.password ? url.toString() : null
   } catch {
     return null
   }
@@ -101,26 +104,39 @@ function comparisonFactStatus(
   field: string,
   value: unknown,
   today: string,
+  evaluatedForDate?: string,
   parentNeedsReview = false,
 ): FactStatus {
-  if (parentNeedsReview || (record && !isCurrentVerifiedRecord(record, today))) return 'stale'
-  const status = record?.fieldMeta[field]?.status
-  if (status && status !== 'known') return status
+  const meta = record?.fieldMeta[field]
+  if (meta && meta.status !== 'known') return meta.status
+  // The server has checked the leaf's review period. That proof lasts only for
+  // its China calendar day, even if an old response survives a failed refetch.
+  const checkedTime = meta ? Date.parse(meta.checkedAt) : NaN
+  const checkedDay = Number.isFinite(checkedTime)
+    ? /^\d{4}-\d{2}-\d{2}$/.test(meta!.checkedAt) ? meta!.checkedAt
+      : new Date(checkedTime + 8 * 3_600_000).toISOString().slice(0, 10)
+    : null
+  const checkedNotFuture = checkedDay !== null && checkedDay <= today
+    && (meta!.checkedAt.length === 10 || checkedTime <= Date.now())
+  if (meta && !checkedNotFuture) return 'stale'
+  const wholeCurrent = record && !parentNeedsReview && isCurrentVerifiedRecord(record, today) && record.verifiedAt <= today
+  const independentLeaf = evaluatedForDate === today && meta?.status === 'known' && checkedNotFuture
+  if (!wholeCurrent && !independentLeaf && (record || parentNeedsReview)) return 'stale'
   return value === null || value === undefined || value === '' ? 'officially_not_announced' : 'known'
 }
 
 /** API states are snapshots; date fields must be re-evaluated while a tab stays open. */
-function currentApplicationState(cycle: AdmissionCycleRecord | null, today: string): ApplicationState {
+function currentApplicationState(cycle: AdmissionCycleRecord | null, today: string, evaluatedForDate?: string, parentNeedsReview = false): ApplicationState {
   if (!cycle?.dateStatus) return 'not-announced'
-  const unsafeStatuses = new Set(['conflict', 'source_unavailable', 'stale'])
-  for (const field of ['dateStatus', 'opensOn', 'closesOn']) {
-    const status = cycle.fieldMeta[field]?.status
-    if (status && unsafeStatuses.has(status)) return 'not-announced'
+  const known = (field: 'dateStatus' | 'opensOn' | 'closesOn') => comparisonFactStatus(cycle, field, cycle[field], today, evaluatedForDate, parentNeedsReview) === 'known'
+  if (!known('dateStatus')) return 'not-announced'
+  for (const field of ['opensOn', 'closesOn'] as const) {
+    if (cycle[field] && !known(field)) return 'not-announced'
+    if (cycle.fieldMeta[field] && ['conflict', 'source_unavailable', 'stale'].includes(cycle.fieldMeta[field].status)) return 'not-announced'
   }
-  if (cycle.fieldMeta.dateStatus && cycle.fieldMeta.dateStatus.status !== 'known') return 'not-announced'
+  if (cycle.dateStatus === 'published' && cycle.opensOn && cycle.opensOn <= today && !known('closesOn')) return 'not-announced'
   const permittedDate = (field: 'opensOn' | 'closesOn') => {
-    const meta = cycle.fieldMeta[field]
-    return !meta || meta.status === 'known' ? cycle[field] : null
+    return known(field) ? cycle[field] : null
   }
   return getApplicationState({
     ...cycle,
@@ -132,7 +148,7 @@ function currentApplicationState(cycle: AdmissionCycleRecord | null, today: stri
   }, today)
 }
 
-function applicationStateLabel(cycle: AdmissionCycleRecord | null, messages: Messages, today: string): string {
+function applicationStateLabel(cycle: AdmissionCycleRecord | null, messages: Messages, today: string, evaluatedForDate?: string, parentNeedsReview = false): string {
   const labels = {
     open: messages.common.openNow,
     upcoming: messages.programs.upcoming,
@@ -142,7 +158,7 @@ function applicationStateLabel(cycle: AdmissionCycleRecord | null, messages: Mes
     'not-announced': messages.programs.notAnnounced,
     'previous-cycle': messages.programs.previousCycle,
   }
-  return labels[currentApplicationState(cycle, today)]
+  return labels[currentApplicationState(cycle, today, evaluatedForDate, parentNeedsReview)]
 }
 
 export function FavoritesView({
@@ -154,7 +170,7 @@ export function FavoritesView({
 }) {
   const { favorites, ready } = useFavorites()
   const [selected, setSelected] = useState<string[]>([])
-  const [items, setItems] = useState<ComparisonItem[]>([])
+  const [items, setItems] = useState<LoadedComparisonItem[]>([])
   const [missingIds, setMissingIds] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState(false)
@@ -212,7 +228,9 @@ export function FavoritesView({
             .map((ids) => fetchComparison(ids, controller.signal)),
         )
         if (controller.signal.aborted) return
-        const returnedItems = responses.flatMap((response) => response.data.items)
+        const returnedItems = responses.flatMap((response) => response.data.items.map(item => ({
+          ...item, evaluatedForDate: response.meta?.release?.evaluatedForDate,
+        })))
         const byId = new Map(returnedItems.map((item) => [item.program.id, item]))
         setItems(favorites.flatMap((id) => byId.get(id) ? [byId.get(id)!] : []))
         setMissingIds([
@@ -287,18 +305,31 @@ export function FavoritesView({
         <Button className="no-print" variant="ghost" onClick={() => window.print()}>{messages.common.print}</Button>
       </div>
       <div className="compare-grid">
-        {compared.map(({ program, currentCycle, linkedScholarshipCount }) => {
+        {compared.map(({ program, currentCycle, linkedScholarshipCount, evaluatedForDate }) => {
           const programNeedsReview = !isCurrentVerifiedRecord(program, today)
           const cycleNeedsReview = Boolean(currentCycle && !isCurrentVerifiedRecord(currentCycle, today))
           const needsReview = programNeedsReview || cycleNeedsReview
+          const programStatus = (field: string, value: unknown) => comparisonFactStatus(program, field, value, today, evaluatedForDate)
+          const cycleStatus = (field: string, value: unknown) => comparisonFactStatus(currentCycle, field, value, today, evaluatedForDate, programNeedsReview)
           const currentTuition = currentCycle?.dateStatus !== 'previous-cycle-reference'
-            && (currentCycle?.tuitionStatus ?? 'confirmed') === 'confirmed'
+            && currentCycle?.tuitionStatus === 'confirmed'
+            && cycleStatus('tuitionStatus', currentCycle.tuitionStatus) === 'known'
+            && cycleStatus('tuitionPeriod', currentCycle.tuitionPeriod) === 'known'
             ? currentCycle?.tuitionCny : null
-          const applicationState = currentApplicationState(currentCycle, today)
-          const canApply = !needsReview
-            && comparisonFactStatus(program, 'applyUrl', program.applyUrl, today) === 'known'
-            && (applicationState === 'open' || applicationState === 'rolling')
-          const applyHref = canApply ? safeHttpsUrl(program.applyUrl) : null
+          const applicationState = currentApplicationState(currentCycle, today, evaluatedForDate, programNeedsReview)
+          const matchingCycle = currentCycle?.programId === program.id
+            && isCurrentAdmissionYear(currentCycle.academicYear, today)
+            && trackMatchesProgram(currentCycle, program.teachingLanguages)
+            && cycleStatus('academicYear', currentCycle.academicYear) === 'known'
+            && programStatus('teachingLanguages', program.teachingLanguages?.length ? program.teachingLanguages : null) === 'known'
+          const annualRoute = matchingCycle && cycleStatus('applyUrl', currentCycle?.applyUrl) === 'known'
+            ? safeHttpsUrl(currentCycle?.applyUrl) : null
+          // Preserve the legacy whole-current, unscoped contract. A partial
+          // annual/track review can never borrow its parent's application URL.
+          const legacyRoute = matchingCycle && !needsReview && !currentCycle?.teachingLanguage && !currentCycle?.applicationRound
+            && programStatus('applyUrl', program.applyUrl) === 'known' ? safeHttpsUrl(program.applyUrl) : null
+          const applyHref = applicationState === 'open' || applicationState === 'rolling' ? annualRoute ?? legacyRoute : null
+          const duration = { ...program, durationMonthsMax: programStatus('durationMonthsMax', program.durationMonthsMax) === 'known' ? program.durationMonthsMax : null }
           const sourceHref = currentCycle?.officialSources
             .map((source) => safeHttpsUrl(source.url)).find(Boolean)
             ?? program.officialSources.map((source) => safeHttpsUrl(source.url)).find(Boolean)
@@ -310,13 +341,13 @@ export function FavoritesView({
             <dl className="compare-facts">
               <div><dt>{copy.university}</dt><dd>{localize(program.university.name, locale)}</dd></div>
               <div><dt>{messages.programs.degree}</dt><dd>{degreeLabels(locale)[program.degreeLevel]}</dd></div>
-              <div><dt>{messages.common.language}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(program, 'teachingLanguages', program.teachingLanguages?.length ? program.teachingLanguages : null, today)} value={program.teachingLanguages?.length ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ') : undefined} /></dd></div>
-              <div><dt>{messages.common.duration}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(program, program.durationText ? 'durationText' : 'durationMonths', program.durationText ?? program.durationMonths, today)} value={durationLabel(program, locale, messages)} /></dd></div>
-              <div><dt>{messages.programs.applicationStatus}</dt><dd>{needsReview ? messages.common.stale : applicationStateLabel(currentCycle, messages, today)}</dd></div>
+              <div><dt>{messages.common.language}</dt><dd><FactValue locale={locale} status={programStatus('teachingLanguages', program.teachingLanguages?.length ? program.teachingLanguages : null)} value={program.teachingLanguages?.length ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ') : undefined} /></dd></div>
+              <div><dt>{messages.common.duration}</dt><dd><FactValue locale={locale} status={programStatus(program.durationText ? 'durationText' : 'durationMonths', program.durationText ?? program.durationMonths)} value={durationLabel(duration, locale, messages)} /></dd></div>
+              <div><dt>{messages.programs.applicationStatus}</dt><dd>{needsReview && applicationState === 'not-announced' ? messages.common.stale : applicationStateLabel(currentCycle, messages, today, evaluatedForDate, programNeedsReview)}</dd></div>
               <div><dt>{decision.currentCycle}</dt><dd>{currentCycle?.academicYear ?? messages.common.unknown}</dd></div>
-              <div><dt>{messages.common.tuition}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(currentCycle, 'tuitionCny', currentTuition, today, programNeedsReview)} value={currentTuition == null ? undefined : tuitionLabel(currentCycle, locale, messages)} /></dd></div>
-              <div><dt>{messages.programs.fee}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(currentCycle, 'applicationFeeCny', currentCycle?.applicationFeeCny, today, programNeedsReview)} value={currentCycle?.applicationFeeCny == null ? undefined : formatCny(currentCycle.applicationFeeCny, locale, messages.common.unknown)} /></dd></div>
-              <div><dt>{messages.common.deadline}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(currentCycle, 'closesOn', currentCycle?.closesOn, today, programNeedsReview)} value={currentCycle?.closesOn ? <time dateTime={currentCycle.closesOn}>{formatDate(currentCycle.closesOn, locale, messages.common.unknown)}</time> : undefined} /></dd></div>
+              <div><dt>{messages.common.tuition}</dt><dd><FactValue locale={locale} status={cycleStatus('tuitionCny', currentTuition)} value={currentTuition == null ? undefined : tuitionLabel(currentCycle, locale, messages)} /></dd></div>
+              <div><dt>{messages.programs.fee}</dt><dd><FactValue locale={locale} status={cycleStatus('applicationFeeCny', currentCycle?.applicationFeeCny)} value={currentCycle?.applicationFeeCny == null ? undefined : formatCny(currentCycle.applicationFeeCny, locale, messages.common.unknown)} /></dd></div>
+              <div><dt>{messages.common.deadline}</dt><dd><FactValue locale={locale} status={cycleStatus('closesOn', currentCycle?.closesOn)} value={currentCycle?.closesOn ? <time dateTime={currentCycle.closesOn}>{formatDate(currentCycle.closesOn, locale, messages.common.unknown)}</time> : undefined} /></dd></div>
               <div><dt>{experience.linkedScholarships}</dt><dd>{linkedScholarshipCount.toLocaleString(locale)}</dd></div>
               <div><dt>{messages.common.lastVerified}</dt><dd><time dateTime={program.verifiedAt}>{formatDate(program.verifiedAt, locale, '—')}</time></dd></div>
               <div><dt>{trust.reviewDue}</dt><dd><time dateTime={reviewDue}>{formatDate(reviewDue, locale, '—')}</time></dd></div>

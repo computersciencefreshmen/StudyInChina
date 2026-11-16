@@ -8,6 +8,7 @@ import { FavoritesView } from '@/components/features/FavoritesView'
 import { getMessages } from '@/i18n/messages'
 import * as freshness from '@/lib/data/freshness'
 import { FAVORITES_KEY } from '@/lib/favorites'
+import type { FieldMeta } from '@/lib/catalog-api/types'
 
 const actualTodayDate = freshness.getTodayDate
 
@@ -74,6 +75,34 @@ function comparisonItem(id: string) {
     },
     linkedScholarshipCount: 2,
   }
+}
+
+function leafComparisonItem(id: string) {
+  const item = comparisonItem(id)
+  const known = (): FieldMeta => ({ status: 'known', officialUrl: 'https://example.edu/reviewed', sourceTitle: 'Annual evidence', checkedAt: '2026-08-01' })
+  return {
+    ...item,
+    program: {
+      ...item.program, status: 'stale', reviewAfter: '2026-08-09', durationMonths: 48, durationMonthsMax: 99,
+      teachingLanguages: ['Chinese'], languageRequirements: [{ test: 'other', minimum: 'UNREVIEWED PARENT CONDITION' }],
+      fieldMeta: { durationMonths: known(), teachingLanguages: known(), applyUrl: known() } as Record<string, FieldMeta>,
+    },
+    currentCycle: {
+      ...item.currentCycle, status: 'stale', reviewAfter: '2026-08-09', teachingLanguage: 'Chinese', applicationRound: 'self-funded',
+      applyUrl: `https://annual.example.edu/${id}` as string | null,
+      eligibility: [{ en: 'UNREVIEWED CYCLE CONDITION' }],
+      fieldMeta: Object.fromEntries(['academicYear', 'dateStatus', 'opensOn', 'closesOn', 'applyUrl'].map(field => [field, known()])) as Record<string, FieldMeta>,
+    },
+  }
+}
+
+function mockComparisonItems(items: unknown[], evaluatedForDate: string | null) {
+  const mock = vi.fn(async () => ({
+    ok: true, status: 200,
+    json: async () => ({ data: { items, missingIds: [] }, meta: evaluatedForDate ? { release: { evaluatedForDate } } : {} }),
+  }) as Response)
+  vi.stubGlobal('fetch', mock)
+  return mock
 }
 
 beforeEach(() => {
@@ -292,6 +321,125 @@ describe('favorites comparison workspace', () => {
     await user.click(await screen.findByRole('checkbox'))
     expect(screen.queryByRole('link', { name: /Apply on official site/ })).not.toBeInTheDocument()
     expect(screen.getAllByText(getMessages('en').programs.notAnnounced)).toHaveLength(2)
+  })
+
+  it('shows independently reviewed leaves and the own annual route without renewing their stale parents or siblings', async () => {
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+    const item = leafComparisonItem(ids[0]), before = JSON.stringify(item)
+    mockComparisonItems([item], '2026-08-10')
+    render(<FavoritesView locale="en" messages={getMessages('en')} />)
+    await userEvent.setup().click(await screen.findByRole('checkbox'))
+
+    expect(screen.getByText('Chinese')).toBeVisible()
+    expect(screen.getByText('48 months')).toBeVisible()
+    expect(screen.getByText('Dec 1, 2026')).toBeVisible()
+    expect(screen.getByText('Open now')).toBeVisible()
+    expect(screen.getByRole('link', { name: /Apply on official site/ })).toHaveAttribute('href', `https://annual.example.edu/${ids[0]}`)
+    expect(screen.getByRole('link', { name: /Official source/ })).toHaveAttribute('href', `https://example.edu/${ids[0]}/admissions`)
+    expect(screen.queryByText(/99 months|CN¥\s*30,000|CN¥\s*600|UNREVIEWED/)).not.toBeInTheDocument()
+    expect(JSON.stringify(item)).toBe(before)
+    expect(item.program.status).toBe('stale')
+    expect(item.currentCycle.status).toBe('stale')
+  })
+
+  it.each([null, '2026-08-09', '2026-08-11'])('does not promote stale leaves from a missing, old, or future server day (%s)', async evaluatedForDate => {
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+    mockComparisonItems([leafComparisonItem(ids[0])], evaluatedForDate)
+    render(<FavoritesView locale="en" messages={getMessages('en')} />)
+    await userEvent.setup().click(await screen.findByRole('checkbox'))
+    expect(screen.queryByText('Chinese')).not.toBeInTheDocument()
+    expect(screen.queryByText('48 months')).not.toBeInTheDocument()
+    expect(screen.queryByText('Dec 1, 2026')).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /Apply on official site/ })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Official source/ })).toBeVisible()
+  })
+
+  it.each(['source_unavailable', 'conflict'] as const)('holds an explicitly %s leaf while keeping other proven leaves', async status => {
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+    const item = leafComparisonItem(ids[0]); item.program.fieldMeta.durationMonths.status = status
+    mockComparisonItems([item], '2026-08-10')
+    const { container } = render(<FavoritesView locale="en" messages={getMessages('en')} />)
+    await userEvent.setup().click(await screen.findByRole('checkbox'))
+    expect(screen.queryByText('48 months')).not.toBeInTheDocument()
+    expect(screen.getByText('Chinese')).toBeVisible()
+    expect(container.querySelector(`[data-fact-status="${status}"]`)).toBeVisible()
+  })
+
+  it.each(['2026-08-11', '2026-08-10T05:00:00.000Z', 'invalid-date'])('rejects future or invalid leaf checkedAt %s', async checkedAt => {
+    vi.spyOn(Date, 'now').mockReturnValue(Date.parse('2026-08-10T00:00:00.000Z'))
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+    const item = leafComparisonItem(ids[0]); item.program.fieldMeta.durationMonths.checkedAt = checkedAt
+    mockComparisonItems([item], '2026-08-10')
+    render(<FavoritesView locale="en" messages={getMessages('en')} />)
+    await userEvent.setup().click(await screen.findByRole('checkbox'))
+    expect(screen.queryByText('48 months')).not.toBeInTheDocument()
+    expect(screen.getByText('Chinese')).toBeVisible()
+  })
+
+  it.each(['missing-route', 'conflicting-route', 'wrong-program', 'wrong-language', 'previous-year', 'upcoming', 'closed'])(
+    'does not borrow a parent or sibling application route for %s', async scenario => {
+      window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+      const item = leafComparisonItem(ids[0])
+      if (scenario === 'missing-route') item.currentCycle.applyUrl = null
+      if (scenario === 'conflicting-route') item.currentCycle.fieldMeta.applyUrl.status = 'conflict'
+      if (scenario === 'wrong-program') item.currentCycle.programId = 'other-program'
+      if (scenario === 'wrong-language') item.currentCycle.teachingLanguage = 'English'
+      if (scenario === 'previous-year') item.currentCycle.academicYear = '2024-2025'
+      if (scenario === 'upcoming') item.currentCycle.opensOn = '2026-08-20'
+      if (scenario === 'closed') item.currentCycle.closesOn = '2026-08-09'
+      mockComparisonItems([item], '2026-08-10')
+      render(<FavoritesView locale="en" messages={getMessages('en')} />)
+      await userEvent.setup().click(await screen.findByRole('checkbox'))
+      expect(screen.getByText('48 months')).toBeVisible()
+      expect(screen.queryByRole('link', { name: /Apply on official site/ })).not.toBeInTheDocument()
+    },
+  )
+
+  it('does not label a known price with an unreviewed tuition period or status', async () => {
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+    const item = leafComparisonItem(ids[0])
+    item.currentCycle.fieldMeta.tuitionCny = { ...item.currentCycle.fieldMeta.closesOn }
+    mockComparisonItems([item], '2026-08-10')
+    render(<FavoritesView locale="en" messages={getMessages('en')} />)
+    await userEvent.setup().click(await screen.findByRole('checkbox'))
+    expect(screen.getByText('Dec 1, 2026')).toBeVisible()
+    expect(screen.queryByText(/CN¥\s*30,000/)).not.toBeInTheDocument()
+  })
+
+  it('keeps each comparison batch bound to its own evaluation day', async () => {
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(ids))
+    vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
+      const requested = new URL(String(input), 'https://example.test').searchParams.get('ids')!.split(',')
+      return { ok: true, status: 200, json: async () => ({
+        data: { items: requested.map(leafComparisonItem), missingIds: [] },
+        meta: { release: { evaluatedForDate: requested.includes(ids[0]) ? '2026-08-10' : '2026-08-09' } },
+      }) } as Response
+    }))
+    render(<FavoritesView locale="en" messages={getMessages('en')} />)
+    const checkboxes = await screen.findAllByRole('checkbox'), user = userEvent.setup()
+    await user.click(checkboxes[0]); await user.click(checkboxes[4])
+    expect(screen.getAllByText('48 months')).toHaveLength(1)
+    expect(screen.getAllByText('Chinese')).toHaveLength(1)
+    expect(screen.getAllByRole('link', { name: /Apply on official site/ })).toHaveLength(1)
+  })
+
+  it('expires leaf promotion at China midnight even when the refetch returns the old server snapshot', async () => {
+    vi.useFakeTimers(); vi.setSystemTime(new Date('2026-08-10T15:59:59.000Z'))
+    vi.mocked(freshness.getTodayDate).mockImplementation(actualTodayDate)
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+    const item = leafComparisonItem(ids[0]), before = JSON.stringify(item), fetchMock = mockComparisonItems([item], '2026-08-10')
+    await act(async () => { render(<FavoritesView locale="en" messages={getMessages('en')} />) })
+    fireEvent.click(screen.getByRole('checkbox'))
+    expect(screen.getByText('48 months')).toBeVisible()
+    expect(screen.getByText('Dec 1, 2026')).toBeVisible()
+    expect(screen.getByRole('link', { name: /Apply on official site/ })).toBeVisible()
+    await act(async () => { await vi.advanceTimersByTimeAsync(1000) })
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+    expect(screen.queryByText('48 months')).not.toBeInTheDocument()
+    expect(screen.queryByText('Chinese')).not.toBeInTheDocument()
+    expect(screen.queryByText('Dec 1, 2026')).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /Apply on official site/ })).not.toBeInTheDocument()
+    expect(JSON.stringify(item)).toBe(before)
   })
 
   it('refreshes at China midnight and on visibility restoration, then clears timers and listeners', async () => {
