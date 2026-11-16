@@ -23,11 +23,11 @@ type Saved = { version: 1; generation: number; epochSha256: string | null; fence
   idleReason: string; gateRetryAt: number | null; modelDemand: boolean; wakeReason: string | null;
   pendingPlanWindow: number | null; lastPlannedWindow: number | null; quota: { checkedAt: number; model: boolean; expansion: boolean; reason: string; retryAt: number } | null }
 type Repository = {
-  selectRefillCandidates(env: RefillEnv, options: { kind: RefillKind; limit: number; excludeJobIds: string[]; now: number; allowExpansion?: boolean }): Promise<{ fence: RefillFence | null; candidates: RefillCandidate[]; nextDueAt?: string | null }>;
+  selectRefillCandidates(env: RefillEnv, options: { kind: RefillKind; limit: number; excludeJobIds: string[]; now: number; allowExpansion?: boolean }): Promise<{ fence: RefillFence | null; candidates: RefillCandidate[]; nextDueAt?: string | null; scanRetryAt?: string | null }>;
   dispatchRefillCandidates(env: RefillEnv, fence: RefillFence, candidates: RefillCandidate[], options: { now: number; dispatchToken: string; epochSha256: string }): Promise<RefillDispatchResult>;
   planDueCaptureJobs(env: RefillEnv, now: number): Promise<unknown>;
   observeRefillDispatch(env: RefillEnv, dispatchToken: string, jobId: string): Promise<boolean>;
-  readRefillDispatchStatus(env: RefillEnv, dispatchToken: string): Promise<{ entries: Array<{ jobId: string; status: string; epochSha256: string; resolution?: string | null; receivedNotStartedReceiptSha256?: string | null }> }>;
+  readRefillDispatchStatus(env: RefillEnv, dispatchToken: string, options?: { includeJobState?: boolean }): Promise<{ entries: Array<{ jobId: string; status: string; epochSha256: string; resolution?: string | null; receivedNotStartedReceiptSha256?: string | null }> }>;
   declineRefillDispatch(env: RefillEnv, input: { jobId: string; dispatchToken: string; epochSha256: string; reason: string; currentEpochSha256?: string }): Promise<{ declined: boolean; reason: string }>;
 }
 export type RefillDependencies = {
@@ -38,6 +38,7 @@ export type RefillDependencies = {
   decline: Repository['declineRefillDispatch'];
 }
 const fenceFor = (cfg: Control): RefillFence => ({ scopeSha256: cfg.scope_sha256, inputCatalogSha256: cfg.input_catalog_sha256, revision: cfg.revision, canaryJson: cfg.canary_json })
+const TELEMETRY_KEY = 'refill-telemetry-v1'
 const sameFence = (a: RefillFence | null, b: RefillFence | null) => Boolean(a && b && a.scopeSha256 === b.scopeSha256
   && a.inputCatalogSha256 === b.inputCatalogSha256 && a.revision === b.revision && a.canaryJson === b.canaryJson)
 const stopped = (reason: string, now: number, wait = 300_000, fence: RefillFence | null = null): Gate => ({ fence, capture: false, model: false, reason, retryAt: now + wait })
@@ -90,7 +91,7 @@ async function jobs(env: RefillEnv, ids: string[]): Promise<RefillJobState[]> {
 // module. The interface keeps fake storage tests independent of queue egress.
 const defaults: RefillDependencies = { now: Date.now, gate: readRefillGate, jobs,
   select: selectRefillCandidates, dispatch: dispatchRefillCandidates, plan: planDueCaptureJobs,
-  observe: observeRefillDispatch, dispatchStatus: readRefillDispatchStatus, decline: declineRefillDispatch }
+  observe: observeRefillDispatch, dispatchStatus: (env, token) => readRefillDispatchStatus(env, token, { includeJobState: false }), decline: declineRefillDispatch }
 
 /** One independent singleton. In particular, it never opens, deletes, expires or
  * rewrites a request in the ModelAdmission Durable Object. */
@@ -119,7 +120,15 @@ export class CatalogRefillCoordinator {
       used: { capture: 0, model: 0 }, lastRefillAt: null, nextRefillAt: null, idleReason: 'not_started', gateRetryAt: null, modelDemand: false, wakeReason: null,
       pendingPlanWindow: null, lastPlannedWindow: null, quota: null }
   }
-  private async save(saved: Saved) { await this.state.storage.put('refill-v1', saved) }
+  private async save(saved: Saved) {
+    const telemetry = this.telemetry(saved)
+    // The read-only dashboard observes one committed snapshot. A proof scan or
+    // Queue send may take time, but never holds this storage transaction open.
+    await this.state.storage.transaction(async txn => {
+      await txn.put('refill-v1', saved)
+      await txn.put(TELEMETRY_KEY, telemetry)
+    })
+  }
   private async schedule(saved: Saved, at: number) {
     const now = this.deps.now(), next = Math.max(now + REFILL_INTERVAL_MS, at)
     if (saved.nextRefillAt !== null && saved.nextRefillAt <= next && saved.nextRefillAt > now) {
@@ -290,7 +299,7 @@ export class CatalogRefillCoordinator {
         saved.lastPlannedWindow = Math.floor(now / REFILL_WINDOW_MS); saved.pendingPlanWindow = null
         await this.save(saved)
       }
-      let remaining = REFILL_LIMITS.batch, selected = 0, nextDueAt: number | null = null
+      let remaining = REFILL_LIMITS.batch, selected = 0, nextDueAt: number | null = null, scanRetryAt: number | null = null
       const prepared = Object.values(saved.outstanding).filter(entry => entry.phase === 'prepared')
       for (const dispatchToken of new Set(prepared.map(entry => entry.dispatchToken))) {
         const group = Object.values(saved.outstanding).filter(entry => entry.dispatchToken === dispatchToken)
@@ -313,6 +322,10 @@ export class CatalogRefillCoordinator {
         const plan = await this.deps.select(this.env, { kind, limit: room, excludeJobIds: Object.keys(saved.outstanding), now, allowExpansion: current.expansion !== false })
         const due = Date.parse(plan.nextDueAt ?? '')
         if (Number.isFinite(due) && due > now) nextDueAt = Math.min(nextDueAt ?? Infinity, due)
+        const scan = Date.parse(plan.scanRetryAt ?? '')
+        // This is only a bounded scan continuation, never evidence that any
+        // candidate is eligible, due, or admitted for an execution permit.
+        if (Number.isFinite(scan)) scanRetryAt = Math.min(scanRetryAt ?? Infinity, Math.max(now + REFILL_INTERVAL_MS, scan))
         if (!plan.fence || !sameFence(current.fence, plan.fence)) { saved.idleReason = 'selection_epoch_changed'; break }
         if (plan.candidates.length > room || new Set(plan.candidates.map(candidate => candidate.jobId)).size !== plan.candidates.length) throw new Error('refill_selection_invalid')
         if (kind === 'model') saved.modelDemand = plan.candidates.length > 0 || this.counts(saved).pending.model > 0
@@ -342,7 +355,7 @@ export class CatalogRefillCoordinator {
         : counts.pending.model + counts.pending.capture ? now + 60_000 : Math.min(nextDueAt ?? Infinity, now + REFILL_WINDOW_MS)
       // A blocked model window may sleep while capture has no work. Completion
       // notifications preserve this retry boundary rather than a hot loop.
-      await this.schedule(saved, Math.max(wait, saved.gateRetryAt ?? 0))
+      await this.schedule(saved, Math.max(capped ? wait : Math.min(wait, scanRetryAt ?? Infinity), saved.gateRetryAt ?? 0))
     } catch (error) {
       saved.idleReason = isDailyD1QuotaError(error) ? 'd1_quota_wait' : error instanceof Error && error.message === 'dispatch_outcome_unconfirmed' ? error.message : 'refill_backend_unavailable'
       if (isDailyD1QuotaError(error)) {
@@ -385,12 +398,14 @@ export class CatalogRefillCoordinator {
       if (!saved.quota.model || job.stage !== 'maintain' && !saved.quota.expansion) return denied(saved.quota.reason, Math.max(10, Math.ceil((saved.quota.retryAt - now) / 1000)))
     }
     const modelLimit = refillModelLimit(this.env)
-    if (kind === 'capture' && !saved.modelDemand && counts.pending.model === 0) {
+    let modelIdleProven = current.model
+    if (kind === 'capture' && current.model && !saved.modelDemand && counts.pending.model === 0) {
       const backlog = await this.deps.select(this.env, { kind: 'model', limit: 1, excludeJobIds: Object.keys(saved.outstanding), now })
       if (!sameFence(current.fence, backlog.fence)) return denied('refill_selection_epoch_changed', 30)
       saved.modelDemand = backlog.candidates.length > 0
+      modelIdleProven = !backlog.scanRetryAt
     }
-    const captureLimit = saved.modelDemand || counts.pending.model > 0 ? REFILL_LIMITS.capture : REFILL_LIMITS.capture + Math.max(0, modelLimit - counts.inflight.model)
+    const captureLimit = !modelIdleProven || saved.modelDemand || counts.pending.model > 0 ? REFILL_LIMITS.capture : REFILL_LIMITS.capture + Math.max(0, modelLimit - counts.inflight.model)
     if (counts.inflight[kind] >= (kind === 'model' ? modelLimit : captureLimit)) return denied('refill_stage_capacity')
     if (!entry) {
       // Existing ordinary Queue deliveries use the same real execution gate.
@@ -406,12 +421,25 @@ export class CatalogRefillCoordinator {
     return { allowed: true, permitToken: entry.permit.token, reason: 'stage_permit_acquired', retryAfter: 0 }
   }
   async fetch(request: Request): Promise<Response> {
+    if (!this.singleton) return json({ error: 'refill_singleton_required' }, 409)
+    if (!authorized(request, this.env)) return json({ error: 'unauthorized' }, 401)
+    if (this.env.MODEL_STATE_MIGRATION_ROLE === 'source') return json({ error: 'account_migration_frozen' }, 503)
+    const path = new URL(request.url).pathname
+    if (path === '/status' && request.method === 'GET') {
+      // Deliberately outside the mutation serial queue. This cannot grant a
+      // permit, reconcile jobs, wake an alarm or report a new observation time.
+      const snapshot = await this.state.storage.get<ReturnType<CatalogRefillCoordinator['telemetry']>>(TELEMETRY_KEY)
+      if (!snapshot || snapshot.format !== 'studyinchina.continuous-refill' || snapshot.version !== 1) return json({ error: 'refill_telemetry_unavailable' }, 503)
+      // A deployment flag is known now; task counts and timestamps still belong
+      // to the original committed observation and are never relabelled fresh.
+      return json(continuousRefillEnabled(this.env) ? snapshot : { ...snapshot, enabled: false, state: 'disabled',
+        reason: 'continuous_refill_disabled', idleReason: 'continuous_refill_disabled' })
+    }
     return this.serial(async () => {
       if (!this.singleton) return json({ error: 'refill_singleton_required' }, 409)
       if (!authorized(request, this.env)) return json({ error: 'unauthorized' }, 401)
       if (this.env.MODEL_STATE_MIGRATION_ROLE === 'source') return json({ error: 'account_migration_frozen' }, 503)
       const path = new URL(request.url).pathname
-      if (path === '/status' && request.method === 'GET') return json(this.telemetry(await this.load()))
       if (request.method !== 'POST') return json({ error: 'not_found' }, 404)
       const body = record(await requestJson(request))
       if (!body) return json({ error: 'invalid_refill_request' }, 400)

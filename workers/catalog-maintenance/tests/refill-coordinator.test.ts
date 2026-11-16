@@ -92,6 +92,58 @@ test('frozen source RPC and alarms perform zero storage reads, writes, deletes o
   assert.equal(f.counts().gateCalls, 0); assert.equal(f.dispatches.length, 0)
 })
 
+test('status before the first committed observation is unavailable rather than fabricated zero work', async () => {
+  const f = fixture()
+  const result = await f.call('/status')
+  assert.equal(result.status, 503); assert.equal(result.value.error, 'refill_telemetry_unavailable')
+  assert.equal(f.storage.reads, 1); assert.equal(f.storage.writes, 0); assert.equal(f.storage.alarmWrites, 0)
+  assert.equal(f.counts().gateCalls, 0)
+})
+
+test('flag-off status immediately projects disabled while retaining historical evidence without writes', async () => {
+  const f = fixture(); await f.start()
+  const original = (await f.call('/status')).value
+  f.env.CONTINUOUS_REFILL_ENABLED = 'false'; f.advance(90_000)
+  const writes = f.storage.writes, deletes = f.storage.deletes, alarms = f.storage.alarmWrites, calls = f.counts()
+  const disabled = (await f.call('/status')).value
+  assert.equal(disabled.enabled, false); assert.equal(disabled.state, 'disabled')
+  assert.equal(disabled.reason, 'continuous_refill_disabled'); assert.equal(disabled.idleReason, 'continuous_refill_disabled')
+  assert.equal(disabled.observedAt, original.observedAt); assert.deepEqual(disabled.model, original.model)
+  assert.deepEqual(disabled.capture, original.capture); assert.equal(disabled.nextWakeAt, original.nextWakeAt)
+  assert.deepEqual(f.counts(), calls); assert.equal(f.storage.writes, writes); assert.equal(f.storage.deletes, deletes); assert.equal(f.storage.alarmWrites, alarms)
+  assert.deepEqual(await f.storage.get('refill-telemetry-v1'), original)
+})
+
+test('status reads the committed snapshot while selection is blocked; acquire remains ordered behind the mutation', async () => {
+  const f = fixture(); await f.start()
+  for (const id of f.dispatches[0].ids) f.rows.get(id)!.status = 'done'
+  let release!: () => void, entered!: () => void
+  const latch = new Promise<void>(resolve => { release = resolve }), selecting = new Promise<void>(resolve => { entered = resolve })
+  const select = f.deps.select
+  f.deps.select = async (...args) => { entered(); await latch; return select(...args) }
+  f.restart()
+  const alarm = f.alarm(); await selecting
+  const committed = await f.storage.get<Record<string, unknown>>('refill-telemetry-v1')
+  assert.ok(committed)
+  const writes = f.storage.writes, deletes = f.storage.deletes, timers = f.storage.alarmWrites, counts = f.counts()
+  let acquired = false
+  const permit = f.call('/acquire', { jobId: hash(9) }).then(value => { acquired = true; return value })
+  // Advancing the display clock cannot turn an older persisted observation into
+  // freshly measured utilisation or latency. Only a real save observes anew.
+  f.advance(5000)
+  let timeout: ReturnType<typeof setTimeout> | undefined
+  try {
+    const status = await Promise.race([f.call('/status'), new Promise<never>((_resolve, reject) => { timeout = setTimeout(() => reject(Error('status_waited_for_selection')), 1000) })])
+    assert.equal(status.status, 200); assert.deepEqual(status.value, committed)
+    assert.notEqual(status.value.observedAt, new Date(f.now()).toISOString())
+    assert.equal(status.value.refillLatencyP95Ms, null); assert.equal(status.value.modelTaskBusyPercent, null)
+    assert.equal(acquired, false); assert.deepEqual(f.counts(), counts)
+    assert.equal(f.storage.writes, writes); assert.equal(f.storage.deletes, deletes); assert.equal(f.storage.alarmWrites, timers)
+    assert.equal((await f.call('/status', undefined, 'wrong')).status, 401)
+  } finally { if (timeout) clearTimeout(timeout); release(); await alarm; await permit }
+  assert.equal(acquired, true)
+})
+
 test('persists complete selection and send-start before egress; one alarm sends at most eight', async () => {
   const f = fixture()
   await f.start()
@@ -136,6 +188,46 @@ test('capture may borrow idle model slots only when no eligible model backlog ex
   const f = fixture({ models: 0 });
   const results = await Promise.all([1001, 1002, 1003, 1004, 1005].map(n => f.call('/acquire', { jobId: hash(n) })))
   assert.equal(results.filter(r => r.value.allowed).length, 4)
+})
+
+test('an incomplete model proof scan permits two captures without proving idle model slots', async () => {
+  const f = fixture({ models: 0 }), select = f.deps.select
+  f.deps.select = async (...args) => ({ ...await select(...args), scanRetryAt: new Date(f.now() + 10_000).toISOString() })
+  f.restart()
+  const results = await Promise.all([1001, 1002, 1003, 1004].map(n => f.call('/acquire', { jobId: hash(n) })))
+  assert.equal(results.filter(r => r.value.allowed).length, 2)
+  assert.equal((await f.storage.get<{ modelDemand: boolean }>('refill-v1'))!.modelDemand, false)
+  assert.equal(f.dispatches.length, 0)
+})
+
+test('models disabled still permits two captures without invoking the model selector or provider quota', async () => {
+  const f = fixture({ models: 0 }); f.setGate(true, false)
+  let selectors = 0, providerChecks = 0
+  const gate = f.deps.gate
+  f.deps.gate = async (...args) => { if (args[2]) providerChecks++; return gate(...args) }
+  f.deps.select = async () => { selectors++; return { fence: null, candidates: [] } }
+  f.restart()
+  const results = await Promise.all([1001, 1002, 1003].map(n => f.call('/acquire', { jobId: hash(n) })))
+  assert.equal(results.filter(r => r.value.allowed).length, 2)
+  assert.equal(selectors, 0); assert.equal(providerChecks, 0); assert.equal(f.dispatches.length, 0)
+})
+
+test('a scan continuation wakes at least ten seconds later without claiming proven eligibility', async () => {
+  for (const delay of [-1000, 500, 30_000]) {
+    const f = fixture({ models: 0, captures: 0 })
+    let scans = 0
+    f.deps.select = async () => { scans++; return { fence: { ...f.fence }, candidates: [], nextDueAt: new Date(f.now() + 3_600_000).toISOString(), scanRetryAt: new Date(f.now() + delay).toISOString() } }
+    f.restart(); await f.start()
+    assert.equal(f.storage.alarm, f.now() + Math.max(10_000, delay))
+    const saved = (await f.storage.get<{ modelDemand: boolean }>('refill-v1'))!
+    const status = (await f.call('/status')).value
+    assert.equal(saved.modelDemand, false); assert.equal(f.dispatches.length, 0)
+    assert.equal((status.model as { eligible: unknown }).eligible, null)
+    assert.equal(status.reason, 'no_eligible_work')
+    const before = scans
+    await f.call('/wake', { reason: 'completion' }); await f.alarm(1000)
+    assert.equal(scans, before)
+  }
 })
 
 test('completion hints cannot release running, expired-lease or unknown model work', async () => {
