@@ -12,10 +12,14 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
     const fence = { scopeSha256:'1'.repeat(64),inputCatalogSha256:'2'.repeat(64),revision:1,canaryJson:'[]' }
     export class TestRefill extends CatalogRefillCoordinator {
       constructor(state,env) {
+        const latch={blocking:false,entered:null,release:null}
         const jobs = async(_env,ids) => (await env.DB.prepare('SELECT * FROM test_jobs WHERE job_id IN(SELECT value FROM json_each(?))').bind(JSON.stringify(ids)).all()).results.map(row=>({jobId:row.job_id,sourceId:row.source_id,stage:row.stage,status:row.status,attempt:row.attempt,updatedAt:row.updated_at,leaseToken:row.lease_token,leaseUntil:null,protectedModel:row.protected_model===1,inScope:true}))
         super(state,env,{
           now:()=>Date.now(),gate:async()=>({fence,capture:true,model:true,reason:'ready',retryAt:Date.now()}),jobs,
-          select:async(_env,input)=>({fence,candidates:(await env.DB.prepare("SELECT * FROM test_jobs WHERE status IN('queued','retry') ORDER BY job_id").all()).results.filter(row=>(row.stage==='capture')===(input.kind==='capture')&&!input.excludeJobIds.includes(row.job_id)).slice(0,input.limit).map(row=>({jobId:row.job_id,sourceId:row.source_id,stage:row.stage,status:row.status,attempt:row.attempt,updatedAt:row.updated_at,enqueuedAt:null,leaseToken:row.lease_token}))}),
+          select:async(_env,input)=>{
+            if(latch.blocking){latch.blocking=false;let timer;try{await new Promise(resolve=>{latch.release=resolve;timer=setTimeout(resolve,15000);latch.entered()})}finally{clearTimeout(timer)}}
+            return {fence,candidates:(await env.DB.prepare("SELECT * FROM test_jobs WHERE status IN('queued','retry') ORDER BY job_id").all()).results.filter(row=>(row.stage==='capture')===(input.kind==='capture')&&!input.excludeJobIds.includes(row.job_id)).slice(0,input.limit).map(row=>({jobId:row.job_id,sourceId:row.source_id,stage:row.stage,status:row.status,attempt:row.attempt,updatedAt:row.updated_at,enqueuedAt:null,leaseToken:row.lease_token}))}
+          },
           dispatch:async(_env,_fence,candidates,input)=>{
             const saved=await state.storage.get('refill-v1')
             for(const row of candidates){if(saved.outstanding[row.jobId].phase!=='sending'||saved.outstanding[row.jobId].dispatchToken!==input.dispatchToken)throw Error('queue_egress_preceded_durable_intent')}
@@ -24,8 +28,18 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
           },plan:async()=>null,observe:async()=>true,dispatchStatus:async()=>({entries:[]}),decline:async()=>({declined:false,reason:'test_no_decline'})
         })
         this.nativeState=state
+        this.latch=latch
       }
       async fetch(request) {
+        const path=new URL(request.url).pathname
+        if(path==='/test/block-select'){
+          const saved=await this.nativeState.storage.get('refill-v1');saved.nextRefillAt=null;saved.lastRefillAt=null;await this.nativeState.storage.put('refill-v1',saved)
+          this.latch.blocking=true;const entered=new Promise(resolve=>{this.latch.entered=resolve})
+          this.pendingAlarm=super.alarm();this.nativeState.waitUntil(this.pendingAlarm);await entered
+          return Response.json({selectionBlocked:true})
+        }
+        if(path==='/test/unblock-select'){this.latch.release();await this.pendingAlarm;return Response.json({released:true})}
+        if(path==='/test/persisted-pair')return Response.json({state:await this.nativeState.storage.get('refill-v1'),snapshot:await this.nativeState.storage.get('refill-telemetry-v1')})
         if(new URL(request.url).pathname==='/test/alarm'){
           const saved=await this.nativeState.storage.get('refill-v1')
           if(saved){saved.nextRefillAt=null;saved.lastRefillAt=null;await this.nativeState.storage.put('refill-v1',saved)}
@@ -81,6 +95,20 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
     assert.equal(await db.prepare('SELECT status FROM test_jobs WHERE job_id=?').bind(job.job_id).first('status'), 'unknown')
     const final = await call('/status')
     assert.equal((final.model as { inflight: number }).inflight, 2); assert.equal(final.uncertainDeliveries, 1)
+    assert.equal((await call('/test/block-select', {})).selectionBlocked, true)
+    const committed = await call('/test/persisted-pair')
+    const saved = committed.state as { outstanding: Record<string, { kind: string; permit: unknown }> }
+    const snapshot = committed.snapshot as { model: { inflight: number; pending: number } }
+    assert.equal(snapshot.model.inflight, Object.values(saved.outstanding).filter(entry => entry.kind === 'model' && entry.permit !== null).length)
+    assert.equal(snapshot.model.pending + snapshot.model.inflight, Object.values(saved.outstanding).filter(entry => entry.kind === 'model').length)
+    let acquired = false, timeout: ReturnType<typeof setTimeout> | undefined
+    const pending = call('/acquire', { jobId: sent[2].job_id, dispatchToken: sent[2].dispatch_token, epochSha256: sent[2].epoch }).then(result => { acquired = true; return result })
+    try {
+      const fast = await Promise.race([call('/status'), new Promise<never>((_resolve, reject) => { timeout = setTimeout(() => reject(Error('native_status_waited_for_blocked_select')), 3000) })])
+      assert.deepEqual(fast, committed.snapshot); assert.equal(acquired, false)
+      assert.equal(fast.refillLatencyP95Ms, null); assert.equal(fast.modelTaskBusyPercent, null)
+    } finally { if (timeout) clearTimeout(timeout); await call('/test/unblock-select', {}); await pending }
+    assert.equal(acquired, true)
     assert.equal(egress, 0)
     t.diagnostic('Real native DO storage and D1; 8 durable dispatch receipts, 2 actual stage permits, 0 external egress; unknown row unchanged.')
   } finally { await mf.dispose() }

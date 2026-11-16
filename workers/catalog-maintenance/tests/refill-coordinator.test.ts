@@ -92,6 +92,44 @@ test('frozen source RPC and alarms perform zero storage reads, writes, deletes o
   assert.equal(f.counts().gateCalls, 0); assert.equal(f.dispatches.length, 0)
 })
 
+test('status before the first committed observation is unavailable rather than fabricated zero work', async () => {
+  const f = fixture()
+  const result = await f.call('/status')
+  assert.equal(result.status, 503); assert.equal(result.value.error, 'refill_telemetry_unavailable')
+  assert.equal(f.storage.reads, 1); assert.equal(f.storage.writes, 0); assert.equal(f.storage.alarmWrites, 0)
+  assert.equal(f.counts().gateCalls, 0)
+})
+
+test('status reads the committed snapshot while selection is blocked; acquire remains ordered behind the mutation', async () => {
+  const f = fixture(); await f.start()
+  for (const id of f.dispatches[0].ids) f.rows.get(id)!.status = 'done'
+  let release!: () => void, entered!: () => void
+  const latch = new Promise<void>(resolve => { release = resolve }), selecting = new Promise<void>(resolve => { entered = resolve })
+  const select = f.deps.select
+  f.deps.select = async (...args) => { entered(); await latch; return select(...args) }
+  f.restart()
+  const alarm = f.alarm(); await selecting
+  const committed = await f.storage.get<Record<string, unknown>>('refill-telemetry-v1')
+  assert.ok(committed)
+  const writes = f.storage.writes, deletes = f.storage.deletes, timers = f.storage.alarmWrites, counts = f.counts()
+  let acquired = false
+  const permit = f.call('/acquire', { jobId: hash(9) }).then(value => { acquired = true; return value })
+  // Advancing the display clock cannot turn an older persisted observation into
+  // freshly measured utilisation or latency. Only a real save observes anew.
+  f.advance(5000)
+  let timeout: ReturnType<typeof setTimeout> | undefined
+  try {
+    const status = await Promise.race([f.call('/status'), new Promise<never>((_resolve, reject) => { timeout = setTimeout(() => reject(Error('status_waited_for_selection')), 1000) })])
+    assert.equal(status.status, 200); assert.deepEqual(status.value, committed)
+    assert.notEqual(status.value.observedAt, new Date(f.now()).toISOString())
+    assert.equal(status.value.refillLatencyP95Ms, null); assert.equal(status.value.modelTaskBusyPercent, null)
+    assert.equal(acquired, false); assert.deepEqual(f.counts(), counts)
+    assert.equal(f.storage.writes, writes); assert.equal(f.storage.deletes, deletes); assert.equal(f.storage.alarmWrites, timers)
+    assert.equal((await f.call('/status', undefined, 'wrong')).status, 401)
+  } finally { if (timeout) clearTimeout(timeout); release(); await alarm; await permit }
+  assert.equal(acquired, true)
+})
+
 test('persists complete selection and send-start before egress; one alarm sends at most eight', async () => {
   const f = fixture()
   await f.start()

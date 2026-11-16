@@ -38,6 +38,7 @@ export type RefillDependencies = {
   decline: Repository['declineRefillDispatch'];
 }
 const fenceFor = (cfg: Control): RefillFence => ({ scopeSha256: cfg.scope_sha256, inputCatalogSha256: cfg.input_catalog_sha256, revision: cfg.revision, canaryJson: cfg.canary_json })
+const TELEMETRY_KEY = 'refill-telemetry-v1'
 const sameFence = (a: RefillFence | null, b: RefillFence | null) => Boolean(a && b && a.scopeSha256 === b.scopeSha256
   && a.inputCatalogSha256 === b.inputCatalogSha256 && a.revision === b.revision && a.canaryJson === b.canaryJson)
 const stopped = (reason: string, now: number, wait = 300_000, fence: RefillFence | null = null): Gate => ({ fence, capture: false, model: false, reason, retryAt: now + wait })
@@ -119,7 +120,15 @@ export class CatalogRefillCoordinator {
       used: { capture: 0, model: 0 }, lastRefillAt: null, nextRefillAt: null, idleReason: 'not_started', gateRetryAt: null, modelDemand: false, wakeReason: null,
       pendingPlanWindow: null, lastPlannedWindow: null, quota: null }
   }
-  private async save(saved: Saved) { await this.state.storage.put('refill-v1', saved) }
+  private async save(saved: Saved) {
+    const telemetry = this.telemetry(saved)
+    // The read-only dashboard observes one committed snapshot. A proof scan or
+    // Queue send may take time, but never holds this storage transaction open.
+    await this.state.storage.transaction(async txn => {
+      await txn.put('refill-v1', saved)
+      await txn.put(TELEMETRY_KEY, telemetry)
+    })
+  }
   private async schedule(saved: Saved, at: number) {
     const now = this.deps.now(), next = Math.max(now + REFILL_INTERVAL_MS, at)
     if (saved.nextRefillAt !== null && saved.nextRefillAt <= next && saved.nextRefillAt > now) {
@@ -406,12 +415,22 @@ export class CatalogRefillCoordinator {
     return { allowed: true, permitToken: entry.permit.token, reason: 'stage_permit_acquired', retryAfter: 0 }
   }
   async fetch(request: Request): Promise<Response> {
+    if (!this.singleton) return json({ error: 'refill_singleton_required' }, 409)
+    if (!authorized(request, this.env)) return json({ error: 'unauthorized' }, 401)
+    if (this.env.MODEL_STATE_MIGRATION_ROLE === 'source') return json({ error: 'account_migration_frozen' }, 503)
+    const path = new URL(request.url).pathname
+    if (path === '/status' && request.method === 'GET') {
+      // Deliberately outside the mutation serial queue. This cannot grant a
+      // permit, reconcile jobs, wake an alarm or report a new observation time.
+      const snapshot = await this.state.storage.get<ReturnType<CatalogRefillCoordinator['telemetry']>>(TELEMETRY_KEY)
+      if (!snapshot || snapshot.format !== 'studyinchina.continuous-refill' || snapshot.version !== 1) return json({ error: 'refill_telemetry_unavailable' }, 503)
+      return json(snapshot)
+    }
     return this.serial(async () => {
       if (!this.singleton) return json({ error: 'refill_singleton_required' }, 409)
       if (!authorized(request, this.env)) return json({ error: 'unauthorized' }, 401)
       if (this.env.MODEL_STATE_MIGRATION_ROLE === 'source') return json({ error: 'account_migration_frozen' }, 503)
       const path = new URL(request.url).pathname
-      if (path === '/status' && request.method === 'GET') return json(this.telemetry(await this.load()))
       if (request.method !== 'POST') return json({ error: 'not_found' }, 404)
       const body = record(await requestJson(request))
       if (!body) return json({ error: 'invalid_refill_request' }, 400)
