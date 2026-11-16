@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { afterEach, describe, expect, it } from 'vitest'
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, resolve, sep } from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
@@ -49,7 +49,10 @@ describe('local-only catalogue database mirror', () => {
     'reopens exact $wording, null durations, reference fees and lossless material/notes roundtrip', ({ wording, localized }) => {
     const bundle = fixture(wording, localized), config = options(), result = buildLocalCatalogMirror(bundle, config)
     expect(result.manifest.validation).toMatchObject({ integrityCheck: 'ok', foreignKeyViolations: 0, textualDurations: 2, referenceTuitionFees: 1 })
-    expect(result.manifest.migrations).toHaveLength(12)
+    const migrationNames = readdirSync(config.migrationDirectory).filter(name => name.endsWith('.sql')).sort()
+    expect(result.manifest.migrations).toEqual(migrationNames.map(path => ({
+      path, sha256: createHash('sha256').update(readFileSync(join(config.migrationDirectory, path))).digest('hex'),
+    })))
     const envelope = JSON.parse(readFileSync(join(result.outputDirectory, 'compat-envelope.json'), 'utf8'))
     expect(envelope.data).toEqual(bundle)
     expect(envelope.data.programs[0].supplementaryDetails.applicationMaterials).toHaveLength(2)

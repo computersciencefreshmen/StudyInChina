@@ -1,5 +1,5 @@
 import { DatabaseSync } from 'node:sqlite'
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { buildLegacyRelease } from '../../scripts/catalog/build-release'
@@ -48,7 +48,10 @@ describe('official duration through catalogue projections', () => {
   it('preserves exact wording in compatibility payload, localized content, and D1 field facts with null numeric columns', () => {
     const bundle = fixture(), built = buildLegacyRelease(bundle), db = new DatabaseSync(':memory:')
     try {
-      for (const name of ['0001_release_core.sql', '0002_programs_scholarships.sql', '0003_search_views.sql', '0004_atomic_release_cutover.sql', '0005_public_projection_hardening.sql', '0009_release_compatibility_artifacts.sql']) db.exec(readFileSync(join(process.cwd(), 'infra/d1/catalog/migrations', name), 'utf8'))
+      const directory = join(process.cwd(), 'infra/d1/catalog/migrations')
+      for (const name of readdirSync(directory).filter(file => file.endsWith('.sql')).sort()) {
+        db.exec(readFileSync(join(directory, name), 'utf8'))
+      }
       db.exec(built.sql)
       expect(JSON.parse(built.envelope).data.programs[0]).toMatchObject({ durationMonths: null, durationText: { en: '16 weeks' } })
       expect(db.prepare('SELECT duration_min, duration_max, duration_unit FROM programs WHERE program_id=?').get('program')).toEqual({ duration_min: null, duration_max: null, duration_unit: null })

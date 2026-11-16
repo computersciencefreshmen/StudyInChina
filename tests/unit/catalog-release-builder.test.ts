@@ -1,6 +1,6 @@
 import { DatabaseSync } from 'node:sqlite'
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { classifyProgramField, programFieldTaxonomy } from '../../src/lib/data/fields'
@@ -9,11 +9,15 @@ import { buildLegacyRelease, readLegacyBundle } from '../../scripts/catalog/buil
 
 function applyMigrations(database: DatabaseSync, today?: string) {
   if (today && !/^\d{4}-\d{2}-\d{2}$/.test(today)) throw new Error('invalid_test_clock')
-  for (const file of ['0001_release_core.sql', '0002_programs_scholarships.sql', '0003_search_views.sql', '0004_atomic_release_cutover.sql', '0005_public_projection_hardening.sql', '0009_release_compatibility_artifacts.sql']) {
-    const sql = readFileSync(join(process.cwd(), 'infra', 'd1', 'catalog', 'migrations', file), 'utf8')
+  const directory = join(process.cwd(), 'infra', 'd1', 'catalog', 'migrations')
+  for (const file of readdirSync(directory).filter(name => name.endsWith('.sql')).sort()) {
+    const sql = readFileSync(join(directory, file), 'utf8')
     // SQLite's native clock is independent of JavaScript fake timers. Evaluate
-    // the unchanged freshness predicates at the fixture's explicit release day.
-    database.exec(today ? sql.replaceAll("date('now')", `date('${today}')`) : sql)
+    // the unchanged freshness predicates at the fixture's explicit release day,
+    // retaining relative modifiers such as the 30-day deadline grace period.
+    database.exec(today ? sql
+      .replaceAll("date('now', '+8 hours'", `date('${today}'`)
+      .replaceAll("date('now')", `date('${today}')`) : sql)
   }
 }
 
