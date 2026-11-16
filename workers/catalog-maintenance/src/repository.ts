@@ -217,8 +217,21 @@ export const schedulingSchoolsSql = `school_meta AS MATERIALIZED (
 )`
 export const schedulingSchoolIdsSql = `(SELECT json_group_array(xu.university_id) FROM maintenance_source_schools xu JOIN maintenance_schools su ON su.university_id=xu.university_id WHERE xu.source_id=chosen.source_id AND su.scope_sha256=(SELECT scope_sha256 FROM maintenance_control WHERE singleton=1))`
 
+/** A lost HTTP-read lease can retry; an uncertain model execution cannot.
+ * The ordinary scheduler retains its existing policy. The refill watchdog uses
+ * one bounded, control-fenced update even when this epoch's plan already exists. */
+async function expireExecutionLeases(env:MaintenanceEnv,now:number,cfg?:Control){
+  const update="UPDATE maintenance_jobs SET status=CASE WHEN stage='capture' THEN 'retry' ELSE 'unknown' END,error_code='execution_lease_expired',lease_token=NULL,lease_until=NULL,due_at=?,enqueued_at=NULL,updated_at=? WHERE status='running' AND lease_until<?"
+  if(!cfg)return env.PIPELINE_DB.prepare(update).bind(after(60000,now),nowIso(now),nowIso(now)).run()
+  return env.PIPELINE_DB.prepare(`${update}
+    AND job_id IN(SELECT job_id FROM maintenance_jobs WHERE status='running' AND lease_until<? ORDER BY lease_until,job_id LIMIT 64)
+    AND EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND scope_sha256=? AND input_catalog_sha256=? AND seed_sha256=? AND legacy_guard_sha256=? AND revision=? AND canary_json=? AND enabled=1 AND seed_complete=1 AND targets_complete=1)`)
+    .bind(after(60000,now),nowIso(now),nowIso(now),nowIso(now),cfg.scope_sha256,cfg.input_catalog_sha256,cfg.seed_sha256,cfg.legacy_guard_sha256,cfg.revision,cfg.canary_json).run()
+}
+
 export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'full'|'dispatch_only'|'administrative_only'|'capture_plan_only'='full') {
   const planOnly=mode==='capture_plan_only',jobLimit = planOnly?64:tickJobLimit(env)
+  if(planOnly&&(env.MODEL_STATE_MIGRATION_ROLE==='source'||env.MAINTENANCE_ENABLED!=='true'||!(await readBackgroundBudgetGate(env.SNAPSHOTS_BUCKET,now)).allowed))return{enabled:false,queued:0,plannedCaptureJobs:0}
   // Only the reviewed 64-slot opt-in enlarges reservoirs. SQL interpolates these
   // closed numeric constants, never the original environment string.
   const candidateLimit = jobLimit === 64 ? 64 : 40, poolLimit = candidateLimit * 3
@@ -229,6 +242,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'fu
   if(mode==='administrative_only')return{enabled:false,queued:0}
   if (env.MAINTENANCE_ENABLED !== 'true' || !cfg?.enabled || !cfg.seed_complete) return {enabled:false,queued:0}
   if(!(await nativeReconciliationGate(env)).ready)return{enabled:false,queued:0,nativeHeadReconciliationRequired:true}
+  if(planOnly)await expireExecutionLeases(env,now,cfg)
   const planEvent=`refill-capture-plan:${Math.floor(now/900000)}`
   if(planOnly&&await env.PIPELINE_DB.prepare('SELECT event_id FROM maintenance_events WHERE event_id=?').bind(planEvent).first())return{enabled:true,queued:0,plannedCaptureJobs:0}
   const targetFollowup = planOnly?{sources:0,pending:0}:await seedTargetFollowupJobs(env,cfg,(row,sha,key,scope)=>queueExtraction(env,row,sha,key,now,scope),now)
@@ -341,8 +355,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'fu
     await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET enqueued_at=? WHERE job_id=? AND status IN('queued','retry')").bind(nowIso(now),job.job_id).run(); queued++
   }
   const schoolRotationSaved=queued?await saveSchoolRotation(env,rotation,cfg.scope_sha256,scopeIds,[...new Set(jobs.map(job=>job.scheduling_school_id))],now):false
-  // Read-only fetches may be retried after a lost lease. A model send cannot.
-  await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET status=CASE WHEN stage='capture' THEN 'retry' ELSE 'unknown' END,error_code='execution_lease_expired',lease_token=NULL,lease_until=NULL,due_at=?,enqueued_at=NULL,updated_at=? WHERE status='running' AND lease_until<?").bind(after(60000,now),nowIso(now),nowIso(now)).run()
+  await expireExecutionLeases(env,now)
   await event(env,'scheduler_tick',{queued,jobLimit,discoveredDueSources:due.length,firstRoundComplete,coverageSnapshotSha256:coverage?.sha256 ?? null,maintenanceShare:firstRoundComplete?0.7:0.3,schoolRotationSaved,targetFollowup},now)
   return {enabled:true,queued}
 }
