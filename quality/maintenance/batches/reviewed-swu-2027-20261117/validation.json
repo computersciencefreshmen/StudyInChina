@@ -1,0 +1,282 @@
+{
+  "format": "studyinchina.local-reviewed-core-validation",
+  "version": 1,
+  "evaluatedForDate": "2026-11-17",
+  "baseCommit": "96baa3f84d7c432fdd9793c53d209d0abcab2c79",
+  "checks": {
+    "unitTestFiles": 10,
+    "unitTestsPassed": 111,
+    "unitTestsFailed": 0,
+    "typeScript": "passed: tsc --noEmit --incremental false",
+    "lint": "passed: eslint tests/unit/swu-reviewed-2027.test.ts --max-warnings=0",
+    "diffCheck": "passed",
+    "dataSchema": "passed with directory-safe expiry; historical overdue raw records and immutable receipts preserved"
+  },
+  "strictDirectory": {
+    "format": "studyinchina.directory-validation",
+    "formatVersion": 1,
+    "evaluatedForDate": "2026-11-17",
+    "integrityPassed": true,
+    "cohortSchools": 272,
+    "directoryCounts": {
+      "universities": 285,
+      "programs": 1173,
+      "scholarships": 26
+    },
+    "currentFactsCounts": {
+      "universities": 252,
+      "programs": 37,
+      "admissionCycles": 42,
+      "scholarships": 0
+    },
+    "schoolCoverage": {
+      "directoryWithPrograms": 238,
+      "directoryWithoutPrograms": 47,
+      "rawWithoutPrograms": 6
+    },
+    "currentCycleStates": {
+      "open": 19,
+      "upcoming": 11,
+      "closed": 0,
+      "rolling": 0,
+      "dates-published": 10,
+      "not-announced": 2,
+      "previous-cycle": 0
+    },
+    "coverageComplete": false,
+    "notice": "Integrity success certifies accepted data and safe projection only. It does not certify complete school catalogues or open applications."
+  },
+  "rawCounts": {
+    "universities": 305,
+    "programs": 2352,
+    "cities": 65,
+    "scholarships": 414,
+    "sources": 3006
+  },
+  "historicalOverdueRawRecordsRetained": 1839,
+  "preservation": {
+    "sources": {
+      "historicalRowsPreserved": 3003,
+      "newRows": 3,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "f149b18cda725fc31ae4345894cb0461521527a4be4126d81a56c85ffb6bbbd6"
+    },
+    "cities": {
+      "historicalRowsPreserved": 65,
+      "newRows": 0,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "f86b20e6ec13d745e9d20e77391e661ef702c7ef289edfafa938acc91156958d"
+    },
+    "universities": {
+      "historicalRowsPreserved": 305,
+      "newRows": 0,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "a2d0be3e7ed2843f0589f3477cb1127feeaef92a8c974f1827e9b688a1bcea0d"
+    },
+    "programs": {
+      "historicalRowsPreserved": 2347,
+      "newRows": 5,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "5be0d9495aeb3b647c4615feb93effe196395f6b9f8dc2d3c26b917bcf02a50a"
+    },
+    "admission-cycles": {
+      "historicalRowsPreserved": 1711,
+      "newRows": 5,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "f197cdfa2dc2ade66ac77a09c745f810911df9b266b9cc5a5d962a79fdf9b81a"
+    },
+    "scholarships": {
+      "historicalRowsPreserved": 414,
+      "newRows": 0,
+      "changedHistoricalIds": [],
+      "originalRowsSha256": "d0d84c62f481f54bd1067656bb510f7b5c5caddd581e3e5fca084e98e73f6be1"
+    },
+    "identityAcceptances": {
+      "historicalRowsPreserved": 1527,
+      "newRows": 5,
+      "originalEntriesSha256": "bf1580bf771b72a4277a6b6358c5c86e8fb00aea0dd528c88a7938d7d371a9a0"
+    },
+    "cities.json": {
+      "unchanged": true,
+      "originalSha256": "f86b20e6ec13d745e9d20e77391e661ef702c7ef289edfafa938acc91156958d"
+    },
+    "field-verifications.json": {
+      "unchanged": true,
+      "originalSha256": "94655bb938cf599fd97a1c03a514b0d5a2b3e12bb3650f6b440914f3dccf63a1"
+    },
+    "identity-bindings.json": {
+      "unchanged": true,
+      "originalSha256": "e5b2536e79abf2608af616c2cc90175cef357cb0ce00a4951aeaf391396a0cb9"
+    },
+    "program-localizations.json": {
+      "unchanged": true,
+      "originalSha256": "a283e7b6f94bfffb173d7bc4dceafa6c2c2c10b5454f02a0400a9ddc3c1957a1"
+    },
+    "scholarships.json": {
+      "unchanged": true,
+      "originalSha256": "d0d84c62f481f54bd1067656bb510f7b5c5caddd581e3e5fca084e98e73f6be1"
+    },
+    "universities.json": {
+      "unchanged": true,
+      "originalSha256": "a2d0be3e7ed2843f0589f3477cb1127feeaef92a8c974f1827e9b688a1bcea0d"
+    }
+  },
+  "publicQualityPolicy": "studyinchina.public-program-core.v2",
+  "beforeDetailedDirectoryProgrammeCount": 25,
+  "afterDetailedDirectoryProgrammeCount": 30,
+  "beforeWholeRecordCurrentProgrammeCount": 20,
+  "afterWholeRecordCurrentProgrammeCount": 25,
+  "previousDirectoryProgrammeIdsPreserved": [
+    "program-beihang-university-computer-science-and-technology-bachelor",
+    "program-beihang-university-materials-science-and-engineering-bachelor",
+    "program-0894c95994b049fc8cc8fc17",
+    "program-4f55aad7fd9236ebdeccc205",
+    "program-6c5f2df917f6314287e33f9e",
+    "program-d80dce5cbd9ef5807e5aafe7",
+    "program-d40f2fe92ea79bef2c5cbb75",
+    "program-beihang-university-nanomaterials-and-technology-bachelor",
+    "program-beihang-university-electronic-information-engineering-bachelor",
+    "program-beihang-university-communication-engineering-bachelor",
+    "program-xiamen-university-bachelor-chinese-020201k",
+    "program-xiamen-university-bachelor-chinese-020202",
+    "program-xiamen-university-bachelor-chinese-020401",
+    "program-xiamen-university-bachelor-chinese-020302",
+    "program-xiamen-university-bachelor-chinese-020301k",
+    "program-vm-hkbu-ma-visual-arts-master",
+    "program-vm-hkbu-mfa-cinematic-arts-master",
+    "program-vm-hkbu-ma-producing-master",
+    "program-vm-hkbu-msc-ai-digital-media-master",
+    "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese",
+    "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese",
+    "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese",
+    "program-northwest-a-and-f-university-business-administration-bachelor-chinese",
+    "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese",
+    "program-vm-hkbu-ma-communication-master"
+  ],
+  "swuCoreProgrammeCount": 5,
+  "previousSwuRawProgrammeIdentitiesPreserved": 9,
+  "swuProgrammes": [
+    {
+      "id": "program-southwest-university-animal-science-bachelor-chinese",
+      "name": {
+        "zh": "动物科学"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-southwest-university-horticulture-bachelor-chinese",
+      "name": {
+        "zh": "园艺"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-southwest-university-landscape-gardening-bachelor-chinese",
+      "name": {
+        "zh": "园林"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-southwest-university-landscape-architecture-bachelor-chinese",
+      "name": {
+        "zh": "风景园林"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    },
+    {
+      "id": "program-southwest-university-aquaculture-bachelor-chinese",
+      "name": {
+        "zh": "水产养殖学"
+      },
+      "durationMonths": 48,
+      "teachingLanguages": [
+        "Chinese"
+      ]
+    }
+  ],
+  "swuCycles": [
+    {
+      "id": "cycle-southwest-university-animal-science-bachelor-chinese-2027-2028-autumn-self-funded",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 500
+    },
+    {
+      "id": "cycle-southwest-university-horticulture-bachelor-chinese-2027-2028-autumn-self-funded",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 500
+    },
+    {
+      "id": "cycle-southwest-university-landscape-gardening-bachelor-chinese-2027-2028-autumn-self-funded",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 500
+    },
+    {
+      "id": "cycle-southwest-university-landscape-architecture-bachelor-chinese-2027-2028-autumn-self-funded",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 500
+    },
+    {
+      "id": "cycle-southwest-university-aquaculture-bachelor-chinese-2027-2028-autumn-self-funded",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "state": "upcoming",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "applicationFeeCny": 500
+    }
+  ],
+  "modelApiCalls": 0,
+  "cloudWrites": 0,
+  "privateUploads": 0,
+  "push": false,
+  "merge": false
+}
