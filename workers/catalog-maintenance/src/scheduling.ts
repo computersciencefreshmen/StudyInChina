@@ -1,7 +1,7 @@
 export type ScheduledJob = { stage: string; priority: number; source_last_success_at?: string | null;
   coverage_count?: number; review_after?: string | null; source_category?: string;
   scheduling_school_id?: string; school_last_attempt_at?: string | null; school_last_dispatched_tick?: number }
-export type SchedulingOptions = { limit: number; firstRoundComplete: boolean; now: number }
+export type SchedulingOptions = { limit: number; firstRoundComplete: boolean; now: number;slotOffset?:number;expansionOffset?:number }
 const TICK_MS = 15 * 60 * 1000
 
 function maintenanceLane(job: ScheduledJob): boolean {
@@ -18,6 +18,7 @@ export const schedulingCoverageBand = (count?: number | null) => count == null |
 export function selectScheduledJobs<T extends ScheduledJob>(jobs: T[], options: SchedulingOptions): T[] {
   if (!Number.isSafeInteger(options.limit) || options.limit < 0 || !Number.isFinite(options.now))
     throw new RangeError('invalid_scheduling_options')
+  if([options.slotOffset,options.expansionOffset].some(value=>value!==undefined&&(!Number.isSafeInteger(value)||value<0)))throw new RangeError('invalid_scheduling_options')
   if (options.limit === 0 || jobs.length === 0) return []
   // Current facts approaching their review date are urgent acquisition work.
   // Scheduling never extends the underlying evidence dates.
@@ -58,8 +59,9 @@ export function selectScheduledJobs<T extends ScheduledJob>(jobs: T[], options: 
   }
   if (urgent.length === options.limit) return urgent.map(index => jobs[index])
   const tick = Math.floor(options.now / TICK_MS), maintenanceTenths = options.firstRoundComplete ? 7 : 3
-  const reservedMaintenance = Math.floor((tick + 1) * options.limit * maintenanceTenths / 10)
-    - Math.floor(tick * options.limit * maintenanceTenths / 10)
+  const slotOffset=options.slotOffset??tick*options.limit
+  const reservedMaintenance = Math.floor((slotOffset + options.limit) * maintenanceTenths / 10)
+    - Math.floor(slotOffset * maintenanceTenths / 10)
   const reservedExpansion = options.limit - reservedMaintenance
   const urgentMaintenance = urgent.filter(index => maintenanceLane(jobs[index])).length
   let expansionSlotsUsed = 0
@@ -68,7 +70,7 @@ export function selectScheduledJobs<T extends ScheduledJob>(jobs: T[], options: 
       const isAward = (job: T) => job.stage === 'award' || job.source_category === 'scholarships'
       // Program / program / award rotation. Empty shares are borrowed immediately.
       for (let slot = 0; slot < count && selected.size < options.limit; slot++) {
-        const award = (tick + expansionSlotsUsed++) % 3 === 2
+        const award = ((options.expansionOffset??tick) + expansionSlotsUsed++) % 3 === 2
         let index = pick(job => !maintenanceLane(job) && isAward(job) === award)
         if (index < 0) index = pick(job => !maintenanceLane(job))
         if (index >= 0) add(index)
