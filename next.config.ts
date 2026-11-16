@@ -25,6 +25,7 @@ const nextConfig: NextConfig = {
     '/*': [
       './quality/minimum-one/*/*/identity-import-receipt.json',
       './quality/maintenance/batches/*/identity-receipt.json',
+      './quality/reviewed-nenu-2027-20261116/identity-receipt.json',
     ],
     '/api/v1/minimax-verification': ['./content/verification/minimax.json'],
   },
