@@ -1,0 +1,1101 @@
+{
+  "format": "studyinchina.curated-official-programme-review",
+  "version": 1,
+  "reviewedAt": "2026-11-16T15:50:35.000Z",
+  "reviewAfter": "2026-12-16",
+  "reviewerId": "codex-independent-official-source-audit:nenu-2027-core-20261116",
+  "method": "Codex independent AI-assisted audit: tool extraction and visual inspection of the original official PDF table and same-year official guide, with exact extracted-quote and content-hash checks. User authorized the workflow; this is not a claim of personal human sign-off for each row.",
+  "baseCommit": "18d79dd23034cd511391dd47843890d84114e635",
+  "privatePacketContentSha256": "cf4a58208a6ae1ae2baa2df2bfcdc6207c201c7554c578de5b6e8f500bfdca0b",
+  "inputCatalogSha256": "a33f517ea7126e212939213cb5a076e27825c9ee07f16ba115ea782f385ee7f8",
+  "outputCatalogSha256": "2a63c6a4af79c0d780734bf6c889507f0fcd712e5e4519d738dc0c6f9e1b793a",
+  "universityId": "uni-northeast-normal-university",
+  "academicYear": "2027-2028",
+  "teachingLanguage": "Chinese",
+  "sources": [
+    {
+      "id": "src-reviewed-nenu-2027-programmes",
+      "url": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+      "rawSha256": "3a63956cf47b2f66d9709d544a2621c5593912651097e93d8fbd6a09ec146be7",
+      "textSha256": "669cabff53a2c34c016115df311d18f882f13f26c94c7fdf91fefbd1f64f2bc2",
+      "parser": "pypdf-6.21.4-layout",
+      "page": 1,
+      "textNormalization": "pypdf layout extraction with CRLF normalized to LF before UTF-8 hashing and Unicode-code-point quote offsets"
+    },
+    {
+      "id": "src-reviewed-nenu-2027-guide",
+      "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+      "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+      "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+      "parser": "htmlparser-readable-whitespace-v1"
+    }
+  ],
+  "sourceChain": {
+    "guideUrl": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+    "pdfUrl": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+    "guideLinksExactPdf": true,
+    "guideScopeQuote": {
+      "sourceId": "src-reviewed-nenu-2027-guide",
+      "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+      "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+      "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+      "quote": "Admission Guidelines for Bachelor’s Programs for International Students of Northeast Normal University 2027–2028",
+      "quoteSha256": "102e370995fb2def0b751e4b6451f3fc07ca0432e9cf68ce0a9b7af511ff0f72",
+      "locator": "text:offset:1589:1701",
+      "rangeUnit": "Unicode_code_points",
+      "range": {
+        "start": 1589,
+        "end": 1701
+      }
+    },
+    "programmeMembershipQuote": {
+      "sourceId": "src-reviewed-nenu-2027-guide",
+      "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+      "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+      "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+      "quote": "For majors and tuition, please refer to the NENU Bachelor’s Programs for International Students 2027(click to view).",
+      "quoteSha256": "52cf5eaa6ad2b854779159b0e627d5eb4bbd427ad93bb72434ba56ac6e5d33c6",
+      "locator": "text:offset:3073:3189",
+      "rangeUnit": "Unicode_code_points",
+      "range": {
+        "start": 3073,
+        "end": 3189
+      }
+    },
+    "exactAnchor": {
+      "href": "../2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+      "resolvedUrl": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+      "quote": "<a href=\"../2027_NENU_Undergraduate_EN_PUBLIC.pdf\" target=\"_blank\" textvalue=\"NENU Bachelor’s Programs for International Students 2027\" style=\"text-decoration: underline;\"><span style=\"color: rgb(0, 112, 192);\">NENU Bachelor’s Programs for International Students 2027</span></a>",
+      "quoteSha256": "0b0ead879a5553dd4e7afd0ea6a9c830870f40bfacd1309ab57f02d2c3ae666b",
+      "sourceRawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+      "locator": "html:a[href=\"../2027_NENU_Undergraduate_EN_PUBLIC.pdf\"]"
+    }
+  },
+  "commonPolicy": {
+    "academicYear": "2027-2028",
+    "degreeLevel": "bachelor",
+    "deadline": "2027-06-25",
+    "opensOn": null,
+    "intake": "other",
+    "intakeExplicitlyKnown": false,
+    "applyUrl": "https://nenu.17gz.org",
+    "applicationFeeCny": 400,
+    "eligibility": [
+      "Non-Chinese citizens.",
+      "In good physical and mental health, with excellent academic performance and conduct, and in compliance with Chinese laws, regulations, and university rules.",
+      "Applicants for bachelor’s degree programs must be between 18 and 25 years old and hold a high school diploma or an equivalent academic qualification.",
+      "Former Chinese citizens who have acquired foreign nationality and apply to our University as international students must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027).",
+      "Applicants whose one or both parents are Chinese citizens and have settled abroad, and who acquired foreign nationality at birth, must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027).",
+      "All applicants for bachelor’s degree programs must take the China Scholastic Competency Assessment (CSCA) organized by the China Scholarship Council (CSC)."
+    ],
+    "languageCertificateWaiver": "Applicants from Malaysian Independent Chinese Secondary Schools are not required to submit proof of Chinese proficiency.",
+    "cscaLanguageExemptionAppliesOnlyToChineseLanguageMajorWithHSK4Score180": true,
+    "allEvidence": [
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "Admission Guidelines for Bachelor’s Programs for International Students of Northeast Normal University 2027–2028",
+        "quoteSha256": "102e370995fb2def0b751e4b6451f3fc07ca0432e9cf68ce0a9b7af511ff0f72",
+        "locator": "text:offset:1589:1701",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1589,
+          "end": 1701
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "For majors and tuition, please refer to the NENU Bachelor’s Programs for International Students 2027(click to view).",
+        "quoteSha256": "52cf5eaa6ad2b854779159b0e627d5eb4bbd427ad93bb72434ba56ac6e5d33c6",
+        "locator": "text:offset:3073:3189",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 3073,
+          "end": 3189
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "From now until June 25, 2027 (Beijing Time).",
+        "quoteSha256": "e3fefaa58d5a47de07848d90647baae5901405ec2aeebecaa7133de66925d67f",
+        "locator": "text:offset:3214:3258",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 3214,
+          "end": 3258
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "After preparing the required materials, register and log in to the NENU International Student Service System: http://studyatnenu.nenu.edu.cn or https://nenu.17gz.org",
+        "quoteSha256": "c92c4da09af16b7a390c40562730108b01ed0cdcbf84e8c60f42cdeaaf061aca",
+        "locator": "text:offset:4265:4430",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 4265,
+          "end": 4430
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "Fill in the required information in Chinese or English, upload all materials, and pay the application fee of RMB 400 online.",
+        "quoteSha256": "1cd505325511a25619dbee7da1240437d911a3c2950881b5aefee60e9b065e90",
+        "locator": "text:offset:4431:4555",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 4431,
+          "end": 4555
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "Applicants from Malaysian Independent Chinese Secondary Schools are not required to submit proof of Chinese proficiency.",
+        "quoteSha256": "ca01b38ddce07707d9231c3e8fb8ba0c4fcc6ce35a5af587904677a643bf15e7",
+        "locator": "text:offset:5710:5830",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 5710,
+          "end": 5830
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "Non-Chinese citizens.",
+        "quoteSha256": "db9ae8111d9184de739b46d40683506b6a8bca5764bc69aa19548980f5ea824e",
+        "locator": "text:offset:1733:1754",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1733,
+          "end": 1754
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "In good physical and mental health, with excellent academic performance and conduct, and in compliance with Chinese laws, regulations, and university rules.",
+        "quoteSha256": "c431dfbe5cfe08f2b970cf3884db560f82bfc6f92ca4719cac21d7b5dba870d7",
+        "locator": "text:offset:1758:1914",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1758,
+          "end": 1914
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "Applicants for bachelor’s degree programs must be between 18 and 25 years old and hold a high school diploma or an equivalent academic qualification.",
+        "quoteSha256": "e011e4842086095a3075a5d94148601e6fff1bb7a94619f3cec47a573b6fa0f9",
+        "locator": "text:offset:1918:2067",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1918,
+          "end": 2067
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "Former Chinese citizens who have acquired foreign nationality and apply to our University as international students must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027).",
+        "quoteSha256": "eb6d9948cbdbd3b12fcdc5fd190473dac1392e283d8985635b3a8c1bb024eeca",
+        "locator": "text:offset:2071:2410",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2071,
+          "end": 2410
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "Applicants whose one or both parents are Chinese citizens and have settled abroad, and who acquired foreign nationality at birth, must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027).",
+        "quoteSha256": "91b03201910ca8e5007b525ff8c30acad666e61b6d2c3bd14aaa2d93e35ddd29",
+        "locator": "text:offset:2555:2908",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2555,
+          "end": 2908
+        }
+      },
+      {
+        "sourceId": "src-reviewed-nenu-2027-guide",
+        "url": "https://iso.nenu.edu.cn/Admission/Bachelor_Program.htm",
+        "rawSha256": "902fe955f1fcf2fe2f69b0f34915e7a31348fdf71ec5c2b871d05964903395a4",
+        "textSha256": "ae1a4b03829127518a1814bb6374d0faa30a98aa0bc6a486a7389b2be7fe90c1",
+        "quote": "All applicants for bachelor’s degree programs must take the China Scholastic Competency Assessment (CSCA) organized by the China Scholarship Council (CSC).",
+        "quoteSha256": "b9d69a4dc4540bfe208318cc983352a235faa83bb3614241fec10a1be4914e7f",
+        "locator": "text:offset:3344:3499",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 3344,
+          "end": 3499
+        }
+      }
+    ]
+  },
+  "programmeRows": [
+    {
+      "recordId": "program-d80dce5cbd9ef5807e5aafe7",
+      "row": 11,
+      "name": "Fine Arts",
+      "faculty": "School of Fine Arts",
+      "years": 4,
+      "tuition": 19600,
+      "hskLevel": 5,
+      "hskQuote": "HSK Level 5",
+      "campus": "Jingyue St. Campus",
+      "cscaSubjects": [
+        "Humanities Chinese",
+        "Mathematics"
+      ],
+      "quote": "11    Fine Arts                                               Chinese       School of Fine Arts                                            4              19600           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+      "evidence": {
+        "sourceId": "src-reviewed-nenu-2027-programmes",
+        "url": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+        "rawSha256": "3a63956cf47b2f66d9709d544a2621c5593912651097e93d8fbd6a09ec146be7",
+        "textSha256": "669cabff53a2c34c016115df311d18f882f13f26c94c7fdf91fefbd1f64f2bc2",
+        "quote": "11    Fine Arts                                               Chinese       School of Fine Arts                                            4              19600           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+        "quoteSha256": "f7f265b917bd825522b6dcf410c545966d1ae857f34e70983f6a4dd9e337592f",
+        "locator": "pdf:page:1/table:1/row:11",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 3706,
+          "end": 3995
+        }
+      },
+      "sourceHsKMinimumScore": null
+    },
+    {
+      "recordId": "program-0894c95994b049fc8cc8fc17",
+      "row": 8,
+      "name": "Musicology",
+      "faculty": "School of Music and Dance",
+      "years": 4,
+      "tuition": 19600,
+      "hskLevel": 5,
+      "hskQuote": "HSK Level 5",
+      "campus": "Jingyue St. Campus",
+      "cscaSubjects": [
+        "Humanities Chinese",
+        "Mathematics"
+      ],
+      "quote": "8    Musicology                                              Chinese       School of Music and Dance                                      4              19600           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+      "evidence": {
+        "sourceId": "src-reviewed-nenu-2027-programmes",
+        "url": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+        "rawSha256": "3a63956cf47b2f66d9709d544a2621c5593912651097e93d8fbd6a09ec146be7",
+        "textSha256": "669cabff53a2c34c016115df311d18f882f13f26c94c7fdf91fefbd1f64f2bc2",
+        "quote": "8    Musicology                                              Chinese       School of Music and Dance                                      4              19600           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+        "quoteSha256": "08289311b9a503b6c71cd1e0bc8f408b6d1c5ea170ceafebe8e1c581a00b8ab8",
+        "locator": "pdf:page:1/table:1/row:8",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2828,
+          "end": 3116
+        }
+      },
+      "sourceHsKMinimumScore": null
+    },
+    {
+      "recordId": "program-d40f2fe92ea79bef2c5cbb75",
+      "row": 9,
+      "name": "Choreography",
+      "faculty": "School of Music and Dance",
+      "years": 4,
+      "tuition": 19600,
+      "hskLevel": 5,
+      "hskQuote": "HSK Level 5",
+      "campus": "Jingyue St. Campus",
+      "cscaSubjects": [
+        "Humanities Chinese",
+        "Mathematics"
+      ],
+      "quote": "9    Choreography                                            Chinese       School of Music and Dance                                      4              19600           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+      "evidence": {
+        "sourceId": "src-reviewed-nenu-2027-programmes",
+        "url": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+        "rawSha256": "3a63956cf47b2f66d9709d544a2621c5593912651097e93d8fbd6a09ec146be7",
+        "textSha256": "669cabff53a2c34c016115df311d18f882f13f26c94c7fdf91fefbd1f64f2bc2",
+        "quote": "9    Choreography                                            Chinese       School of Music and Dance                                      4              19600           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+        "quoteSha256": "6b2aa8effb2b404e8c195bed2ca71697a82140ff565b2c24e41e98d7b335e61a",
+        "locator": "pdf:page:1/table:1/row:9",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 3121,
+          "end": 3409
+        }
+      },
+      "sourceHsKMinimumScore": null
+    },
+    {
+      "recordId": "program-4f55aad7fd9236ebdeccc205",
+      "row": 10,
+      "name": "Sculpture",
+      "faculty": "School of Fine Arts",
+      "years": 5,
+      "tuition": 19600,
+      "hskLevel": 5,
+      "hskQuote": "HSK Level 5",
+      "campus": "Jingyue St. Campus",
+      "cscaSubjects": [
+        "Humanities Chinese",
+        "Mathematics"
+      ],
+      "quote": "10    Sculpture                                               Chinese       School of Fine Arts                                            5              19600           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+      "evidence": {
+        "sourceId": "src-reviewed-nenu-2027-programmes",
+        "url": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+        "rawSha256": "3a63956cf47b2f66d9709d544a2621c5593912651097e93d8fbd6a09ec146be7",
+        "textSha256": "669cabff53a2c34c016115df311d18f882f13f26c94c7fdf91fefbd1f64f2bc2",
+        "quote": "10    Sculpture                                               Chinese       School of Fine Arts                                            5              19600           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+        "quoteSha256": "3134bc9a05a0be93731042ae3aaa77f52c48775a8a8efe463f8ef778cd0c3fc4",
+        "locator": "pdf:page:1/table:1/row:10",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 3413,
+          "end": 3702
+        }
+      },
+      "sourceHsKMinimumScore": null
+    },
+    {
+      "recordId": "program-6c5f2df917f6314287e33f9e",
+      "row": 3,
+      "name": "Law",
+      "faculty": "School of Politics and Law",
+      "years": 4,
+      "tuition": 16000,
+      "hskLevel": 5,
+      "hskQuote": "HSK Level 5",
+      "campus": "Jingyue St. Campus",
+      "cscaSubjects": [
+        "Humanities Chinese",
+        "Mathematics"
+      ],
+      "quote": "3    Law                                                     Chinese       School of Politics and Law                                     4              16000           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+      "evidence": {
+        "sourceId": "src-reviewed-nenu-2027-programmes",
+        "url": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+        "rawSha256": "3a63956cf47b2f66d9709d544a2621c5593912651097e93d8fbd6a09ec146be7",
+        "textSha256": "669cabff53a2c34c016115df311d18f882f13f26c94c7fdf91fefbd1f64f2bc2",
+        "quote": "3    Law                                                     Chinese       School of Politics and Law                                     4              16000           HSK Level 5        Jingyue St. Campus          Humanities Chinese, Mathematics                      √                 √",
+        "quoteSha256": "7478188a0d491f3fb5432b5dd5455506399fbee9328265263c867c50731b726b",
+        "locator": "pdf:page:1/table:1/row:3",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1345,
+          "end": 1633
+        }
+      },
+      "sourceHsKMinimumScore": null
+    }
+  ],
+  "beforePrograms": [
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "verifiedAt": "2026-11-14",
+      "reviewAfter": "2026-11-14",
+      "status": "verified",
+      "id": "program-0894c95994b049fc8cc8fc17",
+      "slug": "northeast-normal-university-bachelor-0894c95994b049fc8cc8fc17",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Musicology",
+        "zh": "音乐学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [],
+      "durationMonths": null,
+      "programUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    },
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "verifiedAt": "2026-11-14",
+      "reviewAfter": "2026-11-14",
+      "status": "verified",
+      "id": "program-4f55aad7fd9236ebdeccc205",
+      "slug": "northeast-normal-university-bachelor-4f55aad7fd9236ebdeccc205",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Sculpture",
+        "zh": "雕塑"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [],
+      "durationMonths": null,
+      "programUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    },
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "verifiedAt": "2026-11-14",
+      "reviewAfter": "2026-11-14",
+      "status": "verified",
+      "id": "program-6c5f2df917f6314287e33f9e",
+      "slug": "northeast-normal-university-bachelor-6c5f2df917f6314287e33f9e",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Law",
+        "zh": "法学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [],
+      "durationMonths": null,
+      "programUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    },
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "verifiedAt": "2026-11-14",
+      "reviewAfter": "2026-11-14",
+      "status": "verified",
+      "id": "program-d80dce5cbd9ef5807e5aafe7",
+      "slug": "northeast-normal-university-bachelor-d80dce5cbd9ef5807e5aafe7",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Fine Arts",
+        "zh": "美术学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [],
+      "durationMonths": null,
+      "programUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    },
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "verifiedAt": "2026-11-14",
+      "reviewAfter": "2026-11-14",
+      "status": "verified",
+      "id": "program-d40f2fe92ea79bef2c5cbb75",
+      "slug": "northeast-normal-university-bachelor-d40f2fe92ea79bef2c5cbb75",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Choreography",
+        "zh": "舞蹈编导"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [],
+      "durationMonths": null,
+      "programUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "identity"
+    }
+  ],
+  "previousIdentityAcceptances": [
+    {
+      "entityType": "program",
+      "recordId": "program-0894c95994b049fc8cc8fc17",
+      "identitySha256": "08be2378e30d63bace8b9c1978cb5cd0544b60a32c60be4afb7888a00b335d47",
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "acceptedAt": "2026-11-14T13:40:37.023Z",
+      "reviewer": "minimax-independent:989a903f-6321-4836-b682-edc0074859e5",
+      "receiptPath": "quality/maintenance/batches/maintenance-7c045a32-3ee3-4d4e-a576-541ef99b383a/identity-receipt.json",
+      "receiptSha256": "424828aec8369ec6cd2a8250c52ec20e3e5851efc7f690ef50fb907aa56f18d6",
+      "verifiedName": {
+        "en": "Musicology",
+        "zh": "音乐学"
+      },
+      "verifiedSourceUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-4f55aad7fd9236ebdeccc205",
+      "identitySha256": "11a5226174694f19933cf56a94d8f544729c50d4788ba3b00a6e31b3ac5f253a",
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "acceptedAt": "2026-11-14T13:40:37.023Z",
+      "reviewer": "minimax-independent:989a903f-6321-4836-b682-edc0074859e5",
+      "receiptPath": "quality/maintenance/batches/maintenance-7c045a32-3ee3-4d4e-a576-541ef99b383a/identity-receipt.json",
+      "receiptSha256": "424828aec8369ec6cd2a8250c52ec20e3e5851efc7f690ef50fb907aa56f18d6",
+      "verifiedName": {
+        "en": "Sculpture",
+        "zh": "雕塑"
+      },
+      "verifiedSourceUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-6c5f2df917f6314287e33f9e",
+      "identitySha256": "435e49a5d4707dd12a7f42279f588c83f3fffdc76a707b7d86d147312852b22c",
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "acceptedAt": "2026-11-14T13:40:37.023Z",
+      "reviewer": "minimax-independent:989a903f-6321-4836-b682-edc0074859e5",
+      "receiptPath": "quality/maintenance/batches/maintenance-7c045a32-3ee3-4d4e-a576-541ef99b383a/identity-receipt.json",
+      "receiptSha256": "424828aec8369ec6cd2a8250c52ec20e3e5851efc7f690ef50fb907aa56f18d6",
+      "verifiedName": {
+        "en": "Law",
+        "zh": "法学"
+      },
+      "verifiedSourceUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-d80dce5cbd9ef5807e5aafe7",
+      "identitySha256": "6f1df35c6a7e7526c3f28758c9efa8f4a837130b14173a7db4239cf2dd7fd4dd",
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "acceptedAt": "2026-11-14T13:40:37.023Z",
+      "reviewer": "minimax-independent:989a903f-6321-4836-b682-edc0074859e5",
+      "receiptPath": "quality/maintenance/batches/maintenance-7c045a32-3ee3-4d4e-a576-541ef99b383a/identity-receipt.json",
+      "receiptSha256": "424828aec8369ec6cd2a8250c52ec20e3e5851efc7f690ef50fb907aa56f18d6",
+      "verifiedName": {
+        "en": "Fine Arts",
+        "zh": "美术学"
+      },
+      "verifiedSourceUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf"
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-d40f2fe92ea79bef2c5cbb75",
+      "identitySha256": "fcd6fa418ca773961da7693a0248147e61e181dad7fdc11196d5eb8005725670",
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77"
+      ],
+      "acceptedAt": "2026-11-14T13:40:37.023Z",
+      "reviewer": "minimax-independent:989a903f-6321-4836-b682-edc0074859e5",
+      "receiptPath": "quality/maintenance/batches/maintenance-7c045a32-3ee3-4d4e-a576-541ef99b383a/identity-receipt.json",
+      "receiptSha256": "424828aec8369ec6cd2a8250c52ec20e3e5851efc7f690ef50fb907aa56f18d6",
+      "verifiedName": {
+        "en": "Choreography",
+        "zh": "舞蹈编导"
+      },
+      "verifiedSourceUrl": "https://iso.nenu.edu.cn/chinese/dongbeishifandaxue2026nianguojixueshengbenkezhuanyemulu.pdf"
+    }
+  ],
+  "afterProgrammeSha256": {
+    "program-0894c95994b049fc8cc8fc17": "6229a5cacce251a0289d095ad169cf5d1557ec70a904fe5f8abaa5595fc92531",
+    "program-4f55aad7fd9236ebdeccc205": "b7cf0e2af109d838f4fad6e34b892940691cc5b165ddf122f4835f74abccf81f",
+    "program-6c5f2df917f6314287e33f9e": "a391d135a96d5f07854dab707ee7949390271fd4da0149522097949b21dc0640",
+    "program-d80dce5cbd9ef5807e5aafe7": "63c0fe667ba0333778719978bd265ff464ec3e127259e9e6f5be387ca0a9c126",
+    "program-d40f2fe92ea79bef2c5cbb75": "4eeb520cefe87039c00a1c092c06e49ba1f9edaee02c5d2a48306273c32ecbb0"
+  },
+  "newCycleSha256": {
+    "cycle-nenu-2027-4a8d46e8de4fe817fc9ef984": "8d25f5812e582b90ae09fb4e4f20aedce4ed4a0561fc6d4819cfa6c6b36f809b",
+    "cycle-nenu-2027-fa25f82d7ba05aa69caddde0": "b092b2c1c7705f848ca04c0464ec94897e98499cda588f38834065886ad432aa",
+    "cycle-nenu-2027-dea5339a86cc13ee2cab57a1": "5e5161dba73f2407b29161e01c14aa483c090fd55372b377e1e183ce07538d19",
+    "cycle-nenu-2027-f0d93abfee9e942b05221890": "00aa2311cba01917dcd6bbf7995bec809422683f849cc30804e0ab16bfa99d76",
+    "cycle-nenu-2027-e6ebdcc492ed50a500e653cc": "cf59a8d8b0bb58a16a34ae0b14fbefad8667f3b434cd4d76e2e5e2e2dfb622af"
+  },
+  "oldAdmissionCyclesSha256": "9e23b5d490f15bf396852cf50a383fc4b3974493b141448e0e90f2595a349437",
+  "oldIdentityBindingsSha256": "e5b2536e79abf2608af616c2cc90175cef357cb0ce00a4951aeaf391396a0cb9",
+  "scopeLimits": {
+    "programmeNames": "Only the exact English names on the 2027 table are freshly accepted; raw historic Chinese names and IDs remain unchanged.",
+    "intakeSeason": null,
+    "calendarOpeningDate": null,
+    "hskNumericMinimumScore": null,
+    "languageCertificateWaiver": "The Malaysian Independent Chinese Secondary School certificate waiver is conditional; it is not a CSCA waiver.",
+    "chineseLanguageMajorOnlyCscaExemptionNotApplied": true,
+    "reviewedOldOptionalFacts": "All five prior records were identity-only, with no nonempty duration, language, application or narrative facts. No other raw record was renewed.",
+    "unreviewedMajorsNotRenewed": true,
+    "admissionGuarantee": false
+  },
+  "modelCalls": false,
+  "oldModelLedgerMutations": false,
+  "cloudWrites": false,
+  "sha256": "a23e863c37fb5caaa263f6e4ff91b2b948caa754b19e506fb9ce0a6727c4637c",
+  "reviewType": "Codex independent AI-assisted official-source audit; user-authorized workflow, not a personal human signature.",
+  "reviewedPrograms": [
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77",
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "status": "verified",
+      "id": "program-0894c95994b049fc8cc8fc17",
+      "slug": "northeast-normal-university-bachelor-0894c95994b049fc8cc8fc17",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Musicology",
+        "zh": "音乐学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+      "applyUrl": "https://nenu.17gz.org",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "verificationScope": "facts"
+    },
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77",
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "status": "verified",
+      "id": "program-4f55aad7fd9236ebdeccc205",
+      "slug": "northeast-normal-university-bachelor-4f55aad7fd9236ebdeccc205",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Sculpture",
+        "zh": "雕塑"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 60,
+      "programUrl": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+      "applyUrl": "https://nenu.17gz.org",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "verificationScope": "facts"
+    },
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77",
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "status": "verified",
+      "id": "program-6c5f2df917f6314287e33f9e",
+      "slug": "northeast-normal-university-bachelor-6c5f2df917f6314287e33f9e",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Law",
+        "zh": "法学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+      "applyUrl": "https://nenu.17gz.org",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "verificationScope": "facts"
+    },
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77",
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "status": "verified",
+      "id": "program-d80dce5cbd9ef5807e5aafe7",
+      "slug": "northeast-normal-university-bachelor-d80dce5cbd9ef5807e5aafe7",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Fine Arts",
+        "zh": "美术学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+      "applyUrl": "https://nenu.17gz.org",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "verificationScope": "facts"
+    },
+    {
+      "sourceIds": [
+        "src-maintenance-identity-beff6aa8864ec5775e6a0b77",
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "status": "verified",
+      "id": "program-d40f2fe92ea79bef2c5cbb75",
+      "slug": "northeast-normal-university-bachelor-d40f2fe92ea79bef2c5cbb75",
+      "universityId": "uni-northeast-normal-university",
+      "name": {
+        "en": "Choreography",
+        "zh": "舞蹈编导"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://iso.nenu.edu.cn/2027_NENU_Undergraduate_EN_PUBLIC.pdf",
+      "applyUrl": "https://nenu.17gz.org",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "verificationScope": "facts"
+    }
+  ],
+  "reviewedAdmissionCycles": [
+    {
+      "id": "cycle-nenu-2027-4a8d46e8de4fe817fc9ef984",
+      "programId": "program-d80dce5cbd9ef5807e5aafe7",
+      "academicYear": "2027-2028",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "opensOn": null,
+      "closesOn": "2027-06-25",
+      "dateStatus": "published",
+      "tuitionCny": 19600,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "applicationFeeCny": 400,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "eligibility": [
+        {
+          "en": "Non-Chinese citizens."
+        },
+        {
+          "en": "In good physical and mental health, with excellent academic performance and conduct, and in compliance with Chinese laws, regulations, and university rules."
+        },
+        {
+          "en": "Applicants for bachelor’s degree programs must be between 18 and 25 years old and hold a high school diploma or an equivalent academic qualification."
+        },
+        {
+          "en": "Former Chinese citizens who have acquired foreign nationality and apply to our University as international students must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "Applicants whose one or both parents are Chinese citizens and have settled abroad, and who acquired foreign nationality at birth, must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "All applicants for bachelor’s degree programs must take the China Scholastic Competency Assessment (CSCA) organized by the China Scholarship Council (CSC)."
+        },
+        {
+          "en": "Required CSCA subjects: Humanities Chinese, Mathematics."
+        }
+      ],
+      "applyUrl": "https://nenu.17gz.org",
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "sourceIds": [
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "status": "verified",
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "notes": {
+        "en": "Intake season and calendar opening date are not explicitly stated; no autumn or opening date is inferred. HSK numeric minimum score is not specified. Malaysian Independent Chinese Secondary School language-certificate waiver is conditional and does not waive CSCA."
+      }
+    },
+    {
+      "id": "cycle-nenu-2027-fa25f82d7ba05aa69caddde0",
+      "programId": "program-0894c95994b049fc8cc8fc17",
+      "academicYear": "2027-2028",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "opensOn": null,
+      "closesOn": "2027-06-25",
+      "dateStatus": "published",
+      "tuitionCny": 19600,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "applicationFeeCny": 400,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "eligibility": [
+        {
+          "en": "Non-Chinese citizens."
+        },
+        {
+          "en": "In good physical and mental health, with excellent academic performance and conduct, and in compliance with Chinese laws, regulations, and university rules."
+        },
+        {
+          "en": "Applicants for bachelor’s degree programs must be between 18 and 25 years old and hold a high school diploma or an equivalent academic qualification."
+        },
+        {
+          "en": "Former Chinese citizens who have acquired foreign nationality and apply to our University as international students must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "Applicants whose one or both parents are Chinese citizens and have settled abroad, and who acquired foreign nationality at birth, must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "All applicants for bachelor’s degree programs must take the China Scholastic Competency Assessment (CSCA) organized by the China Scholarship Council (CSC)."
+        },
+        {
+          "en": "Required CSCA subjects: Humanities Chinese, Mathematics."
+        }
+      ],
+      "applyUrl": "https://nenu.17gz.org",
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "sourceIds": [
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "status": "verified",
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "notes": {
+        "en": "Intake season and calendar opening date are not explicitly stated; no autumn or opening date is inferred. HSK numeric minimum score is not specified. Malaysian Independent Chinese Secondary School language-certificate waiver is conditional and does not waive CSCA."
+      }
+    },
+    {
+      "id": "cycle-nenu-2027-dea5339a86cc13ee2cab57a1",
+      "programId": "program-d40f2fe92ea79bef2c5cbb75",
+      "academicYear": "2027-2028",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "opensOn": null,
+      "closesOn": "2027-06-25",
+      "dateStatus": "published",
+      "tuitionCny": 19600,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "applicationFeeCny": 400,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "eligibility": [
+        {
+          "en": "Non-Chinese citizens."
+        },
+        {
+          "en": "In good physical and mental health, with excellent academic performance and conduct, and in compliance with Chinese laws, regulations, and university rules."
+        },
+        {
+          "en": "Applicants for bachelor’s degree programs must be between 18 and 25 years old and hold a high school diploma or an equivalent academic qualification."
+        },
+        {
+          "en": "Former Chinese citizens who have acquired foreign nationality and apply to our University as international students must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "Applicants whose one or both parents are Chinese citizens and have settled abroad, and who acquired foreign nationality at birth, must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "All applicants for bachelor’s degree programs must take the China Scholastic Competency Assessment (CSCA) organized by the China Scholarship Council (CSC)."
+        },
+        {
+          "en": "Required CSCA subjects: Humanities Chinese, Mathematics."
+        }
+      ],
+      "applyUrl": "https://nenu.17gz.org",
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "sourceIds": [
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "status": "verified",
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "notes": {
+        "en": "Intake season and calendar opening date are not explicitly stated; no autumn or opening date is inferred. HSK numeric minimum score is not specified. Malaysian Independent Chinese Secondary School language-certificate waiver is conditional and does not waive CSCA."
+      }
+    },
+    {
+      "id": "cycle-nenu-2027-f0d93abfee9e942b05221890",
+      "programId": "program-4f55aad7fd9236ebdeccc205",
+      "academicYear": "2027-2028",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "opensOn": null,
+      "closesOn": "2027-06-25",
+      "dateStatus": "published",
+      "tuitionCny": 19600,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "applicationFeeCny": 400,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "eligibility": [
+        {
+          "en": "Non-Chinese citizens."
+        },
+        {
+          "en": "In good physical and mental health, with excellent academic performance and conduct, and in compliance with Chinese laws, regulations, and university rules."
+        },
+        {
+          "en": "Applicants for bachelor’s degree programs must be between 18 and 25 years old and hold a high school diploma or an equivalent academic qualification."
+        },
+        {
+          "en": "Former Chinese citizens who have acquired foreign nationality and apply to our University as international students must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "Applicants whose one or both parents are Chinese citizens and have settled abroad, and who acquired foreign nationality at birth, must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "All applicants for bachelor’s degree programs must take the China Scholastic Competency Assessment (CSCA) organized by the China Scholarship Council (CSC)."
+        },
+        {
+          "en": "Required CSCA subjects: Humanities Chinese, Mathematics."
+        }
+      ],
+      "applyUrl": "https://nenu.17gz.org",
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "sourceIds": [
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "status": "verified",
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "notes": {
+        "en": "Intake season and calendar opening date are not explicitly stated; no autumn or opening date is inferred. HSK numeric minimum score is not specified. Malaysian Independent Chinese Secondary School language-certificate waiver is conditional and does not waive CSCA."
+      }
+    },
+    {
+      "id": "cycle-nenu-2027-e6ebdcc492ed50a500e653cc",
+      "programId": "program-6c5f2df917f6314287e33f9e",
+      "academicYear": "2027-2028",
+      "intake": "other",
+      "teachingLanguage": "Chinese",
+      "opensOn": null,
+      "closesOn": "2027-06-25",
+      "dateStatus": "published",
+      "tuitionCny": 16000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "applicationFeeCny": 400,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "Level 5; minimum score not stated"
+        }
+      ],
+      "eligibility": [
+        {
+          "en": "Non-Chinese citizens."
+        },
+        {
+          "en": "In good physical and mental health, with excellent academic performance and conduct, and in compliance with Chinese laws, regulations, and university rules."
+        },
+        {
+          "en": "Applicants for bachelor’s degree programs must be between 18 and 25 years old and hold a high school diploma or an equivalent academic qualification."
+        },
+        {
+          "en": "Former Chinese citizens who have acquired foreign nationality and apply to our University as international students must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "Applicants whose one or both parents are Chinese citizens and have settled abroad, and who acquired foreign nationality at birth, must have held a valid foreign passport or nationality certificate for four years or longer (inclusive), and must have actually resided abroad for at least two years within the most recent four years (as of April 30, 2027)."
+        },
+        {
+          "en": "All applicants for bachelor’s degree programs must take the China Scholastic Competency Assessment (CSCA) organized by the China Scholarship Council (CSC)."
+        },
+        {
+          "en": "Required CSCA subjects: Humanities Chinese, Mathematics."
+        }
+      ],
+      "applyUrl": "https://nenu.17gz.org",
+      "factScope": "partial",
+      "evidenceBasis": "cycle-specific",
+      "sourceIds": [
+        "src-reviewed-nenu-2027-programmes",
+        "src-reviewed-nenu-2027-guide"
+      ],
+      "status": "verified",
+      "verifiedAt": "2026-11-16",
+      "reviewAfter": "2026-12-16",
+      "notes": {
+        "en": "Intake season and calendar opening date are not explicitly stated; no autumn or opening date is inferred. HSK numeric minimum score is not specified. Malaysian Independent Chinese Secondary School language-certificate waiver is conditional and does not waive CSCA."
+      }
+    }
+  ]
+}
