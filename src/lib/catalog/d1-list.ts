@@ -1,3 +1,4 @@
+import { parseAdmissionYear } from '@/lib/data/cycle-scope'
 import {
   admissionCycleSchema,
   programSchema,
@@ -154,7 +155,7 @@ function normalizeProgramCycle(
   const application = isObject(attributes.application) ? attributes.application : attributes
   const tuition = isObject(attributes.tuition) ? attributes.tuition : null
   const academicYear = stringValue(attributes.academicYear)
-  if (!academicYear || !/^\d{4}-\d{4}$/u.test(academicYear)) return null
+  if (!academicYear || !parseAdmissionYear(academicYear)) return null
   const state = stringValue(application.state)
   const intakeValue = stringValue(attributes.intake)
   const intake = intakeValue === 'spring' || intakeValue === 'autumn' ? intakeValue : 'other'

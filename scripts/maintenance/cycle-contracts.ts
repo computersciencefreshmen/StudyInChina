@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { annualCycleIdentityKey, quotedTrackScope, TEACHING_LANGUAGES, trackMatchesProgram } from '../../src/lib/data/cycle-scope'
+import { annualCycleIdentityKey, parseAdmissionYear, quotedAdmissionIntake, quotedTrackScope, TEACHING_LANGUAGES, trackMatchesProgram } from '../../src/lib/data/cycle-scope'
 import { programSchema } from '../../src/lib/data/schema'
 import { evidenceSchema, sha256Schema } from './contracts'
 import { MAINTAINED_CYCLE_FIELDS } from './field-contracts'
@@ -25,7 +25,7 @@ export const cyclePatchSchema = z.object({ fieldPath: z.enum(MAINTAINED_CYCLE_FI
 
 export const cycleDiscoveryFieldsSchema = z.object({
   programId: z.string().min(1), programScopeSha256: sha256Schema,
-  academicYear: z.string().regex(/^20\d{2}-20\d{2}$/u).refine(value => Number(value.slice(5)) === Number(value.slice(0, 4)) + 1),
+  academicYear: z.string().refine(value => parseAdmissionYear(value) !== null),
   intake: z.enum(['spring', 'autumn']), teachingLanguage: z.enum(TEACHING_LANGUAGES).optional(), applicationRound: z.string().trim().min(1).max(120).optional(), patches: z.array(cyclePatchSchema).min(2).max(MAINTAINED_CYCLE_FIELDS.length),
   programEvidence: evidenceSchema, internationalAdmissionsEvidence: evidenceSchema, cycleScopeEvidence: evidenceSchema,
 }).strict().superRefine((fields, context) => {
@@ -89,8 +89,6 @@ export function explicitCycleScope(fields: CycleDiscoveryFields, identity: { nam
   }
   const expectedDegree = typeof identity.degreeLevel === 'string' ? degrees[identity.degreeLevel] : undefined
   if (expectedDegree && !expectedDegree.test(fields.programEvidence.quote)) return false
-  const intakeYear = fields.intake === 'spring' ? fields.academicYear.slice(5) : fields.academicYear.slice(0, 4)
-  const season = fields.intake === 'spring' ? /spring|春季|March|3月/iu : /autumn|fall|秋季|September|9月/iu
-  return new RegExp(`\\b${intakeYear}\\b`, 'u').test(fields.cycleScopeEvidence.quote) && season.test(fields.cycleScopeEvidence.quote)
+  return quotedAdmissionIntake(fields.academicYear, fields.intake, fields.cycleScopeEvidence.quote)
     && /international|foreign|国际|外国|留学/iu.test(fields.internationalAdmissionsEvidence.quote)
 }

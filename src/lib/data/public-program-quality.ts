@@ -1,8 +1,9 @@
+import { isCurrentAdmissionYear } from './cycle-scope'
 import type { AdmissionCycle, AuditMeta, DataBundle, Program } from './types'
 import type { DiscoveryMeta } from './discovery'
 
 /** A public policy version, not an edit to the raw catalogue or maintenance scope. */
-export const PUBLIC_PROGRAM_QUALITY_POLICY = 'studyinchina.public-program-core.v1'
+export const PUBLIC_PROGRAM_QUALITY_POLICY = 'studyinchina.public-program-core.v2'
 type ProvenRecord = AuditMeta & { discovery?: DiscoveryMeta }
 
 // The same proof rules used by buildProgramCoverage: an explicit unknown wins
@@ -35,9 +36,7 @@ export function hasDetailedPublicProgram(program: Program & { discovery?: Discov
     || !known('durationMonths', typeof program.durationMonths === 'number' && program.durationMonths > 0)) return false
   return cycles.some(input => {
     const cycle = input as AdmissionCycle & { discovery?: DiscoveryMeta }
-    const years = /^(20\d{2})-(20\d{2})$/u.exec(cycle.academicYear)
-    if (cycle.programId !== program.id || !years || Number(years[2]) !== Number(years[1]) + 1
-      || Number(years[2]) < Number(today.slice(0, 4)) || Number(years[1]) > Number(today.slice(0, 4)) + 1 || cycle.dateStatus === 'previous-cycle-reference'
+    if (cycle.programId !== program.id || !isCurrentAdmissionYear(cycle.academicYear, today) || cycle.dateStatus === 'previous-cycle-reference'
       || cycle.closesOn !== null && cycle.closesOn < today
       || cycle.teachingLanguage && !program.teachingLanguages.includes(cycle.teachingLanguage)) return false
     const field = (path: string, value: boolean, exemption = false) => supports(cycle, path, value, today, exemption)

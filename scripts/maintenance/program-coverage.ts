@@ -8,6 +8,7 @@ import { readIdentityAcceptances } from '../../src/lib/data/identity-acceptance-
 import { readFieldVerifications } from '../../src/lib/data/field-verification-store'
 import type { IdentityAcceptance } from '../../src/lib/data/identity-acceptance'
 import type { FieldVerification } from '../../src/lib/data/field-verification'
+import { isCurrentAdmissionYear } from '../../src/lib/data/cycle-scope'
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { maintenanceScopeSchema, scopeContentSha256, canonicalJson, type MaintenanceScope } from './contracts'
 import { maintenanceClientFromEnvironment, type MaintenanceClient } from '../automation/catalog-maintenance-client'
@@ -81,8 +82,12 @@ export async function buildProgramCoverage(bundle: DataBundle, scope: Maintenanc
   const complete = projectedPrograms.filter(program => {
     const known = (path: string, meaningful: boolean, exemption = false) => supportsField(program, path, meaningful, today, exemption)
     const usableCycle = projectedCycles.some(cycle => {
-      if (cycle.programId !== program.id || !/^20\d{2}-20\d{2}$/u.test(cycle.academicYear) || cycle.closesOn && cycle.closesOn < today) return false
+      if (cycle.programId !== program.id || !isCurrentAdmissionYear(cycle.academicYear, today) || cycle.dateStatus === 'previous-cycle-reference' || cycle.closesOn && cycle.closesOn < today) return false
       const cycleField = (path: string, meaningful: boolean, exemption = false) => supportsField(cycle, path, meaningful, today, exemption)
+      const schedule = cycleField('dateStatus', cycle.dateStatus === 'rolling')
+        || cycle.dateStatus === 'published' && cycleField('dateStatus', true)
+          && cycleField('closesOn', typeof cycle.closesOn === 'string' && cycle.closesOn >= today)
+      if (!schedule) return false
       // Without common-applicability evidence, a language/round-specific route
       // and conditions must come from that exact annual scope.
       const scoped = Boolean(cycle.teachingLanguage || cycle.applicationRound) || program.teachingLanguages.length > 1

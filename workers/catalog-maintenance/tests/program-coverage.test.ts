@@ -56,6 +56,7 @@ test('a stale identity counts only after independently scoped programme leaves a
   }) as FieldVerification[]
   fields.push({ ...fields[0], entityType: 'admissionCycle', recordId: cycle.id, recordScopeSha256: fieldRecordScopeSha256('admissionCycle', cycle), fieldPath: 'closesOn', value: cycle.closesOn,
     valueSha256: fieldValueSha256(cycle.closesOn) })
+  fields.push({ ...fields.at(-1)!, fieldPath: 'dateStatus', value: 'published', valueSha256: fieldValueSha256('published') })
   assert.equal((await buildProgramCoverage(bundle, scope, today, [identity])).schools[0].currentProgramCount, 0)
   assert.equal((await buildProgramCoverage(bundle, scope, today, [identity], fields)).schools[0].currentProgramCount, 1)
   assert.equal((await buildProgramCoverage(bundle, scope, today, [identity], fields.slice(1))).schools[0].currentProgramCount, 0)
@@ -204,4 +205,19 @@ test('impending review advances a future source capture while keeping a 24-hour 
       if(hoursSinceSuccess===48)assert.equal(f.db.sqlite.prepare("SELECT priority FROM maintenance_jobs WHERE stage='capture'").get()?.priority,0)
     }finally{f.db.sqlite.close()}
   }
+})
+
+
+test('literal admission years count only with a current known schedule and never change old range identities', async () => {
+  const { bundle, scope } = fixture()
+  bundle.programs = [bundle.programs[0]]; bundle.admissionCycles = [bundle.admissionCycles[0]]
+  const cycle = bundle.admissionCycles[0]
+  cycle.academicYear = '2027'
+  assert.equal((await buildProgramCoverage(bundle, scope, today)).schools[0].currentProgramCount, 1)
+  for (const year of ['unknown', '', '2027-2029', '2025', '2030']) {
+    cycle.academicYear = year
+    assert.equal((await buildProgramCoverage(bundle, scope, today)).schools[0].currentProgramCount, 0, year)
+  }
+  cycle.academicYear = '2027'; cycle.closesOn = null; cycle.dateStatus = 'not-announced'
+  assert.equal((await buildProgramCoverage(bundle, scope, today)).schools[0].currentProgramCount, 0)
 })

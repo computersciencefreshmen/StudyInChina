@@ -53,6 +53,22 @@ async function fixture(sourceText?: string | ((degree: string) => string), close
 }
 
 describe('offline independently reviewed field consumer', () => {
+  it('binds spring literal-year field evidence without converting it to an academic range', async () => {
+    const f = await fixture('Spring 2027 admissions for international students. Application deadline 2027-09-30.')
+    const previous = { academicYear: f.cycle.academicYear, intake: f.cycle.intake }
+    try {
+      Object.assign(f.cycle, { academicYear: '2027', intake: 'spring' })
+      f.proposal.scope = { year: '2027', intake: 'spring' }
+      ;(f.proposal.fields as { recordScopeSha256: string }).recordScopeSha256 = fieldRecordScopeSha256('admissionCycle', f.cycle)
+      f.batch.inputCatalogSha256 = await catalogSha256(bundle)
+      await f.seal()
+      const result = await f.run()
+      expect(result.receipt.held).toEqual([])
+      expect(result.receipt.accepted).toHaveLength(1)
+      expect(result.bundle.admissionCycles.find(row => row.id === f.cycle.id)?.academicYear).toBe('2027')
+    } finally { Object.assign(f.cycle, previous) }
+  })
+
   it('updates one exact field and records only that leaf without renewing the whole record', async () => {
     const f = await fixture(), result = await f.run()
     expect(result.receipt.held).toEqual([])

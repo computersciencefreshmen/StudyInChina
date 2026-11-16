@@ -1,3 +1,4 @@
+import { parseAdmissionYear, quotedAdmissionYear } from '../../../src/lib/data/cycle-scope'
 import { stableJson } from './hash'
 import { sanitizeRegexFlags } from './security'
 import type {
@@ -133,9 +134,10 @@ export function criticalEvidenceIssue(
     }
   }
   if (/academic[_A-Z.-]*year/i.test(field.path) && typeof value === 'string') {
-    const match = /^(\d{4})-(\d{4})$/.exec(value)
-    if (!match || Number(match[2]) !== Number(match[1]) + 1) {
-      return 'academic year must be a consecutive YYYY-YYYY range'
+    const year = parseAdmissionYear(value)
+    if (!year) return 'admission year must be YYYY or a consecutive YYYY-YYYY range'
+    if (year.kind === 'year' && !quotedAdmissionYear(value, quote)) {
+      return 'single admission year is not explicitly supported by its evidence quote'
     }
   }
   if (/institution[_A-Z.-]*id$/i.test(field.path) && value !== manifest.institutionId) {

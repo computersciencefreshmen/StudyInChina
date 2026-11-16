@@ -131,7 +131,7 @@ describe('production publication proof before acknowledgement', () => {
     local.files.set(resolve(process.cwd(), 'quality', 'maintenance', 'batches', receipt.batchId, 'identity-receipt.json'), JSON.stringify({ accepted: [{ recordId: 'program-proof' }] }))
     const result = await verifyMaintenancePublication({ root: process.cwd(), sourceCommit: commit, receipt, vercelToken: token, fetcher: fixture({ hiddenProgram: true }) })
     expect(result).toMatchObject({ directoryCounts: { programs: 0 }, detailsChecked: 0, hiddenProgramDetailsChecked: 6,
-      publicProgramQualityPolicy: 'studyinchina.public-program-core.v1' })
+      publicProgramQualityPolicy: 'studyinchina.public-program-core.v2' })
     const acknowledge = vi.fn()
     await expect(publishMaintenanceProof({ root: process.cwd(), sourceCommit: commit, receipt, vercelToken: token, output: 'leak-proof.json',
       fetcher: fixture({ hiddenProgram: true, exposedHiddenProgram: true }), acknowledge })).rejects.toThrow('publication_hidden_program_visible')
