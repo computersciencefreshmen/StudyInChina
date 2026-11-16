@@ -20,7 +20,6 @@ async function fixture() {
   const env = f.env as RefillEnv
   env.CONTINUOUS_REFILL_ENABLED = 'true'; env.REFILL_MODEL_LIMIT = '2'; env.MAINTENANCE_ADMIN_TOKEN = 'a'.repeat(64)
   env.MODEL_ADMISSION = { idFromName() { providerCalls++; throw Error('provider_forbidden') }, get() { throw Error('provider_forbidden') } }
-  let coordinator: CatalogRefillCoordinator
   env.REFILL_COORDINATOR = { idFromName: name => name, get: () => ({ fetch: request => coordinator.fetch(request) }) }
   const deps: RefillDependencies = {
     now: () => clock,
@@ -32,7 +31,7 @@ async function fixture() {
     select: selectRefillCandidates, dispatch: dispatchRefillCandidates, plan: async () => undefined,
     observe: observeRefillDispatch, dispatchStatus: readRefillDispatchStatus, decline: declineRefillDispatch,
   }
-  coordinator = new CatalogRefillCoordinator({ storage, id: REFILL_SINGLETON }, env, deps)
+  const coordinator = new CatalogRefillCoordinator({ storage, id: REFILL_SINGLETON }, env, deps)
   const call = async (path: string, body?: unknown) => {
     const response = await coordinator.fetch(new Request('https://catalog-refill.internal' + path, { method: body === undefined ? 'GET' : 'POST', headers: { authorization: 'Bearer ' + env.MAINTENANCE_ADMIN_TOKEN, 'content-type': 'application/json' }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) }))
     assert.equal(response.status, 200)
