@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { isVisualMediaQuery } from '@/lib/visual-media'
 import { notFound } from 'next/navigation'
 import { ProgramExplorerV2 } from '@/components/features/ProgramExplorerV2'
 import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
@@ -50,6 +52,9 @@ export default async function ProgramsPage({
     />
     <section className="atlas-container atlas-section">
       <DiscoveryNotice locale={locale} />
+      {isVisualMediaQuery(filters.query) ? <aside className="notice" data-testid="visual-media-collection-shortcut">
+        <Link href={`/${locale}/visual-media`}>{locale === 'zh' ? 'Visual Media 硕士专题与英语优先申请简报' : 'Visual Media master’s collection and English-first applicant brief'} →</Link>
+      </aside> : null}
       {result.total === 0 ? <div className="notice" data-testid="program-publication-note">{messages.programs.verificationNote}</div> : null}
       <ProgramExplorerV2 result={result} locale={locale} messages={messages} today={today} />
     </section>
