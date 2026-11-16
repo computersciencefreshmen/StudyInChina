@@ -30,9 +30,10 @@ export function refillProofBudget(env:MaintenanceEnv){
     // bounded reader's validation and are never accumulated in this cache.
     if(object.size===undefined||object.size>CACHE_BYTES-cacheBytes){
      cache.delete(key)
-     // Other callers may already await this Promise. Give every body read its
-     // own new object instead of sharing the original single-use stream.
-     const fresh=async()=>{check();counts.r2Reads++;const value=await env.SNAPSHOTS_BUCKET.get(key);check();if(!value)throw new MaintenanceError('refill_dispatch_artifact_unavailable');return value}
+     // Other callers may already await this Promise. Atomically consume the
+     // original once; later readers get their own stream, never its used body.
+     let original:BucketObject|null=object
+     const fresh=async()=>{check();if(original){const value=original;original=null;return value}counts.r2Reads++;const value=await env.SNAPSHOTS_BUCKET.get(key);check();if(!value)throw new MaintenanceError('refill_dispatch_artifact_unavailable');return value}
      return{size:object.size,etag:object.etag,text:async()=>(await fresh()).text(),arrayBuffer:async()=>(await fresh()).arrayBuffer()}
     }
     cacheBytes+=object.size

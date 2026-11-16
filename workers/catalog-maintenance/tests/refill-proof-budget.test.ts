@@ -106,11 +106,12 @@ test('ledger-only status skips current subject scans but preserves immutable pro
 test('invocation cache handles concurrent one-shot bodies, unknown-size objects and the16MiB retention bound',async()=>{
  const f=await refillFixture(1)
  try{
-  let calls=0;f.env.SNAPSHOTS_BUCKET.get=async key=>{calls++;const data=new Uint8Array(key.startsWith('large')?9*1024*1024:4).fill(65),response=new Response(data);return{etag:'one-shot',...(key==='unknown'?{}:{size:data.length}),text:()=>response.text(),arrayBuffer:()=>response.arrayBuffer()}}
+  let calls=0;const bodies:Response[]=[];f.env.SNAPSHOTS_BUCKET.get=async key=>{calls++;const data=new Uint8Array(key.startsWith('large')?9*1024*1024:4).fill(65),response=new Response(data);bodies.push(response);return{etag:'one-shot',...(key==='unknown'?{}:{size:data.length}),text:()=>response.text(),arrayBuffer:()=>response.arrayBuffer()}}
   const budget=refillProofBudget(f.env)
   const pair=await Promise.all([budget.env.SNAPSHOTS_BUCKET.get('small'),budget.env.SNAPSHOTS_BUCKET.get('small')]);assert.equal(await pair[0]!.text(),'AAAA');assert.equal((await pair[1]!.arrayBuffer()).byteLength,4);assert.equal(calls,1)
   const uncached=await Promise.all([budget.env.SNAPSHOTS_BUCKET.get('unknown'),budget.env.SNAPSHOTS_BUCKET.get('unknown')]);assert.equal(await uncached[0]!.text(),'AAAA');assert.equal(await uncached[1]!.text(),'AAAA')
   await(await budget.env.SNAPSHOTS_BUCKET.get('large'))!.arrayBuffer();await(await budget.env.SNAPSHOTS_BUCKET.get('large-two'))!.arrayBuffer()
   assert.ok(budget.diagnostics().cachedBytes<=16*1024*1024)
+  assert.equal(calls,5);assert.equal(bodies.every(body=>body.bodyUsed),true,'every acquired one-shot body is consumed; uncached reads do not abandon the initial object')
  }finally{f.db.sqlite.close()}
 })
