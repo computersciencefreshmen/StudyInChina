@@ -1,0 +1,9 @@
+# Public programme core quality
+
+Applicants should see a specific programme only after official, current proof supports its teaching language, duration and a usable annual application scope containing an application route, language requirements and eligibility. An empty value is not an exemption: only an independently verified `not_applicable` leaf can establish one. Explicit language/round tracks require their own route and conditions; conditions from another track do not fill a gap. Tuition and descriptive marketing fields are outside this core gate.
+
+`public-program-quality.ts` filters the existing public projections. Raw catalogue rows, identity/field ledgers, `selectDiscoveryData`, `selectPublishedData`, maintenance scope, reservations and jobs remain unchanged. Unsupported remote public backends fail closed instead of using an unfiltered remote list or compare endpoint. The current production JSON backend remains supported.
+
+The public snapshot supplies lists, detail lookup, search, comparison, school relations, scholarship relations and sitemap. Hidden programme cycles are removed. A programme-specific scholarship with no visible programme is removed rather than accidentally broadening its applicability. Public revisions and both cursor formats bind the policy version. The existing sole publisher uses the same filtered expected projection while retaining owner/project/exact-commit, complete identity pagination, six-language details and published acknowledgement checks.
+
+The current audit finds no programme meeting the core rule. An empty public programme catalogue is intentional; duration-only leaf updates do not meet the rule. Future independently reviewed core facts can make a programme visible through the normal pipeline. This is neither deletion nor a claim that all raw records have been manually reviewed. No deployment or cloud mutation is part of this local change.

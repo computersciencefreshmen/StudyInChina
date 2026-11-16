@@ -13,6 +13,8 @@ import { bundleSchema } from '@/lib/data/schema'
 import { getCatalogData, getData, resetCatalogRepositoryForTests } from '@/lib/data/load'
 import { getCatalogApiService, resetCatalogApiRepositoryForTests } from '@/lib/catalog-api/runtime'
 import type { DataBundle } from '@/lib/data/types'
+import { selectDiscoveryData } from '@/lib/data/discovery'
+import { readFieldVerifications } from '@/lib/data/field-verification-store'
 
 const workspace = process.cwd(), roots: string[] = [], today = '2026-11-03'
 const filenames = { sources: 'sources', cities: 'cities', universities: 'universities', programs: 'programs', admissionCycles: 'admission-cycles', scholarships: 'scholarships' } as const
@@ -32,7 +34,7 @@ function fixture() {
     sources: [{ id: 'official', url: 'https://fixture.edu/program', title: 'Official fixture', publisher: 'Fixture University', kind: 'program', language: 'en', official: true, accessedAt: today }],
     cities: [{ ...audit, reviewAfter: '2027-01-01', id: 'city', slug: 'city', name: { en: 'City', zh: '城市' }, province: null, region: null, coordinates: null, overview: null, climate: null, foodHighlights: [], sights: [] }],
     universities: [{ ...audit, reviewAfter: '2027-01-01', id: 'university', slug: 'university', name: { en: 'University', zh: '大学' }, cityId: 'city', region: null, officialUrl: 'https://fixture.edu/', admissionsUrl: null, summary: null, featured: false }],
-    programs: [{ ...audit, id: 'program', slug: 'program', universityId: 'university', name: { en: 'Computer Science', zh: '计算机科学' }, degreeLevel: 'master', discipline: 'engineering', teachingLanguages: ['English'], durationMonths: 24, programUrl: 'https://fixture.edu/program', applyUrl: 'https://fixture.edu/apply', languageRequirements: [{ test: 'IELTS', minimum: '6.5' }] }],
+    programs: [{ ...audit, id: 'program', slug: 'program', universityId: 'university', name: { en: 'Computer Science', zh: '计算机科学' }, degreeLevel: 'master', discipline: 'engineering', teachingLanguages: ['English'], durationMonths: 24, programUrl: 'https://fixture.edu/program', applyUrl: 'https://fixture.edu/apply', languageRequirements: [{ test: 'IELTS', minimum: '6.5' }], supplementaryDetails: { eligibility: [{ en: 'Bachelor degree required.' }] } }],
     admissionCycles: [{ ...audit, id: 'cycle', programId: 'program', academicYear: '2026-2027', intake: 'spring', opensOn: '2026-11-01', closesOn: today, dateStatus: 'published', tuitionCny: 12000, tuitionPeriod: 'academic-year', tuitionStatus: 'confirmed', applicationFeeCny: 400, evidenceBasis: 'cycle-specific', factScope: 'complete' }],
     scholarships: [{ ...audit, id: 'scholarship', slug: 'scholarship', name: { en: 'Scholarship', zh: '奖学金' }, providerType: 'university', universityIds: ['university'], programIds: ['program'], coverage: { tuition: 'full', accommodation: 'partial', insurance: true, stipendCnyPerMonth: 1000 }, deadline: today, applicationUrl: 'https://fixture.edu/award', summary: { en: 'Current facts' } }],
   }
@@ -52,7 +54,9 @@ function fixture() {
   vi.spyOn(process, 'cwd').mockReturnValue(root)
   const repository = new JsonCatalogRepository()
   const snapshot = async (date = today) => getPublicCatalogSnapshot(await repository.getBundle(), date)
-  return { root, directory, bundle, identities, receiptFile, writeBundle, writeIdentities, repository, snapshot }
+  const internal = async (date: string) => selectDiscoveryData(await repository.getBundle(), date,
+    readIdentityAcceptances(undefined, { strictProjection: true }), readFieldVerifications())
+  return { root, directory, bundle, identities, receiptFile, writeBundle, writeIdentities, repository, snapshot, internal }
 }
 
 function durationField(bundle: DataBundle, reviewAfter = today): FieldVerification {
@@ -188,30 +192,38 @@ describe('public snapshot correctness across independent requests', () => {
     expect(midnight.current.programs).toEqual([])
     expect(midnight.current.admissionCycles).toEqual([])
     expect(midnight.current.scholarships).toEqual([])
-    expect(midnight.directory.programs[0].discovery.currentFacts).toBe(false)
-    expect(midnight.directory.programs[0].durationMonths).toBe(24)
-    expect(midnight.directory.programs[0].applyUrl).toBeNull()
-    expect(midnight.directory.scholarships[0].deadline).toBeNull()
-    expect(midnight.directory.scholarships[0].coverage.tuition).toBe('unknown')
+    expect(midnight.directory.programs).toEqual([])
+    expect(midnight.directory.scholarships).toEqual([])
+    const internal = await f.internal('2026-11-04')
+    expect(internal.programs[0].discovery.currentFacts).toBe(false)
+    expect(internal.programs[0].durationMonths).toBe(24)
+    expect(internal.programs[0].applyUrl).toBeNull()
+    expect(internal.scholarships[0].deadline).toBeNull()
+    expect(internal.scholarships[0].coverage.tuition).toBe('unknown')
     const expiredField = await f.snapshot(getTodayDate(new Date('2026-11-04T16:00:00.000Z')))
-    expect(expiredField.directory.programs[0].durationMonths).toBeNull()
-    expect(expiredField.directory.programs[0].discovery.currentFieldPaths).toEqual([])
+    expect(expiredField.directory.programs).toEqual([])
+    expect((await f.internal('2026-11-05')).programs[0].durationMonths).toBeNull()
+    expect((await f.internal('2026-11-05')).programs[0].discovery.currentFieldPaths).toEqual([])
     expect(expiredField.revision).not.toBe(midnight.revision)
   })
 
   it('detects creation, corruption and repair of a field ledger and retains only independently current leaves', async () => {
     const f = fixture(), date = '2026-11-04', first = await f.snapshot(date)
-    expect(first.directory.programs[0].durationMonths).toBeNull()
+    expect(first.directory.programs).toEqual([])
+    expect((await f.internal(date)).programs[0].durationMonths).toBeNull()
     const file = join(f.directory, 'field-verifications.json'), entry = durationField(f.bundle, date)
     replaceJson(file, { schemaVersion: 1, entries: [entry] })
     const checked = await f.snapshot(date)
     expect(checked.revision).not.toBe(first.revision)
-    expect(checked.directory.programs[0].durationMonths).toBe(24)
-    expect(checked.directory.programs[0].applyUrl).toBeNull()
+    expect(checked.directory.programs).toEqual([])
+    expect((await f.internal(date)).programs[0].durationMonths).toBe(24)
+    expect((await f.internal(date)).programs[0].applyUrl).toBeNull()
     replaceJson(file, { schemaVersion: 1, entries: [{ invalid: true }] })
     const corrupt = await f.snapshot(date)
-    expect(corrupt.directory.programs[0].durationMonths).toBeNull()
+    expect(corrupt.directory.programs).toEqual([])
+    expect((await f.internal(date)).programs[0].durationMonths).toBeNull()
     replaceJson(file, { schemaVersion: 1, entries: [entry] })
-    expect((await f.snapshot(date)).directory.programs[0].durationMonths).toBe(24)
+    expect((await f.snapshot(date)).directory.programs).toEqual([])
+    expect((await f.internal(date)).programs[0].durationMonths).toBe(24)
   })
 })
