@@ -2,7 +2,7 @@ import { REFILL_SINGLETON, continuousRefillEnabled, type RefillAcquireInput, typ
 import { HASH } from './util'
 
 export { continuousRefillEnabled } from './refill-contract'
-async function request(env: RefillEnv, path: '/wake' | '/acquire' | '/claimed' | '/release' | '/status', body?: unknown): Promise<Record<string, unknown>> {
+async function request(env: RefillEnv, path: '/wake' | '/acquire' | '/claimed' | '/decline' | '/release' | '/status', body?: unknown): Promise<Record<string, unknown>> {
   if (!env.REFILL_COORDINATOR || !HASH.test(env.MAINTENANCE_ADMIN_TOKEN ?? '')) throw new Error('refill_binding_unavailable')
   const stub = env.REFILL_COORDINATOR.get(env.REFILL_COORDINATOR.idFromName(REFILL_SINGLETON))
   const response = await stub.fetch(new Request(`https://catalog-refill.internal${path}`, { method: body === undefined ? 'GET' : 'POST', headers: { authorization: `Bearer ${env.MAINTENANCE_ADMIN_TOKEN}`, 'content-type': 'application/json' }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) }))
@@ -38,6 +38,9 @@ export async function confirmRefillClaim(env: RefillEnv, input: { jobId: string;
   const result = await request(env, '/claimed', input)
   if (result.confirmed !== true) throw new Error('refill_claim_unconfirmed')
   return result
+}
+export async function declineRefillDelivery(env: RefillEnv, input: { jobId: string; dispatchToken: string; epochSha256: string; reason: string }) {
+  return request(env, '/decline', input)
 }
 export async function readRefillStatus(env: RefillEnv) {
   if (!env.REFILL_COORDINATOR) return { enabled: false, reason: 'refill_binding_unavailable' }

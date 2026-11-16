@@ -21,7 +21,7 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
             for(const row of candidates){if(saved.outstanding[row.jobId].phase!=='sending'||saved.outstanding[row.jobId].dispatchToken!==input.dispatchToken)throw Error('queue_egress_preceded_durable_intent')}
             for(const row of candidates)await env.DB.prepare('INSERT INTO test_sends VALUES(?,?,?)').bind(input.dispatchToken,row.jobId,input.epochSha256).run()
             return {sent:candidates.map(row=>row.jobId),notSent:[],unconfirmed:[]}
-          },plan:async()=>null,observe:async()=>true,dispatchStatus:async()=>({entries:[]})
+          },plan:async()=>null,observe:async()=>true,dispatchStatus:async()=>({entries:[]}),decline:async()=>({declined:false,reason:'test_no_decline'})
         })
         this.nativeState=state
       }
@@ -35,14 +35,14 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
         return super.fetch(request)
       }
     }
-    export default {fetch(request,env){return env.REFILL.get(env.REFILL.idFromName('catalog-refill-v1')).fetch(request)}}
+    export default {fetch(request,env){const name=new URL(request.url).pathname==='/test/wrong-object'?'wrong-object':'catalog-refill-v1';return env.REFILL_COORDINATOR.get(env.REFILL_COORDINATOR.idFromName(name)).fetch(request)}}
   ` }, bundle: true, platform: 'browser', format: 'esm', target: 'es2022', write: false,
     // This fixture exercises the real coordinator and native DO/D1 bindings.
     // The companion dispatcher has its own native evidence/CAS tests. Egress
     // here is a D1 test receipt, and no real provider/queue resource is present.
     plugins: [{ name: 'isolated-refill-repository', setup(builder) {
       builder.onResolve({ filter: /^\.\/refill-dispatch$/ }, () => ({ path: 'test-only-refill-repository', namespace: 'refill-fixture' }))
-      builder.onLoad({ filter: /.*/, namespace: 'refill-fixture' }, () => ({ contents: 'export const selectRefillCandidates=()=>{throw Error("unexpected_default_selector")};export const dispatchRefillCandidates=()=>{throw Error("unexpected_default_dispatcher")};export const planDueCaptureJobs=()=>{throw Error("unexpected_default_planner")};export const observeRefillDispatch=()=>{throw Error("unexpected_default_observer")};export const readRefillDispatchStatus=()=>{throw Error("unexpected_default_ledger")}' }))
+      builder.onLoad({ filter: /.*/, namespace: 'refill-fixture' }, () => ({ contents: 'export const selectRefillCandidates=()=>{throw Error("unexpected_default_selector")};export const dispatchRefillCandidates=()=>{throw Error("unexpected_default_dispatcher")};export const planDueCaptureJobs=()=>{throw Error("unexpected_default_planner")};export const observeRefillDispatch=()=>{throw Error("unexpected_default_observer")};export const readRefillDispatchStatus=()=>{throw Error("unexpected_default_ledger")};export const declineRefillDispatch=()=>{throw Error("unexpected_default_decline")}' }))
     } }] })
   let egress = 0
   const mf = new Miniflare(convertV4MiniflareOptions({ name: 'native-refill-coordinator', modules: true, script: bundled.outputFiles[0].text,
@@ -50,10 +50,11 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
     // about newer production compatibility flags.
     compatibilityDate: '2026-09-18', host: '127.0.0.1', port: 0, cf: false, telemetry: { enabled: false },
     bindings: { CONTINUOUS_REFILL_ENABLED: 'true', REFILL_MODEL_LIMIT: '2', MAINTENANCE_ADMIN_TOKEN: admin },
-    durableObjects: { REFILL: { className: 'TestRefill', useSQLite: true } }, d1Databases: { DB: 'refill-native-db' },
+    durableObjects: { REFILL_COORDINATOR: { className: 'TestRefill', useSQLite: true } }, d1Databases: { DB: 'refill-native-db' },
     outboundService: async () => { egress++; return new WorkerResponse('external access forbidden', { status: 502 }) } }))
   try {
     await mf.ready
+    assert.equal((await mf.dispatchFetch('https://refill.test/test/wrong-object', { headers: { authorization: 'Bearer ' + admin } })).status, 409)
     const db = await mf.getD1Database('DB'), at = new Date().toISOString()
     await db.prepare('CREATE TABLE test_jobs(job_id TEXT PRIMARY KEY,source_id TEXT,stage TEXT,status TEXT,attempt INTEGER,updated_at TEXT,lease_token TEXT,protected_model INTEGER)').run()
     await db.prepare('CREATE TABLE test_sends(dispatch_token TEXT,job_id TEXT,epoch TEXT,PRIMARY KEY(dispatch_token,job_id))').run()

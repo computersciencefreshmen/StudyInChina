@@ -1,6 +1,7 @@
 import type { Control } from './types'
 import { control } from './repository'
-import * as repository from './refill-dispatch'
+import { selectRefillCandidates, dispatchRefillCandidates, planDueCaptureJobs,
+  observeRefillDispatch, readRefillDispatchStatus, declineRefillDispatch } from './refill-dispatch'
 import { fetchPlanQuota, quotaAdmission } from './admission'
 import { hasUrgentMaintenance } from './admission-priority'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
@@ -8,13 +9,14 @@ import { quotaWait, rememberQuotaWait } from './runtime'
 import { isDailyD1QuotaError } from './backend-errors'
 import { readBackgroundBudgetGate } from '../../shared/background-budget'
 import { authorized, canonical, digest, HASH, json, record, requestJson } from './util'
-import { continuousRefillEnabled, refillKind, refillModelLimit, REFILL_INTERVAL_MS, REFILL_LIMITS, REFILL_WINDOW_MS,
+import { continuousRefillEnabled, refillKind, refillModelLimit, REFILL_SINGLETON, REFILL_INTERVAL_MS, REFILL_LIMITS, REFILL_WINDOW_MS,
   type RefillAcquireInput, type RefillCandidate, type RefillDispatchResult, type RefillDurableState, type RefillEnv,
   type RefillFence, type RefillJobState, type RefillKind, type RefillPermitResult } from './refill-contract'
 
 type Gate = { fence: RefillFence | null; capture: boolean; model: boolean; expansion?: boolean; quotaCheckedAt?: number; reason: string; retryAt: number }
 type Entry = { candidate: RefillCandidate; fenceSha256: string | null; epochSha256: string; dispatchToken: string;
   kind: RefillKind; phase: 'prepared' | 'sending' | 'sent' | 'uncertain'; createdAt: number;
+  chargeWindow: number;
   permit: { token: string; attempt: number; updatedAt: string; observedRunning: boolean; claimLease: string | null } | null }
 type Saved = { version: 1; generation: number; epochSha256: string | null; fence: RefillFence | null; outstanding: Record<string, Entry>;
   window: number; used: { capture: number; model: number }; lastRefillAt: number | null; nextRefillAt: number | null;
@@ -25,13 +27,15 @@ type Repository = {
   dispatchRefillCandidates(env: RefillEnv, fence: RefillFence, candidates: RefillCandidate[], options: { now: number; dispatchToken: string; epochSha256: string }): Promise<RefillDispatchResult>;
   planDueCaptureJobs(env: RefillEnv, now: number): Promise<unknown>;
   observeRefillDispatch(env: RefillEnv, dispatchToken: string, jobId: string): Promise<boolean>;
-  readRefillDispatchStatus(env: RefillEnv, dispatchToken: string): Promise<{ entries: Array<{ jobId: string; status: string; epochSha256: string }> }>;
+  readRefillDispatchStatus(env: RefillEnv, dispatchToken: string): Promise<{ entries: Array<{ jobId: string; status: string; epochSha256: string; resolution?: string | null; receivedNotStartedReceiptSha256?: string | null }> }>;
+  declineRefillDispatch(env: RefillEnv, input: { jobId: string; dispatchToken: string; epochSha256: string; reason: string; currentEpochSha256?: string }): Promise<{ declined: boolean; reason: string }>;
 }
 export type RefillDependencies = {
   now(): number; gate(env: RefillEnv, now: number, provider: boolean): Promise<Gate>;
   jobs(env: RefillEnv, ids: string[]): Promise<RefillJobState[]>;
   select: Repository['selectRefillCandidates']; dispatch: Repository['dispatchRefillCandidates']; plan: Repository['planDueCaptureJobs'];
   observe: Repository['observeRefillDispatch']; dispatchStatus: Repository['readRefillDispatchStatus'];
+  decline: Repository['declineRefillDispatch'];
 }
 const fenceFor = (cfg: Control): RefillFence => ({ scopeSha256: cfg.scope_sha256, inputCatalogSha256: cfg.input_catalog_sha256, revision: cfg.revision, canaryJson: cfg.canary_json })
 const sameFence = (a: RefillFence | null, b: RefillFence | null) => Boolean(a && b && a.scopeSha256 === b.scopeSha256
@@ -84,21 +88,21 @@ async function jobs(env: RefillEnv, ids: string[]): Promise<RefillJobState[]> {
 
 // Repository functions are supplied by the companion bounded selection/dispatch
 // module. The interface keeps fake storage tests independent of queue egress.
-const repo = repository as unknown as Repository
 const defaults: RefillDependencies = { now: Date.now, gate: readRefillGate, jobs,
-  select: (env, options) => repo.selectRefillCandidates(env, options),
-  dispatch: (env, fence, candidates, options) => repo.dispatchRefillCandidates(env, fence, candidates, options),
-  plan: (env, now) => repo.planDueCaptureJobs(env, now),
-  observe: (env, dispatchToken, jobId) => repo.observeRefillDispatch(env, dispatchToken, jobId),
-  dispatchStatus: (env, dispatchToken) => repo.readRefillDispatchStatus(env, dispatchToken) }
+  select: selectRefillCandidates, dispatch: dispatchRefillCandidates, plan: planDueCaptureJobs,
+  observe: observeRefillDispatch, dispatchStatus: readRefillDispatchStatus, decline: declineRefillDispatch }
 
 /** One independent singleton. In particular, it never opens, deletes, expires or
  * rewrites a request in the ModelAdmission Durable Object. */
 export class CatalogRefillCoordinator {
   private tail: Promise<unknown> = Promise.resolve()
   private readonly deps: RefillDependencies
+  private readonly singleton: boolean
   constructor(private readonly state: RefillDurableState, private readonly env: RefillEnv, dependencies: Partial<RefillDependencies> = {}) {
     this.deps = { ...defaults, ...dependencies }
+    this.singleton = env.REFILL_COORDINATOR && state.id !== undefined
+      ? String(env.REFILL_COORDINATOR.idFromName(REFILL_SINGLETON)) === String(state.id)
+      : Object.keys(dependencies).length > 0
   }
   private serial<T>(run: () => Promise<T>): Promise<T> {
     const result = this.tail.then(run, run)
@@ -138,13 +142,15 @@ export class CatalogRefillCoordinator {
   private async reconcile(saved: Saved) {
     const ids = Object.keys(saved.outstanding)
     const current = new Map((await this.deps.jobs(this.env, ids)).map(row => [row.jobId, row]))
-    const uncertain = Object.values(saved.outstanding).filter(entry => entry.phase === 'sending' || entry.phase === 'uncertain')
-    for (const dispatchToken of new Set(uncertain.map(entry => entry.dispatchToken))) {
+    const deliveries = Object.values(saved.outstanding).filter(entry => entry.fenceSha256 !== null)
+    for (const dispatchToken of new Set(deliveries.map(entry => entry.dispatchToken))) {
       const ledger = await this.deps.dispatchStatus(this.env, dispatchToken)
       for (const receipt of ledger.entries) {
         const entry = saved.outstanding[receipt.jobId], job = current.get(receipt.jobId)
         if (!entry || entry.dispatchToken !== dispatchToken || receipt.epochSha256 !== entry.epochSha256) continue
-        if (receipt.status === 'not_sent' && job && !job.protectedModel && ['queued', 'retry', 'held', 'done'].includes(job.status)) await this.close(saved, receipt.jobId, 'not_sent_verified')
+        const refused = receipt.status === 'observed' && receipt.resolution === 'received_not_started' && HASH.test(receipt.receivedNotStartedReceiptSha256 ?? '')
+        if (refused && job && ['queued', 'retry'].includes(job.status) && job.attempt === entry.candidate.attempt && !job.leaseToken) await this.close(saved, receipt.jobId, 'received_not_started_verified')
+        else if (receipt.status === 'not_sent' && job && !job.protectedModel && ['queued', 'retry', 'held', 'done'].includes(job.status)) await this.close(saved, receipt.jobId, 'not_sent_verified')
         else if (receipt.status === 'sent' || receipt.status === 'observed') entry.phase = 'sent'
       }
     }
@@ -180,13 +186,20 @@ export class CatalogRefillCoordinator {
     const unchanged = saved.fence && sameFence(saved.fence, current.fence) && saved.epochSha256 === await this.epoch(current.fence, saved.generation)
     if (!unchanged) {
       const jobs = await this.reconcile(saved)
+      const nextGeneration = saved.generation + 1, nextEpoch = await this.epoch(current.fence, nextGeneration)
       for (const [id, entry] of Object.entries(saved.outstanding)) {
         const row = jobs.get(id)
         // Old deliveries are rejected by acquire. Only provably not-running,
         // not-unknown jobs can leave their old epoch's reservation.
-        if (!entry.permit && row && !row.protectedModel && ['queued', 'retry', 'done', 'held'].includes(row.status)) await this.close(saved, id, 'epoch_invalidated')
+        if (row && ['queued', 'retry'].includes(row.status) && !row.leaseToken && row.attempt === entry.candidate.attempt) {
+          if (entry.phase === 'prepared' && !entry.permit) await this.close(saved, id, 'epoch_prepared_invalidated')
+          else {
+            const receipt = await this.deps.decline(this.env, { jobId: id, dispatchToken: entry.dispatchToken, epochSha256: entry.epochSha256, currentEpochSha256: nextEpoch, reason: 'stale_epoch' })
+            if (receipt.declined) await this.close(saved, id, 'epoch_delivery_declined')
+          }
+        }
       }
-      saved.generation++; saved.epochSha256 = await this.epoch(current.fence, saved.generation); saved.fence = current.fence; saved.quota = null
+      saved.generation = nextGeneration; saved.epochSha256 = nextEpoch; saved.fence = current.fence; saved.quota = null
       await this.save(saved)
     }
   }
@@ -224,14 +237,20 @@ export class CatalogRefillCoordinator {
     await this.schedule(saved, Math.max(saved.gateRetryAt ?? 0, (saved.lastRefillAt ?? 0) + REFILL_INTERVAL_MS, now + REFILL_INTERVAL_MS))
     return this.telemetry(saved)
   }
-  private async send(saved: Saved, batch: Entry[], now: number) {
+  private async send(saved: Saved, batch: Entry[]) {
     const first = batch[0]
     const fence = await this.state.storage.get<RefillFence>(`plan:${first.dispatchToken}`)
     if (!fence || !first.fenceSha256 || await digest(canonical(fence)) !== first.fenceSha256) throw new Error('refill_dispatch_plan_invalid')
+    const sendingAt = this.deps.now()
+    this.resetBudget(saved, sendingAt)
+    const cap = first.kind === 'model' ? REFILL_LIMITS.modelPerWindow : REFILL_LIMITS.capturePerWindow
+    const uncharged = batch.filter(entry => entry.chargeWindow !== saved.window)
+    if (uncharged.length > cap - saved.used[first.kind]) throw new Error('refill_recovery_window_budget')
+    for (const entry of uncharged) { saved.used[entry.kind]++; entry.chargeWindow = saved.window }
     batch.forEach(entry => { entry.phase = 'sending' })
     await this.save(saved)
     let result: RefillDispatchResult
-    try { result = await this.deps.dispatch(this.env, fence, batch.map(entry => entry.candidate), { now, dispatchToken: first.dispatchToken, epochSha256: first.epochSha256 }) }
+    try { result = await this.deps.dispatch(this.env, fence, batch.map(entry => entry.candidate), { now: sendingAt, dispatchToken: first.dispatchToken, epochSha256: first.epochSha256 }) }
     catch { batch.forEach(entry => { entry.phase = 'uncertain' }); await this.save(saved); throw new Error('dispatch_outcome_unconfirmed') }
     const sent = new Set(result.sent), rejected = new Map(result.notSent.map(row => [row.jobId, row.reason]))
     for (const prior of batch) {
@@ -243,6 +262,7 @@ export class CatalogRefillCoordinator {
     await this.save(saved)
   }
   private async refill() {
+    if (!this.singleton) return
     const saved = await this.load(), now = this.deps.now()
     const scheduledFor = saved.nextRefillAt
     saved.nextRefillAt = null
@@ -271,11 +291,14 @@ export class CatalogRefillCoordinator {
       const prepared = Object.values(saved.outstanding).filter(entry => entry.phase === 'prepared' && entry.epochSha256 === saved.epochSha256
         && (entry.kind === 'capture' ? current.capture : current.model && (current.expansion !== false || entry.candidate.stage === 'maintain')))
       for (const dispatchToken of new Set(prepared.map(entry => entry.dispatchToken))) {
-        const batch = prepared.filter(entry => entry.dispatchToken === dispatchToken).slice(0, remaining)
+        const group = prepared.filter(entry => entry.dispatchToken === dispatchToken)
+        const cap = group[0].kind === 'model' ? REFILL_LIMITS.modelPerWindow : REFILL_LIMITS.capturePerWindow
+        let room = cap - saved.used[group[0].kind]
+        const batch = group.filter(entry => entry.chargeWindow === saved.window || room-- > 0).slice(0, remaining)
         if (!batch.length) break
         // A persisted prepared state proves send-start was never confirmed. A
         // sending/uncertain state is NEVER taken through this recovery path.
-        await this.send(saved, batch, now); remaining -= batch.length; selected += batch.length
+        await this.send(saved, batch); remaining -= batch.length; selected += batch.length
       }
       for (const kind of ['model', 'capture'] as const) {
         const count = kind === 'model' && current.expansion === false
@@ -300,13 +323,13 @@ export class CatalogRefillCoordinator {
         // fence for every outstanding job could exceed a DO value's size limit.
         await this.state.storage.put(`plan:${dispatchToken}`, plan.fence)
         for (const candidate of plan.candidates) {
-          saved.outstanding[candidate.jobId] = { candidate, fenceSha256, epochSha256: saved.epochSha256, dispatchToken, kind, phase: 'prepared', createdAt: now, permit: null }
+          saved.outstanding[candidate.jobId] = { candidate, fenceSha256, epochSha256: saved.epochSha256, dispatchToken, kind, phase: 'prepared', createdAt: now, chargeWindow: saved.window, permit: null }
           saved.used[kind]++
         }
         // Complete selection and its bounded window charge are durable before
         // the send-start marker, which is durable before ANY queue egress.
         await this.save(saved)
-        await this.send(saved, plan.candidates.map(candidate => saved.outstanding[candidate.jobId]), now)
+        await this.send(saved, plan.candidates.map(candidate => saved.outstanding[candidate.jobId]))
         selected += plan.candidates.length; remaining -= plan.candidates.length
       }
       const counts = this.counts(saved)
@@ -371,7 +394,7 @@ export class CatalogRefillCoordinator {
       const cap = kind === 'model' ? REFILL_LIMITS.modelPerWindow : REFILL_LIMITS.capturePerWindow
       if (saved.used[kind] >= cap || Object.keys(saved.outstanding).length >= 32) return denied('refill_dispatch_budget', 60)
       entry = { candidate: { jobId: job.jobId, sourceId: job.sourceId, stage: job.stage, status: job.status as 'queued' | 'retry', attempt: job.attempt, updatedAt: job.updatedAt, enqueuedAt: null, leaseToken: job.leaseToken }, fenceSha256: null, epochSha256: saved.epochSha256,
-        dispatchToken: crypto.randomUUID(), kind, phase: 'sent', createdAt: now, permit: null }
+        dispatchToken: crypto.randomUUID(), kind, phase: 'sent', createdAt: now, chargeWindow: saved.window, permit: null }
       saved.outstanding[job.jobId] = entry; saved.used[kind]++
     }
     entry.permit = { token: crypto.randomUUID(), attempt: job.attempt, updatedAt: job.updatedAt, observedRunning: false, claimLease: null }
@@ -380,6 +403,7 @@ export class CatalogRefillCoordinator {
   }
   async fetch(request: Request): Promise<Response> {
     return this.serial(async () => {
+      if (!this.singleton) return json({ error: 'refill_singleton_required' }, 409)
       if (!authorized(request, this.env)) return json({ error: 'unauthorized' }, 401)
       const path = new URL(request.url).pathname
       if (path === '/status' && request.method === 'GET') return json(this.telemetry(await this.load()))
@@ -388,6 +412,15 @@ export class CatalogRefillCoordinator {
       if (!body) return json({ error: 'invalid_refill_request' }, 400)
       if (path === '/wake' && ['watchdog', 'completion', 'operator'].includes(String(body.reason))) return json(await this.wake(String(body.reason), body.planCaptures === true))
       if (path === '/acquire') return json(await this.acquire(body as RefillAcquireInput))
+      if (path === '/decline' && HASH.test(String(body.jobId)) && typeof body.dispatchToken === 'string' && HASH.test(String(body.epochSha256)) && typeof body.reason === 'string') {
+        const saved = await this.load()
+        const result = await this.deps.decline(this.env, { jobId: String(body.jobId), dispatchToken: body.dispatchToken, epochSha256: String(body.epochSha256), reason: body.reason,
+          ...(saved.epochSha256 ? { currentEpochSha256: saved.epochSha256 } : {}) })
+        const entry = saved.outstanding[String(body.jobId)]
+        if (result.declined && entry?.dispatchToken === body.dispatchToken && entry.epochSha256 === body.epochSha256) await this.close(saved, String(body.jobId), 'received_not_started_verified')
+        if (result.declined) await this.wake('completion')
+        return json(result)
+      }
       if (path === '/claimed' && HASH.test(String(body.jobId)) && typeof body.permitToken === 'string' && typeof body.leaseToken === 'string' && body.leaseToken.length > 0) {
         const saved = await this.load(), entry = saved.outstanding[String(body.jobId)]
         if (!entry?.permit || entry.permit.token !== body.permitToken) return json({ confirmed: false, reason: 'refill_permit_mismatch' })

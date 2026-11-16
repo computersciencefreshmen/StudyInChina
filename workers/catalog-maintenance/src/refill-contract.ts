@@ -17,7 +17,7 @@ export type RefillAcquireInput = { jobId: string; dispatchToken?: string; epochS
 export type RefillPermitResult = { allowed: boolean; permitToken?: string; reason: string; retryAfter: number }
 export type RefillWakeInput = { reason: 'watchdog' | 'completion' | 'operator'; planCaptures?: boolean }
 export type RefillStorage = DurableStorage & { setAlarm(time: number): Promise<void>; deleteAlarm(): Promise<void>; getAlarm?(): Promise<number | null> }
-export type RefillDurableState = { storage: RefillStorage }
+export type RefillDurableState = { storage: RefillStorage; id?: unknown }
 export const continuousRefillEnabled = (env: RefillEnv) => env.CONTINUOUS_REFILL_ENABLED === 'true'
 export const refillKind = (stage: RefillStage): RefillKind => stage === 'capture' ? 'capture' : 'model'
 export const refillModelLimit = (env: RefillEnv) => env.REFILL_MODEL_LIMIT === '4' ? 4 : 2

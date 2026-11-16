@@ -39,6 +39,7 @@ function fixture(options: { models?: number; captures?: number; flag?: string; r
     plan: async () => undefined,
     observe: async () => true,
     dispatchStatus: async () => ({ entries: [] }),
+    decline: async () => ({ declined: true, reason: 'received_not_started' }),
     select: async (_env, { kind, limit, excludeJobIds, allowExpansion }) => { selectionCalls++; return { fence: { ...fence }, candidates: [...rows.values()].filter(row => row.inScope && ['queued', 'retry'].includes(row.status) && !row.protectedModel && (row.stage === 'capture') === (kind === 'capture') && (kind === 'capture' || allowExpansion !== false || row.stage === 'maintain') && !excludeJobIds.includes(row.jobId)).slice(0, limit).map(candidate) } },
     dispatch: async (_env, _fence, candidates, input) => {
       const saved = await storage.get<{ outstanding: Record<string, { phase: string; dispatchToken: string }> }>('refill-v1')
@@ -203,6 +204,49 @@ test('only an authoritative not_sent receipt frees a lost-send reservation for n
   assert.equal(f.dispatches.length, 2); assert.notEqual(f.dispatches[1].token, dispatch.token)
 })
 
+test('an exact received-not-started receipt closes sent pending work without rewriting historical model protection', async () => {
+  const f = fixture({ captures: 0 }); await f.start()
+  const original = f.dispatches[0], row = f.rows.get(hash(1))!
+  row.protectedModel = true
+  f.deps.dispatchStatus = async () => ({ entries: [{ jobId: row.jobId, status: 'observed', resolution: 'received_not_started',
+    receivedNotStartedReceiptSha256: hash(900), epochSha256: original.epoch }] })
+  f.restart(); await f.alarm()
+  assert.equal(row.status, 'queued'); assert.equal(row.protectedModel, true)
+  assert.equal(f.dispatches.flatMap(d => d.ids).filter(id => id === row.jobId).length, 1)
+  assert.ok(f.dispatches[1].ids.includes(hash(9)))
+})
+
+test('a missing receipt hash or a genuinely unknown job cannot falsely return capacity', async () => {
+  for (const unknownJob of [false, true]) {
+    const f = fixture({ captures: 0 }); await f.start()
+    const original = f.dispatches[0], row = f.rows.get(hash(1))!
+    row.protectedModel = true; if (unknownJob) row.status = 'unknown'
+    f.deps.dispatchStatus = async () => ({ entries: [{ jobId: row.jobId, status: 'observed', resolution: 'received_not_started',
+      receivedNotStartedReceiptSha256: unknownJob ? hash(900) : null, epochSha256: original.epoch }] })
+    f.restart(); await f.alarm()
+    assert.equal(f.dispatches.length, 1); assert.equal((await f.call('/status')).value.uncertainDeliveries, 1)
+    assert.equal(row.protectedModel, true)
+  }
+})
+
+test('epoch invalidation preserves queued pending work when the D1 decline proof fails', async () => {
+  const f = fixture({ captures: 0 }); await f.start()
+  f.deps.decline = async () => ({ declined: false, reason: 'refusal_unproven' })
+  f.restart(); f.fence.revision++; await f.alarm()
+  assert.equal(f.dispatches.length, 1)
+  assert.equal((await f.call('/acquire', f.metadata(hash(1)))).value.allowed, false)
+  assert.equal(((await f.call('/status')).value.model as { pending: number }).pending, 8)
+})
+
+test('a second Durable Object identity is rejected before storage, D1 or dispatch work', async () => {
+  const f = fixture()
+  const coordinator = new CatalogRefillCoordinator({ storage: f.storage, id: 'wrong-object' }, { ...f.env,
+    REFILL_COORDINATOR: { idFromName: () => 'expected-singleton', get: () => { throw new Error('no stub expected') } } }, f.deps)
+  const response = await coordinator.fetch(new Request('https://catalog-refill.internal/status', { headers: { authorization: 'Bearer ' + token } }))
+  assert.equal(response.status, 409); await coordinator.alarm()
+  assert.equal(f.storage.values.size, 0); assert.equal(f.counts().gateCalls, 0); assert.equal(f.dispatches.length, 0)
+})
+
 test('the watchdog plans new capture/followup jobs once per window; completion never scans sources', async () => {
   const f = fixture({ models: 0, captures: 0 }); let plans = 0
   f.deps.plan = async () => { plans++ }; f.restart()
@@ -275,4 +319,26 @@ test('window budget bounds sustained dispatch to 256 model and 64 capture jobs',
   assert.equal(sent.filter(id => Number.parseInt(id, 16) < 1000).length, 256)
   assert.equal(sent.filter(id => Number.parseInt(id, 16) >= 1000).length, 64)
   assert.equal(new Set(sent).size, sent.length)
+})
+
+test('prepared recovery crossing a window durably recharges before send and cannot yield 264 model sends', async () => {
+  const f = fixture({ models: 400, captures: 0 }); await f.start()
+  const saved = await f.storage.get<{ outstanding: Record<string, { phase: string; chargeWindow: number }> }>('refill-v1')
+  for (const entry of Object.values(saved!.outstanding)) entry.phase = 'prepared'
+  await f.storage.put('refill-v1', saved); f.dispatches.length = 0
+  const dispatch = f.deps.dispatch
+  f.deps.dispatch = async (...args) => {
+    const value = await f.storage.get<{ window: number; used: { model: number }; outstanding: Record<string, { chargeWindow: number }> }>('refill-v1')
+    for (const candidate of args[2]) assert.equal(value!.outstanding[candidate.jobId].chargeWindow, value!.window)
+    assert.ok(value!.used.model <= 256)
+    return dispatch(...args)
+  }
+  f.restart(); await f.alarm(15 * 60_000)
+  assert.equal(((await f.call('/status')).value.model as { epochUsed: number }).epochUsed, 8)
+  for (let turn = 0; turn < 36; turn++) {
+    for (const sent of f.dispatches) for (const id of sent.ids) f.rows.get(id)!.status = 'done'
+    await f.call('/wake', { reason: 'completion' }); await f.alarm()
+  }
+  assert.equal(f.dispatches.flatMap(d => d.ids).length, 256)
+  assert.equal(((await f.call('/status')).value.model as { epochUsed: number }).epochUsed, 256)
 })
