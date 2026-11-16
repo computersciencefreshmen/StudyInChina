@@ -18,7 +18,9 @@ import { refillProofBudget,refillScanHint,proofDeadline } from './refill-proof-b
 export type { RefillKind,RefillFence,RefillCandidate,RefillDispatchResult } from './refill-contract'
 export {planDueCaptureJobs} from './repository'
 
-const PREFIX='maintenance/refill-dispatch/',MAX_PROOF=128*1024,POOL=96
+// Metadata only: each of three lanes keeps its full 32-row cursor page plus
+// up to eight urgent heads. Proof execution remains capped at two/eight tries.
+const PREFIX='maintenance/refill-dispatch/',MAX_PROOF=128*1024,POOL=3*(32+8)
 const jobFields=['job_id','source_id','stage','status','priority','due_at','created_at','updated_at','attempt','lease_token','lease_until','snapshot_sha256','snapshot_key','error_code','enqueued_at','target_ids_json']as const
 const sourceFields=['source_id','url','allowed_hosts_json','category','categories_json','enabled','interval_hours','due_at','last_attempt_at','last_success_at','raw_sha256','canonical_sha256','snapshot_key','etag','failures','error_code','discovery_depth']as const
 type Tuple=Record<string,string|number|null>

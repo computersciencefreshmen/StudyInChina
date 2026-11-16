@@ -34,6 +34,31 @@ test('new priority-zero and review-urgent guides remain visible ahead of a persi
  }
 })
 
+test('seen urgent heads cannot crowd the last ordinary rows out of three complete cursor pages',async()=>{
+ const f=await refillFixture(72)
+ try{
+  await select(f,1)
+  f.db.sqlite.prepare("UPDATE maintenance_jobs SET priority=0 WHERE source_id=? AND stage<>'capture'").run(f.ids[0])
+  const key=[...f.bucket.objects.keys()].find(key=>key.startsWith('maintenance/refill-dispatch/scan/'))!,hint=JSON.parse(await(await f.bucket.get(key))!.text())
+  const fields=['job_id','source_id','stage','status','priority','due_at','created_at','updated_at','attempt','lease_token','lease_until','snapshot_sha256','snapshot_key','error_code','enqueued_at','target_ids_json']
+  const pages:Array<Record<string,unknown>&{lane:string}>=[],heads:Array<Record<string,unknown>&{lane:string}>=[]
+  for(const [stage,lane]of [['maintain','maintenance'],['extract','programme'],['award','award']]){
+   const rows=f.db.sqlite.prepare('SELECT * FROM maintenance_jobs WHERE stage=? ORDER BY priority,due_at,job_id').all(stage).map((row):Record<string,unknown>&{lane:string}=>({...row,lane}))
+   assert.equal(rows.filter(row=>row.priority===0).length,1)
+   heads.push(rows[0]);pages.push(...rows.slice(32,64))
+  }
+  const tail=pages.toSorted((a,b)=>String(a.job_id).localeCompare(String(b.job_id))).slice(-3),ids=new Set(tail.map(row=>row.job_id))
+  hint.offsets={maintenance:32,programme:32,award:32,future:0}
+  hint.visited=await Promise.all([...heads,...pages.filter(row=>!ids.has(row.job_id))].map(async row=>({id:row.job_id,lane:row.lane,stamp:await digest(canonical(Object.fromEntries(fields.map(field=>[field,row[field]??null]))))})))
+  assert.equal(hint.visited.length,96);await f.bucket.put(key,canonical(hint))
+  const result=await select(f,3)
+  assert.deepEqual(result.candidates.map(candidate=>candidate.jobId).sort(),[...ids].sort())
+  assert.equal(result.selection.attempts,3)
+  assert.deepEqual(JSON.parse(await(await f.bucket.get(key))!.text()).offsets,{maintenance:64,programme:64,award:64,future:0})
+  assert.equal(f.messages.length,0);assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').get()?.n,0)
+ }finally{f.db.sqlite.close()}
+})
+
 test('at most two complete candidate proofs overlap, with serialized hint CAS and stable planned order',async()=>{
  const f=await refillFixture(12)
  try{
