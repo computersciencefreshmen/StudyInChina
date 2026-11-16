@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { publicMiniMaxStatusSchema, PUBLIC_MONITOR_REFRESH_MS, type PublicMiniMaxStatus } from '@/lib/minimax/public-monitor'
 import styles from './PublicMiniMaxDashboard.module.css'
+import { MiniMaxActivityCharts, appendSessionObservation, type SessionObservation } from './MiniMaxActivityCharts'
 
 const format = (value: number | null | undefined) => value == null ? '未知' : value.toLocaleString('zh-CN')
 const date = (value: string | null | undefined) => value ? new Intl.DateTimeFormat('zh-CN', { timeZone: 'Asia/Shanghai', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(new Date(value)) : '尚无可确认记录'
@@ -15,6 +16,7 @@ const periodNames = { today: '今日 · 北京时间', 'five-hour': '本轮 5 �
 export function PublicMiniMaxDashboard() {
   const [value, setValue] = useState<PublicMiniMaxStatus | null>(null), [now, setNow] = useState<number | null>(null)
   const [unavailable, setUnavailable] = useState(false)
+  const [observations, setObservations] = useState<SessionObservation[]>([])
   useEffect(() => {
     let stopped = false, timer: ReturnType<typeof setTimeout> | undefined
     const controller = new AbortController()
@@ -24,7 +26,7 @@ export function PublicMiniMaxDashboard() {
         const response = await fetch('/api/minimax/status', { method: 'GET', credentials: 'omit', cache: 'no-store', signal: AbortSignal.any([controller.signal, AbortSignal.timeout(12_000)]) })
         if (!response.ok) throw Error('unavailable')
         const next = publicMiniMaxStatusSchema.parse(await response.json())
-        if (!stopped) { setValue(next); setNow(Date.now()); setUnavailable(false) }
+        if (!stopped) { setValue(next); setNow(Date.now()); setUnavailable(false); setObservations(previous => appendSessionObservation(previous, next, Date.now())) }
       } catch { if (!stopped) { setUnavailable(true); setNow(Date.now()) } }
       finally { if (!stopped) timer = setTimeout(update, PUBLIC_MONITOR_REFRESH_MS) }
     }
@@ -47,6 +49,8 @@ export function PublicMiniMaxDashboard() {
         <div className={styles.timestamps}><p>最近模型调用开始<strong>{date(value?.latestCallAt)}</strong></p><p>最近列表中的已确认响应<strong>{date(value?.latestCompletedAt)}</strong></p></div>
         <p className={styles.note}>等待一轮刷新，观察完成数和 Token 是否增长。调用尝试可能失败或结果未知；完成响应也不等于数据已上线。</p>
       </section>
+
+      <MiniMaxActivityCharts value={value} observations={observations} dataFresh={ledgerFresh} tasksFresh={processingFresh} />
 
       <section className={styles.quota} aria-label="订阅额度"><Quota label="5 小时剩余额度" value={value?.quota.fiveHour ? `${value.quota.fiveHour.remainingPercent}%` : '未知'} detail={`重置 ${date(value?.quota.fiveHour?.resetAt)}`} /><Quota label="每周剩余额度" value={value?.quota.weekly ? value.quota.weekly.unlimited ? '∞' : `${value.quota.weekly.remainingPercent}%` : '未知'} detail={value?.quota.weekly?.unlimited ? '服务商观测：周额度不限' : `重置 ${date(value?.quota.weekly?.resetAt)}`} /><div className={styles.quotaFoot}><span>{quotaFresh ? '当前额度观测' : '额度未知或历史观测'} · {date(value?.quota.observedAt)}</span><p>来自订阅 Token Plan，不是账单或积分余额；∞ 不代表 5 小时无限。</p></div></section>
 
