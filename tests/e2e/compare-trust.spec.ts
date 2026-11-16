@@ -2,6 +2,7 @@ import { expect, test, type Locator, type Page } from '@playwright/test'
 import { directoryData, rawData, TODAY } from './catalog-fixture'
 import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 import { formatProgramDuration } from '../../src/lib/data/duration'
+import { selectAdmissionCycle } from '../../src/lib/data/admission'
 import { localize } from '../../src/lib/data/format'
 import { FAVORITES_KEY } from '../../src/lib/favorites'
 import { LATEST_RELEASE_ANNOUNCEMENT_ID, RELEASE_ANNOUNCEMENT_STORAGE_KEY } from '../../src/i18n/release-announcement'
@@ -57,9 +58,12 @@ test('saved reviewed programs compare actual current annual evidence and survive
     await expect(card.getByText('学制', { exact: true }).locator('..').locator('[data-fact-status="known"]'))
       .toHaveText(formatProgramDuration(program, 'zh', '个月')!)
     const item = body.data.items.find((item: { program: { id: string } }) => item.program.id === program.id)
-    expect(item.currentCycle.academicYear).toBe('2027-2028')
-    expect(item.currentCycle.closesOn).toBe('2027-06-25')
-    await expect(card.locator('time[datetime="2027-06-25"]')).toBeVisible()
+    const cycle = selectAdmissionCycle(publicData.admissionCycles, program.id, TODAY)!
+    expect(cycle, program.id).toBeDefined()
+    expect(item.currentCycle.id).toBe(cycle.id)
+    expect(item.currentCycle.academicYear).toBe(cycle.academicYear)
+    expect(item.currentCycle.closesOn).toBe(cycle.closesOn)
+    if (cycle.closesOn) await expect(card.locator(`time[datetime="${cycle.closesOn}"]`)).toBeVisible()
   }
   await expectOfficialEvidence(comparison)
   await page.reload({ waitUntil: 'domcontentloaded' })

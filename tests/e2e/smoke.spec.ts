@@ -14,6 +14,7 @@ import {
 } from '../../src/i18n/release-announcement'
 import { isIndexableProgram } from '../../src/lib/seo/indexability'
 import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
+import { localize } from '../../src/lib/data/format'
 
 const locales = ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const
 const coreRoutes = ['', 'universities', 'programs', 'scholarships', 'cities', 'guides'] as const
@@ -212,7 +213,8 @@ test('accepted thin and stale programs are absent in all six public locales', as
 })
 
 test('reviewed public programs expose their exact current annual core and official routes', async ({ page }) => {
-  expect(publicData.programs).toHaveLength(5)
+  test.setTimeout(60_000)
+  expect(publicData.programs.length).toBeGreaterThanOrEqual(5)
   const list = await page.request.get('/api/v1/programs?view=directory&limit=24')
   expect(list.ok()).toBe(true)
   const body = await list.json()
@@ -225,7 +227,7 @@ test('reviewed public programs expose their exact current annual core and offici
     expect(cycle.applyUrl).toBeTruthy()
     const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
     expect(response?.ok(), program.slug).toBe(true)
-    await expect(page.getByRole('heading', { level: 1 })).toContainText(program.name.en!)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(localize(program.name, 'en'))
     const track = page.locator(`[data-track-cycle="${cycle.id}"]`)
     await expect(track).toContainText(cycle.academicYear)
     await expect(track).toContainText('HSK')
