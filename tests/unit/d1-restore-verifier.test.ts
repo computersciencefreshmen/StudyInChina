@@ -115,6 +115,8 @@ function executeDataPlan(database: DatabaseSync, output: string, take = Infinity
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }) })
 
 describe('complete D1 restore and account migration', () => {
+  // Both successful restores build the complete 108-table database and run a
+  // fresh verifier process, just like the bounded rejection cases below.
   it.each([272, 295])('recognizes exact versioned %i-school scope and preserves revision 8, unknown reservations and receipts', count => {
     const f = pipelineFixture(count), result = runVerifier(f.root)
     expect(result.status, result.stderr).toBe(0)
@@ -128,7 +130,7 @@ describe('complete D1 restore and account migration', () => {
       expect.objectContaining({ table: 'maintenance_refill_dispatches', rows: 1 }),
       expect.objectContaining({ table: 'maintenance_refill_fairness', rows: 1 }),
     ]))
-  })
+  }, 30_000)
   it('accepts a fully migrated empty maintenance subsystem without claiming execution recovery', () => {
     const f = fixture('pipeline'); f.db.close()
     const result = runVerifier(f.root); expect(result.status, result.stderr).toBe(0)
