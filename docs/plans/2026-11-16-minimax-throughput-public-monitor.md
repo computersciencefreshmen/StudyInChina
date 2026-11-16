@@ -22,3 +22,11 @@ The user authorizes higher concurrency, continuous cloud collection and verifica
 ## Baseline
 
 At 2026-11-16 18:41 Beijing, the current window had 496 completed calls and 84% remaining quota. Near-hour provider latency averaged about 5 seconds, while task processing was not continuously saturated. SQL candidates are not proof of executable evidence: many condition tasks rely on inherited navigation-page discovery graphs. Higher concurrency and better source material are both necessary.
+
+## Queue supply correction after the pilot
+
+The eight-way pilot completed all 16 observed requests without new failures or unknown outcomes, but its recorded request overlap peaked at two. Three reviewed official 2027 guides were captured successfully after their untouched initial capture jobs received audited scheduling priority; their initial extraction jobs also received priority without changing task IDs, inputs, history or model reservations.
+
+A regression then reproduced why newly urgent work could still wait: the persisted page offset excluded jobs inserted ahead of the old cursor. Keep a bounded urgent prefix alongside each ordinary page. The resulting metadata reservoir is at most three times 32 ordinary rows plus eight urgent rows, or 120 rows; this does not increase execution or evidence limits. Complete page counts prevent the urgent prefix from truncating ordinary work or incorrectly advancing its cursor.
+
+Verify at most two candidate proofs concurrently after sequentially persisting their scan hints. Pair only within the existing scheduling reserve and urgency, retain planned output order, and allow already persisted programme proofs to survive a sibling maintenance-read timeout. Preserve eight proof attempts, the eight-second deadline, the 16 MiB invocation-local cache, and fresh dispatch and model-admission checks. A controlled 50 ms per-I/O fixture reduced elapsed time from about 2.5 seconds to 1.6 seconds with the same physical R2 reads; production request throughput must still be measured independently.
