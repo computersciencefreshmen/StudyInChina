@@ -9,7 +9,7 @@ import { quotaWait, rememberQuotaWait } from './runtime'
 import { isDailyD1QuotaError } from './backend-errors'
 import { readBackgroundBudgetGate } from '../../shared/background-budget'
 import { authorized, canonical, digest, HASH, json, record, requestJson } from './util'
-import { continuousRefillEnabled, refillKind, refillModelLimit, REFILL_SINGLETON, REFILL_INTERVAL_MS, REFILL_LIMITS, REFILL_WINDOW_MS,
+import { continuousRefillEnabled, refillKind, refillModelLimit, refillModelWatermark, REFILL_SINGLETON, REFILL_INTERVAL_MS, REFILL_LIMITS, REFILL_WINDOW_MS,
   type RefillAcquireInput, type RefillCandidate, type RefillDispatchResult, type RefillDurableState, type RefillEnv,
   type RefillFence, type RefillJobState, type RefillKind, type RefillPermitResult } from './refill-contract'
 
@@ -315,9 +315,10 @@ export class CatalogRefillCoordinator {
         const count = kind === 'model' && current.expansion === false
           ? Object.values(saved.outstanding).filter(entry => entry.kind === 'model' && entry.candidate.stage === 'maintain').length
           : this.counts(saved).pending[kind]
-        const watermark = REFILL_LIMITS[kind]
+        const watermark = kind === 'model' ? refillModelWatermark(this.env) : REFILL_LIMITS.capture
         const cap = kind === 'capture' ? REFILL_LIMITS.capturePerWindow : REFILL_LIMITS.modelPerWindow
-        const room = Math.min(remaining, watermark - count, cap - saved.used[kind], 32 - Object.keys(saved.outstanding).length)
+        const kindRoom = kind === 'model' ? Math.min(watermark - count, REFILL_LIMITS.modelMaxOutstanding - this.counts(saved).pending.model) : watermark - count
+        const room = Math.min(remaining, kindRoom, cap - saved.used[kind], 32 - Object.keys(saved.outstanding).length)
         if (room <= 0 || !(kind === 'model' ? current.model : current.capture)) continue
         const plan = await this.deps.select(this.env, { kind, limit: room, excludeJobIds: Object.keys(saved.outstanding), now, allowExpansion: current.expansion !== false })
         const due = Date.parse(plan.nextDueAt ?? '')
@@ -405,13 +406,13 @@ export class CatalogRefillCoordinator {
       saved.modelDemand = backlog.candidates.length > 0
       modelIdleProven = !backlog.scanRetryAt
     }
-    const captureLimit = !modelIdleProven || saved.modelDemand || counts.pending.model > 0 ? REFILL_LIMITS.capture : REFILL_LIMITS.capture + Math.max(0, modelLimit - counts.inflight.model)
+    const captureLimit = !modelIdleProven || saved.modelDemand || counts.pending.model > 0 ? REFILL_LIMITS.capture : Math.min(8, REFILL_LIMITS.capture + Math.max(0, modelLimit - counts.inflight.model))
     if (counts.inflight[kind] >= (kind === 'model' ? modelLimit : captureLimit)) return denied('refill_stage_capacity')
     if (!entry) {
       // Existing ordinary Queue deliveries use the same real execution gate.
       // They cannot sidestep the pilot cap or steal all capture/model slots.
       const cap = kind === 'model' ? REFILL_LIMITS.modelPerWindow : REFILL_LIMITS.capturePerWindow
-      if (saved.used[kind] >= cap || Object.keys(saved.outstanding).length >= 32) return denied('refill_dispatch_budget', 60)
+      if (saved.used[kind] >= cap || Object.keys(saved.outstanding).length >= 32 || kind === 'model' && counts.pending.model >= REFILL_LIMITS.modelMaxOutstanding) return denied('refill_dispatch_budget', 60)
       entry = { candidate: { jobId: job.jobId, sourceId: job.sourceId, stage: job.stage, status: job.status as 'queued' | 'retry', attempt: job.attempt, updatedAt: job.updatedAt, enqueuedAt: null, leaseToken: job.leaseToken }, fenceSha256: null, epochSha256: saved.epochSha256,
         dispatchToken: crypto.randomUUID(), kind, phase: 'sent', createdAt: now, chargeWindow: saved.window, permit: null }
       saved.outstanding[job.jobId] = entry; saved.used[kind]++

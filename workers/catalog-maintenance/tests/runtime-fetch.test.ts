@@ -19,12 +19,22 @@ const redirectUrl = 'https://credential-recipient.invalid/never-follow'
 // The production functions run with workerd's global fetch, not an injected
 // Node fetch double. Miniflare intercepts all egress below, including unexpected
 // redirect destinations, so no provider or real model is contacted.
-async function runtimeFixture() {
+async function runtimeFixture(options: { concurrency?: string } = {}) {
   const bundled = await build({
     stdin: {
       contents: `
         import { ModelAdmission, readQuotaProvider } from './admission'
-        export { ModelAdmission }
+        export class TestAdmission extends ModelAdmission {
+          constructor(state, env) { super(state, env); this.testState = state }
+          async fetch(request) {
+            if(new URL(request.url).pathname === '/fixture-seed-gate') {
+              if(request.headers.get('authorization') !== 'Bearer ${adminToken}') return new Response(null,{status:401})
+              await this.testState.storage.put('gate', await request.json())
+              return Response.json({seeded:true})
+            }
+            return super.fetch(request)
+          }
+        }
         export default {
           async fetch(request, env) {
             const path = new URL(request.url).pathname
@@ -54,9 +64,9 @@ async function runtimeFixture() {
               const object = await env.SNAPSHOTS_BUCKET.get(new URL(request.url).searchParams.get('key'))
               return object ? new Response(await object.arrayBuffer()) : new Response(null, { status: 404 })
             }
-            if (path === '/model') {
+            if (path === '/model' || path === '/fixture-seed-gate') {
               const id = env.MODEL_ADMISSION.idFromName('runtime-test-account')
-              return env.MODEL_ADMISSION.get(id).fetch(new Request('https://admission.internal/model/run', request))
+              return env.MODEL_ADMISSION.get(id).fetch(new Request('https://admission.internal' + (path === '/model' ? '/model/run' : path), request))
             }
             return new Response('not found', { status: 404 })
           }
@@ -69,7 +79,8 @@ async function runtimeFixture() {
     bundle: true, format: 'esm', platform: 'browser', external: ['node:crypto'], target: 'es2022', write: false,
   })
   const calls: Array<{ url: string; method: string; authorization: string | null; body: string }> = []
-  const provider = { quotaRedirect: 0, modelRedirect: 0, redirectLocation: redirectUrl, modelBody: null as string | null, modelStatus: 200 }
+  const provider = { quotaRedirect: 0, modelRedirect: 0, redirectLocation: redirectUrl, modelBody: null as string | null, modelStatus: 200,
+    modelWait: null as Promise<void> | null, onModelStart: null as (() => void) | null }
   const mf = new Miniflare(convertV4MiniflareOptions({
     name: 'maintenance-runtime-fetch-test', modules: true, script: bundled.outputFiles[0].text,
     // The lockfile's local workerd supports dates through 2026-09-18. Its real
@@ -84,10 +95,11 @@ async function runtimeFixture() {
       // fixture explicitly uses the supported deployment opt-out, without a fake
       // resume receipt or any change to the production guard.
       NATIVE_HEAD_RECONCILIATION_REQUIRED: 'false', SCOPE_REGISTRY_SHA256: scope,
+      MODEL_CONCURRENCY: options.concurrency ?? '4',
     },
     d1Databases: { PIPELINE_DB: 'runtime-fetch-test-db' },
     r2Buckets: { SNAPSHOTS_BUCKET: 'runtime-fetch-test-snapshots' },
-    durableObjects: { MODEL_ADMISSION: { className: 'ModelAdmission', useSQLite: true } },
+    durableObjects: { MODEL_ADMISSION: { className: 'TestAdmission', useSQLite: true } },
     outboundService: async request => {
       const body = await request.text()
       calls.push({ url: request.url, method: request.method, authorization: request.headers.get('authorization'), body })
@@ -100,6 +112,8 @@ async function runtimeFixture() {
         }] })
       }
       if (request.url === modelUrl) {
+        provider.onModelStart?.()
+        if (provider.modelWait) await provider.modelWait
         if (provider.modelRedirect) return new WorkerResponse(null, { status: provider.modelRedirect, headers: { location: provider.redirectLocation } })
         if (provider.modelBody !== null) return new WorkerResponse(provider.modelBody, { status: provider.modelStatus })
         return WorkerResponse.json({ content: [{ type: 'text', text: '{"evidence":"test-only"}' }],
@@ -140,6 +154,39 @@ function runModel(mf: Miniflare, input: ModelRequest) {
   return mf.dispatchFetch('https://runtime.test/model', { method: 'POST',
     headers: { authorization: `Bearer ${adminToken}`, 'content-type': 'application/json' }, body: JSON.stringify(input) })
 }
+
+test('real workerd SQLite permits eight and sixteen held model sends while atomically rejecting the next delivery', { timeout: 120000 }, async t => {
+  for (const limit of [8, 16]) await t.test(String(limit), async () => {
+    const { mf, db, calls, provider } = await runtimeFixture({ concurrency: String(limit) })
+    let release!: () => void, reached!: () => void, timer: ReturnType<typeof setTimeout> | undefined
+    provider.modelWait = new Promise<void>(resolve => { release = resolve })
+    const started = new Promise<void>(resolve => { reached = resolve })
+    let count = 0
+    provider.onModelStart = () => { if (++count === limit) reached() }
+    let runs: Array<ReturnType<typeof runModel>> = []
+    try {
+      const seeded = await mf.dispatchFetch('https://runtime.test/fixture-seed-gate', { method: 'POST',
+        headers: { authorization: `Bearer ${adminToken}`, 'content-type': 'application/json' },
+        body: JSON.stringify({ fetches: [], models: [], nextHost: {}, successes: 0, cooldownUntil: 0, modelLimit: limit }) })
+      assert.equal(seeded.status, 200)
+      runs = Array.from({ length: limit + 1 }, (_, i) => runModel(mf, modelRequest((i + 1).toString(16).padStart(64, '0'))))
+      await Promise.race([started, new Promise<never>((_resolve, reject) => { timer = setTimeout(() => reject(Error('native_parallel_permits_not_reached')), 10_000) })])
+      const rejected = await Promise.race(runs)
+      assert.equal(rejected.status, 429); assert.equal((await rejected.clone().json() as { error: string }).error, 'model_capacity_or_reserved')
+      assert.equal(calls.filter(call => call.url === modelUrl).length, limit)
+      assert.equal((await db.prepare("SELECT COUNT(*) n FROM maintenance_model_attempts WHERE status='send_started'").first())?.n, limit)
+    } finally {
+      if (timer) clearTimeout(timer)
+      release()
+      try {
+        const results = await Promise.all(runs)
+        assert.equal(results.filter(response => response.ok).length, limit)
+        assert.equal(results.filter(response => response.status === 429).length, 1)
+        assert.equal(calls.filter(call => call.url === modelUrl).length, limit)
+      } finally { await mf.dispose() }
+    }
+  })
+})
 
 test('real workerd archives raw HTTP bytes and usage before known-invalid output classification; ambiguous requests never resend', { timeout: 120000 }, async t => {
   const { mf, db, calls, provider } = await runtimeFixture()
