@@ -1,0 +1,1546 @@
+{
+  "format": "studyinchina.curated-official-programme-review",
+  "version": 1,
+  "reviewedAt": "2026-11-16T17:02:31.474Z",
+  "reviewAfter": "2026-12-17",
+  "reviewerId": "codex-independent-ai-assisted-official-source-audit:nwafu-2027-core-20261117",
+  "method": "Codex independent AI-assisted official-source audit using original HTML and its exact linked official XLSX catalogue. Exact XLSX cells were compared with original HTML table rows, raw source hashes and extracted quotations were checked, and the original HTML table was visually inspected. User authorized this workflow; this is not a claim of personal human sign-off by Henry.",
+  "baseCommit": "d4cb8d711cfa0c1abeca260c900f3c56568e6fef",
+  "inputCatalogSha256": "f307329dc1680eb22fadf0ba8ca49414aa6f5016345e81baffb2971012973b5e",
+  "outputCatalogSha256": "814837c57065645c08149d3cb69b56d7aea3b88763d41aef6e8e6ba305d8f031",
+  "privateProofSha256": "57685fa818e17f72701ddf743640933eb85460c6d640983756babf26d0efea77",
+  "privateProofHashBasis": "candidate-proof.json original UTF-8 file bytes",
+  "universityId": "uni-northwest-a-and-f-university",
+  "academicYear": "2027",
+  "academicYearRangeNotInferred": true,
+  "teachingLanguage": "Chinese",
+  "applicationRound": "self-funded",
+  "intake": "other",
+  "sources": [
+    {
+      "id": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+      "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+      "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+      "accessedAt": "2026-11-16T16:57:31.108741+00:00",
+      "parser": "python-htmlparser-readable-whitespace-v1"
+    },
+    {
+      "id": "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+      "url": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+      "rawSha256": "b6e76820f7bf731fc997d8edd285bfa3f461be9553a11f11962963bdb264f562",
+      "accessedAt": "2026-11-16T16:57:31.108741+00:00",
+      "parser": "xlsx-zip-xml-exact-cell-values-v1"
+    }
+  ],
+  "sourceChain": {
+    "guideUrl": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+    "programmeCatalogueUrl": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+    "exactCatalogueAnchor": {
+      "attributes": {
+        "desc": "textLink",
+        "href": "../docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+        "download": "《2027年本科生招生专业目录》.xlsx"
+      },
+      "text": "《2027年本科生招生专业目录》"
+    },
+    "guideLinksExactCatalogue": true,
+    "linkedApplicationPortal": "https://nwsuaf.17gz.org/",
+    "exactApplicationPortalAnchor": {
+      "attributes": {
+        "href": "https://nwsuaf.17gz.org/",
+        "target": "_blank",
+        "type": "1"
+      },
+      "text": "https://nwsuaf.17gz.org/"
+    }
+  },
+  "programmeRows": [
+    {
+      "officialRowNumber": 1,
+      "verifiedName": {
+        "zh": "汉语国际教育",
+        "en": "Teaching Chinese to Speakers of Other Languages"
+      },
+      "school": {
+        "zh": "语言文化学院",
+        "en": "College of Language and Culture"
+      },
+      "degreeLevel": "bachelor",
+      "qualification": {
+        "zh": "文学学士",
+        "en": "Bachelor of Arts"
+      },
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "cscaSubjects": {
+        "zh": "中文(文)、数学",
+        "en": "Chinese (Humanities),Mathematics"
+      },
+      "xlsxEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "url": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+        "rawSha256": "b6e76820f7bf731fc997d8edd285bfa3f461be9553a11f11962963bdb264f562",
+        "sheet": "本科生",
+        "range": "A3:F3",
+        "exactCells": [
+          {
+            "cell": "A3",
+            "value": "1"
+          },
+          {
+            "cell": "B3",
+            "value": "语言文化学院\nCollege of Language and Culture"
+          },
+          {
+            "cell": "C3",
+            "value": "汉语国际教育\nTeaching Chinese to Speakers of Other Languages"
+          },
+          {
+            "cell": "D3",
+            "value": "4"
+          },
+          {
+            "cell": "E3",
+            "value": " 文学学士\nBachelor of Arts"
+          },
+          {
+            "cell": "F3",
+            "value": "中文(文)、数学\nChinese (Humanities),Mathematics"
+          }
+        ],
+        "sharedLanguageEvidenceRange": "A9:F9",
+        "yearEvidenceCell": "A1"
+      },
+      "htmlEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "locator": "html:table[1]/tbody/tr[2] (parser tr index 1)",
+        "exactCellTexts": [
+          "1",
+          "语言文化学院College of Language and Culture",
+          "汉语国际教育Teaching Chinese to Speakers of Other Languages",
+          "4",
+          "文学学士Bachelor of Arts",
+          "中文(文)、数学Chinese (Humanities),Mathematics"
+        ]
+      },
+      "identityAction": "new-if-later-approved",
+      "existingExactIds": []
+    },
+    {
+      "officialRowNumber": 2,
+      "verifiedName": {
+        "zh": "数据科学与大数据技术",
+        "en": "Data Science and Big Data Technology"
+      },
+      "school": {
+        "zh": "信息工程学院",
+        "en": "College of Information Engineering"
+      },
+      "degreeLevel": "bachelor",
+      "qualification": {
+        "zh": "工学学士",
+        "en": "Bachelor of Engineering"
+      },
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "cscaSubjects": {
+        "zh": "中文（理）、数学、物理",
+        "en": "Chinese(STEM)、Mathematics, Physics"
+      },
+      "xlsxEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "url": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+        "rawSha256": "b6e76820f7bf731fc997d8edd285bfa3f461be9553a11f11962963bdb264f562",
+        "sheet": "本科生",
+        "range": "A4:F4",
+        "exactCells": [
+          {
+            "cell": "A4",
+            "value": "2"
+          },
+          {
+            "cell": "B4",
+            "value": "信息工程学院\nCollege of Information Engineering "
+          },
+          {
+            "cell": "C4",
+            "value": "数据科学与大数据技术\nData Science and Big Data Technology"
+          },
+          {
+            "cell": "D4",
+            "value": "4"
+          },
+          {
+            "cell": "E4",
+            "value": "工学学士\nBachelor of Engineering"
+          },
+          {
+            "cell": "F4",
+            "value": "中文（理）、数学、物理\nChinese(STEM)、Mathematics, Physics"
+          }
+        ],
+        "sharedLanguageEvidenceRange": "A9:F9",
+        "yearEvidenceCell": "A1"
+      },
+      "htmlEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "locator": "html:table[1]/tbody/tr[3] (parser tr index 2)",
+        "exactCellTexts": [
+          "2",
+          "信息工程学院College of Information Engineering",
+          "数据科学与大数据技术Data Science and Big Data Technology",
+          "4",
+          "工学学士Bachelor of Engineering",
+          "中文（理）、数学、物理Chinese(STEM)、Mathematics, Physics"
+        ]
+      },
+      "identityAction": "new-if-later-approved",
+      "existingExactIds": []
+    },
+    {
+      "officialRowNumber": 3,
+      "verifiedName": {
+        "zh": "计算机科学与技术",
+        "en": "Computer Science and Technology"
+      },
+      "school": {
+        "zh": "信息工程学院",
+        "en": "College of Information Engineering"
+      },
+      "degreeLevel": "bachelor",
+      "qualification": {
+        "zh": "工学学士",
+        "en": "Bachelor of Engineering"
+      },
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "cscaSubjects": {
+        "zh": "中文（理）、数学、物理",
+        "en": "Chinese(STEM)、Mathematics, Physics"
+      },
+      "xlsxEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "url": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+        "rawSha256": "b6e76820f7bf731fc997d8edd285bfa3f461be9553a11f11962963bdb264f562",
+        "sheet": "本科生",
+        "range": "A5:F5",
+        "exactCells": [
+          {
+            "cell": "A5",
+            "value": "3"
+          },
+          {
+            "cell": "B5",
+            "value": "信息工程学院\nCollege of Information Engineering "
+          },
+          {
+            "cell": "C5",
+            "value": "计算机科学与技术\nComputer Science and Technology"
+          },
+          {
+            "cell": "D5",
+            "value": "4"
+          },
+          {
+            "cell": "E5",
+            "value": "工学学士\nBachelor of Engineering"
+          },
+          {
+            "cell": "F5",
+            "value": "中文（理）、数学、物理\nChinese(STEM)、Mathematics, Physics"
+          }
+        ],
+        "sharedLanguageEvidenceRange": "A9:F9",
+        "yearEvidenceCell": "A1"
+      },
+      "htmlEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "locator": "html:table[1]/tbody/tr[4] (parser tr index 3)",
+        "exactCellTexts": [
+          "3",
+          "信息工程学院College of Information Engineering",
+          "计算机科学与技术Computer Science and Technology",
+          "4",
+          "工学学士Bachelor of Engineering",
+          "中文（理）、数学、物理Chinese(STEM)、Mathematics, Physics"
+        ]
+      },
+      "identityAction": "new-if-later-approved",
+      "existingExactIds": []
+    },
+    {
+      "officialRowNumber": 4,
+      "verifiedName": {
+        "zh": "工商管理",
+        "en": "Business Administration"
+      },
+      "school": {
+        "zh": "经济管理学院",
+        "en": "College of Economics and Management"
+      },
+      "degreeLevel": "bachelor",
+      "qualification": {
+        "zh": "管理学学士",
+        "en": "Bachelor of Management"
+      },
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "cscaSubjects": {
+        "zh": "中文(文)、数学",
+        "en": "Chinese (Humanities),Mathematics"
+      },
+      "xlsxEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "url": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+        "rawSha256": "b6e76820f7bf731fc997d8edd285bfa3f461be9553a11f11962963bdb264f562",
+        "sheet": "本科生",
+        "range": "A6:F6",
+        "exactCells": [
+          {
+            "cell": "A6",
+            "value": "4"
+          },
+          {
+            "cell": "B6",
+            "value": "经济管理学院\nCollege of Economics and Management"
+          },
+          {
+            "cell": "C6",
+            "value": "工商管理\nBusiness Administration"
+          },
+          {
+            "cell": "D6",
+            "value": "4"
+          },
+          {
+            "cell": "E6",
+            "value": " 管理学学士\nBachelor of Management"
+          },
+          {
+            "cell": "F6",
+            "value": "中文(文)、数学\nChinese (Humanities),Mathematics"
+          }
+        ],
+        "sharedLanguageEvidenceRange": "A9:F9",
+        "yearEvidenceCell": "A1"
+      },
+      "htmlEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "locator": "html:table[1]/tbody/tr[5] (parser tr index 4)",
+        "exactCellTexts": [
+          "4",
+          "经济管理学院College of Economics and Management",
+          "工商管理Business Administration",
+          "4",
+          "管理学学士Bachelor of Management",
+          "中文(文)、数学Chinese (Humanities),Mathematics"
+        ]
+      },
+      "identityAction": "new-if-later-approved",
+      "existingExactIds": []
+    },
+    {
+      "officialRowNumber": 5,
+      "verifiedName": {
+        "zh": "农业水利工程",
+        "en": "Agricultural Water Conservancy Engineering"
+      },
+      "school": {
+        "zh": "水利与建筑工程学院",
+        "en": "College of Water Resources and Architectural Engineering"
+      },
+      "degreeLevel": "bachelor",
+      "qualification": {
+        "zh": "工学学士",
+        "en": "Bachelor of Engineering"
+      },
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "cscaSubjects": {
+        "zh": "中文（理）、数学、物理",
+        "en": "Chinese(STEM)、Mathematics, Physics"
+      },
+      "xlsxEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "url": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+        "rawSha256": "b6e76820f7bf731fc997d8edd285bfa3f461be9553a11f11962963bdb264f562",
+        "sheet": "本科生",
+        "range": "A7:F7",
+        "exactCells": [
+          {
+            "cell": "A7",
+            "value": "5"
+          },
+          {
+            "cell": "B7",
+            "value": "水利与建筑工程学院\nCollege of Water Resources and Architectural Engineering"
+          },
+          {
+            "cell": "C7",
+            "value": "农业水利工程\nAgricultural Water Conservancy Engineering"
+          },
+          {
+            "cell": "D7",
+            "value": "4"
+          },
+          {
+            "cell": "E7",
+            "value": "工学学士\nBachelor of Engineering"
+          },
+          {
+            "cell": "F7",
+            "value": "中文（理）、数学、物理\nChinese(STEM)、Mathematics, Physics"
+          }
+        ],
+        "sharedLanguageEvidenceRange": "A9:F9",
+        "yearEvidenceCell": "A1"
+      },
+      "htmlEvidence": {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "locator": "html:table[1]/tbody/tr[6] (parser tr index 5)",
+        "exactCellTexts": [
+          "5",
+          "水利与建筑工程学院College of Water Resources and Architectural Engineering",
+          "农业水利工程Agricultural Water Conservancy Engineering",
+          "4",
+          "工学学士Bachelor of Engineering",
+          "中文（理）、数学、物理Chinese(STEM)、Mathematics, Physics"
+        ]
+      },
+      "identityAction": "new-if-later-approved",
+      "existingExactIds": []
+    }
+  ],
+  "commonPolicy": {
+    "degreeLevel": "bachelor",
+    "teachingLanguage": "Chinese",
+    "applicationRound": "self-funded",
+    "opensOn": "2026-11-01",
+    "closesOn": "2027-05-31",
+    "dateStatus": "published",
+    "timeZoneExplicitlyStated": false,
+    "intakeSuggestedConservativeValue": "other",
+    "intakeSeasonExplicitlyStated": false,
+    "registrationWindow": "2027年8月底至9月初",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+      }
+    ],
+    "ageMaximum": 25,
+    "maximumAgeReferenceDateExplicitlyStated": false,
+    "under18GuardianReferenceDate": "2027-09-01",
+    "qualification": "高中毕业或应届毕业；非中国籍有效外国护照；健康、品学兼优、对华友好、无犯罪记录；国籍及境外居住要求见逐字引用",
+    "tuitionCny": 18000,
+    "tuitionPeriod": "academic-year",
+    "applicationFeeCny": 400,
+    "applicationFeeRefundable": false,
+    "applyUrl": "https://nwsuaf.17gz.org/",
+    "scholarshipTermsImported": false,
+    "academicYear": "2027",
+    "intake": "other",
+    "allEvidence": [
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "2027年国际学生(本科生)招生简章",
+        "quoteSha256": "1dbf325dc22f50af772b21c31003f3ad06883ab4db0ad0a166e9fb3000be06f7",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 98,
+          "end": 116
+        },
+        "locator": "text:offset:98:116"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "本科专业全部采用汉语授课，学制4-5年，符合学校学位授予有关规定的毕业生将获得学士学位。",
+        "quoteSha256": "781776c3d0986bfbab0a194e04aa3cca4a7430f8a539de38fb4b872a7382595e",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 315,
+          "end": 359
+        },
+        "locator": "text:offset:315:359"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "备注：所有专业为汉语授课，要求提供HSK4级成绩 All majors are taught in Chinese, and applicants must provide an HSK Level 4 score.",
+        "quoteSha256": "8700d496873adc4cb00f175206c48c30caa32fb7f2dc9046eb9edb743bd041a0",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1450,
+          "end": 1558
+        },
+        "locator": "text:offset:1450:1558"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "2026年11月1日至2027年5月31日（以下称：截止日期）",
+        "quoteSha256": "5ba3b794248438376b3a30effe7fd4e1baa371d9e300ac804543b16dd06104d9",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1566,
+          "end": 1597
+        },
+        "locator": "text:offset:1566:1597"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "1. 申请费：人民币400元，概不退还。",
+        "quoteSha256": "0ec08d32229b84b0033ddb99c20618f625d78d767653cde2930b1a186c71282a",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1727,
+          "end": 1747
+        },
+        "locator": "text:offset:1727:1747"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "2. 学费（汉语授课）：18000元/学年",
+        "quoteSha256": "8d2b83891c90f7518789c75d8bade0eabeb911f40902be7c5078cc4fbc33a504",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1748,
+          "end": 1769
+        },
+        "locator": "text:offset:1748:1769"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "1. 非中国国籍、持有效外国护照；",
+        "quoteSha256": "82afda2dca78f4ad66ed426a8270363c28953c856132f74803ee44d85f9d7047",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1847,
+          "end": 1864
+        },
+        "locator": "text:offset:1847:1864"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "2. 年龄不超过25周岁，高中毕业（应届生须提供预计毕业证明，入学前补交正式毕业证）；",
+        "quoteSha256": "0c8032899bb4d851cc05ddd6714b92c24a3f4d484654d70a3c5ac349ff43245f",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1865,
+          "end": 1908
+        },
+        "locator": "text:offset:1865:1908"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "3. 身心健康、品学兼优、对华友好、无犯罪记录。",
+        "quoteSha256": "00bc4b10c67591a8d8f3863faacdfbad7b87dd4e30a064a984f2f4cf7c10cc31",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1909,
+          "end": 1933
+        },
+        "locator": "text:offset:1909:1933"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "4. 语言要求：汉语授课：须提供HSK4成绩，或提交初、高中汉语授课证明以申请免试；",
+        "quoteSha256": "8e7c4c5148aa2275d1042469617e4f396a88a1133945345bb26eca508eca797c",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1934,
+          "end": 1976
+        },
+        "locator": "text:offset:1934:1976"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "专业中文：文科中文、理科中文。凡申请以中文授课进行本科专业学习的申请人，应根据所申请专业类别，参加相应方向的专业中文测试。申请攻读汉语言本科专业的申请人如能提供有效期内HSK四级成绩报告，可免考专业中文。英文授课不需要参加专业中文考试。",
+        "quoteSha256": "b3b93786bd9f99f6391eba7a4d7ab592b66335679ac0841e8045f854ad550052",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1988,
+          "end": 2106
+        },
+        "locator": "text:offset:1988:2106"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "基础科目：数学必考；物理、化学（选考），申请理、工、农、医类专业者，根据专业要求选考一门。",
+        "quoteSha256": "f6ea2d22e5bf09e2ef44568d94249908cf0627989079e11ea916382cce7fab6f",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2107,
+          "end": 2152
+        },
+        "locator": "text:offset:2107:2152"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "注：1. 原为中国国籍，后加入外国国籍者，须于2023年4月30日前取得外国国籍，并于2023年4月30日至2027年4月30日期间在国外累计居住不少于2年（每年不少于9个月）",
+        "quoteSha256": "e0dd95dee5e09773c8ac6d4ebd87f0f816b58d9b150f8a43045f050ef949a996",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2189,
+          "end": 2277
+        },
+        "locator": "text:offset:2189:2277"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "2. 出生即为外国国籍，父母一方为中国公民者，须在其出生前取得外国永久居留权，且申请人满足上述境外居住要求",
+        "quoteSha256": "7b1610be8376a6b7b1e14ad82786eb13da26baab12a28e2d7d57f5140f57d8d5",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2278,
+          "end": 2331
+        },
+        "locator": "text:offset:2278:2331"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "3. 如申请人在申请或入学后被认定仍具有中国国籍，其入学资格将被取消。",
+        "quoteSha256": "f17e6212760688790c35d7762553d43306dca561b69efbfd10accc29544bd35f",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2332,
+          "end": 2367
+        },
+        "locator": "text:offset:2332:2367"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "https://nwsuaf.17gz.org/",
+        "quoteSha256": "00dfe22e4175a7dbc07082303d6316bd9f2e1a29a2de8a8ba97fe57fecf25395",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2400,
+          "end": 2424
+        },
+        "locator": "text:offset:2400:2424"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "9. 截至2027年9月1日未满18周岁者，需提交在中国大陆成年监护人保证书；",
+        "quoteSha256": "4decc3b96761f883e762ab7e30809ee2b4d3ec06f4955bf2483cd844705c91ff",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2567,
+          "end": 2606
+        },
+        "locator": "text:offset:2567:2606"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "textSha256": "6f8a06ef1ee3a59d8e72a850f3a08dbbb3c7a2ad982c16ad4938b0df9dfd145b",
+        "quote": "新生应于2027年8月底至9月初按《录取通知书》要求报到，须提交高中毕业证书、语言成绩等材料原件，未按要求提交者将被取消入学资格。",
+        "quoteSha256": "9a0a2ba24d351f4bb48e79a820acaee630e1cac3f8b46a0e39ae5c4e0f30a645",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2914,
+          "end": 2979
+        },
+        "locator": "text:offset:2914:2979"
+      },
+      {
+        "sourceId": "src-reviewed-nwafu-2027-bachelor-guide-cn",
+        "url": "https://gjs.nwafu.edu.cn/sqzn/8f65fd5acf68446ab8e44d5b9c437655.htm",
+        "rawSha256": "d1d4ce45b433833bd1420fa558d5dc5aa421e3113d6dad2c65f8dae0c32604f8",
+        "locator": "html:table[2]/tbody/tr[2] (zero-based parser tr index 8)",
+        "quote": "自费 | 2027年5月31日",
+        "quoteSha256": "d0a50f7054c97aa28d04e46c6ca070f06d8fda80544643d2992cd68fa15ee4a0",
+        "exactCellTexts": [
+          "自费",
+          "2027年5月31日"
+        ]
+      }
+    ],
+    "commonEligibility": [
+      {
+        "zh": "非中国国籍，持有效外国护照。"
+      },
+      {
+        "zh": "年龄不超过25周岁（官方未说明此年龄上限的计算日期），高中毕业；应届毕业生须提供预计毕业证明，并于入学前补交正式毕业证。"
+      },
+      {
+        "zh": "身心健康、品学兼优、对华友好、无犯罪记录。"
+      },
+      {
+        "zh": "原为中国国籍、后加入外国国籍者，须于2023年4月30日前取得外国国籍，并于2023年4月30日至2027年4月30日期间在国外累计居住不少于2年（每年不少于9个月）。"
+      },
+      {
+        "zh": "出生即为外国国籍、父母一方为中国公民者，该中国籍父母须在申请人出生前取得外国永久居留权，申请人须满足上述境外居住要求；申请或入学后仍被认定具有中国国籍者，入学资格将被取消。"
+      },
+      {
+        "zh": "截至2027年9月1日未满18周岁者，须提交中国大陆成年监护人保证书；此日期仅用于监护材料要求，不作为25周岁年龄上限的计算日。"
+      }
+    ]
+  },
+  "visualReview": {
+    "method": "Original saved HTML rendered in local headless Edge with all external requests blocked; six rows, HSK footnote, self-funded round and fees read visually",
+    "screenshot": "original-guide-majors.png",
+    "screenshotSha256": "6ab2a27dcf254d38e34895d76ab15ad49fbf3fd866cfbf1aa9dc45957219c093",
+    "xlsxVerification": "Exact cells A3:F8 compared against corresponding original HTML table rows; workbook title A1 and merged language/HSK note A9:F9 checked",
+    "reviewer": "Codex independent AI-assisted tool/source/visual review; no Henry personal human sign-off claimed"
+  },
+  "identityDedupe": [
+    {
+      "catalogue": "snapshot",
+      "totalProgrammes": 2302,
+      "rawProgrammeFileSha256": "387339f9c655ba017d537c2ba92c27f03825c2ded6073394319991ea27d93f1d",
+      "university": {
+        "sourceIds": [
+          "src-uni-northwest-a-and-f-university"
+        ],
+        "verifiedAt": "2026-07-26",
+        "reviewAfter": "2027-01-22",
+        "status": "verified",
+        "id": "uni-northwest-a-and-f-university",
+        "slug": "northwest-a-and-f-university",
+        "name": {
+          "en": "Northwest A&F University",
+          "zh": "西北农林科技大学",
+          "ru": "Северо-Западный университет сельского и лесного хозяйства"
+        },
+        "cityId": "city-yangling",
+        "region": "northwest",
+        "officialUrl": "https://gjs.nwafu.edu.cn/",
+        "admissionsUrl": "https://gjs.nwafu.edu.cn/",
+        "summary": {
+          "en": "Northwest A&F University is located in Yangling. Current international programs and requirements are published on the official admissions website.",
+          "zh": "西北农林科技大学位于杨凌。当前国际学生项目和申请要求以学校官方招生网站为准。",
+          "ru": "Северо-Западный университет сельского и лесного хозяйства находится в городе Янлин. Актуальные программы и требования опубликованы на официальном сайте приёма."
+        },
+        "featured": false
+      },
+      "existingProgrammeCount": 3,
+      "existingBachelorCount": 0,
+      "existingProgrammes": [
+        {
+          "id": "program-northwest-a-and-f-university-crop-cultivation-and-farming-system-master",
+          "name": {
+            "en": "Crop Cultivation and Farming System",
+            "zh": "作物栽培学与耕作学",
+            "ru": "Агрономия и системы земледелия"
+          },
+          "degreeLevel": "master",
+          "programUrl": "https://gjs.nwafu.edu.cn/en/ApplicationGuide/4f03a1c38a2341bd969eb38667f9b662.htm"
+        },
+        {
+          "id": "program-northwest-a-and-f-university-plant-genetics-breeding-master",
+          "name": {
+            "en": "Plant Genetics Breeding",
+            "zh": "作物遗传育种",
+            "ru": "Генетика и селекция растений"
+          },
+          "degreeLevel": "master",
+          "programUrl": "https://gjs.nwafu.edu.cn/en/ApplicationGuide/4f03a1c38a2341bd969eb38667f9b662.htm"
+        },
+        {
+          "id": "program-northwest-a-and-f-university-fruit-science-master",
+          "name": {
+            "en": "Fruit Science",
+            "zh": "果树学",
+            "ru": "Плодоводство"
+          },
+          "degreeLevel": "master",
+          "programUrl": "https://gjs.nwafu.edu.cn/en/ApplicationGuide/4f03a1c38a2341bd969eb38667f9b662.htm"
+        }
+      ],
+      "exactIdentityMatches": [
+        {
+          "verifiedName": {
+            "zh": "汉语国际教育",
+            "en": "Teaching Chinese to Speakers of Other Languages"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "数据科学与大数据技术",
+            "en": "Data Science and Big Data Technology"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "计算机科学与技术",
+            "en": "Computer Science and Technology"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "工商管理",
+            "en": "Business Administration"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "农业水利工程",
+            "en": "Agricultural Water Conservancy Engineering"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "动物医学",
+            "en": "Veterinary Medicine"
+          },
+          "existingExactIds": []
+        }
+      ]
+    },
+    {
+      "catalogue": "SIC-xmu-reviewed-2027",
+      "totalProgrammes": 2307,
+      "rawProgrammeFileSha256": "e903ad5f74331114e09107c72f0d02762747b30369b2aebb58a32fdbe45b7ee5",
+      "university": {
+        "sourceIds": [
+          "src-uni-northwest-a-and-f-university"
+        ],
+        "verifiedAt": "2026-07-26",
+        "reviewAfter": "2027-01-22",
+        "status": "verified",
+        "id": "uni-northwest-a-and-f-university",
+        "slug": "northwest-a-and-f-university",
+        "name": {
+          "en": "Northwest A&F University",
+          "zh": "西北农林科技大学",
+          "ru": "Северо-Западный университет сельского и лесного хозяйства"
+        },
+        "cityId": "city-yangling",
+        "region": "northwest",
+        "officialUrl": "https://gjs.nwafu.edu.cn/",
+        "admissionsUrl": "https://gjs.nwafu.edu.cn/",
+        "summary": {
+          "en": "Northwest A&F University is located in Yangling. Current international programs and requirements are published on the official admissions website.",
+          "zh": "西北农林科技大学位于杨凌。当前国际学生项目和申请要求以学校官方招生网站为准。",
+          "ru": "Северо-Западный университет сельского и лесного хозяйства находится в городе Янлин. Актуальные программы и требования опубликованы на официальном сайте приёма."
+        },
+        "featured": false
+      },
+      "existingProgrammeCount": 3,
+      "existingBachelorCount": 0,
+      "existingProgrammes": [
+        {
+          "id": "program-northwest-a-and-f-university-crop-cultivation-and-farming-system-master",
+          "name": {
+            "en": "Crop Cultivation and Farming System",
+            "zh": "作物栽培学与耕作学",
+            "ru": "Агрономия и системы земледелия"
+          },
+          "degreeLevel": "master",
+          "programUrl": "https://gjs.nwafu.edu.cn/en/ApplicationGuide/4f03a1c38a2341bd969eb38667f9b662.htm"
+        },
+        {
+          "id": "program-northwest-a-and-f-university-plant-genetics-breeding-master",
+          "name": {
+            "en": "Plant Genetics Breeding",
+            "zh": "作物遗传育种",
+            "ru": "Генетика и селекция растений"
+          },
+          "degreeLevel": "master",
+          "programUrl": "https://gjs.nwafu.edu.cn/en/ApplicationGuide/4f03a1c38a2341bd969eb38667f9b662.htm"
+        },
+        {
+          "id": "program-northwest-a-and-f-university-fruit-science-master",
+          "name": {
+            "en": "Fruit Science",
+            "zh": "果树学",
+            "ru": "Плодоводство"
+          },
+          "degreeLevel": "master",
+          "programUrl": "https://gjs.nwafu.edu.cn/en/ApplicationGuide/4f03a1c38a2341bd969eb38667f9b662.htm"
+        }
+      ],
+      "exactIdentityMatches": [
+        {
+          "verifiedName": {
+            "zh": "汉语国际教育",
+            "en": "Teaching Chinese to Speakers of Other Languages"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "数据科学与大数据技术",
+            "en": "Data Science and Big Data Technology"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "计算机科学与技术",
+            "en": "Computer Science and Technology"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "工商管理",
+            "en": "Business Administration"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "农业水利工程",
+            "en": "Agricultural Water Conservancy Engineering"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "动物医学",
+            "en": "Veterinary Medicine"
+          },
+          "existingExactIds": []
+        }
+      ]
+    }
+  ],
+  "scopeWarnings": [
+    "Do not turn literal 2027 into 2027-2028.",
+    "All six listed majors are Chinese-taught; the generic English-language paragraph does not create English tracks.",
+    "No HSK numerical score is printed; do not fill 180 or 210.",
+    "The HSK4 CSCA Professional Chinese exemption names 汉语言本科, whereas row 1 is 汉语国际教育; do not transfer the exemption.",
+    "HSK substitute proof is an application for a waiver using both junior and senior secondary Chinese-medium evidence, not automatic exemption.",
+    "The age-25 reference date is not stated; September 1, 2027 belongs only to the under-18 guardian clause.",
+    "The guide gives registration in late August–early September but does not literally name the intake season; conservative intake other is valid.",
+    "No explicit application time zone is printed.",
+    "The six table row numbers are not official major codes.",
+    "The optional veterinary sixth major is five years, not four; it must retain CSCA Chemistry rather than Physics."
+  ],
+  "beforePrograms": [],
+  "reviewedPrograms": [
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese",
+      "slug": "northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese",
+      "universityId": "uni-northwest-a-and-f-university",
+      "name": {
+        "en": "Teaching Chinese to Speakers of Other Languages",
+        "zh": "汉语国际教育"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "chinese-education",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "en": "College of Language and Culture",
+          "zh": "语言文化学院"
+        },
+        "qualification": {
+          "en": "Bachelor of Arts",
+          "zh": "文学学士"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese",
+      "slug": "northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese",
+      "universityId": "uni-northwest-a-and-f-university",
+      "name": {
+        "en": "Data Science and Big Data Technology",
+        "zh": "数据科学与大数据技术"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "en": "College of Information Engineering",
+          "zh": "信息工程学院"
+        },
+        "qualification": {
+          "en": "Bachelor of Engineering",
+          "zh": "工学学士"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese",
+      "slug": "northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese",
+      "universityId": "uni-northwest-a-and-f-university",
+      "name": {
+        "en": "Computer Science and Technology",
+        "zh": "计算机科学与技术"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "en": "College of Information Engineering",
+          "zh": "信息工程学院"
+        },
+        "qualification": {
+          "en": "Bachelor of Engineering",
+          "zh": "工学学士"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-northwest-a-and-f-university-business-administration-bachelor-chinese",
+      "slug": "northwest-a-and-f-university-business-administration-bachelor-chinese",
+      "universityId": "uni-northwest-a-and-f-university",
+      "name": {
+        "en": "Business Administration",
+        "zh": "工商管理"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "business",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "en": "College of Economics and Management",
+          "zh": "经济管理学院"
+        },
+        "qualification": {
+          "en": "Bachelor of Management",
+          "zh": "管理学学士"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese",
+      "slug": "northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese",
+      "universityId": "uni-northwest-a-and-f-university",
+      "name": {
+        "en": "Agricultural Water Conservancy Engineering",
+        "zh": "农业水利工程"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjs.nwafu.edu.cn/docs/2026-10/97b028b759ff452ba60c648fdb95e05b.xlsx",
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "en": "College of Water Resources and Architectural Engineering",
+          "zh": "水利与建筑工程学院"
+        },
+        "qualification": {
+          "en": "Bachelor of Engineering",
+          "zh": "工学学士"
+        }
+      }
+    }
+  ],
+  "reviewedAdmissionCycles": [
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国国籍，持有效外国护照。"
+        },
+        {
+          "zh": "年龄不超过25周岁（官方未说明此年龄上限的计算日期），高中毕业；应届毕业生须提供预计毕业证明，并于入学前补交正式毕业证。"
+        },
+        {
+          "zh": "身心健康、品学兼优、对华友好、无犯罪记录。"
+        },
+        {
+          "zh": "原为中国国籍、后加入外国国籍者，须于2023年4月30日前取得外国国籍，并于2023年4月30日至2027年4月30日期间在国外累计居住不少于2年（每年不少于9个月）。"
+        },
+        {
+          "zh": "出生即为外国国籍、父母一方为中国公民者，该中国籍父母须在申请人出生前取得外国永久居留权，申请人须满足上述境外居住要求；申请或入学后仍被认定具有中国国籍者，入学资格将被取消。"
+        },
+        {
+          "zh": "截至2027年9月1日未满18周岁者，须提交中国大陆成年监护人保证书；此日期仅用于监护材料要求，不作为25周岁年龄上限的计算日。"
+        },
+        {
+          "zh": "须提交符合本专业要求的CSCA成绩：中文(文)、数学。本专业按招生目录列示的科目申请；汉语言本科专业的HSK4免考专业中文例外不移用于本专业。"
+        }
+      ],
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "id": "cycle-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese-2027-self-funded",
+      "programId": "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "other",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "本周期仅为2027年中文授课本科自费申请，起止为2026年11月1日至2027年5月31日；官方未说明申请时区。新生按录取通知于2027年8月底至9月初报到，官方未明确注明入学季。HSK要求为4级，未公布数值最低分；初、高中中文授课证明用于申请免试，不代表自动豁免或免除本专业CSCA科目。报名费400元不退，中文授课学费18000元/学年。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国国籍，持有效外国护照。"
+        },
+        {
+          "zh": "年龄不超过25周岁（官方未说明此年龄上限的计算日期），高中毕业；应届毕业生须提供预计毕业证明，并于入学前补交正式毕业证。"
+        },
+        {
+          "zh": "身心健康、品学兼优、对华友好、无犯罪记录。"
+        },
+        {
+          "zh": "原为中国国籍、后加入外国国籍者，须于2023年4月30日前取得外国国籍，并于2023年4月30日至2027年4月30日期间在国外累计居住不少于2年（每年不少于9个月）。"
+        },
+        {
+          "zh": "出生即为外国国籍、父母一方为中国公民者，该中国籍父母须在申请人出生前取得外国永久居留权，申请人须满足上述境外居住要求；申请或入学后仍被认定具有中国国籍者，入学资格将被取消。"
+        },
+        {
+          "zh": "截至2027年9月1日未满18周岁者，须提交中国大陆成年监护人保证书；此日期仅用于监护材料要求，不作为25周岁年龄上限的计算日。"
+        },
+        {
+          "zh": "须提交符合本专业要求的CSCA成绩：中文（理）、数学、物理。本专业按招生目录列示的科目申请；汉语言本科专业的HSK4免考专业中文例外不移用于本专业。"
+        }
+      ],
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "id": "cycle-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese-2027-self-funded",
+      "programId": "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "other",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "本周期仅为2027年中文授课本科自费申请，起止为2026年11月1日至2027年5月31日；官方未说明申请时区。新生按录取通知于2027年8月底至9月初报到，官方未明确注明入学季。HSK要求为4级，未公布数值最低分；初、高中中文授课证明用于申请免试，不代表自动豁免或免除本专业CSCA科目。报名费400元不退，中文授课学费18000元/学年。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国国籍，持有效外国护照。"
+        },
+        {
+          "zh": "年龄不超过25周岁（官方未说明此年龄上限的计算日期），高中毕业；应届毕业生须提供预计毕业证明，并于入学前补交正式毕业证。"
+        },
+        {
+          "zh": "身心健康、品学兼优、对华友好、无犯罪记录。"
+        },
+        {
+          "zh": "原为中国国籍、后加入外国国籍者，须于2023年4月30日前取得外国国籍，并于2023年4月30日至2027年4月30日期间在国外累计居住不少于2年（每年不少于9个月）。"
+        },
+        {
+          "zh": "出生即为外国国籍、父母一方为中国公民者，该中国籍父母须在申请人出生前取得外国永久居留权，申请人须满足上述境外居住要求；申请或入学后仍被认定具有中国国籍者，入学资格将被取消。"
+        },
+        {
+          "zh": "截至2027年9月1日未满18周岁者，须提交中国大陆成年监护人保证书；此日期仅用于监护材料要求，不作为25周岁年龄上限的计算日。"
+        },
+        {
+          "zh": "须提交符合本专业要求的CSCA成绩：中文（理）、数学、物理。本专业按招生目录列示的科目申请；汉语言本科专业的HSK4免考专业中文例外不移用于本专业。"
+        }
+      ],
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "id": "cycle-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese-2027-self-funded",
+      "programId": "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "other",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "本周期仅为2027年中文授课本科自费申请，起止为2026年11月1日至2027年5月31日；官方未说明申请时区。新生按录取通知于2027年8月底至9月初报到，官方未明确注明入学季。HSK要求为4级，未公布数值最低分；初、高中中文授课证明用于申请免试，不代表自动豁免或免除本专业CSCA科目。报名费400元不退，中文授课学费18000元/学年。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国国籍，持有效外国护照。"
+        },
+        {
+          "zh": "年龄不超过25周岁（官方未说明此年龄上限的计算日期），高中毕业；应届毕业生须提供预计毕业证明，并于入学前补交正式毕业证。"
+        },
+        {
+          "zh": "身心健康、品学兼优、对华友好、无犯罪记录。"
+        },
+        {
+          "zh": "原为中国国籍、后加入外国国籍者，须于2023年4月30日前取得外国国籍，并于2023年4月30日至2027年4月30日期间在国外累计居住不少于2年（每年不少于9个月）。"
+        },
+        {
+          "zh": "出生即为外国国籍、父母一方为中国公民者，该中国籍父母须在申请人出生前取得外国永久居留权，申请人须满足上述境外居住要求；申请或入学后仍被认定具有中国国籍者，入学资格将被取消。"
+        },
+        {
+          "zh": "截至2027年9月1日未满18周岁者，须提交中国大陆成年监护人保证书；此日期仅用于监护材料要求，不作为25周岁年龄上限的计算日。"
+        },
+        {
+          "zh": "须提交符合本专业要求的CSCA成绩：中文(文)、数学。本专业按招生目录列示的科目申请；汉语言本科专业的HSK4免考专业中文例外不移用于本专业。"
+        }
+      ],
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "id": "cycle-northwest-a-and-f-university-business-administration-bachelor-chinese-2027-self-funded",
+      "programId": "program-northwest-a-and-f-university-business-administration-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "other",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "本周期仅为2027年中文授课本科自费申请，起止为2026年11月1日至2027年5月31日；官方未说明申请时区。新生按录取通知于2027年8月底至9月初报到，官方未明确注明入学季。HSK要求为4级，未公布数值最低分；初、高中中文授课证明用于申请免试，不代表自动豁免或免除本专业CSCA科目。报名费400元不退，中文授课学费18000元/学年。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-nwafu-2027-chinese-bachelor-majors",
+        "src-reviewed-nwafu-2027-bachelor-guide-cn"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级；官方未公布数值最低分。可提交初中和高中汉语授课证明以申请免试，须按学校要求审核。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国国籍，持有效外国护照。"
+        },
+        {
+          "zh": "年龄不超过25周岁（官方未说明此年龄上限的计算日期），高中毕业；应届毕业生须提供预计毕业证明，并于入学前补交正式毕业证。"
+        },
+        {
+          "zh": "身心健康、品学兼优、对华友好、无犯罪记录。"
+        },
+        {
+          "zh": "原为中国国籍、后加入外国国籍者，须于2023年4月30日前取得外国国籍，并于2023年4月30日至2027年4月30日期间在国外累计居住不少于2年（每年不少于9个月）。"
+        },
+        {
+          "zh": "出生即为外国国籍、父母一方为中国公民者，该中国籍父母须在申请人出生前取得外国永久居留权，申请人须满足上述境外居住要求；申请或入学后仍被认定具有中国国籍者，入学资格将被取消。"
+        },
+        {
+          "zh": "截至2027年9月1日未满18周岁者，须提交中国大陆成年监护人保证书；此日期仅用于监护材料要求，不作为25周岁年龄上限的计算日。"
+        },
+        {
+          "zh": "须提交符合本专业要求的CSCA成绩：中文（理）、数学、物理。本专业按招生目录列示的科目申请；汉语言本科专业的HSK4免考专业中文例外不移用于本专业。"
+        }
+      ],
+      "applyUrl": "https://nwsuaf.17gz.org/",
+      "id": "cycle-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese-2027-self-funded",
+      "programId": "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "other",
+      "opensOn": "2026-11-01",
+      "closesOn": "2027-05-31",
+      "dateStatus": "published",
+      "tuitionCny": 18000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 400,
+      "notes": {
+        "zh": "本周期仅为2027年中文授课本科自费申请，起止为2026年11月1日至2027年5月31日；官方未说明申请时区。新生按录取通知于2027年8月底至9月初报到，官方未明确注明入学季。HSK要求为4级，未公布数值最低分；初、高中中文授课证明用于申请免试，不代表自动豁免或免除本专业CSCA科目。报名费400元不退，中文授课学费18000元/学年。"
+      }
+    }
+  ],
+  "audit": {
+    "existingNonemptyFieldsChanged": [],
+    "existingRecordsChanged": [],
+    "newProgrammes": 5,
+    "newAnnualCycles": 5,
+    "noHistoricalRawRecordDeleted": true,
+    "noHistoricalReceiptChanged": true,
+    "legacyNenuProgrammesPreserved": 5,
+    "legacyXmuProgrammesPreserved": 5,
+    "newProgrammeIdsHaveNoPriorValues": true,
+    "sourceDerivedNamesOnly": [
+      "zh",
+      "en"
+    ],
+    "originalXlsxCommitted": false,
+    "additionalVeterinaryMajorKeptPrivateOnly": true
+  },
+  "afterProgrammeSha256": {
+    "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese": "398f54427914212d9195fcb9ecbcd6cb0fc36a6683dc85775ffe2341f5d71216",
+    "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese": "26c4836ea5e803061f292ca25f594fb99ce3529e8185965e19a7c546ac6e0509",
+    "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese": "a03f42f8548522afc845d48cdaaeb9afac335f342318abb3108ed82ac17cc6b4",
+    "program-northwest-a-and-f-university-business-administration-bachelor-chinese": "ad2bbb3d985a432b2ae31059e02783ad2669963718fe09e9031a61147d66a309",
+    "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese": "0fb64f8c546b009040d6697a5fbd5ecb1fcc8fc90150dc7d51e8b7a68bfb0fd3"
+  },
+  "newCycleSha256": {
+    "cycle-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese-2027-self-funded": "7ada0ea2f264d1a3d87d1cff0a1162dacd3668995bdb113a9e8a7036e7857090",
+    "cycle-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese-2027-self-funded": "8e1b73614d2dd8a0682068c301df72a74b84e089b9946d574c051d37b157e343",
+    "cycle-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese-2027-self-funded": "c6cac265cc4b98bcbf0c6cf2e3e2b840888a3b0e2143c802a4f77e615652ce8f",
+    "cycle-northwest-a-and-f-university-business-administration-bachelor-chinese-2027-self-funded": "4f34f8be7593c79d4d78d228eed0b544659e24f65d5cca3e4ab104c39fd80e5e",
+    "cycle-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese-2027-self-funded": "533ddbc5244fe2baf7b8686209238ee52abe8314656ca060817758fddf515217"
+  },
+  "annualScopeSha256": {
+    "cycle-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese-2027-self-funded": "b468fc9114576b03e2aba73c9aee875a5d75aa569d27ee2479b4713a42428ffd",
+    "cycle-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese-2027-self-funded": "32349c591c65d8ec0f7fe46421d0d561a5cbdff45c3a9f772e3f4fc2386eac29",
+    "cycle-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese-2027-self-funded": "20df6b58b654e6897ba4990bb91d6121d1668578e18cf1843e95b8c73a5c7937",
+    "cycle-northwest-a-and-f-university-business-administration-bachelor-chinese-2027-self-funded": "625d3c0583977989f5bde1f32b97ade5b9d04d294ab2a6a28e01f43343dab71f",
+    "cycle-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese-2027-self-funded": "1fb13f90190aef95d853e24301dbe8df296999f821a92f45ec88b06bb171e02b"
+  },
+  "preservedRecordsSha256": {
+    "sources": "eb1ea113cd6471ba4bf1e31085620755d2a66f8263bb6a69f3f75933268984d9",
+    "cities": "a7aed7e8ec99bf2ea03eff84f30ac837eab3f8a7772cc4057b15ab80143522cb",
+    "universities": "daadc4bc90e7b533926074380ef599c0be1773c51d9947e37ff9b7fcdcbac983",
+    "programs": "36c1bc37fa9e75520ad7cf2d66ea19093d6c6cb2875bdd44e6e98b81f6f72057",
+    "admissionCycles": "a52ad6c8b3e9ddae8170553c91ed5656d45478b7344e8c3497e563bab802add9",
+    "scholarships": "d0d84c62f481f54bd1067656bb510f7b5c5caddd581e3e5fca084e98e73f6be1"
+  },
+  "modelCalls": false,
+  "paidModelCalls": 0,
+  "cloudWrites": 0,
+  "privateUploads": 0,
+  "oldModelLedgerMutations": false,
+  "push": false,
+  "merge": false,
+  "sha256": "e44c0ec6f464c937a92f055ca34f931102cbda256fb7e4d72ae716ba0fc43406"
+}
