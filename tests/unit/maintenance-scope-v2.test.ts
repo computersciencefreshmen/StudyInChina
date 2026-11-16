@@ -16,7 +16,11 @@ describe('versioned existing-school maintenance scope', () => {
     expect(next.formatVersion).toBe(2); expect(next.expectedSchoolCount).toBe(295)
     expect(next.sha256).toBe(await scopeContentSha256(next)); expect(next.parentScopeSha256).toBe(previous.sha256)
     expect(next.sha256).toBe(EXISTING_SCHOOLS_V2_SHA256)
-    expect(next.schools.map(school => school.universityId).sort()).toEqual(universities.map(school => school.id).sort())
+    // A later manually reviewed school may exist in the catalogue without
+    // being silently enrolled in this immutable 295-school cloud scope.
+    const catalogIds = new Set(universities.map(school => school.id))
+    expect(new Set(next.schools.map(school => school.universityId)).size).toBe(295)
+    for (const school of next.schools) expect(catalogIds.has(school.universityId), school.universityId).toBe(true)
     for (const school of previous.schools) expect(canonicalJson(next.schools.find(row => row.universityId === school.universityId))).toBe(canonicalJson(school))
     expect(readMaintenanceScope(process.cwd(), previous.sha256)).toEqual(previous)
     expect(() => readMaintenanceScope(process.cwd(), 'f'.repeat(64))).toThrow('scope_unavailable')
