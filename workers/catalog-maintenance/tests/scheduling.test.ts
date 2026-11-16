@@ -98,3 +98,22 @@ test('school fairness spans both shares while preserving programme/programme/awa
   const onlyOneSchool=jobs.filter(job=>job.scheduling_school_id==='school-0')
   assert.equal(selectScheduledJobs(onlyOneSchool,{limit:8,firstRoundComplete:false,now:0}).length,8)
 })
+
+test('sixteen slots spread across low-coverage schools and retain conditions and scholarship work',()=>{
+  const jobs=Array.from({length:24},(_,school)=>[
+    {id:`conditions-${school}`,stage:'maintain',purpose:school%2?'cycle-discovery':'fields'},
+    {id:`programme-${school}`,stage:'extract',purpose:'identity'},
+    {id:`award-${school}`,stage:'award',purpose:'scholarship'},
+  ].map(job=>({...job,priority:1,coverage_count:0,scheduling_school_id:`school-${school}`}))).flat()
+  const complete=jobs.map(job=>({...job,id:`complete-${job.id}`,coverage_count:5,scheduling_school_id:`complete-${job.scheduling_school_id}`}))
+  const input=[...complete,...jobs],before=JSON.stringify(input)
+  const selected=selectScheduledJobs(input,{limit:16,firstRoundComplete:false,now:0,slotOffset:0,expansionOffset:0})
+  assert.equal(selected.length,16)
+  assert.equal(new Set(selected.map(job=>job.scheduling_school_id)).size,16)
+  assert.ok(selected.every(job=>job.coverage_count===0))
+  assert.ok(selected.some(job=>job.purpose==='fields'))
+  assert.ok(selected.some(job=>job.purpose==='cycle-discovery'))
+  assert.equal(selected.filter(job=>job.stage==='extract').length,8)
+  assert.equal(selected.filter(job=>job.stage==='award').length,4)
+  assert.equal(JSON.stringify(input),before)
+})
