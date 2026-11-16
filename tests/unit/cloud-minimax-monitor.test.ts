@@ -4,12 +4,39 @@ import { describe, it, expect, vi } from 'vitest'
 import { handleAdminMiniMaxMonitor, readCloudLedger, CLOUD_USAGE_SQL } from '../../workers/catalog-api/src/admin-minimax-monitor'
 import api from '../../workers/catalog-api/src/index'
 import type { CatalogApiEnv, D1PreparedStatement } from '../../workers/catalog-api/src/types'
-import { cloudMiniMaxSchema } from '../../src/lib/admin/cloud-minimax-contract'
+import { cloudMiniMaxSchema, cloudRefillSchema } from '../../src/lib/admin/cloud-minimax-contract'
 import { canonicalJson } from '../../scripts/maintenance/contracts'
 import { cloudSnapshot, CLOUD_NOW } from '../fixtures/cloud-minimax'
 
 const token = 'test-cloud-telemetry-credential-not-a-real-token'
 const request = (auth = true, method = 'GET') => new Request('https://api.test/internal/v1/admin-minimax-monitor', { method, headers: auth ? { authorization: `Bearer ${token}` } : {} })
+const refill = () => ({ format: 'studyinchina.continuous-refill' as const, version: 1 as const, observedAt: new Date(CLOUD_NOW).toISOString(), enabled: true,
+  state: 'waiting' as const, reason: 'delivery_unconfirmed', model: { pending: 3, inflight: 2, eligible: null, limit: 2, epochUsed: 17, epochCap: 256 },
+  capture: { pending: 1, inflight: 1, eligible: null, limit: 2, epochUsed: 5, epochCap: 64 }, lastRefillAt: null, nextWakeAt: null,
+  uncertainDeliveries: 1, modelCallsPerformed: false as const })
+describe('continuous refill monitor projection', () => {
+  it('strips private delivery metadata and preserves genuinely unknown counters', () => {
+    const value = cloudRefillSchema.parse({ ...refill(), dispatchToken: 'private-token', fence: { private: true }, model: { ...refill().model, reservationKey: 'private-reservation' } })
+    expect(value.model.eligible).toBeNull()
+    expect(JSON.stringify(value)).not.toContain('private-')
+    expect(value.model.epochUsed).toBe(17)
+  })
+  it('reads optional same-account refill RPC independently of ledger availability and rejects invalid observations', async () => {
+    const f = fixture()
+    try {
+      const readRefill = vi.fn().mockResolvedValue(refill())
+      f.env.MAINTENANCE_MONITOR = { ...f.env.MAINTENANCE_MONITOR!, readRefill }
+      const value = cloudMiniMaxSchema.parse(await (await handleAdminMiniMaxMonitor(request(), f.env, CLOUD_NOW)).json())
+      expect(value.refill?.uncertainDeliveries).toBe(1)
+      expect(value.refill?.model.eligible).toBeNull()
+      readRefill.mockResolvedValue({ ...refill(), reason: 'Bearer private-credential' })
+      const invalid = await (await handleAdminMiniMaxMonitor(request(), f.env, CLOUD_NOW + 1)).json()
+      expect(invalid.refill).toBeNull()
+      expect(invalid.ledgerState).toBe('fresh')
+      expect(JSON.stringify(invalid)).not.toContain('private-credential')
+    } finally { f.db.close() }
+  })
+})
 function fixture(indexes = true) {
   const db = new DatabaseSync(':memory:')
   db.exec(readFileSync('infra/d1/pipeline/migrations/0019_catalog_maintenance.sql', 'utf8'))

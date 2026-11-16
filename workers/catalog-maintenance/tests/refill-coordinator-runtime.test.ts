@@ -68,8 +68,8 @@ test('native DO storage/serialization and D1 prove bounded stage permits and pre
     assert.equal((first.model as { pending: number }).pending, 8)
     const sent = (await db.prepare('SELECT * FROM test_sends ORDER BY job_id').all<{ dispatch_token: string; job_id: string; epoch: string }>()).results
     assert.equal(sent.length, 8)
-    const permits = await Promise.all(sent.slice(0, 3).map(row => call('/acquire', { jobId: row.job_id, dispatchToken: row.dispatch_token, epochSha256: row.epoch })))
-    assert.equal(permits.filter(result => result.allowed).length, 2)
+    const permits = await Promise.all(sent.slice(0, 3).map((row:{job_id:string;dispatch_token:string;epoch:string}) => call('/acquire', { jobId: row.job_id, dispatchToken: row.dispatch_token, epochSha256: row.epoch })))
+    assert.equal(permits.filter((result:Record<string,unknown>) => result.allowed).length, 2)
     const job = sent[0], permitToken = permits[0].permitToken
     await db.prepare("UPDATE test_jobs SET status='running',attempt=1,lease_token='native-lease' WHERE job_id=?").bind(job.job_id).run()
     assert.equal((await call('/claimed', { jobId: job.job_id, permitToken, leaseToken: 'native-lease' })).confirmed, true)

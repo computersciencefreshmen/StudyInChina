@@ -1,6 +1,7 @@
 import type { DurableNamespace, DurableStorage, MaintenanceEnv } from './types'
 
 export const REFILL_SINGLETON = 'catalog-refill-v1'
+export const REFILL_DISPATCH_TOKEN = /^[A-Za-z0-9_-]{8,160}$/
 export const REFILL_INTERVAL_MS = 10_000
 export const REFILL_WINDOW_MS = 15 * 60_000
 export const REFILL_LIMITS = { capture: 2, model: 8, capturePerWindow: 64, modelPerWindow: 256, batch: 8 } as const

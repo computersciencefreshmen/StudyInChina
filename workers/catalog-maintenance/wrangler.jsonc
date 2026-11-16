@@ -16,6 +16,8 @@
     "MODEL_CONCURRENCY": "4",
     "TICK_JOB_LIMIT": "8",
     "FETCH_CONCURRENCY": "8",
+    "CONTINUOUS_REFILL_ENABLED": "false",
+    "REFILL_MODEL_LIMIT": "2",
     "USER_AGENT": "StudyInChinaDataBot/1.0 (+https://studyinchina.vercel.app/contact)"
   },
   "d1_databases": [{
@@ -26,8 +28,14 @@
   "r2_buckets": [{ "binding": "SNAPSHOTS_BUCKET", "bucket_name": "studyinchina-source-snapshots" }],
   "queues": {
     "producers": [{ "binding": "MAINTENANCE_QUEUE", "queue": "studyinchina-catalog-maintenance" }],
-    "consumers": [{ "queue": "studyinchina-catalog-maintenance", "max_batch_size": 1, "max_retries": 3, "max_concurrency": 8, "dead_letter_queue": "studyinchina-catalog-maintenance-dlq" }]
+    "consumers": [{ "queue": "studyinchina-catalog-maintenance", "max_batch_size": 1, "max_retries": 12, "max_concurrency": 8, "dead_letter_queue": "studyinchina-catalog-maintenance-dlq" }]
   },
-  "durable_objects": { "bindings": [{ "name": "MODEL_ADMISSION", "class_name": "ModelAdmission" }] },
-  "migrations": [{ "tag": "catalog-maintenance-v1", "new_sqlite_classes": ["ModelAdmission"] }]
+  "durable_objects": { "bindings": [
+    { "name": "MODEL_ADMISSION", "class_name": "ModelAdmission" },
+    { "name": "REFILL_COORDINATOR", "class_name": "CatalogRefillCoordinator" }
+  ] },
+  "migrations": [
+    { "tag": "catalog-maintenance-v1", "new_sqlite_classes": ["ModelAdmission"] },
+    { "tag": "catalog-refill-v1", "new_sqlite_classes": ["CatalogRefillCoordinator"] }
+  ]
 }

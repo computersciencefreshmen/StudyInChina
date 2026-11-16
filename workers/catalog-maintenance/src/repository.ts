@@ -18,6 +18,8 @@ import { prepareTargetFollowup, seedTargetFollowupJobs, targetFollowupEvent, typ
 import { readBackgroundBudgetGate } from '../../shared/background-budget'
 import { sqlAnd } from './sql-and'
 import { readRecordTargetGraph, retainTargetGraphHold } from './target-graph'
+import { materialJobVersion,materialJobVersionGuard } from './material-job-version'
+import { materialBatchEnvelope,materialBatchJobId,MATERIAL_BATCH_LIMITS,type MaterialEngine } from './material-batch-contract'
 
 export async function control(env: MaintenanceEnv): Promise<Control | null> {
   return env.PIPELINE_DB.prepare('SELECT * FROM maintenance_control WHERE singleton=1').first<Control>()
@@ -375,24 +377,36 @@ export async function queueExtraction(env:MaintenanceEnv,row:SourceRow,snapshotS
   const categories=row.categories_json?JSON.parse(row.categories_json)as string[]:[row.category]
   const hasAward=categories.some(category=>['university_scholarship','faculty_scholarship','government_scholarship'].includes(category))
   const stages=hasAward&&categories.every(category=>category.includes('scholarship'))?['award']:hasAward?['extract','award']:['extract']
-  if(!followup)for(const stage of stages){const id=await digest(`${stage}:${row.source_id}:${snapshotSha256}:identity-v1`);await env.PIPELINE_DB.prepare("INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,due_at,created_at,updated_at,snapshot_sha256,snapshot_key) VALUES(?,?,?,'queued',?,?,?,?,?)").bind(id,row.source_id,stage,nowIso(now),nowIso(now),nowIso(now),snapshotSha256,key).run()}
   const cfg=await control(env),graph=cfg?.targets_complete?await readRecordTargetGraph(env,row.source_id):null,available=graph?.targets??[],targets=followup?available.filter(target=>followup.pins.some(pin=>pin.id===`${target.entityType}:${target.recordId}`&&pin.sha256===target.recordScopeSha256)):available,operations:SqlOperation[]=[],priority=captureCadence(row,targets.map(target=>target.fields),now).priority===0?0:1
   if(graph)await retainTargetGraphHold(env,graph,snapshotSha256)
   if(followup&&(!followup.pins.length||followup.pins.length>20||new Set(followup.pins.map(pin=>pin.id)).size!==followup.pins.length||targets.length!==followup.pins.length))throw new MaintenanceError('target_followup_target_changed')
-  for(let index=0;index<targets.length;index+=20) {
-    const chunk=targets.slice(index,index+20),pins=chunk.map(t=>({id:`${t.entityType}:${t.recordId}`,sha256:t.recordScopeSha256}))
-    const maintenanceId=await digest(`maintain:${row.source_id}:${snapshotSha256}:${nowIso(now).slice(0,10)}:${canonical(pins)}:fields-v1`)
-    operations.push({sql:"INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json) VALUES(?,?,'maintain','queued',?,?,?,?,?,?,?)",values:[maintenanceId,row.source_id,priority,nowIso(now),nowIso(now),nowIso(now),snapshotSha256,key,canonical(pins)]})
+  const versions=new Map<MaterialEngine,1|2>(),createdAt=nowIso(now)
+  if(!followup)for(const stage of stages){
+    const engine=stage==='award'?'scholarship':'program',version=await materialJobVersion(env,row.source_id,snapshotSha256,engine)
+    versions.set(engine,version)
+    const id=await materialBatchJobId({engine,sourceId:row.source_id,snapshotSha256,createdAt,version})
+    operations.push({sql:"INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json) VALUES(?,?,?,'queued',?,?,?,?,?,?)",values:[id,row.source_id,stage,createdAt,createdAt,createdAt,snapshotSha256,key,version===2?canonical(materialBatchEnvelope(engine)):null]})
+  }
+  const fieldVersion=targets.length?await materialJobVersion(env,row.source_id,snapshotSha256,'fields'):1,fieldLimit=fieldVersion===2?MATERIAL_BATCH_LIMITS.fields:20
+  if(targets.length)versions.set('fields',fieldVersion)
+  for(let index=0;index<targets.length;index+=fieldLimit) {
+    const chunk=targets.slice(index,index+fieldLimit),pins=chunk.map(t=>({id:`${t.entityType}:${t.recordId}`,sha256:t.recordScopeSha256}))
+    const maintenanceId=await materialBatchJobId({engine:'fields',sourceId:row.source_id,snapshotSha256,createdAt,pins,version:fieldVersion})
+    operations.push({sql:"INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json) VALUES(?,?,'maintain','queued',?,?,?,?,?,?,?)",values:[maintenanceId,row.source_id,priority,createdAt,createdAt,createdAt,snapshotSha256,key,canonical(fieldVersion===2?materialBatchEnvelope('fields',pins):pins)]})
   }
   const programs=targets.filter(target=>target.entityType==='program')
-  for(let index=0;index<programs.length;index+=10){const chunk=programs.slice(index,index+10),pins=chunk.map(target=>({id:`program:${target.recordId}`,sha256:target.recordScopeSha256})),id=await digest(`cycle-discovery:${row.source_id}:${snapshotSha256}:${canonical(pins)}:v1`);operations.push({sql:"INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json) VALUES(?,?,'maintain','queued',2,?,?,?,?,?,?)",values:[id,row.source_id,nowIso(now),nowIso(now),nowIso(now),snapshotSha256,key,canonical({kind:'cycle-discovery',targets:pins})]})}
+  const cycleVersion=programs.length?await materialJobVersion(env,row.source_id,snapshotSha256,'cycles'):1,cycleLimit=cycleVersion===2?MATERIAL_BATCH_LIMITS.cycles:10
+  if(programs.length)versions.set('cycles',cycleVersion)
+  for(let index=0;index<programs.length;index+=cycleLimit){const chunk=programs.slice(index,index+cycleLimit),pins=chunk.map(target=>({id:`program:${target.recordId}`,sha256:target.recordScopeSha256})),id=await materialBatchJobId({engine:'cycles',sourceId:row.source_id,snapshotSha256,createdAt,pins,version:cycleVersion});operations.push({sql:"INSERT OR IGNORE INTO maintenance_jobs(job_id,source_id,stage,status,priority,due_at,created_at,updated_at,snapshot_sha256,snapshot_key,target_ids_json) VALUES(?,?,'maintain','queued',2,?,?,?,?,?,?)",values:[id,row.source_id,createdAt,createdAt,createdAt,snapshotSha256,key,canonical(cycleVersion===2?materialBatchEnvelope('cycles',pins):{kind:'cycle-discovery',targets:pins})]})}
   const grouped=coalesceOperations(operations)
   if(grouped.length>32)throw new MaintenanceError('source_target_partition_limit')
   if(grouped.length){
-    const guard=crypto.randomUUID()
+    const guard=crypto.randomUUID(),versionGuards=[...versions].map(([engine,version])=>({id:crypto.randomUUID(),engine,version}))
     await env.PIPELINE_DB.batch([
+      ...versionGuards.map(item=>materialJobVersionGuard(env,item.id,row.source_id,snapshotSha256,item.engine,item.version)),
       ...(followup?[env.PIPELINE_DB.prepare(`INSERT INTO maintenance_transaction_guards VALUES(?,(SELECT CASE WHEN EXISTS(SELECT 1 FROM maintenance_control WHERE singleton=1 AND scope_sha256=? AND input_catalog_sha256=? AND seed_sha256=? AND legacy_guard_sha256=? AND revision=? AND enabled=1 AND models_enabled=1 AND seed_complete=1 AND targets_complete=1) AND EXISTS(SELECT 1 FROM maintenance_sources WHERE source_id=? AND enabled=1 AND failures=0 AND error_code IS NULL AND raw_sha256=? AND snapshot_key=? AND last_success_at=?) AND EXISTS(SELECT 1 FROM maintenance_observations WHERE observation_id=? AND source_id=? AND raw_sha256=? AND snapshot_key=? AND checked_at=? AND http_status BETWEEN 200 AND 299) AND NOT EXISTS(SELECT 1 FROM maintenance_model_attempts WHERE source_id=? AND status IN('unknown','reserved','send_started')) AND NOT EXISTS(SELECT 1 FROM maintenance_jobs WHERE source_id=? AND snapshot_sha256=? AND status='unknown') AND (SELECT COUNT(*) FROM json_each(?) p JOIN maintenance_record_targets t ON t.target_id=json_extract(p.value,'$.id') AND t.record_scope_sha256=json_extract(p.value,'$.sha256') AND t.active=1 JOIN maintenance_target_sources x ON x.target_id=t.target_id AND x.source_id=? JOIN maintenance_source_schools sx ON sx.source_id=x.source_id AND sx.university_id=t.university_id JOIN maintenance_schools u ON u.university_id=t.university_id AND u.scope_sha256=? WHERE (SELECT canary_json FROM maintenance_control WHERE singleton=1)='[]' OR t.university_id IN(SELECT value FROM json_each((SELECT canary_json FROM maintenance_control WHERE singleton=1))))=? THEN 1 ELSE 0 END))`).bind(guard,followup.scopeSha256,followup.inputCatalogSha256,followup.seedSha256,followup.legacyGuardSha256,followup.revision,row.source_id,snapshotSha256,key,row.last_success_at,followup.observationId,row.source_id,snapshotSha256,key,followup.checkedAt,row.source_id,row.source_id,snapshotSha256,canonical(followup.pins),row.source_id,followup.scopeSha256,followup.pins.length)]:[]),
       ...grouped.map(operation=>env.PIPELINE_DB.prepare(operation.sql).bind(...operation.values)),
+      ...versionGuards.map(item=>env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(item.id)),
       ...(followup?[env.PIPELINE_DB.prepare('DELETE FROM maintenance_transaction_guards WHERE guard_id=?').bind(guard)]:[]),
     ])
   }

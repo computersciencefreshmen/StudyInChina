@@ -1,5 +1,10 @@
 import { runtimeModelNoReplayReason, readRuntimeModelDisposition } from './runtime-model-guards'
 import { registerOfficialSourceCandidates } from './source-candidates'
+import { registerSourceRechecks } from './source-rechecks'
+import { acquireRefillPermit, confirmRefillClaim, continuousRefillEnabled, releaseRefillPermit, wakeRefill } from './refill-client'
+import { closeRefillDeliveryBeforeClaim } from './queue-refill-delivery'
+import { REFILL_DISPATCH_TOKEN } from './refill-contract'
+export { CatalogRefillCoordinator } from './refill-coordinator'
 import { ModelAdmission } from './admission'
 import { holdBudgetQueueMessage } from './budget-queue-hold'
 import { readPlanQuotaReport } from './quota-report'
@@ -45,7 +50,8 @@ async function finishDocumentPartition(env:MaintenanceEnv,job:JobRow,progress:Aw
     // A successful bounded continuation is not a failed model attempt.
     await env.PIPELINE_DB.prepare("UPDATE maintenance_jobs SET attempt=MAX(0,attempt-1) WHERE job_id=? AND status='running' AND lease_token=?").bind(job.job_id,job.lease_token).run()
     await finishJob(env,job,'retry','document_partition_pending',5)
-    await env.MAINTENANCE_QUEUE.send({version:1,jobId:job.job_id},{delaySeconds:5})
+    if(continuousRefillEnabled(env))await wakeRefill(env,{reason:'completion'}).catch(()=>undefined)
+    else await env.MAINTENANCE_QUEUE.send({version:1,jobId:job.job_id},{delaySeconds:5})
   }else{
     const unfinished='unfinishedSections'in progress&&Number(progress.unfinishedSections)>0
     await finishJob(env,job,unfinished?'held':progress.ready?'done':progress.held?'held':'done',unfinished?'partition_capacity_requires_review':progress.held?'some_partition_scopes_require_review':null)
@@ -62,16 +68,31 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
   if(message?.version===1&&message.targetRefreshSha256&&HASH.test(message.targetRefreshSha256)){await continueTargetRefresh(env,message.targetRefreshSha256);return}
   if(message?.version!==1||!HASH.test(message.jobId))throw new MaintenanceError('invalid_queue_message')
   const cfg=await control(env)
-  if(env.MAINTENANCE_ENABLED!=='true'||!cfg?.enabled||!cfg.seed_complete)return
-  if(!(await nativeReconciliationGate(env)).ready)return
+  if(env.MAINTENANCE_ENABLED!=='true'||!cfg?.enabled||!cfg.seed_complete){await closeRefillDeliveryBeforeClaim(env,message,'operator_pause');return}
+  if(!(await nativeReconciliationGate(env)).ready){await closeRefillDeliveryBeforeClaim(env,message,'runtime_protected');return}
   if(message.discoveryManifestSha256&&HASH.test(message.discoveryManifestSha256)){await processDiscoveryFrontier(env,message.discoveryManifestSha256,message.discoveryOffset??0);return}
   const pending=await env.PIPELINE_DB.prepare('SELECT source_id,stage FROM maintenance_jobs WHERE job_id=?').bind(message.jobId).first<{source_id:string;stage:string}>()
-  if(!pending||pending.stage!=='capture'&&!cfg.models_enabled||pending.stage==='maintain'&&!cfg.targets_complete)return
+  if(!pending){await closeRefillDeliveryBeforeClaim(env,message,'outside_scope');return}
+  if(pending.stage!=='capture'&&!cfg.models_enabled){await closeRefillDeliveryBeforeClaim(env,message,'models_disabled');return}
+  if(pending.stage==='maintain'&&!cfg.targets_complete){await closeRefillDeliveryBeforeClaim(env,message,'targets_not_ready');return}
   const canary=JSON.parse(cfg.canary_json)as string[],schools=await sourceSchools(env,pending.source_id)
-  if(!schools.length||canary.length&&!schools.some(s=>canary.includes(s.university_id)))return
-  const job=await claimJob(env,message.jobId)
-  if(!job)return
+  if(!schools.length||canary.length&&!schools.some(s=>canary.includes(s.university_id))){await closeRefillDeliveryBeforeClaim(env,message,'outside_canary');return}
+  if(message.refill&&(!REFILL_DISPATCH_TOKEN.test(message.refill.dispatchToken)||!HASH.test(message.refill.epochSha256)))throw new MaintenanceError('invalid_refill_message')
+  const permit=await acquireRefillPermit(env,{jobId:message.jobId,...message.refill})
+  if(!permit.allowed){
+    // Closed deliveries do not claim a job. Capacity waits retain the existing
+    // message without spending its business retry allowance.
+    if(['refill_delivery_disabled','refill_delivery_epoch_invalid','refill_job_outside_scope','refill_unknown_outcome_protected','refill_job_not_runnable','refill_job_invalid'].includes(permit.reason)){await closeRefillDeliveryBeforeClaim(env,message,'permit_denied');return}
+    throw new MaintenanceError(`refill_wait_${permit.reason}`,Math.max(30,permit.retryAfter))
+  }
   try {
+  const job=await claimJob(env,message.jobId,Date.now(),message.refill)
+  if(!job){await closeRefillDeliveryBeforeClaim(env,message,'claim_rejected');return}
+  try {
+    if(permit.permitToken){
+      try{await confirmRefillClaim(env,{jobId:job.job_id,permitToken:permit.permitToken,leaseToken:job.lease_token!})}
+      catch{throw new MaintenanceError('refill_claim_confirmation_wait',30)}
+    }
     const row=await source(env,job.source_id)
     if(!row?.enabled)throw new MaintenanceError('source_disabled')
     // Stop protected aliases before the document partitioner sees the retained
@@ -119,12 +140,19 @@ export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessa
     const code=error instanceof MaintenanceError?error.code:'execution_failed'
     const retry=error instanceof MaintenanceError?error.retryAfter:null
     const unknown=/outcome_unknown|prior_model_outcome|lease_expired/.test(code)
-    const admissionWait=/^(?:fetch_capacity|model_capacity|model_http_429|model_waiting_control|model_not_sent|quota_|budget_|maintenance_quota_reserved)/.test(code),willRetry=retry!==null&&(admissionWait||job.attempt<4)
-    if(admissionWait)await env.PIPELINE_DB.prepare('UPDATE maintenance_jobs SET attempt=MAX(0,attempt-1) WHERE job_id=? AND lease_token=?').bind(job.job_id,job.lease_token).run()
+    const claimConfirmationWait=code==='refill_claim_confirmation_wait'
+    const admissionWait=claimConfirmationWait||/^(?:fetch_capacity|model_capacity|model_http_429|model_waiting_control|model_not_sent|quota_|budget_|maintenance_quota_reserved)/.test(code),willRetry=retry!==null&&(admissionWait||job.attempt<4)
+    // Keep an unconfirmed claim's real attempt increment as durable proof that
+    // this delivery ran; ordinary admission waits still refund the attempt.
+    if(admissionWait&&!claimConfirmationWait)await env.PIPELINE_DB.prepare('UPDATE maintenance_jobs SET attempt=MAX(0,attempt-1) WHERE job_id=? AND lease_token=?').bind(job.job_id,job.lease_token).run()
     await finishJob(env,job,unknown?'unknown':willRetry?'retry':'held',code,retry??0)
     if(job.stage==='capture'&&!admissionWait)await env.PIPELINE_DB.batch([env.PIPELINE_DB.prepare('UPDATE maintenance_sources SET failures=failures+1,last_attempt_at=?,error_code=?,due_at=? WHERE source_id=?').bind(nowIso(),code,after((retry??(code.startsWith('robots_')?14*86400:86400))*1000),job.source_id),env.PIPELINE_DB.prepare('UPDATE maintenance_schools SET last_attempt_at=? WHERE university_id IN(SELECT university_id FROM maintenance_source_schools WHERE source_id=?)').bind(nowIso(),job.source_id)])
-    if(willRetry&&retry!==null&&retry<=900)await env.MAINTENANCE_QUEUE.send({version:1,jobId:job.job_id},{delaySeconds:Math.max(5,retry)})
+    if(willRetry&&retry!==null&&retry<=900&&!continuousRefillEnabled(env))await env.MAINTENANCE_QUEUE.send({version:1,jobId:job.job_id},{delaySeconds:Math.max(5,retry)})
     await event(env,unknown?'job_unknown':'job_held_or_retry',{jobId:job.job_id,stage:job.stage,code})
+  }
+  } finally {
+    if(permit.permitToken)await releaseRefillPermit(env,{jobId:message.jobId,permitToken:permit.permitToken}).catch(()=>undefined)
+    if(continuousRefillEnabled(env))await wakeRefill(env,{reason:'completion'}).catch(()=>undefined)
   }
 }
 export async function handleQueue(batch:MaintenanceBatch,env:MaintenanceEnv):Promise<void> {
@@ -135,6 +163,10 @@ export async function handleQueue(batch:MaintenanceBatch,env:MaintenanceEnv):Pro
   const budget=await readBackgroundBudgetGate(env.SNAPSHOTS_BUCKET)
   if(!budget.allowed){
     for(const message of batch.messages){
+      if(message.body?.refill){
+        try{await closeRefillDeliveryBeforeClaim(env,message.body,'budget_wait');message.ack()}catch{message.retry({delaySeconds:BACKGROUND_BUDGET_RETRY_SECONDS})}
+        continue
+      }
       try{if(await holdBudgetQueueMessage(env,message.body)){message.ack();continue}}catch{/* Retain queue retry until the R2 marker is confirmed. */}
       message.retry({delaySeconds:BACKGROUND_BUDGET_RETRY_SECONDS})
     }
@@ -142,10 +174,20 @@ export async function handleQueue(batch:MaintenanceBatch,env:MaintenanceEnv):Pro
   }
   await Promise.all(batch.messages.map(async message=>{try{
     const waiting=await quotaWait(env)
-    if(waiting){message.retry({delaySeconds:Math.max(60,Math.min(43200,Math.ceil((Date.parse(waiting.retryAt)-Date.now())/1000)))});return}
+    if(waiting){
+      if(message.body?.refill){await closeRefillDeliveryBeforeClaim(env,message.body,'quota_wait');message.ack()}
+      else message.retry({delaySeconds:Math.max(60,Math.min(43200,Math.ceil((Date.parse(waiting.retryAt)-Date.now())/1000)))})
+      return
+    }
     await processMessage(env,message.body);message.ack()
   }catch(error){
     if(isDailyD1QuotaError(error)){const waiting=await rememberQuotaWait(env);message.retry({delaySeconds:Math.max(60,Math.min(43200,Math.ceil((Date.parse(waiting.retryAt)-Date.now())/1000)))})}
+    else if(error instanceof MaintenanceError&&error.code.startsWith('refill_wait_')&&error.retryAfter!==null){
+      if(message.body?.refill&&message.attempts>=3){
+        try{await closeRefillDeliveryBeforeClaim(env,message.body,'broker_attempt_limit');message.ack();await wakeRefill(env,{reason:'completion'}).catch(()=>undefined);return}catch{/* An uncertain delivery remains protected. */}
+      }
+      message.retry({delaySeconds:Math.max(30,Math.min(43200,error.retryAfter))})
+    }
     else message.retry({delaySeconds:60})
   }}))
 }
@@ -182,6 +224,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/scope-upgrades'&&request.method==='POST')return json(await registerScopeUpgradeRequest(env,request))
     if(url.pathname==='/scope-upgrades'&&request.method==='GET')return json(await scopeUpgradeStatus(env,url.searchParams.get('sha256')??''))
     if(url.pathname==='/source-candidates'&&request.method==='POST')return json(await registerOfficialSourceCandidates(env,await requestJson(request,32768)))
+    if(url.pathname==='/source-rechecks'&&request.method==='POST')return json(await registerSourceRechecks(env,await requestJson(request,32768)))
     if(url.pathname==='/coverage'&&request.method==='POST')return json(await submitCoverageSnapshot(env,await requestJson(request,2*1024*1024)))
     if(request.method==='POST'&&['/runtime-model-guards/prepare','/runtime-model-guards/register'].includes(url.pathname))return gateRequest(env,url.pathname,await requestJson(request,8192))
     if(request.method==='GET'&&url.pathname==='/runtime-model-guards'){
