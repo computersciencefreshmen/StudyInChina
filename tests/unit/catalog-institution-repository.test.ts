@@ -77,6 +77,7 @@ describe('CatalogRepository institution lists', () => {
       }
       program.verificationScope = 'facts'
       program.sourceIds = program.sourceIds.filter(id => bundle.sources.some(source => source.id === id && source.official))
+      addFixturePublicCore(bundle, program, TODAY)
     }
     const repository = createJsonCatalogRepository(() => bundle)
     const publicBundle = selectCatalogApiData(bundle, TODAY)
@@ -344,3 +345,4 @@ describe('CatalogRepository institution lists', () => {
     )
   })
 })
+import { addFixturePublicCore } from '../fixtures/public-program-core'

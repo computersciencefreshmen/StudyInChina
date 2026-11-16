@@ -81,6 +81,7 @@ describe('CatalogRepository', () => {
     const today = '2026-08-08'
     const bundle = copyBundle(today)
     const program = selectPublishedData(bundle, today).programs[0]!
+    addFixturePublicCore(bundle, program, today)
     // Keep a positive eligibility fixture independent of canonical evidence rollover.
     bundle.scholarships = [{
       ...bundle.scholarships[0]!,
@@ -129,6 +130,8 @@ describe('CatalogRepository', () => {
     const siblings = [...byUniversity.values()].find((items) => items.length >= 2)!
     const target = siblings[0]!
     const sibling = siblings[1]!
+    addFixturePublicCore(bundle, target, today)
+    addFixturePublicCore(bundle, sibling, today)
     const university = bundle.universities.find((item) => item.id === target.universityId)!
     const base = bundle.scholarships[0]!
     const scoped = {
@@ -301,6 +304,7 @@ describe('CatalogRepository', () => {
       draftReference,
       hiddenReference,
     ]
+    addFixturePublicCore(bundle, bundle.programs[0], today, currentCycle)
 
     const repository = createJsonCatalogRepository(() => bundle)
     const page = await repository.listPrograms({ today, limit: 100 })
@@ -598,3 +602,4 @@ describe('CatalogRepository', () => {
     })
   })
 })
+import { addFixturePublicCore } from '../fixtures/public-program-core'
