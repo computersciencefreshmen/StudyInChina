@@ -169,12 +169,56 @@ test('real model permits enforce the pilot cap and duplicate deliveries do not s
   assert.equal((status.model as { inflight: number }).inflight, 2)
 })
 
-test('four-model opt-in works, malformed configuration keeps the two-permit pilot', async () => {
-  for (const [limit, expected] of [['4', 4], ['8', 2], ['4.0', 2], ['', 2]] as const) {
-    const f = fixture({ modelLimit: limit }); await f.start()
-    const results = await Promise.all(Array.from({ length: 5 }, (_, n) => f.call('/acquire', f.metadata(hash(n + 1)))))
+test('explicit four/eight/sixteen model pilots work; malformed configuration keeps two actual permits', async () => {
+  for (const [limit, expected] of [['4', 4], ['8', 8], ['16', 16], ['17', 2], ['8.0', 2], ['4.0', 2], ['', 2]] as const) {
+    const f = fixture({ modelLimit: limit, models: 40 }); await f.start()
+    for (let turn = 0; turn < 3; turn++) await f.alarm()
+    const results = await Promise.all(Array.from({ length: expected + 1 }, (_, n) => f.call('/acquire', f.metadata(hash(n + 1)))))
     assert.equal(results.filter(r => r.value.allowed).length, expected)
+    assert.equal((results.find(r => !r.value.allowed)!.value).reason, 'refill_stage_capacity')
+    assert.equal(((await f.call('/status')).value.model as { inflight: number }).inflight, expected)
   }
+})
+
+test('larger pilots keep a bounded model prefill and reserve two of the thirty-two outstanding slots for captures', async () => {
+  for (const [limit, watermark] of [['8', 16], ['16', 30]] as const) {
+    const f = fixture({ modelLimit: limit, models: 80, captures: 20 }); await f.start()
+    for (let turn = 0; turn < 5; turn++) await f.alarm()
+    const saved = (await f.storage.get<{ outstanding: Record<string, { kind: string }> }>('refill-v1'))!
+    assert.equal(Object.values(saved.outstanding).filter(entry => entry.kind === 'model').length, watermark)
+    assert.equal(Object.values(saved.outstanding).filter(entry => entry.kind === 'capture').length, 2)
+    assert.ok(Object.keys(saved.outstanding).length <= 32)
+    assert.ok(f.dispatches.every(batch => batch.ids.length <= 8))
+    assert.equal(new Set(f.dispatches.flatMap(batch => batch.ids)).size, watermark + 2)
+  }
+})
+
+test('maintenance reserve and ordinary model deliveries cannot consume the two protected capture slots', async () => {
+  const f = fixture({ modelLimit: '16', models: 80, captures: 0 }); await f.start()
+  for (let turn = 0; turn < 4; turn++) await f.alarm()
+  for (const id of [2001, 2002]) f.add(id, 'maintain')
+  f.setExpansion(false); await f.alarm()
+  const model = f.add(500, 'maintain')
+  assert.equal((await f.call('/acquire', { jobId: model.jobId })).value.reason, 'refill_dispatch_budget')
+  for (const id of [1001, 1002]) {
+    const capture = f.add(id, 'capture')
+    assert.equal((await f.call('/acquire', { jobId: capture.jobId })).value.allowed, true)
+  }
+  const saved = (await f.storage.get<{ outstanding: Record<string, { kind: string }> }>('refill-v1'))!
+  assert.equal(Object.values(saved.outstanding).filter(entry => entry.kind === 'model').length, 30)
+  assert.equal(Object.values(saved.outstanding).filter(entry => entry.kind === 'capture').length, 2)
+  assert.equal(Object.keys(saved.outstanding).length, 32)
+})
+
+test('a rollback immediately denies new stage permits while keeping all existing owners until actual completion', async () => {
+  const f = fixture({ modelLimit: '16', models: 40 }); await f.start()
+  for (let turn = 0; turn < 3; turn++) await f.alarm()
+  const permits = await Promise.all(Array.from({ length: 16 }, (_, n) => f.call('/acquire', f.metadata(hash(n + 1)))))
+  assert.equal(permits.filter(result => result.value.allowed).length, 16)
+  f.env.REFILL_MODEL_LIMIT = '4'
+  assert.equal((await f.call('/acquire', f.metadata(hash(17)))).value.reason, 'refill_stage_capacity')
+  const saved = (await f.storage.get<{ outstanding: Record<string, { permit: unknown }> }>('refill-v1'))!
+  assert.equal(Object.values(saved.outstanding).filter(entry => entry.permit).length, 16)
 })
 
 test('old ordinary capture messages also respect two real permits when model backlog exists', async () => {
@@ -188,6 +232,13 @@ test('capture may borrow idle model slots only when no eligible model backlog ex
   const f = fixture({ models: 0 });
   const results = await Promise.all([1001, 1002, 1003, 1004, 1005].map(n => f.call('/acquire', { jobId: hash(n) })))
   assert.equal(results.filter(r => r.value.allowed).length, 4)
+})
+
+test('larger model pilots cannot lend more than eight capture execution slots to an empty model lane', async () => {
+  const f = fixture({ models: 0, captures: 20, modelLimit: '16' })
+  const results = await Promise.all(Array.from({ length: 10 }, (_, n) => f.call('/acquire', { jobId: hash(1001 + n) })))
+  assert.equal(results.filter(r => r.value.allowed).length, 8)
+  assert.equal(results.filter(r => r.value.reason === 'refill_stage_capacity').length, 2)
 })
 
 test('an incomplete model proof scan permits two captures without proving idle model slots', async () => {

@@ -25,6 +25,12 @@ type Permit = { token: string; host?: string; lane?: string; expiresAt: number; 
 type GateState = { fetches: Permit[]; models: Permit[]; nextHost: Record<string,number>; successes: number; cooldownUntil: number;modelLimit:number;flashCanary?:FlashEnrollment;offlineFence?:LegacyOfflineFence }
 type Reservation = { state: 'send_started'|'completed'|'unknown'|'known_failed'; attemptId: string; requestSha256: string; result?: ModelResult;retryable?:boolean;notBefore?:number;attemptCount?:number;modelProfile?:FlashAudit }
 const initial = (): GateState => ({fetches:[],models:[],nextHost:{},successes:0,cooldownUntil:0,modelLimit:2})
+/** Configuration is an upper bound, never a reset of the durable health ramp.
+ * Exact decimal integers avoid malformed values silently raising the ceiling. */
+export const modelConcurrencyLimit = (env: Pick<MaintenanceEnv,'MODEL_CONCURRENCY'>): number =>
+  /^(?:[1-9]|1[0-6])$/.test(env.MODEL_CONCURRENCY??'') ? Number(env.MODEL_CONCURRENCY) : 4
+const healthyModelLimit = (value: number | undefined): number =>
+  typeof value==='number'&&Number.isSafeInteger(value)&&value>=1 ? Math.min(16,value) : 2
 const offlineFenced = (state: GateState | undefined) => state !== undefined && Object.hasOwn(state, 'offlineFence')
 const ENDPOINTS=new Set(['https://api.minimaxi.com/anthropic','https://api.minimax.cn/anthropic','https://api.minimax.io/anthropic'])
 
@@ -231,7 +237,7 @@ export class ModelAdmission {
       if(current&&(current.state!=='known_failed'||!current.retryable||(current.notBefore??0)>Date.now()||current.requestSha256!==requestSha256))return false
       const gate=await txn.get<GateState>('gate')??initial(),now=Date.now();gate.models=gate.models.filter(p=>p.expiresAt>now)
       if(offlineFenced(gate))return false
-      const target=admission.low?1:Math.min(4,Math.max(1,Number(this.env.MODEL_CONCURRENCY)||4),gate.modelLimit??2)
+      const target=admission.low?1:Math.min(modelConcurrencyLimit(this.env),healthyModelLimit(gate.modelLimit))
       const expansionLimit=urgent?Math.max(1,target-1):target
       if(gate.cooldownUntil>now||gate.models.length>=target||input.lane==='expansion'&&gate.models.filter(p=>p.lane==='expansion').length>=expansionLimit)return false
       // Registration is exclusive with this whole operation; recheck the permanent
@@ -275,7 +281,7 @@ export class ModelAdmission {
         const delay=Math.max(60,Math.min(3600,Number.isFinite(requestedDelay)&&requestedDelay>0?requestedDelay:60*2**Math.min(count-1,6)))
         await this.state.storage.put<Reservation>(key,{state:'known_failed',attemptId,requestSha256,retryable,notBefore:Date.now()+delay*1000,attemptCount:count,...auditFields})
         await this.completeAttempt(input.reservationKey,attemptId,'known_failed',`model_http_${response.status}`,responseUsage)
-        if(retryable){await this.mutate(gate=>{gate.cooldownUntil=Date.now()+delay*1000;gate.successes=0;gate.modelLimit=Math.max(1,Math.floor((gate.modelLimit??2)/2))});return json({ok:false,error:'model_http_429',retryAfter:delay},429)}
+        if(retryable){await this.mutate(gate=>{gate.cooldownUntil=Date.now()+delay*1000;gate.successes=0;gate.modelLimit=Math.max(1,Math.floor(Math.min(modelConcurrencyLimit(this.env),healthyModelLimit(gate.modelLimit))/2))});return json({ok:false,error:'model_http_429',retryAfter:delay},429)}
         return json({ok:false,error:`model_http_${response.status}`},409)
       }
       if(!received.body)return await this.rejectReceivedOutput(key,input.reservationKey,attemptId,requestSha256,(prior?.attemptCount??0)+1,auditFields,'model_response_invalid',responseUsage)
@@ -292,7 +298,7 @@ export class ModelAdmission {
       const result:ModelResult={attemptId,output,artifactKey,artifactSha256,reused:false,...completedAuditFields}
       await this.env.PIPELINE_DB.prepare("UPDATE maintenance_model_attempts SET status='completed',completed_at=?,output_key=?,output_sha256=?,usage_json=? WHERE reservation_key=? AND attempt_id=? AND status='send_started'").bind(nowIso(),artifactKey,artifactSha256,JSON.stringify(responseUsage),input.reservationKey,attemptId).run()
       await this.state.storage.put<Reservation>(key,{state:'completed',attemptId,requestSha256,result,...completedAuditFields})
-      await this.mutate(gate=>{gate.successes++;if(gate.successes>=8){gate.modelLimit=Math.min(4,(gate.modelLimit??2)+1);gate.successes=0}})
+      await this.mutate(gate=>{gate.successes++;if(gate.successes>=8){gate.modelLimit=Math.min(modelConcurrencyLimit(this.env),healthyModelLimit(gate.modelLimit)+1);gate.successes=0}})
       return json({ok:true,...result})
     } catch(error) {
       const state=sent?'unknown':'known_failed'

@@ -15,6 +15,14 @@ const refill = () => ({ format: 'studyinchina.continuous-refill' as const, versi
   capture: { pending: 1, inflight: 1, eligible: null, limit: 2, epochUsed: 5, epochCap: 64 }, lastRefillAt: null, nextWakeAt: null,
   uncertainDeliveries: 1, modelCallsPerformed: false as const })
 describe('continuous refill monitor projection', () => {
+  it('preserves larger model task ceilings without widening capture or leaking dispatch metadata', () => {
+    const input = { ...refill(), model: { ...refill().model, limit: 16, privatePermit: 'not-public' } }
+    const value = cloudMiniMaxSchema.parse({ ...cloudSnapshot(), refill: input })
+    expect(value.refill?.model.limit).toBe(16)
+    expect(JSON.stringify(value.refill)).not.toContain('not-public')
+    expect(cloudRefillSchema.safeParse({ ...input, model: { ...input.model, limit: 17 } }).success).toBe(false)
+    expect(cloudRefillSchema.safeParse({ ...input, capture: { ...input.capture, limit: 9 } }).success).toBe(false)
+  })
   it('strips private delivery metadata and preserves genuinely unknown counters', () => {
     const value = cloudRefillSchema.parse({ ...refill(), dispatchToken: 'private-token', fence: { private: true }, model: { ...refill().model, reservationKey: 'private-reservation' } })
     expect(value.model.eligible).toBeNull()

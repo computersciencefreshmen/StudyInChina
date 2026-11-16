@@ -35,12 +35,14 @@ export type MaintenanceEnv = {
   MAINTENANCE_ENABLED?: string; MINIMAX_MODEL?: string; MINIMAX_ANTHROPIC_BASE?: string;
   NATIVE_HEAD_RECONCILIATION_REQUIRED?: string;
   SCOPE_REGISTRY_SHA256?: string; SCOPE_SCHOOL_COUNT?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;
-  USER_AGENT?: string; FETCH_CONCURRENCY?: string; MODEL_CONCURRENCY?: string;
+  USER_AGENT?: string; FETCH_CONCURRENCY?: string;
+  /** Exact integer 1..16; absent/malformed values retain the four-call ceiling. */
+  MODEL_CONCURRENCY?: string;
   /** Exact 8/16/32/64; every other value preserves the eight-job default. */
   TICK_JOB_LIMIT?: string;
   /** Opt-in continuous dispatch, independent of the existing model reservation ledger. */
   CONTINUOUS_REFILL_ENABLED?: string;
-  /** The continuous model-stage pilot admits two jobs; only literal 4 raises it. */
+  /** Literal 4/8/16 opts in to a larger stage pilot; every other value keeps two. */
   REFILL_MODEL_LIMIT?: string;
   /** Only fresh, versioned jobs may use smaller model batches. */
   MODEL_BATCH_CONTRACT_VERSION?: string;
