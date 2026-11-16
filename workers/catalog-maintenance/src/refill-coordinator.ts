@@ -264,6 +264,7 @@ export class CatalogRefillCoordinator {
     await this.save(saved)
   }
   private async refill() {
+    if (this.env.MODEL_STATE_MIGRATION_ROLE === 'source') return
     if (!this.singleton) return
     const saved = await this.load(), now = this.deps.now()
     const scheduledFor = saved.nextRefillAt
@@ -408,6 +409,7 @@ export class CatalogRefillCoordinator {
     return this.serial(async () => {
       if (!this.singleton) return json({ error: 'refill_singleton_required' }, 409)
       if (!authorized(request, this.env)) return json({ error: 'unauthorized' }, 401)
+      if (this.env.MODEL_STATE_MIGRATION_ROLE === 'source') return json({ error: 'account_migration_frozen' }, 503)
       const path = new URL(request.url).pathname
       if (path === '/status' && request.method === 'GET') return json(this.telemetry(await this.load()))
       if (request.method !== 'POST') return json({ error: 'not_found' }, 404)
@@ -445,5 +447,8 @@ export class CatalogRefillCoordinator {
       return json({ error: 'not_found' }, 404)
     })
   }
-  async alarm(): Promise<void> { return this.serial(() => this.refill()) }
+  async alarm(): Promise<void> {
+    if (this.env.MODEL_STATE_MIGRATION_ROLE === 'source') return
+    return this.serial(() => this.refill())
+  }
 }

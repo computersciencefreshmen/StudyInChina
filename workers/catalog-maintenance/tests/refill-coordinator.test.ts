@@ -9,12 +9,16 @@ const token = hash(12345)
 class Storage implements RefillStorage {
   values = new Map<string, unknown>()
   alarm: number | null = null
-  async get<T>(key: string): Promise<T | undefined> { return structuredClone(this.values.get(key)) as T | undefined }
-  async put<T>(key: string, value: T) { this.values.set(key, structuredClone(value)) }
-  async delete(key: string) { return this.values.delete(key) }
+  reads = 0
+  writes = 0
+  deletes = 0
+  alarmWrites = 0
+  async get<T>(key: string): Promise<T | undefined> { this.reads++; return structuredClone(this.values.get(key)) as T | undefined }
+  async put<T>(key: string, value: T) { this.writes++; this.values.set(key, structuredClone(value)) }
+  async delete(key: string) { this.deletes++; return this.values.delete(key) }
   async transaction<T>(run: (txn: RefillStorage) => Promise<T>): Promise<T> { return run(this) }
-  async setAlarm(at: number) { this.alarm = at }
-  async deleteAlarm() { this.alarm = null }
+  async setAlarm(at: number) { this.alarmWrites++; this.alarm = at }
+  async deleteAlarm() { this.alarmWrites++; this.alarm = null }
   async getAlarm() { return this.alarm }
 }
 type Dispatch = { ids: string[]; token: string; epoch: string; at: number }
@@ -73,6 +77,19 @@ test('requires exact enable flag and freezes the source account before any backe
   assert.equal((await wakeRefill({} as RefillEnv, { reason: 'watchdog' })).enabled, false)
   assert.equal((await acquireRefillPermit({} as RefillEnv, { jobId: hash(1), dispatchToken: 'old' })).allowed, false)
   assert.equal((await acquireRefillPermit({} as RefillEnv, { jobId: hash(1) })).allowed, true)
+})
+
+test('frozen source RPC and alarms perform zero storage reads, writes, deletes or timer operations', async () => {
+  const f = fixture({ role: 'source' })
+  for (const [path, body] of [['/wake', { reason: 'watchdog' }], ['/status', undefined], ['/acquire', { jobId: hash(1) }],
+    ['/release', { jobId: hash(1), permitToken: 'old' }], ['/claimed', { jobId: hash(1), permitToken: 'old', leaseToken: 'old' }],
+    ['/decline', { jobId: hash(1), dispatchToken: 'old-dispatch', epochSha256: hash(2), reason: 'operator_pause' }]] as const) {
+    assert.equal((await f.call(path, body)).status, 503)
+  }
+  await f.alarm()
+  assert.deepEqual({ reads: f.storage.reads, writes: f.storage.writes, deletes: f.storage.deletes, alarmWrites: f.storage.alarmWrites },
+    { reads: 0, writes: 0, deletes: 0, alarmWrites: 0 })
+  assert.equal(f.counts().gateCalls, 0); assert.equal(f.dispatches.length, 0)
 })
 
 test('persists complete selection and send-start before egress; one alarm sends at most eight', async () => {
