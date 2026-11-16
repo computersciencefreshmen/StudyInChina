@@ -81,6 +81,7 @@ export async function refillScanHint(env:MaintenanceEnv,epoch:unknown,now:number
  }
  return{offsets:hint.offsets,fingerprint,seen,
   async visit(id:string,stamp:string,lane:Lane){hint.visited=[...hint.visited.filter(v=>v.id!==id),{id,stamp,lane}].slice(-104);await write()},
+  async forget(id:string){hint.visited=hint.visited.filter(v=>v.id!==id);await write()},
   async page(lane:Lane,rows:Array<{id:string;stamp:string}>,size:number){
    if(rows.length&&rows.some(r=>!seen(r.id,r.stamp)))return
    if(!rows.length&&!hint.offsets[lane])return

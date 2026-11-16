@@ -10,6 +10,16 @@ import {maintenanceRecordTargetSchema} from '../../../scripts/maintenance/field-
 const select=(f:Awaited<ReturnType<typeof refillFixture>>,limit=8)=>selectRefillCandidates(f.env,{kind:'model',limit,excludeJobIds:[],now:refillNow})
 const delay=(ms:number)=>new Promise<void>(resolve=>setTimeout(resolve,ms))
 
+test('repeated scans never defer a verified future retry or lose its precise due date',async()=>{
+ const f=await refillFixture(1)
+ try{
+  f.db.sqlite.exec("UPDATE maintenance_jobs SET status='done'")
+  const job=f.jobs.find(j=>j.stage==='extract')!,due=new Date(refillNow+5000).toISOString()
+  f.db.sqlite.prepare("UPDATE maintenance_jobs SET status='retry',due_at=? WHERE job_id=?").run(due,job.jobId)
+  for(let n=0;n<3;n++){const plan=await select(f,1);assert.equal(plan.candidates.length,0);assert.equal(plan.nextDueAt,due);assert.equal(plan.selection.attempts,1)}
+ }finally{f.db.sqlite.close()}
+})
+
 test('fair preselection proves only the requested batch, reusing one-shot artifact bytes with50ms per I/O and a real unknown registry',{timeout:20000},async()=>{
  const f=await refillFixture(20)
  try{
@@ -35,7 +45,7 @@ test('fair preselection proves only the requested batch, reusing one-shot artifa
   await f.bucket.put(snapshot.rawKey,'changed-after-selection')
   const result=await dispatchRefillCandidates(f.env,plan.fence!,plan.candidates,{dispatchToken:'fresh-performance-dispatch',epochSha256:'e'.repeat(64),now:refillNow})
   assert.equal(result.sent.length,0);assert.equal(f.messages.length,0)
-  console.log(JSON.stringify({proofBudgetFixture:{delayPerIoMs:50,wallElapsedMs:elapsed,...plan.selection,physicalR2Reads:[...reads.values()].reduce((n,v)=>n+v,0)}}))
+  console.log(JSON.stringify({proofBudgetFixture:{delayPerIoMs:50,wallElapsedMs:elapsed,...plan.selection,physicalR2ReadsIncludingFreshDispatch:[...reads.values()].reduce((n,v)=>n+v,0)}}))
  }finally{f.db.sqlite.close()}
 })
 
