@@ -86,9 +86,11 @@ does. This distinction never changes unknown provider outcomes.
 ## Fairness and cost boundaries
 
 Model and capture selection run separately. Maintenance, programme expansion
-and award expansion each retain at most 32 SQL candidates and eight verified
-proofs, preventing a high-priority maintenance backlog from consuming expansion
-reservoirs before the final selector runs. All official scholarship categories
+and award expansion each retain at most 32 SQL candidates. The existing fair
+selector chooses the small requested batch before expensive verification: at
+most eight proof attempts total, including failures and future-due work, share
+an eight-second invocation deadline. Already persisted proofs may be returned
+when that deadline expires. All official scholarship categories
 count toward award discovery. Atomic slot/expansion offsets retain the existing
 70/30 and programme/award 2:1 allocations even with repeated one-slot refills in
 one clock epoch. Urgent work may override shares and empty shares are borrowed;
@@ -99,8 +101,20 @@ model history. Returned rows and artifact/proof work are explicitly bounded.
 Ranking still reads the eligible due range: this is not an O(limit) billing
 claim or a measured production cost saving. Future-due hints use only current
 scope/canary, enabled-source queued/retry work and verify up to eight earliest
-future candidates; an unproved hint is omitted and the existing watchdog
-remains the recovery path.
+future candidates within the same total proof budget; unproved dates are omitted.
+An R2 scan hint bound to scope/catalogue/control/canary advances before reads,
+so failed or stalled candidates cannot indefinitely pin the same first page.
+It changes no job/model state and authorizes no request. `scanRetryAt` requests
+another bounded scan; it is not a factual job due date. A control change discards
+the old hint. SQL ranking still may read the eligible range beyond that page.
+
+Repeated R2 reads share materialized byte promises only within this selection,
+retaining at most16MiB and returning repeatable wrappers instead of single-use
+R2 bodies. Dispatch uses a fresh environment and still rechecks every proof and
+CAS; final ModelAdmission never receives this cache. Ledger readers may explicitly
+omit current job-state scans while retaining all immutable proof, tuple, hash and
+refusal-receipt checks; coordinator lifecycle decisions use its fresh D1 job rows.
+Local50ms-per-I/O tests and native R2 tests do not establish production latency.
 
 Local SQLite and native workerd D1/R2 tests cover exact guarded dispatch,
 preclaim refusal/claim races, lost replies, late control/source/target/unknown

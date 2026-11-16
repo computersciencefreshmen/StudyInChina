@@ -1,0 +1,116 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import {selectRefillCandidates,dispatchRefillCandidates,readRefillDispatchStatus,declineRefillDispatch} from '../src/refill-dispatch'
+import {refillProofBudget,REFILL_PROOF_TIME_MS} from '../src/refill-proof-budget'
+import {canonical} from '../src/util'
+import {refillFixture,refillNow} from './refill-dispatch-fixture'
+import {installUnknownProof} from './refill-proof-budget-fixture'
+import {maintenanceRecordTargetSchema} from '../../../scripts/maintenance/field-contracts'
+
+const select=(f:Awaited<ReturnType<typeof refillFixture>>,limit=8)=>selectRefillCandidates(f.env,{kind:'model',limit,excludeJobIds:[],now:refillNow})
+const delay=(ms:number)=>new Promise<void>(resolve=>setTimeout(resolve,ms))
+
+test('fair preselection proves only the requested batch, reusing one-shot artifact bytes with50ms per I/O and a real unknown registry',{timeout:20000},async()=>{
+ const f=await refillFixture(20)
+ try{
+  const guard=await installUnknownProof(f)
+  for(const row of f.db.sqlite.prepare('SELECT target_id,target_json FROM maintenance_record_targets').all()){
+   const target=JSON.parse(String(row.target_json));target.fields['supplementaryDetails.applicationMaterials']=Array.from({length:35},(_,i)=>({name:`Official material ${i}`,evidence:{quote:'Official programme-specific application condition '.repeat(20),sourceIds:target.sourceIds}}))
+   assert.equal(maintenanceRecordTargetSchema.safeParse(target).success,true)
+   f.db.sqlite.prepare('UPDATE maintenance_record_targets SET target_json=? WHERE target_id=?').run(canonical(target),row.target_id)
+  }
+  for(const[key,body]of f.bucket.objects)if(key.endsWith('.json')&&key.startsWith('maintenance/snapshots/')){const snapshot=JSON.parse(new TextDecoder().decode(body));snapshot.parserCandidates=Array.from({length:100},(_,i)=>({kind:'programme',name:`Degree ${i}`,quote:'Full official catalogue paragraph '.repeat(30),offset:i*100}));await f.bucket.put(key,canonical(snapshot))}
+  const reads=new Map<string,number>(),get=f.bucket.get.bind(f.bucket)
+  f.bucket.get=async key=>{await delay(50);reads.set(key,(reads.get(key)??0)+1);const object=await get(key);if(!object)return null;const response=new Response(await object.arrayBuffer());return{etag:object.etag,size:object.size,text:()=>response.text(),arrayBuffer:()=>response.arrayBuffer()}}
+  const db=f.env.PIPELINE_DB
+  f.env.PIPELINE_DB={prepare(sql){const original=db.prepare(sql);const wrap=(s:typeof original):typeof original=>({bind(...values){return wrap(s.bind(...values))},async first(){await delay(50);return s.first()},async all(){await delay(50);return s.all()},run:s.run.bind(s)});return wrap(original)},batch:db.batch.bind(db)}
+  const started=performance.now(),plan=await select(f,2),elapsed=Math.ceil(performance.now()-started)
+  assert.equal(plan.candidates.length,2);assert.equal(plan.selection.attempts,2);assert.equal(plan.selection.timedOut,false);assert.ok(elapsed<REFILL_PROOF_TIME_MS)
+  assert.equal(reads.get(guard.key),1);assert.equal(reads.get('maintenance/runtime-model-guards/index.v1.json'),1)
+  assert.ok(plan.selection.r2CacheHits>0);assert.ok(plan.selection.cachedBytes<=16*1024*1024)
+  for(const key of reads.keys())if(key.startsWith('maintenance/snapshots/')||key.startsWith('maintenance/text/'))assert.equal(reads.get(key),1,key)
+  assert.equal(f.messages.length,0)
+  // Fresh dispatch must observe a mutation after the selector's cache dies.
+  const chosen=plan.candidates[0],snapshot=JSON.parse(await(await get(chosen.snapshotKey!))!.text())
+  await f.bucket.put(snapshot.rawKey,'changed-after-selection')
+  const result=await dispatchRefillCandidates(f.env,plan.fence!,plan.candidates,{dispatchToken:'fresh-performance-dispatch',epochSha256:'e'.repeat(64),now:refillNow})
+  assert.equal(result.sent.length,0);assert.equal(f.messages.length,0)
+  console.log(JSON.stringify({proofBudgetFixture:{delayPerIoMs:50,wallElapsedMs:elapsed,...plan.selection,physicalR2Reads:[...reads.values()].reduce((n,v)=>n+v,0)}}))
+ }finally{f.db.sqlite.close()}
+})
+
+test('eight failed proofs cannot pin the first page forever; a valid40th target is reached without changing jobs or outcomes',async()=>{
+ const f=await refillFixture(40)
+ try{
+  f.db.sqlite.exec("UPDATE maintenance_jobs SET status='done' WHERE stage<>'maintain'")
+  const valid=f.jobs.filter(j=>j.stage==='maintain').at(-1)!
+  f.db.sqlite.prepare('UPDATE maintenance_record_targets SET target_json=? WHERE target_id NOT IN(SELECT target_id FROM maintenance_target_sources WHERE source_id=?)').run('{}',valid.sourceId)
+  f.db.sqlite.prepare('UPDATE maintenance_jobs SET priority=100 WHERE job_id=?').run(valid.jobId)
+  const before=canonical(f.db.sqlite.prepare('SELECT * FROM maintenance_jobs ORDER BY job_id').all().map(r=>({...r})))
+  let found=false,total=0
+  for(let i=0;i<7;i++){const plan=await select(f,1);assert.ok(plan.selection.attempts<=8);total+=plan.selection.attempts;if(plan.candidates.length){assert.equal(plan.candidates[0].jobId,valid.jobId);found=true;break}assert.ok(plan.scanRetryAt)}
+  assert.equal(found,true);assert.ok(total<=48)
+  assert.equal(canonical(f.db.sqlite.prepare('SELECT * FROM maintenance_jobs ORDER BY job_id').all().map(r=>({...r}))),before)
+  assert.equal(f.messages.length,0);assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) n FROM maintenance_model_attempts').get()?.n,0)
+ }finally{f.db.sqlite.close()}
+})
+
+test('the8s deadline returns already persisted proofs, records scan progress and never waits forever for an R2 read',{timeout:15000},async()=>{
+ const f=await refillFixture(5)
+ try{
+  const initial=await select(f,2);assert.equal(initial.candidates.length,2)
+  for(const key of f.bucket.objects.keys())if(key.startsWith('maintenance/refill-dispatch/scan/'))f.bucket.objects.delete(key)
+  const blocked=initial.candidates[1].sourceId,get=f.bucket.get.bind(f.bucket);let stalled=0
+  f.bucket.get=async key=>{if(key.includes(blocked)&&key.endsWith('.bin')){stalled++;return new Promise(()=>{})}return get(key)}
+  const began=performance.now(),result=await select(f,2),elapsed=performance.now()-began
+  assert.equal(stalled,1);assert.equal(result.selection.timedOut,true);assert.ok(elapsed>=REFILL_PROOF_TIME_MS-100&&elapsed<12000)
+  assert.equal(result.candidates.length,1);assert.equal(result.candidates[0].jobId,initial.candidates[0].jobId);assert.ok(result.scanRetryAt)
+  assert.equal(f.messages.length,0)
+ }finally{f.db.sqlite.close()}
+})
+
+test('scan hints invalidate on scope/catalog/control changes and malformed hints never authorize a candidate',async()=>{
+ const f=await refillFixture(8)
+ try{
+  const first=await select(f,1),second=await select(f,1);assert.notEqual(first.candidates[0].jobId,second.candidates[0].jobId)
+  f.db.sqlite.exec('UPDATE maintenance_control SET revision=revision+1')
+  const revision=await select(f,1);assert.equal(revision.candidates[0].jobId,first.candidates[0].jobId)
+  const keys=[...f.bucket.objects.keys()].filter(k=>k.startsWith('maintenance/refill-dispatch/scan/'))
+  for(const key of keys)await f.bucket.put(key,'{"offsets":{"maintenance":999999999},"proof":true}')
+  const malformed=await select(f,1);assert.equal(malformed.candidates[0].jobId,first.candidates[0].jobId)
+  f.db.sqlite.exec("UPDATE maintenance_jobs SET status='unknown'")
+  assert.equal((await select(f,8)).candidates.length,0);assert.equal(f.messages.length,0)
+ }finally{f.db.sqlite.close()}
+})
+
+test('ledger-only status skips current subject scans but preserves immutable proof, tuple and refusal receipt validation',async()=>{
+ const f=await refillFixture(6)
+ try{
+  await installUnknownProof(f)
+  const plan=await select(f,2),token='ledger-only-performance',epoch='e'.repeat(64)
+  assert.equal((await dispatchRefillCandidates(f.env,plan.fence!,plan.candidates,{dispatchToken:token,epochSha256:epoch,now:refillNow})).sent.length,2)
+  let reads=0;const get=f.bucket.get.bind(f.bucket);f.bucket.get=async key=>{reads++;return get(key)}
+  const full=await readRefillDispatchStatus(f.env,token),fullReads=reads;reads=0
+  const light=await readRefillDispatchStatus(f.env,token,{includeJobState:false})
+  assert.equal(reads,2);assert.ok(fullReads>reads)
+  assert.deepEqual(light.entries,full.entries.map(row=>({...row,job:null})))
+  assert.equal((await declineRefillDispatch(f.env,{dispatchToken:token,epochSha256:epoch,jobId:plan.candidates[0].jobId,reason:'claim_rejected'})).declined,true)
+  assert.ok((await readRefillDispatchStatus(f.env,token,{includeJobState:false})).entries.find(row=>row.jobId===plan.candidates[0].jobId)?.receivedNotStartedReceiptSha256)
+  f.db.sqlite.exec("DELETE FROM maintenance_events WHERE kind='refill_received_not_started'")
+  await assert.rejects(readRefillDispatchStatus(f.env,token,{includeJobState:false}),/refusal_receipt_missing/)
+  await f.bucket.put(plan.candidates[1].proofKey,'{}')
+  await assert.rejects(readRefillDispatchStatus(f.env,token,{includeJobState:false}))
+ }finally{f.db.sqlite.close()}
+})
+
+test('invocation cache handles concurrent one-shot bodies, unknown-size objects and the16MiB retention bound',async()=>{
+ const f=await refillFixture(1)
+ try{
+  let calls=0;f.env.SNAPSHOTS_BUCKET.get=async key=>{calls++;const data=new Uint8Array(key.startsWith('large')?9*1024*1024:4).fill(65),response=new Response(data);return{etag:'one-shot',...(key==='unknown'?{}:{size:data.length}),text:()=>response.text(),arrayBuffer:()=>response.arrayBuffer()}}
+  const budget=refillProofBudget(f.env)
+  const pair=await Promise.all([budget.env.SNAPSHOTS_BUCKET.get('small'),budget.env.SNAPSHOTS_BUCKET.get('small')]);assert.equal(await pair[0]!.text(),'AAAA');assert.equal((await pair[1]!.arrayBuffer()).byteLength,4);assert.equal(calls,1)
+  const uncached=await Promise.all([budget.env.SNAPSHOTS_BUCKET.get('unknown'),budget.env.SNAPSHOTS_BUCKET.get('unknown')]);assert.equal(await uncached[0]!.text(),'AAAA');assert.equal(await uncached[1]!.text(),'AAAA')
+  await(await budget.env.SNAPSHOTS_BUCKET.get('large'))!.arrayBuffer();await(await budget.env.SNAPSHOTS_BUCKET.get('large-two'))!.arrayBuffer()
+  assert.ok(budget.diagnostics().cachedBytes<=16*1024*1024)
+ }finally{f.db.sqlite.close()}
+})
