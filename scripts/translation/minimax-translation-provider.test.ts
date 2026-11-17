@@ -161,17 +161,54 @@ test('invalid batches, duplicate item keys, unsupported locales and malformed in
 })
 
 test('output cannot add, drop, duplicate, rename keys or add undeclared JSON fields', async () => {
-  const badItems = [translated.slice(0, 1), [...translated, { key: 'extra', text: 'Extra' }], [translated[0], translated[0]], [translated[0], { key: 'renamed', text: 'Other' }], [{ ...translated[0], extra: true }, translated[1]]]
+  const badItems = [translated.slice(0, 1), [...translated, { key: 'extra', text: 'Extra' }], [translated[0], translated[0]], [translated[0], { key: 'renamed', text: 'Other' }], [{ ...translated[0], extra: true }, translated[1]], [{ key: 'first', other: 'no text field' }, translated[1]], [null, translated[1]]]
   for (const items of badItems) await typedFailure(() => translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher: reply(message(items)) }), 'translation_items_invalid', 'rejected')
   const extra = message(); extra.content[0].text = JSON.stringify({ items: translated, commentary: 'extra' })
   await typedFailure(() => translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher: reply(extra) }), 'translation_items_invalid', 'rejected')
 })
 
-test('output placeholders must be exact per item, with no omission, duplication, invention or cross-item movement', async () => {
+test('bad output placeholders reject only their item and retain the other item and charged usage', async () => {
   for (const text of ['欢迎。', '欢迎。__SC_000000__ __SC_000000__', '欢迎。__SC_000001__', '欢迎。__SC_0000000__']) {
-    await typedFailure(() => translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher: reply(message([{ ...translated[0], text }, translated[1]])) }), 'translation_placeholder_mismatch', 'rejected')
+    const result = await translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher: reply(message([translated[1], { ...translated[0], text }])) })
+    assert.deepEqual(result, { items: [translated[1]], rejectedItems: [{ key: 'first', code: 'translation_placeholder_mismatch' }],
+      model: TRANSLATION_MODEL, usage: { inputTokens: 40, outputTokens: 20 } })
   }
-  await typedFailure(() => translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher: reply(message([{ key: 'first', text: '欢迎。' }, { key: 'second', text: '校园。__SC_000000__' }])) }), 'translation_placeholder_mismatch', 'rejected')
+})
+
+test('cross-item placeholder movement rejects both items without returning either unsafe text', async () => {
+  const result = await translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT,
+    fetcher: reply(message([{ key: 'second', text: '校园。__SC_000000__' }, { key: 'first', text: '欢迎。' }])) })
+  assert.deepEqual(result, { items: [], rejectedItems: INPUT.map(({ key }) => ({ key, code: 'translation_placeholder_mismatch' })),
+    model: TRANSLATION_MODEL, usage: { inputTokens: 40, outputTokens: 20 } })
+})
+
+test('blank and invalid item text is isolated with sanitized codes and every requested key accounted exactly once', async () => {
+  for (const [text, code] of [[' \n\t', 'translation_empty_text'], [null, 'translation_invalid_text'], [7, 'translation_invalid_text'],
+    [{ privateResponse: KEY }, 'translation_invalid_text'], [[KEY], 'translation_invalid_text']] as const) {
+    const result = await translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT,
+      fetcher: reply(message([{ key: 'second', text }, translated[0]])) })
+    assert.deepEqual(result.items, [translated[0]])
+    assert.deepEqual(result.rejectedItems, [{ key: 'second', code }])
+    assert.deepEqual(result.usage, { inputTokens: 40, outputTokens: 20 })
+    assert.deepEqual([...result.items, ...result.rejectedItems!].map(item => item.key).sort(), INPUT.map(item => item.key).sort())
+    assert.ok(!JSON.stringify(result).includes(KEY))
+    assert.ok(!JSON.stringify(result).includes('privateResponse'))
+  }
+})
+
+test('a globally invalid key set or oversized output cannot produce partial success', async () => {
+  const responses = [
+    message([{ key: 'first', text: 'missing placeholder' }, { key: 'unknown', text: 'Other' }]),
+    message([translated[0], { key: 'second', text: 'x'.repeat(192_001) }]),
+  ]
+  for (const [index, response] of responses.entries()) {
+    await assert.rejects(() => translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher: reply(response) }), error => {
+      assert.ok(error instanceof TranslationProviderError)
+      assert.equal(error.code, index === 0 ? 'translation_items_invalid' : 'translation_output_too_large')
+      assert.deepEqual(error.usage, { inputTokens: 40, outputTokens: 20 })
+      return true
+    })
+  }
 })
 
 test('truncated, tool/incomplete, wrong-model and unaccountable usage responses are rejected', async () => {

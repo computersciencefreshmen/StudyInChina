@@ -13,6 +13,16 @@ const hash = text => createHash('sha256').update(text).digest('hex')
 const read = path => { try { return JSON.parse(readFileSync(path, 'utf8')) } catch { return null } }
 const save = (path, value) => { mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, canonicalJson(value) + '\n') }
 const reservationPath = unit => `translations/reservations/${TRANSLATION_VERSION}/${unit.locale}/${unit.key}.json`
+const RETRY_POLICY = 'item-v2'
+const ITEM_FAILURE_CODES = new Set([
+  'translation_validation_or_provider_rejected', 'translation_validation_rejected', 'translation_response_item_missing',
+  'translation_placeholder_mismatch', 'translation_fact_missing_or_changed', 'translation_added_critical_content',
+  'translation_target_script_mismatch', 'translation_output_invalid', 'translation_output_truncated',
+  'translation_empty_text', 'translation_invalid_text', 'translation_output_json_invalid', 'translation_items_invalid',
+])
+const failureCode = error => /^[a-z0-9_]{1,100}$/.test(error?.code || '') ? error.code
+  : /^translation_[a-z0-9_]{1,88}$/.test(error?.message || '') ? error.message : 'translation_validation_or_provider_rejected'
+const journalPolicy = unit => ({ retryPolicy: RETRY_POLICY, policyAttempts: unit.policyAttempts, attempts: unit.attempts })
 
 /** Preserve every byte of the source at chunk boundaries, including whitespace. */
 export function splitTranslationSource(source, maximum = 6000) {
@@ -91,7 +101,7 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
   const units = buildTranslationUnits(records), completed = new Map(), queued = [], rejectedAssemblies = new Set()
   const summary = { schemaVersion: 1, version: TRANSLATION_VERSION, startedAt, updatedAt: startedAt, state: 'running',
     modelCalls: 0, inputTokens: 0, outputTokens: 0, published: 0, reused: 0, copiedSource: 0,
-    pendingUniqueUnits: 0, blockedUnknownUnits: 0, failedUnits: 0, completedByLocale: Object.fromEntries(TRANSLATION_LOCALES.map(locale => [locale, 0])), quota: null }
+    pendingUniqueUnits: 0, blockedUnknownUnits: 0, failedUnits: 0, completedByLocale: Object.fromEntries(TRANSLATION_LOCALES.map(locale => [locale, 0])), quota: null, lastProviderError: null }
   const entry = unit => resolve(root, translationPath(unit.source, unit.locale))
   const record = (unit, text, method, model) => ({ schemaVersion: 1, version: TRANSLATION_VERSION, key: unit.key,
     sourceHash: hash(unit.source), targetLocale: unit.locale, text, method, model, translatedAt: new Date(now()).toISOString(), validation: 'passed' })
@@ -112,10 +122,15 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
   const aggregate = () => {
     for (const unit of units) if (unit.children && !completed.has(unit.key) && !rejectedAssemblies.has(unit.key) && unit.children.every(key => completed.has(key))) {
       const children = unit.children.map(key => completed.get(key))
+      let result
       try {
-        accept(unit, record(unit, children.map(child => child.text).join(''), children.every(child => child.method === 'source') ? 'source' : 'minimax',
-          children.some(child => child.method === 'minimax') ? 'MiniMax-M3' : null))
-      } catch { rejectedAssemblies.add(unit.key); summary.failedUnits++ }
+        result = record(unit, children.map(child => child.text).join(''), children.every(child => child.method === 'source') ? 'source' : 'minimax',
+          children.some(child => child.method === 'minimax') ? 'MiniMax-M3' : null)
+        if (!validateTranslationRecord(result, unit.source, unit.locale)) throw new Error('translation_validation_rejected')
+      } catch { rejectedAssemblies.add(unit.key); summary.failedUnits++; continue }
+      // Assembly validation can fail independently; storage failures must stop
+      // further billable work just as they do for individual completed items.
+      accept(unit, result)
     }
   }
   for (const unit of units) {
@@ -128,9 +143,17 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
     if (!protection.text.replace(/__SC_\d{6}__/g, '').replace(/[^\p{L}]/gu, '')) { accept(unit, record(unit, unit.source, 'source', null)); summary.copiedSource++; continue }
     const reservation = read(resolve(root, reservationPath(unit)))
     if (reservation && ['reserved', 'unknown'].includes(reservation.state)) { summary.blockedUnknownUnits++; continue }
-    if (reservation?.state === 'failed' && (reservation.attempts >= 2 || Date.parse(reservation.retryAt) > now())) { summary.failedUnits++; continue }
+    if (reservation?.state === 'failed') {
+      // Upgrade only known output-quality failures. A legacy reservation or
+      // unknown transport outcome is never converted into permission to replay.
+      const attempts = reservation.retryPolicy === RETRY_POLICY ? reservation.policyAttempts : 0
+      if (!ITEM_FAILURE_CODES.has(reservation.code) || !Number.isSafeInteger(attempts) || attempts < 0 || attempts >= 2
+        || !Number.isFinite(Date.parse(reservation.retryAt)) || Date.parse(reservation.retryAt) > now()) { summary.failedUnits++; continue }
+    }
     if (protection.text.length > 24_000) { summary.failedUnits++; continue }
-    queued.push({ ...unit, protection, attempts: (reservation?.attempts || 0) + 1 })
+    queued.push({ ...unit, protection, attempts: (reservation?.attempts || 0) + 1,
+      policyAttempts: reservation?.retryPolicy === RETRY_POLICY ? reservation.policyAttempts + 1 : 1,
+      isolated: reservation?.state === 'failed' })
   }
   aggregate()
   const pending = () => units.filter(unit => !completed.has(unit.key)).length
@@ -139,9 +162,9 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
   const perLocale = new Map(TRANSLATION_LOCALES.map(locale => [locale, []]))
   for (const unit of queued) {
     const local = perLocale.get(unit.locale), last = local.at(-1)
-    if (last && last.locale === unit.locale && last.units.length < 6 && last.characters + unit.protection.text.length <= 12_000) {
+    if (last && !last.isolated && !unit.isolated && last.locale === unit.locale && last.units.length < 6 && last.characters + unit.protection.text.length <= 12_000) {
       last.units.push(unit); last.characters += unit.protection.text.length
-    } else local.push({ locale: unit.locale, units: [unit], characters: unit.protection.text.length })
+    } else local.push({ locale: unit.locale, units: [unit], characters: unit.protection.text.length, isolated: unit.isolated })
   }
   const batches = []
   for (const phase of [['zh', 'en'], TRANSLATION_LOCALES.filter(locale => locale !== 'zh' && locale !== 'en')]) {
@@ -162,52 +185,65 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
     // Persist and PUSH the intent before any billable request. A killed runner
     // leaves reserved outcomes quarantined instead of charging for a replay.
     for (const batch of wave) for (const unit of batch.units) save(resolve(root, reservationPath(unit)), {
-      schemaVersion: 1, key: unit.key, locale: unit.locale, state: 'reserved', attempts: unit.attempts,
+      schemaVersion: 1, key: unit.key, locale: unit.locale, state: 'reserved', ...journalPolicy(unit),
       requestedAt: new Date(now()).toISOString(), runId: String(environment.GITHUB_RUN_ID || 'manual'),
       requestHash: hash(canonicalJson({ locale: batch.locale, items: batch.units.map(row => ({ key: row.key, text: row.protection.text })) })) })
     flush()
-    await Promise.all(wave.map(async batch => {
+    const outcomes = await Promise.allSettled(wave.map(async batch => {
       summary.modelCalls++
-      let usageRecorded = false
+      const failUnit = (unit, code, unknown = false, retryAt = null) => {
+        // Filesystem failures propagate; they must never rewrite a previously
+        // completed unit as failed or become permission for another model call.
+        if (completed.has(unit.key)) return
+        save(resolve(root, reservationPath(unit)), { schemaVersion: 1, key: unit.key, locale: unit.locale,
+          state: unknown ? 'unknown' : 'failed', ...journalPolicy(unit), code,
+          completedAt: new Date(now()).toISOString(), retryAt: retryAt || new Date(now() + 15 * 60_000).toISOString() })
+        if (unknown) summary.blockedUnknownUnits++
+        else summary.failedUnits++
+      }
+      let response
       try {
-        const response = await translate({ key: environment.MINIMAX_SUBSCRIPTION_KEY, locale: batch.locale,
+        response = await translate({ key: environment.MINIMAX_SUBSCRIPTION_KEY, locale: batch.locale,
           items: batch.units.map(unit => ({ key: unit.key, text: unit.protection.text })), signal: AbortSignal.timeout(90_000) })
-        summary.inputTokens += response.usage.inputTokens; summary.outputTokens += response.usage.outputTokens
-        usageRecorded = true
-        // Validate the whole batch before making any of its translations visible.
-        const outputs = batch.units.map(unit => {
-          const output = response.items.find(item => item.key === unit.key)
-          if (!output) throw new Error('translation_response_item_missing')
-          const result = record(unit, restoreTranslationText(output.text, unit.protection), 'minimax', response.model)
-          if (!validateTranslationRecord(result, unit.source, unit.locale)) throw new Error('translation_validation_rejected')
-          return { unit, result }
-        })
-        for (const { unit, result } of outputs) {
-          accept(unit, result)
-          save(resolve(root, reservationPath(unit)), { schemaVersion: 1, key: unit.key, locale: unit.locale,
-            state: 'completed', attempts: unit.attempts, completedAt: new Date(now()).toISOString() })
-        }
       } catch (error) {
         // A provider can report charged usage even when its generated JSON is
         // unusable. Preserve measured usage, without inventing unknown usage or
         // counting it twice when our later fact validation rejected the text.
-        if (!usageRecorded && Number.isSafeInteger(error?.usage?.inputTokens) && error.usage.inputTokens >= 0
+        if (Number.isSafeInteger(error?.usage?.inputTokens) && error.usage.inputTokens >= 0
           && Number.isSafeInteger(error?.usage?.outputTokens) && error.usage.outputTokens >= 0) {
           summary.inputTokens += error.usage.inputTokens; summary.outputTokens += error.usage.outputTokens
         }
         const unknown = error?.outcome === 'unknown' || error?.name === 'TimeoutError' || error?.name === 'AbortError'
-        const code = /^[a-z0-9_]{1,100}$/.test(error?.code || '') ? error.code : 'translation_validation_or_provider_rejected'
-        for (const unit of batch.units) save(resolve(root, reservationPath(unit)), { schemaVersion: 1, key: unit.key,
-          locale: unit.locale, state: unknown ? 'unknown' : 'failed', attempts: unit.attempts, code,
-          completedAt: new Date(now()).toISOString(), retryAt: error?.retryAfter || new Date(now() + 15 * 60_000).toISOString() })
+        const code = failureCode(error)
+        summary.lastProviderError = code
+        for (const unit of batch.units) failUnit(unit, code, unknown, error?.retryAfter)
         if (code.includes('quota') || code.includes('rate_limit') || code.includes('unauthorized') || code.includes('configuration')
-          || /http_(?:400|401|403|404)$/.test(code) || code.includes('model_mismatch')
+          || /http_(?:400|401|403|404|529)$/.test(code) || code.includes('model_mismatch')
           || code === 'translation_response_invalid' || code === 'translation_usage_invalid') { summary.state = 'provider_wait'; stop = true }
-        if (unknown) summary.blockedUnknownUnits += batch.units.length
-        else summary.failedUnits += batch.units.length
+        return
+      }
+      // Account one response once, then validate/persist every item separately.
+      // A bad neighbour cannot erase a good translation or charge for it again.
+      summary.inputTokens += response.usage.inputTokens; summary.outputTokens += response.usage.outputTokens
+      for (const unit of batch.units) {
+        const rejected = response.rejectedItems?.find(item => item.key === unit.key)
+        if (rejected) { failUnit(unit, failureCode(rejected)); continue }
+        let result
+        try {
+          const output = response.items.find(item => item.key === unit.key)
+          if (!output) throw new Error('translation_response_item_missing')
+          result = record(unit, restoreTranslationText(output.text, unit.protection), 'minimax', response.model)
+          if (!validateTranslationRecord(result, unit.source, unit.locale)) throw new Error('translation_validation_rejected')
+        } catch (error) { failUnit(unit, failureCode(error)); continue }
+        // Storage is outside the validation catch: an I/O error stops the run,
+        // without relabelling a successfully saved neighbour as invalid output.
+        accept(unit, result)
+        save(resolve(root, reservationPath(unit)), { schemaVersion: 1, key: unit.key, locale: unit.locale,
+          state: 'completed', ...journalPolicy(unit), completedAt: new Date(now()).toISOString() })
       }
     }))
     aggregate(); flush()
+    if (outcomes.some(outcome => outcome.status === 'rejected')) throw new Error('translation_storage_failed')
   }
   if (summary.state === 'running') summary.state = pending() ? 'checkpoint_complete' : 'complete'
   aggregate(); flush()
