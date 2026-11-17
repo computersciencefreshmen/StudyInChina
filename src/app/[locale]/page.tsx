@@ -1,16 +1,24 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { connection } from 'next/server'
 import { CityConstellation } from '@/components/features/CityConstellation'
+import { CollectedProgramCard } from '@/components/features/CollectedProgram'
 import { CraftHomeVisual } from '@/components/features/CraftHomeVisual'
-import { UniversityCard } from '@/components/features/RecordCards'
+import { ProgramCard, UniversityCard } from '@/components/features/RecordCards'
 import styles from '@/components/features/CraftHomeVisual.module.css'
 import { formatStudentCityTitle, getHomeExperienceCopy } from '@/i18n/home-experience'
 import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
 import { classifyProgramField, programFieldTaxonomy } from '@/lib/data/fields'
 import { getCatalogData } from '@/lib/data/load'
+import { getTodayDate } from '@/lib/data/freshness'
 import { guides } from '@/lib/guides'
+import { getProgramFeedIndex } from '@/lib/program-feed'
+import { parseProgramCatalogFilters } from '@/lib/program-catalog'
+import { combineProgramRecords, queryUnifiedProgramData } from '@/lib/unified-programs'
 import { pageMetadata, requireLocale } from '@/lib/site'
+
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const locale = requireLocale((await params).locale) || 'en'
@@ -21,11 +29,28 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = requireLocale((await params).locale)
   if (!locale) notFound()
-  const messages = getMessages(locale), experience = getHomeExperienceCopy(locale), data = await getCatalogData()
+  // Homepage figures must refresh with the same cloud snapshot as Programs,
+  // rather than retaining the reviewed-only count from a deployment build.
+  await connection()
+  const [data, feed] = await Promise.all([getCatalogData(), getProgramFeedIndex()])
+  const today = getTodayDate(), messages = getMessages(locale), experience = getHomeExperienceCopy(locale)
+  const programs = queryUnifiedProgramData(data, feed.programs, parseProgramCatalogFilters({}), today, feed.revision)
+  const allPrograms = combineProgramRecords(data, feed.programs, today).items
+  const previews = programs.items.slice(0, 6)
   const featured = data.universities.filter(item => item.featured).slice(0, 6)
-  const fieldsByUniversity = Object.fromEntries(data.universities.map(university => [university.id, [...new Set(data.programs.filter(program => program.universityId === university.id).map(classifyProgramField))]]))
   const fields = programFieldTaxonomy(locale)
-  const fieldCounts = Object.fromEntries(fields.map(({ key }) => [key, data.programs.filter(program => classifyProgramField(program) === key).length]))
+  const fieldCounts = Object.fromEntries(fields.map(({ key }) => [key, 0]))
+  const fieldsByUniversity = new Map<string, Set<string>>()
+  for (const item of allPrograms) {
+    const field = classifyProgramField('collected' in item
+      ? { name: { en: item.collected.name }, degreeLevel: item.degree || 'other', discipline: 'other' }
+      : item.program)
+    fieldCounts[field] = (fieldCounts[field] || 0) + 1
+    if (item.university) {
+      const schoolFields = fieldsByUniversity.get(item.university.id) || new Set<string>()
+      schoolFields.add(field); fieldsByUniversity.set(item.university.id, schoolFields)
+    }
+  }
   const officialSourceCount = data.sources.filter(source => source.official).length
   const latestSourceCheck = data.sources.reduce<string | null>((latest, source) => !latest || source.accessedAt > latest ? source.accessedAt : latest, null)
   const sourceCheckLabel = latestSourceCheck ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(`${latestSourceCheck}T00:00:00Z`)) : null
@@ -37,11 +62,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <h1 id="home-title">{messages.home.title}</h1>
       <p className={styles.intro}>{messages.home.intro}</p>
       <div className={styles.actions}><Link href={`/${locale}/universities`}>{messages.home.findUniversity}<span aria-hidden="true">↗</span></Link><Link href={`/${locale}/programs`}>{messages.home.explorePrograms}</Link></div>
-      <CraftHomeVisual locale={locale} labels={{ ...messages.nav, search: messages.common.search, searchPlaceholder: messages.programs.searchPlaceholder }} counts={{ universities: data.universities.length, programs: data.programs.length, cities: data.cities.length, guides: guides.length }} />
+      <CraftHomeVisual locale={locale} labels={{ ...messages.nav, search: messages.common.search, searchPlaceholder: messages.programs.searchPlaceholder }} counts={{ universities: data.universities.length, programs: programs.total, cities: data.cities.length, guides: guides.length }} />
     </section>
 
     <section className={styles.ledger} aria-label={experience.catalogEyebrow}>
-      <dl className={styles.metrics}><div><dt>{messages.nav.universities}</dt><dd>{data.universities.length.toLocaleString(locale)}</dd></div><div><dt>{messages.nav.programs}</dt><dd>{data.programs.length.toLocaleString(locale)}</dd></div><div><dt>{messages.nav.scholarships}</dt><dd>{data.scholarships.length.toLocaleString(locale)}</dd></div><div><dt>{experience.officialSources}</dt><dd>{officialSourceCount.toLocaleString(locale)}</dd></div></dl>
+      <dl className={styles.metrics}><div><dt>{messages.nav.universities}</dt><dd>{data.universities.length.toLocaleString(locale)}</dd></div><div><dt>{messages.nav.programs}</dt><dd data-home-program-count={programs.total}>{programs.total.toLocaleString(locale)}</dd></div><div><dt>{messages.nav.scholarships}</dt><dd>{data.scholarships.length.toLocaleString(locale)}</dd></div><div><dt>{experience.officialSources}</dt><dd>{officialSourceCount.toLocaleString(locale)}</dd></div></dl>
       <div className={styles.sourceLine}>{sourceCheckLabel ? <span>{experience.latestSourceCheck}: <time dateTime={latestSourceCheck!}>{sourceCheckLabel}</time></span> : null}<Link href={`/${locale}/data-policy`}>{experience.policyLink} ↗</Link></div>
       <p className={styles.principle}>{experience.noGuessing}</p>
     </section>
@@ -53,12 +78,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
     <section className={styles.section} aria-labelledby="featured-schools-title">
       <header className={styles.sectionHeading}><span className={styles.eyebrow}>{messages.nav.universities}</span><h2 id="featured-schools-title">{messages.home.featured}</h2><p>{messages.home.featuredIntro}</p><Link href={`/${locale}/universities`}>{messages.common.explore} ↗</Link></header>
-      <div className="content-grid">{featured.map(university => <UniversityCard key={university.id} university={university} city={data.cities.find(city => city.id === university.cityId)} fields={fieldsByUniversity[university.id] || []} locale={locale} messages={messages} />)}</div>
+      <div className="content-grid">{featured.map(university => <UniversityCard key={university.id} university={university} city={data.cities.find(city => city.id === university.cityId)} fields={[...fieldsByUniversity.get(university.id) || []]} locale={locale} messages={messages} />)}</div>
     </section>
+
+    {previews.length ? <section className={styles.section} aria-labelledby="home-programs-title" data-testid="home-program-previews">
+      <header className={styles.sectionHeading}><span className={styles.eyebrow}>{messages.nav.programs}</span><h2 id="home-programs-title">{messages.programs.title}</h2><p>{messages.programs.intro}</p><Link href={`/${locale}/programs`}>{messages.home.explorePrograms} ↗</Link></header>
+      <div className="content-grid">{previews.map(item => 'collected' in item
+        ? <CollectedProgramCard key={item.collected.id} item={item} locale={locale} messages={messages} />
+        : <ProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} latestTuitionReference={item.latestTuitionReference} locale={locale} messages={messages} today={today} />)}</div>
+    </section> : null}
 
     <section className={styles.section} aria-labelledby="study-fields-title">
       <header className={styles.sectionHeading}><span className={styles.eyebrow}>{messages.nav.programs}</span><h2 id="study-fields-title">{messages.home.disciplines}</h2></header>
-      {data.programs.length ? <div className={styles.fieldGrid}>{fields.map(({ key, label, description }) => <Link className={styles.field} href={`/${locale}/programs?discipline=${key}`} key={key}><b>{label}</b><small>{description}</small><span>{fieldCounts[key].toLocaleString(locale)} {messages.nav.programs}<span aria-hidden="true">↗</span></span></Link>)}</div> : <div className="notice" data-testid="program-publication-note">{messages.home.programVerificationNote}</div>}
+      {programs.total ? <div className={styles.fieldGrid}>{fields.map(({ key, label, description }) => <Link className={styles.field} href={`/${locale}/programs?discipline=${key}`} key={key}><b>{label}</b><small>{description}</small><span data-field-program-count={fieldCounts[key]}>{fieldCounts[key].toLocaleString(locale)} {messages.nav.programs}<span aria-hidden="true">↗</span></span></Link>)}</div> : <div className="notice" data-testid="program-publication-note">{messages.home.programVerificationNote}</div>}
     </section>
 
     <section className={styles.section} aria-labelledby="student-cities-title">
