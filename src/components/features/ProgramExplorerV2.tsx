@@ -20,6 +20,8 @@ import {
 import { CatalogPagination } from './CatalogPagination'
 import { CatalogFreshnessNote } from './DataFreshnessPanel'
 import { ProgramCard } from './RecordCards'
+import { CollectedProgramCard } from './CollectedProgram'
+import type { UnifiedProgramResult } from '@/lib/unified-programs'
 import styles from './ProgramExplorerV2.module.css'
 
 const labels: Record<LaunchLocale, {
@@ -65,7 +67,7 @@ export function ProgramExplorerV2({
   messages,
   today,
 }: {
-  result: ProgramCatalogResult
+  result: ProgramCatalogResult | UnifiedProgramResult
   locale: LaunchLocale
   messages: Messages
   today: string
@@ -295,7 +297,7 @@ export function ProgramExplorerV2({
       page={result.page}
       pageCount={result.pageCount}
       position="top"
-      previousHref={result.page > 1 && filters.cursorHistory.length > 0
+      previousHref={result.page > 1 && (filters.paginationMode === 'offset' || filters.cursorHistory.length > 0)
         ? programCatalogHref(locale, filters, result.page - 1)
         : undefined}
       previousLabel={text.previous}
@@ -303,9 +305,9 @@ export function ProgramExplorerV2({
     />
     {result.items.length ? (
       <div className="content-grid">
-        {result.items.map(({ program, university, cycle, latestTuitionReference }) => (
-          <ProgramCard key={program.id} program={program} university={university} cycle={cycle} latestTuitionReference={latestTuitionReference} locale={locale} messages={messages} today={today} />
-        ))}
+        {result.items.map(item => 'collected' in item
+          ? <CollectedProgramCard key={item.collected.id} item={item} locale={locale} messages={messages} />
+          : <ProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} latestTuitionReference={item.latestTuitionReference} locale={locale} messages={messages} today={today} />)}
       </div>
     ) : <div className="empty-box">{messages.programs.noResults}</div>}
 
@@ -318,7 +320,7 @@ export function ProgramExplorerV2({
       page={result.page}
       pageCount={result.pageCount}
       position="bottom"
-      previousHref={result.page > 1 && filters.cursorHistory.length > 0
+      previousHref={result.page > 1 && (filters.paginationMode === 'offset' || filters.cursorHistory.length > 0)
         ? programCatalogHref(locale, filters, result.page - 1)
         : undefined}
       previousLabel={text.previous}

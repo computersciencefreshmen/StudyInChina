@@ -1,4 +1,6 @@
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
+import { CollectedProgramDetail, ProgramSourceReferences } from '@/components/features/CollectedProgram'
+import { resolveUnifiedProgram } from '@/lib/unified-programs'
 import { connection } from 'next/server'
 import { AdmissionTrackCards } from '@/components/features/AdmissionTrackCards'
 import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
@@ -45,6 +47,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
   const data = await getCatalogData()
+  const resolved = await resolveUnifiedProgram(slug, getTodayDate(), data)
+  if (resolved && 'collected' in resolved.item) {
+    const record = resolved.item.collected
+    return pageMetadata(locale, `${record.name} · ${record.schoolName}`, record.fields.description?.slice(0, 160) || record.name, `programs/${encodeURIComponent(resolved.canonical)}`)
+  }
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) return {}
   const university = data.universities.find((item) => item.id === program.universityId)
@@ -69,6 +76,10 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   if (!locale) notFound()
 
   const data = await getCatalogData()
+  const resolved = await resolveUnifiedProgram(slug, getTodayDate(), data)
+  if (resolved && resolved.canonical !== slug) permanentRedirect(`/${locale}/programs/${encodeURIComponent(resolved.canonical)}`)
+  if (resolved && 'collected' in resolved.item) return <CollectedProgramDetail item={resolved.item} locale={locale} />
+
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) notFound()
 
@@ -223,6 +234,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
                 </li>
               })}
             </ul>
+            <ProgramSourceReferences sources={resolved?.item.sources || []} locale={locale} />
             <SourceTransparency
               locale={locale}
               lastCheckedAt={lastSourceCheckedAt}
@@ -473,6 +485,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               </li>
             })}
           </ul>
+          <ProgramSourceReferences sources={resolved?.item.sources || []} locale={locale} />
           <SourceTransparency
             locale={locale}
             lastCheckedAt={lastSourceCheckedAt}
