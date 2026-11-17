@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { DataBundle, Program, University } from '@/lib/data/types'
+import type { DataBundle, Program, Scholarship, University } from '@/lib/data/types'
 import type { ThirdPartyProgram } from '@/lib/third-party-programs'
 import { combineProgramRecords, queryUnifiedProgramData, unifiedProgramSlug } from '@/lib/unified-programs'
 import { parseProgramCatalogFilters, programCatalogHref } from '@/lib/program-catalog'
@@ -86,6 +86,23 @@ describe('one program catalogue', () => {
     expect(queryUnifiedProgramData(data, records, filters({ applicationState: 'open' }), today, 'snapshot-one').items.some(item => 'collected' in item)).toBe(false)
     expect(queryUnifiedProgramData(data, records, filters({ tuition: 'under-20000' }), today, 'snapshot-one').items.some(item => 'collected' in item)).toBe(false)
     expect(result.items[0]).toMatchObject({ collected: { official: false, fields: { tuition: '4000 CNY / course' } } })
+  })
+
+  it('restricts linked scholarship results to current verified funding with actual program scope, including an empty result when none qualify', () => {
+    const records = [captured('collected-also-at-alpha', 'Medicine')]
+    const linked = filters({ scholarship: 'linked' })
+    expect(queryUnifiedProgramData(data, records, linked, today, 'snapshot-one').items).toEqual([])
+    const scholarship: Scholarship = { ...audit, id: 'funding', slug: 'funding', name: { en: 'Program funding' }, providerType: 'university', universityIds: [university.id], programIds: [reviewed.id], coverage: { tuition: 'full', accommodation: 'none', insurance: false, stipendCnyPerMonth: null }, deadline: '2027-06-01', applicationUrl: 'https://alpha.edu.cn/funding', summary: null }
+    const scopedData = { ...data, programs: [reviewed, { ...reviewed, id: 'outside-scope', slug: 'outside-scope', name: { en: 'Another program' } }], scholarships: [scholarship] }
+    expect(queryUnifiedProgramData(scopedData, records, linked, today, 'snapshot-one').items.map(unifiedProgramSlug)).toEqual([reviewed.slug])
+    expect(queryUnifiedProgramData({ ...scopedData, scholarships: [{ ...scholarship, reviewAfter: '2026-01-01' }] }, records, linked, today, 'snapshot-one').items).toEqual([])
+  })
+
+  it('does not infer a city or ranking relationship for an unmatched collected school', () => {
+    const records = [captured('unmatched-school', 'Medicine', { schoolName: 'Alpha Medical University' })]
+    const scopedData: DataBundle = { ...data, cities: [{ ...audit, id: 'city', slug: 'alpha-city', name: { en: 'Alpha City' }, province: null, region: null, coordinates: null, overview: null, climate: null, foodHighlights: [], sights: [] }] }
+    expect(queryUnifiedProgramData(scopedData, records, filters({ city: 'alpha-city' }), today, 'snapshot-one').items.map(unifiedProgramSlug)).toEqual([reviewed.slug])
+    expect(queryUnifiedProgramData(scopedData, records, filters({ qsRankMax: '100' }), today, 'snapshot-one').items).toEqual([])
   })
 
   it('resets old cursors or changed snapshot revisions and uses normal Programs links for both page directions', () => {

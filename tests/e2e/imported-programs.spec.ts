@@ -47,7 +47,12 @@ test('canonical search, 24-row pagination and legacy filter aliases stay in norm
   await expect(page).toHaveURL(/\/en\/programs\?q=Business/)
   const cards = page.locator('[data-program-preview]')
   expect(await cards.count()).toBeGreaterThan(0)
-  for (const card of await cards.all()) await expect(card).toContainText(/Business/i)
+  // Reviewed records also match discipline keywords, even when their visible title is Chinese.
+  const searched = (await (await request.get('/api/v1/programs?view=all&q=Business')).json()).data
+  await expect(cards).toHaveCount(searched.length)
+  const detailPaths = await cards.locator('a[href^="/en/programs/"]').evaluateAll(links => links.map(link => link.getAttribute('href')))
+  expect(detailPaths).toEqual(searched.map((item: { slug: string }) => `/en/programs/${encodeURIComponent(item.slug)}`))
+  for (const card of await page.locator('[data-program-preview][data-source-status="source-collected"]').all()) await expect(card).toContainText(/Business/i)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true)
   expect((await request.get('/api/v1/imported-programs?page=-1')).status()).toBe(400)
   expect((await request.get('/api/v1/imported-programs?view=verified')).status()).toBe(400)

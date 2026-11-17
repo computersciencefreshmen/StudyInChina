@@ -2,6 +2,8 @@ import 'server-only'
 import { getCatalogData } from './data/load'
 import { classifyProgramField } from './data/fields'
 import { matchesUniversityRankings, rankingFilterKeys } from './data/rankings'
+import { isCurrentVerifiedRecord } from './data/freshness'
+import { scholarshipAppliesToProgram } from './data/scholarship-scope'
 import type { DataBundle, DegreeLevel, University } from './data/types'
 import { getProgramFeedIndex, getProgramFeedRecord } from './program-feed'
 import { publicThirdPartyProgram } from './third-party-public'
@@ -115,11 +117,16 @@ export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyPr
   const sourceSchool = captured.find(record => record.schoolId === filters.institution)
   const exactUniversities = sourceSchool ? data.universities.filter(university => university.name.en && normalizeProgramIdentity(university.name.en) === normalizeProgramIdentity(sourceSchool.schoolName)) : []
   const effectiveFilters = sourceSchool ? { ...filters, institution: exactUniversities.length === 1 ? exactUniversities[0].slug : normalizeProgramIdentity(sourceSchool.schoolName) } : filters
-  const reviewedMatches = new Set(selectProgramCatalogItems(data, effectiveFilters, today).map(item => item.program.id))
+  const currentScholarships = filters.scholarship ? data.scholarships.filter(scholarship => isCurrentVerifiedRecord(scholarship, today)) : []
+  const reviewedData = filters.scholarship ? {
+    ...data,
+    programs: data.programs.filter(program => currentScholarships.some(scholarship => scholarshipAppliesToProgram(scholarship, program))),
+  } : data
+  const reviewedMatches = new Set(selectProgramCatalogItems(reviewedData, effectiveFilters, today).map(item => item.program.id))
   const matching = combined.items.filter(item => 'collected' in item ? matchesCollected(item, effectiveFilters, data, today) : reviewedMatches.has(item.program.id))
   if (filters.sort === 'name') matching.sort((a, b) => title(a).localeCompare(title(b), 'en') || unifiedProgramSlug(a).localeCompare(unifiedProgramSlug(b)))
   else if (filters.sort !== 'default') {
-    const reviewedOrder = new Map(selectProgramCatalogItems(data, filters, today).map((item, index) => [item.program.id, index]))
+    const reviewedOrder = new Map(selectProgramCatalogItems(reviewedData, effectiveFilters, today).map((item, index) => [item.program.id, index]))
     matching.sort((a, b) => ('collected' in a ? Number.MAX_SAFE_INTEGER : reviewedOrder.get(a.program.id) || 0) - ('collected' in b ? Number.MAX_SAFE_INTEGER : reviewedOrder.get(b.program.id) || 0))
   } else {
     // Interleave institutions so a large source school cannot monopolize the first page.
