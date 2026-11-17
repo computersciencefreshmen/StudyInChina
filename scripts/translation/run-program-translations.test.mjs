@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
-import { mkdtempSync, readFileSync, readdirSync, existsSync, rmSync } from 'node:fs'
+import { mkdtempSync, readFileSync, readdirSync, existsSync, rmSync, mkdirSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import { test } from 'node:test'
 import { buildTranslationUnits, runProgramTranslations, splitTranslationSource } from './run-program-translations.mjs'
 import { translationKey, translationPath } from '../../src/lib/program-translation-contract.ts'
@@ -21,6 +21,13 @@ const fakeModel = calls => async ({ items, locale }) => {
 const fixture = t => { const root = mkdtempSync(join(tmpdir(), 'sic-translation-')); t.after(() => rmSync(root, { recursive: true, force: true })); return root }
 const options = root => ({ feedDir: root, records, environment: { MINIMAX_SUBSCRIPTION_KEY: 'test-subscription-only' }, maxCalls: 1,
   concurrency: 1, maxMinutes: 8, quota: allowed, checkpoint: () => true })
+const journal = (root, original, locale = 'zh') => join(root, 'translations', 'reservations', 'v1', locale, translationKey(original, locale) + '.json')
+const writeJournal = (root, original, value) => {
+  const path = journal(root, original)
+  mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, JSON.stringify({ schemaVersion: 1, key: translationKey(original, 'zh'), locale: 'zh', ...value }))
+}
+const clock = Date.parse('2026-11-17T09:00:00.000Z')
+const pair = [records[0], { ...records[0], id: 'sicas-2', fields: { requirements: 'Please provide the application documents and your personal statement. TOEFL 80 is required.' } }]
 
 test('shared text deduplicates across schools and languages have distinct keys', () => {
   const units = buildTranslationUnits([...records, { ...records[0], id: 'sicas-2', schoolId: 'sicas-2' }])
@@ -103,3 +110,118 @@ test('other-language requests wait for the English/Chinese wave to settle', asyn
     return fakeModel([])(input)
   } })
 })
+
+test('a fact-invalid neighbour cannot discard a valid item or multiply measured response usage', async t => {
+  const root = fixture(t), original = JSON.stringify(pair), calls = []
+  const result = await runProgramTranslations({ ...options(root), records: pair, translate: async input => {
+    const response = await fakeModel(calls)(input)
+    response.items[1].text = '未经保留原文的 TOEFL 40。'
+    return response
+  } })
+  assert.equal(calls[0].items.length, 2)
+  assert.equal(existsSync(join(root, translationPath(pair[0].fields.requirements, 'zh'))), true)
+  assert.equal(existsSync(join(root, translationPath(pair[1].fields.requirements, 'zh'))), false)
+  assert.equal(read(journal(root, pair[0].fields.requirements)).state, 'completed')
+  assert.equal(read(journal(root, pair[1].fields.requirements)).state, 'failed')
+  assert.equal(result.inputTokens, 100); assert.equal(result.outputTokens, 80)
+  assert.equal(result.failedUnits, 1); assert.equal(JSON.stringify(pair), original)
+})
+
+test('provider-rejected items are isolated and successful neighbours are never charged again', async t => {
+  const root = fixture(t), calls = [], badSource = pair[1].fields.requirements, goodSource = pair[0].fields.requirements
+  await runProgramTranslations({ ...options(root), records: pair, now: () => clock, translate: async input => {
+    const response = await fakeModel(calls)(input), rejected = response.items.pop()
+    return { ...response, rejectedItems: [{ key: rejected.key, code: 'translation_placeholder_mismatch' }] }
+  } })
+  assert.equal(read(journal(root, goodSource)).state, 'completed')
+  const rejected = read(journal(root, badSource))
+  assert.equal(rejected.state, 'failed'); assert.equal(rejected.retryPolicy, 'item-v2'); assert.equal(rejected.policyAttempts, 1)
+  await runProgramTranslations({ ...options(root), records: pair, now: () => clock + 16 * 60_000, translate: fakeModel(calls) })
+  assert.equal(calls[1].items.length, 1)
+  assert.equal(calls[1].items[0].key, translationKey(badSource, 'zh'))
+  assert.equal(calls.flatMap(call => call.items).filter(item => item.key === translationKey(goodSource, 'zh')).length, 1)
+  assert.equal(read(journal(root, badSource)).state, 'completed')
+})
+
+test('legacy quality-failed batch items receive only two isolated policy-upgrade attempts while keeping lifetime attempts', async t => {
+  const root = fixture(t), calls = []
+  writeJournal(root, source, { state: 'failed', attempts: 2, code: 'translation_validation_or_provider_rejected', retryAt: new Date(clock - 1).toISOString() })
+  const reject = async input => {
+    calls.push(input)
+    assert.equal(input.items.length, 1)
+    return { model: 'MiniMax-M3', usage: { inputTokens: 20, outputTokens: 10 }, items: [],
+      rejectedItems: [{ key: input.items[0].key, code: 'translation_placeholder_mismatch' }] }
+  }
+  await runProgramTranslations({ ...options(root), now: () => clock, translate: reject })
+  assert.equal(read(journal(root, source)).attempts, 3)
+  assert.equal(read(journal(root, source)).policyAttempts, 1)
+  await runProgramTranslations({ ...options(root), now: () => clock + 16 * 60_000, translate: reject })
+  assert.equal(read(journal(root, source)).attempts, 4)
+  assert.equal(read(journal(root, source)).policyAttempts, 2)
+  await runProgramTranslations({ ...options(root), now: () => clock + 32 * 60_000, translate: fakeModel(calls) })
+  assert.equal(calls.flatMap(call => call.items).filter(item => item.key === translationKey(source, 'zh')).length, 2)
+})
+
+test('legacy retry upgrade respects cooldown and never rescues unknown, reserved or configuration failures', async t => {
+  for (const value of [
+    { state: 'unknown', attempts: 2, code: 'translation_transport_unknown', retryAt: new Date(clock - 1).toISOString() },
+    { state: 'reserved', attempts: 2, code: 'translation_validation_or_provider_rejected', retryAt: new Date(clock - 1).toISOString() },
+    { state: 'failed', attempts: 2, code: 'translation_http_401', retryAt: new Date(clock - 1).toISOString() },
+    { state: 'failed', attempts: 2, code: 'translation_input_too_large', retryAt: new Date(clock - 1).toISOString() },
+    { state: 'failed', attempts: 2, code: 'translation_validation_or_provider_rejected', retryAt: new Date(clock + 60_000).toISOString() },
+  ]) {
+    const root = fixture(t), calls = []
+    writeJournal(root, source, value)
+    await runProgramTranslations({ ...options(root), now: () => clock, translate: fakeModel(calls) })
+    assert.equal(calls.flatMap(call => call.items).filter(item => item.key === translationKey(source, 'zh')).length, 0)
+    assert.deepEqual(read(journal(root, source)).state, value.state)
+    assert.equal(read(journal(root, source)).attempts, 2)
+  }
+})
+
+test('an output-storage failure cannot rewrite a completed neighbour or allow another billing wave', async t => {
+  const root = fixture(t), calls = []
+  mkdirSync(join(root, translationPath(pair[1].fields.requirements, 'zh')), { recursive: true })
+  await assert.rejects(runProgramTranslations({ ...options(root), records: pair, maxCalls: 10, translate: fakeModel(calls) }), /translation_storage_failed/)
+  assert.equal(calls.length, 1)
+  assert.equal(read(journal(root, pair[0].fields.requirements)).state, 'completed')
+  assert.equal(read(journal(root, pair[1].fields.requirements)).state, 'reserved')
+  assert.equal(read(join(root, translationPath(pair[0].fields.requirements, 'zh'))).method, 'minimax')
+})
+
+test('a failed post-response checkpoint stops work before another billing wave', async t => {
+  const root = fixture(t), calls = []; let checkpoints = 0
+  await assert.rejects(runProgramTranslations({ ...options(root), records: pair, maxCalls: 10,
+    checkpoint: () => { if (++checkpoints === 3) throw new Error('checkpoint_push_failed'); return true }, translate: fakeModel(calls) }), /checkpoint_push_failed/)
+  assert.equal(calls.length, 1)
+  assert.equal(read(journal(root, pair[0].fields.requirements)).state, 'completed')
+})
+
+for (const [code, outcome] of [['translation_rate_limited', 'rejected'], ['translation_http_529', 'unknown']]) {
+  test(`${code} stops later waves while the already-started successful neighbour is checkpointed`, async t => {
+    const root = fixture(t), calls = []; let checkpoints = 0
+    const many = Array.from({ length: 18 }, (_, i) => ({ ...records[0], id: `sicas-${i}`,
+      fields: { requirements: `Please submit your application documents for programme number ${i}. IELTS 6.0 is required.` } }))
+    const byKey = new Map(many.map(row => [translationKey(row.fields.requirements, 'zh'), row.fields.requirements]))
+    const result = await runProgramTranslations({ ...options(root), records: many, maxCalls: 10, concurrency: 2,
+      checkpoint: () => { checkpoints++; return true }, translate: async input => {
+        calls.push(input)
+        if (calls.length === 1) {
+          await new Promise(resolve => setTimeout(resolve, 5))
+          throw Object.assign(new Error('never retain provider body or credentials'), { code, outcome })
+        }
+        await new Promise(resolve => setTimeout(resolve, 10))
+        return fakeModel([])(input)
+      } })
+    assert.equal(calls.length, 2)
+    assert.equal(result.state, 'provider_wait'); assert.equal(result.lastProviderError, code)
+    assert.equal(result.inputTokens, 100); assert.equal(result.outputTokens, 80)
+    for (const item of calls[0].items) assert.equal(read(journal(root, byKey.get(item.key))).state, outcome === 'unknown' ? 'unknown' : 'failed')
+    for (const item of calls[1].items) {
+      assert.equal(read(journal(root, byKey.get(item.key))).state, 'completed')
+      assert.equal(existsSync(join(root, translationPath(byKey.get(item.key), 'zh'))), true)
+    }
+    assert.ok(checkpoints >= 3)
+    assert.equal(JSON.stringify(result).includes('never retain provider body or credentials'), false)
+  })
+}

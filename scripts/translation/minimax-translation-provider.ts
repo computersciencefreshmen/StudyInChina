@@ -19,6 +19,16 @@ export type TranslationItem = { key: string; text: string }
 export type TranslationQuota = { allow: boolean; remainingPercent: number | null; retryAt: string | null; reason: string }
 export type TranslationOutcome = 'not_sent' | 'unknown' | 'rejected'
 export type TranslationUsage = { inputTokens: number; outputTokens: number }
+export type TranslationRejectedItem = {
+  key: string
+  code: 'translation_empty_text' | 'translation_invalid_text' | 'translation_placeholder_mismatch'
+}
+export type TranslationBatchResult = {
+  items: TranslationItem[]
+  rejectedItems?: TranslationRejectedItem[]
+  model: string
+  usage: TranslationUsage
+}
 
 /** Codes only: never retain a provider body, credential, transport error or cause. */
 export class TranslationProviderError extends Error {
@@ -147,7 +157,7 @@ function knownUsage(payload: unknown): TranslationUsage | undefined {
   return { inputTokens: usage.input_tokens, outputTokens: usage.output_tokens }
 }
 
-function parseTranslation(payload: unknown, input: TranslationItem[]) {
+function parseTranslation(payload: unknown, input: TranslationItem[]): TranslationBatchResult {
   const body = object(payload)
   if (body?.stop_reason === 'max_tokens') rejectOutput('translation_output_truncated')
   if (!body || body.type !== 'message' || body.stop_reason !== 'end_turn' || !Array.isArray(body.content) || !body.content.length
@@ -160,26 +170,35 @@ function parseTranslation(payload: unknown, input: TranslationItem[]) {
   catch { rejectOutput('translation_output_json_invalid') }
   const result = object(output)
   if (!result || Object.keys(result).length !== 1 || !Array.isArray(result.items) || result.items.length !== input.length) rejectOutput('translation_items_invalid')
-  const original = new Map(input.map(item => [item.key, item.text])), translated = new Map<string, string>()
+  const original = new Map(input.map(item => [item.key, item.text])), returned = new Map<string, unknown>()
   let characters = 0
+  // Validate the complete response identity before accepting any individual text.
   for (const value of result.items) {
     const item = object(value)
-    if (!item || Object.keys(item).length !== 2 || typeof item.key !== 'string' || typeof item.text !== 'string'
-      || !item.text.trim() || !original.has(item.key) || translated.has(item.key)) rejectOutput('translation_items_invalid')
-    const before = placeholders(original.get(item.key)!), after = placeholders(item.text)
-    if (!after || JSON.stringify(before) !== JSON.stringify(after)) rejectOutput('translation_placeholder_mismatch')
-    characters += item.text.length
-    translated.set(item.key, item.text)
+    if (!item || Object.keys(item).length !== 2 || !Object.hasOwn(item, 'text') || typeof item.key !== 'string'
+      || !original.has(item.key) || returned.has(item.key)) rejectOutput('translation_items_invalid')
+    if (typeof item.text === 'string') characters += item.text.length
+    returned.set(item.key, item.text)
   }
   if (characters > MAX_INPUT_CHARACTERS * 8) rejectOutput('translation_output_too_large')
-  return { items: input.map(item => ({ key: item.key, text: translated.get(item.key)! })), model: TRANSLATION_MODEL,
-    usage }
+  const items: TranslationItem[] = [], rejectedItems: TranslationRejectedItem[] = []
+  for (const item of input) {
+    const text = returned.get(item.key)
+    if (typeof text !== 'string') { rejectedItems.push({ key: item.key, code: 'translation_invalid_text' }); continue }
+    if (!text.trim()) { rejectedItems.push({ key: item.key, code: 'translation_empty_text' }); continue }
+    const before = placeholders(item.text), after = placeholders(text)
+    if (!after || JSON.stringify(before) !== JSON.stringify(after)) {
+      rejectedItems.push({ key: item.key, code: 'translation_placeholder_mismatch' }); continue
+    }
+    items.push({ key: item.key, text })
+  }
+  return { items, ...(rejectedItems.length ? { rejectedItems } : {}), model: TRANSLATION_MODEL, usage }
 }
 
 /** Exactly one POST. Durable send reservation and retry decisions belong to the caller. */
 export async function translateMaskedBatch({ key, locale, items, fetcher = fetch, signal }: {
   key: string; locale: string; items: TranslationItem[]; fetcher?: typeof fetch; signal?: AbortSignal
-}): Promise<{ items: TranslationItem[]; model: string; usage: { inputTokens: number; outputTokens: number } }> {
+}): Promise<TranslationBatchResult> {
   if (!validKey(key)) throw new TranslationProviderError('subscription_key_invalid', 'not_sent')
   validateInput(items, locale)
   if (signal?.aborted) throw new TranslationProviderError('translation_aborted_before_send', 'not_sent')
