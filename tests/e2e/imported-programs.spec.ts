@@ -18,13 +18,17 @@ test('captured imports show source facts, work on mobile and remain distinct fro
   await page.goto('/zh/programs/imported', { waitUntil: 'networkidle' })
   await expect(page.getByRole('heading', { name: '第三方项目目录', exact: true })).toBeVisible()
   await expect(page.getByTestId('imported-program-card')).toHaveCount(result.items.length)
-  await expect(page.getByTestId('imported-program-card').first()).toContainText(result.items[0].fields.duration)
+  if (result.items[0].fields.duration) await expect(page.getByTestId('imported-program-card').first()).toContainText(result.items[0].fields.duration)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true)
 
   await page.getByRole('link', { name: '查看已采集详情', exact: false }).first().click()
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(result.items[0].name)
-  await expect(page.getByRole('heading', { name: '申请要求', exact: true })).toBeVisible()
-  await expect(page.getByRole('heading', { name: '申请材料', exact: true })).toBeVisible()
+  const captured = (await (await request.get(`/api/v1/imported-programs/${result.items[0].id}`)).json()).program
+  for (const [label, key] of [['申请要求', 'requirements'], ['申请材料', 'materials']]) {
+    const heading = page.getByRole('heading', { name: label, exact: true })
+    if (captured.fields[key]) await expect(heading).toBeVisible()
+    else await expect(heading).toHaveCount(0)
+  }
   await expect(page.getByRole('link', { name: '查看来源页面', exact: false })).toHaveAttribute('href', result.items[0].sourceUrl)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true)
 

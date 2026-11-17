@@ -19,7 +19,10 @@ export function publicSourceUrl(value, provider) {
   } catch { return null }
 }
 
-export function buildThirdPartyImport(harvestRoot) {
+export function buildThirdPartyImport(harvestRoot, { cucasCandidateFile = 'candidates.jsonl' } = {}) {
+  if (!/^[a-zA-Z0-9._-]+\.jsonl$/.test(cucasCandidateFile)) throw new Error('Invalid candidate snapshot filename')
+  const candidatePath = join(harvestRoot, 'cucas', cucasCandidateFile)
+  if (cucasCandidateFile !== 'candidates.jsonl' && !existsSync(candidatePath)) throw new Error('Requested candidate snapshot is missing')
   const schools = new Map(), links = new Map(), details = new Map(), rejected = []
   const addSchool = school => {
     const existing = schools.get(school.id)
@@ -45,7 +48,7 @@ export function buildThirdPartyImport(harvestRoot) {
     entry_requirements_text: 'requirements', application_materials_text: 'materials',
     program_description_text: 'description', fee_structure_text: 'fees',
   }
-  for (const row of lines(join(harvestRoot, 'cucas', 'candidates.jsonl'))) {
+  for (const row of lines(candidatePath)) {
     const url = publicSourceUrl(row.sourceUrl, 'CUCAS')
     const name = clean(row.facts?.program_name?.value), schoolName = clean(row.facts?.institution_name?.value)
     const sourceId = url && new URL(url).pathname.match(/-(\d+)\.html$/)?.[1]
@@ -59,18 +62,17 @@ export function buildThirdPartyImport(harvestRoot) {
     }
     const id = `cucas-${sourceId}`, schoolId = `cucas-${new URL(url).hostname.split('.')[0]}`
     addSchool({ id: schoolId, provider: 'CUCAS', sourceId: new URL(url).hostname, name: schoolName })
-    const fields = {}, evidence = {}
+    const fields = {}
     for (const [sourceField, targetField] of Object.entries(fieldNames)) {
       const fact = row.facts?.[sourceField], value = clean(fact?.value)
       if (!value) continue
       // Store only visibly extracted source text. Do not generate missing values or infer years.
       if (!clean(fact.evidence?.text).includes(value)) throw new Error(`Unbound extraction: ${id}/${sourceField}`)
       fields[targetField] = value
-      evidence[targetField] = { selector: clean(fact.evidence?.selector), text: clean(fact.evidence?.text) }
     }
     const record = { id, provider: 'CUCAS', sourceId, schoolId, schoolName, name, sourceUrl: url,
       fetchedAt: row.fetchedAt, status: 'extracted', official: false, admissionYear: null,
-      evidenceHash: row.rawSha256, fields, evidence }
+      evidenceHash: row.rawSha256, fields }
     const previous = details.get(id)
     if (previous && previous.schoolId !== schoolId) throw new Error(`Conflicting source programme identity: ${id}`)
     if (!previous || Date.parse(previous.fetchedAt) <= Date.parse(record.fetchedAt)) details.set(id, record)
@@ -95,6 +97,7 @@ export function buildThirdPartyImport(harvestRoot) {
       linkOnlyCount: rows.length - captured.length, schoolCount: schoolRows.length,
       schoolsWithExtractedDetails: schoolRows.filter(row => row.extractedCount > 0).length,
       officialVerificationPerformed: false, modelCalls: 0,
+      candidateSnapshot: existsSync(candidatePath) ? { provider: 'CUCAS', filename: cucasCandidateFile, bytes: readFileSync(candidatePath).length, sha256: sha256(readFileSync(candidatePath)) } : null,
       interpretation: 'School counts are provider directory identities, not independently verified unique institutions. URL-only records contain slug-derived labels and no admission facts. All extracted facts are third-party source claims.',
       sources: sourceSummary ? [{ provider: 'SICAS', url: sourceSummary.sitemap_receipt.url, sha256: sourceSummary.sitemap_receipt.sha256,
         retrievedAt: sourceSummary.sitemap_receipt.retrieved_at_utc, lastModified: sourceSummary.sitemap_receipt.response_headers['Last-Modified'], sitemapEntries: sourceSummary.sitemap_entry_count }] : [],
@@ -104,8 +107,8 @@ export function buildThirdPartyImport(harvestRoot) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const harvestRoot = resolve(process.argv[2] || ''), destination = resolve(process.argv[3] || 'content/third-party')
-  if (!process.argv[2]) throw new Error('Usage: node scripts/ingestion/import-third-party-programs.mjs <private-harvest-root> [destination]')
-  const result = buildThirdPartyImport(harvestRoot)
+  if (!process.argv[2]) throw new Error('Usage: node scripts/ingestion/import-third-party-programs.mjs <private-harvest-root> [destination] [CUCAS-snapshot-filename]')
+  const result = buildThirdPartyImport(harvestRoot, { cucasCandidateFile: process.argv[4] || 'candidates.jsonl' })
   mkdirSync(destination, { recursive: true })
   for (const [name, value] of Object.entries(result)) writeFileSync(join(destination, `${name}.json`), JSON.stringify(value) + '\n')
   console.log(JSON.stringify({ destination, ...result.manifest, rejected: result.manifest.rejected.length }, null, 2))

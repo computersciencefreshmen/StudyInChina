@@ -45,6 +45,11 @@ export default async function ImportedProgramsPage({ params, searchParams }: {
   const nf = new Intl.NumberFormat(locale)
   // The data layer paginates on the server; this is a final rendering bound.
   const items = result.items.slice(0, 40)
+  const schoolOutsideOptions = Boolean(school) && !result.schools.some(option => option.id === school)
+  // Retain an active filter even when a provider/view change removes it from the available options.
+  const selectedSchoolLabel = schoolOutsideOptions
+    ? queryThirdPartyPrograms({ view: 'links' }).schools.find(option => option.id === school)?.name || school
+    : null
 
   return <>
     <PageHero variant="compact" eyebrow={t.sourceLabel} title={t.title} description={t.intro}
@@ -78,6 +83,11 @@ export default async function ImportedProgramsPage({ params, searchParams }: {
           <span>{t.school}</span>
           <select name="school" defaultValue={school}>
             <option value="">{t.allSchools}</option>
+            {schoolOutsideOptions ? <option value={school}>
+              {locale === 'zh'
+                ? `所选院校：${selectedSchoolLabel}（当前筛选无项目）`
+                : `Selected school: ${selectedSchoolLabel} (no programs match these filters)`}
+            </option> : null}
             {result.schools.map(option => <option key={option.id} value={option.id}>
               {option.name} ({nf.format(view === 'extracted' ? option.extractedCount : option.programCount)})
             </option>)}
