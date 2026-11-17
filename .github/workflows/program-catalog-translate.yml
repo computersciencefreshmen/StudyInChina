@@ -1,0 +1,66 @@
+name: Translate program requirements with the MiniMax subscription
+
+on:
+  schedule:
+    - cron: '8,23,38,53 * * * *'
+  workflow_dispatch:
+    inputs:
+      max_calls:
+        description: Maximum useful model calls in this checkpoint (1-240)
+        type: number
+        required: false
+        default: 120
+      concurrency:
+        description: Concurrent translation requests (1-8)
+        type: number
+        required: false
+        default: 8
+
+permissions:
+  contents: write
+
+# Share the data writer with collection. Both check out the latest feed only
+# after obtaining this lock; no force pushes or competing branch snapshots.
+concurrency:
+  group: program-catalog-feed-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    if: >-
+      github.repository == 'computersciencefreshmen/StudyInChina' &&
+      github.ref == 'refs/heads/main' &&
+      vars.PROGRAM_CATALOG_TRANSLATE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out reviewed translation code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          path: code
+          persist-credentials: false
+      - name: Check out durable program data and translation journals
+        uses: actions/checkout@v6
+        with:
+          ref: catalog-program-feed
+          path: feed
+          fetch-depth: 1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: code/package-lock.json
+      - name: Install locked dependencies without lifecycle scripts
+        working-directory: code
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Translate changed text and publish validated results
+        working-directory: code
+        env:
+          MINIMAX_SUBSCRIPTION_KEY: ${{ secrets.MINIMAX_SUBSCRIPTION_KEY }}
+          MAX_CALLS: ${{ inputs.max_calls || '120' }}
+          MODEL_CONCURRENCY: ${{ inputs.concurrency || '8' }}
+        run: >-
+          node --import tsx scripts/translation/run-program-translations.mjs
+          --execute --feed-dir ../feed --max-minutes 8
+          --max-calls "$MAX_CALLS" --concurrency "$MODEL_CONCURRENCY"
