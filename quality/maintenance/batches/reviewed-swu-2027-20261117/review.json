@@ -1,0 +1,2302 @@
+{
+  "format": "studyinchina.curated-official-programme-review",
+  "version": 1,
+  "reviewedAt": "2026-11-16T17:27:58.801Z",
+  "reviewAfter": "2026-12-17",
+  "reviewerId": "codex-independent-ai-assisted-official-source-audit:swu-2027-core-20261117",
+  "method": "Codex independent AI-assisted official-source audit: original guide and dated fall-2027 notice HTML, exact linked official XLSX cells and merged-cell origins, source hashes and quotation offsets. The original HTML CSCA and annual schedule tables were visually inspected; the workbook preview is explicitly derived, not a native screenshot. User authorized this workflow; this is not a claim of personal human sign-off by Henry.",
+  "baseCommit": "96baa3f84d7c432fdd9793c53d209d0abcab2c79",
+  "inputCatalogSha256": "a717c31acef2f26d112096b50f4a4c8f3e6a3c184688f226e78114d0ca4ee2ec",
+  "outputCatalogSha256": "39982894c1701072b8288ef879fe867dca994c4708aed2ffc209390234d1eec5",
+  "privateProofSha256": "10122587f0f4d0df63d9d522836b392b79ed4351716a8d241925823bf35eaa8e",
+  "privateProofHashBasis": "candidate-proof.json original UTF-8 file bytes",
+  "universityId": "uni-southwest-university",
+  "academicYear": "2027-2028",
+  "academicYearRangeExplicitlyPublished": true,
+  "teachingLanguage": "Chinese",
+  "applicationRound": "self-funded",
+  "intake": "autumn",
+  "sources": [
+    {
+      "id": "src-reviewed-swu-2027-bachelor-guide-cn",
+      "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+      "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+      "accessedAt": "2026-11-16T17:12:52.540215+00:00",
+      "parser": "python-htmlparser-readable-whitespace-v1"
+    },
+    {
+      "id": "src-reviewed-swu-2027-fall-notice",
+      "url": "https://gjxy.swu.edu.cn/info/1003/5363.htm",
+      "rawSha256": "3a97547c27beae684963bb7d2458a8d47168fc8c887a59e160832060e68de6fb",
+      "accessedAt": "2026-11-16T17:12:52.540215+00:00",
+      "parser": "python-htmlparser-readable-whitespace-v1"
+    },
+    {
+      "id": "src-reviewed-swu-2027-chinese-bachelor-majors",
+      "url": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+      "rawSha256": "0de669df1bcbc5ee26d48a88744ded16250935170a09b61b79ac7bdbd34251df",
+      "accessedAt": "2026-11-16T17:12:52.540215+00:00",
+      "parser": "xlsx-zip-xml-exact-cell-values-and-merged-origin-v1"
+    }
+  ],
+  "sourceChain": {
+    "bachelorGuideUrl": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+    "fall2027NoticeUrl": "https://gjxy.swu.edu.cn/info/1003/5363.htm",
+    "chineseMajorCatalogueUrl": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+    "exactCatalogueAnchor": {
+      "attributes": {
+        "href": "../2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+        "target": "_self"
+      },
+      "text": "2027-2028年度西南大学本科招生专业列表（汉语授课）.xlsx"
+    },
+    "portalAnchor": {
+      "attributes": {
+        "href": "https://swu.17gz.org/",
+        "style": "font-family: arial, helvetica, sans-serif; text-decoration: underline;"
+      },
+      "text": "https://swu.17gz.org"
+    },
+    "linkedOfficialApplicationPortal": "https://swu.17gz.org/",
+    "workbookYearCell": {
+      "cell": "A1",
+      "value": "2027-2028学年度西南大学本科招生专业列表"
+    },
+    "sameCatalogueContainsTuition": true,
+    "programmeCatalogueUrl": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx"
+  },
+  "programmeRows": [
+    {
+      "verifiedName": {
+        "zh": "动物科学"
+      },
+      "school": {
+        "zh": "动物科学技术学院"
+      },
+      "disciplineLabel": "农学",
+      "degreeLevel": "bachelor",
+      "degreeLabel": "本科",
+      "officialRowNumber": 9,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分",
+          "level": 4,
+          "minimumScore": 200
+        }
+      ],
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "cscaSubjects": [
+        "中文",
+        "数学",
+        "物理",
+        "化学"
+      ],
+      "professionalChineseDirectionNotSpecified": true,
+      "xlsxEvidence": {
+        "sourceName": "chinese-majors",
+        "url": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+        "rawSha256": "0de669df1bcbc5ee26d48a88744ded16250935170a09b61b79ac7bdbd34251df",
+        "sheet": "Sheet1",
+        "range": "A11:H11",
+        "yearCell": "A1",
+        "exactCells": [
+          {
+            "cell": "A11",
+            "value": "9"
+          },
+          {
+            "cell": "B11",
+            "value": "动物科学技术学院"
+          },
+          {
+            "cell": "C11",
+            "value": "本科"
+          },
+          {
+            "cell": "D11",
+            "value": "农学"
+          },
+          {
+            "cell": "E11",
+            "value": "动物科学"
+          },
+          {
+            "cell": "F11",
+            "value": "HSK4级200分"
+          },
+          {
+            "cell": "G11",
+            "value": "4"
+          },
+          {
+            "cell": "H11",
+            "value": "20000"
+          }
+        ],
+        "facultyOriginCell": "B11",
+        "facultyMergedRange": null,
+        "sourceId": "src-reviewed-swu-2027-chinese-bachelor-majors"
+      },
+      "existingExactIds": [],
+      "identityAction": "reviewed-new"
+    },
+    {
+      "verifiedName": {
+        "zh": "园艺"
+      },
+      "school": {
+        "zh": "园艺园林学院"
+      },
+      "disciplineLabel": "农学",
+      "degreeLevel": "bachelor",
+      "degreeLabel": "本科",
+      "officialRowNumber": 34,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分",
+          "level": 4,
+          "minimumScore": 200
+        }
+      ],
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "cscaSubjects": [
+        "中文",
+        "数学",
+        "物理",
+        "化学"
+      ],
+      "professionalChineseDirectionNotSpecified": true,
+      "xlsxEvidence": {
+        "sourceName": "chinese-majors",
+        "url": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+        "rawSha256": "0de669df1bcbc5ee26d48a88744ded16250935170a09b61b79ac7bdbd34251df",
+        "sheet": "Sheet1",
+        "range": "A36:H36",
+        "yearCell": "A1",
+        "exactCells": [
+          {
+            "cell": "A36",
+            "value": "34"
+          },
+          {
+            "cell": "B36",
+            "value": "园艺园林学院"
+          },
+          {
+            "cell": "C36",
+            "value": "本科"
+          },
+          {
+            "cell": "D36",
+            "value": "农学"
+          },
+          {
+            "cell": "E36",
+            "value": "园艺"
+          },
+          {
+            "cell": "F36",
+            "value": "HSK4级200分"
+          },
+          {
+            "cell": "G36",
+            "value": "4"
+          },
+          {
+            "cell": "H36",
+            "value": "20000"
+          }
+        ],
+        "facultyOriginCell": "B36",
+        "facultyMergedRange": "B36:B38",
+        "sourceId": "src-reviewed-swu-2027-chinese-bachelor-majors"
+      },
+      "existingExactIds": [],
+      "identityAction": "reviewed-new"
+    },
+    {
+      "verifiedName": {
+        "zh": "园林"
+      },
+      "school": {
+        "zh": "园艺园林学院"
+      },
+      "disciplineLabel": "农学",
+      "degreeLevel": "bachelor",
+      "degreeLabel": "本科",
+      "officialRowNumber": 35,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分",
+          "level": 4,
+          "minimumScore": 200
+        }
+      ],
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "cscaSubjects": [
+        "中文",
+        "数学",
+        "物理",
+        "化学"
+      ],
+      "professionalChineseDirectionNotSpecified": true,
+      "xlsxEvidence": {
+        "sourceName": "chinese-majors",
+        "url": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+        "rawSha256": "0de669df1bcbc5ee26d48a88744ded16250935170a09b61b79ac7bdbd34251df",
+        "sheet": "Sheet1",
+        "range": "A37:H37",
+        "yearCell": "A1",
+        "exactCells": [
+          {
+            "cell": "A37",
+            "value": "35"
+          },
+          {
+            "cell": "B37",
+            "value": ""
+          },
+          {
+            "cell": "C37",
+            "value": "本科"
+          },
+          {
+            "cell": "D37",
+            "value": "农学"
+          },
+          {
+            "cell": "E37",
+            "value": "园林"
+          },
+          {
+            "cell": "F37",
+            "value": "HSK4级200分"
+          },
+          {
+            "cell": "G37",
+            "value": "4"
+          },
+          {
+            "cell": "H37",
+            "value": "20000"
+          }
+        ],
+        "facultyOriginCell": "B36",
+        "facultyMergedRange": "B36:B38",
+        "sourceId": "src-reviewed-swu-2027-chinese-bachelor-majors"
+      },
+      "existingExactIds": [],
+      "identityAction": "reviewed-new"
+    },
+    {
+      "verifiedName": {
+        "zh": "风景园林"
+      },
+      "school": {
+        "zh": "园艺园林学院"
+      },
+      "disciplineLabel": "工学",
+      "degreeLevel": "bachelor",
+      "degreeLabel": "本科",
+      "officialRowNumber": 36,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分",
+          "level": 4,
+          "minimumScore": 200
+        }
+      ],
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "cscaSubjects": [
+        "中文",
+        "数学",
+        "物理",
+        "化学"
+      ],
+      "professionalChineseDirectionNotSpecified": true,
+      "xlsxEvidence": {
+        "sourceName": "chinese-majors",
+        "url": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+        "rawSha256": "0de669df1bcbc5ee26d48a88744ded16250935170a09b61b79ac7bdbd34251df",
+        "sheet": "Sheet1",
+        "range": "A38:H38",
+        "yearCell": "A1",
+        "exactCells": [
+          {
+            "cell": "A38",
+            "value": "36"
+          },
+          {
+            "cell": "B38",
+            "value": ""
+          },
+          {
+            "cell": "C38",
+            "value": "本科"
+          },
+          {
+            "cell": "D38",
+            "value": "工学"
+          },
+          {
+            "cell": "E38",
+            "value": "风景园林"
+          },
+          {
+            "cell": "F38",
+            "value": "HSK4级200分"
+          },
+          {
+            "cell": "G38",
+            "value": "4"
+          },
+          {
+            "cell": "H38",
+            "value": "20000"
+          }
+        ],
+        "facultyOriginCell": "B36",
+        "facultyMergedRange": "B36:B38",
+        "sourceId": "src-reviewed-swu-2027-chinese-bachelor-majors"
+      },
+      "existingExactIds": [],
+      "identityAction": "reviewed-new"
+    },
+    {
+      "verifiedName": {
+        "zh": "水产养殖学"
+      },
+      "school": {
+        "zh": "水产学院"
+      },
+      "disciplineLabel": "农学",
+      "degreeLevel": "bachelor",
+      "degreeLabel": "本科",
+      "officialRowNumber": 43,
+      "officialProgramCode": null,
+      "officialProgramCodeNotPublished": true,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分",
+          "level": 4,
+          "minimumScore": 200
+        }
+      ],
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "cscaSubjects": [
+        "中文",
+        "数学",
+        "物理",
+        "化学"
+      ],
+      "professionalChineseDirectionNotSpecified": true,
+      "xlsxEvidence": {
+        "sourceName": "chinese-majors",
+        "url": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+        "rawSha256": "0de669df1bcbc5ee26d48a88744ded16250935170a09b61b79ac7bdbd34251df",
+        "sheet": "Sheet1",
+        "range": "A45:H45",
+        "yearCell": "A1",
+        "exactCells": [
+          {
+            "cell": "A45",
+            "value": "43"
+          },
+          {
+            "cell": "B45",
+            "value": "水产学院"
+          },
+          {
+            "cell": "C45",
+            "value": "本科"
+          },
+          {
+            "cell": "D45",
+            "value": "农学"
+          },
+          {
+            "cell": "E45",
+            "value": "水产养殖学"
+          },
+          {
+            "cell": "F45",
+            "value": "HSK4级200分"
+          },
+          {
+            "cell": "G45",
+            "value": "4"
+          },
+          {
+            "cell": "H45",
+            "value": "20000"
+          }
+        ],
+        "facultyOriginCell": "B45",
+        "facultyMergedRange": null,
+        "sourceId": "src-reviewed-swu-2027-chinese-bachelor-majors"
+      },
+      "existingExactIds": [],
+      "identityAction": "reviewed-new"
+    }
+  ],
+  "commonPolicy": {
+    "degreeLevel": "bachelor",
+    "academicYear": "2027-2028",
+    "intake": "autumn",
+    "teachingLanguage": "Chinese",
+    "applicationRound": "self-funded",
+    "opensOn": "2027-01-01",
+    "closesOn": "2027-06-15",
+    "dateStatus": "published",
+    "timeZoneExplicitlyStated": false,
+    "applicationStateOn20261117": "upcoming",
+    "applyUrl": "https://swu.17gz.org/",
+    "applicationFeeCny": 500,
+    "applicationFeeRefundable": false,
+    "eligibility": {
+      "nationality": "非中国籍",
+      "health": "身心健康",
+      "qualification": "高中及以上毕业证书",
+      "ageMinimumInclusive": 17,
+      "ageMaximumExclusive": 30,
+      "ageReferenceDate": "2027-09-01",
+      "passport": "普通护照，以入学年份9月1日为准，有效期1年以上",
+      "guardian": "入学年份9月1日未满18岁须提供监护人保证书"
+    },
+    "languageMinimumForSelectedMajors": "HSK4级200分，成绩须有效；不可把CSCA专业中文免考条件HSK4级180分误作入学语言门槛",
+    "priorDegreeMoirule": "无语言证书可提供上一学位授课语言证明；保留原文供审核，不据此宣称无条件豁免",
+    "cscaSubjectsForSelectedAgricultureEngineeringMajors": [
+      "中文",
+      "数学",
+      "物理",
+      "化学"
+    ],
+    "cscaConditionalProfessionalChineseExemption": "提供有效期内HSK4级180分以上成绩报告者，可免专业中文；不免数学、物理、化学，亦不降低所选专业HSK200要求",
+    "cscaProfessionalChineseDirectionNotSpecified": true,
+    "tuitionCny": 20000,
+    "tuitionPeriod": "academic-year",
+    "scholarshipTermsImported": false,
+    "commonEligibility": [
+      {
+        "zh": "非中国籍公民，身心健康。"
+      },
+      {
+        "zh": "以2027年9月1日为准，年龄17周岁及以上、未满30周岁。"
+      },
+      {
+        "zh": "拥有高中及以上毕业证书；即将毕业者按官方申请材料要求提供所在学校的预毕业证明。"
+      },
+      {
+        "zh": "普通护照以2027年9月1日为准须有1年以上有效期；需要更换护照者应在申请前完成，申请后请勿擅自更换。"
+      },
+      {
+        "zh": "以2027年9月1日为准，未满18周岁者须提交未成年留学生监护人保证书。"
+      },
+      {
+        "zh": "须提交CSCA成绩单；本中文授课农学或工学专业的考试科目为中文、数学、物理、化学。数学、物理、化学试卷语言按授课语言要求选择；官方未细分中文测试的文科或理科方向。"
+      },
+      {
+        "zh": "持有效期内HSK四级180分及以上成绩报告者，可按指南免考CSCA专业中文；该条件不免数学、物理、化学，也不替代本专业入学HSK四级200分要求。"
+      },
+      {
+        "zh": "指南允许无语言证书者提供上一学历授课语言证明，材料须经校方审核；不据此推定无条件豁免本专业语言要求。"
+      }
+    ],
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+      }
+    ],
+    "allEvidence": [
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "1.非中国籍公民，身心健康；",
+        "quoteSha256": "57852b64c575c72dbd47fe171b74788d209555d6f17c6fb3cf5931bfc03f3291",
+        "locator": "text:offset:643:657",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 643,
+          "end": 657
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "2.年龄17周岁以上，30周岁以下（以入学年份9月1日为准）；",
+        "quoteSha256": "42da7ba20e190e8ee60f86b7d5002f08bec81efc2fb162b3ac77f13417a25edb",
+        "locator": "text:offset:716:747",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 716,
+          "end": 747
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "Aged 17 years or above and under 30 years of age (Based on the year of September 1st).",
+        "quoteSha256": "408c1b73295c6a65e874aa5979d5f98327cb9c45f6d4647320e80119c97976e5",
+        "locator": "text:offset:748:834",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 748,
+          "end": 834
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "3.拥有高中及以上毕业证书；",
+        "quoteSha256": "e2956335a2b9715badd87a789ba7e5e1e69302882d9bfef1d6ac583eb14e0eed",
+        "locator": "text:offset:835:849",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 835,
+          "end": 849
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "4.HSK 4级200以上（在有效期内）或托福80，单科不得低于20/ 雅思6.0，单科不得低于5.5/多邻国115，单科不低于115；",
+        "quoteSha256": "e78b105dbfe4c385203cdeb570c4fdcb09dabe65739169c06393906f7b9d3d6a",
+        "locator": "text:offset:896:964",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 896,
+          "end": 964
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "5.需提供“来华留学本科入学学业水平测试”（China Scholastic Competency Assessment, 简称“CSCA测试”）成绩单。CSCA具体介绍及报名方式请登录官方网站（https://csca.cn/home）查看。",
+        "quoteSha256": "a73b2446aad57240815f9108f67a917cecd14cf9909f068bbb9b2585bb9f315b",
+        "locator": "text:offset:1151:1273",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1151,
+          "end": 1273
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "1.申请人如能提供有效期内HSK四级180分以上成绩报告，可免考专业中文。",
+        "quoteSha256": "31be1d363d8f9f519d5a8a01f5164c6f4867954ee8ce9e93e91ebb22ed60deea",
+        "locator": "text:offset:1655:1692",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1655,
+          "end": 1692
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "2.数学、物理、化学均提供中英文试卷，申请人可根据授课语言要求选择试卷语种。Examinations for Mathematics, Physics and Chemistry are offered in Chinese and English. Applicants can select the paper language as required by the medium of instruction.",
+        "quoteSha256": "f465e1a35c4a6a01cb43c32a33b9cb8653ee4d00059f5d65a2ce75e5745df46e",
+        "locator": "text:offset:1832:2040",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 1832,
+          "end": 2040
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "二、标准学习期限：4年",
+        "quoteSha256": "5ec16f3cc9577568dfaa33cc4ba492bf62b2913495aa094a71b6bfc0580e8417",
+        "locator": "text:offset:2244:2255",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2244,
+          "end": 2255
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "申请开始时间：每年1月1日",
+        "quoteSha256": "9631ebf0ed57dbe158c5bd097fbb664f9d278cdcb62f69e75a169d824ca51906",
+        "locator": "text:offset:2314:2327",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2314,
+          "end": 2327
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "申请截止时间：每年6月15日",
+        "quoteSha256": "40c7d6cf947aac8d598f27394178a6388d6f6710215c5d2a91c769e9db198458",
+        "locator": "text:offset:2363:2377",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2363,
+          "end": 2377
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "入学时间：每年9月初",
+        "quoteSha256": "e47a19c8ffedfc088cfe36b466df4960cc6cd51af6971f8e968c1a64ded94b9e",
+        "locator": "text:offset:2408:2418",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2408,
+          "end": 2418
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "2027-2028年度西南大学本科招生专业列表（汉语授课）.xlsx",
+        "quoteSha256": "1462db9dda6f5c1f464511c0d7e58ef92abc1c2e5c3ea1be54db4ab966270fb0",
+        "locator": "text:offset:2517:2551",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2517,
+          "end": 2551
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "4.语言水平证明材料：申请人必须提供HSK、TOEFL-ibt、IELTS、多领国等语言水平证书，以证明其语言能力符合日常和学术的要求，若无，请提供上一级学位用何种语言教学的证明；",
+        "quoteSha256": "f6ba2cd6bd4f87b3a565a1720ce4f997882942651447ee66f1eb59eac1c804ae",
+        "locator": "text:offset:3516:3606",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 3516,
+          "end": 3606
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "8.有效期1年以上的普通护照（以入学年份9月1日为准）。注：（1）如你计划更换护照，请在申请前完成，并取得新护照。（2）除此之外，请勿更换护照。否则影响办理签证及后续入校报道。",
+        "quoteSha256": "7a203834e3d3650c91909c4c754c3ba489f705f1a4ae0dcd852fd87a878ddd1f",
+        "locator": "text:offset:4080:4168",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 4080,
+          "end": 4168
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "9.18岁以下请提供《未成年留学生监护人保证书》（以入学年份9月1日为准）。",
+        "quoteSha256": "d0b3be78af5f69efdd0ff080dbbff5ce3dd8fd9e5add2009fe74fa08c0d6a785",
+        "locator": "text:offset:4508:4546",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 4508,
+          "end": 4546
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "（1）登陆在线申请网站https://swu.17gz.org完成注册；",
+        "quoteSha256": "04da88aa1753f62a3eb8390ec19532ca312062b180ba192c2b79f873eb8a922e",
+        "locator": "text:offset:5070:5106",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 5070,
+          "end": 5106
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "textSha256": "8dcd8aff4bd8bf3ef0565930612f5bdb99eb426ef3461743a2e3b6deefc4d5d3",
+        "quote": "1.申请费:500元/人（该费用不予退还）",
+        "quoteSha256": "48d14dd60609e98f9206a14a136e1f0f5869f04f8c8e01fd947dcbd0d4a280c4",
+        "locator": "text:offset:7366:7387",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 7366,
+          "end": 7387
+        },
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      },
+      {
+        "sourceName": "fall-2027-notice",
+        "url": "https://gjxy.swu.edu.cn/info/1003/5363.htm",
+        "rawSha256": "3a97547c27beae684963bb7d2458a8d47168fc8c887a59e160832060e68de6fb",
+        "textSha256": "ea7c2ba7194630107768013cd2a5be7cc5cfbb04a8c014be7375381e66221240",
+        "quote": "2027年秋季学期国际学生招生通告",
+        "quoteSha256": "121dc377ef6ccde08215912a6cd2fb258d0b8734779e1549045e82ceaad7ba02",
+        "locator": "text:offset:2:19",
+        "rangeUnit": "Unicode_code_points",
+        "range": {
+          "start": 2,
+          "end": 19
+        },
+        "sourceId": "src-reviewed-swu-2027-fall-notice"
+      },
+      {
+        "sourceName": "fall-2027-notice",
+        "url": "https://gjxy.swu.edu.cn/info/1003/5363.htm",
+        "rawSha256": "3a97547c27beae684963bb7d2458a8d47168fc8c887a59e160832060e68de6fb",
+        "locator": "html:table[1]/tbody/tr[5] (parser tr index 4)",
+        "exactCells": [
+          {
+            "attributes": {
+              "width": "353",
+              "valign": "middle"
+            },
+            "text": "自费Self-Sponsored"
+          },
+          {
+            "attributes": {
+              "width": "193.66666666666666",
+              "valign": "middle"
+            },
+            "text": "2027年1月1日01-Jan-2027"
+          },
+          {
+            "attributes": {
+              "width": "226.66666666666666",
+              "valign": "middle"
+            },
+            "text": "2027年6月15日15-Jun-2027"
+          }
+        ],
+        "quote": "自费Self-Sponsored | 2027年1月1日01-Jan-2027 | 2027年6月15日15-Jun-2027",
+        "quoteSha256": "79bea7dae2b12ca7175af09301e05d9ce9894c3605321a7c5e0a31bc03f3561a",
+        "sourceId": "src-reviewed-swu-2027-fall-notice"
+      },
+      {
+        "sourceName": "bachelor-guide",
+        "url": "https://gjxy.swu.edu.cn/zsxx/bks.htm",
+        "rawSha256": "ab2174be02e72364a23e884a8d351c8a3b080920df192d64d38cac5b7882b3a7",
+        "locator": "html:CSCA table tr[4] (parser tr index 3), note inherited from tr[2]/td[4] rowspan=4",
+        "exactCells": [
+          {
+            "attributes": {
+              "width": "202",
+              "rowspan": "2",
+              "valign": "middle",
+              "style": "border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51); word-break: break-all;"
+            },
+            "text": "理学、医学农学、工学、Science,Medical,Agricultural,Engineering,"
+          },
+          {
+            "attributes": {
+              "width": "153.66666666666666",
+              "valign": "middle",
+              "style": "border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);"
+            },
+            "text": "汉语Chinese"
+          },
+          {
+            "attributes": {
+              "width": "214.66666666666666",
+              "valign": "middle",
+              "style": "border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);"
+            },
+            "text": "中文、数学、物理、化学Chinese Language,Mathematics,Physics,Chemistry"
+          }
+        ],
+        "inheritedNote": {
+          "attributes": {
+            "width": "336.6666666666667",
+            "rowspan": "4",
+            "valign": "middle",
+            "style": "border-width: 1px; border-style: solid; border-color: rgb(51, 51, 51);"
+          },
+          "text": "1.申请人如能提供有效期内HSK四级180分以上成绩报告，可免考专业中文。Applicants who provide a valid HSK Level 4 score report with 180 points or above may be exempt from the major-related Chinese examination.2.数学、物理、化学均提供中英文试卷，申请人可根据授课语言要求选择试卷语种。Examinations for Mathematics, Physics and Chemistry are offered in Chinese and English. Applicants can select the paper language as required by the medium of instruction."
+        },
+        "quote": "理学、医学农学、工学、Science,Medical,Agricultural,Engineering, | 汉语Chinese | 中文、数学、物理、化学Chinese Language,Mathematics,Physics,Chemistry",
+        "quoteSha256": "bc6cb0ace2e5f0e776854b2079cb700bfe5f6b83f8c1be04d1ef0e7ce4c54d15",
+        "sourceId": "src-reviewed-swu-2027-bachelor-guide-cn"
+      }
+    ]
+  },
+  "visualReview": {
+    "method": "Original saved bachelor-guide and fall-2027-notice HTML rendered locally in headless Edge with all external requests blocked. Original CSCA merged note and self-funded annual row visually inspected. Workbook rows verified through exact OOXML cells and merged-cell origin resolution; the cell preview is explicitly derived, not a native Excel screenshot.",
+    "reviewer": "Codex AI-assisted source/tool/visual review; no Henry personal human sign-off claimed",
+    "files": [
+      {
+        "file": "original-csca-table.png",
+        "kind": "original HTML render",
+        "sha256": "23ec3f2aca1c8dee222b74d4dab5ea3982f0325453dfc8f3b2fca03237db847f"
+      },
+      {
+        "file": "original-2027-schedule.png",
+        "kind": "original HTML render",
+        "sha256": "575ba2ad03a345a45898a7b179af932a6a169b32d1f71c25106d4cdfb8b74ac5"
+      },
+      {
+        "file": "derived-cell-preview.png",
+        "kind": "derived exact-cell preview, not native workbook screenshot",
+        "sha256": "7cd27f46f89193f1d6216bdb9b1ddb04ee6e0e540a965ea45e99131e0257da66"
+      }
+    ]
+  },
+  "identityDedupe": [
+    {
+      "catalogue": "snapshot",
+      "totalProgrammes": 2302,
+      "rawProgrammeFileSha256": "387339f9c655ba017d537c2ba92c27f03825c2ded6073394319991ea27d93f1d",
+      "university": {
+        "sourceIds": [
+          "src-uni-southwest-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2027-01-16",
+        "status": "verified",
+        "id": "uni-southwest-university",
+        "slug": "southwest-university",
+        "name": {
+          "en": "Southwest University",
+          "zh": "西南大学",
+          "ru": "Юго-Западный университет"
+        },
+        "cityId": "city-chongqing",
+        "region": "southwest",
+        "officialUrl": "https://www.swu.edu.cn/",
+        "admissionsUrl": "https://admissions.swu.edu.cn/",
+        "summary": {
+          "en": "Southwest University is based in Chongqing and is known for education, agriculture and environmental science.",
+          "zh": "西南大学位于重庆，以教育、农业与环境科学等领域见长。",
+          "ru": "Юго-Западный университет находится в городе Чунцин; сильные направления: образование, сельское хозяйство и экология."
+        },
+        "featured": false
+      },
+      "existingProgrammeCount": 9,
+      "existingProgrammes": [
+        {
+          "id": "program-southwest-university-education-bachelor",
+          "name": {
+            "en": "Education",
+            "zh": "教育学",
+            "ru": "Педагогика"
+          },
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm"
+        },
+        {
+          "id": "program-southwest-university-environmental-science-master",
+          "name": {
+            "en": "Environmental Science",
+            "zh": "环境科学",
+            "ru": "Экология"
+          },
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese",
+            "English"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm"
+        },
+        {
+          "id": "program-southwest-university-chinese-language-program-language",
+          "name": {
+            "en": "Chinese Language Program",
+            "zh": "汉语进修项目",
+            "ru": "Программа китайского языка"
+          },
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "To be confirmed"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/"
+        },
+        {
+          "id": "prog-gap-clw-sw-swu-icl-bachelor",
+          "name": {
+            "en": "Bachelor of International Chinese Language Education",
+            "zh": "国际中文教育本科",
+            "ru": "Бакалавриат по международному преподаванию китайского языка"
+          },
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://gjxy.swu.edu.cn/jxj/gjzwjsjxj.htm"
+        },
+        {
+          "id": "prog-gap-confirmed-swu-chinese-language-training",
+          "name": {
+            "en": "Chinese Language Training Program",
+            "zh": "汉语培训项目",
+            "ru": "Программа обучения китайскому языку"
+          },
+          "degreeLevel": "language",
+          "teachingLanguages": [],
+          "programUrl": "https://admissions.swu.edu.cn/info/1048/1051.htm"
+        },
+        {
+          "id": "prog-gap-wave5-west-swu-comparative-education-doctorate-english",
+          "name": {
+            "en": "Comparative Education (English-taught PhD)",
+            "zh": "比较教育学（英文授课博士）",
+            "ru": "Сравнительное образование (докторантура на английском языке)"
+          },
+          "degreeLevel": "doctorate",
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm"
+        },
+        {
+          "id": "prog-gap-wave5-west-swu-educational-technology-master-english",
+          "name": {
+            "en": "Educational Technology (English-taught Master)",
+            "zh": "教育技术学（英文授课硕士）",
+            "ru": "Образовательные технологии (магистратура на английском языке)"
+          },
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm"
+        },
+        {
+          "id": "prog-gap-clw-sw-swu-icl-master",
+          "name": {
+            "en": "Master of International Chinese Language Education",
+            "zh": "国际中文教育硕士",
+            "ru": "Магистратура по международному преподаванию китайского языка"
+          },
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://gjxy.swu.edu.cn/jxj/gjzwjsjxj.htm"
+        },
+        {
+          "id": "prog-gap-wave5-west-swu-teacher-education-master-english",
+          "name": {
+            "en": "Teacher Education (English-taught Master)",
+            "zh": "教师教育学（英文授课硕士）",
+            "ru": "Педагогическое образование (магистратура на английском языке)"
+          },
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm"
+        }
+      ],
+      "exactIdentityMatches": [
+        {
+          "verifiedName": {
+            "zh": "动物科学"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "园艺"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "园林"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "风景园林"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "水产养殖学"
+          },
+          "existingExactIds": []
+        }
+      ]
+    },
+    {
+      "catalogue": "SIC-nwafu-reviewed-2027",
+      "totalProgrammes": 2312,
+      "rawProgrammeFileSha256": "afe1e57b4e1551cf93513f66390865ee04a7833092751ff7fe09bdc0dbf91e61",
+      "university": {
+        "sourceIds": [
+          "src-uni-southwest-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2027-01-16",
+        "status": "verified",
+        "id": "uni-southwest-university",
+        "slug": "southwest-university",
+        "name": {
+          "en": "Southwest University",
+          "zh": "西南大学",
+          "ru": "Юго-Западный университет"
+        },
+        "cityId": "city-chongqing",
+        "region": "southwest",
+        "officialUrl": "https://www.swu.edu.cn/",
+        "admissionsUrl": "https://admissions.swu.edu.cn/",
+        "summary": {
+          "en": "Southwest University is based in Chongqing and is known for education, agriculture and environmental science.",
+          "zh": "西南大学位于重庆，以教育、农业与环境科学等领域见长。",
+          "ru": "Юго-Западный университет находится в городе Чунцин; сильные направления: образование, сельское хозяйство и экология."
+        },
+        "featured": false
+      },
+      "existingProgrammeCount": 9,
+      "existingProgrammes": [
+        {
+          "id": "program-southwest-university-education-bachelor",
+          "name": {
+            "en": "Education",
+            "zh": "教育学",
+            "ru": "Педагогика"
+          },
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm"
+        },
+        {
+          "id": "program-southwest-university-environmental-science-master",
+          "name": {
+            "en": "Environmental Science",
+            "zh": "环境科学",
+            "ru": "Экология"
+          },
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese",
+            "English"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm"
+        },
+        {
+          "id": "program-southwest-university-chinese-language-program-language",
+          "name": {
+            "en": "Chinese Language Program",
+            "zh": "汉语进修项目",
+            "ru": "Программа китайского языка"
+          },
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "To be confirmed"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/"
+        },
+        {
+          "id": "prog-gap-clw-sw-swu-icl-bachelor",
+          "name": {
+            "en": "Bachelor of International Chinese Language Education",
+            "zh": "国际中文教育本科",
+            "ru": "Бакалавриат по международному преподаванию китайского языка"
+          },
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://gjxy.swu.edu.cn/jxj/gjzwjsjxj.htm"
+        },
+        {
+          "id": "prog-gap-confirmed-swu-chinese-language-training",
+          "name": {
+            "en": "Chinese Language Training Program",
+            "zh": "汉语培训项目",
+            "ru": "Программа обучения китайскому языку"
+          },
+          "degreeLevel": "language",
+          "teachingLanguages": [],
+          "programUrl": "https://admissions.swu.edu.cn/info/1048/1051.htm"
+        },
+        {
+          "id": "prog-gap-wave5-west-swu-comparative-education-doctorate-english",
+          "name": {
+            "en": "Comparative Education (English-taught PhD)",
+            "zh": "比较教育学（英文授课博士）",
+            "ru": "Сравнительное образование (докторантура на английском языке)"
+          },
+          "degreeLevel": "doctorate",
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm"
+        },
+        {
+          "id": "prog-gap-wave5-west-swu-educational-technology-master-english",
+          "name": {
+            "en": "Educational Technology (English-taught Master)",
+            "zh": "教育技术学（英文授课硕士）",
+            "ru": "Образовательные технологии (магистратура на английском языке)"
+          },
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm"
+        },
+        {
+          "id": "prog-gap-clw-sw-swu-icl-master",
+          "name": {
+            "en": "Master of International Chinese Language Education",
+            "zh": "国际中文教育硕士",
+            "ru": "Магистратура по международному преподаванию китайского языка"
+          },
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "programUrl": "https://gjxy.swu.edu.cn/jxj/gjzwjsjxj.htm"
+        },
+        {
+          "id": "prog-gap-wave5-west-swu-teacher-education-master-english",
+          "name": {
+            "en": "Teacher Education (English-taught Master)",
+            "zh": "教师教育学（英文授课硕士）",
+            "ru": "Педагогическое образование (магистратура на английском языке)"
+          },
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm"
+        }
+      ],
+      "exactIdentityMatches": [
+        {
+          "verifiedName": {
+            "zh": "动物科学"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "园艺"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "园林"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "风景园林"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "水产养殖学"
+          },
+          "existingExactIds": []
+        }
+      ]
+    },
+    {
+      "catalogue": "actual-baseline-96baa3f8",
+      "totalProgrammes": 2347,
+      "existingProgrammeCount": 9,
+      "existingProgrammes": [
+        {
+          "sourceIds": [
+            "src-uni-southwest-university",
+            "swu-education-live"
+          ],
+          "verifiedAt": "2026-08-26",
+          "reviewAfter": "2026-09-25",
+          "status": "stale",
+          "id": "program-southwest-university-education-bachelor",
+          "slug": "southwest-university-education-bachelor",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Education",
+            "zh": "教育学",
+            "ru": "Педагогика"
+          },
+          "degreeLevel": "bachelor",
+          "discipline": "chinese-education",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 48,
+          "durationMonthsMax": null,
+          "programUrl": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm",
+          "applyUrl": "https://swu.17gz.org/member/login.do",
+          "languageRequirements": [],
+          "verificationScope": "facts"
+        },
+        {
+          "sourceIds": [
+            "src-uni-southwest-university",
+            "swu-engineering-live"
+          ],
+          "verifiedAt": "2026-08-26",
+          "reviewAfter": "2026-09-25",
+          "status": "stale",
+          "id": "program-southwest-university-environmental-science-master",
+          "slug": "southwest-university-environmental-science-master",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Environmental Science",
+            "zh": "环境科学",
+            "ru": "Экология"
+          },
+          "degreeLevel": "master",
+          "discipline": "science",
+          "teachingLanguages": [
+            "Chinese",
+            "English"
+          ],
+          "durationMonths": 36,
+          "durationMonthsMax": null,
+          "programUrl": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm",
+          "applyUrl": "https://swu.17gz.org/member/login.do",
+          "languageRequirements": [],
+          "verificationScope": "facts"
+        },
+        {
+          "sourceIds": [
+            "src-uni-southwest-university"
+          ],
+          "verifiedAt": "2026-07-16",
+          "reviewAfter": "2026-10-01",
+          "status": "draft",
+          "id": "program-southwest-university-chinese-language-program-language",
+          "slug": "southwest-university-chinese-language-program-language",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Chinese Language Program",
+            "zh": "汉语进修项目",
+            "ru": "Программа китайского языка"
+          },
+          "degreeLevel": "language",
+          "discipline": "chinese-education",
+          "teachingLanguages": [
+            "To be confirmed"
+          ],
+          "durationMonths": null,
+          "programUrl": "https://admissions.swu.edu.cn/",
+          "applyUrl": "https://admissions.swu.edu.cn/",
+          "languageRequirements": []
+        },
+        {
+          "sourceIds": [
+            "src-gap-program-clw-sw-swu-icl-bachelor"
+          ],
+          "verifiedAt": "2026-08-02",
+          "reviewAfter": "2026-09-01",
+          "status": "stale",
+          "id": "prog-gap-clw-sw-swu-icl-bachelor",
+          "slug": "gap-clw-sw-swu-icl-bachelor-bachelor",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Bachelor of International Chinese Language Education",
+            "zh": "国际中文教育本科",
+            "ru": "Бакалавриат по международному преподаванию китайского языка"
+          },
+          "degreeLevel": "bachelor",
+          "discipline": "chinese-education",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": null,
+          "programUrl": "https://gjxy.swu.edu.cn/jxj/gjzwjsjxj.htm",
+          "applyUrl": null,
+          "languageRequirements": [],
+          "verificationScope": "facts"
+        },
+        {
+          "sourceIds": [
+            "src-gap-program-confirmed-swu-chinese-language-training",
+            "swu-chinese-training-live"
+          ],
+          "verifiedAt": "2026-08-26",
+          "reviewAfter": "2026-09-25",
+          "status": "stale",
+          "id": "prog-gap-confirmed-swu-chinese-language-training",
+          "slug": "gap-confirmed-swu-chinese-language-training-language",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Chinese Language Training Program",
+            "zh": "汉语培训项目",
+            "ru": "Программа обучения китайскому языку"
+          },
+          "degreeLevel": "language",
+          "discipline": "chinese-education",
+          "teachingLanguages": [],
+          "durationMonths": null,
+          "programUrl": "https://admissions.swu.edu.cn/info/1048/1051.htm",
+          "applyUrl": "https://swu.17gz.org/member/login.do",
+          "languageRequirements": [],
+          "verificationScope": "identity"
+        },
+        {
+          "sourceIds": [
+            "src-gap-program-wave5-west-swu-comparative-education-doctorate-english"
+          ],
+          "verifiedAt": "2026-07-31",
+          "reviewAfter": "2026-08-30",
+          "status": "stale",
+          "id": "prog-gap-wave5-west-swu-comparative-education-doctorate-english",
+          "slug": "gap-wave5-west-swu-comparative-education-doctorate-english-doctorate",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Comparative Education (English-taught PhD)",
+            "zh": "比较教育学（英文授课博士）",
+            "ru": "Сравнительное образование (докторантура на английском языке)"
+          },
+          "degreeLevel": "doctorate",
+          "discipline": "humanities",
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": null,
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm",
+          "applyUrl": "https://swu.17gz.org/",
+          "languageRequirements": [],
+          "verificationScope": "facts"
+        },
+        {
+          "sourceIds": [
+            "src-gap-program-wave5-west-swu-educational-technology-master-english"
+          ],
+          "verifiedAt": "2026-07-31",
+          "reviewAfter": "2026-08-30",
+          "status": "stale",
+          "id": "prog-gap-wave5-west-swu-educational-technology-master-english",
+          "slug": "gap-wave5-west-swu-educational-technology-master-english-master",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Educational Technology (English-taught Master)",
+            "zh": "教育技术学（英文授课硕士）",
+            "ru": "Образовательные технологии (магистратура на английском языке)"
+          },
+          "degreeLevel": "master",
+          "discipline": "humanities",
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": null,
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm",
+          "applyUrl": "https://swu.17gz.org/",
+          "languageRequirements": [],
+          "verificationScope": "facts"
+        },
+        {
+          "sourceIds": [
+            "src-gap-program-clw-sw-swu-icl-master"
+          ],
+          "verifiedAt": "2026-08-02",
+          "reviewAfter": "2026-09-01",
+          "status": "stale",
+          "id": "prog-gap-clw-sw-swu-icl-master",
+          "slug": "gap-clw-sw-swu-icl-master-master",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Master of International Chinese Language Education",
+            "zh": "国际中文教育硕士",
+            "ru": "Магистратура по международному преподаванию китайского языка"
+          },
+          "degreeLevel": "master",
+          "discipline": "chinese-education",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": null,
+          "programUrl": "https://gjxy.swu.edu.cn/jxj/gjzwjsjxj.htm",
+          "applyUrl": null,
+          "languageRequirements": [],
+          "verificationScope": "facts"
+        },
+        {
+          "sourceIds": [
+            "src-gap-program-wave5-west-swu-teacher-education-master-english"
+          ],
+          "verifiedAt": "2026-07-31",
+          "reviewAfter": "2026-08-30",
+          "status": "stale",
+          "id": "prog-gap-wave5-west-swu-teacher-education-master-english",
+          "slug": "gap-wave5-west-swu-teacher-education-master-english-master",
+          "universityId": "uni-southwest-university",
+          "name": {
+            "en": "Teacher Education (English-taught Master)",
+            "zh": "教师教育学（英文授课硕士）",
+            "ru": "Педагогическое образование (магистратура на английском языке)"
+          },
+          "degreeLevel": "master",
+          "discipline": "humanities",
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": null,
+          "programUrl": "https://admissions.swu.edu.cn/info/1023/1272.htm",
+          "applyUrl": "https://swu.17gz.org/",
+          "languageRequirements": [],
+          "verificationScope": "facts"
+        }
+      ],
+      "exactIdentityMatches": [
+        {
+          "verifiedName": {
+            "zh": "动物科学"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "园艺"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "园林"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "风景园林"
+          },
+          "existingExactIds": []
+        },
+        {
+          "verifiedName": {
+            "zh": "水产养殖学"
+          },
+          "existingExactIds": []
+        }
+      ]
+    }
+  ],
+  "scopeWarnings": [
+    "The official workbook publishes 2027-2028: preserve this range, unlike XMU/NWAFU literal-year cases.",
+    "Self-funded deadline is June 15; New Silk Road scholarship May 15 and CSC-B February 15 must not be borrowed.",
+    "The programme list contains multiple HSK scores and duplicate names across schools. This batch intentionally binds five unique exact Chinese names to their own school/row and HSK200 cells.",
+    "No English names are printed for these rows; verifiedName remains zh only.",
+    "Row sequence numbers are not published major codes.",
+    "The quoted CSCA STEM table lists Chinese, Mathematics, Physics and Chemistry together; do not change it to an either/or rule.",
+    "The shared CSCA note spans four language/category rows. Its HSK180 professional-Chinese exemption is separate from the selected majors HSK200 admission requirement.",
+    "The source labels the CSCA subject 中文 without specifying 理科中文; do not invent a more detailed paper direction.",
+    "No application time zone is explicitly printed.",
+    "The general guide has an OR-list of language tests; the selected Chinese-programme-specific XLSX rows explicitly require HSK4 score200. Do not infer English-test substitution for these Chinese tracks.",
+    "Prior-degree medium-of-instruction evidence is an alternative document in the guide; do not promise automatic waiver without school review."
+  ],
+  "beforePrograms": [],
+  "reviewedPrograms": [
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-southwest-university-animal-science-bachelor-chinese",
+      "slug": "southwest-university-animal-science-bachelor-chinese",
+      "universityId": "uni-southwest-university",
+      "name": {
+        "zh": "动物科学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "science",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+      "applyUrl": "https://swu.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "动物科学技术学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-southwest-university-horticulture-bachelor-chinese",
+      "slug": "southwest-university-horticulture-bachelor-chinese",
+      "universityId": "uni-southwest-university",
+      "name": {
+        "zh": "园艺"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "science",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+      "applyUrl": "https://swu.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "园艺园林学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-southwest-university-landscape-gardening-bachelor-chinese",
+      "slug": "southwest-university-landscape-gardening-bachelor-chinese",
+      "universityId": "uni-southwest-university",
+      "name": {
+        "zh": "园林"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "science",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+      "applyUrl": "https://swu.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "园艺园林学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-southwest-university-landscape-architecture-bachelor-chinese",
+      "slug": "southwest-university-landscape-architecture-bachelor-chinese",
+      "universityId": "uni-southwest-university",
+      "name": {
+        "zh": "风景园林"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+      "applyUrl": "https://swu.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "园艺园林学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-southwest-university-aquaculture-bachelor-chinese",
+      "slug": "southwest-university-aquaculture-bachelor-chinese",
+      "universityId": "uni-southwest-university",
+      "name": {
+        "zh": "水产养殖学"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "science",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://gjxy.swu.edu.cn/2027-2028xuenianduxinandaxuebenkezhaoshengzhuanyeliebiao.xlsx",
+      "applyUrl": "https://swu.17gz.org/",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "水产学院"
+        },
+        "qualification": {
+          "zh": "本科"
+        }
+      }
+    }
+  ],
+  "reviewedAdmissionCycles": [
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国籍公民，身心健康。"
+        },
+        {
+          "zh": "以2027年9月1日为准，年龄17周岁及以上、未满30周岁。"
+        },
+        {
+          "zh": "拥有高中及以上毕业证书；即将毕业者按官方申请材料要求提供所在学校的预毕业证明。"
+        },
+        {
+          "zh": "普通护照以2027年9月1日为准须有1年以上有效期；需要更换护照者应在申请前完成，申请后请勿擅自更换。"
+        },
+        {
+          "zh": "以2027年9月1日为准，未满18周岁者须提交未成年留学生监护人保证书。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；本中文授课农学或工学专业的考试科目为中文、数学、物理、化学。数学、物理、化学试卷语言按授课语言要求选择；官方未细分中文测试的文科或理科方向。"
+        },
+        {
+          "zh": "持有效期内HSK四级180分及以上成绩报告者，可按指南免考CSCA专业中文；该条件不免数学、物理、化学，也不替代本专业入学HSK四级200分要求。"
+        },
+        {
+          "zh": "指南允许无语言证书者提供上一学历授课语言证明，材料须经校方审核；不据此推定无条件豁免本专业语言要求。"
+        }
+      ],
+      "applyUrl": "https://swu.17gz.org/",
+      "id": "cycle-southwest-university-animal-science-bachelor-chinese-2027-2028-autumn-self-funded",
+      "programId": "program-southwest-university-animal-science-bachelor-chinese",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "dateStatus": "published",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 500,
+      "notes": {
+        "zh": "2027年秋季自费申请为2027年1月1日至6月15日，官方未明确说明申请时区；新生于9月初入学。专业目录明确标为2027-2028学年度。入学语言要求为有效HSK四级200分及以上；180分仅为CSCA专业中文免考条件，不能用于降低入学门槛。中文测试文理方向未说明，其他三门CSCA科目均保留。学费20000元/学年，报名费500元不退；不使用其他奖学金轮次的截止日。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国籍公民，身心健康。"
+        },
+        {
+          "zh": "以2027年9月1日为准，年龄17周岁及以上、未满30周岁。"
+        },
+        {
+          "zh": "拥有高中及以上毕业证书；即将毕业者按官方申请材料要求提供所在学校的预毕业证明。"
+        },
+        {
+          "zh": "普通护照以2027年9月1日为准须有1年以上有效期；需要更换护照者应在申请前完成，申请后请勿擅自更换。"
+        },
+        {
+          "zh": "以2027年9月1日为准，未满18周岁者须提交未成年留学生监护人保证书。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；本中文授课农学或工学专业的考试科目为中文、数学、物理、化学。数学、物理、化学试卷语言按授课语言要求选择；官方未细分中文测试的文科或理科方向。"
+        },
+        {
+          "zh": "持有效期内HSK四级180分及以上成绩报告者，可按指南免考CSCA专业中文；该条件不免数学、物理、化学，也不替代本专业入学HSK四级200分要求。"
+        },
+        {
+          "zh": "指南允许无语言证书者提供上一学历授课语言证明，材料须经校方审核；不据此推定无条件豁免本专业语言要求。"
+        }
+      ],
+      "applyUrl": "https://swu.17gz.org/",
+      "id": "cycle-southwest-university-horticulture-bachelor-chinese-2027-2028-autumn-self-funded",
+      "programId": "program-southwest-university-horticulture-bachelor-chinese",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "dateStatus": "published",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 500,
+      "notes": {
+        "zh": "2027年秋季自费申请为2027年1月1日至6月15日，官方未明确说明申请时区；新生于9月初入学。专业目录明确标为2027-2028学年度。入学语言要求为有效HSK四级200分及以上；180分仅为CSCA专业中文免考条件，不能用于降低入学门槛。中文测试文理方向未说明，其他三门CSCA科目均保留。学费20000元/学年，报名费500元不退；不使用其他奖学金轮次的截止日。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国籍公民，身心健康。"
+        },
+        {
+          "zh": "以2027年9月1日为准，年龄17周岁及以上、未满30周岁。"
+        },
+        {
+          "zh": "拥有高中及以上毕业证书；即将毕业者按官方申请材料要求提供所在学校的预毕业证明。"
+        },
+        {
+          "zh": "普通护照以2027年9月1日为准须有1年以上有效期；需要更换护照者应在申请前完成，申请后请勿擅自更换。"
+        },
+        {
+          "zh": "以2027年9月1日为准，未满18周岁者须提交未成年留学生监护人保证书。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；本中文授课农学或工学专业的考试科目为中文、数学、物理、化学。数学、物理、化学试卷语言按授课语言要求选择；官方未细分中文测试的文科或理科方向。"
+        },
+        {
+          "zh": "持有效期内HSK四级180分及以上成绩报告者，可按指南免考CSCA专业中文；该条件不免数学、物理、化学，也不替代本专业入学HSK四级200分要求。"
+        },
+        {
+          "zh": "指南允许无语言证书者提供上一学历授课语言证明，材料须经校方审核；不据此推定无条件豁免本专业语言要求。"
+        }
+      ],
+      "applyUrl": "https://swu.17gz.org/",
+      "id": "cycle-southwest-university-landscape-gardening-bachelor-chinese-2027-2028-autumn-self-funded",
+      "programId": "program-southwest-university-landscape-gardening-bachelor-chinese",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "dateStatus": "published",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 500,
+      "notes": {
+        "zh": "2027年秋季自费申请为2027年1月1日至6月15日，官方未明确说明申请时区；新生于9月初入学。专业目录明确标为2027-2028学年度。入学语言要求为有效HSK四级200分及以上；180分仅为CSCA专业中文免考条件，不能用于降低入学门槛。中文测试文理方向未说明，其他三门CSCA科目均保留。学费20000元/学年，报名费500元不退；不使用其他奖学金轮次的截止日。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国籍公民，身心健康。"
+        },
+        {
+          "zh": "以2027年9月1日为准，年龄17周岁及以上、未满30周岁。"
+        },
+        {
+          "zh": "拥有高中及以上毕业证书；即将毕业者按官方申请材料要求提供所在学校的预毕业证明。"
+        },
+        {
+          "zh": "普通护照以2027年9月1日为准须有1年以上有效期；需要更换护照者应在申请前完成，申请后请勿擅自更换。"
+        },
+        {
+          "zh": "以2027年9月1日为准，未满18周岁者须提交未成年留学生监护人保证书。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；本中文授课农学或工学专业的考试科目为中文、数学、物理、化学。数学、物理、化学试卷语言按授课语言要求选择；官方未细分中文测试的文科或理科方向。"
+        },
+        {
+          "zh": "持有效期内HSK四级180分及以上成绩报告者，可按指南免考CSCA专业中文；该条件不免数学、物理、化学，也不替代本专业入学HSK四级200分要求。"
+        },
+        {
+          "zh": "指南允许无语言证书者提供上一学历授课语言证明，材料须经校方审核；不据此推定无条件豁免本专业语言要求。"
+        }
+      ],
+      "applyUrl": "https://swu.17gz.org/",
+      "id": "cycle-southwest-university-landscape-architecture-bachelor-chinese-2027-2028-autumn-self-funded",
+      "programId": "program-southwest-university-landscape-architecture-bachelor-chinese",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "dateStatus": "published",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 500,
+      "notes": {
+        "zh": "2027年秋季自费申请为2027年1月1日至6月15日，官方未明确说明申请时区；新生于9月初入学。专业目录明确标为2027-2028学年度。入学语言要求为有效HSK四级200分及以上；180分仅为CSCA专业中文免考条件，不能用于降低入学门槛。中文测试文理方向未说明，其他三门CSCA科目均保留。学费20000元/学年，报名费500元不退；不使用其他奖学金轮次的截止日。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-swu-2027-chinese-bachelor-majors",
+        "src-reviewed-swu-2027-bachelor-guide-cn",
+        "src-reviewed-swu-2027-fall-notice"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "self-funded",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "4级200分及以上，成绩须在有效期内；按2027-2028年度中文授课专业目录本专业条款申请。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "非中国籍公民，身心健康。"
+        },
+        {
+          "zh": "以2027年9月1日为准，年龄17周岁及以上、未满30周岁。"
+        },
+        {
+          "zh": "拥有高中及以上毕业证书；即将毕业者按官方申请材料要求提供所在学校的预毕业证明。"
+        },
+        {
+          "zh": "普通护照以2027年9月1日为准须有1年以上有效期；需要更换护照者应在申请前完成，申请后请勿擅自更换。"
+        },
+        {
+          "zh": "以2027年9月1日为准，未满18周岁者须提交未成年留学生监护人保证书。"
+        },
+        {
+          "zh": "须提交CSCA成绩单；本中文授课农学或工学专业的考试科目为中文、数学、物理、化学。数学、物理、化学试卷语言按授课语言要求选择；官方未细分中文测试的文科或理科方向。"
+        },
+        {
+          "zh": "持有效期内HSK四级180分及以上成绩报告者，可按指南免考CSCA专业中文；该条件不免数学、物理、化学，也不替代本专业入学HSK四级200分要求。"
+        },
+        {
+          "zh": "指南允许无语言证书者提供上一学历授课语言证明，材料须经校方审核；不据此推定无条件豁免本专业语言要求。"
+        }
+      ],
+      "applyUrl": "https://swu.17gz.org/",
+      "id": "cycle-southwest-university-aquaculture-bachelor-chinese-2027-2028-autumn-self-funded",
+      "programId": "program-southwest-university-aquaculture-bachelor-chinese",
+      "academicYear": "2027-2028",
+      "intake": "autumn",
+      "opensOn": "2027-01-01",
+      "closesOn": "2027-06-15",
+      "dateStatus": "published",
+      "tuitionCny": 20000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 500,
+      "notes": {
+        "zh": "2027年秋季自费申请为2027年1月1日至6月15日，官方未明确说明申请时区；新生于9月初入学。专业目录明确标为2027-2028学年度。入学语言要求为有效HSK四级200分及以上；180分仅为CSCA专业中文免考条件，不能用于降低入学门槛。中文测试文理方向未说明，其他三门CSCA科目均保留。学费20000元/学年，报名费500元不退；不使用其他奖学金轮次的截止日。"
+      }
+    }
+  ],
+  "beforePublicProgrammeIds": [
+    "program-beihang-university-computer-science-and-technology-bachelor",
+    "program-beihang-university-materials-science-and-engineering-bachelor",
+    "program-0894c95994b049fc8cc8fc17",
+    "program-4f55aad7fd9236ebdeccc205",
+    "program-6c5f2df917f6314287e33f9e",
+    "program-d80dce5cbd9ef5807e5aafe7",
+    "program-d40f2fe92ea79bef2c5cbb75",
+    "program-beihang-university-nanomaterials-and-technology-bachelor",
+    "program-beihang-university-electronic-information-engineering-bachelor",
+    "program-beihang-university-communication-engineering-bachelor",
+    "program-xiamen-university-bachelor-chinese-020201k",
+    "program-xiamen-university-bachelor-chinese-020202",
+    "program-xiamen-university-bachelor-chinese-020401",
+    "program-xiamen-university-bachelor-chinese-020302",
+    "program-xiamen-university-bachelor-chinese-020301k",
+    "program-vm-hkbu-ma-visual-arts-master",
+    "program-vm-hkbu-mfa-cinematic-arts-master",
+    "program-vm-hkbu-ma-producing-master",
+    "program-vm-hkbu-msc-ai-digital-media-master",
+    "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese",
+    "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese",
+    "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese",
+    "program-northwest-a-and-f-university-business-administration-bachelor-chinese",
+    "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese",
+    "program-vm-hkbu-ma-communication-master"
+  ],
+  "beforePublicProgrammeSha256": {
+    "program-beihang-university-computer-science-and-technology-bachelor": "834cd6441988160c9dddd2abfe6ed7f61777cbb31116dae06d3458e63a540b7e",
+    "program-beihang-university-materials-science-and-engineering-bachelor": "2dbf73f02fdab4621cd838df995ab45bf8fbe7d7e6de9bf4dca2dc62afab05bc",
+    "program-0894c95994b049fc8cc8fc17": "6229a5cacce251a0289d095ad169cf5d1557ec70a904fe5f8abaa5595fc92531",
+    "program-4f55aad7fd9236ebdeccc205": "b7cf0e2af109d838f4fad6e34b892940691cc5b165ddf122f4835f74abccf81f",
+    "program-6c5f2df917f6314287e33f9e": "a391d135a96d5f07854dab707ee7949390271fd4da0149522097949b21dc0640",
+    "program-d80dce5cbd9ef5807e5aafe7": "63c0fe667ba0333778719978bd265ff464ec3e127259e9e6f5be387ca0a9c126",
+    "program-d40f2fe92ea79bef2c5cbb75": "4eeb520cefe87039c00a1c092c06e49ba1f9edaee02c5d2a48306273c32ecbb0",
+    "program-beihang-university-nanomaterials-and-technology-bachelor": "3d771ac8512a83f2fa6b24031189920ba90d1c51e571e3db529c90fc5aae3c17",
+    "program-beihang-university-electronic-information-engineering-bachelor": "7efb2f60be13f7e30c29a5a2c43f5bc57d4b62daefcadfa6c802dd46e92318aa",
+    "program-beihang-university-communication-engineering-bachelor": "e6d5e12064f5ad775317c18af491e608efe2b61b2119cb540503d186ef196a4a",
+    "program-xiamen-university-bachelor-chinese-020201k": "b7be55a541dc4088c4f7b0ba7ba8993b1bb68867b5366e79fec8a6d4088d6acf",
+    "program-xiamen-university-bachelor-chinese-020202": "4415e6206dbf32b555af47717dd19ce157abe40514f4c1f40ffe6b403d090ff4",
+    "program-xiamen-university-bachelor-chinese-020401": "b4699271ab861b9122476f9bc8c0a54658912bf5cf6be87dac72012c1ea296c7",
+    "program-xiamen-university-bachelor-chinese-020302": "af6c60a4940777ec00ef66ff518b7cdfc0d16057f1c028fdbf5209791a2e7f47",
+    "program-xiamen-university-bachelor-chinese-020301k": "00505b7d58e00ffa0d26633d53d1ff2762bbb7a8bc9b4160297be37d1c780038",
+    "program-vm-hkbu-ma-visual-arts-master": "dcd37fb2024590537ed58e46eb9856e08daf8a25ce2b998c4fc75d692f30a324",
+    "program-vm-hkbu-mfa-cinematic-arts-master": "199acdd8accc89d5ae5787d714861f0e085c65ba7d8c02e9836589896c1ec879",
+    "program-vm-hkbu-ma-producing-master": "bb328a7ae7e17a5feb6a4d863dc425dec312030c1f0844791f20ff75e62c1dcf",
+    "program-vm-hkbu-msc-ai-digital-media-master": "52508c1ccd2a1e5072430e742bc089c9d3ecdc58d67b0b362baa713457d09193",
+    "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese": "398f54427914212d9195fcb9ecbcd6cb0fc36a6683dc85775ffe2341f5d71216",
+    "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese": "26c4836ea5e803061f292ca25f594fb99ce3529e8185965e19a7c546ac6e0509",
+    "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese": "a03f42f8548522afc845d48cdaaeb9afac335f342318abb3108ed82ac17cc6b4",
+    "program-northwest-a-and-f-university-business-administration-bachelor-chinese": "ad2bbb3d985a432b2ae31059e02783ad2669963718fe09e9031a61147d66a309",
+    "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese": "0fb64f8c546b009040d6697a5fbd5ecb1fcc8fc90150dc7d51e8b7a68bfb0fd3",
+    "program-vm-hkbu-ma-communication-master": "cb3a0206e76308ed9e5e6dc62b0332a6db3e77eb0942a245b5ce77c5c92cd33c"
+  },
+  "beforePublicAdmissionCycleIds": [
+    "cycle-nenu-2027-4a8d46e8de4fe817fc9ef984",
+    "cycle-nenu-2027-fa25f82d7ba05aa69caddde0",
+    "cycle-nenu-2027-dea5339a86cc13ee2cab57a1",
+    "cycle-nenu-2027-f0d93abfee9e942b05221890",
+    "cycle-nenu-2027-e6ebdcc492ed50a500e653cc",
+    "cycle-xiamen-university-bachelor-chinese-020201k-2027-autumn-self-funded",
+    "cycle-xiamen-university-bachelor-chinese-020202-2027-autumn-self-funded",
+    "cycle-xiamen-university-bachelor-chinese-020401-2027-autumn-self-funded",
+    "cycle-xiamen-university-bachelor-chinese-020302-2027-autumn-self-funded",
+    "cycle-xiamen-university-bachelor-chinese-020301k-2027-autumn-self-funded",
+    "cycle-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese-2027-self-funded",
+    "cycle-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese-2027-self-funded",
+    "cycle-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese-2027-self-funded",
+    "cycle-northwest-a-and-f-university-business-administration-bachelor-chinese-2027-self-funded",
+    "cycle-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese-2027-self-funded",
+    "cycle-reviewed-hkbu-visual-arts-2027-english-nonlocal-round1",
+    "cycle-reviewed-hkbu-visual-arts-2027-english-nonlocal-round2",
+    "cycle-reviewed-hkbu-cinematic-arts-2027-english-nonlocal",
+    "cycle-reviewed-hkbu-producing-2027-english-nonlocal",
+    "cycle-reviewed-hkbu-ai-digital-media-2027-english-nonlocal",
+    "cycle-reviewed-hkbu-communication-2027-english-nonlocal",
+    "cycle-2027-buaa-materials-science-and-engineering-bachelor-chinese",
+    "cycle-2027-buaa-nanomaterials-and-technology-bachelor-chinese",
+    "cycle-2027-buaa-electronic-information-engineering-bachelor-chinese",
+    "cycle-2027-buaa-communication-engineering-bachelor-chinese",
+    "cycle-2027-buaa-computer-science-and-technology-bachelor-chinese"
+  ],
+  "beforePublicAdmissionCycleSha256": {
+    "cycle-nenu-2027-4a8d46e8de4fe817fc9ef984": "8d25f5812e582b90ae09fb4e4f20aedce4ed4a0561fc6d4819cfa6c6b36f809b",
+    "cycle-nenu-2027-fa25f82d7ba05aa69caddde0": "b092b2c1c7705f848ca04c0464ec94897e98499cda588f38834065886ad432aa",
+    "cycle-nenu-2027-dea5339a86cc13ee2cab57a1": "5e5161dba73f2407b29161e01c14aa483c090fd55372b377e1e183ce07538d19",
+    "cycle-nenu-2027-f0d93abfee9e942b05221890": "00aa2311cba01917dcd6bbf7995bec809422683f849cc30804e0ab16bfa99d76",
+    "cycle-nenu-2027-e6ebdcc492ed50a500e653cc": "cf59a8d8b0bb58a16a34ae0b14fbefad8667f3b434cd4d76e2e5e2e2dfb622af",
+    "cycle-xiamen-university-bachelor-chinese-020201k-2027-autumn-self-funded": "345494ab4eb085a59b5b6a215ca4d515c0e10cd71f481a2b60918d98c50dbde2",
+    "cycle-xiamen-university-bachelor-chinese-020202-2027-autumn-self-funded": "43202b4ba31676bf9e9e53648bfeb2ae7fd7f713d55f0678606c3a8927517c24",
+    "cycle-xiamen-university-bachelor-chinese-020401-2027-autumn-self-funded": "adfbe419046153d7829c3081fc6951cc28dd11533314ad5d9eec9bb725d6f485",
+    "cycle-xiamen-university-bachelor-chinese-020302-2027-autumn-self-funded": "5e5b5ccfeb65d2377b3a3d3f4af0cd0e348814418cfa43b12c813368bc8518a0",
+    "cycle-xiamen-university-bachelor-chinese-020301k-2027-autumn-self-funded": "179a44d445306b8902e14f0b57276431548733e2a83348c7ddb312ebb7af1e3a",
+    "cycle-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese-2027-self-funded": "7ada0ea2f264d1a3d87d1cff0a1162dacd3668995bdb113a9e8a7036e7857090",
+    "cycle-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese-2027-self-funded": "8e1b73614d2dd8a0682068c301df72a74b84e089b9946d574c051d37b157e343",
+    "cycle-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese-2027-self-funded": "c6cac265cc4b98bcbf0c6cf2e3e2b840888a3b0e2143c802a4f77e615652ce8f",
+    "cycle-northwest-a-and-f-university-business-administration-bachelor-chinese-2027-self-funded": "4f34f8be7593c79d4d78d228eed0b544659e24f65d5cca3e4ab104c39fd80e5e",
+    "cycle-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese-2027-self-funded": "533ddbc5244fe2baf7b8686209238ee52abe8314656ca060817758fddf515217",
+    "cycle-reviewed-hkbu-visual-arts-2027-english-nonlocal-round1": "037066b08aab7e265ca796c2d794e6b7995594b3944fd287c9dbd04674e2cc43",
+    "cycle-reviewed-hkbu-visual-arts-2027-english-nonlocal-round2": "af00260431c19c4e841b48c35dd0da0bfec697f918b34a96b07d098f6e9f1738",
+    "cycle-reviewed-hkbu-cinematic-arts-2027-english-nonlocal": "b3392c4f5218c74b01fbd43b5c448e94e761de77df5a5af6e1af5d1297cde8f9",
+    "cycle-reviewed-hkbu-producing-2027-english-nonlocal": "a29d280e6a75222873f891930bccf8591b80cbc9f443d274d93411368e87e8e2",
+    "cycle-reviewed-hkbu-ai-digital-media-2027-english-nonlocal": "7d5caf277da37c562ec914d61e16f12b1befe49bbc50329ad50bb4400c2d24f3",
+    "cycle-reviewed-hkbu-communication-2027-english-nonlocal": "14e1e54e1493699ae01ed51993f004e25a0bc1bc6fc388d35531bb2f636b9c7c",
+    "cycle-2027-buaa-materials-science-and-engineering-bachelor-chinese": "d1ca47937eaaf644b9da791e4171a09b06915419fe4c4afcab93ef8e9551f0f6",
+    "cycle-2027-buaa-nanomaterials-and-technology-bachelor-chinese": "da8d779af1f4c0681588946668bc000b8f1284ce0bbb2af615fecea38737c483",
+    "cycle-2027-buaa-electronic-information-engineering-bachelor-chinese": "9ba2a69c2d07e2ba8c4f6e4cd2faf1a406eb2149ddff328ad9046fa1f43bb19e",
+    "cycle-2027-buaa-communication-engineering-bachelor-chinese": "bfc3e4fe0c4595d2510bbeb1dad22e6e961b29eb09cc2c93a59e62a61f7a7642",
+    "cycle-2027-buaa-computer-science-and-technology-bachelor-chinese": "e83f1b8414f81f9bb0ce21f897b9668150079bdf4aa37805100d403f6ca1dc1e"
+  },
+  "audit": {
+    "existingNonemptyFieldsChanged": [],
+    "existingRecordsChanged": [],
+    "newProgrammes": 5,
+    "newAnnualCycles": 5,
+    "noHistoricalRawRecordDeleted": true,
+    "noHistoricalReceiptChanged": true,
+    "previousQualifiedProgrammesPreserved": 25,
+    "existingSwuProgrammeIdentitiesPreserved": 9,
+    "newProgrammeIdsHaveNoPriorValues": true,
+    "sourceDerivedNamesOnly": [
+      "zh"
+    ],
+    "originalXlsxCommitted": false
+  },
+  "afterProgrammeSha256": {
+    "program-southwest-university-animal-science-bachelor-chinese": "eaa6be83fef0c2c778dcf829349002b06c1696f9160d8f6b0bb67d61962a029e",
+    "program-southwest-university-horticulture-bachelor-chinese": "a98dc6454f6c57125d38294c06431d5506d33269292b9a1be7bd1b49563612c1",
+    "program-southwest-university-landscape-gardening-bachelor-chinese": "0f790f612e3df640c7df3b13c27795c992d3300ec903dd841101ca56b899bf99",
+    "program-southwest-university-landscape-architecture-bachelor-chinese": "faed0e9fef130610e4bdc946e8960fa2847113818cae685cfbc7cfd33f986b1d",
+    "program-southwest-university-aquaculture-bachelor-chinese": "5a304f6fba0079e46cf5ea59d491905889234418739d5be5ef6df6211b8480e7"
+  },
+  "newCycleSha256": {
+    "cycle-southwest-university-animal-science-bachelor-chinese-2027-2028-autumn-self-funded": "7410d9b0b0aa1a95233736bf5a45251541746a3c6be8a5b3f73dd4c3c991186f",
+    "cycle-southwest-university-horticulture-bachelor-chinese-2027-2028-autumn-self-funded": "707f70cc947617893bb553a22f995dbae6f7ff8b108d5d7ad30402165876e3b3",
+    "cycle-southwest-university-landscape-gardening-bachelor-chinese-2027-2028-autumn-self-funded": "bb04dffee84241ff4af2ee5ca6fa4b0e7419d59c7fb314d005c3dfd3db74c2d3",
+    "cycle-southwest-university-landscape-architecture-bachelor-chinese-2027-2028-autumn-self-funded": "5538239fd879961a5d57c92bb42e604caf8409484cccc49811744a2686046856",
+    "cycle-southwest-university-aquaculture-bachelor-chinese-2027-2028-autumn-self-funded": "3b329d06e4f339146ae67ecee80b24e937a398c6bd38b88437a4e1f93e72c0e4"
+  },
+  "annualScopeSha256": {
+    "cycle-southwest-university-animal-science-bachelor-chinese-2027-2028-autumn-self-funded": "02335cbf48b27540f2f09783aff2107c7db98b4f4aa26a5b2ff824de40176b42",
+    "cycle-southwest-university-horticulture-bachelor-chinese-2027-2028-autumn-self-funded": "e1461704bed7fdffa1fe21fc78da0c27ce4b4acf6d7e1d34ed254e4db15978fb",
+    "cycle-southwest-university-landscape-gardening-bachelor-chinese-2027-2028-autumn-self-funded": "0558c56b69a2b7bd753a941fd9fdb59ad6b8c724dd0458516b4b5245b00f907e",
+    "cycle-southwest-university-landscape-architecture-bachelor-chinese-2027-2028-autumn-self-funded": "e7d96adbe9e5b6d9e968a20b5e1f9e3e941bfcdf0de88471121261c762efeacb",
+    "cycle-southwest-university-aquaculture-bachelor-chinese-2027-2028-autumn-self-funded": "559e7b30c6217643c45ad250060fe38043758e95be8e3a136690ab6c186820d8"
+  },
+  "preservedRecordsSha256": {
+    "sources": "f149b18cda725fc31ae4345894cb0461521527a4be4126d81a56c85ffb6bbbd6",
+    "cities": "f86b20e6ec13d745e9d20e77391e661ef702c7ef289edfafa938acc91156958d",
+    "universities": "a2d0be3e7ed2843f0589f3477cb1127feeaef92a8c974f1827e9b688a1bcea0d",
+    "programs": "5be0d9495aeb3b647c4615feb93effe196395f6b9f8dc2d3c26b917bcf02a50a",
+    "admissionCycles": "f197cdfa2dc2ade66ac77a09c745f810911df9b266b9cc5a5d962a79fdf9b81a",
+    "scholarships": "d0d84c62f481f54bd1067656bb510f7b5c5caddd581e3e5fca084e98e73f6be1"
+  },
+  "modelCalls": false,
+  "paidModelCalls": 0,
+  "cloudWrites": 0,
+  "privateUploads": 0,
+  "oldModelLedgerMutations": false,
+  "push": false,
+  "merge": false,
+  "beforeCurrentProgrammeIds": [
+    "program-0894c95994b049fc8cc8fc17",
+    "program-4f55aad7fd9236ebdeccc205",
+    "program-6c5f2df917f6314287e33f9e",
+    "program-d80dce5cbd9ef5807e5aafe7",
+    "program-d40f2fe92ea79bef2c5cbb75",
+    "program-xiamen-university-bachelor-chinese-020201k",
+    "program-xiamen-university-bachelor-chinese-020202",
+    "program-xiamen-university-bachelor-chinese-020401",
+    "program-xiamen-university-bachelor-chinese-020302",
+    "program-xiamen-university-bachelor-chinese-020301k",
+    "program-vm-hkbu-ma-visual-arts-master",
+    "program-vm-hkbu-mfa-cinematic-arts-master",
+    "program-vm-hkbu-ma-producing-master",
+    "program-vm-hkbu-msc-ai-digital-media-master",
+    "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese",
+    "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese",
+    "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese",
+    "program-northwest-a-and-f-university-business-administration-bachelor-chinese",
+    "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese",
+    "program-vm-hkbu-ma-communication-master"
+  ],
+  "beforeCurrentAdmissionCycleIds": [
+    "cycle-nenu-2027-4a8d46e8de4fe817fc9ef984",
+    "cycle-nenu-2027-fa25f82d7ba05aa69caddde0",
+    "cycle-nenu-2027-dea5339a86cc13ee2cab57a1",
+    "cycle-nenu-2027-f0d93abfee9e942b05221890",
+    "cycle-nenu-2027-e6ebdcc492ed50a500e653cc",
+    "cycle-xiamen-university-bachelor-chinese-020201k-2027-autumn-self-funded",
+    "cycle-xiamen-university-bachelor-chinese-020202-2027-autumn-self-funded",
+    "cycle-xiamen-university-bachelor-chinese-020401-2027-autumn-self-funded",
+    "cycle-xiamen-university-bachelor-chinese-020302-2027-autumn-self-funded",
+    "cycle-xiamen-university-bachelor-chinese-020301k-2027-autumn-self-funded",
+    "cycle-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese-2027-self-funded",
+    "cycle-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese-2027-self-funded",
+    "cycle-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese-2027-self-funded",
+    "cycle-northwest-a-and-f-university-business-administration-bachelor-chinese-2027-self-funded",
+    "cycle-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese-2027-self-funded",
+    "cycle-reviewed-hkbu-visual-arts-2027-english-nonlocal-round1",
+    "cycle-reviewed-hkbu-visual-arts-2027-english-nonlocal-round2",
+    "cycle-reviewed-hkbu-cinematic-arts-2027-english-nonlocal",
+    "cycle-reviewed-hkbu-producing-2027-english-nonlocal",
+    "cycle-reviewed-hkbu-ai-digital-media-2027-english-nonlocal",
+    "cycle-reviewed-hkbu-communication-2027-english-nonlocal"
+  ],
+  "beforeDirectoryProgrammeCount": 25,
+  "beforeCurrentProgrammeCount": 20,
+  "sha256": "541cf8cd6efc862d9305a8ce0c41f511ff1b4a4ef37733d2fd24e23133cf6c1b"
+}
