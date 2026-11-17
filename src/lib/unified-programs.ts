@@ -154,12 +154,12 @@ export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyPr
     cityOptions: data.cities.filter(city => cityIds.has(city.id)).map(city => ({ value: city.slug, name: city.name })) }
 }
 
-export async function queryUnifiedPrograms(filters: ProgramCatalogFilters, today: string) {
-  const [data, feed] = await Promise.all([getCatalogData(), getProgramFeedIndex()])
+export async function queryUnifiedPrograms(filters: ProgramCatalogFilters, today: string, catalogData?: DataBundle) {
+  const [data, feed] = await Promise.all([catalogData ?? getCatalogData(), getProgramFeedIndex()])
   return queryUnifiedProgramData(data, feed.programs, filters, today, feed.revision)
 }
-export async function resolveUnifiedProgram(slug: string, today: string) {
-  const [data, feed] = await Promise.all([getCatalogData(), getProgramFeedIndex()])
+export async function resolveUnifiedProgram(slug: string, today: string, catalogData?: DataBundle) {
+  const [data, feed] = await Promise.all([catalogData ?? getCatalogData(), getProgramFeedIndex()])
   const combined = combineProgramRecords(data, feed.programs, today)
   const canonical = combined.aliases.get(slug) || slug
   const item = combined.items.find(item => unifiedProgramSlug(item) === canonical)

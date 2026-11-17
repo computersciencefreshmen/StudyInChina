@@ -46,12 +46,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   await connection()
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
-  const resolved = await resolveUnifiedProgram(slug, getTodayDate())
+  const data = await getCatalogData()
+  const resolved = await resolveUnifiedProgram(slug, getTodayDate(), data)
   if (resolved && 'collected' in resolved.item) {
     const record = resolved.item.collected
     return pageMetadata(locale, `${record.name} · ${record.schoolName}`, record.fields.description?.slice(0, 160) || record.name, `programs/${encodeURIComponent(resolved.canonical)}`)
   }
-  const data = await getCatalogData()
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) return {}
   const university = data.universities.find((item) => item.id === program.universityId)
@@ -75,11 +75,11 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const locale = requireLocale(raw)
   if (!locale) notFound()
 
-  const resolved = await resolveUnifiedProgram(slug, getTodayDate())
+  const data = await getCatalogData()
+  const resolved = await resolveUnifiedProgram(slug, getTodayDate(), data)
   if (resolved && resolved.canonical !== slug) permanentRedirect(`/${locale}/programs/${encodeURIComponent(resolved.canonical)}`)
   if (resolved && 'collected' in resolved.item) return <CollectedProgramDetail item={resolved.item} locale={locale} />
 
-  const data = await getCatalogData()
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) notFound()
 

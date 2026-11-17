@@ -56,7 +56,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
   const fields = [...new Set(programs.map((item) => item.discipline))]
   const scholarships = data.scholarships.filter((item) => item.universityIds.includes(university.id))
   const today = getTodayDate()
-  const unifiedPrograms = await queryUnifiedPrograms(parseProgramCatalogFilters({ institution: university.slug }), today)
+  const unifiedPrograms = await queryUnifiedPrograms(parseProgramCatalogFilters({ institution: university.slug }), today, data)
   const stateScores = { open: 7, rolling: 6, upcoming: 5, 'dates-published': 4, 'not-announced': 3, closed: 2, 'previous-cycle': 1 } as const
   const programEntries = programs
     .map((program) => {
