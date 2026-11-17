@@ -6,8 +6,10 @@ import { getCatalogRepository } from '@/lib/catalog'
 import {
   parseUniversityCatalogFilters,
   queryUniversityCatalogRepository,
+  withUnifiedUniversityProgramCounts,
   type UniversityCatalogSearchParams,
 } from '@/lib/university-catalog'
+import { getUnifiedUniversityProgramCounts } from '@/lib/unified-programs'
 import { hasSearchParameters, pageMetadata, requireLocale } from '@/lib/site'
 
 export async function generateMetadata({
@@ -40,7 +42,11 @@ export default async function UniversitiesPage({
   if (!locale) notFound()
   const messages = getMessages(locale)
   const filters = parseUniversityCatalogFilters(await searchParams)
-  const result = await queryUniversityCatalogRepository(getCatalogRepository(), filters)
+  const [catalog, counts] = await Promise.all([
+    queryUniversityCatalogRepository(getCatalogRepository(), filters),
+    getUnifiedUniversityProgramCounts(),
+  ])
+  const result = withUnifiedUniversityProgramCounts(catalog, counts)
   const coverageLabel = {
     zh: '查看非军校双一流高校数据表',
     en: 'View non-military Double First-Class coverage',

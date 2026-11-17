@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { DataBundle, Program, Scholarship, University } from '@/lib/data/types'
 import type { ThirdPartyProgram } from '@/lib/third-party-programs'
-import { combineProgramRecords, queryUnifiedProgramData, unifiedProgramSlug } from '@/lib/unified-programs'
+import { combineProgramRecords, countUnifiedUniversityPrograms, queryUnifiedProgramData, unifiedProgramSlug } from '@/lib/unified-programs'
 import { parseProgramCatalogFilters, programCatalogHref } from '@/lib/program-catalog'
 
 const today = '2026-11-17'
@@ -15,6 +15,52 @@ function captured(id: string, name: string, overrides: Partial<ThirdPartyProgram
 const filters = (values: Record<string, string> = {}) => parseProgramCatalogFilters(values)
 
 describe('one program catalogue', () => {
+  it('counts canonical captured and reviewed offerings together without URL-only placeholders or duplicate source aliases', () => {
+    const emptyUniversity = { ...university, id: 'empty', slug: 'empty-university', name: { en: 'Empty University' } }
+    const scopedData = { ...data, universities: [university, emptyUniversity] }
+    const fields = { degree: 'Bachelor', language: 'English', duration: '4 Years', tuition: 'CNY 20000', startDate: '2027-09-01', deadline: '2027-07-01' }
+    const records = [captured('first', 'Medicine', { fields }), captured('duplicate', 'Medicine', { fields }),
+      captured('link-only', 'Not captured', { status: 'link_only', fields: {} }),
+      captured('unmatched', 'Another programme', { schoolName: 'Alpha Medical University' })]
+    const counts = countUnifiedUniversityPrograms(scopedData, records, today)
+    expect(counts.get(university.id)).toBe(2)
+    expect(counts.get(emptyUniversity.id)).toBe(0)
+    expect(counts.get(university.id)).toBe(queryUnifiedProgramData(scopedData, records, filters({ institution: university.slug }), today, 'snapshot-one').total)
+  })
+
+  it('binds unique English punctuation variants and Chinese names to the same university across counts and institution filters', () => {
+    const xian = { ...university, id: 'xian', slug: 'xian-university', name: { en: "Xi'an University", zh: '西安大学' } }
+    const scopedData = { ...data, universities: [xian], programs: [{ ...reviewed, universityId: xian.id }] }
+    const records = [captured('xian-en', 'Medicine', { schoolId: 'source-xian', schoolName: 'Xian University' }),
+      captured('xian-zh', 'Economics', { schoolId: 'source-xian-zh', schoolName: '西安大学' })]
+    expect(countUnifiedUniversityPrograms(scopedData, records, today).get(xian.id)).toBe(3)
+    for (const institution of [xian.id, xian.slug, 'source-xian', 'source-xian-zh']) {
+      expect(queryUnifiedProgramData(scopedData, records, filters({ institution }), today, 'snapshot-one').total).toBe(3)
+    }
+    expect(combineProgramRecords(scopedData, records, today).items.every(item => item.university?.id === xian.id)).toBe(true)
+  })
+
+  it('does not assign an ambiguous compact school name to the first university or conflate Medical and general universities', () => {
+    const first = { ...university, id: 'first', slug: 'first', name: { en: 'AB University', zh: '甲大学' } }
+    const second = { ...university, id: 'second', slug: 'second', name: { en: 'A B University', zh: '乙大学' } }
+    const scopedData = { ...data, universities: [first, second], programs: [] }
+    const records = [captured('ambiguous', 'Medicine', { schoolName: 'A-B University' })]
+    expect(combineProgramRecords(scopedData, records, today).items[0].university).toBeUndefined()
+    expect([...countUnifiedUniversityPrograms(scopedData, records, today).values()]).toEqual([0, 0])
+    for (const institution of [first.id, first.slug, second.id, second.slug]) {
+      expect(queryUnifiedProgramData(scopedData, records, filters({ institution }), today, 'snapshot-one').total).toBe(0)
+    }
+    expect(countUnifiedUniversityPrograms(data, [captured('medical', 'Medicine', { schoolName: 'Alpha Medical University' })], today).get(university.id)).toBe(1)
+  })
+
+  it('deduplicates proven same offerings across unique known English and Chinese school names once', () => {
+    const scopedData = { ...data, universities: [{ ...university, name: { ...university.name, zh: '阿尔法大学' } }] }
+    const fields = { degree: 'Bachelor', language: 'English', duration: '4 Years', tuition: 'CNY 20000', startDate: '2027-09-01', deadline: '2027-07-01' }
+    const records = [captured('same-en', 'Medicine', { fields }), captured('same-zh', 'Medicine', { schoolName: '阿尔法大学', fields })]
+    expect(countUnifiedUniversityPrograms(scopedData, records, today).get(university.id)).toBe(2)
+    expect(queryUnifiedProgramData(scopedData, records, filters({ institution: university.slug }), today, 'snapshot-one').total).toBe(2)
+  })
+
   it('combines captured records before a single bounded pagination and visits every record once', () => {
     const records = Array.from({ length: 55 }, (_, i) => captured(`cucas-${i}`, `Program ${i}`))
     const first = queryUnifiedProgramData(data, records, filters(), today, 'snapshot-one')

@@ -6,6 +6,8 @@ import {
   queryUniversityCatalogRepository,
   UNIVERSITY_CATALOG_PAGE_SIZE,
   universityCatalogHref,
+  withUnifiedUniversityProgramCounts,
+  type UniversityCatalogResult,
 } from '@/lib/university-catalog'
 
 function repositoryWithPage(overrides: Record<string, unknown> = {}) {
@@ -24,6 +26,25 @@ function repositoryWithPage(overrides: Record<string, unknown> = {}) {
 }
 
 describe('repository-backed university catalogue', () => {
+  it('overlays actual unified counts without changing filters, order, pagination or other coverage', () => {
+    const filters = parseUniversityCatalogFilters({ q: 'science', city: 'beijing', sort: 'programs-desc' })
+    const original = { items: [
+      { institution: { id: 'university-a' }, programCount: 0, scholarshipCount: 7 },
+      { institution: { id: 'university-b' }, programCount: 100, scholarshipCount: 2 },
+    ], filters, total: 72, totalExact: true, page: 2, pageCount: 3, pageSize: 24, cityOptions: [] } as unknown as UniversityCatalogResult
+    const overlaid = withUnifiedUniversityProgramCounts(original, new Map([['university-a', 12], ['university-b', 0]]))
+    expect(overlaid.items.map(item => item.programCount)).toEqual([12, 0])
+    expect(overlaid.items.map(item => item.institution.id)).toEqual(['university-a', 'university-b'])
+    expect(overlaid.items.map(item => item.scholarshipCount)).toEqual([7, 2])
+    expect(overlaid.filters).toBe(filters)
+    expect({ ...overlaid, items: [] }).toEqual({ ...original, items: [] })
+    expect(original.items.map(item => item.programCount)).toEqual([0, 100])
+  })
+
+  it('keeps genuinely missing coverage at zero instead of inventing a positive count', () => {
+    const original = { items: [{ institution: { id: 'university-unknown' }, programCount: 88 }] } as unknown as UniversityCatalogResult
+    expect(withUnifiedUniversityProgramCounts(original, new Map()).items[0].programCount).toBe(0)
+  })
   it('normalizes safe URL filters into the shared taxonomy', () => {
     const filters = parseUniversityCatalogFilters({
       q: 'technology',
