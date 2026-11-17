@@ -8,8 +8,8 @@ import {
 export type ProgramTranslations = Partial<Record<ProgramTranslationField, ProgramTranslationRecord>>
 const locales = new Set<string>(TRANSLATION_LOCALES)
 const base = 'https://raw.githubusercontent.com/computersciencefreshmen/StudyInChina/catalog-program-feed/'
-const maximumBytes = 1_000_000, timeoutMs = 10_000, negativeTtl = 60_000
-const positive = new Map<string, { record: ProgramTranslationRecord; bytes: number }>()
+const maximumBytes = 1_000_000, timeoutMs = 10_000, cacheTtl = 60_000
+const positive = new Map<string, { record: ProgramTranslationRecord; bytes: number; expiresAt: number }>()
 const negative = new Map<string, number>()
 const pending = new Map<string, Promise<ProgramTranslationRecord | null>>()
 let cachedBytes = 0, active = 0
@@ -51,11 +51,11 @@ function remember(path: string, record: ProgramTranslationRecord) {
     const oldest = positive.keys().next().value!
     cachedBytes -= positive.get(oldest)!.bytes; positive.delete(oldest)
   }
-  positive.set(path, { record, bytes }); cachedBytes += bytes
+  positive.set(path, { record, bytes, expiresAt: Date.now() + cacheTtl }); cachedBytes += bytes
 }
 function miss(path: string) {
   if (negative.size >= 256) negative.delete(negative.keys().next().value!)
-  negative.set(path, Date.now() + negativeTtl)
+  negative.set(path, Date.now() + cacheTtl)
 }
 async function download(path: string, source: string, locale: ProgramTranslationLocale) {
   const deadline = Date.now() + timeoutMs
@@ -85,7 +85,10 @@ async function translation(source: string, locale: ProgramTranslationLocale): Pr
   try { path = translationPath(source, locale) } catch { return null }
   if (!new RegExp(`^translations/v1/${locale}/[a-f0-9]{64}\\.json$`).test(path)) return null
   const cached = positive.get(path)
-  if (cached) return cached.record
+  if (cached) {
+    if (cached.expiresAt > Date.now()) return cached.record
+    cachedBytes -= cached.bytes; positive.delete(path)
+  }
   const expires = negative.get(path)
   if (expires && expires > Date.now()) return null
   if (expires) negative.delete(path)
