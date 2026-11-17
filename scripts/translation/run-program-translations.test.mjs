@@ -78,6 +78,15 @@ test('changed critical information is rejected instead of published', async t =>
   const result = await runProgramTranslations({ ...options(root), translate: async ({ items }) => ({ model: 'MiniMax-M3', usage: { inputTokens: 20, outputTokens: 20 },
     items: items.map(item => ({ key: item.key, text: 'IELTS 4.0 is enough.' })) }) })
   assert.ok(result.failedUnits > 0); assert.equal(existsSync(join(root, translationPath(source, 'zh'))), false)
+  assert.equal(result.inputTokens, 20); assert.equal(result.outputTokens, 20)
+})
+test('known charged usage survives provider rejection without publishing its invalid output', async t => {
+  const root = fixture(t)
+  const result = await runProgramTranslations({ ...options(root), translate: async () => {
+    throw Object.assign(new Error('translation_output_json_invalid'), { code: 'translation_output_json_invalid', outcome: 'rejected', usage: { inputTokens: 55, outputTokens: 34 } })
+  } })
+  assert.equal(result.inputTokens, 55); assert.equal(result.outputTokens, 34)
+  assert.equal(existsSync(join(root, translationPath(source, 'zh'))), false)
 })
 test('failed reservation checkpoint prevents all model requests', async t => {
   const root = fixture(t); let checkpoints = 0, modelCalls = 0

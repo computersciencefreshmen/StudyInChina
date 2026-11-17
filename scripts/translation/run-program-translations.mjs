@@ -168,10 +168,12 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
     flush()
     await Promise.all(wave.map(async batch => {
       summary.modelCalls++
+      let usageRecorded = false
       try {
         const response = await translate({ key: environment.MINIMAX_SUBSCRIPTION_KEY, locale: batch.locale,
           items: batch.units.map(unit => ({ key: unit.key, text: unit.protection.text })), signal: AbortSignal.timeout(90_000) })
         summary.inputTokens += response.usage.inputTokens; summary.outputTokens += response.usage.outputTokens
+        usageRecorded = true
         // Validate the whole batch before making any of its translations visible.
         const outputs = batch.units.map(unit => {
           const output = response.items.find(item => item.key === unit.key)
@@ -186,6 +188,13 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
             state: 'completed', attempts: unit.attempts, completedAt: new Date(now()).toISOString() })
         }
       } catch (error) {
+        // A provider can report charged usage even when its generated JSON is
+        // unusable. Preserve measured usage, without inventing unknown usage or
+        // counting it twice when our later fact validation rejected the text.
+        if (!usageRecorded && Number.isSafeInteger(error?.usage?.inputTokens) && error.usage.inputTokens >= 0
+          && Number.isSafeInteger(error?.usage?.outputTokens) && error.usage.outputTokens >= 0) {
+          summary.inputTokens += error.usage.inputTokens; summary.outputTokens += error.usage.outputTokens
+        }
         const unknown = error?.outcome === 'unknown' || error?.name === 'TimeoutError' || error?.name === 'AbortError'
         const code = /^[a-z0-9_]{1,100}$/.test(error?.code || '') ? error.code : 'translation_validation_or_provider_rejected'
         for (const unit of batch.units) save(resolve(root, reservationPath(unit)), { schemaVersion: 1, key: unit.key,
