@@ -228,6 +228,42 @@ test('post-send transport errors and HTTP5xx remain unknown and never authorize 
   await typedFailure(() => translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher: async () => new Response(KEY, { status: 503 }) }), 'translation_http_503', 'unknown')
 })
 
+test('valid charged usage survives malformed output JSON, item-key rejection and token truncation without retaining response data', async () => {
+  const cases: [unknown, string][] = [
+    [message(undefined, { content: [{ type: 'text', text: `private response ${KEY}` }] }), 'translation_output_json_invalid'],
+    [message([translated[0], { key: 'wrong-key', text: `private response ${KEY}` }]), 'translation_items_invalid'],
+    [message(undefined, { stop_reason: 'max_tokens' }), 'translation_output_truncated'],
+  ]
+  for (const [response, code] of cases) {
+    await assert.rejects(() => translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher: reply(response) }), error => {
+      assert.ok(error instanceof TranslationProviderError)
+      assert.equal(error.code, code)
+      assert.equal(error.outcome, 'rejected')
+      assert.deepEqual(error.usage, { inputTokens: 40, outputTokens: 20 })
+      assert.ok(!JSON.stringify(error).includes(KEY))
+      assert.ok(!JSON.stringify(error).includes('private response'))
+      return true
+    })
+  }
+})
+
+test('unknown transport, unparseable HTTP JSON and invalid usage never fabricate charged token counts', async () => {
+  const fetchers: typeof fetch[] = [
+    async () => { throw new Error(KEY) },
+    async () => new Response(KEY),
+    reply(message(undefined, { usage: { input_tokens: 1_000_001, output_tokens: 10 } })),
+    reply(message(undefined, { usage: { input_tokens: 40, output_tokens: 32_769 } })),
+    reply(message(undefined, { usage: { input_tokens: '40', output_tokens: 20 } })),
+    reply(message(undefined, { usage: null })),
+  ]
+  for (const fetcher of fetchers) await assert.rejects(() => translateMaskedBatch({ key: KEY, locale: 'zh', items: INPUT, fetcher }), error => {
+    assert.ok(error instanceof TranslationProviderError)
+    assert.equal(error.usage, undefined)
+    assert.ok(!JSON.stringify(error).includes(KEY))
+    return true
+  })
+})
+
 test('cancellation before send is distinct from cancellation after a request starts, even if the fetcher ignores its signal', async () => {
   const before = new AbortController(); before.abort()
   let calls = 0

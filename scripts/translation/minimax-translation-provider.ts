@@ -10,12 +10,15 @@ const MODEL_TIMEOUT_MS = 90_000
 const MAX_INPUT_CHARACTERS = 24_000
 const MAX_RESPONSE_BYTES = 2 * 1024 * 1024
 const MAX_OUTPUT_TOKENS = 32_768
+// An accounting bound for a24k-character request, not a claimed model context limit.
+const MAX_ACCOUNTED_INPUT_TOKENS = 1_000_000
 const MINIMUM_REMAINING_PERCENT = 5
 const LOCALES: Record<string, string> = { zh: 'Chinese', en: 'English', ru: 'Russian', de: 'German', fr: 'French', es: 'Spanish' }
 
 export type TranslationItem = { key: string; text: string }
 export type TranslationQuota = { allow: boolean; remainingPercent: number | null; retryAt: string | null; reason: string }
 export type TranslationOutcome = 'not_sent' | 'unknown' | 'rejected'
+export type TranslationUsage = { inputTokens: number; outputTokens: number }
 
 /** Codes only: never retain a provider body, credential, transport error or cause. */
 export class TranslationProviderError extends Error {
@@ -25,6 +28,7 @@ export class TranslationProviderError extends Error {
     readonly outcome: TranslationOutcome,
     readonly retryAfter: string | null = null,
     readonly retryable = false,
+    readonly usage?: TranslationUsage,
   ) { super(code) }
 }
 
@@ -136,14 +140,21 @@ function validateInput(items: TranslationItem[], locale: string) {
   if (characters > MAX_INPUT_CHARACTERS) throw new TranslationProviderError('translation_input_too_large', 'not_sent')
 }
 
+function knownUsage(payload: unknown): TranslationUsage | undefined {
+  const body = object(payload), usage = object(body?.usage)
+  if (body?.type !== 'message' || !safeCount(usage?.input_tokens) || !safeCount(usage?.output_tokens)
+    || usage.input_tokens > MAX_ACCOUNTED_INPUT_TOKENS || usage.output_tokens > MAX_OUTPUT_TOKENS) return undefined
+  return { inputTokens: usage.input_tokens, outputTokens: usage.output_tokens }
+}
+
 function parseTranslation(payload: unknown, input: TranslationItem[]) {
   const body = object(payload)
   if (body?.stop_reason === 'max_tokens') rejectOutput('translation_output_truncated')
   if (!body || body.type !== 'message' || body.stop_reason !== 'end_turn' || !Array.isArray(body.content) || !body.content.length
     || body.content.some(part => object(part)?.type !== 'text' || typeof object(part)?.text !== 'string')) rejectOutput('translation_response_invalid')
   if (body.model !== TRANSLATION_MODEL) rejectOutput('translation_model_mismatch')
-  const usage = object(body.usage)
-  if (!safeCount(usage?.input_tokens) || !safeCount(usage?.output_tokens) || usage.output_tokens > MAX_OUTPUT_TOKENS) rejectOutput('translation_usage_invalid')
+  const usage = knownUsage(body)
+  if (!usage) rejectOutput('translation_usage_invalid')
   let output: unknown
   try { output = JSON.parse(body.content.map(part => object(part)!.text as string).join('')) }
   catch { rejectOutput('translation_output_json_invalid') }
@@ -162,7 +173,7 @@ function parseTranslation(payload: unknown, input: TranslationItem[]) {
   }
   if (characters > MAX_INPUT_CHARACTERS * 8) rejectOutput('translation_output_too_large')
   return { items: input.map(item => ({ key: item.key, text: translated.get(item.key)! })), model: TRANSLATION_MODEL,
-    usage: { inputTokens: usage.input_tokens, outputTokens: usage.output_tokens } }
+    usage }
 }
 
 /** Exactly one POST. Durable send reservation and retry decisions belong to the caller. */
@@ -199,6 +210,11 @@ export async function translateMaskedBatch({ key, locale, items, fetcher = fetch
     let payload: unknown
     try { payload = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)) }
     catch { rejectOutput('translation_response_json_invalid') }
-    return parseTranslation(payload, items)
+    try { return parseTranslation(payload, items) }
+    catch (error) {
+      const usage = knownUsage(payload)
+      if (error instanceof TranslationProviderError) throw new TranslationProviderError(error.code, error.outcome, error.retryAfter, error.retryable, usage)
+      throw new TranslationProviderError('translation_response_invalid', 'rejected', null, false, usage)
+    }
   } finally { clearTimeout(timer) }
 }
