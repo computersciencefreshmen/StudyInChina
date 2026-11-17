@@ -57,6 +57,17 @@ export type UniversityCatalogResult = {
   cityOptions: CatalogListOption[]
 }
 
+/** Replace legacy counts on this page using the same canonical programme snapshot as university details. */
+export function withUnifiedUniversityProgramCounts(
+  result: UniversityCatalogResult,
+  counts: ReadonlyMap<string, number>,
+): UniversityCatalogResult {
+  return { ...result, items: result.items.map(item => {
+    const count = counts.get(item.institution.id) ?? 0
+    return { ...item, programCount: Number.isSafeInteger(count) && count >= 0 ? count : 0 }
+  }) }
+}
+
 function first(value: string | string[] | undefined): string {
   return typeof value === 'string' ? value : ''
 }

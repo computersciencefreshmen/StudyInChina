@@ -2,7 +2,7 @@ import 'server-only'
 import { getCatalogData } from './data/load'
 import { classifyProgramField } from './data/fields'
 import { matchesUniversityRankings, rankingFilterKeys } from './data/rankings'
-import { isCurrentVerifiedRecord } from './data/freshness'
+import { getTodayDate, isCurrentVerifiedRecord } from './data/freshness'
 import { scholarshipAppliesToProgram } from './data/scholarship-scope'
 import type { DataBundle, DegreeLevel, University } from './data/types'
 import { getProgramFeedIndex, getProgramFeedRecord } from './program-feed'
@@ -17,6 +17,22 @@ export type UnifiedProgramResult = Omit<ProgramCatalogResult, 'items'> & { items
 
 export function normalizeProgramIdentity(value: string) {
   return value.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
+}
+function universityNameKey(value: string) {
+  // Punctuation/spacing variants such as Xi'an/Xian have the same exact letters.
+  // Never remove meaningful words (Medical/Forestry/etc.) or infer abbreviations.
+  return normalizeProgramIdentity(value).replaceAll(' ', '')
+}
+function universityNameIndex(universities: University[]) {
+  const index = new Map<string, University | null>()
+  for (const university of universities) for (const name of [university.name.en, university.name.zh]) {
+    if (!name) continue
+    const key = universityNameKey(name)
+    if (!key) continue
+    if (!index.has(key)) index.set(key, university)
+    else if (index.get(key)?.id !== university.id) index.set(key, null)
+  }
+  return index
 }
 export function collectedDegree(value = ''): DegreeLevel | undefined {
   const key = normalizeProgramIdentity(value).replaceAll(' ', '')
@@ -65,19 +81,16 @@ function schoolName(item: UnifiedProgramItem) { return 'collected' in item ? ite
 export function combineProgramRecords(data: DataBundle, captured: ThirdPartyProgram[], today: string) {
   const items: UnifiedProgramItem[] = selectProgramCatalogItems(data, parseProgramCatalogFilters({}), today).map(item => ({ ...item }))
   const keys = new Map<string, UnifiedProgramItem[]>(), aliases = new Map<string, string>()
-  const schools = new Map<string, University>()
-  for (const university of data.universities) if (university.name.en) {
-    const key = normalizeProgramIdentity(university.name.en)
-    if (!schools.has(key)) schools.set(key, university)
-  }
+  const schools = universityNameIndex(data.universities)
   for (const item of items) if (!('collected' in item)) {
-    const key = identity(item.university.name.en || '', item.program.name.en || '', item.program.degreeLevel, item.program.teachingLanguages)
+    const key = identity(item.university.id, item.program.name.en || '', item.program.degreeLevel, item.program.teachingLanguages)
     if (key) keys.set(key, [...keys.get(key) || [], item])
   }
   for (const record of [...captured].sort((a, b) => a.id.localeCompare(b.id))) {
     if (record.status !== 'extracted') continue
     const degree = collectedDegree(record.fields.degree), languages = collectedLanguages(record.fields.language)
-    const key = identity(record.schoolName, record.name, degree, languages)
+    const university = schools.get(universityNameKey(record.schoolName)) || undefined
+    const key = identity(university?.id || record.schoolName, record.name, degree, languages)
     const existing = key ? keys.get(key)?.find(candidate => sameKnownOffering(candidate, record)) : undefined
     const publicRecord = publicThirdPartyProgram(record) as ThirdPartyProgram
     if (existing) {
@@ -85,12 +98,26 @@ export function combineProgramRecords(data: DataBundle, captured: ThirdPartyProg
       aliases.set(record.id, unifiedProgramSlug(existing))
       continue
     }
-    const item: CollectedProgramItem = { collected: publicRecord, degree, languages, university: schools.get(normalizeProgramIdentity(record.schoolName)), sources: [publicRecord] }
+    const item: CollectedProgramItem = { collected: publicRecord, degree, languages, university, sources: [publicRecord] }
     items.push(item)
     aliases.set(record.id, record.id)
     if (key) keys.set(key, [...keys.get(key) || [], item])
   }
   return { items, aliases }
+}
+
+/** Counts the same canonical offerings as university details and Programs filters. */
+export function countUnifiedUniversityPrograms(data: DataBundle, captured: ThirdPartyProgram[], today: string): Map<string, number> {
+  const counts = new Map(data.universities.map(university => [university.id, 0]))
+  for (const item of combineProgramRecords(data, captured, today).items) {
+    if (item.university) counts.set(item.university.id, (counts.get(item.university.id) || 0) + 1)
+  }
+  return counts
+}
+
+export async function getUnifiedUniversityProgramCounts(today = getTodayDate(), catalogData?: DataBundle): Promise<Map<string, number>> {
+  const [data, feed] = await Promise.all([catalogData ?? getCatalogData(), getProgramFeedIndex()])
+  return countUnifiedUniversityPrograms(data, feed.programs, today)
 }
 
 function matchesCollected(item: CollectedProgramItem, filters: ProgramCatalogFilters, data: DataBundle, today: string) {
@@ -114,9 +141,9 @@ function matchesCollected(item: CollectedProgramItem, filters: ProgramCatalogFil
 
 export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyProgram[], filters: ProgramCatalogFilters, today: string, revision: string): UnifiedProgramResult {
   const combined = combineProgramRecords(data, captured, today)
-  const sourceSchool = captured.find(record => record.schoolId === filters.institution)
-  const exactUniversities = sourceSchool ? data.universities.filter(university => university.name.en && normalizeProgramIdentity(university.name.en) === normalizeProgramIdentity(sourceSchool.schoolName)) : []
-  const effectiveFilters = sourceSchool ? { ...filters, institution: exactUniversities.length === 1 ? exactUniversities[0].slug : normalizeProgramIdentity(sourceSchool.schoolName) } : filters
+  const sourceSchool = captured.find(record => record.status === 'extracted' && record.schoolId === filters.institution)
+  const sourceUniversity = sourceSchool ? universityNameIndex(data.universities).get(universityNameKey(sourceSchool.schoolName)) : undefined
+  const effectiveFilters = sourceSchool ? { ...filters, institution: sourceUniversity?.slug || normalizeProgramIdentity(sourceSchool.schoolName) } : filters
   const currentScholarships = filters.scholarship ? data.scholarships.filter(scholarship => isCurrentVerifiedRecord(scholarship, today)) : []
   const reviewedData = filters.scholarship ? {
     ...data,

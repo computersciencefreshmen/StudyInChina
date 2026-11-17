@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { UniversityExplorerV2 } from '@/components/features/UniversityExplorerV2'
 import { getMessages } from '@/i18n/messages'
 import type { LaunchLocale } from '@/i18n/config'
+import type { CatalogInstitutionListItem } from '@/lib/catalog/types'
 import {
   parseUniversityCatalogFilters,
   type UniversityCatalogResult,
@@ -24,7 +25,29 @@ function result(overrides: Partial<UniversityCatalogResult> = {}): UniversityCat
   }
 }
 
+function university(programCount: number): CatalogInstitutionListItem {
+  return { institution: { id: 'university-example', slug: 'example-university', name: { en: 'Example University', zh: '示例大学' },
+    summary: { en: 'Source-backed university record', zh: '来源院校记录' }, status: 'stale', verifiedAt: '2026-01-01',
+    reviewAfter: '2027-01-01', officialUrl: 'https://example.edu', sourceIds: [] },
+  city: null, disciplines: [], programCount, scholarshipCount: 0 } as unknown as CatalogInstitutionListItem
+}
+
 describe('UniversityExplorerV2', () => {
+  it('links actual programme counts to the same canonical university filter as its detail page', () => {
+    render(<UniversityExplorerV2 result={result({ items: [university(12)], total: 1 })} locale="zh" messages={getMessages('zh')} />)
+    expect(screen.getByRole('link', { name: /^12$/ })).toHaveAttribute('href', '/zh/programs?institution=example-university')
+    expect(screen.queryByTestId('university-program-information-pending')).not.toBeInTheDocument()
+  })
+
+  it.each(locales)('describes genuine zero coverage honestly in %s', locale => {
+    const { container } = render(<UniversityExplorerV2 result={result({ items: [university(0)], total: 1 })} locale={locale} messages={getMessages(locale)} />)
+    const pending = screen.getByTestId('university-program-information-pending')
+    expect(pending).toBeVisible()
+    expect(pending.textContent).not.toBe('0')
+    if (locale === 'zh') expect(pending).toHaveTextContent('项目资料待补充')
+    expect(container.querySelector('[data-program-count="0"]')).toContainElement(pending)
+    expect(container.querySelector(`a[href="/${locale}/programs?institution=example-university"]`)).toBeNull()
+  })
   it.each(locales)('renders the server-driven filter form in %s', (locale) => {
     const messages = getMessages(locale)
     render(<UniversityExplorerV2 result={result()} locale={locale} messages={messages} />)

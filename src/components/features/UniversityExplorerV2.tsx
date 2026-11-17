@@ -1,4 +1,5 @@
 import { RoundedSelect } from '@/components/ui/RoundedSelect'
+import Link from 'next/link'
 import { Badge, Button, Card, LinkButton, VerificationBadge } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
@@ -33,15 +34,16 @@ type ExplorerLabels = {
   programsMost: string
   scholarshipsMost: string
   sortBy: string
+  programsPending: string
 }
 
 const labels: Record<LaunchLocale, ExplorerLabels> = {
-  en: { apply: 'Apply filters', defaultOrder: 'Default order', nameOrder: 'University A–Z', next: 'Next', pagination: 'University catalogue pages', previous: 'Previous', programsMost: 'Most programs', scholarshipsMost: 'Most scholarships', sortBy: 'Sort by' },
-  zh: { apply: '应用筛选', defaultOrder: '默认顺序', nameOrder: '大学名称 A–Z', next: '下一页', pagination: '高校目录分页', previous: '上一页', programsMost: '项目数量最多', scholarshipsMost: '奖学金数量最多', sortBy: '排序方式' },
-  ru: { apply: 'Применить фильтры', defaultOrder: 'По умолчанию', nameOrder: 'Вуз A–Я', next: 'Далее', pagination: 'Страницы каталога вузов', previous: 'Назад', programsMost: 'Больше всего программ', scholarshipsMost: 'Больше всего стипендий', sortBy: 'Сортировка' },
-  de: { apply: 'Filter anwenden', defaultOrder: 'Standardreihenfolge', nameOrder: 'Hochschule A–Z', next: 'Weiter', pagination: 'Hochschulkatalogseiten', previous: 'Zurück', programsMost: 'Meiste Studiengänge', scholarshipsMost: 'Meiste Stipendien', sortBy: 'Sortieren nach' },
-  fr: { apply: 'Appliquer les filtres', defaultOrder: 'Ordre par défaut', nameOrder: 'Établissement A–Z', next: 'Suivant', pagination: 'Pages du catalogue des universités', previous: 'Précédent', programsMost: 'Plus de programmes', scholarshipsMost: 'Plus de bourses', sortBy: 'Trier par' },
-  es: { apply: 'Aplicar filtros', defaultOrder: 'Orden predeterminado', nameOrder: 'Universidad A–Z', next: 'Siguiente', pagination: 'Páginas del catálogo de universidades', previous: 'Anterior', programsMost: 'Más programas', scholarshipsMost: 'Más becas', sortBy: 'Ordenar por' },
+  en: { apply: 'Apply filters', defaultOrder: 'Default order', nameOrder: 'University A–Z', next: 'Next', pagination: 'University catalogue pages', previous: 'Previous', programsMost: 'Most programs', scholarshipsMost: 'Most scholarships', sortBy: 'Sort by', programsPending: 'Program information pending' },
+  zh: { apply: '应用筛选', defaultOrder: '默认顺序', nameOrder: '大学名称 A–Z', next: '下一页', pagination: '高校目录分页', previous: '上一页', programsMost: '项目数量最多', scholarshipsMost: '奖学金数量最多', sortBy: '排序方式', programsPending: '项目资料待补充' },
+  ru: { apply: 'Применить фильтры', defaultOrder: 'По умолчанию', nameOrder: 'Вуз A–Я', next: 'Далее', pagination: 'Страницы каталога вузов', previous: 'Назад', programsMost: 'Больше всего программ', scholarshipsMost: 'Больше всего стипендий', sortBy: 'Сортировка', programsPending: 'Сведения о программах пока не добавлены' },
+  de: { apply: 'Filter anwenden', defaultOrder: 'Standardreihenfolge', nameOrder: 'Hochschule A–Z', next: 'Weiter', pagination: 'Hochschulkatalogseiten', previous: 'Zurück', programsMost: 'Meiste Studiengänge', scholarshipsMost: 'Meiste Stipendien', sortBy: 'Sortieren nach', programsPending: 'Programminformationen werden ergänzt' },
+  fr: { apply: 'Appliquer les filtres', defaultOrder: 'Ordre par défaut', nameOrder: 'Établissement A–Z', next: 'Suivant', pagination: 'Pages du catalogue des universités', previous: 'Précédent', programsMost: 'Plus de programmes', scholarshipsMost: 'Plus de bourses', sortBy: 'Trier par', programsPending: 'Informations sur les programmes à compléter' },
+  es: { apply: 'Aplicar filtros', defaultOrder: 'Orden predeterminado', nameOrder: 'Universidad A–Z', next: 'Siguiente', pagination: 'Páginas del catálogo de universidades', previous: 'Anterior', programsMost: 'Más programas', scholarshipsMost: 'Más becas', sortBy: 'Ordenar por', programsPending: 'Información de programas pendiente' },
 }
 
 type SelectOption = { value: string; label: string }
@@ -215,7 +217,11 @@ export function UniversityExplorerV2({
               ))}
             </div>
             <dl className="record-facts">
-              <div><dt>{messages.universities.programs}</dt><dd>{programCount}</dd></div>
+              <div><dt>{messages.universities.programs}</dt><dd data-program-count={programCount}>
+                {programCount > 0
+                  ? <Link href={`/${locale}/programs?institution=${encodeURIComponent(institution.slug)}`}>{programCount}</Link>
+                  : <span data-testid="university-program-information-pending">{text.programsPending}</span>}
+              </dd></div>
               <div><dt>{messages.universities.funding}</dt><dd>{scholarshipCount}</dd></div>
             </dl>
             <div className="record-card__actions">
