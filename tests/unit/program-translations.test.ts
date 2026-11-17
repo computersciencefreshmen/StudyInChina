@@ -88,6 +88,66 @@ describe('source-bound programme translation reader', () => {
     expect(network).toHaveBeenCalledTimes(2)
   })
 
+  it('expires a positive entry at 60 seconds despite intervening hits and falls back after withdrawal', async () => {
+    const network = vi.fn(async () => Response.json(translated(requirement)))
+    vi.stubGlobal('fetch', network)
+    const { getProgramTranslations } = await import('@/lib/program-translations')
+    const source = { fields: { requirements: requirement } }, started = Date.now()
+    expect((await getProgramTranslations(source, 'zh')).requirements?.text).toBe(translatedRequirement)
+    network.mockImplementation(async () => new Response(null, { status: 404 }))
+    vi.setSystemTime(started + 59_999)
+    expect((await getProgramTranslations(source, 'zh')).requirements?.text).toBe(translatedRequirement)
+    expect(network).toHaveBeenCalledTimes(1)
+    vi.setSystemTime(started + 60_000)
+    expect(await getProgramTranslations(source, 'zh')).toEqual({})
+    expect(network).toHaveBeenCalledTimes(2)
+    vi.setSystemTime(started + 119_999)
+    expect(await getProgramTranslations(source, 'zh')).toEqual({})
+    expect(network).toHaveBeenCalledTimes(2)
+    network.mockImplementation(async () => Response.json(translated(requirement)))
+    vi.setSystemTime(started + 120_000)
+    expect((await getProgramTranslations(source, 'zh')).requirements?.text).toBe(translatedRequirement)
+    expect(network).toHaveBeenCalledTimes(3)
+  })
+
+  it('deduplicates concurrent refreshes of an expired positive entry without serving the old record', async () => {
+    const network = vi.fn(async () => Response.json(translated(requirement)))
+    vi.stubGlobal('fetch', network)
+    const { getProgramTranslations } = await import('@/lib/program-translations')
+    const source = { fields: { requirements: requirement } }
+    await getProgramTranslations(source, 'zh')
+    vi.setSystemTime(Date.now() + 60_000)
+    let finish!: (response: Response) => void
+    network.mockImplementationOnce(() => new Promise<Response>(resolve => { finish = resolve }))
+    const first = getProgramTranslations(source, 'zh'), second = getProgramTranslations(source, 'zh')
+    await Promise.resolve()
+    expect(network).toHaveBeenCalledTimes(2)
+    const updated = translated(requirement, 'zh', { translatedAt: '2026-11-17T06:01:00.000Z' })
+    finish(Response.json(updated))
+    const results = await Promise.all([first, second])
+    expect(results.map(result => result.requirements)).toEqual([updated, updated])
+    expect(network).toHaveBeenCalledTimes(2)
+  })
+
+  it('reclaims expired entry bytes so refreshing does not evict a still-fresh translation within the memory budget', async () => {
+    const sources = Array.from({ length: 21 }, (_, index) => 'Campus background ' + String.fromCharCode(65 + index) + 'a'.repeat(369_000))
+    const records = new Map(sources.map(source => [base + translationPath(source, 'en'), translated(source, 'en', { text: source, method: 'source', model: null })]))
+    const network = vi.fn(async (url: RequestInfo | URL) => Response.json(records.get(String(url))))
+    vi.stubGlobal('fetch', network)
+    const { getProgramTranslations } = await import('@/lib/program-translations')
+    const load = (index: number) => getProgramTranslations({ fields: { requirements: sources[index] } }, 'en')
+    const started = Date.now()
+    expect((await load(0)).requirements?.text).toBe(sources[0])
+    vi.setSystemTime(started + 30_000)
+    expect((await load(1)).requirements?.text).toBe(sources[1])
+    vi.setSystemTime(started + 60_000)
+    expect((await load(0)).requirements?.text).toBe(sources[0])
+    for (let index = 2; index < sources.length; index++) expect((await load(index)).requirements?.text).toBe(sources[index])
+    expect((await load(1)).requirements?.text).toBe(sources[1])
+    expect(network.mock.calls.filter(([url]) => String(url) === base + translationPath(sources[1], 'en'))).toHaveLength(1)
+    expect(network).toHaveBeenCalledTimes(22)
+  })
+
   it.each([
     { targetLocale: 'ru' as const },
     { text: translatedRequirement.replace('HSK 4', 'HSK 3') },
