@@ -3,6 +3,8 @@ import { isVisualMediaQuery } from '@/lib/visual-media'
 import { notFound } from 'next/navigation'
 import { ProgramExplorerV2 } from '@/components/features/ProgramExplorerV2'
 import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
+import { importedProgramText } from '@/components/features/ImportedPrograms'
+import importedStyles from '@/components/features/ImportedPrograms.module.css'
 import { PageHero } from '@/components/ui'
 import { getMessages } from '@/i18n/messages'
 import { getTodayDate } from '@/lib/data/freshness'
@@ -52,6 +54,10 @@ export default async function ProgramsPage({
     />
     <section className="atlas-container atlas-section">
       <DiscoveryNotice locale={locale} />
+      <aside className={importedStyles.banner} data-testid="imported-program-directory-link">
+        <div><strong>{importedProgramText(locale).banner}</strong><p>{importedProgramText(locale).bannerIntro}</p></div>
+        <Link className={importedStyles.textLink} href={`/${locale}/programs/imported`}>{importedProgramText(locale).title} →</Link>
+      </aside>
       {isVisualMediaQuery(filters.query) ? <aside className="notice" data-testid="visual-media-collection-shortcut">
         <Link href={`/${locale}/visual-media`}>{locale === 'zh' ? 'Visual Media 硕士专题与英语优先申请简报' : 'Visual Media master’s collection and English-first applicant brief'} →</Link>
       </aside> : null}
