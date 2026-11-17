@@ -1,0 +1,166 @@
+import 'server-only'
+import { getCatalogData } from './data/load'
+import { classifyProgramField } from './data/fields'
+import { matchesUniversityRankings, rankingFilterKeys } from './data/rankings'
+import type { DataBundle, DegreeLevel, University } from './data/types'
+import { getProgramFeedIndex, getProgramFeedRecord } from './program-feed'
+import { publicThirdPartyProgram } from './third-party-public'
+import type { ThirdPartyProgram } from './third-party-programs'
+import { parseProgramCatalogFilters, selectProgramCatalogItems, PROGRAM_CATALOG_PAGE_SIZE, type ProgramCatalogFilters, type ProgramCatalogItem, type ProgramCatalogResult } from './program-catalog'
+
+export type CollectedProgramItem = { collected: ThirdPartyProgram; university?: University; degree?: DegreeLevel; languages: string[]; sources: ThirdPartyProgram[] }
+export type ReviewedProgramItem = ProgramCatalogItem & { sources?: ThirdPartyProgram[] }
+export type UnifiedProgramItem = ReviewedProgramItem | CollectedProgramItem
+export type UnifiedProgramResult = Omit<ProgramCatalogResult, 'items'> & { items: UnifiedProgramItem[]; revision: string }
+
+export function normalizeProgramIdentity(value: string) {
+  return value.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
+}
+export function collectedDegree(value = ''): DegreeLevel | undefined {
+  const key = normalizeProgramIdentity(value).replaceAll(' ', '')
+  if (['bachelor', 'bachelors', 'bachelordegree', 'undergraduate', 'bsc', 'ba', 'beng'].includes(key)) return 'bachelor'
+  if (['master', 'masters', 'masterdegree', 'postgraduate', 'msc', 'ma', 'mba'].includes(key)) return 'master'
+  if (['doctor', 'doctorate', 'doctoral', 'phd', 'phddegree'].includes(key)) return 'doctorate'
+  if (['language', 'chineselanguage', 'chineselanguageprogram'].includes(key)) return 'language'
+  if (['foundation', 'preparatory', 'preparatorycourse'].includes(key)) return 'foundation'
+  if (['nondegree', 'nondegreeprogram', 'other'].includes(key)) return 'other'
+  return undefined
+}
+export function collectedLanguages(value = ''): string[] {
+  const key = normalizeProgramIdentity(value)
+  if (['english', 'english taught', 'english medium'].includes(key)) return ['English']
+  if (['chinese', 'mandarin', 'chinese taught', 'chinese medium'].includes(key)) return ['Chinese']
+  if (['bilingual', 'chinese english', 'english chinese', 'chinese and english', 'english and chinese'].includes(key)) return ['Chinese', 'English']
+  return []
+}
+function languageKey(languages: string[]) {
+  return [...new Set(languages.flatMap(language => collectedLanguages(language)))].sort().join('|')
+}
+function identity(school: string, name: string, degree: DegreeLevel | undefined, languages: string[]) {
+  const schoolKey = normalizeProgramIdentity(school), nameKey = normalizeProgramIdentity(name), language = languageKey(languages)
+  return schoolKey && nameKey && degree && language ? `${schoolKey}\0${nameKey}\0${degree}\0${language}` : undefined
+}
+const offeringDimensions = ['duration', 'tuition', 'startDate', 'deadline'] as const
+function offeringValue(value: string | undefined) {
+  const normalized = value?.normalize('NFKC').toLowerCase().replace(/\s+/g, ' ').trim()
+  return normalized && !/^(unknown|not announced|not provided|not available|n\/a|tba)$/.test(normalized) ? normalized : undefined
+}
+function sameKnownOffering(candidate: UnifiedProgramItem, record: ThirdPartyProgram) {
+  // The reviewed schema does not supply a course start date and source fee wording
+  // on the same scope. Missing dimensions cannot prove that two offerings coincide.
+  if (!('collected' in candidate)) return false
+  return offeringDimensions.every(key => {
+    const left = offeringValue(candidate.collected.fields[key]), right = offeringValue(record.fields[key])
+    if (!left || !right || left !== right) return false
+    return key !== 'startDate' && key !== 'deadline' || /\b(?:19|20)\d{2}\b/.test(left)
+  })
+}
+export function unifiedProgramSlug(item: UnifiedProgramItem) { return 'collected' in item ? item.collected.id : item.program.slug }
+function title(item: UnifiedProgramItem) { return 'collected' in item ? item.collected.name : item.program.name.en || item.program.name.zh || '' }
+function schoolName(item: UnifiedProgramItem) { return 'collected' in item ? item.collected.schoolName : item.university.name.en || '' }
+
+/** Only exact identities AND fully known equal offering dimensions combine sources. Unknowns retain distinct offerings. */
+export function combineProgramRecords(data: DataBundle, captured: ThirdPartyProgram[], today: string) {
+  const items: UnifiedProgramItem[] = selectProgramCatalogItems(data, parseProgramCatalogFilters({}), today).map(item => ({ ...item }))
+  const keys = new Map<string, UnifiedProgramItem[]>(), aliases = new Map<string, string>()
+  const schools = new Map<string, University>()
+  for (const university of data.universities) if (university.name.en) {
+    const key = normalizeProgramIdentity(university.name.en)
+    if (!schools.has(key)) schools.set(key, university)
+  }
+  for (const item of items) if (!('collected' in item)) {
+    const key = identity(item.university.name.en || '', item.program.name.en || '', item.program.degreeLevel, item.program.teachingLanguages)
+    if (key) keys.set(key, [...keys.get(key) || [], item])
+  }
+  for (const record of [...captured].sort((a, b) => a.id.localeCompare(b.id))) {
+    if (record.status !== 'extracted') continue
+    const degree = collectedDegree(record.fields.degree), languages = collectedLanguages(record.fields.language)
+    const key = identity(record.schoolName, record.name, degree, languages)
+    const existing = key ? keys.get(key)?.find(candidate => sameKnownOffering(candidate, record)) : undefined
+    const publicRecord = publicThirdPartyProgram(record) as ThirdPartyProgram
+    if (existing) {
+      existing.sources = [...existing.sources || [], publicRecord]
+      aliases.set(record.id, unifiedProgramSlug(existing))
+      continue
+    }
+    const item: CollectedProgramItem = { collected: publicRecord, degree, languages, university: schools.get(normalizeProgramIdentity(record.schoolName)), sources: [publicRecord] }
+    items.push(item)
+    aliases.set(record.id, record.id)
+    if (key) keys.set(key, [...keys.get(key) || [], item])
+  }
+  return { items, aliases }
+}
+
+function matchesCollected(item: CollectedProgramItem, filters: ProgramCatalogFilters, data: DataBundle, today: string) {
+  const record = item.collected, university = item.university
+  const city = university ? data.cities.find(candidate => candidate.id === university.cityId) : undefined
+  const search = normalizeProgramIdentity(`${record.name} ${record.schoolName} ${record.fields.degree || ''} ${record.fields.language || ''}`)
+  if (normalizeProgramIdentity(filters.query).split(' ').filter(Boolean).some(token => !search.includes(token))) return false
+  if (filters.degree && item.degree !== filters.degree) return false
+  if (filters.language && !(filters.language === 'Bilingual' ? item.languages.length > 1 : item.languages.includes(filters.language))) return false
+  if (filters.discipline && classifyProgramField({ name: { en: record.name }, degreeLevel: item.degree || 'other', discipline: 'other' }) !== filters.discipline) return false
+  if (filters.institution && ![record.schoolId, normalizeProgramIdentity(record.schoolName), university?.id, university?.slug].includes(filters.institution)) return false
+  if (filters.city && ![city?.id, city?.slug].includes(filters.city)) return false
+  if (rankingFilterKeys.some(key => filters[key]) && (!university || !matchesUniversityRankings(university, filters, today))) return false
+  // Source wording is retained; it does not establish a current application cycle or comparable annual tuition.
+  if (filters.intake || filters.scholarship || filters.applicationState && filters.applicationState !== 'not-announced') return false
+  const hasTuition = Boolean(record.fields.tuition?.trim()) && !/^(unknown|not provided|n\/a|not available)$/i.test(record.fields.tuition!.trim())
+  if (filters.tuition === 'known' && !hasTuition || filters.tuition === 'unknown' && hasTuition) return false
+  if (filters.tuition && !['known', 'unknown'].includes(filters.tuition)) return false
+  return true
+}
+
+export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyProgram[], filters: ProgramCatalogFilters, today: string, revision: string): UnifiedProgramResult {
+  const combined = combineProgramRecords(data, captured, today)
+  const sourceSchool = captured.find(record => record.schoolId === filters.institution)
+  const exactUniversities = sourceSchool ? data.universities.filter(university => university.name.en && normalizeProgramIdentity(university.name.en) === normalizeProgramIdentity(sourceSchool.schoolName)) : []
+  const effectiveFilters = sourceSchool ? { ...filters, institution: exactUniversities.length === 1 ? exactUniversities[0].slug : normalizeProgramIdentity(sourceSchool.schoolName) } : filters
+  const reviewedMatches = new Set(selectProgramCatalogItems(data, effectiveFilters, today).map(item => item.program.id))
+  const matching = combined.items.filter(item => 'collected' in item ? matchesCollected(item, effectiveFilters, data, today) : reviewedMatches.has(item.program.id))
+  if (filters.sort === 'name') matching.sort((a, b) => title(a).localeCompare(title(b), 'en') || unifiedProgramSlug(a).localeCompare(unifiedProgramSlug(b)))
+  else if (filters.sort !== 'default') {
+    const reviewedOrder = new Map(selectProgramCatalogItems(data, filters, today).map((item, index) => [item.program.id, index]))
+    matching.sort((a, b) => ('collected' in a ? Number.MAX_SAFE_INTEGER : reviewedOrder.get(a.program.id) || 0) - ('collected' in b ? Number.MAX_SAFE_INTEGER : reviewedOrder.get(b.program.id) || 0))
+  } else {
+    // Interleave institutions so a large source school cannot monopolize the first page.
+    const groups = new Map<string, UnifiedProgramItem[]>()
+    for (const item of matching) { const key = normalizeProgramIdentity(schoolName(item)); const group = groups.get(key) || []; group.push(item); groups.set(key, group) }
+    const ordered: UnifiedProgramItem[] = [], values = [...groups.values()]
+    for (let offset = 0; ordered.length < matching.length; offset++) for (const group of values) if (group[offset]) ordered.push(group[offset])
+    matching.splice(0, matching.length, ...ordered)
+  }
+  const pageCount = Math.ceil(matching.length / PROGRAM_CATALOG_PAGE_SIZE)
+  const stale = Boolean(filters.cursor) || Boolean(filters.revision && filters.revision !== revision)
+  const page = pageCount ? Math.min(stale ? 1 : filters.page, pageCount) : 1
+  const options = new Map<string, { value: string; name: { en?: string; zh?: string } }>()
+  const cityIds = new Set<string>()
+  for (const item of combined.items) {
+    const university = item.university
+    const value = university?.slug || normalizeProgramIdentity(schoolName(item))
+    options.set(value, { value, name: university?.name || { en: schoolName(item) } })
+    if (university) cityIds.add(university.cityId)
+    if ('collected' in item && item.collected.schoolId === filters.institution) options.set(filters.institution, { value: filters.institution, name: { en: item.collected.schoolName } })
+  }
+  return { items: matching.slice((page - 1) * PROGRAM_CATALOG_PAGE_SIZE, page * PROGRAM_CATALOG_PAGE_SIZE), total: matching.length, totalExact: true, page, pageCount, pageSize: PROGRAM_CATALOG_PAGE_SIZE, revision,
+    filters: { ...filters, page, cursor: '', cursorHistory: [], nextCursor: undefined, paginationMode: 'offset', revision },
+    universityOptions: [...options.values()].sort((a, b) => (a.name.en || '').localeCompare(b.name.en || '')),
+    cityOptions: data.cities.filter(city => cityIds.has(city.id)).map(city => ({ value: city.slug, name: city.name })) }
+}
+
+export async function queryUnifiedPrograms(filters: ProgramCatalogFilters, today: string) {
+  const [data, feed] = await Promise.all([getCatalogData(), getProgramFeedIndex()])
+  return queryUnifiedProgramData(data, feed.programs, filters, today, feed.revision)
+}
+export async function resolveUnifiedProgram(slug: string, today: string) {
+  const [data, feed] = await Promise.all([getCatalogData(), getProgramFeedIndex()])
+  const combined = combineProgramRecords(data, feed.programs, today)
+  const canonical = combined.aliases.get(slug) || slug
+  const item = combined.items.find(item => unifiedProgramSlug(item) === canonical)
+  if (!item) return undefined
+  if ('collected' in item) {
+    const record = await getProgramFeedRecord(item.collected.id)
+    if (!record || record.status !== 'extracted') return undefined
+    return { item: { ...item, collected: record }, canonical }
+  }
+  return { item, canonical }
+}

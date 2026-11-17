@@ -62,6 +62,8 @@ export type ProgramCatalogFilters = RankingFilters & {
   cursor: string
   cursorHistory: string[]
   nextCursor?: string
+  paginationMode?: 'offset'
+  revision?: string
 }
 
 export type ProgramCatalogOption = {
@@ -142,6 +144,7 @@ export function parseProgramCatalogFilters(
     page: Number.isSafeInteger(requestedPage) && requestedPage > 0
       ? requestedPage
       : 1,
+    ...(bounded(params.revision) ? { revision: bounded(params.revision) } : {}),
   }
 }
 
@@ -239,12 +242,11 @@ function catalogOptions(data: DataBundle) {
  * directly to the D1 list endpoint later. Only the returned page is handed to
  * the explorer component; the full catalogue never crosses a client boundary.
  */
-export function queryProgramCatalog(
+export function selectProgramCatalogItems(
   data: DataBundle,
   filters: ProgramCatalogFilters,
   today: string,
-  pageSize = PROGRAM_CATALOG_PAGE_SIZE,
-): ProgramCatalogResult {
+): ProgramCatalogItem[] {
   const universitiesById = new Map(data.universities.map((item) => [item.id, item]))
   const citiesById = new Map(data.cities.map((item) => [item.id, item]))
   const cyclesByProgram = new Map<string, AdmissionCycle[]>()
@@ -286,7 +288,16 @@ export function queryProgramCatalog(
     return matches && matchesUniversityRankings(university, filters, today) ? [{ program, university, cycle }] : []
   })
 
-  sortEntries(matching, filters.sort)
+  return sortEntries(matching, filters.sort)
+}
+
+export function queryProgramCatalog(
+  data: DataBundle,
+  filters: ProgramCatalogFilters,
+  today: string,
+  pageSize = PROGRAM_CATALOG_PAGE_SIZE,
+): ProgramCatalogResult {
+  const matching = selectProgramCatalogItems(data, filters, today)
   const normalizedPageSize = Math.min(100, Math.max(1, pageSize))
   const pageCount = Math.ceil(matching.length / normalizedPageSize)
   const page = pageCount === 0 ? 1 : Math.min(filters.page, pageCount)
@@ -402,7 +413,10 @@ export function programCatalogHref(
   const params = new URLSearchParams()
   let targetCursor = filters.cursor
   let targetHistory = [...filters.cursorHistory]
-  if (page === filters.page + 1 && filters.nextCursor) {
+  if (filters.paginationMode === 'offset') {
+    targetCursor = ''
+    targetHistory = []
+  } else if (page === filters.page + 1 && filters.nextCursor) {
     targetHistory.push(filters.cursor || '~')
     targetCursor = filters.nextCursor
   } else if (page === filters.page - 1) {
@@ -430,6 +444,7 @@ export function programCatalogHref(
   for (const [key, value] of values) if (value) params.set(key, value)
   if (targetCursor) params.set('cursor', targetCursor)
   if (targetHistory.length > 0) params.set('cursorHistory', targetHistory.join(','))
+  if (filters.paginationMode === 'offset' && filters.revision) params.set('revision', filters.revision)
   if (page > 1) params.set('page', String(page))
   const query = params.toString()
   return `/${locale}/programs${query ? `?${query}` : ''}`

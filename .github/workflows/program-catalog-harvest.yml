@@ -1,0 +1,57 @@
+name: Harvest public third-party program catalog
+
+on:
+  schedule:
+    - cron: '3,18,33,48 * * * *'
+  workflow_dispatch:
+    inputs:
+      batch_limit:
+        description: Maximum programme details in this checkpoint (1-250)
+        type: number
+        required: false
+        default: 150
+
+permissions:
+  contents: write
+
+concurrency:
+  group: program-catalog-feed-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  harvest:
+    if: >-
+      github.repository == 'computersciencefreshmen/StudyInChina' &&
+      github.ref == 'refs/heads/main' &&
+      vars.PROGRAM_CATALOG_HARVEST_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out trusted collector code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          path: code
+          persist-credentials: false
+      - name: Check out the pre-seeded durable data branch
+        uses: actions/checkout@v6
+        with:
+          ref: catalog-program-feed
+          path: feed
+          fetch-depth: 1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: code/package-lock.json
+      - name: Install locked parser dependencies without lifecycle scripts
+        working-directory: code
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Collect one bounded batch and push its checkpoint before finishing
+        working-directory: code
+        env:
+          BATCH_LIMIT: ${{ inputs.batch_limit || '150' }}
+          MINIMAX_SUBSCRIPTION_KEY: ${{ secrets.MINIMAX_SUBSCRIPTION_KEY }}
+        run: >-
+          node scripts/ingestion/harvest-program-catalog.mjs
+          --execute --feed-dir ../feed --limit "$BATCH_LIMIT" --max-minutes 9

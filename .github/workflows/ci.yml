@@ -50,6 +50,9 @@ jobs:
       - name: Run unit tests
         run: npm run test
 
+      - name: Validate incremental program feed and resumable source collection
+        run: node --test scripts/ingestion/program-catalog-feed.test.mjs scripts/harvest/sicas-collector.test.mjs
+
       - name: Test full record audit
         run: npm run test:audit
 

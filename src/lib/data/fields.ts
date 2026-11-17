@@ -229,14 +229,14 @@ const CHINESE_LANGUAGE_SEARCH_KEYWORDS = [
   'Международное преподавание китайского языка',
 ] as const
 
-function programNameForClassification(program: Program): string {
+function programNameForClassification(program: Pick<Program, 'name'>): string {
   return Object.values(program.name)
     .filter((value): value is string => typeof value === 'string' && value.trim().length > 0)
     .join(' ')
     .normalize('NFKC')
 }
 
-export function classifyProgramField(program: Program): ProgramField {
+export function classifyProgramField(program: Pick<Program, 'name' | 'degreeLevel' | 'discipline'>): ProgramField {
   if (program.degreeLevel === 'language') return 'chinese-language'
 
   const searchableName = programNameForClassification(program)

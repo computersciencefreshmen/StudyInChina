@@ -2,20 +2,15 @@ import Link from 'next/link'
 import { isVisualMediaQuery } from '@/lib/visual-media'
 import { notFound } from 'next/navigation'
 import { ProgramExplorerV2 } from '@/components/features/ProgramExplorerV2'
-import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
-import { importedProgramText } from '@/components/features/ImportedPrograms'
-import importedStyles from '@/components/features/ImportedPrograms.module.css'
 import { PageHero } from '@/components/ui'
 import { getMessages } from '@/i18n/messages'
 import { getTodayDate } from '@/lib/data/freshness'
-import { getCatalogRepository } from '@/lib/catalog'
+import { queryUnifiedPrograms } from '@/lib/unified-programs'
 import {
   parseProgramCatalogFilters,
-  queryProgramCatalogRepository,
   type ProgramCatalogSearchParams,
 } from '@/lib/program-catalog'
 import { hasSearchParameters, pageMetadata, requireLocale } from '@/lib/site'
-import importedManifest from '../../../../content/third-party/manifest.json'
 
 export async function generateMetadata({
   params,
@@ -43,9 +38,7 @@ export default async function ProgramsPage({
   const messages = getMessages(locale)
   const today = getTodayDate()
   const filters = parseProgramCatalogFilters(await searchParams)
-  const result = await queryProgramCatalogRepository(getCatalogRepository(), filters, today)
-  const importText = importedProgramText(locale)
-  const countFormat = new Intl.NumberFormat(locale)
+  const result = await queryUnifiedPrograms(filters, today)
 
   return <>
     <PageHero
@@ -56,11 +49,6 @@ export default async function ProgramsPage({
       meta={<><span>{messages.common.authoritativeNotice}</span></>}
     />
     <section className="atlas-container atlas-section">
-      <DiscoveryNotice locale={locale} />
-      <aside className={importedStyles.banner} data-testid="imported-program-directory-link">
-        <div><strong>{importText.banner}</strong><p>{countFormat.format(importedManifest.extractedCount)} {importText.extracted} · {countFormat.format(importedManifest.linkOnlyCount)} {importText.linkOnly}</p></div>
-        <Link className={importedStyles.textLink} href={`/${locale}/programs/imported`}>{importText.title} →</Link>
-      </aside>
       {isVisualMediaQuery(filters.query) ? <aside className="notice" data-testid="visual-media-collection-shortcut">
         <Link href={`/${locale}/visual-media`}>{locale === 'zh' ? 'Visual Media 硕士专题与英语优先申请简报' : 'Visual Media master’s collection and English-first applicant brief'} →</Link>
       </aside> : null}

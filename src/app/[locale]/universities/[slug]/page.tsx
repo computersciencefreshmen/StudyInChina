@@ -7,7 +7,9 @@ import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { FollowUpdates } from '@/components/features/FollowUpdates'
 import { UniversityProgramsPending } from '@/components/features/UniversityProgramsPending'
-import { UniversityImportedPrograms } from '@/components/features/UniversityImportedPrograms'
+import { CollectedProgramCard } from '@/components/features/CollectedProgram'
+import { queryUnifiedPrograms } from '@/lib/unified-programs'
+import { parseProgramCatalogFilters } from '@/lib/program-catalog'
 import { indexedLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
@@ -54,6 +56,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
   const fields = [...new Set(programs.map((item) => item.discipline))]
   const scholarships = data.scholarships.filter((item) => item.universityIds.includes(university.id))
   const today = getTodayDate()
+  const unifiedPrograms = await queryUnifiedPrograms(parseProgramCatalogFilters({ institution: university.slug }), today)
   const stateScores = { open: 7, rolling: 6, upcoming: 5, 'dates-published': 4, 'not-announced': 3, closed: 2, 'previous-cycle': 1 } as const
   const programEntries = programs
     .map((program) => {
@@ -80,7 +83,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
     </div>
     <section className="atlas-container atlas-section">
       <div className="stat-strip">
-        <div className="stat"><strong>{programs.length}</strong><span>{copy.programs}</span></div>
+        <div className="stat"><strong>{unifiedPrograms.total}</strong><span>{copy.programs}</span></div>
         <div className="stat"><strong>{scholarships.length}</strong><span>{copy.funding}</span></div>
         <div className="stat"><strong>{fields.length}</strong><span>{messages.programs.discipline}</span></div>
         <div className="stat"><strong>{city ? localize(city.name, locale) : '—'}</strong><span>{messages.common.city}</span></div>
@@ -89,8 +92,15 @@ export default async function UniversityDetailPage({ params }: { params: Promise
     <section className="atlas-container section-block--tight detail-layout">
       <div className="detail-main">
         <div className="prose-panel"><h2>{copy.facts}</h2><p>{localize(university.summary, locale)}</p><div className="tag-list">{fields.map((field) => <Badge key={field} tone="neutral">{disciplineLabels(locale)[field]}</Badge>)}</div></div>
-        <div><SectionHeading title={copy.programs} description={messages.common.authoritativeNotice} level={2} />{visibleProgramEntries.length ? <div className="content-grid content-grid--two">{visibleProgramEntries.map(({ program, cycle }) => <ProgramCard key={program.id} program={program} university={university} cycle={cycle} locale={locale} messages={messages} today={today} />)}</div> : <UniversityProgramsPending locale={locale} universityName={localize(university.name, locale)} officialUrl={university.admissionsUrl || university.officialUrl} />}{programs.length > visibleProgramEntries.length ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/programs?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({programs.length}) →</LinkButton></div> : null}</div>
-        <UniversityImportedPrograms englishSchoolName={university.name.en || ''} locale={locale} />
+        <div>
+          <SectionHeading title={copy.programs} level={2} />
+          {unifiedPrograms.items.length ? <div className="content-grid content-grid--two">
+            {unifiedPrograms.items.slice(0, 8).map(item => 'collected' in item
+              ? <CollectedProgramCard key={item.collected.id} item={item} locale={locale} messages={messages} />
+              : <ProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} locale={locale} messages={messages} today={today} />)}
+          </div> : <UniversityProgramsPending locale={locale} universityName={localize(university.name, locale)} officialUrl={university.admissionsUrl || university.officialUrl} />}
+          {unifiedPrograms.total > 8 ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/programs?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({unifiedPrograms.total}) →</LinkButton></div> : null}
+        </div>
         {visibleScholarships.length ? <div><SectionHeading title={copy.funding} level={2} /><div className="content-grid content-grid--two">{visibleScholarships.map((scholarship) => <Card key={scholarship.id}><Badge tone="gold">{providerLabel(scholarship.providerType, locale)}</Badge><h3 className="atlas-card__title">{localize(scholarship.name, locale)}</h3><p className="atlas-card__description">{localize(scholarship.summary, locale)}</p><div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="quiet">{messages.common.viewDetails} →</LinkButton></div></Card>)}</div>{scholarships.length > visibleScholarships.length ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({scholarships.length}) →</LinkButton></div> : null}</div> : null}
       </div>
       <aside className="detail-aside">
