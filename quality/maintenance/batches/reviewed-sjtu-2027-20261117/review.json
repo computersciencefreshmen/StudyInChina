@@ -1,0 +1,4262 @@
+{
+  "format": "studyinchina.curated-official-programme-review",
+  "version": 1,
+  "reviewedAt": "2026-11-16T18:45:45.113Z",
+  "reviewAfter": "2026-12-17",
+  "reviewerId": "codex-independent-ai-assisted-official-source-audit:sjtu-2027-core-20261117",
+  "method": "Codex independent AI-assisted official-source/tool/visual audit with a separate raw-source peer review. User authorized local implementation. This is not a claim of personal human sign-off by Henry; no remote model call or cloud write was performed.",
+  "baseCommit": "a7acd5b7915b8fbd0a088709227869277383945e",
+  "inputCatalogSha256": "39982894c1701072b8288ef879fe867dca994c4708aed2ffc209390234d1eec5",
+  "outputCatalogSha256": "c353e10f088ed7a09b1b635ed441ed3135fd9f9a27329109c284b426f8a8c453",
+  "privateProofSha256": "e45d95e9bfebf885fc226b88ca38c17c8f4bd271cd358e35e861b9a9bb5b13ed",
+  "privateProofHashBasis": "candidate-proof.json original UTF-8 file bytes",
+  "privateProofCanonicalContentSha256": "a1db304f3a6610502d5fd0926d68a42ce9395aa429317db99d8d1d8b504ec264",
+  "independentSourcePeer": {
+    "artifact": "PRIVATE/sjtu-independent-peer-20261117/peer-review.private.json",
+    "rawFileSha256": "8c50cea0d898bab4d749df6838abf4881e1e8b3f058027fa350ad40c232c30ec",
+    "reviewedAt": "2026-11-16T18:36:03.947648+00:00",
+    "result": "PASS: no source-fact blocker found for the five selected direct Chinese bachelor majors in the specified scope.",
+    "scope": "PRIVATE source evidence review; not repository import, field/identity receipt acceptance, current-coverage count or deployment approval."
+  },
+  "universityId": "uni-shanghai-jiao-tong-university",
+  "academicYear": "2027",
+  "academicYearRangeInferred": false,
+  "teachingLanguage": "Chinese",
+  "intake": "autumn",
+  "applicationRounds": [
+    {
+      "applicationRound": "general-admissions-round-1",
+      "officialLabel": "第一轮",
+      "opensOn": "2026-11-18",
+      "opensAt": "00:00",
+      "closesOn": "2027-01-05",
+      "closesAt": "23:59",
+      "quote": "round-1",
+      "timezone": "Asia/Shanghai",
+      "timezoneLiteral": "北京时间",
+      "stateAsOf20261117": "upcoming"
+    },
+    {
+      "applicationRound": "general-admissions-round-2",
+      "officialLabel": "第二轮",
+      "opensOn": "2027-01-06",
+      "opensAt": "00:00",
+      "closesOn": "2027-02-28",
+      "closesAt": "23:59",
+      "quote": "round-2",
+      "timezone": "Asia/Shanghai",
+      "timezoneLiteral": "北京时间",
+      "stateAsOf20261117": "upcoming"
+    },
+    {
+      "applicationRound": "general-admissions-round-3",
+      "officialLabel": "第三轮",
+      "opensOn": "2027-03-01",
+      "opensAt": "00:00",
+      "closesOn": "2027-03-31",
+      "closesAt": "23:59",
+      "quote": "round-3",
+      "timezone": "Asia/Shanghai",
+      "timezoneLiteral": "北京时间",
+      "stateAsOf20261117": "upcoming"
+    }
+  ],
+  "fundingScope": "general admission rounds; source does not label these self-funded-only; scholarships are optional and have separate rules",
+  "sources": [
+    {
+      "id": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "title": "2027年上海交通大学来华留学国际本科生中文项目招生专业目录",
+      "publisher": "Shanghai Jiao Tong University",
+      "kind": "program",
+      "language": "other",
+      "official": true,
+      "accessedAt": "2026-11-17",
+      "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+      "byteLength": 250116,
+      "capturedAt": "2026-11-16T18:26:46.035Z"
+    },
+    {
+      "id": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "title": "2027年上海交通大学来华留学国际本科生中文项目招生简章",
+      "publisher": "Shanghai Jiao Tong University",
+      "kind": "admissions",
+      "language": "zh",
+      "official": true,
+      "accessedAt": "2026-11-17",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "byteLength": 252810,
+      "capturedAt": "2026-11-16T18:23:45.828Z"
+    },
+    {
+      "id": "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+      "title": "2027年上海交通大学来华留学国际本科生中文项目申请材料列表",
+      "publisher": "Shanghai Jiao Tong University",
+      "kind": "admissions",
+      "language": "other",
+      "official": true,
+      "accessedAt": "2026-11-17",
+      "rawSha256": "30d020e4545efb5e3a14f7fe9c2977349bff3ff399fc5fd475f60083ba42fcd0",
+      "byteLength": 279108,
+      "capturedAt": "2026-11-16T18:26:46.025Z"
+    },
+    {
+      "id": "src-reviewed-sjtu-2027-chinese-bachelor-guide-html",
+      "url": "https://en.sjtu.edu.cn/study-sjtu/prospective/degree-programs/834",
+      "title": "2027年上海交通大学来华留学国际本科生中文项目招生简章（官网）",
+      "publisher": "Shanghai Jiao Tong University",
+      "kind": "admissions",
+      "language": "zh",
+      "official": true,
+      "accessedAt": "2026-11-17",
+      "rawSha256": "0d77f099a0a10ecb94d029837671bb1c0d307f1e0491a7e48b371778dd2f3a28",
+      "byteLength": 186030,
+      "capturedAt": "2026-11-16T18:23:45.852Z"
+    }
+  ],
+  "sourceChain": {
+    "guideHtmlUrl": "https://en.sjtu.edu.cn/study-sjtu/prospective/degree-programs/834",
+    "officialMajorPdfUrl": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+    "officialGuidePdfUrl": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+    "officialMaterialsPdfUrl": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+    "exactHtmlAnchors": [
+      {
+        "href": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+        "attributes": {
+          "href": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf"
+        },
+        "text": "《2027年上海交通大学来华留学国际本科生中文项目招生专业目录》"
+      },
+      {
+        "href": "/storage/global/web/en/page/2026/11/46a1d668d2e005cc53fa54f1e40e75d1.pdf",
+        "attributes": {
+          "href": "/storage/global/web/en/page/2026/11/46a1d668d2e005cc53fa54f1e40e75d1.pdf"
+        },
+        "text": "《2027年上海交通大学来华留学国际本科生中文项目招生专业目录》"
+      },
+      {
+        "href": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+        "attributes": {
+          "href": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf"
+        },
+        "text": "附件"
+      }
+    ]
+  },
+  "programmeRows": [
+    {
+      "programId": "program-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese",
+      "sequence": 4,
+      "verifiedName": {
+        "en": "Artificial Intelligence",
+        "zh": "人工智能"
+      },
+      "starredCluster": false,
+      "specificMajor": "——",
+      "durationMonths": 48,
+      "cscaSubjects": [
+        "理科中文",
+        "数学"
+      ],
+      "cscaMergedSequences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "rowEvidence": {
+        "id": "row-4",
+        "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+        "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+        "locator": "pdf:p6:table0:sequence-4:first-five-columns",
+        "page": 6,
+        "bbox": [
+          26.160000000000004,
+          359.1595,
+          457.8,
+          386.63999999999993
+        ],
+        "cells": [
+          "4",
+          "人工智能学院",
+          "人工智能",
+          "——",
+          "4 年"
+        ],
+        "quote": "4 人工智能学院 人工智能 —— 4 年",
+        "quoteSha256": "fc54d31da4a82c6a1cf70aeb4815da0581bf174fa2df574cec08a5f7507708fc",
+        "visualVerified": "majors-cn-page-6.png"
+      }
+    },
+    {
+      "programId": "program-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese",
+      "sequence": 5,
+      "verifiedName": {
+        "en": "Materials Science and Engineering",
+        "zh": "材料科学与工程"
+      },
+      "starredCluster": false,
+      "specificMajor": "——",
+      "durationMonths": 48,
+      "cscaSubjects": [
+        "理科中文",
+        "数学"
+      ],
+      "cscaMergedSequences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "rowEvidence": {
+        "id": "row-5",
+        "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+        "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+        "locator": "pdf:p6:table0:sequence-5:first-five-columns",
+        "page": 6,
+        "bbox": [
+          26.160000000000004,
+          386.63999999999993,
+          457.8,
+          418.3199999999999
+        ],
+        "cells": [
+          "5",
+          "材料科学与工程\n学院",
+          "材料科学与工程",
+          "——",
+          "4 年"
+        ],
+        "quote": "材料科学与工程\n5 材料科学与工程 —— 4 年\n学院",
+        "quoteSha256": "b7aae72323320454dba3d423e896d3d9071a9badc77f07d1dd797ef3eed4c8e1",
+        "visualVerified": "majors-cn-page-6.png"
+      }
+    },
+    {
+      "programId": "program-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese",
+      "sequence": 6,
+      "verifiedName": {
+        "en": "Aerospace Engineering",
+        "zh": "航空航天工程"
+      },
+      "starredCluster": false,
+      "specificMajor": "——",
+      "durationMonths": 48,
+      "cscaSubjects": [
+        "理科中文",
+        "数学"
+      ],
+      "cscaMergedSequences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "rowEvidence": {
+        "id": "row-6",
+        "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+        "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+        "locator": "pdf:p6:table0:sequence-6:first-five-columns",
+        "page": 6,
+        "bbox": [
+          26.160000000000004,
+          418.3199999999999,
+          457.8,
+          445.8
+        ],
+        "cells": [
+          "6",
+          "航空航天学院",
+          "航空航天工程",
+          "——",
+          "4 年"
+        ],
+        "quote": "6 航空航天学院 航空航天工程 —— 4 年",
+        "quoteSha256": "33f8cf379adab16c76d360244f7c03fb50344f7b77920ec3ac559d69588685d0",
+        "visualVerified": "majors-cn-page-6.png"
+      }
+    },
+    {
+      "programId": "program-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese",
+      "sequence": 8,
+      "verifiedName": {
+        "en": "Biomedical Engineering",
+        "zh": "生物医学工程"
+      },
+      "starredCluster": false,
+      "specificMajor": "——",
+      "durationMonths": 48,
+      "cscaSubjects": [
+        "理科中文",
+        "数学"
+      ],
+      "cscaMergedSequences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "rowEvidence": {
+        "id": "row-8",
+        "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+        "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+        "locator": "pdf:p6:table0:sequence-8:first-five-columns",
+        "page": 6,
+        "bbox": [
+          26.160000000000004,
+          477.4799999999999,
+          457.8,
+          509.2795
+        ],
+        "cells": [
+          "8",
+          "生物医学工程学\n院",
+          "生物医学工程",
+          "——",
+          "4 年"
+        ],
+        "quote": "生物医学工程学\n8 生物医学工程 —— 4 年\n院",
+        "quoteSha256": "f45e10a87de46fa92b5d5a32cca2e75979579fb51a9d8a8d9a5ec061bc029c6c",
+        "visualVerified": "majors-cn-page-6.png"
+      }
+    },
+    {
+      "programId": "program-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese",
+      "sequence": 9,
+      "verifiedName": {
+        "en": "Smart Energy",
+        "zh": "智慧能源工程"
+      },
+      "starredCluster": false,
+      "specificMajor": "——",
+      "durationMonths": 48,
+      "cscaSubjects": [
+        "理科中文",
+        "数学"
+      ],
+      "cscaMergedSequences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "rowEvidence": {
+        "id": "row-9",
+        "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+        "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+        "locator": "pdf:p6:table0:sequence-9:first-five-columns",
+        "page": 6,
+        "bbox": [
+          26.160000000000004,
+          509.2795,
+          457.8,
+          540.9594999999999
+        ],
+        "cells": [
+          "9",
+          "智慧能源创新学\n院",
+          "智慧能源工程",
+          "——",
+          "4 年"
+        ],
+        "quote": "智慧能源创新学\n9 智慧能源工程 —— 4 年\n院",
+        "quoteSha256": "15e075491dc34d4aa4d3d0cc4f0bd52457f13611ac4a5b15cf565b5697ac12d7",
+        "visualVerified": "majors-cn-page-6.png"
+      }
+    }
+  ],
+  "evidenceQuotes": [
+    {
+      "id": "degree-year-language",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p1:extracted-text-offset:0:304",
+      "page": 1,
+      "quote": "2027 年上海交通大学来华留学国际本科生中文项目\n招生简章\n上海交通大学创办于1896年，是一所“ 综合性、创新型、国际化”的国内一流、\n国际知名大学，位列 2026 年软科世界大学学术排名（ARWU）第 27 位，2027 年\n泰晤士高等教育世界大学（ THE）排名第39位，2026-2027年U.S. News世界大\n学排名第 37 位，2027 年 QS 世界大学排名第 36 位。目前，本科专业涵盖工学、\n理学、医学、经济学、管理学、法学、文学、农学和艺术等学科门类，学制四年，\n特殊项目除外。完成规定的教学计划，考核合格并通过毕业论文答辩者，颁发本\n科毕业证书，经学位审查合格者，授予学士学位。",
+      "quoteSha256": "4eadd3e01330859e545ba02a900b744dfe029d3f1832769c28256386cadae08b"
+    },
+    {
+      "id": "major-binding",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p1:extracted-text-offset:305:402",
+      "page": 1,
+      "quote": "一、招生专业\n详见《2027年上海交通大学来华留学国际本科生中文项目招生专业目录》。\n注：我校医学院单独招生， 如申请医学院项目请直接和医学院联系\n（www.shsmu.edu.cn/iso）。",
+      "quoteSha256": "a237fe51faef8b16dbc002b24974394c9e96dcb27f1d0440f209ec19297e5d90"
+    },
+    {
+      "id": "eligibility",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p1:extracted-text-offset:410:533",
+      "page": 1,
+      "quote": "（一）高中毕业或具有同等学历。应届毕业生须提供由学校开具的预毕业证\n明，并于入学前取得高中毕业证书。\n（二）持外国有效护照的非中国籍公民，并符合教育部《关于规范我高等学校\n接受国际学生有关工作的通知》等相关规定。\n（三）身心健康，无违法犯罪记录。",
+      "quoteSha256": "bad51ddbee31e0de3ed28dbeea6823288494cca04510f2b3c284d2a7d16ba8d3"
+    },
+    {
+      "id": "academic-transcript",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p1:extracted-text-offset:558:608",
+      "page": 1,
+      "quote": "1. 高中成绩单（含高中阶段所有课程）。应届毕业生须提供截至申请时已获\n得的高中阶段所有课程成绩单。",
+      "quoteSha256": "d896d2cd96658f5c232d76bc5f4602863243205916bcf558de9738c3d333d0ce"
+    },
+    {
+      "id": "csca-conditional-results",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p2:extracted-text-offset:0:311",
+      "page": 2,
+      "quote": "2. 来华留学本科入学学业水平测试（China Scholastic Competency\nAssessment，简称CSCA）成绩单。具体考试科目要求详见《2027年上海交\n通大学来华留学国际本科生中文项目招生专业目录》。\n申请时尚未参加CSCA考试的申请人，可先提供其他国际标准化考试或所在\n国家/地区统一高中毕业考试或大学入学考试成绩单，如SAT（code:\n9184）/ACT（code: 3038）/A-Level/IB（code: N010601）/UEC/STPM等，\n进行申请。通过我校选拔后将获得有条件预录取通知的申请人，须在2027\n年6月30日前补交CSCA成绩，通过我校复核后方可获得正式录取通知。",
+      "quoteSha256": "1a9896bfd0ed28249d7611b82cc23bce08bb0e55670d88a905ef76354d210256"
+    },
+    {
+      "id": "chinese-proof-alternatives",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p2:extracted-text-offset:460:608",
+      "page": 2,
+      "quote": "1. 汉语水平证明，以下材料须至少提供一项：\n(1) HSK成绩，HSK5级200分（含）以上或HSK6级180分（含）以上。\n(2) 其他同等证明材料，如中文为母语的说明等。\n(3) 上海交通大学国际本科生一年预科项目申请书，仅适用于汉语水平暂未达\n到要求，需要一年预科学习的有条件录取申请人。",
+      "quoteSha256": "771f04070a9e48630d8de3ef3b58b3f01ff8b067d3dfc41a740f3d33c783c88e"
+    },
+    {
+      "id": "english-proof-required",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p2:extracted-text-offset:609:700",
+      "page": 2,
+      "quote": "2. 英语水平证明，以下材料须至少提供一项。\n(1) 托福TOEFL（code: D070）。\n(2) 雅思IELTS。\n(3) 多邻国Duolingo。\n(4) 其他英语水平证明。",
+      "quoteSha256": "4a607e8c780ce8346ef0071e6dce23ffe20276a629e9f8211c3587881012dc36"
+    },
+    {
+      "id": "round-1",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p2:extracted-text-offset:708:749",
+      "page": 2,
+      "quote": "第一轮：2026年11月18日0:00至2027年1月5日23:59（北京时间）。",
+      "quoteSha256": "ac1a9edbce0ae0ba77869fe449d93be40abd4ac5d6a812efee702dcdf468ce7d"
+    },
+    {
+      "id": "round-2",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p2:extracted-text-offset:750:790",
+      "page": 2,
+      "quote": "第二轮：2027年1月6日0:00至2027年2月28日23:59（北京时间）。",
+      "quoteSha256": "36f1879dba2794fb91a2fa38e439ac98629d033e65341ef539b61ddebec369d9"
+    },
+    {
+      "id": "round-3",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p2:extracted-text-offset:791:831",
+      "page": 2,
+      "quote": "第三轮：2027年3月1日0:00至2027年3月31日23:59（北京时间）。",
+      "quoteSha256": "fd3c76339165fa2a9eeb8965420d97fb64d52f3d253facc4d496c51946d940e4"
+    },
+    {
+      "id": "application-route",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p3:extracted-text-offset:28:103",
+      "page": 3,
+      "quote": "1. 在申请批次规定时间内，注册登录在线申请系统\n（https://apply.sjtu.edu.cn），选择【新的申请表→本科生→中文授课项\n目】。",
+      "quoteSha256": "e597fb0d56878b2b7b49c7ec176d59052bae934e1cb0ec6096df9687695461cb"
+    },
+    {
+      "id": "conditional-selection",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p3:extracted-text-offset:201:383",
+      "page": 3,
+      "quote": "第二步：参加面试。\n通过我校遴选的申请人将获得面试资格。面试旨在考查学生的综合素养及语言能\n力，具体安排请以邮件通知为准。\n第三步：查询预录取结果并确认就读。\n我校根据综合评估情况择优进行预录取，申请人可登录申请系统查询预录取结果。\n获得预录取资格的申请人须在预录取结果公布后 2 周内登录申请系统确认来校\n就读，未在规定时间内完成确认来校就读者视为放弃录取资格。",
+      "quoteSha256": "8648aa457af36884e338558cb0b1c5192cca570fea394d2e8a2edc74f8239c9d"
+    },
+    {
+      "id": "intake-and-fees",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/9bd42baaeb7a5f329b23ad4d1ffc31a4.pdf",
+      "rawSha256": "fbc92dc1e26b167b3ad15a4cd7afa16145a5b3d74a4c4b08bb40d59cdbe022b8",
+      "locator": "pdf:p4:extracted-text-offset:373:459",
+      "page": 4,
+      "quote": "六、开学时间\n2027年9月初。具体时间以《录取通知书》为准。\n七、费用标准\n（一）申请费\n人民币800元。申请费一经缴纳不予退还。\n（二）学费\n人民币50000元/学年。",
+      "quoteSha256": "b7eca1940e3d9ed6da2c27b7b924a732460c7e542a70f3d0fe9337485af2876f"
+    },
+    {
+      "id": "passport-validity",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+      "rawSha256": "30d020e4545efb5e3a14f7fe9c2977349bff3ff399fc5fd475f60083ba42fcd0",
+      "locator": "pdf:p5:extracted-text-offset:118:162",
+      "page": 5,
+      "quote": "1. 有效期大于12个月的护照信息页。一经录取，直至入学报到完成前，护照\n信息不可更改。",
+      "quoteSha256": "8a26a6b5557276ac7ca0b79a52e573ad9a157742ee73a07bdefb1b67c38f4954"
+    },
+    {
+      "id": "language-cn-confirmation",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+      "rawSha256": "30d020e4545efb5e3a14f7fe9c2977349bff3ff399fc5fd475f60083ba42fcd0",
+      "locator": "pdf:p6:extracted-text-offset:0:229",
+      "page": 6,
+      "quote": "7.1 汉语水平证明，以下材料至少提供一项：(1) HSK成绩，HSK5级200分\n（含）以上或HSK6级180分（含）以上。(2)其他同等证明材料，如中文为\n母语的说明等。(3)上海交通大学国际本科生一年预科项目申请书，仅适用\n于汉语水平暂未达到要求，需要一年预科学习的有条件录取申请人。\n7.2 英语水平证明，以下材料至少提供一项：(1)托福TOEFL（code:\nD070）。(2)雅思IELTS。(3)多邻国Duolingo。(4)其他英语水平证明。",
+      "quoteSha256": "9c118999d67dc11b8e0bf1e60024365376668aeabd39490dd58fc338356cebc6"
+    },
+    {
+      "id": "language-en-confirmation",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+      "rawSha256": "30d020e4545efb5e3a14f7fe9c2977349bff3ff399fc5fd475f60083ba42fcd0",
+      "locator": "pdf:p2:extracted-text-offset:757:1555",
+      "page": 2,
+      "quote": "7.1 Chinese language proficiency proof, with at least one of the following materials\nrequired:\n(1) HSK results: HSK Level 5 with a score of 200 or above, or HSK Level 6 with a\nscore of 180 or above.\n(2) Other equivalent proof, such as documentation indicating Chinese as a native\nlanguage.\n(3) Application Form for the SJTU One-Year Pre-university Program for International\nUndergraduates. This applies only to conditionally admitted applicants whose Chinese\nproficiency does not yet meet the requirements and who require one-year pre-university\nprogram study.\n7.2 English language proficiency proof, with at least one of the following materials\nrequired:\n(1) TOEFL scores (code: D070).\n(2) IELTS scores.\n(3) Duolingo scores.\n(4) Other supporting materials as proof of English language proficiency.",
+      "quoteSha256": "70106400d033563d404c59cea33a3a529ab739a2390df5bc90bfd72ca38f858a"
+    },
+    {
+      "id": "nationality-documentation",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+      "rawSha256": "30d020e4545efb5e3a14f7fe9c2977349bff3ff399fc5fd475f60083ba42fcd0",
+      "locator": "pdf:p6:extracted-text-offset:230:749",
+      "page": 6,
+      "quote": "8. 申请人父母双方的国籍或户籍证明，如护照/身份证/户口本等。\n9. 父母双方或一方为中国公民的申请人，提供以下证明材料：\n9.1 申请人出生即获得外国国籍的证明，或后加入外国国籍的证明。\n9.2 申请人出生即获得外国国籍的，①如父母双方或一方为中国公民且在申\n请人出生时有国外永久居留，须提供父母相应的永久居留证明；②如父母双\n方或一方为中国公民且在申请人出生时未获得国外永久居留，须提供截至入\n学年份4月30日已退出中国国籍满4年的相关证明。\n9.3 申请人原为中国公民后加入外国国籍的，须提供截至入学年份4月30\n日已注销原中国户籍及退出中国国籍满4年的相关证明。\n9.4 自申请人第一本护照起所有往来中国的签证、居留许可、出入境记录\n等。\n注：(1)曾持有《中华人民共和国旅行证》或《中华人民共和国出入境通行\n证》的申请人，须参照9.3要求提供相应材料。(2)申请人是否具有中华人民共\n和国国籍，以中国公安机关出入境管理部门的国籍认定结论为准。如在申请、\n录取或入学报到后被判定为具有中国国籍，或存在其他不符合申请身份资格的\n申请人，我校将依法依规取消其相应申请资格、录取资格（含预录取资格）、入\n学资格或正式学籍并作退学处理。",
+      "quoteSha256": "bff1a425520d4e4c095a25adb0f8da0060f7d8746aedca35eb9562153320bb4d"
+    },
+    {
+      "id": "guardian-and-finance",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+      "rawSha256": "30d020e4545efb5e3a14f7fe9c2977349bff3ff399fc5fd475f60083ba42fcd0",
+      "locator": "pdf:p6:extracted-text-offset:750:841",
+      "page": 6,
+      "quote": "10.截至入学年份9月1日（含）未满18周岁的申请人，提供在华监护人保证\n书（模板下载）。\n11.经济保证证明，申请人或其经济担保人须提供不少于10万元人民币或等额\n外币的经济证明。",
+      "quoteSha256": "0a66e5299ee947f6595da79279391402f20f8d1e9721a64f98499c0c633e71f4"
+    },
+    {
+      "id": "validity-and-translation",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/def1d6ca3e1abbb845ce815412384a74.pdf",
+      "rawSha256": "30d020e4545efb5e3a14f7fe9c2977349bff3ff399fc5fd475f60083ba42fcd0",
+      "locator": "pdf:p7:extracted-text-offset:15:97",
+      "page": 7,
+      "quote": "① 6.2、7.1、7.2所列成绩或证明须在有效期内，如未列明具体有效期须为两\n年内获得。\n② 以上所有申请材料若非中文或英文，须提供经公证后的中文或英文翻译\n件。",
+      "quoteSha256": "6ce1fb4cdc7c24fdf535ee45a79643eb979cabd23784e4bb9a247a89758e2c7d"
+    },
+    {
+      "id": "cluster-warning",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+      "locator": "pdf:p8:extracted-text-offset:36:85",
+      "page": 8,
+      "quote": "② 录取专业为招生专业。标记“*”的招生专业，学生入学后须根据学院相关\n要求进入相应分流专业学习。",
+      "quoteSha256": "0af807c1e749e69fdc33615fdb7fb6cf1cd5cb84852e08dc995c21c4a56a23d6"
+    },
+    {
+      "id": "csca-merged-cell",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+      "locator": "pdf:p6:table0:last-column:merged-rows1-14",
+      "page": 6,
+      "bbox": [
+        457.8,
+        181.91999999999996,
+        569.5205,
+        730.6794999999998
+      ],
+      "quote": "理科中文\n数学",
+      "quoteSha256": "cef419830095f935c650dd50b9e22e9d7bae5762a46e44103438699ff20f389f",
+      "appliesToSequenceNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "visualVerified": "majors-cn-page-6.png"
+    },
+    {
+      "id": "row-4",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+      "locator": "pdf:p6:table0:sequence-4:first-five-columns",
+      "page": 6,
+      "bbox": [
+        26.160000000000004,
+        359.1595,
+        457.8,
+        386.63999999999993
+      ],
+      "cells": [
+        "4",
+        "人工智能学院",
+        "人工智能",
+        "——",
+        "4 年"
+      ],
+      "quote": "4 人工智能学院 人工智能 —— 4 年",
+      "quoteSha256": "fc54d31da4a82c6a1cf70aeb4815da0581bf174fa2df574cec08a5f7507708fc",
+      "visualVerified": "majors-cn-page-6.png"
+    },
+    {
+      "id": "row-5",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+      "locator": "pdf:p6:table0:sequence-5:first-five-columns",
+      "page": 6,
+      "bbox": [
+        26.160000000000004,
+        386.63999999999993,
+        457.8,
+        418.3199999999999
+      ],
+      "cells": [
+        "5",
+        "材料科学与工程\n学院",
+        "材料科学与工程",
+        "——",
+        "4 年"
+      ],
+      "quote": "材料科学与工程\n5 材料科学与工程 —— 4 年\n学院",
+      "quoteSha256": "b7aae72323320454dba3d423e896d3d9071a9badc77f07d1dd797ef3eed4c8e1",
+      "visualVerified": "majors-cn-page-6.png"
+    },
+    {
+      "id": "row-6",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+      "locator": "pdf:p6:table0:sequence-6:first-five-columns",
+      "page": 6,
+      "bbox": [
+        26.160000000000004,
+        418.3199999999999,
+        457.8,
+        445.8
+      ],
+      "cells": [
+        "6",
+        "航空航天学院",
+        "航空航天工程",
+        "——",
+        "4 年"
+      ],
+      "quote": "6 航空航天学院 航空航天工程 —— 4 年",
+      "quoteSha256": "33f8cf379adab16c76d360244f7c03fb50344f7b77920ec3ac559d69588685d0",
+      "visualVerified": "majors-cn-page-6.png"
+    },
+    {
+      "id": "row-8",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+      "locator": "pdf:p6:table0:sequence-8:first-five-columns",
+      "page": 6,
+      "bbox": [
+        26.160000000000004,
+        477.4799999999999,
+        457.8,
+        509.2795
+      ],
+      "cells": [
+        "8",
+        "生物医学工程学\n院",
+        "生物医学工程",
+        "——",
+        "4 年"
+      ],
+      "quote": "生物医学工程学\n8 生物医学工程 —— 4 年\n院",
+      "quoteSha256": "f45e10a87de46fa92b5d5a32cca2e75979579fb51a9d8a8d9a5ec061bc029c6c",
+      "visualVerified": "majors-cn-page-6.png"
+    },
+    {
+      "id": "row-9",
+      "sourceId": "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+      "url": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "rawSha256": "12a495b669697323d24d59aebb6a32b7b7a5089a9edd7280955d705d5b836b37",
+      "locator": "pdf:p6:table0:sequence-9:first-five-columns",
+      "page": 6,
+      "bbox": [
+        26.160000000000004,
+        509.2795,
+        457.8,
+        540.9594999999999
+      ],
+      "cells": [
+        "9",
+        "智慧能源创新学\n院",
+        "智慧能源工程",
+        "——",
+        "4 年"
+      ],
+      "quote": "智慧能源创新学\n9 智慧能源工程 —— 4 年\n院",
+      "quoteSha256": "15e075491dc34d4aa4d3d0cc4f0bd52457f13611ac4a5b15cf565b5697ac12d7",
+      "visualVerified": "majors-cn-page-6.png"
+    }
+  ],
+  "fieldEvidenceBindings": [
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese",
+      "fieldPath": "teachingLanguages",
+      "recordScopeSha256": "46e6a6e17cbe74f741162842326d36ac925fbb322f9bf06f6933e625e3679604",
+      "valueSha256": "70fdc540918888e6995c615b262793230a4ac9a7c89501fc55a0a4b07b7f0c79",
+      "verificationSha256": "84925b4319908de1ab1046c0d9bfdd93150b02652334bb2f3a1715938335d9dd",
+      "primaryEvidenceId": "degree-year-language",
+      "supportingEvidenceIds": [
+        "degree-year-language"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese",
+      "fieldPath": "durationMonths",
+      "recordScopeSha256": "46e6a6e17cbe74f741162842326d36ac925fbb322f9bf06f6933e625e3679604",
+      "valueSha256": "98010bd9270f9b100b6214a21754fd33bdc8d41b2bc9f9dd16ff54d3c34ffd71",
+      "verificationSha256": "92ad32ab4000a3746e6a262ffeb687c7a039f7a1a5ae1c5e5f6cca54b0ee6f08",
+      "primaryEvidenceId": "row-4",
+      "supportingEvidenceIds": [
+        "row-4"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese",
+      "fieldPath": "teachingLanguages",
+      "recordScopeSha256": "51623c18dbae09a87c80f432913bfb57c3dd48d8fb322ecc47260b7161449a3c",
+      "valueSha256": "70fdc540918888e6995c615b262793230a4ac9a7c89501fc55a0a4b07b7f0c79",
+      "verificationSha256": "47ed2367c2d11f86f9a93588229aaac85675f3ecfb7dba0e60c2b9458f6dc492",
+      "primaryEvidenceId": "degree-year-language",
+      "supportingEvidenceIds": [
+        "degree-year-language"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese",
+      "fieldPath": "durationMonths",
+      "recordScopeSha256": "51623c18dbae09a87c80f432913bfb57c3dd48d8fb322ecc47260b7161449a3c",
+      "valueSha256": "98010bd9270f9b100b6214a21754fd33bdc8d41b2bc9f9dd16ff54d3c34ffd71",
+      "verificationSha256": "d2acde8aba5ccfd6df95296eabd78b00c7dc239b7b861618a28c48017e885c72",
+      "primaryEvidenceId": "row-5",
+      "supportingEvidenceIds": [
+        "row-5"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese",
+      "fieldPath": "teachingLanguages",
+      "recordScopeSha256": "3d7bc149d1c52db4a0c3287432fcf68eb22bfd8a657ec6d6823c9b5250854b21",
+      "valueSha256": "70fdc540918888e6995c615b262793230a4ac9a7c89501fc55a0a4b07b7f0c79",
+      "verificationSha256": "8426f803f4fa0c8ae18cde1013f9a281b092e2292d8025a1649c24e9490444f6",
+      "primaryEvidenceId": "degree-year-language",
+      "supportingEvidenceIds": [
+        "degree-year-language"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese",
+      "fieldPath": "durationMonths",
+      "recordScopeSha256": "3d7bc149d1c52db4a0c3287432fcf68eb22bfd8a657ec6d6823c9b5250854b21",
+      "valueSha256": "98010bd9270f9b100b6214a21754fd33bdc8d41b2bc9f9dd16ff54d3c34ffd71",
+      "verificationSha256": "d2581a1684823a766833ca72d21a37fb46e585627180c9a09bbc0606cebbe367",
+      "primaryEvidenceId": "row-6",
+      "supportingEvidenceIds": [
+        "row-6"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese",
+      "fieldPath": "teachingLanguages",
+      "recordScopeSha256": "03d0d179f62f182b2b12d22f096e3c84f79646b25b50164fbc8d3d8038b47fcc",
+      "valueSha256": "70fdc540918888e6995c615b262793230a4ac9a7c89501fc55a0a4b07b7f0c79",
+      "verificationSha256": "d3a74dc0294284d9914c96191689645352046340a7eb2eb8590e805005524b8a",
+      "primaryEvidenceId": "degree-year-language",
+      "supportingEvidenceIds": [
+        "degree-year-language"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese",
+      "fieldPath": "durationMonths",
+      "recordScopeSha256": "03d0d179f62f182b2b12d22f096e3c84f79646b25b50164fbc8d3d8038b47fcc",
+      "valueSha256": "98010bd9270f9b100b6214a21754fd33bdc8d41b2bc9f9dd16ff54d3c34ffd71",
+      "verificationSha256": "0e9a37708e04fb7db6436ef959ca19e5d7d769f19a7e46846161a2aa18534433",
+      "primaryEvidenceId": "row-8",
+      "supportingEvidenceIds": [
+        "row-8"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese",
+      "fieldPath": "teachingLanguages",
+      "recordScopeSha256": "22993343534f4124b2bbc72a9d66e992c1560a7984c412ce2ca22af9efe0084c",
+      "valueSha256": "70fdc540918888e6995c615b262793230a4ac9a7c89501fc55a0a4b07b7f0c79",
+      "verificationSha256": "bf1625693742c4ce627e3e53571ece8a93c8eca531b3069d76699501b76ec2a0",
+      "primaryEvidenceId": "degree-year-language",
+      "supportingEvidenceIds": [
+        "degree-year-language"
+      ]
+    },
+    {
+      "entityType": "program",
+      "recordId": "program-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese",
+      "fieldPath": "durationMonths",
+      "recordScopeSha256": "22993343534f4124b2bbc72a9d66e992c1560a7984c412ce2ca22af9efe0084c",
+      "valueSha256": "98010bd9270f9b100b6214a21754fd33bdc8d41b2bc9f9dd16ff54d3c34ffd71",
+      "verificationSha256": "5a0f1b647bd42d35069aaf87d57dbd5327c14513c2e5fffe0cb77239b37cb479",
+      "primaryEvidenceId": "row-9",
+      "supportingEvidenceIds": [
+        "row-9"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "9c7fd88ae85a964720ba943f86d887db5800ba3ddfcb92ad6409e5db93a1ea3b",
+      "valueSha256": "0f45d26b9bca5bab9215ee29cc079e2776099e08de9df505123e52128fe91375",
+      "verificationSha256": "8c04eebb07efad5311d41d0ff5288e72f82b0b39ea9783c72ef38917ee607b8d",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "9c7fd88ae85a964720ba943f86d887db5800ba3ddfcb92ad6409e5db93a1ea3b",
+      "valueSha256": "5f97582eefee30bf0b41b8f8904219f41c4fd9d0261217002cbc1afbfa96c3e0",
+      "verificationSha256": "f21e9cb33635e46b719707e8c37d8625bcf9b7342b2f8116e8135e567c46e725",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "9c7fd88ae85a964720ba943f86d887db5800ba3ddfcb92ad6409e5db93a1ea3b",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "6607bdb21ddc4fc7f4cf4695d934347f403e1769934a55c4e53e2d9f7a1c0c80",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "9c7fd88ae85a964720ba943f86d887db5800ba3ddfcb92ad6409e5db93a1ea3b",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "1c9ff21a584261ce91bb21a6c48c050160f000f4d1572598d4e5ccd4558ee08b",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "9c7fd88ae85a964720ba943f86d887db5800ba3ddfcb92ad6409e5db93a1ea3b",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "b8aefa31016a3e2be6809eac9fd0941599bd2e25a503fc253920771a6f840e73",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "9c7fd88ae85a964720ba943f86d887db5800ba3ddfcb92ad6409e5db93a1ea3b",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "7113338aacd835164f368dc5b2a7aa8e5a1bbe8010ac4b431d845b3e04362ac9",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "0d24bf397ad660451a0447523d72c9cbbf2d91cd2f1895f73a63706f5cb82eb7",
+      "valueSha256": "fc28ae569a836faabf45369a9056dc8c2ca5a765ad5d869a993c413038e167e2",
+      "verificationSha256": "f4a778a8c9c0749f11f5aeb37d26567ff73eb3a30ae1f4c9f205894b0015a4e7",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "0d24bf397ad660451a0447523d72c9cbbf2d91cd2f1895f73a63706f5cb82eb7",
+      "valueSha256": "7231f4d4a14ee5ad7d3c4526cd74ffcabcb8cd36dd21e24fd2094f2821889286",
+      "verificationSha256": "2274689e2827d86e3ca371fc31ed4a18af68bce31db50d59d8c52b2bd2d2759a",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "0d24bf397ad660451a0447523d72c9cbbf2d91cd2f1895f73a63706f5cb82eb7",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "7af83f23995dacf0408740a96597b18b4906f718beb0ca5fad520a869919949e",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "0d24bf397ad660451a0447523d72c9cbbf2d91cd2f1895f73a63706f5cb82eb7",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "e61c45d60c409e4f7c2427b8e459e67045fb048b31ac895d66c6657e6e2b9f87",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "0d24bf397ad660451a0447523d72c9cbbf2d91cd2f1895f73a63706f5cb82eb7",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "a78b086adc3353b8ae5f9ca462d32d714bc0137acecc42ddb67e3b13dc15fc17",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "0d24bf397ad660451a0447523d72c9cbbf2d91cd2f1895f73a63706f5cb82eb7",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "6d22b334c2390b1f6007eb9b53af387c35d8ba519fb2991b700bd57b49265025",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "9f07fb41d168efb02f1b8bfcd6be766d7f0796211a576b1bb66c4178352332a1",
+      "valueSha256": "e9fc3ec7f363f375ca69d26f0d826d701b2af9e6519a2f984a45b58402bf0ca9",
+      "verificationSha256": "a0d4b22ba398c39fe82593ff1c5326954f46aae68446a0cebf1f8e9bdd7a0591",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "9f07fb41d168efb02f1b8bfcd6be766d7f0796211a576b1bb66c4178352332a1",
+      "valueSha256": "1304c0d461ef4ac06fb432699deeb39247c5c58416535a1f8e83c9e2fee01305",
+      "verificationSha256": "44c1bd1bd3fe5ac4c2205e273f39471fe4eb1e0ea60419952538e58aed5b7b1f",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "9f07fb41d168efb02f1b8bfcd6be766d7f0796211a576b1bb66c4178352332a1",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "17e579332a0c720f12c50d489a822f4a35fe31264a81ad5069ed2754992b656d",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "9f07fb41d168efb02f1b8bfcd6be766d7f0796211a576b1bb66c4178352332a1",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "4af5f3c2e0a73cd80b62a4fc34edd5c4660cda0c828f93feb74b68ed7cf4ced1",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "9f07fb41d168efb02f1b8bfcd6be766d7f0796211a576b1bb66c4178352332a1",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "c5ffee06161be51920edc83c7e2cd2645cfa6bf87cdaec40b87b7cfee88e5766",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "9f07fb41d168efb02f1b8bfcd6be766d7f0796211a576b1bb66c4178352332a1",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "95855c2de93b84289bf6337d9cec9c5bc5168ac1e94c983b077ede57b23584ed",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "d94e01749f1526936200e89ef30944775c0b58a6799e9a5533341ceb3189c133",
+      "valueSha256": "0f45d26b9bca5bab9215ee29cc079e2776099e08de9df505123e52128fe91375",
+      "verificationSha256": "6b84842d526aa1197fcabcf676f90861272cff3b5dfc221a56f9e24ea2113213",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "d94e01749f1526936200e89ef30944775c0b58a6799e9a5533341ceb3189c133",
+      "valueSha256": "5f97582eefee30bf0b41b8f8904219f41c4fd9d0261217002cbc1afbfa96c3e0",
+      "verificationSha256": "c32364495edeaa6571eae5ff21a8ec689e8875a110c3ff15a496930593f3ad8b",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "d94e01749f1526936200e89ef30944775c0b58a6799e9a5533341ceb3189c133",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "ea8c93339588cfe59c653f1289d61f5fd9acba3c29b4a7d6707919b3821a7864",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "d94e01749f1526936200e89ef30944775c0b58a6799e9a5533341ceb3189c133",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "fadd69f84df16d9ec8bbc52773d232b9b1cec352808168360c162175aa4c7703",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "d94e01749f1526936200e89ef30944775c0b58a6799e9a5533341ceb3189c133",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "a06616ed48c83d2411c472d9392d95ead4aba230294d5634b2706bee1151fcd5",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "d94e01749f1526936200e89ef30944775c0b58a6799e9a5533341ceb3189c133",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "5555fd2bc7b76a7681f585f6ca817cacbb488c0de419d835fa21d307ee41695f",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "3a902aca17f5baf172e049c760eaa8365e3f12c1e2785dcbd9908094a656d2fc",
+      "valueSha256": "fc28ae569a836faabf45369a9056dc8c2ca5a765ad5d869a993c413038e167e2",
+      "verificationSha256": "10ded228ad84bae000c28939f234b36b4a797d4078e5f1eebdc797345c30da59",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "3a902aca17f5baf172e049c760eaa8365e3f12c1e2785dcbd9908094a656d2fc",
+      "valueSha256": "7231f4d4a14ee5ad7d3c4526cd74ffcabcb8cd36dd21e24fd2094f2821889286",
+      "verificationSha256": "ea936a1a8e5cabf42f186d7248faf1c33f281bccefcc243118943c179ee47cc2",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "3a902aca17f5baf172e049c760eaa8365e3f12c1e2785dcbd9908094a656d2fc",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "9c97241d546e910cba1795ef9ca01ac8c8360340fde7d659d7605d6af1c4d773",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "3a902aca17f5baf172e049c760eaa8365e3f12c1e2785dcbd9908094a656d2fc",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "f980fd4e4eb72960fd1b1ca37e7f99502c6a6908b5a97b8685ca63965964f619",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "3a902aca17f5baf172e049c760eaa8365e3f12c1e2785dcbd9908094a656d2fc",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "6456c833904c0b357db644a089feeadd92298f071421a76d5c3d0404d98d609e",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "3a902aca17f5baf172e049c760eaa8365e3f12c1e2785dcbd9908094a656d2fc",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "29f531ae91a046a110878f91f458793ca68c0cc0e33ecfb3386a9c2cf9d715e5",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "28218dbc9b5c2329f90110bd835a0c6dd96d34d39ee3e6385a50ccaf08e9a166",
+      "valueSha256": "e9fc3ec7f363f375ca69d26f0d826d701b2af9e6519a2f984a45b58402bf0ca9",
+      "verificationSha256": "ad2e6f259e29715b5a015e454295ac1008cd3a28ab1aefb2dee770136f6d0d3a",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "28218dbc9b5c2329f90110bd835a0c6dd96d34d39ee3e6385a50ccaf08e9a166",
+      "valueSha256": "1304c0d461ef4ac06fb432699deeb39247c5c58416535a1f8e83c9e2fee01305",
+      "verificationSha256": "0a0344a602fe4b9b4fcc34f51ffb72d9a542f9c551099f9e8c0e5b72e6bd71e4",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "28218dbc9b5c2329f90110bd835a0c6dd96d34d39ee3e6385a50ccaf08e9a166",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "1af7df6da1ab7b342a8d5c8f845062b8bc5ee76fab03a4dc0dfdac51dd51c8cb",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "28218dbc9b5c2329f90110bd835a0c6dd96d34d39ee3e6385a50ccaf08e9a166",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "92945e366345cb0433f82dc260d6f59553e4cdae0c826c7ee655349d027de0cb",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "28218dbc9b5c2329f90110bd835a0c6dd96d34d39ee3e6385a50ccaf08e9a166",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "0f2013fd6fc6a91d85350dc0909e39dd86204849eafc6e34beae2c5f5645728c",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "28218dbc9b5c2329f90110bd835a0c6dd96d34d39ee3e6385a50ccaf08e9a166",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "fa749a87534b929728c4f2ec963419a4b48a562683c39e9cc80e94b63987dada",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "21b035c1e08c1b96e24b4f919b3364fd5d5af139b3b8f09bbc52a1710bcf4d47",
+      "valueSha256": "0f45d26b9bca5bab9215ee29cc079e2776099e08de9df505123e52128fe91375",
+      "verificationSha256": "7cdae918bbaa56ed334779592ae2121afaac04207c7d304ccefcc425207a00c5",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "21b035c1e08c1b96e24b4f919b3364fd5d5af139b3b8f09bbc52a1710bcf4d47",
+      "valueSha256": "5f97582eefee30bf0b41b8f8904219f41c4fd9d0261217002cbc1afbfa96c3e0",
+      "verificationSha256": "8f8842d66fd10418faa5c0641465b8331c6bc135b55e67ace6c84b181a2ad597",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "21b035c1e08c1b96e24b4f919b3364fd5d5af139b3b8f09bbc52a1710bcf4d47",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "b6a246d2f097fdd25f2921e717c4adc16cb81b58595c98a4ec0947764f5a739a",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "21b035c1e08c1b96e24b4f919b3364fd5d5af139b3b8f09bbc52a1710bcf4d47",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "103d75aa730978629edf83dffcc9a40837054221d0fead9ef74287358138b1bb",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "21b035c1e08c1b96e24b4f919b3364fd5d5af139b3b8f09bbc52a1710bcf4d47",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "87f7de3d034cbeb0312f27501b725ddf4e7cbd452ee1aeebf56d618fa6bd470f",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "21b035c1e08c1b96e24b4f919b3364fd5d5af139b3b8f09bbc52a1710bcf4d47",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "3f9b93cbb3b07cd4f8c751d119a4c85447c6ccf39af5cacdb98a58d1bf4360f8",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "857d9584cf4fefa97c96b0ff9239b58ad8f88cf5df822b85ace2ee19793290cb",
+      "valueSha256": "fc28ae569a836faabf45369a9056dc8c2ca5a765ad5d869a993c413038e167e2",
+      "verificationSha256": "cd9277d7ee5e16736d9d57399ef9e3021928ebf1a95267cfbc2d80e129b222d0",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "857d9584cf4fefa97c96b0ff9239b58ad8f88cf5df822b85ace2ee19793290cb",
+      "valueSha256": "7231f4d4a14ee5ad7d3c4526cd74ffcabcb8cd36dd21e24fd2094f2821889286",
+      "verificationSha256": "8920c63e0ce94e301cac6eaad614a5d04cc296acd1dfcc7f54499633bbc6df51",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "857d9584cf4fefa97c96b0ff9239b58ad8f88cf5df822b85ace2ee19793290cb",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "51afd994964f00e7cf90c183a27f2bc37fcc2d3d3e511711ef7109b216cf774e",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "857d9584cf4fefa97c96b0ff9239b58ad8f88cf5df822b85ace2ee19793290cb",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "516285f74ade1e10a85ddf41ce83479cad3d6ccdd1f6f1cb1ee2e49b86562bf3",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "857d9584cf4fefa97c96b0ff9239b58ad8f88cf5df822b85ace2ee19793290cb",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "04d0ddd8f3d5ef36c1c2cd965f4123ce48e9419f753c622115ed818646dd0636",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "857d9584cf4fefa97c96b0ff9239b58ad8f88cf5df822b85ace2ee19793290cb",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "18bb2ac8a722644f2ece3ad33e1c4ea9002862e566a9d816587a960ce49e2f81",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "4fd6401fd53c15fabc440f31109beb0b596bf306a701744f38db0a0e5e5b1cd6",
+      "valueSha256": "e9fc3ec7f363f375ca69d26f0d826d701b2af9e6519a2f984a45b58402bf0ca9",
+      "verificationSha256": "8313788dcae03f8739786cfe0eeca360a93bac69750023563176c33b521f027a",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "4fd6401fd53c15fabc440f31109beb0b596bf306a701744f38db0a0e5e5b1cd6",
+      "valueSha256": "1304c0d461ef4ac06fb432699deeb39247c5c58416535a1f8e83c9e2fee01305",
+      "verificationSha256": "f90dd02293ac209cc4b4d0b3235d1f206b027b2fcb0f23bb9597e12e74fa107c",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "4fd6401fd53c15fabc440f31109beb0b596bf306a701744f38db0a0e5e5b1cd6",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "f9b8bdb98018aefc5cd855284a9c3d758df3040e8b0b85b4bdef9f2ad3dcc5bc",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "4fd6401fd53c15fabc440f31109beb0b596bf306a701744f38db0a0e5e5b1cd6",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "cfa18a7ffcffd92fdd7c2e9cbadf69de157257247fe735ba8d23e2bdc9592ca0",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "4fd6401fd53c15fabc440f31109beb0b596bf306a701744f38db0a0e5e5b1cd6",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "9d843c40f5ef367068581e75be267367a3d78d093e0352804f6dc94fcc9cd48a",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "4fd6401fd53c15fabc440f31109beb0b596bf306a701744f38db0a0e5e5b1cd6",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "4764a618fa58dbeb21a66dfd312ce15715137ff4637901f0068a32efa7ff6e6e",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "d9b4c2814dfcdbb70adc1bf8209c91d25599fffffbbf9a916dc528567f67c3f9",
+      "valueSha256": "0f45d26b9bca5bab9215ee29cc079e2776099e08de9df505123e52128fe91375",
+      "verificationSha256": "d9ebb3a11d5d1d56f0bcaffcdbaf4c1421e035091900204cffd318d94d7c5508",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "d9b4c2814dfcdbb70adc1bf8209c91d25599fffffbbf9a916dc528567f67c3f9",
+      "valueSha256": "5f97582eefee30bf0b41b8f8904219f41c4fd9d0261217002cbc1afbfa96c3e0",
+      "verificationSha256": "eb8285e91db9a4cd3e9b5ca4a9d3c4b75b8e853138026f35cc335d8f905c46db",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "d9b4c2814dfcdbb70adc1bf8209c91d25599fffffbbf9a916dc528567f67c3f9",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "fafd5b8467d1a9ebfa9438c60a35b368bb06951fa18760ef13f30253562a006b",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "d9b4c2814dfcdbb70adc1bf8209c91d25599fffffbbf9a916dc528567f67c3f9",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "96d95cc54b6dc7e39bf8fa9a2502c7a2015c4560a17527f0990a867d3a99151a",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "d9b4c2814dfcdbb70adc1bf8209c91d25599fffffbbf9a916dc528567f67c3f9",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "a608c0946dfda169294943b1113b74a37e4ca995fb1a645357e284811675b404",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "d9b4c2814dfcdbb70adc1bf8209c91d25599fffffbbf9a916dc528567f67c3f9",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "fc9b73a6247fc4145b06487987f9f5fc11b046bf86d841f7ced4ab10a9d924e8",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "8b4f3077d729b0658df4f912bc23533798cf37de4c5c15d69a3a899b01fb10ea",
+      "valueSha256": "fc28ae569a836faabf45369a9056dc8c2ca5a765ad5d869a993c413038e167e2",
+      "verificationSha256": "db624a39e6eac7a045b2f6d6cb906e620e41833a8566278592e1ae8262681fef",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "8b4f3077d729b0658df4f912bc23533798cf37de4c5c15d69a3a899b01fb10ea",
+      "valueSha256": "7231f4d4a14ee5ad7d3c4526cd74ffcabcb8cd36dd21e24fd2094f2821889286",
+      "verificationSha256": "c7f342b46e0ccf8e0ef50e3f6f70ce7625ae63656eb880036253eddbbda46ad1",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "8b4f3077d729b0658df4f912bc23533798cf37de4c5c15d69a3a899b01fb10ea",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "5d8f08a53829cb3fcd0788615b8379b74e06bbfbe073a7387593ec9febc517ba",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "8b4f3077d729b0658df4f912bc23533798cf37de4c5c15d69a3a899b01fb10ea",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "33642d43071a469c8295285f579b4dc088b5923ea38fff8fd332f2054ef26ad0",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "8b4f3077d729b0658df4f912bc23533798cf37de4c5c15d69a3a899b01fb10ea",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "c66bfab934f00ee66e30646a357ca5e9c455552d9e1b876118504ef9e83ebcc8",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "8b4f3077d729b0658df4f912bc23533798cf37de4c5c15d69a3a899b01fb10ea",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "16a91a3cd246eb8c595499c3491b660ef45ed8d811a16e798ff4b4e84161138b",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "dfbdc9ebdc8054efa4c56cdb3db40eb5460702332131c45ac1fe87b96663f12e",
+      "valueSha256": "e9fc3ec7f363f375ca69d26f0d826d701b2af9e6519a2f984a45b58402bf0ca9",
+      "verificationSha256": "8e2aaa7bc5c7afa1ad8d50c499f891b53e77faf713c6ba83d1ae94fe47497a62",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "dfbdc9ebdc8054efa4c56cdb3db40eb5460702332131c45ac1fe87b96663f12e",
+      "valueSha256": "1304c0d461ef4ac06fb432699deeb39247c5c58416535a1f8e83c9e2fee01305",
+      "verificationSha256": "359f7a46da9349c00be5f42efdb93e3011283efa1f828a926bccd17afac57262",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "dfbdc9ebdc8054efa4c56cdb3db40eb5460702332131c45ac1fe87b96663f12e",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "8a5d594755cd2e3761a387ca5e9dbe0e249e82ced6c6e3daab474bbb89c2ad75",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "dfbdc9ebdc8054efa4c56cdb3db40eb5460702332131c45ac1fe87b96663f12e",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "969176bff89da282f1fd862aeb4642a0bec0b72eb24d9bed36be59527b62f82c",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "dfbdc9ebdc8054efa4c56cdb3db40eb5460702332131c45ac1fe87b96663f12e",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "b6b80bcc8dac2a7f6c03d68770113295dc4cc7058ff761cdbb5904afe1ada44f",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "dfbdc9ebdc8054efa4c56cdb3db40eb5460702332131c45ac1fe87b96663f12e",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "9cf41c27d92b56b2fdbc54ed726a222f535d26e7354476b48afd40e825a24306",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "f12d75d52cffdc09ba28667711d31ca3b9ce408d7af85f024970118c584c9de9",
+      "valueSha256": "0f45d26b9bca5bab9215ee29cc079e2776099e08de9df505123e52128fe91375",
+      "verificationSha256": "08cec3da52ec4116da1afdcaa2109a6a5cf68d29d0905574aecb67d34aedd4d9",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "f12d75d52cffdc09ba28667711d31ca3b9ce408d7af85f024970118c584c9de9",
+      "valueSha256": "5f97582eefee30bf0b41b8f8904219f41c4fd9d0261217002cbc1afbfa96c3e0",
+      "verificationSha256": "1a20fc27b728a381d5fdf0204e859138d37b546d0357161715440e5d7f9ee4fc",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "f12d75d52cffdc09ba28667711d31ca3b9ce408d7af85f024970118c584c9de9",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "264e23857dc02fc91b133285c5324b328bb54a3d6cdd8a1f860fd0bc8d2e3852",
+      "primaryEvidenceId": "round-1",
+      "supportingEvidenceIds": [
+        "round-1"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "f12d75d52cffdc09ba28667711d31ca3b9ce408d7af85f024970118c584c9de9",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "17581e6420b832b4e06f8b9b5e9584fab2835e269cb5dac1bd546273df6944bb",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "f12d75d52cffdc09ba28667711d31ca3b9ce408d7af85f024970118c584c9de9",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "da66906820a5dc76b3f1462bab54fea630f671ac6aa83aa50a8fabd772b73285",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "f12d75d52cffdc09ba28667711d31ca3b9ce408d7af85f024970118c584c9de9",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "43a4c814b6bbd40fc04f121754cc63bdc503cc071c57a361002080dd71d481b3",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "ad5f7a4eee99819b6c620642c383f08d05d40afe7f7c5c93cb53a1120456415a",
+      "valueSha256": "fc28ae569a836faabf45369a9056dc8c2ca5a765ad5d869a993c413038e167e2",
+      "verificationSha256": "c19f8140d83142b6c2274756e4acc449d78580616e68fd36819da3d255f37054",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "ad5f7a4eee99819b6c620642c383f08d05d40afe7f7c5c93cb53a1120456415a",
+      "valueSha256": "7231f4d4a14ee5ad7d3c4526cd74ffcabcb8cd36dd21e24fd2094f2821889286",
+      "verificationSha256": "893cad7b8881554927721789b8ebe3ea7395fabd23096e0c7d324689e4af405b",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "ad5f7a4eee99819b6c620642c383f08d05d40afe7f7c5c93cb53a1120456415a",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "f0c25b584199f30a72f212c42e3aeb35d62646e1e25d56e6d41cc678ddb63ce7",
+      "primaryEvidenceId": "round-2",
+      "supportingEvidenceIds": [
+        "round-2"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "ad5f7a4eee99819b6c620642c383f08d05d40afe7f7c5c93cb53a1120456415a",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "8b18273cd8de46eb94bbcdccd371155973d7381aa6e101ebc46dce19910375ab",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "ad5f7a4eee99819b6c620642c383f08d05d40afe7f7c5c93cb53a1120456415a",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "982ecf74d444be2ae7702e7f88a4bcc39e43f93bf4ae99a3cfdac3428b5e01d2",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "ad5f7a4eee99819b6c620642c383f08d05d40afe7f7c5c93cb53a1120456415a",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "21d7fd5fb1e9ac687140f440999366ae0e43c066e07d2b9b59909191c62783f1",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "opensOn",
+      "recordScopeSha256": "4e4614de552ac404329708b2d3ba825470015f43c67a5f83a896262761c5197a",
+      "valueSha256": "e9fc3ec7f363f375ca69d26f0d826d701b2af9e6519a2f984a45b58402bf0ca9",
+      "verificationSha256": "3c4b6014dc33d6f2671f4bf7d0a3e99c01859e681ce98dd20c888c99ad266688",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "closesOn",
+      "recordScopeSha256": "4e4614de552ac404329708b2d3ba825470015f43c67a5f83a896262761c5197a",
+      "valueSha256": "1304c0d461ef4ac06fb432699deeb39247c5c58416535a1f8e83c9e2fee01305",
+      "verificationSha256": "c7285171afe2b52c8cad109a64b14057b17e223a682d032094c0360e5f148223",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "dateStatus",
+      "recordScopeSha256": "4e4614de552ac404329708b2d3ba825470015f43c67a5f83a896262761c5197a",
+      "valueSha256": "dd2653c12a35c69d362d327a778f6e79f7e182293194fe0c3f4f68f6afdc8c1b",
+      "verificationSha256": "a0abb8d7d0af32c799a95f2c038879afaf18cc63915fb6c7e1e1491a400502c5",
+      "primaryEvidenceId": "round-3",
+      "supportingEvidenceIds": [
+        "round-3"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "applyUrl",
+      "recordScopeSha256": "4e4614de552ac404329708b2d3ba825470015f43c67a5f83a896262761c5197a",
+      "valueSha256": "8767d4bb0021f8f29308651e20e87c3d4b010013f7ce3b12e46fb569a0ea740f",
+      "verificationSha256": "85ceb97eb7af2d2ca1134ab730a948b548038b80a4ba40cb0e63333e4124df3f",
+      "primaryEvidenceId": "application-route",
+      "supportingEvidenceIds": [
+        "application-route"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "languageRequirements",
+      "recordScopeSha256": "4e4614de552ac404329708b2d3ba825470015f43c67a5f83a896262761c5197a",
+      "valueSha256": "6b8ed94902fbef2f01110747e1b0ba72fb8db9eaa469d05f98efe4c1392c49a9",
+      "verificationSha256": "b9d3c0154078453ca27e530632cd7819979104814a21fad3a0f529c828c07d10",
+      "primaryEvidenceId": "chinese-proof-alternatives",
+      "supportingEvidenceIds": [
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "language-cn-confirmation",
+        "language-en-confirmation",
+        "validity-and-translation"
+      ]
+    },
+    {
+      "entityType": "admissionCycle",
+      "recordId": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "fieldPath": "eligibility",
+      "recordScopeSha256": "4e4614de552ac404329708b2d3ba825470015f43c67a5f83a896262761c5197a",
+      "valueSha256": "a58ee3437399636613fa65455995661a8291f20bac895d6ca1d03a5926987ea1",
+      "verificationSha256": "16f1d1b570602fb9dcaadba76add6a48027435be144bbcef63efe10b8e7688cf",
+      "primaryEvidenceId": "eligibility",
+      "supportingEvidenceIds": [
+        "eligibility",
+        "academic-transcript",
+        "csca-conditional-results",
+        "csca-merged-cell",
+        "chinese-proof-alternatives",
+        "english-proof-required",
+        "passport-validity",
+        "nationality-documentation",
+        "guardian-and-finance",
+        "validity-and-translation",
+        "conditional-selection"
+      ]
+    }
+  ],
+  "compositeLeafEvidence": "A receipt records its primary official quotation; fieldEvidenceBindings retains every supporting guide/materials/major-list quotation for composite language/eligibility leaves. Original source documents and peer review remain private.",
+  "sourceDifferences": {
+    "selectedPagesIdentical": [
+      1,
+      2,
+      6
+    ],
+    "unselectedDiscrepancyPages": [
+      3
+    ],
+    "differences": [
+      {
+        "page": 3,
+        "canonicalTextSha256": "06efaddd5521252a4b589973a0bf3c98b48c95b0f061029b14bba076d2375476",
+        "cscaAnchorTextSha256": "1bca7668018dba352bcbcf955152d18a7df1e86f65e4f62fc0e1a395a0739d5b",
+        "scope": "unselected Japanese/German rows21-22",
+        "difference": "canonical English p3 prints merged 4 Years; alternate English p3 leaves duration blank",
+        "visualVerified": [
+          "majors-english3-3.png",
+          "majors-csca-english3-3.png"
+        ],
+        "resolution": "retain both source hashes and discrepancy; do not combine or repair unselected rows"
+      }
+    ],
+    "bilingualNames": "Smart Energy is the English p2 literal; Chinese p6 says 智慧能源工程. Keep Chinese verified name and English literal separately; do not silently expand English title."
+  },
+  "reviewedPrograms": [
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese",
+      "slug": "shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese",
+      "universityId": "uni-shanghai-jiao-tong-university",
+      "name": {
+        "en": "Artificial Intelligence",
+        "zh": "人工智能"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "人工智能学院"
+        },
+        "qualification": {
+          "en": "Bachelor",
+          "zh": "本科"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese",
+      "slug": "shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese",
+      "universityId": "uni-shanghai-jiao-tong-university",
+      "name": {
+        "en": "Materials Science and Engineering",
+        "zh": "材料科学与工程"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "材料科学与工程学院"
+        },
+        "qualification": {
+          "en": "Bachelor",
+          "zh": "本科"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese",
+      "slug": "shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese",
+      "universityId": "uni-shanghai-jiao-tong-university",
+      "name": {
+        "en": "Aerospace Engineering",
+        "zh": "航空航天工程"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "航空航天学院"
+        },
+        "qualification": {
+          "en": "Bachelor",
+          "zh": "本科"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese",
+      "slug": "shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese",
+      "universityId": "uni-shanghai-jiao-tong-university",
+      "name": {
+        "en": "Biomedical Engineering",
+        "zh": "生物医学工程"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "生物医学工程学院"
+        },
+        "qualification": {
+          "en": "Bachelor",
+          "zh": "本科"
+        }
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "id": "program-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese",
+      "slug": "shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese",
+      "universityId": "uni-shanghai-jiao-tong-university",
+      "name": {
+        "en": "Smart Energy",
+        "zh": "智慧能源工程"
+      },
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "durationMonths": 48,
+      "programUrl": "https://global.sjtu.edu.cn/en/storage/global/web/en/page/2026/11/fb2570048becacef0be421214dbc3889.pdf",
+      "applyUrl": null,
+      "languageRequirements": [],
+      "verificationScope": "facts",
+      "supplementaryDetails": {
+        "faculty": {
+          "zh": "智慧能源创新学院"
+        },
+        "qualification": {
+          "en": "Bachelor",
+          "zh": "本科"
+        }
+      }
+    }
+  ],
+  "reviewedAdmissionCycles": [
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-1",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "programId": "program-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-11-18",
+      "closesOn": "2027-01-05",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第一轮：2026-11-18 00:00至2027-01-05 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-2",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "programId": "program-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-01-06",
+      "closesOn": "2027-02-28",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第二轮：2027-01-06 00:00至2027-02-28 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-3",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "programId": "program-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-03-01",
+      "closesOn": "2027-03-31",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第三轮：2027-03-01 00:00至2027-03-31 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-1",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "programId": "program-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-11-18",
+      "closesOn": "2027-01-05",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第一轮：2026-11-18 00:00至2027-01-05 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-2",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "programId": "program-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-01-06",
+      "closesOn": "2027-02-28",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第二轮：2027-01-06 00:00至2027-02-28 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-3",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "programId": "program-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-03-01",
+      "closesOn": "2027-03-31",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第三轮：2027-03-01 00:00至2027-03-31 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-1",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "programId": "program-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-11-18",
+      "closesOn": "2027-01-05",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第一轮：2026-11-18 00:00至2027-01-05 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-2",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "programId": "program-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-01-06",
+      "closesOn": "2027-02-28",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第二轮：2027-01-06 00:00至2027-02-28 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-3",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "programId": "program-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-03-01",
+      "closesOn": "2027-03-31",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第三轮：2027-03-01 00:00至2027-03-31 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-1",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "programId": "program-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-11-18",
+      "closesOn": "2027-01-05",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第一轮：2026-11-18 00:00至2027-01-05 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-2",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "programId": "program-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-01-06",
+      "closesOn": "2027-02-28",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第二轮：2027-01-06 00:00至2027-02-28 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-3",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "programId": "program-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-03-01",
+      "closesOn": "2027-03-31",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第三轮：2027-03-01 00:00至2027-03-31 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-1",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1",
+      "programId": "program-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2026-11-18",
+      "closesOn": "2027-01-05",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第一轮：2026-11-18 00:00至2027-01-05 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-2",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2",
+      "programId": "program-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-01-06",
+      "closesOn": "2027-02-28",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第二轮：2027-01-06 00:00至2027-02-28 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    },
+    {
+      "sourceIds": [
+        "src-reviewed-sjtu-2027-chinese-bachelor-majors",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-pdf",
+        "src-reviewed-sjtu-2027-chinese-bachelor-materials",
+        "src-reviewed-sjtu-2027-chinese-bachelor-guide-html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "reviewAfter": "2026-12-17",
+      "status": "verified",
+      "teachingLanguage": "Chinese",
+      "applicationRound": "general-admissions-round-3",
+      "languageRequirements": [
+        {
+          "test": "HSK",
+          "minimum": "HSK5级200分（含）以上或HSK6级180分（含）以上；亦可提供其他同等证明材料（如中文为母语的说明）。一年预科项目申请仅适用于汉语暂未达到要求、需要一年预科学习的有条件录取申请人。"
+        },
+        {
+          "test": "other",
+          "minimum": "须另提交英语水平证明（以下至少一项）：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        }
+      ],
+      "eligibility": [
+        {
+          "zh": "高中毕业或具有同等学历；应届毕业生须提供学校开具的预毕业证明，并于入学前取得高中毕业证书。"
+        },
+        {
+          "zh": "持外国有效护照的非中国籍公民，符合教育部《关于规范我高等学校接受国际学生有关工作的通知》等相关规定；提交有效期大于12个月的护照信息页。"
+        },
+        {
+          "zh": "身心健康，无违法犯罪记录；提交高中阶段全部课程成绩单。"
+        },
+        {
+          "zh": "须提交CSCA成绩，所选专业至少提供理科中文、数学。申请时尚未参加CSCA者可先提供简章列明的其他国际标准化或本国统一考试成绩；获有条件预录取者须在2027年6月30日前补交CSCA成绩，通过复核后方可获得正式录取通知。"
+        },
+        {
+          "zh": "汉语证明须至少提供一项：HSK5级200分（含）以上或HSK6级180分（含）以上；或其他同等证明材料（如中文为母语的说明）。汉语暂未达到要求者的一年预科项目申请仅适用于有条件录取，不等同于已满足本科直接入学条件。"
+        },
+        {
+          "zh": "须另提交以下英语水平证明至少一项：托福TOEFL（code：D070）、雅思IELTS、多邻国Duolingo或其他英语水平证明。"
+        },
+        {
+          "zh": "CSCA、汉语及英语成绩或证明须在有效期内；如未列明具体有效期，须为两年内获得。"
+        },
+        {
+          "zh": "须提交申请人父母双方的国籍或户籍证明；父母双方或一方为中国公民、原为中国公民后加入外国国籍等情形，须按申请材料列表第9条提交相应国籍、户籍及往来中国的签证、居留许可、出入境记录等证明；国籍认定以中国公安机关出入境管理部门结论为准。"
+        },
+        {
+          "zh": "截至2027年9月1日（含）未满18周岁的申请人，须提供在华监护人保证书。"
+        },
+        {
+          "zh": "申请人或其经济担保人须提供不少于10万元人民币或等额外币的经济证明。"
+        },
+        {
+          "zh": "通过学校遴选的申请人须参加面试，学校综合评估择优预录取；预录取后须在结果公布后2周内确认就读。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "zh": "有效期大于12个月的护照信息页；一经录取，直至入学报到完成前护照信息不可更改。"
+        },
+        {
+          "zh": "高中毕业或同等学历证明；应届毕业生可先提供所在高中开具的预毕业证明。"
+        },
+        {
+          "zh": "高中简介：学校情况、入学要求、课程体系、成绩评分制度等。"
+        },
+        {
+          "zh": "本人签字的自述信。"
+        },
+        {
+          "zh": "推荐信两封，须推荐人签字，其中至少一封由所在高中任课教师提供。"
+        },
+        {
+          "zh": "高中全部课程成绩单及CSCA成绩；延期提交须符合招生简章所列条件。"
+        },
+        {
+          "zh": "汉语和英语水平证明，按材料列表各自至少提供一项。"
+        },
+        {
+          "zh": "父母双方的国籍或户籍证明；符合第9条情形者按原条款提交相应国籍、户籍、签证、居留许可及出入境记录等材料。"
+        },
+        {
+          "zh": "未满18周岁者按2027年9月1日（含）条件提供在华监护人保证书。"
+        },
+        {
+          "zh": "不少于10万元人民币或等额外币的经济保证证明。"
+        },
+        {
+          "zh": "获奖证书（如果有）及学校要求的其他支撑材料。"
+        },
+        {
+          "zh": "材料若非中文或英文，须提供经公证的中文或英文翻译件；补充材料须在要求时间内提交。"
+        }
+      ],
+      "applyUrl": "https://apply.sjtu.edu.cn/",
+      "id": "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3",
+      "programId": "program-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese",
+      "academicYear": "2027",
+      "intake": "autumn",
+      "opensOn": "2027-03-01",
+      "closesOn": "2027-03-31",
+      "dateStatus": "published",
+      "tuitionCny": 50000,
+      "tuitionPeriod": "academic-year",
+      "tuitionStatus": "confirmed",
+      "evidenceBasis": "cycle-specific",
+      "factScope": "partial",
+      "applicationFeeCny": 800,
+      "notes": {
+        "zh": "第三轮：2027-03-01 00:00至2027-03-31 23:59（北京时间）。2027年9月初开学，具体时间以录取通知书为准。申请费一经缴纳不予退还；奖学金申请依各奖学金规定办理。"
+      }
+    }
+  ],
+  "afterProgrammeSha256": {
+    "program-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese": "19d16896d4bd15f5699ff60024580011f226eb4e2d90f17429f66b6edef5ca0b",
+    "program-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese": "2e1838025bac3cba91f731df4a7fa2c50bbea572f106d096138fced38c1b2b0e",
+    "program-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese": "9be3c90bdc921a0617c97ef98d09a0aa9f74a117f07f93552f42fa4b85f6c48e",
+    "program-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese": "57d96ad2d558c4b717f1d1b490388ec6f096f4a2a836b91908cb00861d52d78b",
+    "program-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese": "b4dc814c1658517a3da50653a0637de6d2710aeca7338bbacbf3ac9cc5bef63d"
+  },
+  "newCycleSha256": {
+    "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1": "f3b00963daf4735cc61c3a8253e6ead42db508a7dd18bd01b5f9e89834e890ba",
+    "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2": "094718b47a8ca2af871293864280a13e54f6f112c6f4ad2a0d64d76749d2af89",
+    "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3": "920f1429b25c1df44e226e034abf5b6a1a8654d1af78714feb76cfe2015c6667",
+    "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1": "fcdd465f7a7b53e9e8e230c7e1adba1fc1800d081f8b381b77c2d0885d8b9ad8",
+    "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2": "4eb226e70c7093da962fb8727008071bbbe42b145715f9b0940d1c6840970d41",
+    "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3": "59536273a5574546d21b48bf216f48a1c05a893bb04e451254f292fed05c9078",
+    "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1": "e40d54353867a4b449a685edec27ce14cdd800d1c2e0472e17b8869bbff6fe60",
+    "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2": "1a772314997f6c9ed7c2dc4720010a23cbb0241baf0c2b3d252702a413d70421",
+    "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3": "d2e185df10cf7e7a7b5dec8b55f382d3b4baa010b0afba454030146389095129",
+    "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1": "cc1051e5c81a520965fed402ca2cd5468bb4109811ea0f5e754faa06b9e89b97",
+    "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2": "ef8ec8783dcfcb866c70574c947a8d9fac9d7255d59a77c912d139608b3839f8",
+    "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3": "98df4b9765cce044cd7fa5abd1cf67546276f0e010f24c100a4e56f3cedd96fb",
+    "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1": "60e4c70c57760701d747ef0652910f567623f960070d2a6c3682124d81821b38",
+    "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2": "bfc3f94ac38606e48e315805207406a93806c66dd277863ad85f590806582a41",
+    "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3": "fdd47192a57dea50b517d38bbf62ebc228ed99ce6f38a278fab38ffecb3b5af6"
+  },
+  "annualScopeSha256": {
+    "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-1": "9c7fd88ae85a964720ba943f86d887db5800ba3ddfcb92ad6409e5db93a1ea3b",
+    "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-2": "0d24bf397ad660451a0447523d72c9cbbf2d91cd2f1895f73a63706f5cb82eb7",
+    "cycle-shanghai-jiao-tong-university-artificial-intelligence-bachelor-chinese-2027-autumn-general-admissions-round-3": "9f07fb41d168efb02f1b8bfcd6be766d7f0796211a576b1bb66c4178352332a1",
+    "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1": "d94e01749f1526936200e89ef30944775c0b58a6799e9a5533341ceb3189c133",
+    "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2": "3a902aca17f5baf172e049c760eaa8365e3f12c1e2785dcbd9908094a656d2fc",
+    "cycle-shanghai-jiao-tong-university-materials-science-and-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3": "28218dbc9b5c2329f90110bd835a0c6dd96d34d39ee3e6385a50ccaf08e9a166",
+    "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1": "21b035c1e08c1b96e24b4f919b3364fd5d5af139b3b8f09bbc52a1710bcf4d47",
+    "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2": "857d9584cf4fefa97c96b0ff9239b58ad8f88cf5df822b85ace2ee19793290cb",
+    "cycle-shanghai-jiao-tong-university-aerospace-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3": "4fd6401fd53c15fabc440f31109beb0b596bf306a701744f38db0a0e5e5b1cd6",
+    "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1": "d9b4c2814dfcdbb70adc1bf8209c91d25599fffffbbf9a916dc528567f67c3f9",
+    "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2": "8b4f3077d729b0658df4f912bc23533798cf37de4c5c15d69a3a899b01fb10ea",
+    "cycle-shanghai-jiao-tong-university-biomedical-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3": "dfbdc9ebdc8054efa4c56cdb3db40eb5460702332131c45ac1fe87b96663f12e",
+    "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-1": "f12d75d52cffdc09ba28667711d31ca3b9ce408d7af85f024970118c584c9de9",
+    "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-2": "ad5f7a4eee99819b6c620642c383f08d05d40afe7f7c5c93cb53a1120456415a",
+    "cycle-shanghai-jiao-tong-university-smart-energy-engineering-bachelor-chinese-2027-autumn-general-admissions-round-3": "4e4614de552ac404329708b2d3ba825470015f43c67a5f83a896262761c5197a"
+  },
+  "preservation": {
+    "sources": {
+      "beforeCount": 3006,
+      "beforeCanonicalSha256": "4bc83e5b534dbb1d16b2544498b56ed0e21477804577ec06f6fc1a4ad667fbb3"
+    },
+    "cities": {
+      "beforeCount": 65,
+      "beforeCanonicalSha256": "f86b20e6ec13d745e9d20e77391e661ef702c7ef289edfafa938acc91156958d"
+    },
+    "universities": {
+      "beforeCount": 305,
+      "beforeCanonicalSha256": "a2d0be3e7ed2843f0589f3477cb1127feeaef92a8c974f1827e9b688a1bcea0d"
+    },
+    "programs": {
+      "beforeCount": 2352,
+      "beforeCanonicalSha256": "c432ff5d85f25af3a514fff503efdb2815f9f2d8a64fc80f03344d9f5ab507c8"
+    },
+    "admission-cycles": {
+      "beforeCount": 1716,
+      "beforeCanonicalSha256": "5b17c0ea199dc7a1938333f46114c0e72256706d9505e9f19a4a9a1b76484639"
+    },
+    "scholarships": {
+      "beforeCount": 414,
+      "beforeCanonicalSha256": "d0d84c62f481f54bd1067656bb510f7b5c5caddd581e3e5fca084e98e73f6be1"
+    },
+    "identity-acceptances": {
+      "beforeCount": 1532,
+      "beforeCanonicalSha256": "b4aad0367019cd593e88cc9f0c2e4bcfe88b191a1eba3540417e931a9b064aba"
+    },
+    "field-verifications": {
+      "beforeCount": 125,
+      "beforeCanonicalSha256": "e740c490fc6996d4363510ee45f1385ce6bc1c2847ea263139b0f8f81f299724"
+    }
+  },
+  "beforePublicProgrammeSha256": {
+    "program-beihang-university-computer-science-and-technology-bachelor": "834cd6441988160c9dddd2abfe6ed7f61777cbb31116dae06d3458e63a540b7e",
+    "program-beihang-university-materials-science-and-engineering-bachelor": "2dbf73f02fdab4621cd838df995ab45bf8fbe7d7e6de9bf4dca2dc62afab05bc",
+    "program-0894c95994b049fc8cc8fc17": "6229a5cacce251a0289d095ad169cf5d1557ec70a904fe5f8abaa5595fc92531",
+    "program-4f55aad7fd9236ebdeccc205": "b7cf0e2af109d838f4fad6e34b892940691cc5b165ddf122f4835f74abccf81f",
+    "program-6c5f2df917f6314287e33f9e": "a391d135a96d5f07854dab707ee7949390271fd4da0149522097949b21dc0640",
+    "program-d80dce5cbd9ef5807e5aafe7": "63c0fe667ba0333778719978bd265ff464ec3e127259e9e6f5be387ca0a9c126",
+    "program-d40f2fe92ea79bef2c5cbb75": "4eeb520cefe87039c00a1c092c06e49ba1f9edaee02c5d2a48306273c32ecbb0",
+    "program-beihang-university-nanomaterials-and-technology-bachelor": "3d771ac8512a83f2fa6b24031189920ba90d1c51e571e3db529c90fc5aae3c17",
+    "program-beihang-university-electronic-information-engineering-bachelor": "7efb2f60be13f7e30c29a5a2c43f5bc57d4b62daefcadfa6c802dd46e92318aa",
+    "program-beihang-university-communication-engineering-bachelor": "e6d5e12064f5ad775317c18af491e608efe2b61b2119cb540503d186ef196a4a",
+    "program-xiamen-university-bachelor-chinese-020201k": "b7be55a541dc4088c4f7b0ba7ba8993b1bb68867b5366e79fec8a6d4088d6acf",
+    "program-xiamen-university-bachelor-chinese-020202": "4415e6206dbf32b555af47717dd19ce157abe40514f4c1f40ffe6b403d090ff4",
+    "program-xiamen-university-bachelor-chinese-020401": "b4699271ab861b9122476f9bc8c0a54658912bf5cf6be87dac72012c1ea296c7",
+    "program-xiamen-university-bachelor-chinese-020302": "af6c60a4940777ec00ef66ff518b7cdfc0d16057f1c028fdbf5209791a2e7f47",
+    "program-xiamen-university-bachelor-chinese-020301k": "00505b7d58e00ffa0d26633d53d1ff2762bbb7a8bc9b4160297be37d1c780038",
+    "program-vm-hkbu-ma-visual-arts-master": "dcd37fb2024590537ed58e46eb9856e08daf8a25ce2b998c4fc75d692f30a324",
+    "program-vm-hkbu-mfa-cinematic-arts-master": "199acdd8accc89d5ae5787d714861f0e085c65ba7d8c02e9836589896c1ec879",
+    "program-vm-hkbu-ma-producing-master": "bb328a7ae7e17a5feb6a4d863dc425dec312030c1f0844791f20ff75e62c1dcf",
+    "program-vm-hkbu-msc-ai-digital-media-master": "52508c1ccd2a1e5072430e742bc089c9d3ecdc58d67b0b362baa713457d09193",
+    "program-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese": "398f54427914212d9195fcb9ecbcd6cb0fc36a6683dc85775ffe2341f5d71216",
+    "program-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese": "26c4836ea5e803061f292ca25f594fb99ce3529e8185965e19a7c546ac6e0509",
+    "program-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese": "a03f42f8548522afc845d48cdaaeb9afac335f342318abb3108ed82ac17cc6b4",
+    "program-northwest-a-and-f-university-business-administration-bachelor-chinese": "ad2bbb3d985a432b2ae31059e02783ad2669963718fe09e9031a61147d66a309",
+    "program-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese": "0fb64f8c546b009040d6697a5fbd5ecb1fcc8fc90150dc7d51e8b7a68bfb0fd3",
+    "program-vm-hkbu-ma-communication-master": "cb3a0206e76308ed9e5e6dc62b0332a6db3e77eb0942a245b5ce77c5c92cd33c",
+    "program-southwest-university-animal-science-bachelor-chinese": "eaa6be83fef0c2c778dcf829349002b06c1696f9160d8f6b0bb67d61962a029e",
+    "program-southwest-university-horticulture-bachelor-chinese": "a98dc6454f6c57125d38294c06431d5506d33269292b9a1be7bd1b49563612c1",
+    "program-southwest-university-landscape-gardening-bachelor-chinese": "0f790f612e3df640c7df3b13c27795c992d3300ec903dd841101ca56b899bf99",
+    "program-southwest-university-landscape-architecture-bachelor-chinese": "faed0e9fef130610e4bdc946e8960fa2847113818cae685cfbc7cfd33f986b1d",
+    "program-southwest-university-aquaculture-bachelor-chinese": "5a304f6fba0079e46cf5ea59d491905889234418739d5be5ef6df6211b8480e7"
+  },
+  "beforePublicAdmissionCycleSha256": {
+    "cycle-nenu-2027-4a8d46e8de4fe817fc9ef984": "8d25f5812e582b90ae09fb4e4f20aedce4ed4a0561fc6d4819cfa6c6b36f809b",
+    "cycle-nenu-2027-fa25f82d7ba05aa69caddde0": "b092b2c1c7705f848ca04c0464ec94897e98499cda588f38834065886ad432aa",
+    "cycle-nenu-2027-dea5339a86cc13ee2cab57a1": "5e5161dba73f2407b29161e01c14aa483c090fd55372b377e1e183ce07538d19",
+    "cycle-nenu-2027-f0d93abfee9e942b05221890": "00aa2311cba01917dcd6bbf7995bec809422683f849cc30804e0ab16bfa99d76",
+    "cycle-nenu-2027-e6ebdcc492ed50a500e653cc": "cf59a8d8b0bb58a16a34ae0b14fbefad8667f3b434cd4d76e2e5e2e2dfb622af",
+    "cycle-xiamen-university-bachelor-chinese-020201k-2027-autumn-self-funded": "345494ab4eb085a59b5b6a215ca4d515c0e10cd71f481a2b60918d98c50dbde2",
+    "cycle-xiamen-university-bachelor-chinese-020202-2027-autumn-self-funded": "43202b4ba31676bf9e9e53648bfeb2ae7fd7f713d55f0678606c3a8927517c24",
+    "cycle-xiamen-university-bachelor-chinese-020401-2027-autumn-self-funded": "adfbe419046153d7829c3081fc6951cc28dd11533314ad5d9eec9bb725d6f485",
+    "cycle-xiamen-university-bachelor-chinese-020302-2027-autumn-self-funded": "5e5b5ccfeb65d2377b3a3d3f4af0cd0e348814418cfa43b12c813368bc8518a0",
+    "cycle-xiamen-university-bachelor-chinese-020301k-2027-autumn-self-funded": "179a44d445306b8902e14f0b57276431548733e2a83348c7ddb312ebb7af1e3a",
+    "cycle-northwest-a-and-f-university-teaching-chinese-to-speakers-of-other-languages-bachelor-chinese-2027-self-funded": "7ada0ea2f264d1a3d87d1cff0a1162dacd3668995bdb113a9e8a7036e7857090",
+    "cycle-northwest-a-and-f-university-data-science-and-big-data-technology-bachelor-chinese-2027-self-funded": "8e1b73614d2dd8a0682068c301df72a74b84e089b9946d574c051d37b157e343",
+    "cycle-northwest-a-and-f-university-computer-science-and-technology-bachelor-chinese-2027-self-funded": "c6cac265cc4b98bcbf0c6cf2e3e2b840888a3b0e2143c802a4f77e615652ce8f",
+    "cycle-northwest-a-and-f-university-business-administration-bachelor-chinese-2027-self-funded": "4f34f8be7593c79d4d78d228eed0b544659e24f65d5cca3e4ab104c39fd80e5e",
+    "cycle-northwest-a-and-f-university-agricultural-water-conservancy-engineering-bachelor-chinese-2027-self-funded": "533ddbc5244fe2baf7b8686209238ee52abe8314656ca060817758fddf515217",
+    "cycle-reviewed-hkbu-visual-arts-2027-english-nonlocal-round1": "037066b08aab7e265ca796c2d794e6b7995594b3944fd287c9dbd04674e2cc43",
+    "cycle-reviewed-hkbu-visual-arts-2027-english-nonlocal-round2": "af00260431c19c4e841b48c35dd0da0bfec697f918b34a96b07d098f6e9f1738",
+    "cycle-reviewed-hkbu-cinematic-arts-2027-english-nonlocal": "b3392c4f5218c74b01fbd43b5c448e94e761de77df5a5af6e1af5d1297cde8f9",
+    "cycle-reviewed-hkbu-producing-2027-english-nonlocal": "a29d280e6a75222873f891930bccf8591b80cbc9f443d274d93411368e87e8e2",
+    "cycle-reviewed-hkbu-ai-digital-media-2027-english-nonlocal": "7d5caf277da37c562ec914d61e16f12b1befe49bbc50329ad50bb4400c2d24f3",
+    "cycle-reviewed-hkbu-communication-2027-english-nonlocal": "14e1e54e1493699ae01ed51993f004e25a0bc1bc6fc388d35531bb2f636b9c7c",
+    "cycle-southwest-university-animal-science-bachelor-chinese-2027-2028-autumn-self-funded": "7410d9b0b0aa1a95233736bf5a45251541746a3c6be8a5b3f73dd4c3c991186f",
+    "cycle-southwest-university-horticulture-bachelor-chinese-2027-2028-autumn-self-funded": "707f70cc947617893bb553a22f995dbae6f7ff8b108d5d7ad30402165876e3b3",
+    "cycle-southwest-university-landscape-gardening-bachelor-chinese-2027-2028-autumn-self-funded": "bb04dffee84241ff4af2ee5ca6fa4b0e7419d59c7fb314d005c3dfd3db74c2d3",
+    "cycle-southwest-university-landscape-architecture-bachelor-chinese-2027-2028-autumn-self-funded": "5538239fd879961a5d57c92bb42e604caf8409484cccc49811744a2686046856",
+    "cycle-southwest-university-aquaculture-bachelor-chinese-2027-2028-autumn-self-funded": "3b329d06e4f339146ae67ecee80b24e937a398c6bd38b88437a4e1f93e72c0e4",
+    "cycle-2027-buaa-materials-science-and-engineering-bachelor-chinese": "d1ca47937eaaf644b9da791e4171a09b06915419fe4c4afcab93ef8e9551f0f6",
+    "cycle-2027-buaa-nanomaterials-and-technology-bachelor-chinese": "da8d779af1f4c0681588946668bc000b8f1284ce0bbb2af615fecea38737c483",
+    "cycle-2027-buaa-electronic-information-engineering-bachelor-chinese": "9ba2a69c2d07e2ba8c4f6e4cd2faf1a406eb2149ddff328ad9046fa1f43bb19e",
+    "cycle-2027-buaa-communication-engineering-bachelor-chinese": "bfc3e4fe0c4595d2510bbeb1dad22e6e961b29eb09cc2c93a59e62a61f7a7642",
+    "cycle-2027-buaa-computer-science-and-technology-bachelor-chinese": "e83f1b8414f81f9bb0ce21f897b9668150079bdf4aa37805100d403f6ca1dc1e"
+  },
+  "baselinePublicCounts": {
+    "currentPrograms": 25,
+    "currentCycles": 26,
+    "directoryPrograms": 30,
+    "directoryCycles": 31
+  },
+  "audit": {
+    "existingRecordsChanged": [],
+    "existingNonemptyFieldsChanged": [],
+    "originalFilesCommitted": false,
+    "modelApiCalls": 0,
+    "cloudWrites": 0,
+    "privateUploads": 0,
+    "rawProgrammeCountBefore": 2352,
+    "oldSjtuIdentitiesPreserved": 6,
+    "unsupportedDegreeSubtypeAdded": false,
+    "unsupportedStudyModeAdded": false,
+    "otherSchoolCandidatesImported": false
+  },
+  "sha256": "9aaa0a260028fd0a06c4e5fc449f67d1e3dbe47698e4eff29f4e3166aeb6c467"
+}
