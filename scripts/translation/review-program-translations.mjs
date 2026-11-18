@@ -99,7 +99,8 @@ export async function reviewTranslationBacklog({ root, records, maxCalls, concur
       } catch (error) {
         if (error?.code === 'translation_admission_wait' && error?.outcome === 'not_sent') {
           summary.modelCalls--; summary.state = 'provider_wait'
-          write(job.journal, { state: 'admission_wait', binding: job.binding, checkedAt: stamp(), retryAt: error.retryAfter })
+          summary.admissionWait = { reason: error.admissionReason ?? 'admission_response_unrecognized', retryAt: error.retryAfter }
+          write(job.journal, { state: 'admission_wait', binding: job.binding, checkedAt: stamp(), ...summary.admissionWait })
           return
         }
         const limited = error?.code === 'translation_rate_limited' && error?.outcome === 'rejected'

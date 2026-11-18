@@ -18,7 +18,9 @@ export function providerEvidenceClient(env, fetcher = fetch) {
       if (receipt.stored !== true || receipt.sha256 !== hash || receipt.bytes !== body.length || receipt.sourceUrl !== sourceUrl) throw new Error('provider_archive_receipt_invalid')
     },
     async coverage() {
-      const response = await request('/coverage', { method: 'GET' })
+      const commit = env.GITHUB_SHA
+      if (commit && !/^[a-f0-9]{40}$/u.test(commit)) throw new Error('provider_coverage_commit_invalid')
+      const response = await request(commit ? '/coverage?deploymentSha=' + commit : '/coverage', { method: 'GET' })
       if (response.status === 503) return null
       if (!response.ok) throw new Error('provider_coverage_unavailable')
       return response.json()

@@ -58,7 +58,7 @@ export function maintenanceClientFromEnvironment(environment: Record<string, str
     throw new Error('maintenance_configuration_unavailable')
   }
   const request = async (path: string, method: 'GET' | 'POST', body?: unknown): Promise<Response> => {
-    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|job-dispositions|runtime-model-guards(?:\/(?:prepare|register))?|source-candidates|source-rechecks|schools|coverage|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick(?:\/(?:dispatch|administrative))?|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
+    if (!/^\/(?:status|quota|budget(?:\/(?:check|resume))?|backend\/recheck|control|head-reconcile|rollout|job-dispositions|runtime-model-guards(?:\/(?:prepare|register))?|source-candidates|source-rechecks|schools|coverage(?:\/published)?|reconciliations|scope-upgrades(?:\?sha256=[a-f0-9]{64})?|seed|targets|controls|tick(?:\/(?:dispatch|administrative))?|publications|documents(?:\?limit=[1-5])?|exports(?:\/[a-zA-Z0-9_-]+)?|ack|artifacts\?key=[a-zA-Z0-9%_.-]+)$/u.test(path)) throw new Error('maintenance_endpoint_rejected')
     const url = new URL(path, origin)
     let response: Response
     try {

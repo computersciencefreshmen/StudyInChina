@@ -8,8 +8,29 @@ import { directoryCoverage } from '@/lib/data/directory-coverage'
 import { CatalogApiService, type InstitutionQuery, type ProgramQuery, type ScholarshipQuery } from './service'
 import { selectCatalogApiData } from './projection'
 import { AUTOMATED_COLLECTION_NOTICE, type ApiEnvelope, type ReleaseInfo } from './types'
+import schoolScope from '../../../content/maintenance/scope-295.v2.json'
+import { buildProgramCoverage } from '@/lib/data/school-program-coverage'
+import { readIdentityAcceptances } from '@/lib/data/identity-acceptance-store'
+import { readFieldVerifications } from '@/lib/data/field-verification-store'
 
 let repository: CatalogRepository | undefined
+let schedulingCoverage: { revision: string; value: Promise<{sha256: string; inputCatalogSha256: string; scopeRegistrySha256: string}> } | undefined
+
+/** Only the digests are public. The authenticated scheduler receives the full per-school rows. */
+export async function getDeployedSchoolCoverage() {
+  const { data } = await getCurrentCatalogRelease()
+  if (!data.directoryRevision || !data.evaluatedForDate || data.catalogBackend !== 'json') throw new Error('public_coverage_unavailable')
+  if (schedulingCoverage?.revision !== data.directoryRevision) {
+    const bundle = await getRepository().getBundle()
+    const value = buildProgramCoverage(bundle, schoolScope, data.evaluatedForDate,
+      readIdentityAcceptances(undefined,{strictProjection:true}),readFieldVerifications())
+      .then(({sha256,inputCatalogSha256,scopeRegistrySha256}) => ({sha256,inputCatalogSha256,scopeRegistrySha256}))
+    schedulingCoverage = {revision: data.directoryRevision, value}
+    value.catch(() => { if (schedulingCoverage?.value === value) schedulingCoverage = undefined })
+  }
+  return { data: {deploymentSha:data.deploymentSha, directoryRevision:data.directoryRevision, evaluatedForDate:data.evaluatedForDate,
+    catalogBackend:data.catalogBackend, coverage:await schedulingCoverage.value} }
+}
 
 const DEPLOYMENT_SHA_PATTERN = /^[a-f0-9]{40}$/u
 

@@ -33,6 +33,8 @@ export type MaintenanceEnv = {
   MODEL_STATE_MIGRATION_ID?: string; MODEL_STATE_MIGRATION_ROLE?: string;
   MODEL_STATE_MIGRATION_SOURCE_ACCOUNT_ID?: string; MODEL_STATE_MIGRATION_TARGET_ACCOUNT_ID?: string;
   MAINTENANCE_ENABLED?: string; MINIMAX_MODEL?: string; MINIMAX_ANTHROPIC_BASE?: string;
+  /** Separate opt-in for subscription translation and bilingual review. */
+  TRANSLATION_ADMISSION_ENABLED?: string;
   NATIVE_HEAD_RECONCILIATION_REQUIRED?: string;
   SCOPE_REGISTRY_SHA256?: string; SCOPE_SCHOOL_COUNT?: string; MINIMAX_CREDIT_FALLBACK_DISABLED?: string;
   USER_AGENT?: string; FETCH_CONCURRENCY?: string;
