@@ -11,6 +11,7 @@ import { expectedScopeSchoolCount } from './scope-config'
 import { tickJobLimit } from './dispatch-config'
 import { getTodayDate } from '../../../src/lib/data/freshness'
 import { readCoverageSnapshot, validateCoverageSnapshot, storeCoverageSnapshot, publishCoverageSnapshot, coverageEvent, type CoverageSnapshot } from './coverage'
+import { readSchedulingCoverage } from './public-coverage'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { readUnknownJobDisposition } from './reviewed-terminal-quarantine'
 import { readLegacyModelDisposition } from './legacy-model-guards'
@@ -246,7 +247,7 @@ export async function enqueueDue(env: MaintenanceEnv, now = Date.now(), mode:'fu
   const planEvent=`refill-capture-plan:${Math.floor(now/900000)}`
   if(planOnly&&await env.PIPELINE_DB.prepare('SELECT event_id FROM maintenance_events WHERE event_id=?').bind(planEvent).first())return{enabled:true,queued:0,plannedCaptureJobs:0}
   const targetFollowup = planOnly?{sources:0,pending:0}:await seedTargetFollowupJobs(env,cfg,(row,sha,key,scope)=>queueExtraction(env,row,sha,key,now,scope),now)
-  const suppliedCoverage = await readCoverageSnapshot(env,cfg.input_catalog_sha256,cfg.scope_sha256,now)
+  const suppliedCoverage = await readSchedulingCoverage(env,cfg.input_catalog_sha256,cfg.scope_sha256,now)
   // Verify the complete identity set as well as the date/catalog/scope hashes.
   // This bounded registry lookup replaces the old first-attempt aggregate, and
   // does not count or scan programme/fact records. Historical scopes stay valid.

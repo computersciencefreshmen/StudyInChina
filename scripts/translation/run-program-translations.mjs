@@ -223,9 +223,10 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
       } catch (error) {
         if (error?.code === 'translation_admission_wait' && error?.outcome === 'not_sent') {
           summary.modelCalls--
+          summary.admissionWait = { reason: error.admissionReason ?? 'admission_response_unrecognized', retryAt: error.retryAfter }
           for (const unit of batch.units) save(resolve(root, reservationPath(unit)), { schemaVersion: 1, key: unit.key, locale: unit.locale,
             ...journalPolicy(unit), state: 'admission_wait', policyAttempts: Math.max(0, unit.policyAttempts - 1),
-            attempts: Math.max(0, unit.attempts - 1), retryAt: error.retryAfter, code: error.code })
+            attempts: Math.max(0, unit.attempts - 1), ...summary.admissionWait, code: error.code })
           summary.state = 'provider_wait'; summary.lastProviderError = error.code; stop = true
           return
         }

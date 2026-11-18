@@ -10,7 +10,8 @@ import { holdBudgetQueueMessage } from './budget-queue-hold'
 import { readPlanQuotaReport } from './quota-report'
 import { budgetStatus, configureBudget, checkBudget, resumeBudget } from './budget'
 import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS, BUDGET_POLICY_KEY, BUDGET_OBSERVATION_KEY } from '../../shared/background-budget'
-import { readCoverageSnapshot, submitCoverageSnapshot } from './coverage'
+import { submitCoverageSnapshot } from './coverage'
+import { readSchedulingCoverage, registerPublicCoverage } from './public-coverage'
 import { storeSicasEvidence } from './provider-evidence'
 import { registerScopeUpgradeRequest, processScopeUpgrade, scopeUpgradeStatus } from './scope-upgrade'
 import { captureSource } from './capture'
@@ -207,7 +208,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if (request.method === 'GET' && url.pathname === '/coverage') {
       const cfg = await control(env)
       const snapshot = cfg?.scope_sha256 && cfg.input_catalog_sha256
-        ? await readCoverageSnapshot(env, cfg.input_catalog_sha256, cfg.scope_sha256) : null
+        ? await readSchedulingCoverage(env, cfg.input_catalog_sha256, cfg.scope_sha256, Date.now(), fetch, url.searchParams.get('deploymentSha')) : null
       return snapshot ? json(snapshot) : json({ error: 'coverage_unavailable' }, 503)
     }
     if(url.pathname==='/legacy-model-guards'&&request.method==='GET')return json((await readLegacyModelDisposition(env,await control(env))).summary)
@@ -228,7 +229,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/budget/resume'&&request.method==='POST')return json(await resumeBudget(env,await requestJson(request,1024)))
     if(url.pathname==='/quota'&&request.method==='GET')return json(await readPlanQuotaReport(env))
     if(url.pathname==='/backend/recheck'&&request.method==='POST')return json(await recheckBackend(env,await requestJson(request,1024)))
-    if(request.method==='POST'&&['/seed','/bootstrap','/scope-upgrades','/coverage','/targets','/documents','/reconciliations','/exports','/rollout','/head-reconcile-targets'].includes(url.pathname)){
+    if(request.method==='POST'&&['/seed','/bootstrap','/scope-upgrades','/coverage','/coverage/published','/targets','/documents','/reconciliations','/exports','/rollout','/head-reconcile-targets'].includes(url.pathname)){
       const budget=await readBackgroundBudgetGate(env.SNAPSHOTS_BUCKET)
       if(!budget.allowed)return json({ok:false,error:'budget_wait',code:budget.code},503)
     }
@@ -239,6 +240,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/source-candidates'&&request.method==='POST')return json(await registerOfficialSourceCandidates(env,await requestJson(request,32768)))
     if(url.pathname==='/source-rechecks'&&request.method==='POST')return json(await registerSourceRechecks(env,await requestJson(request,32768)))
     if(url.pathname==='/coverage'&&request.method==='POST')return json(await submitCoverageSnapshot(env,await requestJson(request,2*1024*1024)))
+    if(url.pathname==='/coverage/published'&&request.method==='POST')return json(await registerPublicCoverage(env,await requestJson(request,2*1024*1024)))
     if(request.method==='POST'&&['/runtime-model-guards/prepare','/runtime-model-guards/register'].includes(url.pathname))return gateRequest(env,url.pathname,await requestJson(request,8192))
     if(request.method==='GET'&&url.pathname==='/runtime-model-guards'){
       const cfg=await control(env);if(!cfg)throw new MaintenanceError('seed_not_ready')

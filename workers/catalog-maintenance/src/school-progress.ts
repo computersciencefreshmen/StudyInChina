@@ -3,7 +3,8 @@ import { schoolReconciliationSchema, evaluateSchoolReconciliation, type SchoolRe
 import { maintenanceRecordTargetSchema } from '../../../scripts/maintenance/field-contracts'
 import { control } from './repository'
 import { expectedScopeSchoolCount } from './scope-config'
-import { readCoverageSnapshot, type CoverageSnapshot } from './coverage'
+import type { CoverageSnapshot } from './coverage'
+import { readSchedulingCoverage } from './public-coverage'
 import { isDailyD1QuotaError } from './backend-errors'
 import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
@@ -198,7 +199,7 @@ export async function listSchoolProgress(env: MaintenanceEnv, now = Date.now()) 
     const cfg = await control(env)
     if (cfg && cfg.scope_sha256 !== env.SCOPE_REGISTRY_SHA256) throw new MaintenanceError('school_progress_scope_mismatch')
     catalogSha256 = cfg?.seed_complete && cfg.targets_complete ? cfg.input_catalog_sha256 : null
-    if (catalogSha256) coverage = await readCoverageSnapshot(env,catalogSha256,env.SCOPE_REGISTRY_SHA256,now)
+    if (catalogSha256) coverage = await readSchedulingCoverage(env,catalogSha256,env.SCOPE_REGISTRY_SHA256,now)
     schools = (await env.PIPELINE_DB.prepare('SELECT university_id,name_json,last_attempt_at FROM maintenance_schools WHERE scope_sha256=? ORDER BY university_id')
       .bind(env.SCOPE_REGISTRY_SHA256).all<School>()).results ?? []
     sources = (await env.PIPELINE_DB.prepare('SELECT x.university_id,s.source_id,s.url,s.enabled,s.due_at,s.last_attempt_at,s.failures,s.error_code FROM maintenance_sources s JOIN maintenance_source_schools x ON x.source_id=s.source_id JOIN maintenance_schools u ON u.university_id=x.university_id WHERE u.scope_sha256=?')
