@@ -46,7 +46,10 @@ export async function collectFeedCandidate({ feedDir, limit = 150, maxMinutes = 
     environment: collectorEnvironment, archive: evidenceClient?.archive, schoolTargets, repairProgramId })
   if (!result || !Array.isArray(result.records) || result.records.length > limit || !Array.isArray(result.receipts) || result.receipts.length > limit * 4 + 20 || !result.state) throw new Error('feed_batch_result_invalid')
   const state = structuredClone(result.state)
-  if (evidenceClient) state.scheduling = { coverageSha256: coverage?.sha256 ?? null, inputFeedRevision: loaded.manifest.revision, mappedProviderSchools: schoolTargets.size }
+  if (evidenceClient) state.scheduling = { coverageSha256: coverage?.sha256 ?? null, inputFeedRevision: loaded.manifest.revision,
+    coverageCatalogSha256: coverage?.inputCatalogSha256 ?? null, coverageScopeSha256: coverage?.scopeRegistrySha256 ?? null,
+    coverageEvaluatedOn: coverage?.evaluatedOn ?? null, deploymentSha: coverage ? environment.GITHUB_SHA ?? null : null,
+    mappedProviderSchools: schoolTargets.size }
   assertPublicState(state)
   const records = result.records.map(record => sanitizeProgram(record, { requireFieldEvidence: true }))
   // Candidate artifacts contain only the public feed projection. Raw evidence

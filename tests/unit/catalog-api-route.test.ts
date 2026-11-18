@@ -14,6 +14,18 @@ afterEach(() => {
 })
 
 describe('catalog API routes', () => {
+  it('binds the scheduling digest to the normal live deployment and exposes only coverage hashes', async () => {
+    const normal = await (await getCurrentRelease()).json()
+    const response = await getCurrentRelease(new Request('https://example.test/api/v1/releases/current?view=school-coverage'))
+    const { data } = await response.json()
+    expect(response.status).toBe(200)
+    expect(response.headers.get('cache-control')).toBe('no-store')
+    expect(data).toMatchObject({deploymentSha:normal.data.deploymentSha, directoryRevision:normal.data.directoryRevision,
+      evaluatedForDate:normal.data.evaluatedForDate, catalogBackend:'json'})
+    expect(Object.keys(data.coverage).sort()).toEqual(['inputCatalogSha256','scopeRegistrySha256','sha256'])
+    expect(Object.values(data.coverage).every(value => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value))).toBe(true)
+  })
+
   it('serves only publication-gated records with cache policy and release metadata', async () => {
     // The shared cache intentionally shrinks before Shanghai midnight. Keep
     // this ordinary daytime contract independent of the CI runner's clock.

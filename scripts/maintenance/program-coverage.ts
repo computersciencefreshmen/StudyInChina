@@ -1,53 +1,19 @@
-import { createHash } from 'node:crypto'
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs'
 import { resolve, join, dirname } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import type { DataBundle } from '../../src/lib/data/types'
-import { selectDiscoveryData } from '../../src/lib/data/discovery'
 import { readIdentityAcceptances } from '../../src/lib/data/identity-acceptance-store'
 import { readFieldVerifications } from '../../src/lib/data/field-verification-store'
-import type { IdentityAcceptance } from '../../src/lib/data/identity-acceptance'
-import type { FieldVerification } from '../../src/lib/data/field-verification'
-import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 import { getTodayDate } from '../../src/lib/data/freshness'
-import { maintenanceScopeSchema, scopeContentSha256, canonicalJson, type MaintenanceScope } from './contracts'
+import { maintenanceScopeSchema, scopeContentSha256 } from './contracts'
 import { maintenanceClientFromEnvironment, type MaintenanceClient } from '../automation/catalog-maintenance-client'
 import { readMaintenanceScope } from './scope-registry'
 import { catalogSha256, loadMaintenanceBundle } from './build-scope'
-import { coverageBand, coverageSnapshotSchema, type CoverageSnapshot } from '../../workers/catalog-maintenance/src/coverage'
+import type { CoverageSnapshot } from '../../workers/catalog-maintenance/src/coverage'
 import { EXISTING_SCHOOLS_V2_SHA256 } from '../../workers/catalog-maintenance/src/scope-config'
 
-import { distinctPrograms } from '../../src/lib/data/concrete-majors'
+import { buildProgramCoverage } from '../../src/lib/data/school-program-coverage'
+export { buildProgramCoverage }
 export { concreteProgramKeys } from '../../src/lib/data/concrete-majors'
-
-import { completeScholarship } from '../../src/lib/data/decision-evidence'
-
-export async function buildProgramCoverage(bundle: DataBundle, scope: MaintenanceScope, today: string, identities: IdentityAcceptance[] = [], fields: FieldVerification[] = []): Promise<CoverageSnapshot> {
-  const directory = selectDiscoveryData(bundle, today, identities, fields)
-  const published = selectDetailedPublicPrograms(directory, today, bundle)
-  const complete = published.programs
-  const projectedAwards = directory.scholarships
-  const completeAwards = published.scholarships.filter(award => completeScholarship(award, today))
-  const content = {
-    format: 'studyinchina.school-program-coverage' as const, version: 1 as const, scopeRegistrySha256: scope.sha256,
-    inputCatalogSha256: await catalogSha256(bundle), evaluatedOn: today,
-    schools: scope.schools.map(school => {
-      const programs = complete.filter(program => program.universityId === school.universityId), ids = distinctPrograms(programs)
-      const reviewDates = programs.flatMap(program => {
-        const raw = bundle.programs.find(row => row.id === program.id)
-        return [raw?.reviewAfter, ...directory.admissionCycles.filter(cycle => cycle.programId === program.id).map(cycle => cycle.reviewAfter)]
-          .filter((date): date is string => Boolean(date && date >= today))
-      }).sort()
-      return { universityId: school.universityId, rawProgramCount: bundle.programs.filter(program => program.universityId === school.universityId).length,
-        directoryProgramCount: distinctPrograms(directory.programs.filter(program => program.universityId === school.universityId)).length,
-        currentProgramCount: ids.length, minimumProgramCount: 5 as const, gap: Math.max(0, 5 - ids.length), coverageBand: coverageBand(ids.length),
-        countedProgramIds: ids, directoryScholarshipCount: projectedAwards.filter(award => award.universityIds.includes(school.universityId)).length,
-        currentScholarshipCount: completeAwards.filter(award => award.universityIds.includes(school.universityId)).length,
-        reviewAfter: reviewDates[0] ?? null }
-    }).sort((a, b) => a.universityId.localeCompare(b.universityId)),
-  }
-  return coverageSnapshotSchema.parse({ ...content, sha256: createHash('sha256').update(canonicalJson(content)).digest('hex') })
-}
 
 export function coverageSummary(snapshot: CoverageSnapshot) {
   return { schoolCount: snapshot.schools.length, minimumProgramCount: 5,

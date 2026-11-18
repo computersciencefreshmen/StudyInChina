@@ -2,7 +2,7 @@ import type { Control,MaintenanceEnv,JobRow,SourceRow,ModelRequest } from './typ
 import { MaintenanceError } from './types'
 import type { RefillKind,RefillFence,RefillCandidate,RefillDispatchResult,RefillJobState } from './refill-contract'
 import { control,source,sourceSchools,recordTargets,readSchoolRotation,saveSchoolRotation,schedulingMetadata,schedulingSchoolsSql,schedulingSchoolIdsSql } from './repository'
-import { readCoverageSnapshot } from './coverage'
+import { readSchedulingCoverage } from './public-coverage'
 import { selectScheduledJobs } from './scheduling'
 import { nativeReconciliationGate } from './native-reconciliation-guard'
 import { readBackgroundBudgetGate } from '../../shared/background-budget'
@@ -89,7 +89,7 @@ async function prove(env:MaintenanceEnv,fence:RefillDispatchFence,job:Tuple):Pro
 }
 async function context(env:MaintenanceEnv,cfg:Control,now:number){
   const rows=(await env.PIPELINE_DB.prepare('SELECT university_id FROM maintenance_schools WHERE scope_sha256=? LIMIT 296').bind(cfg.scope_sha256).all<{university_id:string}>()).results??[],ids=new Set(rows.map(r=>r.university_id))
-  const supplied=await readCoverageSnapshot(env,cfg.input_catalog_sha256,cfg.scope_sha256,now),coverage=supplied&&[272,295].includes(ids.size)&&supplied.schools.length===ids.size&&new Set(supplied.schools.map(s=>s.universityId)).size===ids.size&&supplied.schools.every(s=>ids.has(s.universityId))?supplied:null
+  const supplied=await readSchedulingCoverage(env,cfg.input_catalog_sha256,cfg.scope_sha256,now),coverage=supplied&&[272,295].includes(ids.size)&&supplied.schools.length===ids.size&&new Set(supplied.schools.map(s=>s.universityId)).size===ids.size&&supplied.schools.every(s=>ids.has(s.universityId))?supplied:null
   const rotation=await readSchoolRotation(env,cfg.scope_sha256,ids,now),metadata=schedulingMetadata(coverage,rotation,now)
   return{ids,coverage,rotation,metadata,firstRoundComplete:Boolean(coverage?.schools.every(s=>s.currentProgramCount>=5))}
 }

@@ -285,6 +285,12 @@ jobs:
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
         run: npm run maintenance:coverage -- --cloud-refresh --output "$RUNNER_TEMP/catalog-maintenance-tick/coverage.json"
+      - name: Register the currently deployed directory for school scheduling
+        if: steps.budget.outputs.work_allowed == 'true'
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        run: node --import tsx scripts/maintenance/refresh-published-coverage.ts --output "$RUNNER_TEMP/catalog-maintenance-tick/published-coverage.json"
       - name: Continue only administrative queue work under the canonical writer fence
         if: steps.budget.outputs.work_allowed == 'true'
         env:
@@ -310,6 +316,7 @@ jobs:
             ${{ runner.temp }}/catalog-maintenance-administration
             ${{ runner.temp }}/catalog-maintenance-tick/target-refresh.json
             ${{ runner.temp }}/catalog-maintenance-tick/coverage.json
+            ${{ runner.temp }}/catalog-maintenance-tick/published-coverage.json
             ${{ runner.temp }}/catalog-maintenance-tick/budget.json
           if-no-files-found: ignore
           retention-days: 35
