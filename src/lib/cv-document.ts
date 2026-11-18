@@ -4,6 +4,7 @@ const MAX_DOCUMENT_XML = 2 * 1024 * 1024
 const MAX_PDF_PAGES = 20
 const MAX_TEXT = 160_000
 const wordNamespaces = new Set(['http://schemas.openxmlformats.org/wordprocessingml/2006/main', 'http://purl.oclc.org/ooxml/wordprocessingml/main'])
+const obsoleteWordText = new Set(['del', 'moveFrom'])
 
 export type CVReadErrorCode = 'unsupported' | 'legacyWord' | 'tooLarge' | 'protectedPdf' | 'noText' | 'unreadable'
 export class CVReadError extends Error {
@@ -66,10 +67,13 @@ async function readWord(data: Uint8Array) {
   const body = root.getElementsByTagNameNS(ns, 'body')[0]
   if (!body) throw new CVReadError('unreadable')
   return Array.from(body.getElementsByTagNameNS(ns, 'p'), paragraph => {
+    for (let parent = paragraph.parentElement; parent && parent !== body; parent = parent.parentElement) {
+      if (parent.namespaceURI === ns && obsoleteWordText.has(parent.localName)) return ''
+    }
     const fragments: string[] = []
     const walker = dom.createTreeWalker(paragraph, NodeFilter.SHOW_ELEMENT, node => {
       const element = node as Element
-      if (element.namespaceURI === ns && ['del', 'moveFrom', 'p'].includes(element.localName)) return NodeFilter.FILTER_REJECT
+      if (element.namespaceURI === ns && (element.localName === 'p' || obsoleteWordText.has(element.localName))) return NodeFilter.FILTER_REJECT
       return NodeFilter.FILTER_ACCEPT
     })
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
