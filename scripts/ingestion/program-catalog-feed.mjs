@@ -209,7 +209,8 @@ function preserveScopedFields(prior, record) {
   const sameDocument = prior.evidenceHash === record.evidenceHash
   const datedStart = prior.fields.startDate && /\b(?:19|20)\d{2}\b/.test(prior.fields.startDate)
     && normalized(prior.fields.startDate) === normalized(record.fields.startDate)
-  const sameTrack = ['degree', 'language'].every(k => normalized(prior.fields[k]) === normalized(record.fields[k]))
+  const sameTrack = ['degree', 'language'].every(k => prior.fields[k] && record.fields[k]
+    && normalized(prior.fields[k]) === normalized(record.fields[k]))
   const missing = Object.keys(prior.fields).filter(key => !record.fields[key])
   // A sparse observation without a provable cohort is still archived. Keep
   // the older entire projection (including its actual observation date) until

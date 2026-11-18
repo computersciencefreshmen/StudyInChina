@@ -107,14 +107,25 @@ function fakeGit(root, { failPush = false, wrongBranch = false } = {}) {
 test('scope-bound older fields retain original provenance; new intakes never borrow previous fees', () => {
   const prior = program(1, 'extracted')
   prior.archiveSha256 = prior.evidenceHash
+  const track = { degree: 'Bachelor', language: 'English' }
+  const trackProof = { degree: { selector: '.degree', text: 'Bachelor' }, language: { selector: '.language', text: 'English' } }
+  Object.assign(prior.fields, track)
+  Object.assign(prior.fieldEvidence, trackProof)
   const sparse = { ...prior, fetchedAt: '2026-11-18T00:00:00Z', evidenceHash: sha256('new body'),
-    fields: { startDate: prior.fields.startDate, tuition: 'TBD' },
-    fieldEvidence: { startDate: prior.fieldEvidence.startDate, tuition: { text: 'Fee: TBD', selector: '.tuition' } } }
+    fields: { ...track, startDate: prior.fields.startDate, tuition: 'TBD' },
+    fieldEvidence: { ...trackProof, startDate: prior.fieldEvidence.startDate, tuition: { text: 'Fee: TBD', selector: '.tuition' } } }
   const merged = mergeProgramRecords([prior], [sparse]).records[0]
   assert.equal(merged.fields.tuition, prior.fields.tuition)
   assert.equal(merged.fieldEvidence.tuition.evidenceHash, prior.evidenceHash)
   assert.equal(merged.fieldEvidence.tuition.archiveSha256, prior.evidenceHash)
   assert.equal(merged.fieldEvidence.tuition.fetchedAt, prior.fetchedAt)
+  for (const missing of ['degree', 'language']) {
+    const earlier = structuredClone(prior), newer = structuredClone(sparse)
+    delete earlier.fields[missing]; delete newer.fields[missing]
+    const blocked = mergeProgramRecords([earlier], [newer])
+    assert.equal(blocked.held[0].errorCode, 'incomplete_evidence_scope')
+    assert.equal(blocked.records[0].fetchedAt, prior.fetchedAt)
+  }
   const nextIntake = { ...sparse, fields: { startDate: 'Sep 1, 2036' }, fieldEvidence: { startDate: { selector: '.start', text: 'Sep 1, 2036' } } }
   assert.equal(mergeProgramRecords([prior], [nextIntake]).records[0].fields.tuition, undefined)
   const uncertain = mergeProgramRecords([prior], [{ ...sparse, fields: {}, fieldEvidence: {} }])

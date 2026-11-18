@@ -83,9 +83,15 @@ export function programSourceText(locale: LaunchLocale) {
   return sourceText[locale]
 }
 
-export async function CollectedProgramCard({ item, locale, messages }: { item: CollectedProgramItem; locale: LaunchLocale; messages: Messages }) {
+type CollectedCardProps = { item: CollectedProgramItem; locale: LaunchLocale; messages: Messages }
+export function CollectedProgramCard(props: CollectedCardProps) {
+  const title = localizeProgramText(props.item.collected.name, props.locale)
+  if (props.locale !== 'en' || !containsHan(title)) return <CollectedCard {...props} title={title} />
+  return collectedDisplayName(props.item.collected, props.locale).then(name => <CollectedCard {...props} title={name} />)
+}
+
+function CollectedCard({ item, locale, messages, title }: CollectedCardProps & { title: string }) {
   const record = item.collected, t = programSourceText(locale)
-  const title = await collectedDisplayName(record, locale)
   const facts = [[t.language, record.fields.language], [t.duration, record.fields.duration], [t.tuition, record.fields.tuition]].filter(([, value]) => value)
   return <Card className={`record-card ${cardStyles.card} ${cardStyles.programCard}`} data-program-preview data-source-status="source-collected">
     <div className={cardStyles.identityRow}>
