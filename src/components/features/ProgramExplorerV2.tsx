@@ -1,3 +1,4 @@
+import { LocalizedProgramCard } from '@/components/features/LocalizedProgramCard'
 import { RoundedSelect } from '@/components/ui/RoundedSelect'
 import Link from 'next/link'
 import { Button, LinkButton } from '@/components/ui'
@@ -19,7 +20,6 @@ import {
 } from './CatalogFilterSummary'
 import { CatalogPagination } from './CatalogPagination'
 import { CatalogFreshnessNote } from './DataFreshnessPanel'
-import { ProgramCard } from './RecordCards'
 import { CollectedProgramCard } from './CollectedProgram'
 import type { UnifiedProgramResult } from '@/lib/unified-programs'
 import styles from './ProgramExplorerV2.module.css'
@@ -43,6 +43,14 @@ const labels: Record<LaunchLocale, {
 }
 
 type SelectOption = { value: string; label: string }
+const incompleteMatch: Record<LaunchLocale, string> = {
+  en: 'Additional listings have insufficient evidence for these filters',
+  zh: '另有以下数量的项目缺少判断当前筛选条件的证据',
+  fr: 'Autres formations dont les informations ne suffisent pas pour ces filtres',
+  de: 'Weitere Angebote mit unzureichenden Angaben für diese Filter',
+  ru: 'Другие программы с недостаточными данными для этих фильтров',
+  es: 'Otros programas con información insuficiente para estos filtros',
+}
 type ProgramFilterKey =
   | 'query'
   | 'degree'
@@ -288,7 +296,9 @@ export function ProgramExplorerV2({
       total={result.total}
       totalExact={result.totalExact}
     />
-    <CatalogPagination
+      {'sourceConditionsUnknown' in result && result.sourceConditionsUnknown > 0 ?
+        <p role="status">{incompleteMatch[locale]} · {result.sourceConditionsUnknown.toLocaleString(locale)}</p> : null}
+      <CatalogPagination
       ariaLabel={text.pagination}
       nextHref={result.page < result.pageCount
         ? programCatalogHref(locale, filters, result.page + 1)
@@ -307,7 +317,7 @@ export function ProgramExplorerV2({
       <div className="content-grid">
         {result.items.map(item => 'collected' in item
           ? <CollectedProgramCard key={item.collected.id} item={item} locale={locale} messages={messages} />
-          : <ProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} latestTuitionReference={item.latestTuitionReference} locale={locale} messages={messages} today={today} />)}
+          : <LocalizedProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} latestTuitionReference={item.latestTuitionReference} locale={locale} messages={messages} today={today} />)}
       </div>
     ) : <div className="empty-box">{messages.programs.noResults}</div>}
 

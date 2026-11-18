@@ -297,6 +297,14 @@ describe('decision-fact gap report', () => {
     expect(first.deterministicGeneratedAt).toBe('2026-08-26T00:00:00.000Z')
   })
 
+  it('does not count scholarship evidence first verified after the report date', () => {
+    const data = fixture()
+    data.scholarships[0].verifiedAt = '2026-08-27'
+    const report = buildDecisionGapReport(data, { today: TODAY })
+    expect(report.summary.scholarships.freshRecords).toBe(0)
+    expect(report.summary.scholarships.universitiesCovered).toBe(0)
+  })
+
   it('profiles the current formal catalog and derives every tuition flag from public confirmed cycles', () => {
     const data = bundleSchema.parse({
       admissionCycles,

@@ -1,9 +1,11 @@
 import 'server-only'
 import type { ThirdPartyProgram } from './third-party-programs'
 import {
-  TRANSLATION_FIELDS, TRANSLATION_LOCALES, translationPath, validateTranslationRecord,
+  TRANSLATION_FIELDS, TRANSLATION_LOCALES, programTranslationSource,
   type ProgramTranslationField, type ProgramTranslationLocale, type ProgramTranslationRecord,
 } from './program-translation-contract'
+import { officialTitleSource, publicationPath, translationScope, validatePublishedTranslation, type TranslationInput, type TranslationScope } from './program-translation-review'
+import type { Program, University } from './data/types'
 
 export type ProgramTranslations = Partial<Record<ProgramTranslationField, ProgramTranslationRecord>>
 const locales = new Set<string>(TRANSLATION_LOCALES)
@@ -57,7 +59,7 @@ function miss(path: string) {
   if (negative.size >= 256) negative.delete(negative.keys().next().value!)
   negative.set(path, Date.now() + cacheTtl)
 }
-async function download(path: string, source: string, locale: ProgramTranslationLocale) {
+async function download(path: string, source: string, locale: ProgramTranslationLocale, scope: TranslationScope) {
   const deadline = Date.now() + timeoutMs
   if (!await acquire(deadline)) return null
   try {
@@ -76,14 +78,13 @@ async function download(path: string, source: string, locale: ProgramTranslation
         chunks.push(part.value)
       }
     } finally { reader.releaseLock() }
-    return validateTranslationRecord(JSON.parse(Buffer.concat(chunks).toString('utf8')), source, locale)
+    return validatePublishedTranslation(JSON.parse(Buffer.concat(chunks).toString('utf8')), source, locale, scope)
   } catch { return null }
   finally { release() }
 }
-async function translation(source: string, locale: ProgramTranslationLocale): Promise<ProgramTranslationRecord | null> {
+async function translation(source: string, locale: ProgramTranslationLocale, scope: TranslationScope): Promise<ProgramTranslationRecord | null> {
   let path: string
-  try { path = translationPath(source, locale) } catch { return null }
-  if (!new RegExp(`^translations/v1/${locale}/[a-f0-9]{64}\\.json$`).test(path)) return null
+  try { path = publicationPath(source, locale, scope) } catch { return null }
   const cached = positive.get(path)
   if (cached) {
     if (cached.expiresAt > Date.now()) return cached.record
@@ -95,7 +96,7 @@ async function translation(source: string, locale: ProgramTranslationLocale): Pr
   const existing = pending.get(path)
   if (existing) return existing
   if (pending.size >= 256) return null
-  const promise = download(path, source, locale).then(record => {
+  const promise = download(path, source, locale, scope).then(record => {
     if (record) remember(path, record)
     else miss(path)
     return record
@@ -109,10 +110,21 @@ export async function getProgramTranslations(record: Pick<ThirdPartyProgram, 'fi
   if (!enabled() || !isProgramTranslationLocale(locale)) return {}
   const result: ProgramTranslations = {}
   await Promise.all(TRANSLATION_FIELDS.map(async field => {
-    const source = record.fields[field]
+    const source = programTranslationSource(record, field, locale)
     if (typeof source !== 'string' || !source.trim() || Buffer.byteLength(source) > maximumBytes) return
-    const translated = await translation(source, locale)
+    const translated = await translation(source, locale, translationScope(record, field))
     if (translated) result[field] = translated
   }))
   return result
+}
+
+export async function getProgramTitleTranslation(row: TranslationInput, locale: string) {
+  if (!enabled() || locale !== 'en') return null
+  const source = programTranslationSource(row, 'title', locale)
+  return source ? translation(source, locale, translationScope(row, 'title')) : null
+}
+
+export async function getOfficialTitleTranslation(program: Program, school: University, locale: string) {
+  const row = officialTitleSource(program, school)
+  return row ? getProgramTitleTranslation(row, locale) : null
 }

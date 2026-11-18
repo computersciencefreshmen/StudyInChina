@@ -49,7 +49,7 @@ describe('SJTU reviewed 2027 direct Chinese bachelor core', () => {
       expect(scopedNameReceiptMatches(entry, identityReceipt)).toBe(true)
       expect(scopedNameReceiptMatches({ ...entry, verifiedName: { zh: '未经审阅专业' } }, identityReceipt)).toBe(false)
     }
-    expect(await validateDirectory(process.cwd(), TODAY)).toMatchObject({ integrityPassed: true, cohortSchools: 272 })
+    expect(await validateDirectory(process.cwd())).toMatchObject({ integrityPassed: true, cohortSchools: 272 })
   }, 30_000)
 
   it('retains five direct official rows, exact bilingual names and the merged CSCA subjects without inventing scope', () => {
@@ -127,8 +127,8 @@ describe('SJTU reviewed 2027 direct Chinese bachelor core', () => {
       const value = read(file)
       const rows = Array.isArray(value) ? value.filter(row => !removeNew[file]?.has(row.id))
         : value.entries.filter((row: { recordId: string }) => !ids.has(row.recordId) && !cycleIds.has(row.recordId))
-      expect(rows).toHaveLength(baseline.beforeCount)
-      expect(hash(rows)).toBe(baseline.beforeCanonicalSha256)
+      // Later batches append independently reviewed entries after this historical prefix.
+      expect(hash(rows.slice(0, baseline.beforeCount))).toBe(baseline.beforeCanonicalSha256)
     }
     const bundle = raw(), snapshot = getPublicCatalogSnapshot(bundle, TODAY)
     expect(bundle.programs.filter(row => row.universityId === UNIVERSITY && !ids.has(row.id))).toHaveLength(6)

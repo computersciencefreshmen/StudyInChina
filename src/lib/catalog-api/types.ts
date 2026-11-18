@@ -19,6 +19,10 @@ export type FieldMeta = {
   officialUrl: string
   sourceTitle: string
   checkedAt: string
+  conflictingSources?: string[]
+  location?: { kind: 'page' | 'paragraph'; number: number }
+    | { kind: 'text'; start: number; end: number; unit: 'UTF-16' | 'Unicode'; excerpt: string }
+    | { kind: 'html'; path: string }
 }
 
 export type OfficialSourceLink = {

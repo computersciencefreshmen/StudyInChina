@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it, vi } from 'vitest'
 import { loadMaintenanceBundle, buildMaintenanceScope, catalogSha256 } from '../../scripts/maintenance/build-scope'
 import { importFieldCandidates } from '../../scripts/maintenance/import-fields'
 import { canonicalJson, exportContentSha256, proposalContentSha256, type CandidateExport, type MaintenanceProposal, type MaintenanceScope } from '../../scripts/maintenance/contracts'
-import { fieldRecordScopeSha256 } from '../../src/lib/data/field-verification'
+import { applyFreshFieldVerifications, fieldRecordScopeSha256 } from '../../src/lib/data/field-verification'
 import type { DataBundle } from '../../src/lib/data/types'
 
 const now = '2026-10-24T02:00:00.000Z', capturedAt = '2026-10-24T00:00:00.000Z'
@@ -53,6 +53,30 @@ async function fixture(sourceText?: string | ((degree: string) => string), close
 }
 
 describe('offline independently reviewed field consumer', () => {
+  it('holds conflicting deadlines across two current official documents and retains both field receipts', async () => {
+    const original = await fixture()
+    const first = await original.run()
+    expect(first.receipt.held).toEqual([])
+    const changed = await fixture('Autumn 2027 admissions for international students. The application deadline is 2027-09-15.', '2027-09-15')
+    const url = changed.proposal.source.url.replace('field-test.txt', 'second-guide.txt')
+    changed.proposal.source.url = url
+    for (const evidence of changed.proposal.fieldEvidence) evidence.url = url
+    changed.batch.batchId = 'second-official-document'
+    changed.batch.inputCatalogSha256 = await catalogSha256(first.bundle)
+    await changed.seal()
+    const result = await importFieldCandidates({ bundle: first.bundle, scope, entries: first.entries, batch: changed.batch,
+      acceptedAt: now, receiptPath: 'quality/second-field-receipt.json', readArtifact: async key => changed.artifacts.get(key)! })
+    expect(result.receipt.held).toEqual([])
+    expect(result.entries).toHaveLength(2)
+    expect(result.entries[1]).toMatchObject({ observationOnly: true, value: '2027-09-15' })
+    expect(result.bundle.admissionCycles.find(row => row.id === changed.cycle.id)?.closesOn).toBe('2027-09-30')
+    const visible = applyFreshFieldVerifications(result.bundle, result.bundle, '2026-10-24', result.entries)
+    const cycle = visible.admissionCycles.find(row => row.id === changed.cycle.id)
+    expect(cycle).toMatchObject({ closesOn: null, discovery: { fieldStates: { closesOn: 'conflict' },
+      fieldMeta: { closesOn: { status: 'conflict', conflictingSources: expect.arrayContaining([url, original.proposal.source.url]) } } } })
+    expect(cycle?.tuitionCny).toBe(changed.cycle.tuitionCny)
+    expect(JSON.stringify(visible)).not.toContain('source.txt')
+  })
   it('binds spring literal-year field evidence without converting it to an academic range', async () => {
     const f = await fixture('Spring 2027 admissions for international students. Application deadline 2027-09-30.')
     const previous = { academicYear: f.cycle.academicYear, intake: f.cycle.intake }

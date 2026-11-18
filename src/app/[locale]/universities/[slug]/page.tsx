@@ -1,7 +1,7 @@
+import { LocalizedProgramCard } from '@/components/features/LocalizedProgramCard'
 import { notFound } from 'next/navigation'
 import { connection } from 'next/server'
 import { Badge, Card, LinkButton, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
-import { ProgramCard } from '@/components/features/RecordCards'
 import { UniversityRankingLinks } from '@/components/features/RankingFilterFields'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
@@ -75,7 +75,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
   const jsonLd = { '@context': 'https://schema.org', '@type': 'CollegeOrUniversity', name: localize(university.name, locale), url: university.officialUrl, address: city ? { '@type': 'PostalAddress', addressLocality: localize(city.name, locale), addressCountry: 'CN' } : undefined }
 
   return <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
+    <script type="application/ld+json" data-program-revision={unifiedPrograms.revision} data-public-program-count={unifiedPrograms.total} dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
     <PageHero variant="compact" eyebrow={city ? `${localize(city.name, locale)} · ${university.region ? regionLabels(locale)[university.region] : messages.common.unknown}` : university.region ? regionLabels(locale)[university.region] : messages.common.unknown} title={localize(university.name, locale)} description={localize(university.summary, locale)} actions={<><a className="atlas-button atlas-button--primary atlas-button--medium" href={university.admissionsUrl || university.officialUrl} target="_blank" rel="noreferrer">{university.admissionsUrl ? copy.admission : messages.common.officialSource} ↗</a><a className="atlas-button atlas-button--ghost atlas-button--medium" href={university.officialUrl} target="_blank" rel="noreferrer">{copy.official} ↗</a></>} meta={<VerificationBadge collection="universities" recordId={university.id} status={university.status} verifiedAt={university.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />} />
     <div className="atlas-container">
       <DataFreshnessPanel record={university} locale={locale} today={today} />
@@ -97,7 +97,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
           {unifiedPrograms.items.length ? <div className="content-grid content-grid--two">
             {unifiedPrograms.items.slice(0, 8).map(item => 'collected' in item
               ? <CollectedProgramCard key={item.collected.id} item={item} locale={locale} messages={messages} />
-              : <ProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} locale={locale} messages={messages} today={today} />)}
+              : <LocalizedProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} locale={locale} messages={messages} today={today} />)}
           </div> : <UniversityProgramsPending locale={locale} universityName={localize(university.name, locale)} officialUrl={university.admissionsUrl || university.officialUrl} />}
           {unifiedPrograms.total > 8 ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/programs?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({unifiedPrograms.total}) →</LinkButton></div> : null}
         </div>

@@ -4,6 +4,7 @@ import { ApplicationSummaryCard } from '@/components/features/ApplicationSummary
 import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
+import { OfficialFieldSources } from '@/components/features/OfficialFieldSources'
 import { Badge, Card, PageHero, VerificationBadge } from '@/components/ui'
 import { formatUniversityCoverage, getDecisionExperienceCopy } from '@/i18n/decision-experience'
 import { getMessages } from '@/i18n/messages'
@@ -193,6 +194,7 @@ export default async function ScholarshipDetail({
         />
         <Card accent="jade" id="official-evidence">
           <h2 className="atlas-card__title">{copy.sources}</h2>
+          <OfficialFieldSources locale={locale} records={[item]} />
           <div className="tag-list">
             <VerificationBadge collection="scholarships" recordId={item.id}
               status={item.status}

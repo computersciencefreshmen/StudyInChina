@@ -4,6 +4,33 @@ import { JSDOM } from 'jsdom'
 export const normalizeSourceText = value => (value || '').replace(/\s+/g, ' ').trim()
 export const sourceHash = value => createHash('sha256').update(value).digest('hex')
 
+/** Inspect only the present programme's award subsection. A prerequisite
+ * degree, a navigation filter, or the duration cannot establish this field. */
+export function explicitProgrammeAward(section) {
+  if (!section) return null
+  const heading = /^(?:degree|diploma)\s+(?:awarded|conferred)\s*[:：]?$/iu
+  const level = /^(?:bachelor|master)(?:['’]s)?(?:\s+degree)?\b|^(?:ph\.?\s*d|doctorate|doctor(?:al)?\s+degree|doctor\s+of\s+philosophy)\b/iu
+  const found = new Map()
+  for (const label of section.querySelectorAll('strong,b,h2,h3,h4,p,div,span')) {
+    const title = normalizeSourceText(label.textContent)
+    if (!heading.test(title) || [...label.children].some(node => heading.test(normalizeSourceText(node.textContent)))) continue
+    let after = label
+    // Some templates wrap an identical heading in <strong><div>...</div></strong>.
+    while (after.parentElement !== section && heading.test(normalizeSourceText(after.parentElement?.textContent))) after = after.parentElement
+    let sibling = after.nextSibling
+    while (sibling && !normalizeSourceText(sibling.textContent)) sibling = sibling.nextSibling
+    const award = normalizeSourceText(sibling?.textContent)
+    const literal = award.match(level)?.[0]
+    if (!literal || award.length > 200 || /\b(?:or|and|not|instead|previous|eligible|prerequisite|applicants?|optional)\b|[/／]/iu.test(award)) return null
+    const kinds = new Set([...award.matchAll(/\b(?:bachelor|master|doctor(?:ate|al)?|ph\.?\s*d)\b/giu)].map(match => match[0].toLowerCase()))
+    if (kinds.size !== 1) return null
+    const quote = `${title} ${award}`
+    if (!normalizeSourceText(section.textContent).includes(quote)) return null
+    found.set(literal.toLowerCase(), { value: literal, quote })
+  }
+  return found.size === 1 ? [...found.values()][0] : null
+}
+
 /** Only the public programme route is accepted. A legacy sitemap route is
  * upgraded to the /School route observed in the current public UI. Names and
  * admission facts are never taken from these URL slugs. */
@@ -69,6 +96,10 @@ export function parseSicasProgram(html, { source, sourceUrl, fetchedAt, rawSha25
     // hydration step may supply it with its own exact-ID receipt and evidence.
     const explicitDegree = text(document.querySelector('.sc-info .degree, .sidebar-detail .degree'))
     if (explicitDegree) put('degree', explicitDegree, '.sc-info .degree, .sidebar-detail .degree')
+    if (!fields.degree) {
+      const award = explicitProgrammeAward(document.querySelector('#about-program > .cards-text'))
+      if (award) put('degree', award.value, '#about-program > .cards-text', award.quote)
+    }
     const bodyText = text(document.body)
     for (const [field, value] of Object.entries(fields)) {
       if (!bodyText.includes(value) || !fieldEvidence[field].text.includes(value)) throw new Error(`Unbound SICAS field: ${field}`)

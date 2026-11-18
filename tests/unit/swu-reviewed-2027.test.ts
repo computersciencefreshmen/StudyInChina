@@ -57,7 +57,7 @@ describe('SWU 2027-2028 independently reviewed Chinese bachelor core', () => {
     for (const row of programs) expect(sha(row)).toBe(review.afterProgrammeSha256[row.id as keyof typeof review.afterProgrammeSha256])
     for (const row of cycles) expect(sha(row)).toBe(review.newCycleSha256[row.id as keyof typeof review.newCycleSha256])
     const fixedScope = JSON.parse(readFileSync('content/maintenance/scope-272.v1.json', 'utf8')) as { schools: unknown[] }
-    expect(await validateDirectory(process.cwd(), TODAY)).toMatchObject({ integrityPassed: true, cohortSchools: fixedScope.schools.length })
+    expect(await validateDirectory(process.cwd())).toMatchObject({ integrityPassed: true, cohortSchools: fixedScope.schools.length })
   }, 30_000)
 
   it('binds five distinct official rows, exact year and merged-cell origins without inventing codes or English names', () => {

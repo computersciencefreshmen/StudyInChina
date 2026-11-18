@@ -5,10 +5,9 @@ import { pathToFileURL } from 'node:url'
 
 import {
   getTodayDate,
-  isCurrentVerifiedRecord,
   isWithinPostDeadlineGrace,
 } from '../../src/lib/data/freshness'
-import { selectPublishedData } from '../../src/lib/data/publication'
+import { isPublicVerifiedRecord, selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 import type { DataBundle, Program, University } from '../../src/lib/data/types'
 
@@ -266,7 +265,7 @@ export function buildDecisionGapReport(
   )
   const publicUniversityIds = new Set(universityById.keys())
   const freshScholarships = rawBundle.scholarships.filter(
-    (scholarship) => isCurrentVerifiedRecord(scholarship, today)
+    (scholarship) => isPublicVerifiedRecord(scholarship, today)
       && isWithinPostDeadlineGrace(scholarship.deadline, today),
   )
   const freshScholarshipIdsByUniversity = new Map<string, Set<string>>()
@@ -460,7 +459,7 @@ export function buildDecisionGapReport(
       officialApplyRoute: 'The published program has a non-empty applyUrl and at least one associated official source.',
       freshDisposition: 'A published non-historical cycle was verified within the inclusive 30-day window ending on evaluatedForDate.',
       requirements: 'At least one language requirement or non-empty localized eligibility item is public.',
-      scholarshipFreshness: 'A raw scholarship qualifies only when isCurrentVerifiedRecord and isWithinPostDeadlineGrace both pass; university coverage is limited to published universities.',
+      scholarshipFreshness: 'Verification must have occurred by the evaluation date and still be current on that date. Scholarships may be within their post-deadline grace period. Coverage counts published universities.',
       programGapWeights: { ...DECISION_FACT_WEIGHTS },
       valueBoosts: { ...VALUE_BOOSTS },
       universityPriorityBoosts: { ...UNIVERSITY_PRIORITY_BOOSTS },

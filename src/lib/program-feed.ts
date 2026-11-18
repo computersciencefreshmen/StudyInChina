@@ -3,14 +3,20 @@ import { createHash } from 'node:crypto'
 import localData from '../../content/third-party/details.json'
 import localManifest from '../../content/third-party/manifest.json'
 import type { ThirdPartyProgram } from './third-party-programs'
+import { programWithdrawalReason } from './program-publication-policy.mjs'
+import { CatalogRepositoryError } from './catalog/types'
 
 export type ProgramFeedSummary = {
   capturedCount: number
   schoolCount: number
   sourceCount: number
+  quality?: FeedQuality
 }
+type FeedQuality = { captured: number; archived: number; withdrawn: number; degreeRequirementsMaterialsPresent: number;
+  missing: { degree: number; requirements: number; materials: number } }
 
 export type ProgramFeedIndex = {
+  monitor?: { eligibleWindowsWithoutGrowth: number; reason: string | null }
   revision: string
   generatedAt: string
   programs: ThirdPartyProgram[]
@@ -18,12 +24,13 @@ export type ProgramFeedIndex = {
 }
 
 const records = localData.programs as unknown as ThirdPartyProgram[]
-const byId = new Map(records.map(record => [record.id, record]))
+const localVisible = records.filter(record => !programWithdrawalReason(record))
+const byId = new Map(localVisible.map(record => [record.id, record]))
 const basicFields = ['degree', 'language', 'duration', 'startDate', 'deadline', 'tuition', 'applicationFee', 'providerServiceFee'] as const
 const localIndex: ProgramFeedIndex = {
   revision: `local-${localManifest.candidateSnapshot.sha256}`,
   generatedAt: localManifest.generatedAt,
-  programs: records.map(record => ({
+  programs: localVisible.map(record => ({
     ...record,
     fields: Object.fromEntries(basicFields.filter(key => record.fields[key] !== undefined).map(key => [key, record.fields[key]])),
   })),
@@ -35,8 +42,10 @@ const localIndex: ProgramFeedIndex = {
 }
 
 type Descriptor = { path: string; sha256: string; bytes: number; count?: number }
+type Publication = { version: 1; sourceRevision: string; visibleCount: number; withdrawnIds: string[]; indexShards: Descriptor[]; revision: string; quality?: FeedQuality }
 type FeedManifest = { schemaVersion: number; revision: string; generatedAt: string; official: boolean;
-  counts: { programCount: number; capturedCount: number; schoolCount: number; sourceCount: number }; indexShards: Descriptor[] }
+  monitor?: ProgramFeedIndex['monitor'];
+  counts: { programCount: number; capturedCount: number; schoolCount: number; sourceCount: number }; indexShards: Descriptor[]; publication?: Publication }
 const feedBase = 'https://raw.githubusercontent.com/computersciencefreshmen/StudyInChina/catalog-program-feed/'
 const digest = (value: Uint8Array | string) => createHash('sha256').update(value).digest('hex')
 const canonical = (value: unknown): string => {
@@ -56,13 +65,14 @@ function remoteEnabled() {
 }
 
 async function readFeed(path: string, descriptor?: Descriptor): Promise<unknown> {
-  const maximum = path === 'manifest.json' ? 256_000 : path.startsWith('indexes/') ? 1_000_000 : 5_000_000
-  if (path !== 'manifest.json' && (!/^(?:indexes\/[a-f0-9]{64}|details\/[a-f0-9]{2}\/[a-f0-9]{64})\.json$/.test(path)
+  const isManifest = path === 'manifest.json' || path === 'receipts/site-last-good.json'
+  const maximum = isManifest ? 256_000 : path.startsWith('indexes/') ? 1_000_000 : 5_000_000
+  if (!isManifest && (!/^(?:indexes\/[a-f0-9]{64}|details\/[a-f0-9]{2}\/[a-f0-9]{64})\.json$/.test(path)
     || !descriptor || !Number.isSafeInteger(descriptor.bytes) || descriptor.bytes < 1 || descriptor.bytes > maximum
     || !/^[a-f0-9]{64}$/.test(descriptor.sha256))) throw new Error('program_feed_descriptor_invalid')
   const response = await fetch(`${feedBase}${path}`, {
     redirect: 'error', signal: AbortSignal.timeout(10_000),
-    next: { revalidate: path === 'manifest.json' ? 60 : 86_400 },
+    next: { revalidate: isManifest ? 60 : 86_400 },
   })
   if (!response.ok || !response.body || Number(response.headers.get('content-length') || 0) > maximum) throw new Error('program_feed_unavailable')
   const reader = response.body.getReader(), chunks: Uint8Array[] = []
@@ -97,13 +107,28 @@ function sourceRecord(value: unknown): ThirdPartyProgram {
     if (typeof row.fields[key] !== 'string' || row.fields[key]!.length > 500_000) throw new Error('program_feed_field_invalid')
     fields[key] = row.fields[key]
   }
+  const evidenceRow = row as ThirdPartyProgram & { archiveSha256?: string; fieldEvidence?: Record<string, {
+    sourceUrl?: string; fetchedAt?: string; selector?: string; text?: string; evidenceHash?: string; archiveSha256?: string }> }
+  const fieldSources: NonNullable<ThirdPartyProgram['fieldSources']> = {}
+  for (const key of allowedFields) {
+    const fact = evidenceRow.fieldEvidence?.[key]
+    if (!fields[key] || !fact || typeof fact.text !== 'string' || !fact.text.includes(fields[key]!)
+      || typeof fact.selector !== 'string' || fact.selector.length > 2000) continue
+    const location = new URL(fact.sourceUrl ?? url.href)
+    const collectedAt = fact.fetchedAt ?? row.fetchedAt
+    if (location.origin !== url.origin || location.username || location.password || !collectedAt || !Number.isFinite(Date.parse(collectedAt))) continue
+    const hash = fact.evidenceHash ?? row.evidenceHash
+    fieldSources[key] = { url: location.href, collectedAt, locator: fact.selector,
+      archived: !!hash && (fact.archiveSha256 ?? evidenceRow.archiveSha256) === hash }
+  }
   return { id: row.id, name: row.name, schoolId: row.schoolId, schoolName: row.schoolName, provider: row.provider,
     sourceId: row.sourceId, sourceUrl: url.href, status: 'extracted', official: false, admissionYear: null,
-    fetchedAt: row.fetchedAt, sourceUpdatedAt: row.sourceUpdatedAt, evidenceHash: row.evidenceHash, fields }
+    fetchedAt: row.fetchedAt, sourceUpdatedAt: row.sourceUpdatedAt, evidenceHash: row.evidenceHash, fields,
+    ...(Object.keys(fieldSources).length ? { fieldSources } : {}) }
 }
 
-async function refreshIndex(): Promise<ProgramFeedIndex> {
-  const manifest = await readFeed('manifest.json') as FeedManifest
+async function refreshIndex(path = 'manifest.json'): Promise<ProgramFeedIndex> {
+  const manifest = await readFeed(path) as FeedManifest
   if (manifest.schemaVersion !== 1 || manifest.official !== false || !Array.isArray(manifest.indexShards)
     || manifest.indexShards.length > 1000 || !manifest.counts || !Number.isSafeInteger(manifest.counts.capturedCount)
     || !Number.isSafeInteger(manifest.counts.programCount) || manifest.counts.programCount > 100_000
@@ -111,30 +136,66 @@ async function refreshIndex(): Promise<ProgramFeedIndex> {
     || manifest.indexShards.some(part => !Number.isSafeInteger(part.count) || part.count! < 1 || part.count! > 500)
     || manifest.indexShards.reduce((size, part) => size + part.bytes, 0) > 64_000_000
     || manifest.revision !== digest(canonical({ schemaVersion: 1, counts: manifest.counts, indexShards: manifest.indexShards }))) throw new Error('program_feed_manifest_invalid')
-  if (manifest.revision === currentIndex.revision) return currentIndex
+  const published = manifest.publication
+  if (published) {
+    const { revision, ...payload } = published
+    const quality = published.quality
+    if (quality && (!quality.missing || quality.captured !== manifest.counts.capturedCount || quality.withdrawn !== published.withdrawnIds?.length
+      || [quality.archived, quality.withdrawn, quality.degreeRequirementsMaterialsPresent, quality.missing.degree, quality.missing.requirements,
+        quality.missing.materials].some(n => !Number.isSafeInteger(n) || n < 0 || n > quality.captured))) throw new Error('program_publication_quality_invalid')
+    if (published.version !== 1 || published.sourceRevision !== manifest.revision || digest(canonical(payload)) !== revision
+      || !Number.isSafeInteger(published.visibleCount) || published.visibleCount < 0 || !Array.isArray(published.withdrawnIds)
+      || new Set(published.withdrawnIds).size !== published.withdrawnIds.length
+      || published.withdrawnIds.some(id => typeof id !== 'string' || !/^[a-z][a-z0-9-]{1,160}$/u.test(id))
+      || published.visibleCount + published.withdrawnIds.length !== manifest.counts.capturedCount
+      || !Array.isArray(published.indexShards) || published.indexShards.length > 1000
+      || published.indexShards.some(part => !Number.isSafeInteger(part.count) || part.count! < 1 || part.count! > 500)
+      || published.indexShards.reduce((sum, part) => sum + part.bytes, 0) > 64_000_000) throw new Error('program_publication_invalid')
+  }
+  const revision = published?.revision ?? manifest.revision
+  const candidate = manifest.monitor
+  const monitor = candidate && Number.isSafeInteger(candidate.eligibleWindowsWithoutGrowth) && candidate.eligibleWindowsWithoutGrowth >= 0
+    && (candidate.reason === null || typeof candidate.reason === 'string' && /^[a-z_]{1,60}$/.test(candidate.reason))
+    ? { eligibleWindowsWithoutGrowth: candidate.eligibleWindowsWithoutGrowth, reason: candidate.reason } : undefined
+  if (revision === currentIndex.revision) {
+    currentIndex = { ...currentIndex, generatedAt: manifest.generatedAt, monitor }
+    return currentIndex
+  }
+  const shards = published?.indexShards ?? manifest.indexShards
+  const withdrawn = new Set(published?.withdrawnIds || [])
   const programs: ThirdPartyProgram[] = [], refs = new Map<string, Descriptor>(), seen = new Set<string>()
-  let offset = 0, indexed = 0
-  await Promise.all(Array.from({ length: Math.min(6, manifest.indexShards.length) }, async () => {
-    while (offset < manifest.indexShards.length) {
-      const descriptor = manifest.indexShards[offset++]
+  let offset = 0, indexed = 0, extracted = 0
+  await Promise.all(Array.from({ length: Math.min(6, shards.length) }, async () => {
+    while (offset < shards.length) {
+      const descriptor = shards[offset++]
       const shard = await readFeed(descriptor.path, descriptor) as { schemaVersion: number; programs: (ThirdPartyProgram & { detail: Descriptor | null })[] }
       if (shard.schemaVersion !== 1 || !Array.isArray(shard.programs) || shard.programs.length !== descriptor.count) throw new Error('program_feed_index_invalid')
       indexed += shard.programs.length
       for (const row of shard.programs) {
         if (seen.has(row.id)) throw new Error('program_feed_duplicate_identity')
         seen.add(row.id)
-        if (row.status !== 'extracted') continue
+        if (row.status !== 'extracted') {
+          if (published) throw new Error('program_publication_contains_discovery')
+          continue
+        }
+        extracted++
         const program = sourceRecord(row)
         if (!row.detail) throw new Error('program_feed_detail_missing')
+        if (withdrawn.has(program.id)) throw new Error('program_publication_contains_withdrawal')
+        if (programWithdrawalReason(program)) {
+          withdrawn.add(program.id)
+          continue
+        }
         programs.push(program); refs.set(program.id, row.detail)
       }
     }
   }))
-  if (indexed !== manifest.counts.programCount || programs.length !== manifest.counts.capturedCount
-    || records.some(record => !refs.has(record.id))) throw new Error('program_feed_count_mismatch')
+  if (indexed !== (published?.visibleCount ?? manifest.counts.programCount) || extracted !== (published?.visibleCount ?? manifest.counts.capturedCount)
+    || localVisible.some(record => !refs.has(record.id) && !withdrawn.has(record.id))) throw new Error('program_feed_count_mismatch')
   programs.sort((a, b) => a.id.localeCompare(b.id, 'en', { numeric: true }))
-  const next = { revision: manifest.revision, generatedAt: manifest.generatedAt, programs,
-    summary: { capturedCount: programs.length, schoolCount: new Set(programs.map(row => row.schoolId)).size,
+  const next = { revision, generatedAt: manifest.generatedAt, programs, monitor,
+    summary: { capturedCount: manifest.counts.capturedCount, schoolCount: new Set(programs.map(row => row.schoolId)).size,
+      ...(published?.quality ? { quality: published.quality } : {}),
       sourceCount: new Set(programs.map(row => row.provider)).size } }
   references = refs; currentIndex = next
   return next
@@ -147,7 +208,12 @@ export async function getProgramFeedIndex(): Promise<ProgramFeedIndex> {
   if (Date.now() - lastAttempt < 60_000) return currentIndex
   if (!pending) {
     lastAttempt = Date.now()
-    pending = refreshIndex().catch(() => currentIndex).finally(() => { pending = undefined })
+    pending = refreshIndex().catch(async () => {
+      if (currentIndex === localIndex && process.env.VERCEL_ENV === 'production') {
+        try { return await refreshIndex('receipts/site-last-good.json') } catch { /* Serve the bundled vetted fallback. */ }
+      }
+      return currentIndex
+    }).finally(() => { pending = undefined })
   }
   return pending
 }
@@ -155,7 +221,7 @@ export async function getProgramFeedIndex(): Promise<ProgramFeedIndex> {
 export async function getProgramFeedRecord(id: string): Promise<ThirdPartyProgram | undefined> {
   const index = await getProgramFeedIndex()
   const descriptor = references.get(id)
-  if (!descriptor) return byId.get(id)
+  if (!descriptor) return index === localIndex ? byId.get(id) : undefined
   const expected = index.programs.find(record => record.id === id)
   const key = `${id}:${descriptor.sha256}`
   const cached = detailCache.get(key)
@@ -167,5 +233,10 @@ export async function getProgramFeedRecord(id: string): Promise<ThirdPartyProgra
     if (detailCache.size >= 256) detailCache.delete(detailCache.keys().next().value!)
     detailCache.set(key, record)
     return record
-  } catch { return byId.get(id) }
+  } catch {
+    const fallback = byId.get(id)
+    if (fallback && expected && fallback.evidenceHash === expected.evidenceHash && fallback.sourceUrl === expected.sourceUrl
+      && fallback.schoolId === expected.schoolId && fallback.name === expected.name) return fallback
+    throw new CatalogRepositoryError('PROGRAM_DETAIL_UNAVAILABLE', 'The indexed programme detail is temporarily unavailable.')
+  }
 }

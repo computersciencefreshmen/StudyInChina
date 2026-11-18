@@ -1,7 +1,8 @@
 import type { LaunchLocale } from '@/i18n/config'
 import { officialReferenceTuitionCopy } from '@/i18n/tuition-reference'
 import { getMessages } from '@/i18n/messages'
-import { formatDate, formatCny, localize } from '@/lib/data/format'
+import { formatDate, formatCny, localize, localizeProgramText, containsHan } from '@/lib/data/format'
+import { sourceKindLabel } from '@/lib/data/program-source-labels'
 import { languageLabel } from '@/lib/data/labels'
 import { hasCurrentDirectoryField } from '@/lib/data/discovery-state'
 import type { AdmissionCycle, Program, Source } from '@/lib/data/types'
@@ -25,14 +26,14 @@ export function AdmissionTrackCards({ program, cycles, sources, locale, today }:
           {known('closesOn') && cycle.closesOn ? <div><dt>{messages.common.deadline}</dt><dd><time dateTime={cycle.closesOn}>{formatDate(cycle.closesOn, locale, '')}</time></dd></div> : null}
           {known('tuitionCny') && cycle.tuitionCny !== null && known('tuitionStatus') && known('tuitionPeriod') && cycle.tuitionPeriod ? <div><dt>{cycle.tuitionStatus === 'reference' ? referenceCopy.label : messages.common.tuition}</dt><dd>{formatCny(cycle.tuitionCny, locale, '')} · {periodLabels[cycle.tuitionPeriod]}</dd></div> : null}
           {known('applicationFeeCny') && cycle.applicationFeeCny !== null ? <div><dt>{messages.programs.fee}</dt><dd>{formatCny(cycle.applicationFeeCny, locale, '')}</dd></div> : null}
-          {known('languageRequirements') && cycle.languageRequirements?.length ? <div><dt>{messages.common.requirements}</dt><dd>{cycle.languageRequirements.map(requirement => `${requirement.test}${requirement.minimum ? `: ${requirement.minimum}` : ''}`).join(' · ')}</dd></div> : null}
+          {known('languageRequirements') && cycle.languageRequirements?.length ? <div><dt>{messages.common.requirements}</dt><dd>{cycle.languageRequirements.map(requirement => `${requirement.test}${requirement.minimum ? `: ${localizeProgramText(requirement.minimum, locale)}` : ''}`).join(' · ')}</dd></div> : null}
         </dl>
         {known('tuitionStatus') && cycle.tuitionStatus === 'reference' && known('tuitionCny') ? <p>{referenceCopy.notice}</p> : null}
         {known('tuitionSchedule') && cycle.tuitionSchedule ? <p>{localize(cycle.tuitionSchedule, locale)}</p> : null}
         {known('eligibility') && cycle.eligibility?.length ? <section><h3>{messages.programs.eligibility}</h3><ul>{cycle.eligibility.map((item, index) => <li key={index}>{localize(item, locale)}</li>)}</ul></section> : null}
         {known('applicationMaterials') && cycle.applicationMaterials?.length ? <section><h3>{messages.programs.materials}</h3><ul>{cycle.applicationMaterials.map((item, index) => <li key={index}>{localize(item, locale)}</li>)}</ul></section> : null}
         {known('applyUrl') && cycle.applyUrl ? <a href={cycle.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a> : null}
-        {sources.filter(source => cycle.sourceIds.includes(source.id)).map(source => <p key={source.id}><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a></p>)}
+        {sources.filter(source => cycle.sourceIds.includes(source.id)).map(source => <p key={source.id}><a href={source.url} title={source.title} target="_blank" rel="noreferrer">{locale === 'en' && containsHan(source.title) ? sourceKindLabel(source.kind, locale) : source.title} ↗</a></p>)}
       </article>
     })}
   </section>

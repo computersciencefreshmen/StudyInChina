@@ -10,7 +10,8 @@ import { holdBudgetQueueMessage } from './budget-queue-hold'
 import { readPlanQuotaReport } from './quota-report'
 import { budgetStatus, configureBudget, checkBudget, resumeBudget } from './budget'
 import { readBackgroundBudgetGate, BACKGROUND_BUDGET_RETRY_SECONDS, BUDGET_POLICY_KEY, BUDGET_OBSERVATION_KEY } from '../../shared/background-budget'
-import { submitCoverageSnapshot } from './coverage'
+import { readCoverageSnapshot, submitCoverageSnapshot } from './coverage'
+import { storeSicasEvidence } from './provider-evidence'
 import { registerScopeUpgradeRequest, processScopeUpgrade, scopeUpgradeStatus } from './scope-upgrade'
 import { captureSource } from './capture'
 import { extractIdentities } from './extraction'
@@ -197,6 +198,18 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   if(!authorized(request,env))return json({ok:false,error:'unauthorized'},401)
   if(sourceMigrationFrozen(env)&&!sourceMigrationRoutes.has(`${request.method} ${url.pathname}`))return json({ok:false,error:'account_migration_frozen'},503)
   try {
+    if (request.method === 'POST' && url.pathname.startsWith('/provider-evidence/sicas/')) {
+      return await storeSicasEvidence(request, env, url.pathname.slice('/provider-evidence/sicas/'.length))
+    }
+    if (request.method === 'POST' && ['/translation/acquire', '/translation/settle'].includes(url.pathname)) {
+      return await gateRequest(env, url.pathname, await requestJson(request, 1024))
+    }
+    if (request.method === 'GET' && url.pathname === '/coverage') {
+      const cfg = await control(env)
+      const snapshot = cfg?.scope_sha256 && cfg.input_catalog_sha256
+        ? await readCoverageSnapshot(env, cfg.input_catalog_sha256, cfg.scope_sha256) : null
+      return snapshot ? json(snapshot) : json({ error: 'coverage_unavailable' }, 503)
+    }
     if(url.pathname==='/legacy-model-guards'&&request.method==='GET')return json((await readLegacyModelDisposition(env,await control(env))).summary)
     if(url.pathname==='/legacy-model-guards'&&request.method==='POST')return json(await registerLegacyModelGuards(env,await requestJson(request,1024)))
     if(url.pathname==='/job-dispositions'&&request.method==='GET')return json((await readUnknownJobDisposition(env,await control(env))).summary)

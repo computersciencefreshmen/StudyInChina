@@ -2,9 +2,15 @@ import { createHash } from 'node:crypto'
 
 export const TRANSLATION_VERSION = 'v1' as const
 export const TRANSLATION_LOCALES = ['zh', 'en', 'ru', 'de', 'fr', 'es'] as const
-export const TRANSLATION_FIELDS = ['requirements', 'materials', 'description'] as const
+export const TRANSLATION_FIELDS = ['title', 'requirements', 'materials', 'description'] as const
 export type ProgramTranslationLocale = typeof TRANSLATION_LOCALES[number]
 export type ProgramTranslationField = typeof TRANSLATION_FIELDS[number]
+type SourceInput = { name?: string; fields: Partial<Record<Exclude<ProgramTranslationField, 'title'>, string>> }
+
+export function programTranslationSource(row: SourceInput, field: ProgramTranslationField, locale: ProgramTranslationLocale) {
+  if (field !== 'title') return row.fields[field]
+  return locale === 'en' && row.name && /\p{Script=Han}/u.test(row.name) ? row.name : undefined
+}
 export type ProgramTranslationRecord = {
   schemaVersion: 1
   version: typeof TRANSLATION_VERSION
@@ -16,9 +22,10 @@ export type ProgramTranslationRecord = {
   model: string | null
   translatedAt: string
   validation: 'passed'
+  factPolicy?: 'literal-v2'
 }
 
-export type TranslationProtection = { text: string; spans: string[] }
+export type TranslationProtection = { text: string; spans: string[]; factPolicy?: 'literal-v2' }
 const MAX_SOURCE = 500_000
 const MARKER_PREFIX = '__SC_'
 const marker = (index: number) => `${MARKER_PREFIX}${String(index).padStart(6, '0')}__`
@@ -54,6 +61,9 @@ const FACT_PATTERNS = [
 // prose may contain them. Scores, new links, operators and new negations are.
 const ADDED_CRITICAL = new RegExp(String.raw`\p{N}|https?:\/\/|www\.|[<>≤≥≦≧=￥¥$€£]|${EXAM}|${QUALIFIER}|\b(?:nicht|keine?|pas|jamais|sans)\b|\b(?:не|нет|без)\b`, 'iu')
 const EXPLICIT_TRUNCATION = /\[(?:truncated|omitted|translation omitted)\]|<\/?(?:truncated|omitted)>/iu
+// Keep numerical values, links, tests, currency codes and operators byte-exact.
+// Translate grammatical qualifiers in context; their meaning and units require independent review.
+const LITERALS = new RegExp(String.raw`https?:\/\/[^\s<>"']+|www\.[^\s<>"']+|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|${EXAM}|\b(?:CNY|RMB|USD|EUR|GBP|HKD)\b|${NUMBER}|[<>≤≥≦≧=￥¥$€£%]`, 'giu')
 
 function assertSource(source: string) {
   if (typeof source !== 'string' || !source.trim() || source.length > MAX_SOURCE || source.includes(MARKER_PREFIX)) {
@@ -73,10 +83,10 @@ export function translationPath(source: string, locale: ProgramTranslationLocale
   return `translations/${TRANSLATION_VERSION}/${locale}/${translationKey(source, locale)}.json`
 }
 
-export function protectTranslationText(source: string): TranslationProtection {
+export function protectTranslationText(source: string, factPolicy?: 'literal-v2'): TranslationProtection {
   assertSource(source)
   const matches: { start: number; end: number }[] = []
-  for (const pattern of FACT_PATTERNS) {
+  for (const pattern of factPolicy === 'literal-v2' ? [LITERALS] : FACT_PATTERNS) {
     pattern.lastIndex = 0
     for (const match of source.matchAll(pattern)) matches.push({ start: match.index, end: match.index + match[0].length })
   }
@@ -93,7 +103,7 @@ export function protectTranslationText(source: string): TranslationProtection {
     spans.push(source.slice(range.start, range.end)); cursor = range.end
   }
   text += source.slice(cursor)
-  return { text, spans }
+  return { text, spans, ...(factPolicy && { factPolicy }) }
 }
 
 function textBounds(text: string, source: string) {
@@ -101,7 +111,13 @@ function textBounds(text: string, source: string) {
     || EXPLICIT_TRUNCATION.test(text)) throw new Error('translation_output_invalid')
 }
 
-function remainingText(text: string, spans: string[]): string {
+function remainingText(text: string, spans: string[], factPolicy?: 'literal-v2'): string {
+  if (factPolicy === 'literal-v2') {
+    const actual = (text.match(LITERALS) || []).sort()
+    if (JSON.stringify(actual) !== JSON.stringify([...spans].sort()) || text.includes(MARKER_PREFIX))
+      throw new Error('translation_fact_missing_or_changed')
+    return text.replace(LITERALS, ' ')
+  }
   let remaining = text
   // Longer facts first handle overlapping value fragments. ASCII word/value
   // boundaries prevent an original "18" from being satisfied by a new "118".
@@ -119,8 +135,8 @@ function remainingText(text: string, spans: string[]): string {
 }
 
 function validateTargetScript(text: string, source: string, locale: ProgramTranslationLocale, protection: TranslationProtection) {
-  const outside = remainingText(text, protection.spans)
-  const originalOutside = remainingText(source, protection.spans)
+  const outside = remainingText(text, protection.spans, protection.factPolicy)
+  const originalOutside = remainingText(source, protection.spans, protection.factPolicy)
   const originalLetters = originalOutside.match(/\p{L}/gu) || []
   if (originalLetters.length < 10) return
   const letters = outside.match(/\p{L}/gu) || []
@@ -134,10 +150,10 @@ function validateTargetScript(text: string, source: string, locale: ProgramTrans
 
 function validateText(text: string, source: string, protection: TranslationProtection) {
   textBounds(text, source)
-  const outside = remainingText(text, protection.spans).trim()
+  const outside = remainingText(text, protection.spans, protection.factPolicy).trim()
   // A provider stop_reason=max_tokens is also rejected by the caller. This catches
   // silently empty/short translations without imposing a word-for-word ratio.
-  const originalOutside = remainingText(source, protection.spans).trim()
+  const originalOutside = remainingText(source, protection.spans, protection.factPolicy).trim()
   if (originalOutside.length > 30 && outside.length < Math.min(12, Math.ceil(originalOutside.length * 0.1))) {
     throw new Error('translation_output_truncated')
   }
@@ -176,13 +192,14 @@ export function validateTranslationRecord(value: unknown, source: string, locale
       if (row.model !== null || row.text !== source) return null
     } else {
       if (typeof row.model !== 'string' || !/^MiniMax-[A-Za-z0-9._-]{1,80}$/.test(row.model)) return null
-      const protection = protectTranslationText(source)
+      if (row.factPolicy !== undefined && row.factPolicy !== 'literal-v2') return null
+      const protection = protectTranslationText(source, row.factPolicy)
       validateText(row.text, source, protection)
       validateTargetScript(row.text, source, locale, protection)
     }
     return { schemaVersion: 1, version: TRANSLATION_VERSION, key, sourceHash: digest(source), targetLocale: locale,
       text: row.text, method: row.method as ProgramTranslationRecord['method'], model: row.model as string | null,
-      translatedAt: row.translatedAt, validation: 'passed' }
+      translatedAt: row.translatedAt, validation: 'passed', ...(row.factPolicy === 'literal-v2' && { factPolicy: 'literal-v2' as const }) }
   } catch { return null }
 }
 

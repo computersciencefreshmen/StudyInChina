@@ -4,7 +4,8 @@ import { mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from '
 import { basename, dirname, join, resolve } from 'node:path'
 import { tmpdir } from 'node:os'
 import { FEED_BRANCH, MAX_INDEX_BYTES, MAX_INDEX_RECORDS, emptyProgress, feedRevision, loadProgramFeed, mergeProgramRecords, sanitizeProgram, sha256, writeProgramFeed } from './program-catalog-feed.mjs'
-import { checkpointFeed, harvestProgramCatalog } from './harvest-program-catalog.mjs'
+import { checkpointFeed, collectFeedCandidate, harvestMonitor, harvestProgramCatalog, publishFeedCandidate } from './harvest-program-catalog.mjs'
+import { pushCatalogCheckpoint } from './push-catalog-checkpoint.mjs'
 
 const roots = []
 afterEach(() => {
@@ -102,6 +103,78 @@ function fakeGit(root, { failPush = false, wrongBranch = false } = {}) {
     return ''
   } }
 }
+
+test('scope-bound older fields retain original provenance; new intakes never borrow previous fees', () => {
+  const prior = program(1, 'extracted')
+  prior.archiveSha256 = prior.evidenceHash
+  const track = { degree: 'Bachelor', language: 'English' }
+  const trackProof = { degree: { selector: '.degree', text: 'Bachelor' }, language: { selector: '.language', text: 'English' } }
+  Object.assign(prior.fields, track)
+  Object.assign(prior.fieldEvidence, trackProof)
+  const sparse = { ...prior, fetchedAt: '2026-11-18T00:00:00Z', evidenceHash: sha256('new body'),
+    fields: { ...track, startDate: prior.fields.startDate, tuition: 'TBD' },
+    fieldEvidence: { ...trackProof, startDate: prior.fieldEvidence.startDate, tuition: { text: 'Fee: TBD', selector: '.tuition' } } }
+  const merged = mergeProgramRecords([prior], [sparse]).records[0]
+  assert.equal(merged.fields.tuition, prior.fields.tuition)
+  assert.equal(merged.fieldEvidence.tuition.evidenceHash, prior.evidenceHash)
+  assert.equal(merged.fieldEvidence.tuition.archiveSha256, prior.evidenceHash)
+  assert.equal(merged.fieldEvidence.tuition.fetchedAt, prior.fetchedAt)
+  for (const missing of ['degree', 'language']) {
+    const earlier = structuredClone(prior), newer = structuredClone(sparse)
+    delete earlier.fields[missing]; delete newer.fields[missing]
+    const blocked = mergeProgramRecords([earlier], [newer])
+    assert.equal(blocked.held[0].errorCode, 'incomplete_evidence_scope')
+    assert.equal(blocked.records[0].fetchedAt, prior.fetchedAt)
+  }
+  const nextIntake = { ...sparse, fields: { startDate: 'Sep 1, 2036' }, fieldEvidence: { startDate: { selector: '.start', text: 'Sep 1, 2036' } } }
+  assert.equal(mergeProgramRecords([prior], [nextIntake]).records[0].fields.tuition, undefined)
+  const uncertain = mergeProgramRecords([prior], [{ ...sparse, fields: {}, fieldEvidence: {} }])
+  assert.equal(uncertain.records[0].fetchedAt, prior.fetchedAt)
+  assert.equal(uncertain.held[0].errorCode, 'incomplete_evidence_scope')
+  assert.equal(mergeProgramRecords([prior], [{ ...sparse, name: 'Other program' }]).rejected.length, 1)
+})
+
+test('staged harvest replays once and a stale cursor cannot overwrite a newer collection', async () => {
+  const root = temporaryRoot(); write(root, [program()]); const git = fakeGit(root)
+  const first = await collectFeedCandidate({ feedDir: root, git: git.run,
+    collector: async ({ state }) => ({ records: [], state, receipts: [] }) })
+  assert.equal(git.calls.some(args => args[0] === 'push'), false)
+  const competing = { ...first, generatedAt: '2026-11-17T02:00:00Z' }
+  assert.equal(publishFeedCandidate(root, first, git.run).pushed, true)
+  assert.equal(publishFeedCandidate(root, first, git.run).reused, true)
+  assert.throws(() => publishFeedCandidate(root, competing, git.run), /cursor_conflict/)
+})
+
+test('health counts four distinct eligible windows, skips idle and resets only on visible growth', () => {
+  let state
+  const tick = (minute, attempted = 1, grew = false) => {
+    state = harvestMonitor(state, { generatedAt: new Date(Date.UTC(2026, 10, 18, 0, minute)).toISOString(), attempted }, grew, 1, 0)
+  }
+  tick(0); tick(2); tick(15, 0); tick(30); tick(45); tick(60)
+  assert.equal(state.eligibleWindowsWithoutGrowth, 4); assert.equal(state.reason, 'scope_review')
+  tick(61, 1, true); tick(62); assert.equal(state.eligibleWindowsWithoutGrowth, 0)
+})
+
+test('both publishers rebase disjoint work, reject overlapping writes and recognize an acknowledged push', () => {
+  for (const lane of ['harvest', 'translation']) {
+    function race(changes, remote = '3'.repeat(40)) {
+      let pushes = 0, rebases = 0
+      const git = args => {
+        if (args[0] === 'push' && ++pushes === 1) throw Error('push conflict')
+        if (args[0] === 'rev-parse') return args[1] === 'HEAD^' ? '1'.repeat(40) : args[1] === 'HEAD' ? '2'.repeat(40) : remote
+        if (args[0] === 'diff') return changes
+        if (args.includes('rebase')) rebases++
+        return ''
+      }
+      pushCatalogCheckpoint(git, lane)
+      return [pushes, rebases]
+    }
+    const other = lane === 'harvest' ? 'translations/status.json\0' : 'manifest.json\0indexes/abc.json\0'
+    assert.deepEqual(race(other), [2, 1])
+    assert.deepEqual(race(other, '2'.repeat(40)), [1, 0])
+    assert.throws(() => race('manifest.json\0translations/status.json\0'), /namespace_conflict/)
+  }
+})
 
 test('commits and pushes a 403 backoff checkpoint and withholds GitHub credentials from the collector', async () => {
   const root = temporaryRoot(); write(root, [program()]); const git = fakeGit(root)

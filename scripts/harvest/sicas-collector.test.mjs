@@ -2,6 +2,9 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { collectSicasBatch, normalizeSicasState, roundRobinSicasSources, sicasRobotsPolicy } from './sicas-collector.mjs'
 import { parseSicasProgram, parseSicasListing, sicasProgramIdentity, sourceHash } from './sicas-parser.mjs'
+import { schoolCoverageTargets } from './sicas-school-priority.mjs'
+import { degreeBackfill, degreeDue, finishDegreeCheck, selectDegreeAndDiscovery } from './sicas-degree-backfill.mjs'
+import { sha256, canonicalJson } from '../ingestion/program-catalog-feed.mjs'
 
 const source = (school, id) => ({ id: `sicas-${id}`, provider: 'SICAS', sourceId: String(id), schoolId: `sicas-${school}`,
   schoolName: 'URL-only school label', name: 'URL-only programme label', status: 'link_only', fields: {},
@@ -64,6 +67,46 @@ test('listing entries carry exact programme IDs and a separate receipt instead o
   assert.equal(rows[0].evidenceHash, 'a'.repeat(64)); assert.match(rows[0].listingSourceUrl, /degreeId=2/)
 })
 
+test('degree award comes from the present programme award section, preserves literal text, rejects alternatives and prerequisites', () => {
+  const select = html => parseSicasProgram(page().replace('Historical programme brochure published in 2015.', html), {
+    sourceUrl: sicasProgramIdentity(source(1, 11).sourceUrl).url }).fieldEvidence.degree
+  const evidence = select('<strong>Degree Awarded</strong> <div>Bachelor Degree of Business Administration (BBA) .</div>')
+  assert.equal(evidence.text, 'Degree Awarded Bachelor Degree of Business Administration (BBA) .')
+  assert.equal(evidence.selector, '#about-program > .cards-text')
+  for (const invalid of ['Applicants require a Bachelor Degree.', '<b>Degree Awarded</b> <p>Bachelor or Master</p>',
+    '<b>Degree Awarded</b> <p>Bachelor Degree</p> <b>Degree Awarded</b> <p>Master Degree</p>',
+    '<b>Degree Awarded</b> <p>Applicants require a Bachelor Degree</p>']) assert.equal(select(invalid), undefined)
+})
+
+test('persistent degree repairs deduplicate, borrow spare slots, preserve discovery, and respect source and field retry clocks', async () => {
+  const clock = clockFixture(), id = source(1, 11), captured = { ...id, status: 'extracted', evidenceHash: '1'.repeat(64),
+    fetchedAt: '2026-11-17T00:00:00Z', fields: { requirements: 'HSK 6' } }
+  const pending = degreeBackfill([captured, captured], {}, clock.now())
+  assert.deepEqual(Object.keys(pending.awaiting_source_check), ['sicas-11'])
+  assert.ok(degreeDue(pending, id.id, clock.now()))
+  finishDegreeCheck(pending, captured, clock.now())
+  assert.equal(degreeDue(degreeBackfill([captured], pending, clock.now()), id.id, clock.now()), false)
+  assert.equal(degreeDue(pending, id.id, clock.now() + 14 * 86400000), true)
+  finishDegreeCheck(pending, { ...captured, fields: { degree: 'Bachelor' } }, clock.now())
+  assert.equal(degreeDue(pending, id.id, clock.now()), false)
+  const repairs = [11, 12, 13].map(id => ({ source: source(1, id) })), discovery = [21, 22, 23, 24].map(id => ({ source: source(2, id) }))
+  assert.deepEqual(selectDegreeAndDiscovery(discovery, repairs, 4), [repairs[0], ...discovery.slice(0,3)])
+  assert.deepEqual(selectDegreeAndDiscovery([], repairs, 4), repairs)
+  assert.deepEqual(selectDegreeAndDiscovery(discovery, repairs, 4, 'sicas-13'), [repairs[2], ...discovery.slice(0,3)])
+  assert.deepEqual(selectDegreeAndDiscovery(discovery, repairs, 4, 'sicas-99'), [repairs[0], ...discovery.slice(0,3)])
+  await assert.rejects(collectSicasBatch({ repairProgramId: 'https://example.org/invalid' }), /invalid_degree_repair_id/)
+  const state = { outcomes: { [id.id]: { status: 'captured', attempts: 1, nextAttemptAt: '2026-12-17T00:00:00Z' } } }
+  function fetcher(url) { return Promise.resolve(url.endsWith('/robots.txt') ? new Response(null, {status:404}) : new Response(page())) }
+  const first = await collectSicasBatch({ sources: [captured], state, limit: 2, ...clock, fetcher })
+  assert.equal(first.summary.captured, 1)
+  assert.ok(first.state.fieldBackfill.degree.explicit_degree_missing[id.id] > clock.now())
+  const second = await collectSicasBatch({ sources: [captured], state:first.state, limit:2, ...clock, fetcher })
+  assert.equal(second.summary.attempted, 0)
+  const blocked = await collectSicasBatch({ sources: [captured], state:{ outcomes:{[id.id]:{ status:'unavailable', nextAttemptAt:'2026-12-17T00:00:00Z' }} },
+    limit:2, ...clock, fetcher })
+  assert.equal(blocked.summary.attempted, 0)
+})
+
 test('school round-robin is deterministic and stable source IDs are deduplicated', () => {
   const a = source(1, 11), b = source(1, 12), c = source(2, 21), d = source(2, 22)
   assert.deepEqual(roundRobinSicasSources([d, b, a, c, a]).map(row => row.id), ['sicas-11', 'sicas-21', 'sicas-12', 'sicas-22'])
@@ -80,6 +123,34 @@ function clockFixture() {
   let time = Date.parse('2026-11-17T00:00:00.000Z')
   return { now: () => time, sleeper: async ms => { time += ms }, advance: ms => { time += ms } }
 }
+
+test('cloud priority reads exact school identities, favors zero and least recently attempted; archive is required before parsing', async () => {
+  const clock = clockFixture(), sources = [1, 2, 3, 4].map(i => ({ ...source(i, i), schoolName: `School ${i}` }))
+  const universities = sources.map((s, i) => ({ id: `uni-${i + 1}`, name: { en: s.schoolName } }))
+  const snapshot = { format: 'studyinchina.school-program-coverage', version: 1, evaluatedOn: '2026-11-17',
+    scopeRegistrySha256: '1'.repeat(64), inputCatalogSha256: '2'.repeat(64),
+    schools: universities.map((u, i) => ({ universityId: u.id, currentProgramCount: [5, 0, 0, 1][i] })) }
+  snapshot.sha256 = sha256(canonicalJson(snapshot))
+  const targets = schoolCoverageTargets(snapshot, universities, sources, '2026-11-17')
+  assert.equal(targets.size, 4)
+  assert.throws(() => schoolCoverageTargets({ ...snapshot, sha256: '3'.repeat(64) }, universities, sources, '2026-11-17'))
+  const ambiguous = schoolCoverageTargets(snapshot, [...universities, { id: 'other', name: { en: 'School 1' } }], sources, '2026-11-17')
+  assert.equal(ambiguous.has('sicas-1'), false)
+  const evidenceWrites = []
+  const result = await collectSicasBatch({ sources, schoolTargets: targets, limit: 2, ...clock,
+    state: { cursor: 1, outcomes: { 'sicas-2': { status: 'retry', fetchedAt: '2026-10-01T00:00:00Z' } } },
+    fetcher: async url => new Response(url.endsWith('/robots.txt') ? null : page(), { status: url.endsWith('/robots.txt') ? 404 : 200 }),
+    archive: async (body, hash, url) => { assert.equal(sourceHash(body), hash); evidenceWrites.push(url) } })
+  assert.deepEqual(result.records.map(r => r.id), ['sicas-3'])
+  assert.equal(evidenceWrites.length, 1)
+  assert.equal(result.records[0].archiveSha256, result.records[0].evidenceHash)
+  const failed = await collectSicasBatch({ sources: [sources[0]], ...clock,
+    archive: async () => { throw Error('archive failed') },
+    fetcher: async url => new Response(url.endsWith('/robots.txt') ? null : page(), { status: url.endsWith('/robots.txt') ? 404 : 200 }) })
+  assert.deepEqual(failed.records, [])
+  assert.equal(failed.state.outcomes['sicas-1'].errorCode, 'private_archive_unavailable')
+  assert.equal(failed.summary.archiveUnavailable, true)
+})
 
 test('batch returns literal records, retains prior outcomes, spaces starts, and caps total requests including robots', async () => {
   const clock = clockFixture(), starts = [], inputs = []

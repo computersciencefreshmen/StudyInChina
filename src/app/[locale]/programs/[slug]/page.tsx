@@ -1,3 +1,6 @@
+import { LocalizedProgramCard } from '@/components/features/LocalizedProgramCard'
+import { collectedDisplayName, officialDisplayName } from '@/lib/program-display-name'
+import { consultationLabels, programConsultationHref } from '@/i18n/program-consultation'
 import { notFound, permanentRedirect } from 'next/navigation'
 import { CollectedProgramDetail, ProgramSourceReferences } from '@/components/features/CollectedProgram'
 import { resolveUnifiedProgram } from '@/lib/unified-programs'
@@ -8,9 +11,9 @@ import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
 import { FavoriteButton } from '@/components/features/FavoriteButton'
 import { FollowUpdates } from '@/components/features/FollowUpdates'
-import { ProgramCard } from '@/components/features/RecordCards'
 import { ScholarshipCard } from '@/components/features/ScholarshipCard'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
+import { OfficialFieldSources } from '@/components/features/OfficialFieldSources'
 import { Badge, Card, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
 import { indexedLocales } from '@/i18n/config'
 import { getDecisionExperienceCopy } from '@/i18n/decision-experience'
@@ -50,14 +53,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const resolved = await resolveUnifiedProgram(slug, getTodayDate(), data)
   if (resolved && 'collected' in resolved.item) {
     const record = resolved.item.collected
-    return pageMetadata(locale, `${record.name} · ${record.schoolName}`, record.fields.description?.slice(0, 160) || record.name, `programs/${encodeURIComponent(resolved.canonical)}`)
+    const displayName = await collectedDisplayName(record, locale)
+    const schoolName = resolved.item.university ? localize(resolved.item.university.name, locale) : record.schoolName
+    return pageMetadata(locale, `${displayName} · ${schoolName}`, displayName, `programs/${encodeURIComponent(resolved.canonical)}`)
   }
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) return {}
   const university = data.universities.find((item) => item.id === program.universityId)
+  const displayName = await officialDisplayName(program, university, locale)
   const title = university
-    ? `${localize(program.name, locale)} — ${localize(university.name, locale)}`
-    : localize(program.name, locale)
+    ? `${displayName} — ${localize(university.name, locale)}`
+    : displayName
 
   return pageMetadata(
     locale,
@@ -78,7 +84,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const data = await getCatalogData()
   const resolved = await resolveUnifiedProgram(slug, getTodayDate(), data)
   if (resolved && resolved.canonical !== slug) permanentRedirect(`/${locale}/programs/${encodeURIComponent(resolved.canonical)}`)
-  if (resolved && 'collected' in resolved.item) return <CollectedProgramDetail item={resolved.item} locale={locale} />
+  if (resolved && 'collected' in resolved.item) return <div data-program-revision={resolved.revision}><CollectedProgramDetail item={resolved.item} locale={locale} /></div>
 
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) notFound()
@@ -87,6 +93,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const decisionCopy = getDecisionExperienceCopy(locale)
   const university = data.universities.find((item) => item.id === program.universityId)
   if (!university) notFound()
+  const displayName = await officialDisplayName(program, university, locale)
 
   const city = data.cities.find((item) => item.id === university.cityId)
   const today = getTodayDate()
@@ -145,16 +152,18 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       <PageHero
         variant="compact"
         eyebrow={`${degreeLabels(locale)[program.degreeLevel]} \u00b7 ${disciplineLabels(locale)[program.discipline]}`}
-        title={localize(program.name, locale)}
+        title={displayName}
         description={<>
           <span>{localize(university.name, locale)}</span>
           {city ? <span> {'\u00b7'} {localize(city.name, locale)}</span> : null}
         </>}
-        actions={partialCanApply && applicationUrl
+        actions={<>{partialCanApply && applicationUrl
           ? <a className="atlas-button atlas-button--primary atlas-button--medium" href={applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
           : <a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
               {messages.common.officialSource} ↗
             </a>}
+          <FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
+          <a className="text-link" href={programConsultationHref(locale, program.slug)}>{consultationLabels[locale]}</a></>}
         meta={<VerificationBadge collection="programs" recordId={program.id}
           status={program.status}
           verifiedAt={program.verifiedAt}
@@ -173,7 +182,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
         <AdmissionTrackCards program={program} cycles={data.admissionCycles} sources={data.sources} locale={locale} today={today} />
       </div>
-      <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail>
+      <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail data-program-revision={resolved?.revision}>
         <div className={styles.main}>
           <article className={styles.panel}>
             <h2>{messages.programs.overview}</h2>
@@ -222,9 +231,10 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               ? <a className="atlas-button atlas-button--primary atlas-button--small" href={applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
               : <a className="atlas-button atlas-button--secondary atlas-button--small" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
           />
-          <FollowUpdates locale={locale} targets={[{ kind: 'program', id: program.id, label: localize(program.name, locale) }]} />
+          <FollowUpdates locale={locale} targets={[{ kind: 'program', id: program.id, label: displayName }]} />
           <Card accent="jade" id="official-evidence">
             <h2 className="atlas-card__title">{messages.programs.sources}</h2>
+            <OfficialFieldSources locale={locale} records={[program, cycle]} />
             <ul className="source-list">
               {sources.map((source) => {
                 const label = localizeProgramSource(source, university, locale)
@@ -311,7 +321,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'EducationalOccupationalProgram',
-    name: localize(program.name, locale),
+    name: displayName,
     description: details.overview ? localize(details.overview, locale) : undefined,
     provider: {
       '@type': 'CollegeOrUniversity',
@@ -330,7 +340,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     <PageHero
       variant="compact"
       eyebrow={`${degreeLabels(locale)[program.degreeLevel]} · ${disciplineLabels(locale)[program.discipline]}`}
-      title={localize(program.name, locale)}
+      title={displayName}
       description={<>
         <span>{localize(university.name, locale)}</span>
         {details.campus ? <span> · {localize(details.campus, locale)}</span> : city ? <span> · {localize(city.name, locale)}</span> : null}
@@ -342,6 +352,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           {messages.common.officialSource}{' \u2197'}
           </a>}
         <FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
+        <a className="text-link" href={programConsultationHref(locale, program.slug)}>{consultationLabels[locale]}</a>
       </>}
       meta={<VerificationBadge collection="programs" recordId={program.id}
         status={program.status}
@@ -362,7 +373,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
         <AdmissionTrackCards program={program} cycles={data.admissionCycles} sources={data.sources} locale={locale} today={today} />
     </div>
-    <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail>
+    <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail data-program-revision={resolved?.revision}>
       <div className={styles.main}>
         <article className={styles.panel}>
           <h2>{messages.programs.overview}</h2>
@@ -419,7 +430,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         {related.length ? <div>
           <SectionHeading title={messages.programs.related} level={2} />
           <div className="content-grid">
-            {related.map((item) => <ProgramCard
+            {related.map((item) => <LocalizedProgramCard
               key={item.id}
               program={item}
               university={university}
@@ -469,9 +480,10 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
             ? <a className="atlas-button atlas-button--primary atlas-button--small" href={applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
             : <a className="atlas-button atlas-button--secondary atlas-button--small" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
         />
-        <FollowUpdates locale={locale} targets={[{ kind: 'program', id: program.id, label: localize(program.name, locale) }]} />
+        <FollowUpdates locale={locale} targets={[{ kind: 'program', id: program.id, label: displayName }]} />
         <Card accent="jade" id="official-evidence">
           <h2 className="atlas-card__title">{messages.programs.sources}</h2>
+          <OfficialFieldSources locale={locale} records={[program, cycle]} />
           <dl className="record-facts">
             <div><dt>{messages.common.lastVerified}</dt><dd>{formatDate(program.verifiedAt, locale, '—')}</dd></div>
             <div><dt>{messages.common.status}</dt><dd><VerificationBadge collection="programs" recordId={program.id} status={program.status} locale={locale} showDate={false} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} /></dd></div>

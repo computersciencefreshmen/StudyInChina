@@ -10,6 +10,17 @@ beforeEach(() => {
 afterEach(() => vi.useRealTimers())
 
 describe('program comparison API', () => {
+  it('resolves an official ID and a collected ID in one request and leaves source-only application facts unknown', async () => {
+    const officialId = getData().programs[0].id
+    const response = await GET(new Request(`https://example.test/api/v1/programs/compare?view=all&ids=${officialId},cucas-3284,unknown-id`))
+    expect(response.status).toBe(200)
+    const result = await response.json()
+    expect(result.data.items[0].program.id).toBe(officialId)
+    expect(result.data.collectedItems).toMatchObject([{ savedId: 'cucas-3284',
+      record: { id: 'cucas-3284', name: 'Advertising', official: false, admissionYear: null } }])
+    expect(result.data.missingIds).toEqual(['unknown-id'])
+    expect(result.data.collectedItems[0]).not.toHaveProperty('currentCycle')
+  })
   it('returns at most four lightweight records in requested order', async () => {
     const ids = getData().programs.slice(0, 4).map((program) => program.id)
     const response = await GET(new Request(

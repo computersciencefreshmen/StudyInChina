@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto'
 import { existsSync, lstatSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs'
 import { dirname, isAbsolute, relative, resolve } from 'node:path'
+import { programWithdrawalReason } from '../../src/lib/program-publication-policy.mjs'
+import { profileCapturedPrograms } from './program-catalog-quality.mjs'
 
 export const FEED_BRANCH = 'catalog-program-feed'
 export const MAX_INDEX_BYTES = 900_000
@@ -73,6 +75,7 @@ export function sanitizeProgram(input, { requireFieldEvidence = false } = {}) {
   if (input.status === 'extracted') {
     if (!instant(input.fetchedAt) || !hashPattern.test(input.evidenceHash || '')) throw new Error('feed_evidence_identity_invalid')
     result.evidenceHash = input.evidenceHash
+    if (input.archiveSha256 === result.evidenceHash) result.archiveSha256 = input.archiveSha256
     for (const key of allFields) if (typeof input.fields?.[key] === 'string' && input.fields[key].trim()) result.fields[key] = text(input.fields[key], 500_000)
     const evidence = input.fieldEvidence || input.evidence
     if (requireFieldEvidence && Object.keys(result.fields).length && (!evidence || typeof evidence !== 'object' || Array.isArray(evidence))) throw new Error('feed_missing_field_evidence')
@@ -91,6 +94,7 @@ export function sanitizeProgram(input, { requireFieldEvidence = false } = {}) {
           if (!instant(quote.fetchedAt)) throw new Error('feed_timestamp_invalid')
           result.fieldEvidence[key].fetchedAt = quote.fetchedAt
         }
+        if (quote.archiveSha256 && quote.archiveSha256 === quote.evidenceHash) result.fieldEvidence[key].archiveSha256 = quote.archiveSha256
       }
     }
     if (input.displayedDates) { assertPublicState(input.displayedDates); result.displayedDates = input.displayedDates }
@@ -146,20 +150,84 @@ export function loadProgramFeed(root) {
   const state = readDescriptor(root, manifest.state, MAX_STATE_BYTES)
   assertPublicState(state)
   if (records.length !== manifest.counts.programCount || records.filter(r => r.status === 'extracted').length !== manifest.counts.capturedCount) throw new Error('feed_count_mismatch')
+  if (manifest.publication) {
+    const { revision, ...snapshot } = manifest.publication
+    const captured = records.filter(row => row.status === 'extracted')
+    const withheld = captured.filter(programWithdrawalReason).map(row => row.id)
+    const expected = new Map(captured.filter(row => !programWithdrawalReason(row)).map(row => [row.id, row]))
+    if (revision !== sha256(canonicalJson(snapshot)) || snapshot.sourceRevision !== manifest.revision || snapshot.version !== 1
+      || snapshot.visibleCount !== expected.size || canonicalJson(withheld) !== canonicalJson(snapshot.withdrawnIds)
+      || canonicalJson(snapshot.quality) !== canonicalJson(profileCapturedPrograms(records))) throw new Error('publication_manifest_invalid')
+    for (const part of snapshot.indexShards) {
+      const shard = readDescriptor(root, part, MAX_INDEX_BYTES)
+      if (shard.schemaVersion !== 1 || !Array.isArray(shard.programs) || shard.programs.length !== part.count || part.count > MAX_INDEX_RECORDS) throw new Error('publication_shard_invalid')
+      for (const row of shard.programs) {
+        const source = expected.get(row.id)
+        if (!source || row.status !== 'extracted' || row.detail?.sha256 !== sha256(encode(source))) throw new Error('publication_record_mismatch')
+        expected.delete(row.id)
+      }
+    }
+    if (expected.size) throw new Error('publication_count_mismatch')
+  }
   return { manifest, records, state }
 }
 
 export function mergeProgramRecords(current, incoming) {
-  const records = new Map(current.map(record => [record.id, sanitizeProgram(record)])), rejected = []
+  const records = new Map(current.map(record => [record.id, sanitizeProgram(record)])), rejected = [], held = []
   for (const input of incoming) {
     try {
       const record = sanitizeProgram(input, { requireFieldEvidence: true }), prior = records.get(record.id)
       if (prior && (prior.schoolId !== record.schoolId || prior.provider !== record.provider)) throw new Error('feed_conflicting_identity')
       if (prior?.status === 'extracted' && (record.status !== 'extracted' || Date.parse(prior.fetchedAt) > Date.parse(record.fetchedAt))) continue
+      if (prior?.status === 'extracted') {
+        if (Date.parse(prior.fetchedAt) === Date.parse(record.fetchedAt) && prior.evidenceHash !== record.evidenceHash) throw new Error('feed_ambiguous_observation')
+        if (!preserveScopedFields(prior, record)) {
+          held.push({ id: record.id, errorCode: 'incomplete_evidence_scope' })
+          continue
+        }
+      }
       records.set(record.id, record)
     } catch { rejected.push({ id: typeof input?.id === 'string' && idPattern.test(input.id) ? input.id : null, errorCode: 'invalid_feed_record' }) }
   }
-  return { records: [...records.values()], rejected }
+  return { records: [...records.values()], rejected, held }
+}
+
+// Retain independently attributable facts only on the same identified offering.
+// Literal start dates must establish the same dated cohort before a prior
+// admission condition can be reused. A capture timestamp is never an intake.
+function preserveScopedFields(prior, record) {
+  const normalized = value => value?.normalize('NFKC').toLowerCase().replace(/\s+/gu, ' ').trim()
+  if (normalized(prior.name) !== normalized(record.name) || normalized(prior.schoolName) !== normalized(record.schoolName)) throw new Error('feed_changed_identity')
+  for (const [key, value] of Object.entries(record.fields)) {
+    if (/^(?:TBA|TBD|N\/?A|unknown|not (?:provided|announced)|to be (?:confirmed|announced)|[-–—])$/iu.test(value)) {
+      delete record.fields[key]
+      if (record.fieldEvidence) delete record.fieldEvidence[key]
+    }
+  }
+  if (['language', 'degree', 'startDate', 'deadline'].some(key =>
+    prior.fields[key] && record.fields[key] && normalized(prior.fields[key]) !== normalized(record.fields[key]))) return true
+  const sameDocument = prior.evidenceHash === record.evidenceHash
+  const datedStart = prior.fields.startDate && /\b(?:19|20)\d{2}\b/.test(prior.fields.startDate)
+    && normalized(prior.fields.startDate) === normalized(record.fields.startDate)
+  const sameTrack = ['degree', 'language'].every(k => prior.fields[k] && record.fields[k]
+    && normalized(prior.fields[k]) === normalized(record.fields[k]))
+  const missing = Object.keys(prior.fields).filter(key => !record.fields[key])
+  // A sparse observation without a provable cohort is still archived. Keep
+  // the older entire projection (including its actual observation date) until
+  // the new fields can be attributed; do not restamp or combine both scopes.
+  if (missing.length && ((!sameDocument && !(datedStart && sameTrack)) || missing.some(key => !prior.fieldEvidence?.[key]))) return false
+  for (const [field, value] of Object.entries(prior.fields)) {
+    if (record.fields[field] || !prior.fieldEvidence?.[field]) continue
+    if (!sameDocument && !(datedStart && sameTrack)) continue
+    record.fields[field] = value
+    const quote = prior.fieldEvidence[field]
+    const evidenceHash = quote.evidenceHash || prior.evidenceHash
+    const archiveSha256 = quote.archiveSha256 || (prior.archiveSha256 === evidenceHash ? prior.archiveSha256 : undefined)
+    record.fieldEvidence ??= {}
+    record.fieldEvidence[field] = { ...quote, sourceUrl: quote.sourceUrl || prior.sourceUrl, fetchedAt: quote.fetchedAt || prior.fetchedAt,
+      evidenceHash, ...(archiveSha256 ? { archiveSha256 } : {}) }
+  }
+  return true
 }
 
 function sanitizeReceipt(row) {
@@ -170,11 +238,38 @@ function sanitizeReceipt(row) {
   for (const key of ['status', 'bytes']) if (Number.isSafeInteger(row[key]) && row[key] >= 0) result[key] = row[key]
   if (row.fetchedAt && instant(row.fetchedAt)) result.fetchedAt = row.fetchedAt
   if (hashPattern.test(row.rawSha256 || '')) result.rawSha256 = row.rawSha256
+  if (result.rawSha256 && row.archiveSha256 === result.rawSha256) result.archiveSha256 = row.archiveSha256
   if (typeof row.errorCode === 'string' && /^[a-z0-9_-]{1,120}$/i.test(row.errorCode)) result.errorCode = row.errorCode
   return result
 }
 
-export function writeProgramFeed(root, { records, state = emptyProgress(), receipts = [], generatedAt }) {
+function saveIndexShards(root, indexRows) {
+  const shards = []
+  let rows = []
+  const emptyBytes = encode({ schemaVersion: 1, programs: [] }).length
+  let bytes = emptyBytes
+  const flush = () => {
+    if (!rows.length) return
+    const body = encode({ schemaVersion: 1, programs: rows })
+    const hash = sha256(body)
+    const part = { path: `indexes/${hash}.json`, sha256: hash, bytes: body.length, count: rows.length }
+    saveImmutable(root, part.path, body)
+    shards.push(part)
+    rows = []
+    bytes = emptyBytes
+  }
+  for (const row of indexRows) {
+    const rowBytes = Buffer.byteLength(canonicalJson(row))
+    if (emptyBytes + rowBytes > MAX_INDEX_BYTES) throw new Error('feed_single_index_row_too_large')
+    if (rows.length >= MAX_INDEX_RECORDS || bytes + Number(rows.length > 0) + rowBytes > MAX_INDEX_BYTES) flush()
+    bytes += Number(rows.length > 0) + rowBytes
+    rows.push(row)
+  }
+  flush()
+  return shards
+}
+
+export function writeProgramFeed(root, { records, state = emptyProgress(), receipts = [], generatedAt, publicIndex = false }) {
   mkdirSync(root, { recursive: true })
   assertPublicState(state)
   const progress = encode(state)
@@ -193,20 +288,7 @@ export function writeProgramFeed(root, { records, state = emptyProgress(), recei
     row.fields = Object.fromEntries(basicFields.filter(key => program.fields[key] !== undefined).map(key => [key, program.fields[key]]))
     return { ...row, detail }
   })
-  const indexShards = []
-  let batch = []
-  const flush = () => {
-    if (!batch.length) return
-    const body = encode({ schemaVersion: 1, programs: batch }), hash = sha256(body)
-    const descriptor = { path: `indexes/${hash}.json`, sha256: hash, bytes: body.length, count: batch.length }
-    saveImmutable(root, descriptor.path, body); indexShards.push(descriptor); batch = []
-  }
-  for (const row of indexRows) {
-    if (batch.length && (batch.length >= MAX_INDEX_RECORDS || encode({ schemaVersion: 1, programs: [...batch, row] }).length > MAX_INDEX_BYTES)) flush()
-    batch.push(row)
-    if (encode({ schemaVersion: 1, programs: batch }).length > MAX_INDEX_BYTES) throw new Error('feed_single_index_row_too_large')
-  }
-  flush()
+  const indexShards = saveIndexShards(root, indexRows)
   const counts = { programCount: programs.length, capturedCount: programs.filter(p => p.status === 'extracted').length,
     schoolCount: new Set(programs.map(p => p.schoolId)).size, sourceCount: new Set(programs.map(p => p.sourceUrl)).size }
   const stateDescriptor = { path: 'state/progress.json', sha256: sha256(progress), bytes: progress.length }
@@ -217,6 +299,15 @@ export function writeProgramFeed(root, { records, state = emptyProgress(), recei
   const timestamp = generatedAt || state.updatedAt || programs.map(p => p.fetchedAt || p.sourceUpdatedAt).filter(Boolean).sort().at(-1) || new Date().toISOString()
   if (!instant(timestamp)) throw new Error('feed_timestamp_invalid')
   const manifest = { schemaVersion: 1, revision: feedRevision(counts, indexShards), generatedAt: timestamp, official: false, counts, indexShards, state: stateDescriptor }
+  if (state.monitor) manifest.monitor = { eligibleWindowsWithoutGrowth: state.monitor.eligibleWindowsWithoutGrowth, reason: state.monitor.reason }
+  if (publicIndex) {
+    const captured = indexRows.filter(row => row.status === 'extracted')
+    const withheld = captured.filter(programWithdrawalReason).map(row => row.id)
+    const visible = captured.filter(row => !programWithdrawalReason(row))
+    const publication = { version: 1, sourceRevision: manifest.revision, visibleCount: visible.length,
+      withdrawnIds: withheld, indexShards: saveIndexShards(root, visible), quality: profileCapturedPrograms(programs) }
+    manifest.publication = { ...publication, revision: sha256(canonicalJson(publication)) }
+  }
   writeFileSync(safePath(root, 'manifest.json'), encode(manifest))
   return manifest
 }

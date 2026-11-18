@@ -130,6 +130,17 @@ test('unknown DO keys fail explicitly instead of silently producing a partial ma
   } finally { f.db.sqlite.close() }
 })
 
+test('migration round-trips shared translation permits and uncertain outcomes with exact digest fences', async () => {
+  const source = fixture('source'), target = fixture('target')
+  try {
+    const entries = [[`translation:${'1'.repeat(64)}`, 'unknown'], [`translation:${'2'.repeat(64)}`, crypto.randomUUID()]]
+    for (const [key, value] of entries) await source.storage.put(key, value)
+    const data = await exported(source)
+    await importAll(target, data)
+    for (const [key, value] of entries) assert.equal(await target.storage.get(key), value)
+  } finally { source.db.sqlite.close(); target.db.sqlite.close() }
+})
+
 test('a malformed existing gate cannot roll back the durable source freeze', async () => {
   const f = fixture('source')
   try {

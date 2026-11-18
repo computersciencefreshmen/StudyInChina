@@ -6,8 +6,12 @@ import { pathToFileURL } from 'node:url'
 import { canonicalJson, loadProgramFeed } from '../ingestion/program-catalog-feed.mjs'
 import { assertFeedCheckout } from '../ingestion/harvest-program-catalog.mjs'
 import { TRANSLATION_FIELDS, TRANSLATION_LOCALES, TRANSLATION_VERSION, translationKey, translationPath,
-  protectTranslationText, restoreTranslationText, sourceIsTargetLanguage, validateTranslationRecord } from '../../src/lib/program-translation-contract.ts'
+  programTranslationSource, protectTranslationText, restoreTranslationText, sourceIsTargetLanguage, validateTranslationRecord } from '../../src/lib/program-translation-contract.ts'
 import { readTranslationQuota, translateMaskedBatch } from './minimax-translation-provider.ts'
+import { pushCatalogCheckpoint } from '../ingestion/push-catalog-checkpoint.mjs'
+import { reviewTranslationBacklog, candidatePath } from './review-program-translations.mjs'
+import { needsEnglishTitle, publicOfficialTitles } from './official-title-records.ts'
+import { programWithdrawalReason } from '../../src/lib/program-publication-policy.mjs'
 
 const hash = text => createHash('sha256').update(text).digest('hex')
 const read = path => { try { return JSON.parse(readFileSync(path, 'utf8')) } catch { return null } }
@@ -44,7 +48,7 @@ export function splitTranslationSource(source, maximum = 6000) {
   return result.length ? result : [source]
 }
 
-export function buildTranslationUnits(records) {
+export function buildTranslationUnits(records, locales = TRANSLATION_LOCALES, fields = TRANSLATION_FIELDS) {
   const units = new Map(), groups = new Map()
   for (const row of records) if (row.status === 'extracted') {
     const group = groups.get(row.schoolId) || []; group.push(row); groups.set(row.schoolId, group)
@@ -62,10 +66,10 @@ export function buildTranslationUnits(records) {
   }
   // Finish useful English/Chinese coverage first, then other supported languages.
   for (const phase of [['zh', 'en'], TRANSLATION_LOCALES.filter(locale => locale !== 'zh' && locale !== 'en')]) {
-    for (const field of TRANSLATION_FIELDS) for (const row of ordered) {
-      const source = row.fields?.[field]
-      if (typeof source !== 'string' || !source.trim()) continue
-      for (const locale of phase) {
+    for (const field of fields) for (const row of ordered) {
+      for (const locale of phase.filter(locale => locales.includes(locale))) {
+        const source = programTranslationSource(row, field, locale)
+        if (typeof source !== 'string' || !source.trim()) continue
         const chunks = splitTranslationSource(source)
         const children = chunks.length > 1 ? chunks.map(chunk => add(chunk, locale, field, row.schoolId)) : null
         add(source, locale, field, row.schoolId, children)
@@ -86,36 +90,38 @@ export function checkpointTranslations(root) {
   git(['add', '--all', '--', 'translations'])
   if (!git(['diff', '--cached', '--name-only'])) return false
   git(['-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-m', 'Checkpoint cached program translations'])
-  // One serialized data writer; a failed push stops work, never force-pushes.
-  git(['push', 'origin', 'HEAD:refs/heads/catalog-program-feed'])
+  pushCatalogCheckpoint(git, 'translation')
   return true
 }
 
 export async function runProgramTranslations({ feedDir, records, maxCalls = 120, concurrency = 8, maxMinutes = 8,
   environment = process.env, now = Date.now, quota = readTranslationQuota, translate = translateMaskedBatch,
-  checkpoint = checkpointTranslations } = {}) {
+  checkpoint = checkpointTranslations, factPolicy = 'literal-v2', locales = TRANSLATION_LOCALES, fields = TRANSLATION_FIELDS, writeStatus = true } = {}) {
   if (!Number.isSafeInteger(maxCalls) || maxCalls < 1 || maxCalls > 240 || !Number.isSafeInteger(concurrency)
     || concurrency < 1 || concurrency > 8 || !Number.isFinite(maxMinutes) || maxMinutes < 0.1 || maxMinutes > 9) throw new Error('translation_batch_bounds_invalid')
   const root = resolve(feedDir), startedAt = new Date(now()).toISOString(), deadlineAt = now() + maxMinutes * 60_000
   if (!records) { assertFeedCheckout(root); records = loadProgramFeed(root).records }
-  const units = buildTranslationUnits(records), completed = new Map(), queued = [], rejectedAssemblies = new Set()
+  const units = buildTranslationUnits(records, locales, fields), completed = new Map(), queued = [], rejectedAssemblies = new Set()
   const summary = { schemaVersion: 1, version: TRANSLATION_VERSION, startedAt, updatedAt: startedAt, state: 'running',
-    modelCalls: 0, inputTokens: 0, outputTokens: 0, published: 0, reused: 0, copiedSource: 0,
+    modelCalls: 0, inputTokens: 0, outputTokens: 0, published: 0, preparedCandidates: 0, reused: 0, copiedSource: 0,
     pendingUniqueUnits: 0, blockedUnknownUnits: 0, failedUnits: 0, completedByLocale: Object.fromEntries(TRANSLATION_LOCALES.map(locale => [locale, 0])), quota: null, lastProviderError: null }
   const entry = unit => resolve(root, translationPath(unit.source, unit.locale))
   const record = (unit, text, method, model) => ({ schemaVersion: 1, version: TRANSLATION_VERSION, key: unit.key,
-    sourceHash: hash(unit.source), targetLocale: unit.locale, text, method, model, translatedAt: new Date(now()).toISOString(), validation: 'passed' })
+    sourceHash: hash(unit.source), targetLocale: unit.locale, text, method, model, translatedAt: new Date(now()).toISOString(), validation: 'passed',
+    ...(method === 'minimax' && factPolicy && { factPolicy }) })
   const accept = (unit, value, fresh = true) => {
     const checked = validateTranslationRecord(value, unit.source, unit.locale)
     if (!checked) throw new Error('translation_validation_rejected')
     if (fresh) {
-      const path = entry(unit)
+      const path = checked.method === 'source' ? entry(unit) : resolve(root, candidatePath(unit.source, unit.locale))
       if (existsSync(path)) {
         const prior = validateTranslationRecord(read(path), unit.source, unit.locale)
         if (!prior) throw new Error('translation_existing_entry_invalid')
         completed.set(unit.key, prior); return
       }
-      save(path, checked); summary.published++
+      save(path, checked)
+      if (checked.method === 'source') summary.published++
+      else summary.preparedCandidates++
     } else summary.reused++
     completed.set(unit.key, checked); summary.completedByLocale[unit.locale]++
   }
@@ -134,15 +140,19 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
     }
   }
   for (const unit of units) {
-    const prior = validateTranslationRecord(read(entry(unit)), unit.source, unit.locale)
+    const legacy = read(entry(unit))
+    if (legacy?.validation === 'quarantined') { summary.failedUnits++; continue }
+    const prior = validateTranslationRecord(legacy, unit.source, unit.locale)
+      || validateTranslationRecord(read(resolve(root, candidatePath(unit.source, unit.locale))), unit.source, unit.locale)
     if (prior) { accept(unit, prior, false); continue }
     if (unit.children) continue
     if (sourceIsTargetLanguage(unit.source, unit.locale)) { accept(unit, record(unit, unit.source, 'source', null)); summary.copiedSource++; continue }
-    const protection = protectTranslationText(unit.source)
+    const protection = protectTranslationText(unit.source, factPolicy || undefined)
     // All-critical clauses stay verbatim; there is no useful model work to buy.
     if (!protection.text.replace(/__SC_\d{6}__/g, '').replace(/[^\p{L}]/gu, '')) { accept(unit, record(unit, unit.source, 'source', null)); summary.copiedSource++; continue }
     const reservation = read(resolve(root, reservationPath(unit)))
     if (reservation && ['reserved', 'unknown'].includes(reservation.state)) { summary.blockedUnknownUnits++; continue }
+    if (reservation?.state === 'admission_wait' && Date.parse(reservation.retryAt) > now()) continue
     if (reservation?.state === 'failed') {
       // Upgrade only known output-quality failures. A legacy reservation or
       // unknown transport outcome is never converted into permission to replay.
@@ -157,7 +167,12 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
   }
   aggregate()
   const pending = () => units.filter(unit => !completed.has(unit.key)).length
-  const flush = () => { summary.pendingUniqueUnits = pending(); summary.updatedAt = new Date(now()).toISOString(); save(resolve(root, 'translations/status.json'), summary); return checkpoint(root) }
+  const flush = () => {
+    summary.pendingUniqueUnits = pending()
+    summary.updatedAt = new Date(now()).toISOString()
+    if (writeStatus) save(resolve(root, 'translations/status.json'), summary)
+    return checkpoint(root)
+  }
   flush()
   const perLocale = new Map(TRANSLATION_LOCALES.map(locale => [locale, []]))
   for (const unit of queued) {
@@ -206,6 +221,14 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
         response = await translate({ key: environment.MINIMAX_SUBSCRIPTION_KEY, locale: batch.locale,
           items: batch.units.map(unit => ({ key: unit.key, text: unit.protection.text })), signal: AbortSignal.timeout(90_000) })
       } catch (error) {
+        if (error?.code === 'translation_admission_wait' && error?.outcome === 'not_sent') {
+          summary.modelCalls--
+          for (const unit of batch.units) save(resolve(root, reservationPath(unit)), { schemaVersion: 1, key: unit.key, locale: unit.locale,
+            ...journalPolicy(unit), state: 'admission_wait', policyAttempts: Math.max(0, unit.policyAttempts - 1),
+            attempts: Math.max(0, unit.attempts - 1), retryAt: error.retryAfter, code: error.code })
+          summary.state = 'provider_wait'; summary.lastProviderError = error.code; stop = true
+          return
+        }
         // A provider can report charged usage even when its generated JSON is
         // unusable. Preserve measured usage, without inventing unknown usage or
         // counting it twice when our later fact validation rejected the text.
@@ -253,10 +276,42 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), option = name => { const i = args.indexOf(name); return i < 0 ? undefined : args[i + 1] }
   if (!args.includes('--execute') || !option('--feed-dir')) throw new Error('translation_execute_and_feed_dir_required')
-  const result = await runProgramTranslations({ feedDir: option('--feed-dir'), maxCalls: Number(option('--max-calls') || 120),
-    concurrency: Number(option('--concurrency') || 8), maxMinutes: Number(option('--max-minutes') || 8) })
+  const root = resolve(option('--feed-dir')), maxCalls = Number(option('--max-calls') || 120)
+  const maxMinutes = Number(option('--max-minutes') || 8), concurrency = Number(option('--concurrency') || 8)
+  if (!Number.isFinite(maxMinutes) || maxMinutes < 0.1 || maxMinutes > 9 || !Number.isSafeInteger(maxCalls)
+    || maxCalls < 1 || maxCalls > 240 || !Number.isSafeInteger(concurrency) || concurrency < 1 || concurrency > 8)
+    throw new Error('translation_batch_bounds_invalid')
+  assertFeedCheckout(root)
+  const records = loadProgramFeed(root).records.filter(row => row.status === 'extracted' && !programWithdrawalReason(row))
+  const deadline = Date.now() + maxMinutes * 60_000
+  const minutesLeft = () => (deadline - Date.now()) / 60_000
+  const titleRecords = [...publicOfficialTitles().filter(row => !row.hasEnglishTitle),
+    ...records.filter(row => needsEnglishTitle(row.name))]
+  const titleOptions = { root, feedDir: root, records: titleRecords, fields: ['title'], locales: ['en'], concurrency,
+    writeStatus: false, deadline, checkpoint: checkpointTranslations }
+  const titleReview = await reviewTranslationBacklog({ ...titleOptions, maxCalls: Math.max(1, Math.floor(maxCalls / 8)) })
+  const mayContinue = state => ['complete', 'review_checkpoint', 'checkpoint_complete'].includes(state)
+  const titleGeneration = mayContinue(titleReview.state) && maxCalls > titleReview.modelCalls && minutesLeft() > 1.6
+    ? await runProgramTranslations({ ...titleOptions, maxCalls: 1, maxMinutes: minutesLeft() }) : null
+  const titleCalls = titleReview.modelCalls + (titleGeneration?.modelCalls || 0)
+  const fields = TRANSLATION_FIELDS.filter(field => field !== 'title')
+  const detailReview = maxCalls > titleCalls && mayContinue(titleReview.state) && (!titleGeneration || mayContinue(titleGeneration.state))
+    ? await reviewTranslationBacklog({ root, records, fields, maxCalls: maxCalls - titleCalls, deadline, concurrency, checkpoint: checkpointTranslations }) : null
+  const review = { ...titleReview, state: detailReview?.state ?? titleGeneration?.state ?? titleReview.state }
+  for (const metric of ['modelCalls', 'approved', 'revise', 'blocked', 'unknown', 'inputTokens', 'outputTokens']) review[metric] += detailReview?.[metric] || 0
+  const available = maxCalls - titleCalls - (detailReview?.modelCalls || 0)
+  const generate = detailReview?.state === 'complete' && available > 0 && minutesLeft() > 1.6
+    ? await runProgramTranslations({ feedDir: root, records, fields, maxCalls: available, concurrency, maxMinutes: minutesLeft() }) : null
+  const result = { ...generate, state: generate?.state ?? review.state, review, englishTitles: { review: titleReview, generation: titleGeneration },
+    startedAt: review.startedAt, updatedAt: new Date().toISOString(),
+    published: (generate?.published || 0) + review.approved,
+    modelCalls: (generate?.modelCalls || 0) + (titleGeneration?.modelCalls || 0) + review.modelCalls,
+    inputTokens: (generate?.inputTokens || 0) + (titleGeneration?.inputTokens || 0) + review.inputTokens,
+    outputTokens: (generate?.outputTokens || 0) + (titleGeneration?.outputTokens || 0) + review.outputTokens }
+  save(resolve(root, 'translations/status.json'), result)
+  checkpointTranslations(root)
   console.log(JSON.stringify(result))
   if (process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY,
-    `Translation checkpoint: ${result.published} new entries, ${result.modelCalls} model calls, ${result.pendingUniqueUnits} pending; state ${result.state}.\n`, { flag: 'a' })
+    `Translation checkpoint: ${review.approved} reviews approved, ${review.revise} revisions, ${review.blocked} blocked, ${result.modelCalls} model calls. State ${result.state}.\n`, { flag: 'a' })
   if (result.state === 'missing_subscription_key') process.exitCode = 1
 }

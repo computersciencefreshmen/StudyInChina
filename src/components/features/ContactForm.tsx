@@ -7,7 +7,7 @@ import Script from 'next/script'
 import { Button } from '@/components/ui'
 import type { Messages } from '@/i18n/messages'
 
-export function ContactForm({ messages, siteKey }: { messages: Messages; siteKey?: string }) {
+export function ContactForm({ messages, siteKey, program }: { messages: Messages; siteKey?: string; program?: { id: string; name: string } }) {
   const [state, setState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const configured = Boolean(siteKey)
 
@@ -17,17 +17,17 @@ export function ContactForm({ messages, siteKey }: { messages: Messages; siteKey
     if (!token) { setState('error'); return }
     setState('sending')
     try {
-      const response = await fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ category: values.get('category'), message: values.get('message'), sourceUrl: values.get('sourceUrl') || undefined, replyEmail: values.get('replyEmail') || undefined, pageUrl: window.location.href, consent: values.get('consent') === 'on', turnstileToken: token, website: values.get('website') || '' }) })
+      const response = await fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ category: program ? 'program-inquiry' : values.get('category'), recordId: program?.id, message: values.get('message'), sourceUrl: values.get('sourceUrl') || undefined, replyEmail: values.get('replyEmail') || undefined, pageUrl: window.location.origin + window.location.pathname, consent: values.get('consent') === 'on', turnstileToken: token, website: values.get('website') || '' }) })
       if (!response.ok) throw new Error('feedback failed')
       setState('success'); form.reset()
     } catch { setState('error') }
   }
 
   return <form className="form-stack" onSubmit={submit}>
-    <div className="field"><label htmlFor="feedback-category">{messages.contact.category}</label><RoundedSelect id="feedback-category" name="category" required defaultValue="incorrect-data"><option value="incorrect-data">{messages.contact.incorrect}</option><option value="broken-link">{messages.contact.broken}</option><option value="suggest-program">{messages.contact.suggest}</option><option value="other">{messages.contact.other}</option></RoundedSelect></div>
+    {program ? <p><strong>{program.name}</strong></p> : <div className="field"><label htmlFor="feedback-category">{messages.contact.category}</label><RoundedSelect id="feedback-category" name="category" required defaultValue="incorrect-data"><option value="incorrect-data">{messages.contact.incorrect}</option><option value="broken-link">{messages.contact.broken}</option><option value="suggest-program">{messages.contact.suggest}</option><option value="other">{messages.contact.other}</option></RoundedSelect></div>}
     <div className="field"><label htmlFor="feedback-message">{messages.contact.message}</label><textarea id="feedback-message" name="message" required maxLength={2000} /></div>
     <div className="field"><label htmlFor="feedback-source">{messages.contact.source}</label><input id="feedback-source" name="sourceUrl" type="url" inputMode="url" placeholder="https://" /></div>
-    <div className="field"><label htmlFor="feedback-email">{messages.contact.email}</label><input id="feedback-email" name="replyEmail" type="email" autoComplete="email" /></div>
+    <div className="field"><label htmlFor="feedback-email">{messages.contact.email}</label><input id="feedback-email" name="replyEmail" type="email" autoComplete="email" required={Boolean(program)} /></div>
     <div className="honeypot" aria-hidden="true"><label htmlFor="feedback-website">Website</label><input id="feedback-website" name="website" tabIndex={-1} autoComplete="off" /></div>
     <label className="checkbox-field"><input name="consent" type="checkbox" required /><span>{messages.contact.consent}</span></label>
     {configured ? <><Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" /><div className="cf-turnstile" data-sitekey={siteKey} data-theme="light" /></> : <div className="notice">{messages.contact.configurationNote}</div>}

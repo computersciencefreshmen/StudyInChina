@@ -166,8 +166,30 @@ export async function importFieldCandidates(options: {
         if (!validateFieldVerification(validBundle, verification, today)) throw new Error(`field_value_or_window_invalid:${patch.fieldPath}`)
         proposalEntries.push(verification)
       }
+      for (const observation of proposalEntries) {
+        const otherDocumentDisagrees = [...entries, ...staged].some(prior =>
+          prior.entityType === entityType && prior.recordId === record.id && prior.fieldPath === observation.fieldPath
+          && prior.recordScopeSha256 === observation.recordScopeSha256 && prior.sourceUrl !== observation.sourceUrl
+          && Boolean(validateFieldVerification(bundle, prior, today))
+          && (prior.valueSha256 !== observation.valueSha256 || prior.factStatus !== observation.factStatus))
+        if (otherDocumentDisagrees) {
+          observation.observationOnly = true
+          // Keep the prior canonical value and both independently reviewed sources.
+          // Public projection withholds this field until the disagreement is resolved.
+          const previous = currentField(record, observation.fieldPath)
+          const list = entityType === 'program' ? validBundle.programs : entityType === 'admissionCycle' ? validBundle.admissionCycles : validBundle.scholarships
+          setField(list.find(row => row.id === record.id)!, observation.fieldPath, previous)
+        }
+      }
       if (proposal.review!.method === 'independent_model') {
         for (const patch of fields.patches) {
+          if (proposalEntries.some(row => row.fieldPath === patch.fieldPath && row.observationOnly)) continue
+          const resolvesDisagreement = [...entries, ...staged].some(old => old.observationOnly
+            && old.recordScopeSha256 === fields.recordScopeSha256 && old.fieldPath === patch.fieldPath
+            && old.sourceUrl === proposal.source.url && old.verifiedAt < proposal.source.checkedAt
+            && currentField(record, patch.fieldPath) !== undefined
+            && fieldValueSha256(currentField(record, patch.fieldPath)) === fieldValueSha256(patch.value))
+          if (resolvesDisagreement) continue
           const humanReviewed = [...entries, ...staged].some(entry => entry.entityType === entityType
             && entry.recordId === record.id && entry.fieldPath === patch.fieldPath && entry.review.method === 'independent')
           const reason = automaticFieldPatchHoldReason(currentField(record, patch.fieldPath), patch.value, humanReviewed)
@@ -184,7 +206,8 @@ export async function importFieldCandidates(options: {
   const receipt = { ...content, sha256: digest(content) }
   for (const entry of staged) {
     entry.receiptSha256 = receipt.sha256
-    const index = entries.findIndex(old => old.entityType === entry.entityType && old.recordId === entry.recordId && old.fieldPath === entry.fieldPath)
+    const index = entries.findIndex(old => old.entityType === entry.entityType && old.recordId === entry.recordId
+      && old.fieldPath === entry.fieldPath && old.sourceUrl === entry.sourceUrl)
     if (index < 0) entries.push(entry); else entries[index] = entry
   }
   return { bundle, entries, receipt, replayed: false }

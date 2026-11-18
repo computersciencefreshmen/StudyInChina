@@ -54,7 +54,7 @@ describe('independent HKBU 2027 full-time non-local core review', () => {
       expect(entry.verifiedName).toEqual({ en: program.name.en })
     }
     expect(identities.filter(entry => ids.has(entry.recordId))).toHaveLength(5)
-    expect((await validateDirectory(ROOT, TODAY)).integrityPassed).toBe(true)
+    expect((await validateDirectory(ROOT)).integrityPassed).toBe(true)
   }, 30_000)
 
   it('uses five actual degree identities with exact original source hashes, explicit 2027 entry and portal anchors', () => {

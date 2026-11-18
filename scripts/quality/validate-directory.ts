@@ -8,7 +8,7 @@ import { selectDiscoveryData } from '../../src/lib/data/discovery'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { hasRequiredProgramNameScope, identityAcceptanceLedgerSchema, identityFingerprint, canonicalIdentityJson, scopedNameReceiptMatches, verifiedNameMatchesRecord, verifiedSourceUrlMatchesRecord } from '../../src/lib/data/identity-acceptance'
 import type { Program } from '../../src/lib/data/types'
-import { fieldVerificationLedgerSchema, fieldVerificationContentSha256, validateFieldVerification } from '../../src/lib/data/field-verification'
+import { fieldVerificationLedgerSchema, fieldVerificationContentSha256, validateFieldObservation, validateFieldVerification } from '../../src/lib/data/field-verification'
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { getApplicationState } from '../../src/lib/data/admission'
 
@@ -51,12 +51,17 @@ export async function validateDirectory(root: string, today = getTodayDate()) {
   }
   const fieldKeys = new Set<string>()
   for (const entry of fields) {
-    const key = `${entry.entityType}:${entry.recordId}:${entry.fieldPath}`
+    const key = JSON.stringify([entry.entityType, entry.recordId, entry.fieldPath, entry.sourceUrl])
     if (fieldKeys.has(key)) throw new Error('directory_duplicate_field_acceptance')
     fieldKeys.add(key)
     const verifiedDay = getTodayDate(new Date(entry.verifiedAt))
     // An expired historical receipt can remain intact, but cannot regain current visibility.
-    if (verifiedDay > today || !validateFieldVerification(bundle, entry, verifiedDay)) throw new Error('directory_field_binding_invalid')
+    if (verifiedDay > today || !validateFieldObservation(bundle, entry, verifiedDay)) throw new Error('directory_field_binding_invalid')
+    if (!entry.observationOnly && !validateFieldVerification(bundle, entry, verifiedDay)) {
+      const superseded = fields.some(other => other.recordScopeSha256 === entry.recordScopeSha256 && other.fieldPath === entry.fieldPath
+        && other.verifiedAt > entry.verifiedAt && validateFieldVerification(bundle, other, getTodayDate(new Date(other.verifiedAt))))
+      if (!superseded) throw new Error('directory_field_binding_invalid')
+    }
     const content = checkedReceipt(entry.receiptPath, entry.receiptSha256, 'field')
     const acceptedAt = typeof content.acceptedAt === 'string' ? new Date(content.acceptedAt) : undefined
     if (content.format !== 'studyinchina.field-import-receipt' || content.formatVersion !== 1

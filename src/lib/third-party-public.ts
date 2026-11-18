@@ -16,7 +16,7 @@ export function publicThirdPartyProgram(program: ThirdPartyProgram, detail = fal
     status: program.status,
     official: false,
     admissionYear: null,
-    ...(detail ? { evidenceHash: program.evidenceHash } : {}),
+    ...(detail ? { evidenceHash: program.evidenceHash, fieldSources: program.fieldSources } : {}),
     fields: {
       degree: fields.degree,
       language: fields.language,

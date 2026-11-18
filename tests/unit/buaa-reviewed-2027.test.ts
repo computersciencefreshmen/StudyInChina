@@ -56,7 +56,7 @@ describe('independent BUAA 2027 source-backed core review', () => {
       expect(content.fieldBindings).toContainEqual({ entityType: entry.entityType, recordId: entry.recordId,
         fieldPath: entry.fieldPath, verificationSha256: fieldVerificationContentSha256(entry) })
     }
-    expect((await validateDirectory(root, TODAY)).integrityPassed).toBe(true)
+    expect((await validateDirectory(root)).integrityPassed).toBe(true)
   }, 30_000) // This exercises the complete real catalogue and receipt chain.
 
   it.each(['identity-format', 'missing-accepted-path', 'missing-entity-type', 'changed-leaf-binding'])(

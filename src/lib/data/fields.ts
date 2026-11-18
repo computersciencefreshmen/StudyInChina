@@ -1,6 +1,6 @@
 import visualMediaSearch from '../../../content/collections/visual-media-catalog-search.json'
 import type { Locale } from '@/i18n/config'
-import { localize } from './format'
+import { findReviewedProgramTranslation, localize } from './format'
 import type { LocalizedText, Program } from './types'
 
 const PROGRAM_FIELD_KEYS = [
@@ -275,5 +275,6 @@ export function classifyProgramField(program: Pick<Program, 'name' | 'degreeLeve
 export function programSearchKeywords(program: Program): readonly string[] {
   const chinese = classifyProgramField(program) === 'chinese-language' ? CHINESE_LANGUAGE_SEARCH_KEYWORDS : []
   const visual = visualMediaSearch.find(entry => entry.programId === program.id)?.keywords ?? []
-  return [...chinese, ...visual]
+  const english = program.name.zh && findReviewedProgramTranslation(program.name.zh, 'en')
+  return [...chinese, ...visual, ...(english && english !== program.name.en ? [english] : [])]
 }
