@@ -1,6 +1,15 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { readTranslationQuota, translateMaskedBatch, TranslationProviderError, TRANSLATION_MODEL } from './minimax-translation-provider'
+import { acquireTranslationPermit } from './shared-admission'
+
+test('shared admission reports only known wait reasons, preserving the no-send retry and withholding arbitrary worker text', async () => {
+  const environment: NodeJS.ProcessEnv = { NODE_ENV: 'test', CATALOG_MAINTENANCE_URL: 'https://studyinchina-catalog-maintenance.yanghanyu2023.workers.dev', CATALOG_MAINTENANCE_TOKEN: 'test' }
+  for (const [received, expected] of [['translation_lane_disabled', 'translation_lane_disabled'], ['private-response-or-token', 'admission_response_unrecognized']]) {
+    const response = await acquireTranslationPermit('sample', async () => Response.json({ error: received, retryAfter: 45 }, { status: 429 }), environment)
+    assert.deepEqual(response, { state: 'wait', reason: expected, retrySeconds: 45 })
+  }
+})
 
 const KEY = 'synthetic-subscription-key-never-log'
 const NOW = Date.parse('2026-11-17T04:00:00Z')

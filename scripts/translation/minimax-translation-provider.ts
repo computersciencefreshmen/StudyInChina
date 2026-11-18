@@ -40,6 +40,7 @@ export class TranslationProviderError extends Error {
     readonly retryAfter: string | null = null,
     readonly retryable = false,
     readonly usage?: TranslationUsage,
+    readonly admissionReason?: string,
   ) { super(code) }
 }
 
@@ -238,7 +239,8 @@ async function requestMessage<T>(key: string, system: string, data: object, fetc
   // Injected offline transports test provider parsing without touching an account.
   const admission = fetcher === fetch ? await acquireTranslationPermit(wire) : null
   if (admission?.state === 'protected') throw new TranslationProviderError('translation_prior_outcome_protected', 'unknown')
-  if (admission?.state === 'wait') throw new TranslationProviderError('translation_admission_wait', 'not_sent', new Date(Date.now() + admission.retrySeconds * 1000).toISOString(), true)
+  if (admission?.state === 'wait') throw new TranslationProviderError('translation_admission_wait', 'not_sent',
+    new Date(Date.now() + admission.retrySeconds * 1000).toISOString(), true, undefined, admission.reason)
   let outcome: 'received' | 'rate_limited' | 'unknown' | 'not_sent' = 'not_sent', retrySeconds: number | undefined
   const controller = new AbortController()
   const combined = signal ? AbortSignal.any([signal, controller.signal]) : controller.signal
