@@ -43,6 +43,14 @@ const labels: Record<LaunchLocale, {
 }
 
 type SelectOption = { value: string; label: string }
+const incompleteMatch: Record<LaunchLocale, string> = {
+  en: 'Additional listings have insufficient evidence for these filters',
+  zh: '另有以下数量的项目缺少判断当前筛选条件的证据',
+  fr: 'Autres formations dont les informations ne suffisent pas pour ces filtres',
+  de: 'Weitere Angebote mit unzureichenden Angaben für diese Filter',
+  ru: 'Другие программы с недостаточными данными для этих фильтров',
+  es: 'Otros programas con información insuficiente para estos filtros',
+}
 type ProgramFilterKey =
   | 'query'
   | 'degree'
@@ -288,7 +296,9 @@ export function ProgramExplorerV2({
       total={result.total}
       totalExact={result.totalExact}
     />
-    <CatalogPagination
+      {'sourceConditionsUnknown' in result && result.sourceConditionsUnknown > 0 ?
+        <p role="status">{incompleteMatch[locale]} · {result.sourceConditionsUnknown.toLocaleString(locale)}</p> : null}
+      <CatalogPagination
       ariaLabel={text.pagination}
       nextHref={result.page < result.pageCount
         ? programCatalogHref(locale, filters, result.page + 1)

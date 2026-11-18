@@ -58,6 +58,8 @@ jobs:
         working-directory: code
         env:
           MINIMAX_SUBSCRIPTION_KEY: ${{ secrets.MINIMAX_SUBSCRIPTION_KEY }}
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
           MAX_CALLS: ${{ inputs.max_calls || '120' }}
           MODEL_CONCURRENCY: ${{ inputs.concurrency || '8' }}
         run: >-

@@ -24,6 +24,8 @@ import { useFavorites } from './useFavorites'
 import { FavoriteButton } from './FavoriteButton'
 import { CatalogFreshnessNote } from './DataFreshnessPanel'
 import { FollowUpdates } from './FollowUpdates'
+import type { publicThirdPartyProgram } from '@/lib/third-party-public'
+import { consultationLabels, programConsultationHref } from '@/i18n/program-consultation'
 
 type ComparisonItem = {
   program: ProgramRecord
@@ -33,10 +35,13 @@ type ComparisonItem = {
 
 type ComparisonResponse = ApiEnvelope<{
   items: ComparisonItem[]
+  collectedItems?: SavedCollected[]
+  aliases?: Record<string, string>
   missingIds: string[]
 }>
 
-type LoadedComparisonItem = ComparisonItem & { evaluatedForDate?: string }
+type SavedCollected = { savedId: string; record: ReturnType<typeof publicThirdPartyProgram> }
+type LoadedComparisonItem = ComparisonItem & { savedId: string; evaluatedForDate?: string }
 
 type FavoritesExperience = {
   loadError: string
@@ -76,7 +81,7 @@ function safeHttpsUrl(value: string | null | undefined): string | null {
 
 async function fetchComparison(ids: string[], signal: AbortSignal): Promise<ComparisonResponse> {
   const response = await fetch(
-    `/api/v1/programs/compare?view=directory&ids=${encodeURIComponent(ids.join(','))}`,
+    `/api/v1/programs/compare?view=all&ids=${encodeURIComponent(ids.join(','))}`,
     { headers: { Accept: 'application/json' }, cache: 'no-store', signal },
   )
   if (!response.ok) throw new Error(`Comparison request failed with ${response.status}`)
@@ -171,15 +176,18 @@ export function FavoritesView({
   const { favorites, ready } = useFavorites()
   const [selected, setSelected] = useState<string[]>([])
   const [items, setItems] = useState<LoadedComparisonItem[]>([])
+  const [collectedItems, setCollectedItems] = useState<SavedCollected[]>([])
   const [missingIds, setMissingIds] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState(false)
   const [retryKey, setRetryKey] = useState(0)
   const saved = useMemo(
-    () => items.filter(({ program }) => favorites.includes(program.id)),
+    () => items.filter(({ savedId }) => favorites.includes(savedId)),
     [items, favorites],
   )
-  const compared = saved.filter(({ program }) => selected.includes(program.id))
+  const compared = saved.filter(({ savedId }) => selected.includes(savedId))
+  const savedCollected = collectedItems.filter(({ savedId }) => favorites.includes(savedId))
+  const comparedCollected = savedCollected.filter(({ savedId }) => selected.includes(savedId))
   const copy = messages.favorites
   const experience = experienceCopy[locale]
   const trust = getDataTrustCopy(locale)
@@ -231,11 +239,17 @@ export function FavoritesView({
         const returnedItems = responses.flatMap((response) => response.data.items.map(item => ({
           ...item, evaluatedForDate: response.meta?.release?.evaluatedForDate,
         })))
+        const aliases = Object.assign({}, ...responses.map(r => r.data.aliases || {}))
         const byId = new Map(returnedItems.map((item) => [item.program.id, item]))
-        setItems(favorites.flatMap((id) => byId.get(id) ? [byId.get(id)!] : []))
+        const collected = responses.flatMap(r => r.data.collectedItems || [])
+        setCollectedItems(collected)
+        setItems(favorites.flatMap(savedId => {
+          const item = byId.get(aliases[savedId] || savedId)
+          return item ? [{ ...item, savedId }] : []
+        }))
         setMissingIds([
           ...invalidIds,
-          ...favorites.filter((id) => !byId.has(id) && !invalidIds.includes(id)),
+          ...favorites.filter(id => !byId.has(aliases[id] || id) && !collected.some(c => c.savedId === id) && !invalidIds.includes(id)),
         ])
       } catch {
         if (!controller.signal.aborted) setLoadError(true)
@@ -257,7 +271,7 @@ export function FavoritesView({
   if (!ready) return <p aria-live="polite">{copy.loading}</p>
   if (!favorites.length) return <EmptyState title={messages.favorites.empty} description={messages.favorites.localOnly} action={<LinkButton href={`/${locale}/programs`}>{messages.home.explorePrograms}</LinkButton>} />
   if (loadError) return <div className="notice" role="alert"><p>{experience.loadError}</p><Button type="button" variant="secondary" onClick={() => setRetryKey((value) => value + 1)}>{experience.retry}</Button></div>
-  if (loading && saved.length === 0) return <p aria-live="polite">{copy.loading}</p>
+  if (loading && saved.length === 0 && savedCollected.length === 0) return <p aria-live="polite">{copy.loading}</p>
 
   return <div className="atlas-stack" style={{ '--atlas-stack-gap': '3rem' } as React.CSSProperties}>
     {saved.length ? <FollowUpdates locale={locale} bulk targets={saved.map(({ program }) => ({ kind: 'program', id: program.id, label: localize(program.name, locale) }))} /> : null}
@@ -265,13 +279,13 @@ export function FavoritesView({
       <CatalogFreshnessNote locale={locale} today={today} />
       <p className="result-count">{copy.limit} {messages.favorites.localOnly}</p>
       <div className="content-grid">
-        {saved.map(({ program, currentCycle }) => <Card key={program.id} className="record-card">
+        {saved.map(({ program, currentCycle, savedId }) => <Card key={savedId} className="record-card">
           <label className="checkbox-field">
             <input
               type="checkbox"
-              checked={selected.includes(program.id)}
-              disabled={!selected.includes(program.id) && selected.filter((id) => favorites.includes(id)).length >= MAX_COMPARE}
-              onChange={() => toggleCompare(program.id)}
+              checked={selected.includes(savedId)}
+              disabled={!selected.includes(savedId) && selected.filter((id) => favorites.includes(id)).length >= MAX_COMPARE}
+              onChange={() => toggleCompare(savedId)}
             />
             <span>{copy.choose}</span>
           </label>
@@ -287,8 +301,16 @@ export function FavoritesView({
           </div>
           <div className="record-card__actions">
             <LinkButton href={`/${locale}/programs/${program.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>
-            <FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={copy.remove} />
+            <FavoriteButton programId={savedId} saveLabel={messages.common.save} savedLabel={copy.remove} />
           </div>
+        </Card>)}
+        {savedCollected.map(({ savedId, record }) => <Card key={savedId} className="record-card">
+          <label className="checkbox-field"><input type="checkbox" checked={selected.includes(savedId)}
+            disabled={!selected.includes(savedId) && selected.filter(id => favorites.includes(id)).length >= MAX_COMPARE}
+            onChange={() => toggleCompare(savedId)} /><span>{copy.choose}</span></label>
+          <h2 className="record-card__title">{record.name}</h2><p>{record.schoolName} · {record.provider}</p>
+          <div className="record-card__actions"><LinkButton href={`/${locale}/programs/${record.id}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>
+            <FavoriteButton programId={savedId} saveLabel={messages.common.save} savedLabel={copy.remove} /></div>
         </Card>)}
         {missingIds.filter((id) => favorites.includes(id)).map((id) => <Card key={id} className="record-card">
           <h2 className="record-card__title">{experience.unavailable}</h2>
@@ -299,12 +321,22 @@ export function FavoritesView({
         </Card>)}
       </div>
     </div>
-    {compared.length ? <section>
+    {compared.length || comparedCollected.length ? <section>
       <div className="record-card__top">
         <h2>{copy.comparison}</h2>
         <Button className="no-print" variant="ghost" onClick={() => window.print()}>{messages.common.print}</Button>
       </div>
       <div className="compare-grid">
+        {comparedCollected.map(({ savedId, record }) => <Card key={savedId} accent="jade">
+          <h3 className="atlas-card__title">{record.name}</h3>
+          <dl className="compare-facts">{[
+            [copy.university, record.schoolName], [messages.programs.degree, record.fields.degree], [messages.common.language, record.fields.language],
+            [messages.common.duration, record.fields.duration], [messages.common.tuition, record.fields.tuition],
+            [messages.programs.applicationStatus, messages.common.unknown], [decision.currentCycle, messages.common.unknown],
+          ].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value || messages.common.unknown}</dd></div>)}</dl>
+          <div className="record-card__actions">{safeHttpsUrl(record.sourceUrl) ? <a className="text-link" href={record.sourceUrl} target="_blank" rel="noreferrer">{record.provider} ↗</a> : null}
+            <LinkButton href={programConsultationHref(locale, record.id)} variant="secondary" size="small">{consultationLabels[locale]}</LinkButton></div>
+        </Card>)}
         {compared.map(({ program, currentCycle, linkedScholarshipCount, evaluatedForDate }) => {
           const programNeedsReview = !isCurrentVerifiedRecord(program, today)
           const cycleNeedsReview = Boolean(currentCycle && !isCurrentVerifiedRecord(currentCycle, today))

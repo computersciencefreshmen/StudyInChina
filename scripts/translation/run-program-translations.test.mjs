@@ -4,7 +4,8 @@ import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { test } from 'node:test'
 import { buildTranslationUnits, runProgramTranslations, splitTranslationSource } from './run-program-translations.mjs'
-import { translationKey, translationPath } from '../../src/lib/program-translation-contract.ts'
+import { translationKey } from '../../src/lib/program-translation-contract.ts'
+import { candidatePath as translationPath } from './review-program-translations.mjs'
 
 const source = 'Please submit your application documents. IELTS 6.0 is required.'
 const records = [{ id: 'sicas-1', schoolId: 'sicas-1', status: 'extracted', fields: { requirements: source } }]
@@ -20,7 +21,7 @@ const fakeModel = calls => async ({ items, locale }) => {
 }
 const fixture = t => { const root = mkdtempSync(join(tmpdir(), 'sic-translation-')); t.after(() => rmSync(root, { recursive: true, force: true })); return root }
 const options = root => ({ feedDir: root, records, environment: { MINIMAX_SUBSCRIPTION_KEY: 'test-subscription-only' }, maxCalls: 1,
-  concurrency: 1, maxMinutes: 8, quota: allowed, checkpoint: () => true })
+  concurrency: 1, maxMinutes: 8, quota: allowed, checkpoint: () => true, factPolicy: null })
 const journal = (root, original, locale = 'zh') => join(root, 'translations', 'reservations', 'v1', locale, translationKey(original, locale) + '.json')
 const writeJournal = (root, original, value) => {
   const path = journal(root, original)

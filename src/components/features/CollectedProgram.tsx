@@ -6,6 +6,9 @@ import type { ThirdPartyProgram } from '@/lib/third-party-programs'
 import { getProgramTranslations } from '@/lib/program-translations'
 import { Badge, Card, LinkButton, PageHero } from '@/components/ui'
 import { degreeLabels } from '@/lib/data/labels'
+import { FavoriteButton } from './FavoriteButton'
+import { getMessages } from '@/i18n/messages'
+import { consultationLabels, programConsultationHref } from '@/i18n/program-consultation'
 import { publicSourceHref } from './ImportedPrograms'
 import cardStyles from './DecisionRecordCards.module.css'
 import styles from './ImportedPrograms.module.css'
@@ -93,6 +96,7 @@ export function CollectedProgramCard({ item, locale, messages }: { item: Collect
     <p className="record-card__place">{record.provider}{record.fetchedAt ? ` · ${t.captured}: ${record.fetchedAt.slice(0, 10)}` : ''}</p>
     <div className="record-card__actions">
       <LinkButton href={`/${locale}/programs/${encodeURIComponent(record.id)}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>
+      <FavoriteButton programId={record.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
       {publicSourceHref(record.sourceUrl) ? <a className="text-link" href={record.sourceUrl} target="_blank" rel="noopener noreferrer">{t.source} ↗</a> : null}
     </div>
   </Card>
@@ -100,6 +104,7 @@ export function CollectedProgramCard({ item, locale, messages }: { item: Collect
 
 export async function CollectedProgramDetail({ item, locale }: { item: CollectedProgramItem; locale: LaunchLocale }) {
   const record = item.collected, t = programSourceText(locale)
+  const messages = getMessages(locale)
   const translations = await getProgramTranslations(record, locale)
   const facts = ['degree', 'language', 'duration', 'startDate', 'deadline', 'tuition', 'applicationFee', 'providerServiceFee'] as const
   const sections = ['description', 'requirements', 'materials', 'fees'] as const
@@ -107,7 +112,9 @@ export async function CollectedProgramDetail({ item, locale }: { item: Collected
     <PageHero variant="compact" title={record.name} description={record.schoolName}
       eyebrow={record.fields.degree || undefined}
       meta={<><Badge tone="blue">{t.collected}</Badge><span>{record.provider}</span></>}
-      actions={<Link className="text-link" href={`/${locale}/programs`}>← {t.back}</Link>} />
+      actions={<><FavoriteButton programId={record.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
+        <Link className="text-link" href={programConsultationHref(locale, record.id)}>{consultationLabels[locale]}</Link>
+        <Link className="text-link" href={`/${locale}/programs`}>← {t.back}</Link></>} />
     <section className={`atlas-container atlas-section ${styles.workspace}`} data-program-detail data-source-status="source-collected">
       <div className={styles.detailLayout}>
         <div className={styles.detailMain}>

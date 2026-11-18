@@ -1,6 +1,7 @@
 import 'server-only'
 import directoryData from '../../content/third-party/directory.json'
 import detailData from '../../content/third-party/details.json'
+import { programWithdrawalReason } from './program-publication-policy.mjs'
 
 export type ThirdPartyProgram = {
   id: string
@@ -33,12 +34,12 @@ const programs: ThirdPartyProgram[] = directoryData.programs.map(([id, schoolId,
   return { id, schoolId, name, sourceUrl, sourceUpdatedAt: sourceUpdatedAt || undefined,
     provider: school.provider, sourceId: id.replace(/^[^-]+-/, ''), schoolName: school.name,
     status: 'link_only', official: false, admissionYear: null, fields: {} }
-})
+}).filter(program => !programWithdrawalReason(program)) as ThirdPartyProgram[]
 const index = new Map(programs.map(program => [program.id, program]))
 const searchText = new Map(programs.map(program => [program.id, `${program.name} ${program.schoolName} ${program.provider}`.normalize('NFKC').toLowerCase()]))
 
 export function getThirdPartySummary() {
-  return { programCount: programs.length, extractedCount: details.size, schoolCount: schools.length,
+  return { programCount: programs.length, extractedCount: programs.filter(p => p.status === 'extracted').length, schoolCount: schools.length,
     schoolsWithExtractedDetails: schools.filter(school => school.extractedCount > 0).length,
     generatedAt: directoryData.generatedAt, official: false as const }
 }

@@ -1,0 +1,603 @@
+{
+  "format": "studyinchina.official-multischool-review",
+  "version": 1,
+  "evaluatedAt": "2026-11-18T03:04:24.625Z",
+  "reviewer": "codex-official-evidence-review:coverage-pilot-20261118",
+  "baseline": {
+    "publicFeedRevision": "58714f3ba75bb24fb14805711aa46c6546e367038e1f9e978f834b2e3ef1da0c",
+    "observedAt": "2026-11-18T02:02:27.375Z",
+    "counts": {
+      "uni-hong-kong-polytechnic-university": 0,
+      "uni-city-university-of-hong-kong": 0,
+      "uni-hkust-guangzhou": 0
+    }
+  },
+  "inputCatalogSha256": "c353e10f088ed7a09b1b635ed441ed3135fd9f9a27329109c284b426f8a8c453",
+  "outputCatalogSha256": "3762851881feb82e741b1a52f90900fd124b3bdd8ee5392607e147553dd7afde",
+  "sources": {
+    "poly": {
+      "url": "https://www.polyu.edu.hk/study/pg/tpg/2027/62027-dfm-dpm",
+      "sourceId": "src-pilot-poly-20261118",
+      "rawBytes": 84831,
+      "rawSha256": "23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6",
+      "normalizedTextSha256": "ed6c2531a526fcf373e1055c09b1a442bd20f46fc7f28e3bd4c244c3230aeb74",
+      "objectKey": "official/coverage-pilot-20261118/23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6.html"
+    },
+    "polyreq": {
+      "url": "https://www.polyu.edu.hk/study/pg/taught-postgraduate/admission-requirements-tpg",
+      "sourceId": "src-pilot-polyreq-20261118",
+      "rawBytes": 46091,
+      "rawSha256": "8327f43e864ad4fa9bd98edcb5bd932ebab31e3ee15f3d79ed8c6fcb153dc2cb",
+      "normalizedTextSha256": "1caa03c85cb5558c6d58aa1f7303790645c94250c04384dfcfa06bc8d7a566b9",
+      "objectKey": "official/coverage-pilot-20261118/8327f43e864ad4fa9bd98edcb5bd932ebab31e3ee15f3d79ed8c6fcb153dc2cb.html"
+    },
+    "polylang": {
+      "url": "https://www.polyu.edu.hk/edc/-/media/department/edc/content/stay-on-top-of-things/teacher-handbook/teacher-handbook-250829.pdf?hash=B7A265A017B76CE536695656BC693200&rev=17a9364fc3dd4a56827a80f0ebdd3653",
+      "sourceId": "src-pilot-polylang-20261118",
+      "rawBytes": 6457119,
+      "rawSha256": "18649802b375043edc15e8b66e84fa5507879b207fa8e732c991615241a4684d",
+      "normalizedTextSha256": "cb0b5ee1222e653b3b3c89567cc91ff95c0cd909c47e896deb33402d771a991a",
+      "objectKey": "official/coverage-pilot-20261118/18649802b375043edc15e8b66e84fa5507879b207fa8e732c991615241a4684d.pdf"
+    },
+    "cityprogram": {
+      "url": "https://www.cb.cityu.edu.hk/en/pg/programme/program-list/2027/college-of-liberal-arts-and-social-sciences/department-of-public-and-international-affairs/p38",
+      "sourceId": "src-pilot-cityprogram-20261118",
+      "rawBytes": 73065,
+      "rawSha256": "5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68",
+      "normalizedTextSha256": "c88856eb8610393a44a845b21b9b4121b57d941956f19a11aacbd8592a9c0668",
+      "objectKey": "official/coverage-pilot-20261118/5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68.html"
+    },
+    "citypolicy": {
+      "url": "https://www.cb.cityu.edu.hk/en/pg/taught-postgraduate-programmes/faq",
+      "sourceId": "src-pilot-citypolicy-20261118",
+      "rawBytes": 240285,
+      "rawSha256": "0fb332015797d94a9ecad628cc003bf91ea593ef17221b20abf0798a4b8bb832",
+      "normalizedTextSha256": "d0bdcefdb9b1c4d38917767e7e1aeefe95c725d29b1a80b30bba3f404b8fd6f8",
+      "objectKey": "official/coverage-pilot-20261118/0fb332015797d94a9ecad628cc003bf91ea593ef17221b20abf0798a4b8bb832.html"
+    },
+    "gzold": {
+      "url": "https://fytgs.hkust-gz.edu.cn/programs/data-science-and-analytics-5",
+      "sourceId": "src-pilot-gzold-20261118",
+      "rawBytes": 102163,
+      "rawSha256": "662b415741c8ce73202a77d3fc41fb19e6a1f7666d8faf79f1d80c55e64f40cc",
+      "normalizedTextSha256": "2e6f2c9c33e1d8a5e383be067ce456bf46f57fa72e1edfaef9153abe3cdf0046",
+      "objectKey": "official/coverage-pilot-20261118/662b415741c8ce73202a77d3fc41fb19e6a1f7666d8faf79f1d80c55e64f40cc.html"
+    },
+    "gztime": {
+      "url": "https://fytgs.hkust-gz.edu.cn/admissions/before-submitting-an-application/admission-timeline",
+      "sourceId": "src-pilot-gztime-20261118",
+      "rawBytes": 56345,
+      "rawSha256": "f2543ad08f4083f171e95bb1708333faee7bc487659f3c3fdfa481f1aff40278",
+      "normalizedTextSha256": "b9c485256852dc4e89c5831464eecc7505d4a51563a2dbbb9672afa508332b34",
+      "objectKey": "official/coverage-pilot-20261118/f2543ad08f4083f171e95bb1708333faee7bc487659f3c3fdfa481f1aff40278.html"
+    },
+    "gzreq": {
+      "url": "https://fytgs.hkust-gz.edu.cn/admissions/before-submitting-an-application/admission-requirements",
+      "sourceId": "src-pilot-gzreq-20261118",
+      "rawBytes": 51953,
+      "rawSha256": "0c08ab86f792e03cf7d481e21434291ceac73879a498d518b0e030a1e848a6f7",
+      "normalizedTextSha256": "2de1180a51de7660d710774d3f5bf9964efd6814bf55366553397937313d8135",
+      "objectKey": "official/coverage-pilot-20261118/0c08ab86f792e03cf7d481e21434291ceac73879a498d518b0e030a1e848a6f7.html"
+    },
+    "gzlang": {
+      "url": "https://fytgs.hkust-gz.edu.cn/handbooks/handbook-for-research-postgraduate-studies",
+      "sourceId": "src-pilot-gzlang-20261118",
+      "rawBytes": 174535,
+      "rawSha256": "473b9dad7cfc67ae7fe12ca2216698ba38e7a671c3768b7331a5b2b6ffc046f3",
+      "normalizedTextSha256": "68bf1985a6b62a50e0ee33979ea0749ff8fd664535cb826eb17d7acd26069aec",
+      "objectKey": "official/coverage-pilot-20261118/473b9dad7cfc67ae7fe12ca2216698ba38e7a671c3768b7331a5b2b6ffc046f3.html"
+    },
+    "gzapply": {
+      "url": "https://fytgs.hkust-gz.edu.cn/admissions/apply-now",
+      "sourceId": "src-pilot-gzapply-20261118",
+      "rawBytes": 47557,
+      "rawSha256": "048495c877ce9013e08d5cd0522abdf5fe389b57fec82bfbb55257665f018581",
+      "normalizedTextSha256": "e5c65d9e4a4dc20f6dc470d4313563bd3d1c63c6777a84542a58ac4c4c1a49fb",
+      "objectKey": "official/coverage-pilot-20261118/048495c877ce9013e08d5cd0522abdf5fe389b57fec82bfbb55257665f018581.html"
+    },
+    "xmu-award-cn": {
+      "sourceId": "src-reviewed-xmu-2027-new-student-scholarship-cn",
+      "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+      "rawBytes": 62804,
+      "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+      "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+    },
+    "xmu-award-en": {
+      "sourceId": "src-reviewed-xmu-2027-new-student-scholarship-en",
+      "url": "https://admissions.xmu.edu.cn/info/1043/1836.htm",
+      "rawBytes": 65826,
+      "rawSha256": "00616e19d009ede31d89a8dff25b083565cc07d9c9002ed06743040c26c8b190",
+      "objectKey": "official/coverage-pilot-20261118/00616e19d009ede31d89a8dff25b083565cc07d9c9002ed06743040c26c8b190.html"
+    },
+    "xmu-guide-cn": {
+      "sourceId": "src-reviewed-xmu-2027-bachelor-guide-cn",
+      "url": "https://admissions.xmu.edu.cn/cn/info/1019/2036.htm",
+      "rawBytes": 119134,
+      "rawSha256": "0640b24ecc86004e9cea70bef223f45ffee2510d63e2e7df3095dd84efeadf13",
+      "objectKey": "official/coverage-pilot-20261118/0640b24ecc86004e9cea70bef223f45ffee2510d63e2e7df3095dd84efeadf13.html"
+    }
+  },
+  "programmeEvidence": {
+    "program-polyu-msc-data-science-and-analytics": {
+      "identity": {
+        "sourceId": "src-pilot-poly-20261118",
+        "sourceUrl": "https://www.polyu.edu.hk/study/pg/tpg/2027/62027-dfm-dpm",
+        "snapshotSha256": "23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6",
+        "objectKey": "official/coverage-pilot-20261118/23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6.html",
+        "locator": "normalized-utf16:16:63",
+        "quote": "Master of Science in Data Science and Analytics"
+      },
+      "annualEvidence": {
+        "sourceId": "src-pilot-poly-20261118",
+        "sourceUrl": "https://www.polyu.edu.hk/study/pg/tpg/2027/62027-dfm-dpm",
+        "snapshotSha256": "23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6",
+        "objectKey": "official/coverage-pilot-20261118/23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6.html",
+        "locator": "normalized-utf16:3018:3103",
+        "quote": "Non-local - Mixed Mode Sept 2027 Entry Early Round: 2026-10-20 Main Round: 2027-02-25"
+      },
+      "nonLocal": {
+        "sourceId": "src-pilot-poly-20261118",
+        "sourceUrl": "https://www.polyu.edu.hk/study/pg/tpg/2027/62027-dfm-dpm",
+        "snapshotSha256": "23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6",
+        "objectKey": "official/coverage-pilot-20261118/23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6.html",
+        "locator": "normalized-utf16:2738:2800",
+        "quote": "Non-local applicants must be registered as full-time students."
+      },
+      "tuition": {
+        "sourceId": "src-pilot-poly-20261118",
+        "sourceUrl": "https://www.polyu.edu.hk/study/pg/tpg/2027/62027-dfm-dpm",
+        "snapshotSha256": "23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6",
+        "objectKey": "official/coverage-pilot-20261118/23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6.html",
+        "locator": "normalized-utf16:6963:7107",
+        "quote": "HK$13,500 per credit for local and non-local students (Note: There is no tuition charge for the 1-credit Academic Integrity and Ethics subject.)"
+      }
+    },
+    "program-cityuhk-ma-international-studies": {
+      "identity": {
+        "sourceId": "src-pilot-cityprogram-20261118",
+        "sourceUrl": "https://www.cb.cityu.edu.hk/en/pg/programme/program-list/2027/college-of-liberal-arts-and-social-sciences/department-of-public-and-international-affairs/p38",
+        "snapshotSha256": "5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68",
+        "objectKey": "official/coverage-pilot-20261118/5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68.html",
+        "locator": "normalized-utf16:3947:3975",
+        "quote": "P38 MA International Studies"
+      },
+      "annualEvidence": {
+        "sourceId": "src-pilot-cityprogram-20261118",
+        "sourceUrl": "https://www.cb.cityu.edu.hk/en/pg/programme/program-list/2027/college-of-liberal-arts-and-social-sciences/department-of-public-and-international-affairs/p38",
+        "snapshotSha256": "5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68",
+        "objectKey": "official/coverage-pilot-20261118/5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68.html",
+        "locator": "normalized-utf16:4052:4182",
+        "quote": "Year of Entry 2027 Application Deadline 20260915T020000Z 20270331T155900Z 9/15/2026 02:00:00 3/31/2027 15:59:00 3/31/2027 15:59:00"
+      },
+      "rolling": {
+        "sourceId": "src-pilot-cityprogram-20261118",
+        "sourceUrl": "https://www.cb.cityu.edu.hk/en/pg/programme/program-list/2027/college-of-liberal-arts-and-social-sciences/department-of-public-and-international-affairs/p38",
+        "snapshotSha256": "5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68",
+        "objectKey": "official/coverage-pilot-20261118/5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68.html",
+        "locator": "normalized-utf16:4659:4855",
+        "quote": "Applications are processed on a rolling basis. Review of applications will start before the deadline and continue until all places are filled. Early applications are therefore strongly encouraged."
+      }
+    },
+    "program-hkust-gz-phd-data-science-and-analytics": {
+      "identity": {
+        "sourceId": "src-pilot-gzold-20261118",
+        "sourceUrl": "https://fytgs.hkust-gz.edu.cn/programs/data-science-and-analytics-5",
+        "snapshotSha256": "662b415741c8ce73202a77d3fc41fb19e6a1f7666d8faf79f1d80c55e64f40cc",
+        "objectKey": "official/coverage-pilot-20261118/662b415741c8ce73202a77d3fc41fb19e6a1f7666d8faf79f1d80c55e64f40cc.html",
+        "locator": "normalized-utf16:4150:4219",
+        "quote": "Doctor of Philosophy in Data Science and Analytics Program Short Name"
+      },
+      "annualEvidence": {
+        "sourceId": "src-pilot-gztime-20261118",
+        "sourceUrl": "https://fytgs.hkust-gz.edu.cn/admissions/before-submitting-an-application/admission-timeline",
+        "snapshotSha256": "f2543ad08f4083f171e95bb1708333faee7bc487659f3c3fdfa481f1aff40278",
+        "objectKey": "official/coverage-pilot-20261118/f2543ad08f4083f171e95bb1708333faee7bc487659f3c3fdfa481f1aff40278.html",
+        "locator": "normalized-utf16:4192:4639",
+        "quote": "2026-27 Spring Intake (Exclusively for PhD and MBA programs) Details Timeline Application Period PhD 21 July 2026 to 4 December 2026 (23:59, GMT+8) for international applicants 21 July 2026 to 25 December 2026 (23:59, GMT+8) for Chinese applicants MBA Please refer to \"Application\" tab of [href=https://fytgs.hkust-gz.edu.cn/programs] individual program page for details Program registration Early January 2027 Program commencement 25 January 2027"
+      },
+      "curriculumYear": {
+        "sourceId": "src-pilot-gzold-20261118",
+        "sourceUrl": "https://fytgs.hkust-gz.edu.cn/programs/data-science-and-analytics-5",
+        "snapshotSha256": "662b415741c8ce73202a77d3fc41fb19e6a1f7666d8faf79f1d80c55e64f40cc",
+        "objectKey": "official/coverage-pilot-20261118/662b415741c8ce73202a77d3fc41fb19e6a1f7666d8faf79f1d80c55e64f40cc.html",
+        "locator": "normalized-utf16:3952:4066",
+        "quote": "Postgraduate Programs 2026/27 Master of Philosophy and Doctor of Philosophy Programs in Data Science and Analytics"
+      }
+    }
+  },
+  "scholarship": {
+    "recordId": "scholarship-xmu-new-international-students-bachelor-chinese-2027-first",
+    "scope": {
+      "literalAdmissionYear": "2027",
+      "range2027to2028Inferred": false,
+      "universityId": "uni-xiamen-university",
+      "schemeSupportsDegrees": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "candidateDegree": "bachelor",
+      "candidateLanguage": "Chinese",
+      "englishBachelorSupported": false,
+      "mastersOrDoctoratesIncludedInCandidate": false,
+      "candidateProgramIds": [
+        "program-xiamen-university-bachelor-chinese-020201k",
+        "program-xiamen-university-bachelor-chinese-020202",
+        "program-xiamen-university-bachelor-chinese-020401",
+        "program-xiamen-university-bachelor-chinese-020302",
+        "program-xiamen-university-bachelor-chinese-020301k"
+      ],
+      "actualSchemeScope": "All eligible official Chinese-taught BA programmes at XMU; this proposal conservatively links only the independently verified five Economics BA programmes. MA/DR tiers are distinct and excluded.",
+      "applicationRound": "new-international-students-scholarship",
+      "intake": "autumn (inherited from the separately verified 2027 BA programme guide)",
+      "sourceDoesNotNameIntakeExplicitly": true
+    },
+    "citations": {
+      "literal-year-title": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 555,
+        "end": 579,
+        "quote": "厦门大学2027年“国际学生新生奖学金”申请办法",
+        "quoteSha256": "52fc5975d5e951bcb3811426189f2b1405dcc3c46fbef860eb223811e4f86506",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "all-programme-conditions": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 5,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 262,
+        "end": 285,
+        "quote": "1.符合所申请项目的招生简章上规定的所有条件；",
+        "quoteSha256": "da6c65263962c5bcda94487ee8401ebeec8862f3d1e26111f2ceae0495cd4009",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "age-reference": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 6,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 286,
+        "end": 314,
+        "quote": "2.申请人的学历和年龄要求（截止入学年度的9月1日前）：",
+        "quoteSha256": "932883542c283bd4ec4aeeffa237424f6755aab093b5bea87b7e1f51ac4aab01",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "ba-age-education": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 7,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 315,
+        "end": 340,
+        "quote": "（1）本科生：高中及以上学历，年龄不超过25周岁；",
+        "quoteSha256": "dcb2d4b4597a87ec93be5a4b35c168a2d039c018d33b703b9e5bec26309e29b7",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "ba-duration": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 11,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 401,
+        "end": 426,
+        "quote": "1.本科生：学制4或5学年，奖学金期限4或5学年；",
+        "quoteSha256": "34fa75441b5728f0db1841930543686c2e4da00b0e27470db1a725f831112294",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "annual-review": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 14,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 475,
+        "end": 569,
+        "quote": "注：奖学金获得者需按照奖学金相关管理规定参加年度评审，评审通过的可继续申请或享受下一学年的奖学金，评审未通过的，将被中止或取消奖学金资格，具体年度评审规定和办法以当年度发布的最新通知为准。",
+        "quoteSha256": "89e11c071f094a0e397f2f638707570700a52dbff819c44ae4e198ee8e698f50",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "ba-chinese-directory": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 54,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 790,
+        "end": 845,
+        "quote": "https://admissions.xmu.edu.cn/cn/Majors/CN_BA.htm（中文授课）",
+        "quoteSha256": "e8366a8088952386c9633765f6c635eb4fc3102f602c69dc23ebaccf34689a9b",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "english-ba-excluded": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 55,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 846,
+        "end": 867,
+        "quote": "备注：本奖学金项目不支持英文授课本科项目。",
+        "quoteSha256": "3bc3054ada13259423d6ed9ed43864c0b49258b1760b31b06369adcd15e0603f",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "application-dates": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 63,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 1139,
+        "end": 1160,
+        "quote": "2026年12月1日-2027年4月30日",
+        "quoteSha256": "8341167cba269ea00971c1d0014dfa05053479adc68a5a37545439ccbfde71d3",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "admitted-before-selection": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 65,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 1168,
+        "end": 1227,
+        "quote": "“厦门大学国际学生新生奖学金”申请者必须在申请我校本科、硕士或博士相关专业并被我校录取后，才具备参与奖学金评选的资格。",
+        "quoteSha256": "bf50494406559aef1ddf236107d624378e9991b2f05314cccc33d6f6131e159e",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "portal-and-signed-form": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 74,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 1490,
+        "end": 1608,
+        "quote": "符合条件的申请者需登录“厦门大学境外学生网上报名系统”（http://application.xmu.edu.cn）完成网上报名并上传《厦门大学国际学生新生奖学金申请表》扫描件（须用中文或英文填写，并附本人签名）。无需邮寄纸质申请材料。",
+        "quoteSha256": "5aecd26807f867bcf4e983766cda78ee67a69db2e04fa6db9f6e4336f4ff42e8",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "selective-award": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 79,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 1711,
+        "end": 1795,
+        "quote": "我校将组织专家综合考虑申请者的专业背景、学业成绩、语言水平、学术能力、科研成果和导师意见，从申请者中择优选拔奖学金候选人报我校国际新生各类奖学金候选人遴选工作小组审批。",
+        "quoteSha256": "131f1258e701d852c4ca9e31dab1e24254ac7a75c51163b8d2bfe7eb1ca9b527",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "latest-policy": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 88,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 1940,
+        "end": 1980,
+        "quote": "本申请办法将根据上级部门文件通知及学校工作实际进行调整，请以最新版申请办法为准。",
+        "quoteSha256": "5d85bb23efb9e16471f28f275e7c897099e395bc96f21d56bd1e8313777745c0",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "english-age-discrepancy": {
+        "source": "award-en",
+        "url": "https://admissions.xmu.edu.cn/info/1043/1836.htm",
+        "rawSha256": "00616e19d009ede31d89a8dff25b083565cc07d9c9002ed06743040c26c8b190",
+        "textSha256": "c2e261fd0bcc1418c721c061c34ac89d5df07700d0ec13da9bb4cfb26ce6b571",
+        "paragraphIndex": 7,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 1381,
+        "end": 1400,
+        "quote": "under the age of 25",
+        "quoteSha256": "86185eaa794bf3775ca066e981f0f2721ba13d5da5a1bf28e13ef921b0990647",
+        "objectKey": "official/coverage-pilot-20261118/00616e19d009ede31d89a8dff25b083565cc07d9c9002ed06743040c26c8b190.html"
+      },
+      "chinese-prevails": {
+        "source": "award-en",
+        "url": "https://admissions.xmu.edu.cn/info/1043/1836.htm",
+        "rawSha256": "00616e19d009ede31d89a8dff25b083565cc07d9c9002ed06743040c26c8b190",
+        "textSha256": "c2e261fd0bcc1418c721c061c34ac89d5df07700d0ec13da9bb4cfb26ce6b571",
+        "paragraphIndex": 87,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 5401,
+        "end": 5434,
+        "quote": "the Chinese version shall prevail",
+        "quoteSha256": "0f8cd5bb94140a59394f0aa0ff67137c71501806aa750b89f9af5a56f960b1a0",
+        "objectKey": "official/coverage-pilot-20261118/00616e19d009ede31d89a8dff25b083565cc07d9c9002ed06743040c26c8b190.html"
+      },
+      "first-benefits": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 23,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 607,
+        "end": 623,
+        "quote": "免学费，生活费(2500元/月)",
+        "quoteSha256": "2083e6f8a497dcf944199e2b614f047f406d34366066a04480db0bab89764d22",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "first-quota": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 24,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 624,
+        "end": 625,
+        "quote": "5",
+        "quoteSha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "school-selection-discretion": {
+        "source": "award-cn",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1063/8993.htm",
+        "rawSha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "textSha256": "e45e9a2ffc4ca9953702e44e9710d3d9bf6446158a32712b805e0e19e1b29165",
+        "paragraphIndex": 25,
+        "offsetUnit": "Unicode code points",
+        "offsetConvention": "zero-based, end-exclusive",
+        "start": 626,
+        "end": 640,
+        "quote": "学校将视申请录取情况择优资助",
+        "quoteSha256": "cd0dcbc428a910b6aed7f0ac951f5bbd008f26328c5e6a8991f0f07589f2feff",
+        "objectKey": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html"
+      },
+      "https-portal-guide-link": {
+        "source": "guide-cn-reused",
+        "url": "https://admissions.xmu.edu.cn/cn/info/1019/2036.htm",
+        "rawSha256": "0640b24ecc86004e9cea70bef223f45ffee2510d63e2e7df3095dd84efeadf13",
+        "xpath": "/html/body/div[2]/div/div[2]/div/form/div[3]/div/div/p[27]/span[2]/span/a",
+        "href": "https://application.xmu.edu.cn/",
+        "label": "application.xmu.edu.cn",
+        "note": "The scholarship page prints HTTP; the official 2027 BA guide explicitly links the same portal over HTTPS. This additional source supports a schema-compatible HTTPS applicationUrl.",
+        "objectKey": "official/coverage-pilot-20261118/0640b24ecc86004e9cea70bef223f45ffee2510d63e2e7df3095dd84efeadf13.html"
+      }
+    }
+  },
+  "fieldReviewContentSha256": [
+    "c80d5593b08161c1a52b7250892dc08d15c521939bd874830b4acdce3fa81a64",
+    "fc0c8a551e49f58ae883733b4cf726aa3670245d0530b64106f2f2604cdccf89",
+    "10f0454dc941d36c52dee540c576bc5ac77b2620ec846fc4dd14f682c417958d",
+    "960ecd34019ab9fb7f7d01b7af2a66667ab5c1a59d676e67ac22be235b9396ca",
+    "4486e7b2ca35b186dccdc692a57f7ff91bd8db6964453c4624020de055dfbcf2",
+    "31f139ce367f90768ac2d079ac03f28d8e01bf1dd88b948aeb77d08867aa1b14",
+    "b0011e61d18c1b0eff7899a995922ce9b237320d516adf9c66ba8c19c4f40e6d",
+    "d0c00bb0b82c4bf87641bcf4b937a304565fa95e20e4f5b2ceaa217650fb5e04",
+    "fa2a018b368823756ab39240cdfda196d808cae0c301d5c8ac25543a888b6585",
+    "ba3604fe865e990cfca65813a5d52e6fcd6e49056c38b8aa2ede259fe09debc3",
+    "5c9e2fc95014bad3a4fbc2a55a5036be99f6692d370402fe61307428d19d52d5",
+    "545104c1bb741ff137ca0048869acb175374dfcad1141f3c63a530fc0327b958",
+    "2ac4a52255d66430ec71c4fef3a232686ba584bdccf05a86361a03f9574d75d4",
+    "3822ab210e9593396b077412aa2966d641e960cdfab4db887d85212accb8e537",
+    "08d0f85cd18e1947af0cb93ecb60ed44dabd12727011cd5b27120f08d83429ef",
+    "fe69af4ec071ba9e62af633c4fd353b53bfada3d90fccbe7f1281b8092582acb",
+    "3f5903301090374f5f3f44e5b64e98ebc3329ebb5b69a6ffdde9aeb68a2f5ad9",
+    "641544a8aa07d5e2ea5e35ab6a93995ac47b85413dff6fa21d5d283d4ed2b139",
+    "548a4df40b0c349a8c2001167261d8a597bc547ccbc56359063b82f363994339",
+    "e27779e33ca3a1e4f0af91ad94f90053daef57659cddcd9954afd3a16f76e356",
+    "d117ba38875f925be70237d563d072134e25cb33f9b9de768acee59efcc0402f",
+    "bc47db63f8ba175583f920474cd4dae86466a3e9ea43bdb359644e19f42d3a32",
+    "08a257c4dfc9f5741c042469b899add3f98da3bb74d9d6876afd8e8bc56d7c49",
+    "51b28d2ff6db256ea9ea5226f31247c00ed4b379f800163ce2a0aa2b0f547e66",
+    "77dd06fe3bcbdf5ea43519b79478b50034046a16c4767930bac54320fcc461dd",
+    "f0324c37a36948eda53d43bd7d5859f62a3886f197854740cea7cbe72ec499f1",
+    "9738ca6bd2c05189194b5687e00010ba68e7a5648c108256f313bc4304ab4e7c",
+    "1abdd5e030fdebf44f010e56a9a04c738fc6fc68f0615e813965d876684e64cb",
+    "c144e01750777733bb817cfc8731484ec4082791becf0cd71e4e8ccbc7d16fe7",
+    "3e6d6de36131ddc068215da4a72ea7b364a3c939fc6e78a7263944c0fbed987e",
+    "71387f3d4f9d5d876a47bcf1f94cc1a2d8f69dda9c09570e268697e511460111"
+  ],
+  "privateArchive": {
+    "provider": "Cloudflare R2",
+    "verification": "downloaded and SHA-256 compared with the original bytes",
+    "objects": [
+      {
+        "key": "official/coverage-pilot-20261118/00616e19d009ede31d89a8dff25b083565cc07d9c9002ed06743040c26c8b190.html",
+        "sha256": "00616e19d009ede31d89a8dff25b083565cc07d9c9002ed06743040c26c8b190",
+        "verifiedAt": "2026-11-18T03:04:02.491Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/048495c877ce9013e08d5cd0522abdf5fe389b57fec82bfbb55257665f018581.html",
+        "sha256": "048495c877ce9013e08d5cd0522abdf5fe389b57fec82bfbb55257665f018581",
+        "verifiedAt": "2026-11-18T03:03:59.969Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/0640b24ecc86004e9cea70bef223f45ffee2510d63e2e7df3095dd84efeadf13.html",
+        "sha256": "0640b24ecc86004e9cea70bef223f45ffee2510d63e2e7df3095dd84efeadf13",
+        "verifiedAt": "2026-11-18T03:04:03.903Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/0c08ab86f792e03cf7d481e21434291ceac73879a498d518b0e030a1e848a6f7.html",
+        "sha256": "0c08ab86f792e03cf7d481e21434291ceac73879a498d518b0e030a1e848a6f7",
+        "verifiedAt": "2026-11-18T03:03:55.729Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/0fb332015797d94a9ecad628cc003bf91ea593ef17221b20abf0798a4b8bb832.html",
+        "sha256": "0fb332015797d94a9ecad628cc003bf91ea593ef17221b20abf0798a4b8bb832",
+        "verifiedAt": "2026-11-18T03:03:51.957Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/18649802b375043edc15e8b66e84fa5507879b207fa8e732c991615241a4684d.pdf",
+        "sha256": "18649802b375043edc15e8b66e84fa5507879b207fa8e732c991615241a4684d",
+        "verifiedAt": "2026-11-18T03:03:51.227Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6.html",
+        "sha256": "23bf90b12926ebf60bd525cb60120e035cf3d89d2a510fb52dcaa042441682e6",
+        "verifiedAt": "2026-11-18T03:03:47.900Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/473b9dad7cfc67ae7fe12ca2216698ba38e7a671c3768b7331a5b2b6ffc046f3.html",
+        "sha256": "473b9dad7cfc67ae7fe12ca2216698ba38e7a671c3768b7331a5b2b6ffc046f3",
+        "verifiedAt": "2026-11-18T03:03:58.645Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68.html",
+        "sha256": "5468dbce8e3ae7814dbd6fd3a92af4659d98ce492ab85def848c51c8aa94df68",
+        "verifiedAt": "2026-11-18T03:03:51.758Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/662b415741c8ce73202a77d3fc41fb19e6a1f7666d8faf79f1d80c55e64f40cc.html",
+        "sha256": "662b415741c8ce73202a77d3fc41fb19e6a1f7666d8faf79f1d80c55e64f40cc",
+        "verifiedAt": "2026-11-18T03:03:54.752Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/8327f43e864ad4fa9bd98edcb5bd932ebab31e3ee15f3d79ed8c6fcb153dc2cb.html",
+        "sha256": "8327f43e864ad4fa9bd98edcb5bd932ebab31e3ee15f3d79ed8c6fcb153dc2cb",
+        "verifiedAt": "2026-11-18T03:03:47.993Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d.html",
+        "sha256": "8e551110516ec05b9efe59fbd86ef4a05135512445934a0d6a208db767bd7a3d",
+        "verifiedAt": "2026-11-18T03:03:59.732Z"
+      },
+      {
+        "key": "official/coverage-pilot-20261118/f2543ad08f4083f171e95bb1708333faee7bc487659f3c3fdfa481f1aff40278.html",
+        "sha256": "f2543ad08f4083f171e95bb1708333faee7bc487659f3c3fdfa481f1aff40278",
+        "verifiedAt": "2026-11-18T03:03:56.104Z"
+      }
+    ]
+  },
+  "sha256": "02f6a11b53e7754ae29f1b0f0fa0baac29ec38ffde5252bff69848113e7c44d0"
+}

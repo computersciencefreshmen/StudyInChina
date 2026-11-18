@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ProgramExplorerV2 } from '@/components/features/ProgramExplorerV2'
 import { PageHero } from '@/components/ui'
 import { getMessages } from '@/i18n/messages'
+import { studentMatchCopy } from '@/i18n/student-match'
 import { getTodayDate } from '@/lib/data/freshness'
 import { queryUnifiedPrograms } from '@/lib/unified-programs'
 import {
@@ -46,6 +47,7 @@ export default async function ProgramsPage({
       eyebrow={`${result.total} ${messages.nav.programs}`}
       title={messages.programs.title}
       description={messages.programs.intro}
+      actions={<Link className="text-link" href={`/${locale}/match`}>{studentMatchCopy(locale).title} →</Link>}
       meta={<><span>{messages.common.authoritativeNotice}</span></>}
     />
     <section className="atlas-container atlas-section">

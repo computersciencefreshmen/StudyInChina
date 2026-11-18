@@ -1,4 +1,5 @@
 import 'server-only'
+import { createHash } from 'node:crypto'
 import { getCatalogData } from './data/load'
 import { classifyProgramField } from './data/fields'
 import { matchesUniversityRankings, rankingFilterKeys } from './data/rankings'
@@ -7,13 +8,24 @@ import { scholarshipAppliesToProgram } from './data/scholarship-scope'
 import type { DataBundle, DegreeLevel, University } from './data/types'
 import { getProgramFeedIndex, getProgramFeedRecord } from './program-feed'
 import { publicThirdPartyProgram } from './third-party-public'
+import { programWithdrawalReason } from './program-publication-policy.mjs'
 import type { ThirdPartyProgram } from './third-party-programs'
 import { parseProgramCatalogFilters, selectProgramCatalogItems, PROGRAM_CATALOG_PAGE_SIZE, type ProgramCatalogFilters, type ProgramCatalogItem, type ProgramCatalogResult } from './program-catalog'
 
 export type CollectedProgramItem = { collected: ThirdPartyProgram; university?: University; degree?: DegreeLevel; languages: string[]; sources: ThirdPartyProgram[] }
 export type ReviewedProgramItem = ProgramCatalogItem & { sources?: ThirdPartyProgram[] }
 export type UnifiedProgramItem = ReviewedProgramItem | CollectedProgramItem
-export type UnifiedProgramResult = Omit<ProgramCatalogResult, 'items'> & { items: UnifiedProgramItem[]; revision: string }
+export type UnifiedProgramResult = Omit<ProgramCatalogResult, 'items'> & { items: UnifiedProgramItem[]; revision: string; sourceConditionsUnknown: number }
+
+const directoryHashes = new WeakMap<DataBundle, string>()
+export function unifiedCatalogRevision(data: DataBundle, feedRevision: string, today: string) {
+  let directory = Object.isFrozen(data) ? directoryHashes.get(data) : undefined
+  if (!directory) {
+    directory = createHash('sha256').update(JSON.stringify(data)).digest('hex')
+    if (Object.isFrozen(data)) directoryHashes.set(data, directory)
+  }
+  return createHash('sha256').update(['program-publication-v2', directory, feedRevision, today].join('\n')).digest('hex')
+}
 
 export function normalizeProgramIdentity(value: string) {
   return value.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
@@ -87,7 +99,7 @@ export function combineProgramRecords(data: DataBundle, captured: ThirdPartyProg
     if (key) keys.set(key, [...keys.get(key) || [], item])
   }
   for (const record of [...captured].sort((a, b) => a.id.localeCompare(b.id))) {
-    if (record.status !== 'extracted') continue
+    if (record.status !== 'extracted' || programWithdrawalReason(record)) continue
     const degree = collectedDegree(record.fields.degree), languages = collectedLanguages(record.fields.language)
     const university = schools.get(universityNameKey(record.schoolName)) || undefined
     const key = identity(university?.id || record.schoolName, record.name, degree, languages)
@@ -123,20 +135,22 @@ export async function getUnifiedUniversityProgramCounts(today = getTodayDate(), 
 function matchesCollected(item: CollectedProgramItem, filters: ProgramCatalogFilters, data: DataBundle, today: string) {
   const record = item.collected, university = item.university
   const city = university ? data.cities.find(candidate => candidate.id === university.cityId) : undefined
-  const search = normalizeProgramIdentity(`${record.name} ${record.schoolName} ${record.fields.degree || ''} ${record.fields.language || ''}`)
+  const search = normalizeProgramIdentity([record.name, record.schoolName, record.fields.degree, record.fields.language,
+    university?.name.en, university?.name.zh, city?.name.en, city?.name.zh].filter(Boolean).join(' '))
   if (normalizeProgramIdentity(filters.query).split(' ').filter(Boolean).some(token => !search.includes(token))) return false
-  if (filters.degree && item.degree !== filters.degree) return false
-  if (filters.language && !(filters.language === 'Bilingual' ? item.languages.length > 1 : item.languages.includes(filters.language))) return false
+  let unknown = Boolean(filters.degree && !item.degree || filters.language && !item.languages.length)
+  if (filters.degree && item.degree && item.degree !== filters.degree) return false
+  if (filters.language && item.languages.length && !(filters.language === 'Bilingual' ? item.languages.length > 1 : item.languages.includes(filters.language))) return false
   if (filters.discipline && classifyProgramField({ name: { en: record.name }, degreeLevel: item.degree || 'other', discipline: 'other' }) !== filters.discipline) return false
   if (filters.institution && ![record.schoolId, normalizeProgramIdentity(record.schoolName), university?.id, university?.slug].includes(filters.institution)) return false
   if (filters.city && ![city?.id, city?.slug].includes(filters.city)) return false
   if (rankingFilterKeys.some(key => filters[key]) && (!university || !matchesUniversityRankings(university, filters, today))) return false
   // Source wording is retained; it does not establish a current application cycle or comparable annual tuition.
-  if (filters.intake || filters.scholarship || filters.applicationState && filters.applicationState !== 'not-announced') return false
+  if (filters.intake || filters.scholarship || filters.applicationState && filters.applicationState !== 'not-announced') unknown = true
   const hasTuition = Boolean(record.fields.tuition?.trim()) && !/^(unknown|not provided|n\/a|not available)$/i.test(record.fields.tuition!.trim())
   if (filters.tuition === 'known' && !hasTuition || filters.tuition === 'unknown' && hasTuition) return false
-  if (filters.tuition && !['known', 'unknown'].includes(filters.tuition)) return false
-  return true
+  if (filters.tuition && !['known', 'unknown'].includes(filters.tuition)) unknown = true
+  return unknown ? 'unknown' : true
 }
 
 export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyProgram[], filters: ProgramCatalogFilters, today: string, revision: string): UnifiedProgramResult {
@@ -150,7 +164,13 @@ export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyPr
     programs: data.programs.filter(program => currentScholarships.some(scholarship => scholarshipAppliesToProgram(scholarship, program))),
   } : data
   const reviewedMatches = new Set(selectProgramCatalogItems(reviewedData, effectiveFilters, today).map(item => item.program.id))
-  const matching = combined.items.filter(item => 'collected' in item ? matchesCollected(item, effectiveFilters, data, today) : reviewedMatches.has(item.program.id))
+  let sourceConditionsUnknown = 0
+  const matching = combined.items.filter(item => {
+    if (!('collected' in item)) return reviewedMatches.has(item.program.id)
+    const result = matchesCollected(item, effectiveFilters, data, today)
+    if (result === 'unknown') sourceConditionsUnknown++
+    return result === true
+  })
   if (filters.sort === 'name') matching.sort((a, b) => title(a).localeCompare(title(b), 'en') || unifiedProgramSlug(a).localeCompare(unifiedProgramSlug(b)))
   else if (filters.sort !== 'default') {
     const reviewedOrder = new Map(selectProgramCatalogItems(reviewedData, effectiveFilters, today).map((item, index) => [item.program.id, index]))
@@ -175,7 +195,7 @@ export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyPr
     if (university) cityIds.add(university.cityId)
     if ('collected' in item && item.collected.schoolId === filters.institution) options.set(filters.institution, { value: filters.institution, name: { en: item.collected.schoolName } })
   }
-  return { items: matching.slice((page - 1) * PROGRAM_CATALOG_PAGE_SIZE, page * PROGRAM_CATALOG_PAGE_SIZE), total: matching.length, totalExact: true, page, pageCount, pageSize: PROGRAM_CATALOG_PAGE_SIZE, revision,
+  return { items: matching.slice((page - 1) * PROGRAM_CATALOG_PAGE_SIZE, page * PROGRAM_CATALOG_PAGE_SIZE), total: matching.length, totalExact: true, page, pageCount, pageSize: PROGRAM_CATALOG_PAGE_SIZE, revision, sourceConditionsUnknown,
     filters: { ...filters, page, cursor: '', cursorHistory: [], nextCursor: undefined, paginationMode: 'offset', revision },
     universityOptions: [...options.values()].sort((a, b) => (a.name.en || '').localeCompare(b.name.en || '')),
     cityOptions: data.cities.filter(city => cityIds.has(city.id)).map(city => ({ value: city.slug, name: city.name })) }
@@ -183,18 +203,19 @@ export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyPr
 
 export async function queryUnifiedPrograms(filters: ProgramCatalogFilters, today: string, catalogData?: DataBundle) {
   const [data, feed] = await Promise.all([catalogData ?? getCatalogData(), getProgramFeedIndex()])
-  return queryUnifiedProgramData(data, feed.programs, filters, today, feed.revision)
+  return queryUnifiedProgramData(data, feed.programs, filters, today, unifiedCatalogRevision(data, feed.revision, today))
 }
 export async function resolveUnifiedProgram(slug: string, today: string, catalogData?: DataBundle) {
   const [data, feed] = await Promise.all([catalogData ?? getCatalogData(), getProgramFeedIndex()])
   const combined = combineProgramRecords(data, feed.programs, today)
   const canonical = combined.aliases.get(slug) || slug
+  const revision = unifiedCatalogRevision(data, feed.revision, today)
   const item = combined.items.find(item => unifiedProgramSlug(item) === canonical)
   if (!item) return undefined
   if ('collected' in item) {
     const record = await getProgramFeedRecord(item.collected.id)
     if (!record || record.status !== 'extracted') return undefined
-    return { item: { ...item, collected: record }, canonical }
+    return { item: { ...item, collected: record }, canonical, revision }
   }
-  return { item, canonical }
+  return { item, canonical, revision }
 }

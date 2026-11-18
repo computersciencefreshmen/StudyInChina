@@ -28,6 +28,7 @@ export const feedbackRequestSchema = z
       'incorrect-data',
       'broken-link',
       'suggest-program',
+      'program-inquiry',
       'other',
     ]),
     message: z
@@ -54,6 +55,9 @@ export const feedbackRequestSchema = z
     website: z.string().trim().max(256).optional().default(''),
   })
   .strict()
+  .refine(data => data.category !== 'program-inquiry' || Boolean(data.recordId && data.replyEmail), {
+    message: 'A program inquiry needs the selected program and a reply address.',
+  })
 
 export type FeedbackRequest = z.infer<typeof feedbackRequestSchema>
 

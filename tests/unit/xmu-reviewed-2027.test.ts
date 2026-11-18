@@ -47,7 +47,7 @@ describe('XMU 2027 independently reviewed Chinese economics core', () => {
     }
     for (const row of programs) expect(sha(row)).toBe(review.afterProgrammeSha256[row.id as keyof typeof review.afterProgrammeSha256])
     for (const row of cycles) expect(sha(row)).toBe(review.newCycleSha256[row.id as keyof typeof review.newCycleSha256])
-    expect(await validateDirectory(process.cwd(), TODAY)).toMatchObject({ integrityPassed: true, cohortSchools: 272 })
+    expect(await validateDirectory(process.cwd())).toMatchObject({ integrityPassed: true, cohortSchools: 272 })
   }, 20_000)
 
   it('proves the five original rows and shared cells without inventing English names or relabeling English tracks', () => {

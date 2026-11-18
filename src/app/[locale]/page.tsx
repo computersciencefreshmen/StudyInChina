@@ -15,7 +15,7 @@ import { getTodayDate } from '@/lib/data/freshness'
 import { guides } from '@/lib/guides'
 import { getProgramFeedIndex } from '@/lib/program-feed'
 import { parseProgramCatalogFilters } from '@/lib/program-catalog'
-import { combineProgramRecords, queryUnifiedProgramData } from '@/lib/unified-programs'
+import { combineProgramRecords, queryUnifiedProgramData, unifiedCatalogRevision } from '@/lib/unified-programs'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamic = 'force-dynamic'
@@ -34,7 +34,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   await connection()
   const [data, feed] = await Promise.all([getCatalogData(), getProgramFeedIndex()])
   const today = getTodayDate(), messages = getMessages(locale), experience = getHomeExperienceCopy(locale)
-  const programs = queryUnifiedProgramData(data, feed.programs, parseProgramCatalogFilters({}), today, feed.revision)
+  const programs = queryUnifiedProgramData(data, feed.programs, parseProgramCatalogFilters({}), today, unifiedCatalogRevision(data, feed.revision, today))
   const allPrograms = combineProgramRecords(data, feed.programs, today).items
   const previews = programs.items.slice(0, 6)
   const featured = data.universities.filter(item => item.featured).slice(0, 6)
@@ -56,7 +56,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const sourceCheckLabel = latestSourceCheck ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(`${latestSourceCheck}T00:00:00Z`)) : null
   const pathwayHrefs = ['universities', 'programs', 'guides/verify-admissions-data', 'programs?applicationState=open'] as const
 
-  return <div className={styles.home}>
+  return <div className={styles.home} data-program-revision={programs.revision} data-public-program-count={programs.total}>
     <section className={styles.hero} aria-labelledby="home-title">
       <p className={styles.eyebrow}>{messages.home.eyebrow}</p>
       <h1 id="home-title">{messages.home.title}</h1>

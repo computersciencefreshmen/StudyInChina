@@ -2,7 +2,8 @@ import { createHash } from 'node:crypto'
 import { createElement, type ReactNode } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { translationKey, translationPath, type ProgramTranslationLocale, type ProgramTranslationRecord } from '@/lib/program-translation-contract'
+import { translationKey, type ProgramTranslationLocale, type ProgramTranslationRecord } from '@/lib/program-translation-contract'
+import { publicationPath, reviewBinding, translationScope, REVIEW_MODEL, REVIEW_POLICY } from '@/lib/program-translation-review'
 import type { ThirdPartyProgram } from '@/lib/third-party-programs'
 import type { CollectedProgramItem } from '@/lib/unified-programs'
 
@@ -26,7 +27,7 @@ vi.mock('@/components/ui', () => ({
 }))
 
 const requirement = 'Please submit a personal statement explaining your motivation for studying this subject. HSK 4 is required.'
-const translatedRequirement = '请提交一份个人陈述，说明你学习该专业的动机。 HSK 4 is required.'
+const translatedRequirement = '请提交一份个人陈述，说明你学习该专业的动机。须具备 HSK 4。'
 const materials = 'Please submit a personal statement explaining your interests and a copy of your passport.'
 const description = 'Explore the subject through independent research and collaborative projects.'
 const translatedText = new Map([[requirement, translatedRequirement], [materials, '请提交说明个人兴趣的陈述和护照复印件。'], [description, '通过独立研究和合作项目探索该学科。']])
@@ -38,10 +39,15 @@ const profile: ThirdPartyProgram = {
   fields: { requirements: requirement, materials, description, fees: 'Service fee USD 100', tuition: 'RMB 20,000 per year', duration: '4 Years',
     startDate: 'Sep 1, 2027', deadline: 'May 31, 2027', degree: 'Bachelor', language: 'Chinese' },
 }
+const fieldOf = (source: string) => source.startsWith(materials) ? 'materials' : source.startsWith(description) || source.startsWith('<em>') ? 'description' : 'requirements'
+const scopeOf = (source: string) => translationScope(profile, fieldOf(source))
+const translationPath = (source: string, locale: ProgramTranslationLocale) => publicationPath(source, locale, scopeOf(source))
 function translated(source: string, locale: ProgramTranslationLocale = 'zh', overrides: Partial<ProgramTranslationRecord> = {}): ProgramTranslationRecord {
-  return { schemaVersion: 1, version: 'v1', key: translationKey(source, locale), sourceHash: createHash('sha256').update(source).digest('hex'),
+  const row: ProgramTranslationRecord = { schemaVersion: 1, version: 'v1', key: translationKey(source, locale), sourceHash: createHash('sha256').update(source).digest('hex'),
     targetLocale: locale, text: translatedText.get(source) || source, method: 'minimax', model: 'MiniMax-M3',
-    translatedAt: '2026-11-17T06:00:00.000Z', validation: 'passed', ...overrides }
+    translatedAt: '2026-11-17T06:00:00.000Z', validation: 'passed', factPolicy: 'literal-v2', ...overrides }
+  if (row.method === 'source') return row
+  return Object.assign(row, { review: { policy: REVIEW_POLICY, model: REVIEW_MODEL, verdict: 'PASS', checkedAt: row.translatedAt, binding: reviewBinding(source, row.text, locale, scopeOf(source)) } })
 }
 function validFetch() {
   const records = new Map([requirement, materials, description].map(source => [base + translationPath(source, 'zh'), translated(source)]))
@@ -78,7 +84,7 @@ describe('source-bound programme translation reader', () => {
     const network = vi.fn(async () => Response.json(translated(requirement, 'zh', { sourceHash: '0'.repeat(64) })))
     vi.stubGlobal('fetch', network)
     const { getProgramTranslations } = await import('@/lib/program-translations')
-    const source = { fields: { requirements: requirement } }
+    const source = { ...profile, fields: { ...profile.fields, materials: undefined, description: undefined, requirements: requirement } }
     expect(await getProgramTranslations(source, 'zh')).toEqual({})
     expect(await getProgramTranslations(source, 'zh')).toEqual({})
     expect(network).toHaveBeenCalledTimes(1)
@@ -92,7 +98,7 @@ describe('source-bound programme translation reader', () => {
     const network = vi.fn(async () => Response.json(translated(requirement)))
     vi.stubGlobal('fetch', network)
     const { getProgramTranslations } = await import('@/lib/program-translations')
-    const source = { fields: { requirements: requirement } }, started = Date.now()
+    const source = { ...profile, fields: { ...profile.fields, materials: undefined, description: undefined, requirements: requirement } }, started = Date.now()
     expect((await getProgramTranslations(source, 'zh')).requirements?.text).toBe(translatedRequirement)
     network.mockImplementation(async () => new Response(null, { status: 404 }))
     vi.setSystemTime(started + 59_999)
@@ -114,7 +120,7 @@ describe('source-bound programme translation reader', () => {
     const network = vi.fn(async () => Response.json(translated(requirement)))
     vi.stubGlobal('fetch', network)
     const { getProgramTranslations } = await import('@/lib/program-translations')
-    const source = { fields: { requirements: requirement } }
+    const source = { ...profile, fields: { ...profile.fields, materials: undefined, description: undefined, requirements: requirement } }
     await getProgramTranslations(source, 'zh')
     vi.setSystemTime(Date.now() + 60_000)
     let finish!: (response: Response) => void
@@ -125,7 +131,7 @@ describe('source-bound programme translation reader', () => {
     const updated = translated(requirement, 'zh', { translatedAt: '2026-11-17T06:01:00.000Z' })
     finish(Response.json(updated))
     const results = await Promise.all([first, second])
-    expect(results.map(result => result.requirements)).toEqual([updated, updated])
+    expect(results.map(result => result.requirements?.translatedAt)).toEqual([updated.translatedAt, updated.translatedAt])
     expect(network).toHaveBeenCalledTimes(2)
   })
 
@@ -135,7 +141,7 @@ describe('source-bound programme translation reader', () => {
     const network = vi.fn(async (url: RequestInfo | URL) => Response.json(records.get(String(url))))
     vi.stubGlobal('fetch', network)
     const { getProgramTranslations } = await import('@/lib/program-translations')
-    const load = (index: number) => getProgramTranslations({ fields: { requirements: sources[index] } }, 'en')
+    const load = (index: number) => getProgramTranslations({ ...profile, fields: { ...profile.fields, materials: undefined, description: undefined, requirements: sources[index] } }, 'en')
     const started = Date.now()
     expect((await load(0)).requirements?.text).toBe(sources[0])
     vi.setSystemTime(started + 30_000)
@@ -155,7 +161,7 @@ describe('source-bound programme translation reader', () => {
   ])('falls back when locale, key or a critical source clause changes: %j', async override => {
     vi.stubGlobal('fetch', vi.fn(async () => Response.json(translated(requirement, 'zh', override))))
     const { getProgramTranslations } = await import('@/lib/program-translations')
-    expect(await getProgramTranslations({ fields: { requirements: requirement } }, 'zh')).toEqual({})
+    expect(await getProgramTranslations({ ...profile, fields: { ...profile.fields, materials: undefined, description: undefined, requirements: requirement } }, 'zh')).toEqual({})
   })
 
   it.each(['missing', 'network', 'large-header', 'large-body'] as const)('falls back safely for %s responses', async kind => {
@@ -166,7 +172,7 @@ describe('source-bound programme translation reader', () => {
       return new Response('x'.repeat(1_000_001))
     }))
     const { getProgramTranslations } = await import('@/lib/program-translations')
-    expect(await getProgramTranslations({ fields: { requirements: requirement } }, 'zh')).toEqual({})
+    expect(await getProgramTranslations({ ...profile, fields: { ...profile.fields, materials: undefined, description: undefined, requirements: requirement } }, 'zh')).toEqual({})
   })
 
   it('does not fetch locally, for unsupported locales, empty fields or unsupported source text', async () => {
@@ -195,7 +201,7 @@ describe('source-bound programme translation reader', () => {
     vi.stubGlobal('fetch', network)
     const { getProgramTranslations } = await import('@/lib/program-translations')
     await Promise.all([getProgramTranslations(profile, 'en'), getProgramTranslations(profile, 'en'),
-      getProgramTranslations({ fields: { requirements: other[0], materials: other[1], description: other[2] } }, 'en')])
+      getProgramTranslations({ ...profile, fields: { ...profile.fields, requirements: other[0], materials: other[1], description: other[2] } }, 'en')])
     expect(maximum).toBe(3)
     expect(network).toHaveBeenCalledTimes(6)
   })

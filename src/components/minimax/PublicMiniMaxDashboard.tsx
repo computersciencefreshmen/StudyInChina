@@ -13,7 +13,7 @@ const fresh = (at: string | null | undefined, now: number) => Boolean(at && now 
 const periodNames = { today: '今日 · 北京时间', 'five-hour': '本轮 5 小时' }
 
 /** Presentation has no token, administrative endpoint, or write action. */
-export function PublicMiniMaxDashboard() {
+export function PublicMiniMaxDashboard({ catalogue }: { catalogue?: React.ReactNode } = {}) {
   const [value, setValue] = useState<PublicMiniMaxStatus | null>(null), [now, setNow] = useState<number | null>(null)
   const [unavailable, setUnavailable] = useState(false)
   const [observations, setObservations] = useState<SessionObservation[]>([])
@@ -64,6 +64,7 @@ export function PublicMiniMaxDashboard() {
       <section className={styles.section} aria-labelledby="recent-calls"><div className={styles.sectionTitle}><span>04 / 最近响应</span><h2 id="recent-calls">最近云端调用</h2></div>{value?.recentCalls.length ? <ol className={styles.calls}>{value.recentCalls.map((call, index) => <li key={`${call.startedAt}:${index}`}><div><time>{date(call.startedAt)}</time><strong>{call.model}</strong><span>{call.pass === 'primary' ? '提取' : '独立复核'}</span></div><b className={call.status === 'completed' ? styles.success : styles.callState}>{status[call.status]}</b></li>)}</ol> : <p className={styles.empty}>暂无可确认的最近调用记录。</p>}</section>
 
       <section className={styles.coverage} aria-labelledby="coverage"><div><p className={styles.eyebrow}>QUALITY BEFORE VOLUME</p><h2 id="coverage">身份发现 ≠ 条件齐备</h2><p>专业名称进入目录后，还要补齐当前年度、资格、语言要求与官方申请入口，才能计作完整申请项目。</p><Link href="/en/programs">查看公开项目目录 →</Link></div><div>{value?.coverage ? <><p className={styles.coverageDate}>覆盖快照 {value.coverage.evaluatedOn}{value.coverage.stale || !ledgerFresh ? ' · 历史快照，待更新' : ''}</p><Metric label="条件齐备项目" value={format(value.coverage.currentPrograms)} /><Metric label="至少 5 个完整项目的学校" value={`${format(value.coverage.fivePlus)} / ${format(value.coverage.schools)}`} /><p className={styles.note}>有效奖学金机会 {format(value.coverage.currentScholarships)}。模型完成次数不计作新增项目数。</p></> : <p>完整覆盖快照暂不可用，不能据调用数推断已达标。</p>}</div></section>
+      {catalogue}
       <footer className={styles.footer}><span>Study in China Atlas · 只读用量看板</span><span>时间均为北京时间 · 云端采样约 45 秒，页面每 45 秒查询</span></footer>
     </div>
   </main>

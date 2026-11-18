@@ -143,7 +143,9 @@ export class ModelAdmission {
       // a provider response. A freeze stops new admissions but lets these drain.
       this.activeOperations++
       try {
-      if(path!=='/fetch/release'&&path!=='/status')await assertModelStateBusinessOpen(this.state.storage,this.env)
+      if(path!=='/fetch/release'&&path!=='/translation/settle'&&path!=='/status')await assertModelStateBusinessOpen(this.state.storage,this.env)
+      if(path==='/translation/acquire') return await this.acquireTranslation(raw)
+      if(path==='/translation/settle') return await this.settleTranslation(raw)
       if(path==='/fetch/acquire') {
         const host=String(raw.host??'')
         if(!/^[a-z0-9.-]{3,253}$/.test(host)||!host.includes('.')||host.includes('..')) return json({ok:false,error:'invalid_host'},400)
@@ -172,6 +174,59 @@ export class ModelAdmission {
       return json({ok:false,error:'invalid_or_unavailable_admission'},400)
     }
   }
+  private async acquireTranslation(raw: Record<string, unknown>): Promise<Response> {
+    const hash = raw.requestSha256
+    if (typeof hash !== 'string' || !HASH.test(hash)) return json({ error: 'invalid_request' }, 400)
+    const cfg = await control(this.env)
+    const budget = await readBackgroundBudgetGate(this.env.SNAPSHOTS_BUCKET)
+    if (!budget.allowed || !cfg?.enabled || !cfg.models_enabled || this.env.MAINTENANCE_ENABLED !== 'true') return json({ error: 'model_lane_disabled', retryAfter: 900 }, 429)
+    if (offlineFenced(await this.state.storage.get<GateState>('gate'))) return json({ error: 'model_capacity_offline_fenced', retryAfter: 300 }, 429)
+    const urgent = await hasUrgentMaintenance(this.env, cfg)
+    const quota = quotaAdmission(await fetchPlanQuota(this.env, this.fetcher), 'expansion', urgent, false)
+    if (!quota.allow) return json({ error: quota.code, retryAfter: quota.retryAfter }, 429)
+    return await this.state.storage.transaction(async txn => {
+      await assertModelStateBusinessOpen(txn, this.env)
+      const key = `translation:${hash}`
+      if (await txn.get(key)) return json({ error: 'translation_outcome_protected' }, 409)
+      const gate = await txn.get<GateState>('gate') ?? initial(), now = Date.now()
+      if (offlineFenced(gate)) return json({ error: 'model_capacity_offline_fenced', retryAfter: 300 }, 429)
+      gate.models = gate.models.filter(p => p.expiresAt > now)
+      const limit = quota.low ? 1 : Math.min(modelConcurrencyLimit(this.env), healthyModelLimit(gate.modelLimit))
+      if (now < gate.cooldownUntil || gate.models.length >= limit ||
+        (urgent && gate.models.filter(p => p.lane === 'expansion').length >= Math.max(1, limit - 1))) {
+        return json({ error: 'model_capacity', retryAfter: Math.max(30, Math.ceil((gate.cooldownUntil - now) / 1000)) }, 429)
+      }
+      const permit = crypto.randomUUID()
+      gate.models.push({ token: permit, lane: 'expansion', expiresAt: now + 120000 })
+      await txn.put(key, permit)
+      await txn.put('gate', gate)
+      return json({ permit })
+    })
+  }
+
+  private async settleTranslation(raw: Record<string, unknown>): Promise<Response> {
+    if (typeof raw.requestSha256 !== 'string' || !HASH.test(raw.requestSha256) || typeof raw.permit !== 'string'
+      || !['received', 'rate_limited', 'unknown', 'not_sent'].includes(String(raw.outcome))) return json({ error: 'invalid_request' }, 400)
+    return this.state.storage.transaction(async txn => {
+      await assertModelStateCleanupOpen(txn, this.env)
+      const key = `translation:${raw.requestSha256}`
+      if (await txn.get(key) !== raw.permit) return json({ error: 'reservation_mismatch' }, 409)
+      const gate = await txn.get<GateState>('gate') ?? initial()
+      if (offlineFenced(gate)) return json({ error: 'model_capacity_offline_fenced' }, 409)
+      gate.models = gate.models.filter(p => p.token !== raw.permit)
+      if (raw.outcome === 'rate_limited') {
+        const seconds = typeof raw.retrySeconds === 'number' && Number.isFinite(raw.retrySeconds) ? raw.retrySeconds : 60
+        gate.cooldownUntil = Math.max(gate.cooldownUntil, Date.now() + Math.max(60, Math.min(3600, seconds)) * 1000)
+        gate.modelLimit = Math.max(1, Math.floor(healthyModelLimit(gate.modelLimit) / 2))
+        gate.successes = 0
+      }
+      if (raw.outcome === 'unknown') await txn.put(key, 'unknown')
+      else await txn.delete(key)
+      await txn.put('gate', gate)
+      return json({ settled: true })
+    })
+  }
+
   private async run(input:ModelRequest):Promise<Response> {
     if(offlineFenced(await this.state.storage.get<GateState>('gate')))return json({ok:false,error:'model_capacity_offline_fenced',retryAfter:300},429)
     const budget=await readBackgroundBudgetGate(this.env.SNAPSHOTS_BUCKET)

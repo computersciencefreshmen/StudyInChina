@@ -20,7 +20,7 @@ type Descriptor = { path: string; sha256: string; bytes: number; count?: number 
 type Manifest = { schemaVersion: number; revision: string; generatedAt: string; official: false;
   counts: { programCount: number; capturedCount: number; schoolCount: number; sourceCount: number }; indexShards: Descriptor[] }
 type Helpers = {
-  writeProgramFeed(root: string, data: { records: unknown[]; generatedAt: string }): Manifest
+  writeProgramFeed(root: string, data: { records: unknown[]; generatedAt: string; publicIndex?: boolean }): Manifest
   sha256(body: string | Uint8Array): string
   feedRevision(counts: Manifest['counts'], shards: Descriptor[]): string
 }
@@ -173,6 +173,21 @@ describe('remote programme feed integrity and baseline preservation', () => {
     vi.stubGlobal('fetch', networkFor(root))
     const feed = await import('@/lib/program-feed')
     await feed.getProgramFeedIndex()
-    expect(await feed.getProgramFeedRecord(extra().id)).toBeUndefined()
+    await expect(feed.getProgramFeedRecord(extra().id)).rejects.toMatchObject({code: 'PROGRAM_DETAIL_UNAVAILABLE'})
+  })
+
+  it('serves only publication shards and keeps discovered and withdrawn URLs out of the runtime index', async () => {
+    const { root } = bundle()
+    const demo = { ...extra(), id: 'sicas-27165', sourceId: '27165', name: 'TEST 1' }
+    const manifest = builder.writeProgramFeed(root, { records: [...fixture.baseline, extra(), sourceLink(), demo],
+      generatedAt: '2026-11-18T01:00:00Z', publicIndex: true })
+    const network = networkFor(root)
+    vi.stubGlobal('fetch', network)
+    const feed = await import('@/lib/program-feed')
+    const index = await feed.getProgramFeedIndex()
+    expect(index.programs.map(p => p.id)).toEqual([...fixture.baseline.map(p => p.id), extra().id])
+    expect(index.summary.capturedCount).toBe(4)
+    expect(await feed.getProgramFeedRecord(demo.id)).toBeUndefined()
+    expect(network.mock.calls.map(([u]) => String(u))).not.toContain(feedBase + manifest.indexShards[0].path)
   })
 })

@@ -1,3 +1,4 @@
+import { consultationLabels, programConsultationHref } from '@/i18n/program-consultation'
 import { notFound, permanentRedirect } from 'next/navigation'
 import { CollectedProgramDetail, ProgramSourceReferences } from '@/components/features/CollectedProgram'
 import { resolveUnifiedProgram } from '@/lib/unified-programs'
@@ -78,7 +79,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const data = await getCatalogData()
   const resolved = await resolveUnifiedProgram(slug, getTodayDate(), data)
   if (resolved && resolved.canonical !== slug) permanentRedirect(`/${locale}/programs/${encodeURIComponent(resolved.canonical)}`)
-  if (resolved && 'collected' in resolved.item) return <CollectedProgramDetail item={resolved.item} locale={locale} />
+  if (resolved && 'collected' in resolved.item) return <div data-program-revision={resolved.revision}><CollectedProgramDetail item={resolved.item} locale={locale} /></div>
 
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) notFound()
@@ -150,11 +151,13 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           <span>{localize(university.name, locale)}</span>
           {city ? <span> {'\u00b7'} {localize(city.name, locale)}</span> : null}
         </>}
-        actions={partialCanApply && applicationUrl
+        actions={<>{partialCanApply && applicationUrl
           ? <a className="atlas-button atlas-button--primary atlas-button--medium" href={applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
           : <a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
               {messages.common.officialSource} ↗
             </a>}
+          <FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
+          <a className="text-link" href={programConsultationHref(locale, program.slug)}>{consultationLabels[locale]}</a></>}
         meta={<VerificationBadge collection="programs" recordId={program.id}
           status={program.status}
           verifiedAt={program.verifiedAt}
@@ -173,7 +176,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
         <AdmissionTrackCards program={program} cycles={data.admissionCycles} sources={data.sources} locale={locale} today={today} />
       </div>
-      <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail>
+      <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail data-program-revision={resolved?.revision}>
         <div className={styles.main}>
           <article className={styles.panel}>
             <h2>{messages.programs.overview}</h2>
@@ -342,6 +345,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           {messages.common.officialSource}{' \u2197'}
           </a>}
         <FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
+        <a className="text-link" href={programConsultationHref(locale, program.slug)}>{consultationLabels[locale]}</a>
       </>}
       meta={<VerificationBadge collection="programs" recordId={program.id}
         status={program.status}
@@ -362,7 +366,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
         <AdmissionTrackCards program={program} cycles={data.admissionCycles} sources={data.sources} locale={locale} today={today} />
     </div>
-    <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail>
+    <section className={`atlas-container atlas-section ${styles.layout}`} data-program-detail data-program-revision={resolved?.revision}>
       <div className={styles.main}>
         <article className={styles.panel}>
           <h2>{messages.programs.overview}</h2>

@@ -116,6 +116,21 @@ afterEach(() => {
 })
 
 describe('favorites comparison workspace', () => {
+  it('restores a saved collected project, compares source facts and opens program-specific consultation', async () => {
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(['sicas-123']))
+    const mock = vi.fn(async () => ({ ok: true, json: async () => ({ meta: {}, data: {
+      items: [], missingIds: [], collectedItems: [{ savedId: 'sicas-123', record: {
+        id: 'sicas-123', name: 'Painting', provider: 'SICAS', schoolName: 'Arts University', sourceUrl: 'https://example.test/painting',
+        fields: { duration: '4 semesters', tuition: 'CNY 15000 per programme' } } }] } }) } as Response))
+    vi.stubGlobal('fetch', mock)
+    render(<FavoritesView locale="en" messages={getMessages('en')} />)
+    await userEvent.setup().click(await screen.findByRole('checkbox'))
+    expect(mock.mock.calls[0]).toContainEqual(expect.stringContaining('view=all'))
+    expect(screen.getByText('4 semesters')).toBeVisible()
+    expect(screen.getByText('CNY 15000 per programme')).toBeVisible()
+    expect(screen.getByRole('link', { name: 'Ask about this program' })).toHaveAttribute('href', '/en/contact?program=sicas-123')
+    expect(screen.queryByRole('link', { name: /Apply on official site/ })).toBeNull()
+  })
   it('shows exact official semesters in saved programme comparison without inferring months', async () => {
     window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
     const item = comparisonItem(ids[0])

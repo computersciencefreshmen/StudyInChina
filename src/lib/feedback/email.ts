@@ -11,6 +11,7 @@ const categoryLabels: Record<FeedbackRequest['category'], string> = {
   'incorrect-data': 'Incorrect data',
   'broken-link': 'Broken link',
   'suggest-program': 'Program suggestion',
+  'program-inquiry': 'Program inquiry',
   other: 'Other feedback',
 }
 

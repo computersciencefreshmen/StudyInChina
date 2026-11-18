@@ -3,6 +3,7 @@ import { resolve, join, sep } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import { parseSicasProgram, sicasProgramIdentity, sourceHash } from './sicas-parser.mjs'
+import { prioritizeSicasQueue } from './sicas-school-priority.mjs'
 
 const HOST = 'www.sicas.com.cn'
 const UA = 'StudyInChinaPublicResearch/1.0 (authorized public programme collection)'
@@ -85,7 +86,7 @@ function retryAfter(value, now) {
 /** Pure batch boundary: the caller owns durable state and canonical feed writes.
  * No model key, account, official site, or publication endpoint is touched here. */
 export async function collectSicasBatch({ sources = [], state: inputState = {}, limit = 150, deadlineAt,
-  environment = process.env, fetcher = globalThis.fetch, now = Date.now, sleeper = wait } = {}) {
+  environment = process.env, fetcher = globalThis.fetch, now = Date.now, sleeper = wait, archive, schoolTargets = new Map() } = {}) {
   const state = normalizeSicasState(inputState), records = [], receipts = []
   const start = now(), deadline = Math.min(Number.isFinite(deadlineAt) ? deadlineAt : start + 9 * 60_000, start + 9 * 60_000)
   const parsedLimit = Number(limit)
@@ -145,7 +146,7 @@ export async function collectSicasBatch({ sources = [], state: inputState = {}, 
         if (!existsSync(file)) writeFileSync(file, gzipSync(body), { flag: 'wx' })
       }
       receipts.push(receipt)
-      return { receipt, html, status, location: response.headers.get('location'), contentType: response.headers.get('content-type') || '' }
+      return { receipt, html, body, status, location: response.headers.get('location'), contentType: response.headers.get('content-type') || '' }
     } catch (error) {
       const errorCode = error?.message === 'body_limit' ? 'body_limit' : error?.name === 'TimeoutError' || error?.name === 'AbortError' ? 'request_timeout' : 'network_error'
       receipts.push({ provider: 'SICAS', sourceUrl: url, finalUrl: url, method: 'GET', ...(status ? { status } : {}), fetchedAt, bytes, errorCode })
@@ -167,10 +168,10 @@ export async function collectSicasBatch({ sources = [], state: inputState = {}, 
     stop('robots_unavailable', robots.status, now() + 15 * 60_000)
     return finish()
   }
-  const ordered = roundRobinSicasSources(sources), queue = []
+  const ordered = roundRobinSicasSources(sources), eligible = []
   if (!ordered.length) return finish()
   const initialCursor = state.cursor % ordered.length
-  for (let scanned = 0; scanned < ordered.length && queue.length < maxRequests; scanned++) {
+  for (let scanned = 0; scanned < ordered.length && (schoolTargets.size || eligible.length < maxRequests); scanned++) {
     const index = (initialCursor + scanned) % ordered.length, source = ordered[index]
     const outcome = state.outcomes[source.id]
     if (future(outcome?.nextAttemptAt, now())) continue
@@ -179,11 +180,12 @@ export async function collectSicasBatch({ sources = [], state: inputState = {}, 
         nextAttemptAt: iso(Math.max(now(), Date.parse(source.fetchedAt)) + 30 * DAY) }
       continue
     }
-    queue.push({ source, afterCursor: (index + 1) % ordered.length })
+    eligible.push({ source, afterCursor: (index + 1) % ordered.length })
   }
+  const queue = schoolTargets.size ? prioritizeSicasQueue(eligible, ordered, state.outcomes, schoolTargets).slice(0, maxRequests) : eligible
   let next = 0
   async function worker() {
-    while (next < queue.length && !blocked() && summary.requests < maxRequests && now() < deadline && summary.bytes < MAX_BYTES) {
+    while (next < queue.length && !summary.archiveUnavailable && !blocked() && summary.requests < maxRequests && now() < deadline && summary.bytes < MAX_BYTES) {
       const { source, afterCursor } = queue[next++]
       state.cursor = afterCursor
       const attempts = (state.outcomes[source.id]?.attempts || 0) + 1
@@ -207,9 +209,20 @@ export async function collectSicasBatch({ sources = [], state: inputState = {}, 
       } else if (httpStatus === 404 || httpStatus === 410) {
         summary.unavailable++; state.outcomes[source.id] = { ...base, status: 'unavailable', nextAttemptAt: iso(now() + 7 * DAY), errorCode: `http_${httpStatus}` }
       } else if (httpStatus === 200) {
+        if (archive) {
+          try {
+            await archive(response.body, response.receipt.rawSha256, identity.url)
+            response.receipt.archiveSha256 = response.receipt.rawSha256
+          } catch {
+            summary.archiveUnavailable = true
+            state.outcomes[source.id] = { ...base, status: 'retry', nextAttemptAt: iso(now() + retryDelay(attempts)), errorCode: 'private_archive_unavailable' }
+            continue
+          }
+        }
         let record = null
         try { record = parseSicasProgram(response.html, { source, sourceUrl: identity.url, fetchedAt, rawSha256: response.receipt.rawSha256 }) } catch { /* Unsupported HTML stays retryable, never guessed. */ }
         if (record) {
+          if (response.receipt.archiveSha256) record.archiveSha256 = response.receipt.archiveSha256
           records.push(record); summary.captured++
           state.outcomes[source.id] = { ...base, status: 'captured', nextAttemptAt: iso(now() + 30 * DAY) }
         } else state.outcomes[source.id] = { ...base, status: 'retry', nextAttemptAt: iso(now() + retryDelay(attempts)), errorCode: 'unstructured_or_missing_identity' }

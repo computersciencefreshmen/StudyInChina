@@ -15,6 +15,16 @@ function captured(id: string, name: string, overrides: Partial<ThirdPartyProgram
 const filters = (values: Record<string, string> = {}) => parseProgramCatalogFilters(values)
 
 describe('one program catalogue', () => {
+  it('searches the bound bilingual school name, quarantines test identities, and counts unknown budget evidence separately', () => {
+    const bilingual = { ...data, universities: [{ ...university, name: { en: 'Alpha University', zh: '阿尔法大学' } }] }
+    const rows = [captured('cucas-1', 'History'), captured('sicas-27165', 'Renamed'), captured('sicas-2', 'TEST 21')]
+    const zh = queryUnifiedProgramData(bilingual, rows, filters({ q: '阿尔法大学' }), today, 'rev')
+    const en = queryUnifiedProgramData(bilingual, rows, filters({ q: 'Alpha University' }), today, 'rev')
+    expect(zh.items.map(unifiedProgramSlug)).toEqual(en.items.map(unifiedProgramSlug))
+    expect(zh.total).toBe(2)
+    const budget = queryUnifiedProgramData(bilingual, rows, filters({ tuition: 'under-20000' }), today, 'rev')
+    expect(budget.sourceConditionsUnknown).toBe(1)
+  })
   it('counts canonical captured and reviewed offerings together without URL-only placeholders or duplicate source aliases', () => {
     const emptyUniversity = { ...university, id: 'empty', slug: 'empty-university', name: { en: 'Empty University' } }
     const scopedData = { ...data, universities: [university, emptyUniversity] }

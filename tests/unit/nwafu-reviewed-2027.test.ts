@@ -58,7 +58,7 @@ describe('NWAFU 2027 independently reviewed Chinese bachelor core', () => {
     }
     for (const row of programs) expect(sha(row)).toBe(review.afterProgrammeSha256[row.id as keyof typeof review.afterProgrammeSha256])
     for (const row of cycles) expect(sha(row)).toBe(review.newCycleSha256[row.id as keyof typeof review.newCycleSha256])
-    expect(await validateDirectory(process.cwd(), TODAY)).toMatchObject({ integrityPassed: true, cohortSchools: 272 })
+    expect(await validateDirectory(process.cwd())).toMatchObject({ integrityPassed: true, cohortSchools: 272 })
   }, 20_000)
 
   it('binds five genuinely new bilingual identities to exact official HTML rows and XLSX cells, leaving the sixth candidate private', () => {

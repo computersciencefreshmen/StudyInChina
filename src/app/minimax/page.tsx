@@ -1,3 +1,5 @@
 import { PublicMiniMaxDashboard } from '@/components/minimax/PublicMiniMaxDashboard'
 
-export default function MiniMaxPage() { return <PublicMiniMaxDashboard /> }
+import { ProgrammeCoveragePanel } from '@/components/minimax/ProgrammeCoveragePanel'
+
+export default function MiniMaxPage() { return <PublicMiniMaxDashboard catalogue={<ProgrammeCoveragePanel />} /> }

@@ -13,7 +13,7 @@ export function GET(request: Request) {
     const params = new URL(request.url).searchParams
     if (params.get('view') === 'all') {
       const result = await queryUnifiedPrograms(parseProgramCatalogFilters(Object.fromEntries(params)), getTodayDate())
-      return ok({ data: result.items.map(item => publicUnifiedProgram(item)), meta: { total: result.total, page: result.page, pageCount: result.pageCount, pageSize: result.pageSize, revision: result.revision } })
+      return ok({ data: result.items.map(item => publicUnifiedProgram(item)), meta: { total: result.total, page: result.page, pageCount: result.pageCount, pageSize: result.pageSize, revision: result.revision, sourceConditionsUnknown: result.sourceConditionsUnknown } })
     }
     const service = await getCatalogApiService()
     return ok(service.listPrograms({

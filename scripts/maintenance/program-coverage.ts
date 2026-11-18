@@ -17,32 +17,8 @@ import { catalogSha256, loadMaintenanceBundle } from './build-scope'
 import { coverageBand, coverageSnapshotSchema, type CoverageSnapshot } from '../../workers/catalog-maintenance/src/coverage'
 import { EXISTING_SCHOOLS_V2_SHA256 } from '../../workers/catalog-maintenance/src/scope-config'
 
-/** Language tracks and admission rounds do not create another concrete major. */
-export function concreteProgramKeys(program: Program): string[] {
-  const names = [program.name.zh, program.name.en].filter((name): name is string => Boolean(name))
-  const generic = /^(?:(?:international\s+)?(?:undergraduate|graduate|postgraduate|bachelor(?:'?s)?|master(?:'?s)?|doctoral|degree)\s+(?:program(?:me)?s?|admissions?)(?:\s+guide)?|(?:国际学生|留学生)?(?:本科|硕士|博士|研究生|学历)(?:招生|项目|专业|目录|指南)(?:简章|目录|指南)?)$/iu
-  if (!names.length || names.every(name => generic.test(name.trim()))) return []
-  const normalize = (name: string) => name.normalize('NFKC').toLowerCase()
-    .replace(/\((?:english|chinese)(?:[- ](?:taught|medium))?\)|(?:english|chinese)[- ](?:taught|medium)|[（(](?:中文|英文|汉语|英语)(?:授课|教学)?[）)]/gu, '')
-    .replace(/[^\p{L}\p{N}]+/gu, '')
-  return [...new Set(names.map(normalize).filter(Boolean))].map(name => `${program.degreeLevel}:${name}`)
-}
-
-function distinctPrograms(programs: Program[]): string[] {
-  const groups: Array<{ ids: string[]; keys: Set<string> }> = []
-  for (const program of [...programs].sort((a, b) => a.id.localeCompare(b.id))) {
-    const keys = concreteProgramKeys(program)
-    if (!keys.length) continue
-    const matches = groups.filter(group => keys.some(key => group.keys.has(key)))
-    const group = matches[0] ?? { ids: [], keys: new Set<string>() }
-    if (!matches.length) groups.push(group)
-    group.ids.push(program.id); keys.forEach(key => group.keys.add(key))
-    for (const other of matches.slice(1)) {
-      group.ids.push(...other.ids); other.keys.forEach(key => group.keys.add(key)); groups.splice(groups.indexOf(other), 1)
-    }
-  }
-  return groups.map(group => group.ids.sort()[0]).sort()
-}
+import { concreteProgramKeys, distinctPrograms } from '../../src/lib/data/concrete-majors'
+export { concreteProgramKeys } from '../../src/lib/data/concrete-majors'
 
 type WithDiscovery = AuditMeta & { discovery?: DiscoveryMeta }
 /** A whole-current record or a fresh leaf can prove a value. Explicit unknown

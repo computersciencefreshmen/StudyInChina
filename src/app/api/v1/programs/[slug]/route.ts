@@ -19,7 +19,7 @@ export function GET(request: Request, context: { params: Promise<{ slug: string 
       const translated = isProgramTranslationLocale(locale)
         ? 'collected' in result.item ? await getProgramTranslations(result.item.collected, locale) : {}
         : null
-      return ok({ data: publicUnifiedProgram(result.item, true), meta: { canonicalSlug: result.canonical },
+      return ok({ data: publicUnifiedProgram(result.item, true), meta: { canonicalSlug: result.canonical, revision: result.revision },
         ...(isProgramTranslationLocale(locale) ? { translations: { locale, fields: Object.fromEntries(Object.entries(translated || {}).map(([field, record]) => [field,
           { text: record.text, method: record.method, translatedAt: record.translatedAt }])) } } : {}) })
     }

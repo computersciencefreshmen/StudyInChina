@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { collectSicasBatch, normalizeSicasState, roundRobinSicasSources, sicasRobotsPolicy } from './sicas-collector.mjs'
 import { parseSicasProgram, parseSicasListing, sicasProgramIdentity, sourceHash } from './sicas-parser.mjs'
+import { schoolCoverageTargets } from './sicas-school-priority.mjs'
+import { sha256, canonicalJson } from '../ingestion/program-catalog-feed.mjs'
 
 const source = (school, id) => ({ id: `sicas-${id}`, provider: 'SICAS', sourceId: String(id), schoolId: `sicas-${school}`,
   schoolName: 'URL-only school label', name: 'URL-only programme label', status: 'link_only', fields: {},
@@ -80,6 +82,34 @@ function clockFixture() {
   let time = Date.parse('2026-11-17T00:00:00.000Z')
   return { now: () => time, sleeper: async ms => { time += ms }, advance: ms => { time += ms } }
 }
+
+test('cloud priority reads exact school identities, favors zero and least recently attempted; archive is required before parsing', async () => {
+  const clock = clockFixture(), sources = [1, 2, 3, 4].map(i => ({ ...source(i, i), schoolName: `School ${i}` }))
+  const universities = sources.map((s, i) => ({ id: `uni-${i + 1}`, name: { en: s.schoolName } }))
+  const snapshot = { format: 'studyinchina.school-program-coverage', version: 1, evaluatedOn: '2026-11-17',
+    scopeRegistrySha256: '1'.repeat(64), inputCatalogSha256: '2'.repeat(64),
+    schools: universities.map((u, i) => ({ universityId: u.id, currentProgramCount: [5, 0, 0, 1][i] })) }
+  snapshot.sha256 = sha256(canonicalJson(snapshot))
+  const targets = schoolCoverageTargets(snapshot, universities, sources, '2026-11-17')
+  assert.equal(targets.size, 4)
+  assert.throws(() => schoolCoverageTargets({ ...snapshot, sha256: '3'.repeat(64) }, universities, sources, '2026-11-17'))
+  const ambiguous = schoolCoverageTargets(snapshot, [...universities, { id: 'other', name: { en: 'School 1' } }], sources, '2026-11-17')
+  assert.equal(ambiguous.has('sicas-1'), false)
+  const evidenceWrites = []
+  const result = await collectSicasBatch({ sources, schoolTargets: targets, limit: 2, ...clock,
+    state: { cursor: 1, outcomes: { 'sicas-2': { status: 'retry', fetchedAt: '2026-10-01T00:00:00Z' } } },
+    fetcher: async url => new Response(url.endsWith('/robots.txt') ? null : page(), { status: url.endsWith('/robots.txt') ? 404 : 200 }),
+    archive: async (body, hash, url) => { assert.equal(sourceHash(body), hash); evidenceWrites.push(url) } })
+  assert.deepEqual(result.records.map(r => r.id), ['sicas-3'])
+  assert.equal(evidenceWrites.length, 1)
+  assert.equal(result.records[0].archiveSha256, result.records[0].evidenceHash)
+  const failed = await collectSicasBatch({ sources: [sources[0]], ...clock,
+    archive: async () => { throw Error('archive failed') },
+    fetcher: async url => new Response(url.endsWith('/robots.txt') ? null : page(), { status: url.endsWith('/robots.txt') ? 404 : 200 }) })
+  assert.deepEqual(failed.records, [])
+  assert.equal(failed.state.outcomes['sicas-1'].errorCode, 'private_archive_unavailable')
+  assert.equal(failed.summary.archiveUnavailable, true)
+})
 
 test('batch returns literal records, retains prior outcomes, spaces starts, and caps total requests including robots', async () => {
   const clock = clockFixture(), starts = [], inputs = []

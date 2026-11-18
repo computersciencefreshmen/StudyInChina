@@ -12,10 +12,10 @@ on:
         default: 150
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: program-catalog-feed-${{ github.repository }}
+  group: program-catalog-harvest-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
       - name: Check out trusted collector code
         uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ github.sha }}
           path: code
           persist-credentials: false
       - name: Check out the pre-seeded durable data branch
@@ -39,6 +39,7 @@ jobs:
           ref: catalog-program-feed
           path: feed
           fetch-depth: 1
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -47,11 +48,126 @@ jobs:
       - name: Install locked parser dependencies without lifecycle scripts
         working-directory: code
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Collect one bounded batch and push its checkpoint before finishing
+      - name: Archive source pages and collect a bounded batch
         working-directory: code
         env:
           BATCH_LIMIT: ${{ inputs.batch_limit || '150' }}
-          MINIMAX_SUBSCRIPTION_KEY: ${{ secrets.MINIMAX_SUBSCRIPTION_KEY }}
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
         run: >-
           node scripts/ingestion/harvest-program-catalog.mjs
           --execute --feed-dir ../feed --limit "$BATCH_LIMIT" --max-minutes 9
+          --stage-candidate "$RUNNER_TEMP/harvest-candidate.json"
+      - uses: actions/upload-artifact@v6
+        with:
+          name: harvest-candidate
+          path: ${{ runner.temp }}/harvest-candidate.json
+          retention-days: 2
+          if-no-files-found: error
+
+  publish:
+    needs: harvest
+    outputs:
+      feed_commit: ${{ steps.checkpoint.outputs.feed_commit }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    concurrency:
+      group: program-catalog-feed-${{ github.repository }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          path: code
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          ref: catalog-program-feed
+          path: feed
+          fetch-depth: 1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v7
+        with:
+          name: harvest-candidate
+          path: ${{ runner.temp }}/candidate
+      - name: Publish against the latest feed under the shared writer lock
+        id: checkpoint
+        working-directory: code
+        run: |
+          node scripts/ingestion/harvest-program-catalog.mjs --execute --feed-dir ../feed --publish-candidate "$RUNNER_TEMP/candidate/harvest-candidate.json"
+          echo "feed_commit=$(git -C ../feed rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  readback:
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          path: code
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.publish.outputs.feed_commit }}
+          path: feed
+          sparse-checkout: manifest.json
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: |
+          mkdir proof
+          node code/scripts/quality/program-publication-readback.mjs feed/manifest.json proof/site-readback.json
+          cp feed/manifest.json proof/site-last-good.json
+      - uses: actions/upload-artifact@v6
+        with:
+          name: verified-production-programmes
+          path: proof/
+          if-no-files-found: error
+          retention-days: 14
+
+  record-readback:
+    needs: readback
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    permissions:
+      contents: write
+    concurrency:
+      group: program-catalog-feed-${{ github.repository }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: catalog-program-feed
+          sparse-checkout: receipts
+      - uses: actions/download-artifact@v7
+        with:
+          name: verified-production-programmes
+          path: ${{ runner.temp }}/proof
+      - name: Record the newest observed success for cold starts and the dashboard
+        run: |
+          node --input-type=module <<'JS'
+          import {readFileSync, existsSync, copyFileSync} from 'node:fs'
+          const dir = process.env.RUNNER_TEMP + '/proof/'
+          const receipt = JSON.parse(readFileSync(dir + 'site-readback.json'))
+          const manifest = JSON.parse(readFileSync(dir + 'site-last-good.json'))
+          if (!receipt.feedRevision || receipt.feedRevision !== manifest.publication.revision) throw Error('readback_revision_mismatch')
+          const last = 'receipts/site-readback.json'
+          if (!existsSync(last) || JSON.parse(readFileSync(last)).verifiedAt < receipt.verifiedAt) {
+            copyFileSync(dir + 'site-readback.json', last)
+            copyFileSync(dir + 'site-last-good.json', 'receipts/site-last-good.json')
+          }
+          JS
+          git add -- receipts/site-readback.json receipts/site-last-good.json
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record verified production programme snapshot'
+            git push origin HEAD:refs/heads/catalog-program-feed
+          fi
