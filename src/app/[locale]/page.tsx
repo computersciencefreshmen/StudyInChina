@@ -1,10 +1,11 @@
+import { LocalizedProgramCard } from '@/components/features/LocalizedProgramCard'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { connection } from 'next/server'
 import { CityConstellation } from '@/components/features/CityConstellation'
 import { CollectedProgramCard } from '@/components/features/CollectedProgram'
 import { CraftHomeVisual } from '@/components/features/CraftHomeVisual'
-import { ProgramCard, UniversityCard } from '@/components/features/RecordCards'
+import { UniversityCard } from '@/components/features/RecordCards'
 import styles from '@/components/features/CraftHomeVisual.module.css'
 import { formatStudentCityTitle, getHomeExperienceCopy } from '@/i18n/home-experience'
 import { getMessages } from '@/i18n/messages'
@@ -85,7 +86,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <header className={styles.sectionHeading}><span className={styles.eyebrow}>{messages.nav.programs}</span><h2 id="home-programs-title">{messages.programs.title}</h2><p>{messages.programs.intro}</p><Link href={`/${locale}/programs`}>{messages.home.explorePrograms} ↗</Link></header>
       <div className="content-grid">{previews.map(item => 'collected' in item
         ? <CollectedProgramCard key={item.collected.id} item={item} locale={locale} messages={messages} />
-        : <ProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} latestTuitionReference={item.latestTuitionReference} locale={locale} messages={messages} today={today} />)}</div>
+        : <LocalizedProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} latestTuitionReference={item.latestTuitionReference} locale={locale} messages={messages} today={today} />)}</div>
     </section> : null}
 
     <section className={styles.section} aria-labelledby="study-fields-title">

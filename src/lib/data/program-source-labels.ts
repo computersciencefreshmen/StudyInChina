@@ -14,6 +14,10 @@ const labels: Record<Source['kind'], readonly string[]> = {
 }
 const publisher = ['Official publisher', '官方发布机构', 'Официальный издатель', 'Offizieller Herausgeber', 'Organisme officiel', 'Entidad oficial']
 
+export function sourceKindLabel(kind: Source['kind'], locale: PublicLocale) {
+  return labels[kind][localeIndex[locale]]!
+}
+
 function institutionalHost(url: string): string {
   const host = new URL(url).hostname.toLowerCase()
   return host.endsWith('.edu.cn') ? host.split('.').slice(-3).join('.') : host.replace(/^www\./u, '')

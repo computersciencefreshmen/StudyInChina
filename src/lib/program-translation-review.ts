@@ -2,11 +2,19 @@ import { createHash } from 'node:crypto'
 import { sourceIsTargetLanguage, translationKey, translationPath, validateTranslationRecord,
   type ProgramTranslationField, type ProgramTranslationLocale } from './program-translation-contract'
 import type { ThirdPartyProgram } from './third-party-programs'
+import type { Program, University } from './data/types'
 
 export const REVIEW_POLICY = 'semantic-v1' as const
 export const REVIEW_MODEL = 'MiniMax-M3' as const
-type TranslationInput = Pick<ThirdPartyProgram, 'fields'> & Partial<Omit<ThirdPartyProgram, 'fields'>>
+export type TranslationInput = Pick<ThirdPartyProgram, 'fields'> & Partial<Omit<ThirdPartyProgram, 'fields'>>
 const digest = (s: string) => createHash('sha256').update(s).digest('hex')
+
+export function officialTitleSource(program: Program, school: University) {
+  const name = program.name.zh || program.name.en
+  if (!name || !/\p{Script=Han}/u.test(name) || program.universityId !== school.id) return null
+  return { id: program.id, slug: program.slug, schoolId: school.id, schoolName: school.name.en || school.name.zh || school.id,
+    name, status: 'extracted' as const, fields: { degree: program.degreeLevel, language: [...program.teachingLanguages].sort().join(', ') } }
+}
 
 export function translationScope(row: TranslationInput, field: ProgramTranslationField) {
   return { field, program: row.id ?? null, school: row.schoolId ?? null, name: row.name ?? null,
@@ -30,7 +38,8 @@ export function reviewBinding(source: string, text: string, locale: ProgramTrans
 }
 
 /** Narrow, reproducible counterexamples; all other prose still needs a separate reviewer. */
-export function translationConflict(source: string, text: string, locale: ProgramTranslationLocale) {
+export function translationConflict(source: string, text: string, locale: ProgramTranslationLocale, field?: ProgramTranslationField) {
+  if (field === 'title' && locale === 'en' && (/\p{Script=Han}/u.test(text) || !/[A-Za-z]/u.test(text))) return 'untranslated_title'
   if (locale !== 'zh') return null
   const prose = text.replace(/https?:\/\/\S+|[\w.+-]+@[\w.-]+/giu, '')
   if (/\p{Script=Han}/u.test(prose) && /\b(?:not|above|under|unless|required|exempt(?:ed)?|at least|at most)\b/iu.test(prose)) return 'untranslated_condition'
@@ -49,8 +58,10 @@ export function translationConflict(source: string, text: string, locale: Progra
 /** A fluent translation never proves that the underlying admissions claim is current or official. */
 export function validatePublishedTranslation(value: unknown, source: string, locale: ProgramTranslationLocale, scope: TranslationScope) {
   const record = validateTranslationRecord(value, source, locale)
+  if (scope.field === 'title' && (!record || record.method !== 'minimax' || locale !== 'en' ||
+    /\p{Script=Han}/u.test(record.text) || !/[A-Za-z]/u.test(record.text))) return null
   if (!record || record.method === 'source') return record
-  if (sourceIsTargetLanguage(source, locale) || translationConflict(source, record.text, locale)) return null
+  if (sourceIsTargetLanguage(source, locale) || translationConflict(source, record.text, locale, scope.field)) return null
   const review = (value as { review?: Record<string, unknown> }).review
   if (!scope.program || !scope.school || !review || review.policy !== REVIEW_POLICY || review.model !== REVIEW_MODEL
     || review.verdict !== 'PASS' || review.binding !== reviewBinding(source, record.text, locale, scope)

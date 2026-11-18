@@ -2,6 +2,7 @@ import type { DataBundle } from '@/lib/data/types'
 import { readIdentityAcceptances } from '@/lib/data/identity-acceptance-store'
 import { readFieldVerifications } from '@/lib/data/field-verification-store'
 import { selectPublishedData } from '@/lib/data/publication'
+import { applyFreshFieldVerifications } from '@/lib/data/field-verification'
 import { selectDiscoveryData } from '@/lib/data/discovery'
 import { freezeSnapshot } from '@/lib/data/file-snapshot'
 import { directoryRevision } from './directory-revision'
@@ -19,7 +20,7 @@ const snapshots = new WeakMap<DataBundle, { today: string; identities: unknown; 
 
 function buildSnapshot(bundle: DataBundle, today: string, identities: ReturnType<typeof readIdentityAcceptances>, fields: ReturnType<typeof readFieldVerifications>, immutable = true) {
   const value = {
-    current: selectDetailedPublicPrograms(selectPublishedData(bundle, today, identities), today, bundle),
+    current: selectDetailedPublicPrograms(applyFreshFieldVerifications(bundle, selectPublishedData(bundle, today, identities), today, fields), today, bundle),
     directory: selectDetailedPublicPrograms(selectDiscoveryData(bundle, today, identities, fields), today, bundle),
     revision: directoryRevision(bundle, today, identities, fields),
     release: deriveCatalogRelease(bundle),

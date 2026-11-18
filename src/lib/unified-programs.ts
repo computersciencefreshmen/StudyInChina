@@ -1,6 +1,7 @@
 import 'server-only'
 import { createHash } from 'node:crypto'
 import { getCatalogData } from './data/load'
+import { findReviewedProgramTranslation } from './data/format'
 import { classifyProgramField } from './data/fields'
 import { matchesUniversityRankings, rankingFilterKeys } from './data/rankings'
 import { getTodayDate, isCurrentVerifiedRecord } from './data/freshness'
@@ -135,7 +136,7 @@ export async function getUnifiedUniversityProgramCounts(today = getTodayDate(), 
 function matchesCollected(item: CollectedProgramItem, filters: ProgramCatalogFilters, data: DataBundle, today: string) {
   const record = item.collected, university = item.university
   const city = university ? data.cities.find(candidate => candidate.id === university.cityId) : undefined
-  const search = normalizeProgramIdentity([record.name, record.schoolName, record.fields.degree, record.fields.language,
+  const search = normalizeProgramIdentity([record.name, findReviewedProgramTranslation(record.name, 'en'), record.schoolName, record.fields.degree, record.fields.language,
     university?.name.en, university?.name.zh, city?.name.en, city?.name.zh].filter(Boolean).join(' '))
   if (normalizeProgramIdentity(filters.query).split(' ').filter(Boolean).some(token => !search.includes(token))) return false
   let unknown = Boolean(filters.degree && !item.degree || filters.language && !item.languages.length)

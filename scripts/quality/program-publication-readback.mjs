@@ -19,7 +19,7 @@ export async function verifyPublishedPrograms(expectedFeedRevision, read = get, 
   if (!revisionId.test(revision) || stats.feedRevision !== expectedFeedRevision || stats.revision !== revision || stats.publicPrograms !== total
     || !Number.isSafeInteger(total) || total < 1 || !home.includes(`data-program-revision="${revision}"`)
     || !home.includes(`data-public-program-count="${total}"`)) throw new Error('readback_version_or_total_mismatch')
-  const first = list.data.find(row => publicId.test(row.slug) && publicId.test(row.university?.slug || ''))
+  const first = list.data.find(row => typeof row.slug === 'string' && publicId.test(row.slug) && publicId.test(row.university?.slug || ''))
   if (!first) throw new Error('readback_has_no_bound_university_sample')
   const school = first.university.slug
   const [detail, html, scoped, schoolHtml] = await Promise.all([

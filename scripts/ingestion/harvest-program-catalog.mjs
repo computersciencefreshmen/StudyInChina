@@ -6,6 +6,7 @@ import { FEED_BRANCH, assertPublicState, canonicalJson, loadProgramFeed, mergePr
 import { providerEvidenceClient } from '../harvest/provider-evidence-client.mjs'
 import { schoolCoverageTargets } from '../harvest/sicas-school-priority.mjs'
 import { programWithdrawalReason } from '../../src/lib/program-publication-policy.mjs'
+import { pushCatalogCheckpoint } from './push-catalog-checkpoint.mjs'
 
 const runGit = (root, args) => {
   try { return execFileSync('git', ['-C', root, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, GIT_TERMINAL_PROMPT: '0' } }).trim() }
@@ -27,12 +28,11 @@ export function checkpointFeed(root, revision, git = runGit) {
   git(root, ['add', '--all', '--', ...paths])
   if (!git(root, ['diff', '--cached', '--name-only'])) return { changed: false, pushed: false }
   git(root, ['-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-m', `Checkpoint program feed ${revision.slice(0, 12)}`])
-  // No force push or automatic retry: a competing writer must be reconciled before another batch starts.
-  git(root, ['push', 'origin', `HEAD:refs/heads/${FEED_BRANCH}`])
+  pushCatalogCheckpoint(args => git(root, args), 'harvest')
   return { changed: true, pushed: true }
 }
 
-export async function collectFeedCandidate({ feedDir, limit = 150, maxMinutes = 9, collector, git, environment = process.env, now = Date.now, evidenceClient }) {
+export async function collectFeedCandidate({ feedDir, limit = 150, maxMinutes = 9, collector, git, environment = process.env, now = Date.now, evidenceClient, repairProgramId }) {
   if (!Number.isSafeInteger(limit) || limit < 1 || limit > 250 || !Number.isFinite(maxMinutes) || maxMinutes < 0.1 || maxMinutes > 10) throw new Error('feed_batch_bound_invalid')
   const root = resolve(feedDir)
   assertFeedCheckout(root, git)
@@ -43,7 +43,7 @@ export async function collectFeedCandidate({ feedDir, limit = 150, maxMinutes = 
   const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai' }).format(new Date(now()))
   const schoolTargets = schoolCoverageTargets(coverage, universities, loaded.records, today)
   const result = await collector({ sources: loaded.records, state: structuredClone(loaded.state), limit, deadlineAt: now() + maxMinutes * 60_000,
-    environment: collectorEnvironment, archive: evidenceClient?.archive, schoolTargets })
+    environment: collectorEnvironment, archive: evidenceClient?.archive, schoolTargets, repairProgramId })
   if (!result || !Array.isArray(result.records) || result.records.length > limit || !Array.isArray(result.receipts) || result.receipts.length > limit * 4 + 20 || !result.state) throw new Error('feed_batch_result_invalid')
   const state = structuredClone(result.state)
   if (evidenceClient) state.scheduling = { coverageSha256: coverage?.sha256 ?? null, inputFeedRevision: loaded.manifest.revision, mappedProviderSchools: schoolTargets.size }
@@ -79,8 +79,10 @@ export function publishFeedCandidate(root, candidate, git = runGit) {
   if (loaded.manifest.state.sha256 !== candidate.baseState) throw new Error('feed_candidate_cursor_conflict')
   const merged = mergeProgramRecords(loaded.records, candidate.records)
   const state = { ...candidate.state, lastBatchSha256: batchSha256 }
-  const publishedBefore = new Set(loaded.records.filter(row => row.status === 'extracted' && !programWithdrawalReason(row)).map(row => row.id))
-  const grew = merged.records.some(row => row.status === 'extracted' && !programWithdrawalReason(row) && !publishedBefore.has(row.id))
+  const publishedBefore = new Map(loaded.records.filter(row => row.status === 'extracted' && !programWithdrawalReason(row)).map(row => [row.id, row]))
+  const visible = merged.records.filter(row => row.status === 'extracted' && !programWithdrawalReason(row))
+  const restoredDegrees = visible.filter(row => publishedBefore.has(row.id) && !publishedBefore.get(row.id).fields.degree && row.fields.degree).length
+  const grew = restoredDegrees > 0 || visible.some(row => !publishedBefore.has(row.id))
   state.monitor = harvestMonitor(loaded.state.monitor, candidate, grew, merged.held.length, merged.rejected.length)
   for (const rejected of merged.rejected) if (rejected.id && state.outcomes?.[rejected.id]) state.outcomes[rejected.id] = { ...state.outcomes[rejected.id], status: 'invalid', errorCode: rejected.errorCode }
   for (const held of merged.held) if (state.outcomes?.[held.id]) state.outcomes[held.id] = { ...state.outcomes[held.id], status: 'retry', errorCode: held.errorCode,
@@ -91,7 +93,7 @@ export function publishFeedCandidate(root, candidate, git = runGit) {
   const publication = checkpointFeed(root, manifest.revision, git)
   return { schemaVersion: 1, revision: manifest.revision, counts: manifest.counts, batchRecords: candidate.records.length,
     rejectedRecords: merged.rejected.length, heldRecords: merged.held.length, ...publication, archiveUnavailable: candidate.archiveUnavailable,
-    mappedProviderSchools: candidate.mappedProviderSchools, modelCalls: 0 }
+    mappedProviderSchools: candidate.mappedProviderSchools, restoredDegrees, modelCalls: 0 }
 }
 
 export async function harvestProgramCatalog(options) {
@@ -110,7 +112,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   } else {
     const { collectSicasBatch } = await import('../harvest/sicas-collector.mjs')
     const options = { feedDir: option('--feed-dir'), limit: Number(option('--limit') || 150), maxMinutes: Number(option('--max-minutes') || 9),
-      collector: collectSicasBatch, evidenceClient: providerEvidenceClient(process.env) }
+      collector: collectSicasBatch, evidenceClient: providerEvidenceClient(process.env), repairProgramId: option('--repair-program-id') }
     if (stage) {
       const candidate = await collectFeedCandidate(options)
       writeFileSync(stage, JSON.stringify(candidate), { flag: 'wx' })

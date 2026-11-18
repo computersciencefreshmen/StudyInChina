@@ -4,7 +4,7 @@ import type { AdmissionCycle, LocalizedText } from './types'
 import reviewedProgramLocalizations from '../../../content/data/program-localizations.json'
 
 const programTranslations = reviewedProgramLocalizations.entries as Record<string, LocalizedText>
-const containsHan = (value: string) => /[\u3400-\u9fff]/u.test(value)
+export const containsHan = (value: string) => /\p{Script=Han}/u.test(value)
 export const normalizeProgramTranslationKey = (value: string) => value.normalize('NFC').replace(/\s+/gu, ' ').trim()
 
 /** Exact source keys only; publication imports separately reviewed translations. */

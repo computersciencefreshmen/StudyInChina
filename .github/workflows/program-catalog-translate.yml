@@ -5,6 +5,10 @@ on:
     - cron: '8,23,38,53 * * * *'
   workflow_dispatch:
     inputs:
+      review_canary:
+        description: Review four pinned Chinese and English samples (at most six model calls)
+        type: boolean
+        default: false
       max_calls:
         description: Maximum useful model calls in this checkpoint (1-240)
         type: number
@@ -19,10 +23,10 @@ on:
 permissions:
   contents: write
 
-# Share the data writer with collection. Both check out the latest feed only
-# after obtaining this lock; no force pushes or competing branch snapshots.
+# Keep one translation journal owner. Augmented feed pushes use Git's
+# fast-forward check and reconcile only another producer's disjoint paths.
 concurrency:
-  group: program-catalog-feed-${{ github.repository }}
+  group: program-catalog-translation-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
@@ -30,14 +34,15 @@ jobs:
     if: >-
       github.repository == 'computersciencefreshmen/StudyInChina' &&
       github.ref == 'refs/heads/main' &&
-      vars.PROGRAM_CATALOG_TRANSLATE_ENABLED == 'true'
+      (vars.PROGRAM_CATALOG_TRANSLATE_ENABLED == 'true' ||
+      (github.event_name == 'workflow_dispatch' && inputs.review_canary == true))
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: ${{ inputs.review_canary == true && 18 || 12 }}
     steps:
       - name: Check out reviewed translation code
         uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ github.sha }}
           path: code
           persist-credentials: false
       - name: Check out durable program data and translation journals
@@ -55,6 +60,7 @@ jobs:
         working-directory: code
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Translate changed text and publish validated results
+        if: inputs.review_canary != true
         working-directory: code
         env:
           MINIMAX_SUBSCRIPTION_KEY: ${{ secrets.MINIMAX_SUBSCRIPTION_KEY }}
@@ -66,3 +72,15 @@ jobs:
           node --import tsx scripts/translation/run-program-translations.mjs
           --execute --feed-dir ../feed --max-minutes 8
           --max-calls "$MAX_CALLS" --concurrency "$MODEL_CONCURRENCY"
+      - name: Check semantic regressions before the bounded review
+        if: github.event_name == 'workflow_dispatch' && inputs.review_canary == true
+        working-directory: code
+        run: node --import tsx --test scripts/translation/review-program-translations.test.mjs scripts/translation/translation-canary.test.mjs
+      - name: Review four pinned program fields in Chinese and English
+        if: github.event_name == 'workflow_dispatch' && inputs.review_canary == true
+        working-directory: code
+        env:
+          MINIMAX_SUBSCRIPTION_KEY: ${{ secrets.MINIMAX_SUBSCRIPTION_KEY }}
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        run: node --import tsx scripts/translation/translation-canary.mjs --execute --feed-dir ../feed

@@ -1,3 +1,5 @@
+import { collectedDisplayName } from '@/lib/program-display-name'
+import { isProgramTranslationLocale } from '@/lib/program-translations'
 import { compareCatalogPrograms, getCatalogDirectoryService } from '@/lib/catalog-api/runtime'
 import { resolveUnifiedProgram } from '@/lib/unified-programs'
 import { publicThirdPartyProgram } from '@/lib/third-party-public'
@@ -39,12 +41,14 @@ export function GET(request: Request) {
       const service = await getCatalogDirectoryService()
       const envelope = service.comparePrograms(ids)
       const today = getTodayDate()
+      const locale = params.get('locale')
       const collectedItems = [], aliases: Record<string, string> = {}, missingIds = []
       for (const id of envelope.data.missingIds) {
         const resolved = await resolveUnifiedProgram(id, today)
         if (!resolved) { missingIds.push(id); continue }
         if ('collected' in resolved.item) {
-          collectedItems.push({ savedId: id, record: publicThirdPartyProgram(resolved.item.collected) })
+          collectedItems.push({ savedId: id, record: publicThirdPartyProgram(resolved.item.collected),
+            ...(isProgramTranslationLocale(locale) ? { displayName: await collectedDisplayName(resolved.item.collected, locale) } : {}) })
           continue
         }
         const item = service.comparePrograms([resolved.item.program.id]).data.items[0]

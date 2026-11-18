@@ -4,7 +4,8 @@ import { loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
 import { getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { readFieldVerifications } from '@/lib/data/field-verification-store'
-import { validateFieldVerification } from '@/lib/data/field-verification'
+import { applyFreshFieldVerifications, fieldValueSha256, validateFieldVerification } from '@/lib/data/field-verification'
+import { studentMatchCatalog } from '@/lib/student-matching-data'
 
 const checked = '2026-11-18'
 const bundle = loadMaintenanceBundle(process.cwd())
@@ -48,5 +49,24 @@ describe('three zero-coverage schools and the scoped Xiamen funding opportunity'
       expect(archived.get(leaf.objectKey)).toBe(leaf.snapshotSha256)
       expect(validateFieldVerification(bundle, leaf, checked)).toEqual(leaf)
     }
+  })
+  it('excludes a contested annual language condition from matching while preserving other schools', () => {
+    const scoped = structuredClone(bundle)
+    const cycle = scoped.admissionCycles.find(row => row.programId === 'program-polyu-msc-data-science-and-analytics')!
+    const first = readFieldVerifications().find(row => row.recordId === cycle.id && row.fieldPath === 'languageRequirements')!
+    const source = { ...scoped.sources.find(row => row.id === first.sourceId)!, id: 'test-contradictory-source',
+      url: 'https://www.polyu.edu.hk/test/conflicting-announcement' }
+    scoped.sources.push(source)
+    cycle.sourceIds.push(source.id)
+    const value = [{ test: 'IELTS', minimum: '8.5' }]
+    const conflict = { ...first, sourceId: source.id, sourceUrl: source.url, value, valueSha256: fieldValueSha256(value), observationOnly: true as const }
+    const projected = getPublicCatalogSnapshot(bundle, checked).directory
+    const before = studentMatchCatalog(projected, 'en', checked)
+    const after = studentMatchCatalog(applyFreshFieldVerifications(scoped, projected, checked, [first, conflict]), 'en', checked)
+    expect(before.map(item => item.id)).toContain(cycle.programId)
+    expect(after.map(item => item.id)).toEqual(before.filter(item => item.id !== cycle.programId).map(item => item.id))
+    const reconciled = { ...conflict, verifiedAt: '2026-11-18T08:10:00.000Z', value: first.value, valueSha256: first.valueSha256 }
+    const resolved = studentMatchCatalog(applyFreshFieldVerifications(scoped, projected, checked, [reconciled, conflict, first]), 'en', checked)
+    expect(resolved.map(item => item.id)).toContain(cycle.programId)
   })
 })

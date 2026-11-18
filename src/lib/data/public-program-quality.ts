@@ -1,38 +1,16 @@
+import { concreteProgramKeys } from './concrete-majors'
+import { supportsField as supports, applicationRoute as route, hasList } from './decision-evidence'
 import { isCurrentAdmissionYear } from './cycle-scope'
 import type { AdmissionCycle, AuditMeta, DataBundle, Program } from './types'
 import type { DiscoveryMeta } from './discovery'
 
 /** A public policy version, not an edit to the raw catalogue or maintenance scope. */
 export const PUBLIC_PROGRAM_QUALITY_POLICY = 'studyinchina.public-program-core.v2'
-type ProvenRecord = AuditMeta & { discovery?: DiscoveryMeta }
-
-// The same proof rules used by buildProgramCoverage: an explicit unknown wins
-// over whole-record freshness. Empty values are not automatic exemptions.
-function supports(record: ProvenRecord, path: string, meaningful: boolean, today: string, exemption = false) {
-  const meta = record.discovery
-  const current = meta ? meta.currentFacts : record.status === 'verified' && record.verifiedAt <= today && record.reviewAfter >= today
-  if (!current && !meta?.currentFieldPaths.includes(path)) return false
-  const state = meta?.fieldStates?.[path]
-  if (state === 'not_applicable') return exemption
-  return (state === undefined || state === 'known') && meaningful
-}
-const hasList = (value: unknown) => Array.isArray(value) && value.length > 0
-function route(value: unknown) {
-  if (typeof value !== 'string') return false
-  try { const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) && !url.username && !url.password }
-  catch { return false }
-}
-function concrete(program: Program) {
-  const names = [program.name.en, program.name.zh].filter((value): value is string => Boolean(value))
-  const generic = /^(?:(?:international\s+)?(?:undergraduate|graduate|postgraduate|bachelor(?:'?s)?|master(?:'?s)?|doctoral|degree)\s+(?:program(?:me)?s?|admissions?)(?:\s+guide)?|(?:国际学生|留学生)?(?:本科|硕士|博士|研究生|学历)(?:招生|项目|专业|目录|指南)(?:简章|目录|指南)?)$/iu
-  return names.length > 0 && !names.every(name => generic.test(name.trim()))
-}
-
 /** Core facts must be known in one usable annual/language/round scope. Tuition
  * and marketing descriptions are deliberately not prerequisites for this gate. */
 export function hasDetailedPublicProgram(program: Program & { discovery?: DiscoveryMeta }, cycles: AdmissionCycle[], today: string): boolean {
   const known = (path: string, value: boolean, exemption = false) => supports(program, path, value, today, exemption)
-  if (!concrete(program) || !route(program.programUrl) || program.degreeLevel === 'other' || !known('teachingLanguages', program.teachingLanguages.length > 0)
+  if (concreteProgramKeys(program).length === 0 || !route(program.programUrl) || program.degreeLevel === 'other' || !known('teachingLanguages', program.teachingLanguages.length > 0)
     || !known('durationMonths', typeof program.durationMonths === 'number' && program.durationMonths > 0)) return false
   return cycles.some(input => {
     const cycle = input as AdmissionCycle & { discovery?: DiscoveryMeta }

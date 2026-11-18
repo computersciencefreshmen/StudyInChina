@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { admissionCycleSchema, programSchema, programSupplementaryDetailsSchema, scholarshipSchema } from './schema'
 import { canonicalIdentityJson } from './identity-acceptance'
 import { getTodayDate } from './freshness'
+import type { FieldMeta } from '@/lib/catalog-api/types'
+import type { DiscoveryMeta } from './discovery'
 import type { AdmissionCycle, DataBundle, Program, Scholarship } from './types'
 
 const hash = z.string().regex(/^[a-f0-9]{64}$/u)
@@ -14,6 +16,7 @@ export const fieldVerificationSchema = z.object({
   entityType: z.enum(['program', 'admissionCycle', 'scholarship']), recordId: z.string().min(1),
   recordScopeSha256: hash, fieldPath: z.string().min(1), value: z.unknown(), valueSha256: hash,
   factStatus: z.enum(['known', 'officially_not_announced', 'not_applicable']).default('known'),
+  observationOnly: z.literal(true).optional(),
   sourceId: z.string().min(1), sourceUrl: z.url(), snapshotSha256: hash, objectKey: z.string().min(1),
   locator: z.string().min(1), quote: z.string().min(1), verifiedAt: z.iso.datetime(), reviewAfter: calendarDate,
   review: z.object({ method: z.enum(['rules', 'dual-model', 'independent']), reviewerId: z.string().min(1), promptSha256: hash.optional() }).strict(),
@@ -83,7 +86,8 @@ function getField(record: unknown, path: string): unknown {
   return value
 }
 
-export function validateFieldVerification(bundle: DataBundle, input: unknown, today = getTodayDate()): FieldVerification | undefined {
+/** Source-backed observations may disagree with the value currently chosen for display. */
+export function validateFieldObservation(bundle: DataBundle, input: unknown, today = getTodayDate()): FieldVerification | undefined {
   const parsed = fieldVerificationSchema.safeParse(input)
   if (!parsed.success) return undefined
   const entry = parsed.data, verifiedDay = getTodayDate(new Date(entry.verifiedAt))
@@ -98,15 +102,39 @@ export function validateFieldVerification(bundle: DataBundle, input: unknown, to
   if (url.protocol !== 'https:' || url.username || url.password || url.port) return undefined
   const schema = fieldSchema(entry.entityType, entry.fieldPath)
   if (!schema || !schema.safeParse(entry.value).success || entry.value === undefined || entry.valueSha256 !== fieldValueSha256(entry.value)
-    || entry.valueSha256 !== fieldValueSha256(getField(record, entry.fieldPath))
     || entry.recordScopeSha256 !== fieldRecordScopeSha256(entry.entityType, record)) return undefined
   if (entry.factStatus === 'known' && entry.value === null) return undefined
   return entry
 }
 
-type PublicFieldEvidence = { status: FieldVerification['factStatus']; officialUrl: string; sourceTitle: string; checkedAt: string }
-type FieldDiscovery = { currentFacts?: boolean; currentFieldPaths?: string[]; fieldStates?: Record<string, FieldVerification['factStatus']>;
-  fieldMeta?: Record<string, PublicFieldEvidence> }
+export function validateFieldVerification(bundle: DataBundle, input: unknown, today = getTodayDate()) {
+  const entry = validateFieldObservation(bundle, input, today)
+  if (!entry) return undefined
+  const collection = entry.entityType === 'program' ? bundle.programs : entry.entityType === 'admissionCycle' ? bundle.admissionCycles : bundle.scholarships
+  const value = getField(collection.find(row => row.id === entry.recordId), entry.fieldPath)
+  return value !== undefined && entry.valueSha256 === fieldValueSha256(value) ? entry : undefined
+}
+
+function withheldValue(path: string, value: unknown): unknown {
+  if (Array.isArray(value)) return []
+  if (['coverage.tuition', 'coverage.accommodation', 'coverage.insurance'].includes(path)) return 'unknown'
+  if (path === 'dateStatus') return 'not-announced'
+  return null
+}
+
+/** Expose only checked public-document coordinates. Arbitrary locators, archive keys and raw documents stay private. */
+function publicSourceLocation(entry: FieldVerification): FieldMeta['location'] {
+  const section = /^(?:pdf:)?(page|paragraph):([1-9]\d{0,4})$/u.exec(entry.locator)
+  if (section) return { kind: section[1] as 'page' | 'paragraph', number: Number(section[2]) }
+  const range = /^normalized-(utf16|code-points):(\d{1,8}):(\d{1,8})$/u.exec(entry.locator)
+  if (range && Number(range[2]) < Number(range[3])) {
+    // Some official website parsers include hyperlink annotations in normalized text.
+    const excerpt = entry.quote.replace(/\[href=[^\]]+\]/gu, '').replace(/\s+/gu, ' ').trim().slice(0, 95).trim()
+    return { kind: 'text', start: Number(range[2]), end: Number(range[3]), unit: range[1] === 'utf16' ? 'UTF-16' : 'Unicode', excerpt }
+  }
+  if (entry.locator.length <= 250 && /^\/html\/body(?:\/(?:main|article|section|div|form|span|p|a|table|tbody|thead|tr|th|td|ul|ol|li)(?:\[[1-9]\d{0,3}\])?)+$/u.test(entry.locator))
+    return { kind: 'html', path: entry.locator }
+}
 function setField(record: Record<string, unknown>, path: string, value: unknown) {
   const parts = path.split('.')
   let target = record
@@ -120,21 +148,43 @@ function setField(record: Record<string, unknown>, path: string, value: unknown)
 /** Pure allowlisted overlay. It does not renew a record, change its status, or expose raw siblings. */
 export function applyFreshFieldVerifications(raw: DataBundle, projected: DataBundle, today: string, entries: FieldVerification[]): DataBundle {
   const result = structuredClone(projected)
-  const valid = entries.flatMap(entry => { const accepted = validateFieldVerification(raw, entry, today); return accepted ? [accepted] : [] })
-    .sort((a, b) => a.verifiedAt.localeCompare(b.verifiedAt) || a.receiptSha256.localeCompare(b.receiptSha256))
-  for (const entry of valid) {
+  const groups = new Map<string, FieldVerification[]>()
+  for (const input of entries) {
+    const entry = validateFieldObservation(raw, input, today)
+    if (!entry) continue
+    const key = [entry.entityType, entry.recordScopeSha256, entry.fieldPath].join(':')
+    const observations = groups.get(key) || []
+    observations.push(entry)
+    groups.set(key, observations)
+  }
+  for (const observations of groups.values()) {
+    observations.sort((a, b) => a.verifiedAt.localeCompare(b.verifiedAt) || a.receiptSha256.localeCompare(b.receiptSha256))
+    const bySource = new Map(observations.map(row => [row.sourceUrl, row]))
+    const entry = observations.at(-1)!
+    const current = [...bySource.values()]
+    const disputed = new Set(current.map(row => row.factStatus + ':' + row.valueSha256)).size > 1
+      || current.some(row => row.observationOnly && !validateFieldVerification(raw, row, today))
+    if (!disputed && !validateFieldVerification(raw, entry, today)) continue
     const records = entry.entityType === 'program' ? result.programs : entry.entityType === 'admissionCycle' ? result.admissionCycles : result.scholarships
     // A field receipt cannot grant a previously rejected identity or resurrect a hidden cycle.
-    const record = records.find(row => row.id === entry.recordId) as (Program | AdmissionCycle | Scholarship) & { discovery?: FieldDiscovery } | undefined
+    const record = records.find(row => row.id === entry.recordId) as (Program | AdmissionCycle | Scholarship) & { discovery?: DiscoveryMeta } | undefined
     if (!record) continue
     const path = entry.entityType === 'program' && entry.fieldPath.startsWith('details.') && !(record as Program).details
       ? entry.fieldPath.replace(/^details\./u, 'supplementaryDetails.') : entry.fieldPath
-    setField(record as unknown as Record<string, unknown>, path, entry.value)
-    if (record.discovery) record.discovery = { ...record.discovery,
-      currentFieldPaths: [...new Set([...(record.discovery.currentFieldPaths ?? []), entry.fieldPath])],
-      fieldStates: { ...record.discovery.fieldStates, [entry.fieldPath]: entry.factStatus },
-      fieldMeta: { ...record.discovery.fieldMeta, [entry.fieldPath]: { status: entry.factStatus, officialUrl: entry.sourceUrl,
-        sourceTitle: raw.sources.find(source => source.id === entry.sourceId)!.title, checkedAt: entry.verifiedAt } } }
+    const status = disputed ? 'conflict' : entry.factStatus
+    setField(record as unknown as Record<string, unknown>, path, disputed ? withheldValue(path, entry.value) : entry.value)
+    const evidence: FieldMeta = { status, officialUrl: entry.sourceUrl,
+      sourceTitle: raw.sources.find(source => source.id === entry.sourceId)!.title, checkedAt: entry.verifiedAt }
+    if (!disputed) {
+      const location = publicSourceLocation(entry)
+      if (location) evidence.location = location
+    }
+    if (disputed) evidence.conflictingSources = [...bySource.keys()]
+    record.discovery = { identityAcceptedAt: record.verifiedAt,
+      currentFacts: record.status === 'verified' && record.verifiedAt <= today && record.reviewAfter >= today,
+      ...record.discovery, currentFieldPaths: [...new Set([...(record.discovery?.currentFieldPaths ?? []), entry.fieldPath])],
+      fieldStates: { ...record.discovery?.fieldStates, [entry.fieldPath]: status },
+      fieldMeta: { ...record.discovery?.fieldMeta, [entry.fieldPath]: evidence } }
   }
   return result
 }

@@ -1,6 +1,6 @@
 # Durable third-party programme feed
 
-The code checkout is pinned to the workflow commit on `main`. The separate data branch is `catalog-program-feed`. The cloud workflow runs every 15 minutes at minutes 3/18/33/48 when `PROGRAM_CATALOG_HARVEST_ENABLED=true`. Its read-only collection job archives the exact bytes of each successful SICAS detail response before extraction. The short publication job checks out the current feed under the common writer lock, validates the candidate and publishes once.
+The code checkout is pinned to the workflow commit on `main`. The separate data branch is `catalog-program-feed`. The cloud workflow runs every 15 minutes at minutes 3/18/33/48 when `PROGRAM_CATALOG_HARVEST_ENABLED=true`. Its read-only collection job archives the exact bytes of each successful SICAS detail response before extraction. The short publication job checks out the current feed, validates the candidate and publishes once. Both producers share the atomic Git fast-forward writer. Concurrent translation-only and harvest-only changes can be rebased; overlapping paths halt publication.
 
 Root must seed the data branch with `vercel.json` containing `{"git":{"deploymentEnabled":false}}` before enabling the workflow. The checkpoint preflight requires this file, the exact data branch, and the expected GitHub origin; it never changes deployment settings on `main`. The data branch must contain no application source or credentials.
 

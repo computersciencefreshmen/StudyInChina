@@ -10,6 +10,10 @@ on:
         type: number
         required: false
         default: 150
+      repair_program_id:
+        description: Optional due SICAS programme ID to prioritize for a degree evidence check
+        type: string
+        required: false
 
 permissions:
   contents: read
@@ -52,12 +56,13 @@ jobs:
         working-directory: code
         env:
           BATCH_LIMIT: ${{ inputs.batch_limit || '150' }}
+          REPAIR_PROGRAM_ID: ${{ inputs.repair_program_id }}
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
         run: >-
           node scripts/ingestion/harvest-program-catalog.mjs
           --execute --feed-dir ../feed --limit "$BATCH_LIMIT" --max-minutes 9
-          --stage-candidate "$RUNNER_TEMP/harvest-candidate.json"
+          --stage-candidate "$RUNNER_TEMP/harvest-candidate.json" --repair-program-id "$REPAIR_PROGRAM_ID"
       - uses: actions/upload-artifact@v6
         with:
           name: harvest-candidate
@@ -146,13 +151,21 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: ${{ github.sha }}
+          path: code
+          sparse-checkout: scripts/ingestion
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
           ref: catalog-program-feed
+          path: feed
           sparse-checkout: receipts
       - uses: actions/download-artifact@v7
         with:
           name: verified-production-programmes
           path: ${{ runner.temp }}/proof
       - name: Record the newest observed success for cold starts and the dashboard
+        working-directory: feed
         run: |
           node --input-type=module <<'JS'
           import {readFileSync, existsSync, copyFileSync} from 'node:fs'
@@ -169,5 +182,5 @@ jobs:
           git add -- receipts/site-readback.json receipts/site-last-good.json
           if ! git diff --cached --quiet; then
             git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record verified production programme snapshot'
-            git push origin HEAD:refs/heads/catalog-program-feed
+            node ../code/scripts/ingestion/push-catalog-checkpoint.mjs harvest
           fi

@@ -51,10 +51,10 @@ jobs:
         run: npm run test
 
       - name: Validate incremental program feed and resumable source collection
-        run: node --test scripts/ingestion/program-catalog-feed.test.mjs scripts/harvest/sicas-collector.test.mjs
+        run: node --test scripts/ingestion/program-catalog-feed.test.mjs scripts/harvest/sicas-collector.test.mjs scripts/quality/program-publication-readback.test.mjs
 
       - name: Validate subscription translation quota, fact preservation and durable retries
-        run: node --import tsx --test scripts/translation/minimax-translation-provider.test.ts scripts/translation/run-program-translations.test.mjs scripts/translation/review-program-translations.test.mjs
+        run: node --import tsx --test scripts/translation/minimax-translation-provider.test.ts scripts/translation/run-program-translations.test.mjs scripts/translation/review-program-translations.test.mjs scripts/translation/translation-canary.test.mjs
 
       - name: Test full record audit
         run: npm run test:audit

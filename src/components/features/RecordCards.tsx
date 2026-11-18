@@ -61,7 +61,7 @@ export function UniversityCard({ university, city, fields, locale, messages }: {
   </Card>
 }
 
-export function ProgramCard({ program, university, cycle, latestTuitionReference, locale, messages, today = new Date().toISOString().slice(0, 10) }: { program: ProgramWithFieldMeta; university?: University; cycle?: AdmissionCycleWithFieldMeta; latestTuitionReference?: AdmissionCycleWithFieldMeta; locale: PublicLocale; messages: Messages; today?: string }) {
+export function ProgramCard({ program, displayName, university, cycle, latestTuitionReference, locale, messages, today = new Date().toISOString().slice(0, 10) }: { program: ProgramWithFieldMeta; displayName?: string; university?: University; cycle?: AdmissionCycleWithFieldMeta; latestTuitionReference?: AdmissionCycleWithFieldMeta; locale: PublicLocale; messages: Messages; today?: string }) {
   const periodLabels = {
     program: messages.programs.tuitionProgram,
     semester: messages.programs.tuitionSemester,
@@ -129,7 +129,7 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
       <Badge tone="vermilion">{degreeLabels(locale)[program.degreeLevel]}</Badge>
       <VerificationBadge status={program.status} locale={locale} showDate={false} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />
     </div>
-    <div className={styles.programIdentity}><h3 className={`record-card__title ${styles.programTitle}`}>{localize(program.name, locale)}</h3>{university ? <p className="record-card__place">{localize(university.name, locale)}</p> : null}</div>
+    <div className={styles.programIdentity}><h3 className={`record-card__title ${styles.programTitle}`}>{displayName || localize(program.name, locale)}</h3>{university ? <p className="record-card__place">{localize(university.name, locale)}</p> : null}</div>
     {dynamicFactsAreStale || applicationState !== 'not-announced' || cycle?.closesOn ? <dl className={styles.signal}>
       {dynamicFactsAreStale || applicationState !== 'not-announced' ? <div><dt>{messages.programs.applicationStatus}</dt><dd><Badge tone={stateTone}>{stateLabel}</Badge></dd></div> : null}
       {cycle?.closesOn ? <div><dt>{messages.common.deadline}</dt><dd><FactValue status={deadlineStatus} locale={locale} value={cycle.closesOn

@@ -40,7 +40,7 @@ type ComparisonResponse = ApiEnvelope<{
   missingIds: string[]
 }>
 
-type SavedCollected = { savedId: string; record: ReturnType<typeof publicThirdPartyProgram> }
+type SavedCollected = { savedId: string; displayName?: string; record: ReturnType<typeof publicThirdPartyProgram> }
 type LoadedComparisonItem = ComparisonItem & { savedId: string; evaluatedForDate?: string }
 
 type FavoritesExperience = {
@@ -79,9 +79,9 @@ function safeHttpsUrl(value: string | null | undefined): string | null {
   }
 }
 
-async function fetchComparison(ids: string[], signal: AbortSignal): Promise<ComparisonResponse> {
+async function fetchComparison(ids: string[], signal: AbortSignal, locale: LaunchLocale): Promise<ComparisonResponse> {
   const response = await fetch(
-    `/api/v1/programs/compare?view=all&ids=${encodeURIComponent(ids.join(','))}`,
+    `/api/v1/programs/compare?view=all&ids=${encodeURIComponent(ids.join(','))}&locale=${locale}`,
     { headers: { Accept: 'application/json' }, cache: 'no-store', signal },
   )
   if (!response.ok) throw new Error(`Comparison request failed with ${response.status}`)
@@ -233,7 +233,7 @@ export function FavoritesView({
       try {
         const responses = await Promise.all(
           batches(requestableIds, MAX_COMPARE)
-            .map((ids) => fetchComparison(ids, controller.signal)),
+            .map((ids) => fetchComparison(ids, controller.signal, locale)),
         )
         if (controller.signal.aborted) return
         const returnedItems = responses.flatMap((response) => response.data.items.map(item => ({
@@ -260,7 +260,7 @@ export function FavoritesView({
 
     void load()
     return () => controller.abort()
-  }, [favorites, ready, retryKey])
+  }, [favorites, ready, retryKey, locale])
 
   const toggleCompare = (id: string) => setSelected((current) => {
     const available = current.filter((item) => favorites.includes(item))
@@ -304,11 +304,11 @@ export function FavoritesView({
             <FavoriteButton programId={savedId} saveLabel={messages.common.save} savedLabel={copy.remove} />
           </div>
         </Card>)}
-        {savedCollected.map(({ savedId, record }) => <Card key={savedId} className="record-card">
+        {savedCollected.map(({ savedId, record, displayName }) => <Card key={savedId} className="record-card">
           <label className="checkbox-field"><input type="checkbox" checked={selected.includes(savedId)}
             disabled={!selected.includes(savedId) && selected.filter(id => favorites.includes(id)).length >= MAX_COMPARE}
             onChange={() => toggleCompare(savedId)} /><span>{copy.choose}</span></label>
-          <h2 className="record-card__title">{record.name}</h2><p>{record.schoolName} · {record.provider}</p>
+          <h2 className="record-card__title">{displayName || record.name}</h2><p>{record.schoolName} · {record.provider}</p>
           <div className="record-card__actions"><LinkButton href={`/${locale}/programs/${record.id}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>
             <FavoriteButton programId={savedId} saveLabel={messages.common.save} savedLabel={copy.remove} /></div>
         </Card>)}
@@ -327,8 +327,8 @@ export function FavoritesView({
         <Button className="no-print" variant="ghost" onClick={() => window.print()}>{messages.common.print}</Button>
       </div>
       <div className="compare-grid">
-        {comparedCollected.map(({ savedId, record }) => <Card key={savedId} accent="jade">
-          <h3 className="atlas-card__title">{record.name}</h3>
+        {comparedCollected.map(({ savedId, record, displayName }) => <Card key={savedId} accent="jade">
+          <h3 className="atlas-card__title">{displayName || record.name}</h3>
           <dl className="compare-facts">{[
             [copy.university, record.schoolName], [messages.programs.degree, record.fields.degree], [messages.common.language, record.fields.language],
             [messages.common.duration, record.fields.duration], [messages.common.tuition, record.fields.tuition],

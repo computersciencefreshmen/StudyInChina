@@ -5,6 +5,7 @@ import { basename, dirname, join, resolve } from 'node:path'
 import { tmpdir } from 'node:os'
 import { FEED_BRANCH, MAX_INDEX_BYTES, MAX_INDEX_RECORDS, emptyProgress, feedRevision, loadProgramFeed, mergeProgramRecords, sanitizeProgram, sha256, writeProgramFeed } from './program-catalog-feed.mjs'
 import { checkpointFeed, collectFeedCandidate, harvestMonitor, harvestProgramCatalog, publishFeedCandidate } from './harvest-program-catalog.mjs'
+import { pushCatalogCheckpoint } from './push-catalog-checkpoint.mjs'
 
 const roots = []
 afterEach(() => {
@@ -141,6 +142,27 @@ test('health counts four distinct eligible windows, skips idle and resets only o
   tick(0); tick(2); tick(15, 0); tick(30); tick(45); tick(60)
   assert.equal(state.eligibleWindowsWithoutGrowth, 4); assert.equal(state.reason, 'scope_review')
   tick(61, 1, true); tick(62); assert.equal(state.eligibleWindowsWithoutGrowth, 0)
+})
+
+test('both publishers rebase disjoint work, reject overlapping writes and recognize an acknowledged push', () => {
+  for (const lane of ['harvest', 'translation']) {
+    function race(changes, remote = '3'.repeat(40)) {
+      let pushes = 0, rebases = 0
+      const git = args => {
+        if (args[0] === 'push' && ++pushes === 1) throw Error('push conflict')
+        if (args[0] === 'rev-parse') return args[1] === 'HEAD^' ? '1'.repeat(40) : args[1] === 'HEAD' ? '2'.repeat(40) : remote
+        if (args[0] === 'diff') return changes
+        if (args.includes('rebase')) rebases++
+        return ''
+      }
+      pushCatalogCheckpoint(git, lane)
+      return [pushes, rebases]
+    }
+    const other = lane === 'harvest' ? 'translations/status.json\0' : 'manifest.json\0indexes/abc.json\0'
+    assert.deepEqual(race(other), [2, 1])
+    assert.deepEqual(race(other, '2'.repeat(40)), [1, 0])
+    assert.throws(() => race('manifest.json\0translations/status.json\0'), /namespace_conflict/)
+  }
 })
 
 test('commits and pushes a 403 backoff checkpoint and withholds GitHub credentials from the collector', async () => {

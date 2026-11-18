@@ -38,7 +38,7 @@ export function schoolCoverageTargets(snapshot, universities, sources, today) {
   return targets
 }
 
-export function prioritizeSicasQueue(eligible, sources, outcomes, targets) {
+export function prioritizeSicasQueue(eligible, sources, outcomes, targets, likelyEvidence = () => false) {
   const lastSeen = new Map()
   for (const source of sources) {
     const id = targets.get(source.schoolId)?.universityId ?? source.schoolId
@@ -57,6 +57,7 @@ export function prioritizeSicasQueue(eligible, sources, outcomes, targets) {
   const result = []
   for (const tier of [0, 1, 2, 3, 4]) {
     const schools = [...(tiers.get(tier) ?? [])].sort(([a], [b]) => (lastSeen.get(a) ?? 0) - (lastSeen.get(b) ?? 0) || a.localeCompare(b))
+    for (const [, rows] of schools) rows.sort((a, b) => Number(likelyEvidence(b.source)) - Number(likelyEvidence(a.source)))
     let active = schools.map(([, rows]) => rows)
     for (let round = 0; active.length; round++) {
       for (const rows of active) result.push(rows[round])

@@ -1,3 +1,4 @@
+import { LocalizedProgramCard } from '@/components/features/LocalizedProgramCard'
 import { RoundedSelect } from '@/components/ui/RoundedSelect'
 import Link from 'next/link'
 import { Button, LinkButton } from '@/components/ui'
@@ -19,7 +20,6 @@ import {
 } from './CatalogFilterSummary'
 import { CatalogPagination } from './CatalogPagination'
 import { CatalogFreshnessNote } from './DataFreshnessPanel'
-import { ProgramCard } from './RecordCards'
 import { CollectedProgramCard } from './CollectedProgram'
 import type { UnifiedProgramResult } from '@/lib/unified-programs'
 import styles from './ProgramExplorerV2.module.css'
@@ -317,7 +317,7 @@ export function ProgramExplorerV2({
       <div className="content-grid">
         {result.items.map(item => 'collected' in item
           ? <CollectedProgramCard key={item.collected.id} item={item} locale={locale} messages={messages} />
-          : <ProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} latestTuitionReference={item.latestTuitionReference} locale={locale} messages={messages} today={today} />)}
+          : <LocalizedProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} latestTuitionReference={item.latestTuitionReference} locale={locale} messages={messages} today={today} />)}
       </div>
     ) : <div className="empty-box">{messages.programs.noResults}</div>}
 

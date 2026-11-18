@@ -81,6 +81,10 @@ export async function assertModelStateCleanupOpen(storage: DurableStorage, env: 
 function validateEntry(entry: Entry) {
   // Canonicalization rejects undefined, non-finite numbers and non-JSON objects.
   try { canonical(entry.value) } catch { return fail('model_state_migration_value_invalid') }
+  if (/^translation:[a-f0-9]{64}$/u.test(entry.key)) {
+    if (entry.value === 'unknown' || typeof entry.value === 'string' && /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/u.test(entry.value)) return
+    return fail('model_state_migration_translation_fence_invalid')
+  }
   const value = record(entry.value)
   if (!value) return fail('model_state_migration_value_invalid')
   if (entry.key === 'gate') {

@@ -1,10 +1,11 @@
 import 'server-only'
 import type { ThirdPartyProgram } from './third-party-programs'
 import {
-  TRANSLATION_FIELDS, TRANSLATION_LOCALES,
+  TRANSLATION_FIELDS, TRANSLATION_LOCALES, programTranslationSource,
   type ProgramTranslationField, type ProgramTranslationLocale, type ProgramTranslationRecord,
 } from './program-translation-contract'
-import { publicationPath, translationScope, validatePublishedTranslation, type TranslationScope } from './program-translation-review'
+import { officialTitleSource, publicationPath, translationScope, validatePublishedTranslation, type TranslationInput, type TranslationScope } from './program-translation-review'
+import type { Program, University } from './data/types'
 
 export type ProgramTranslations = Partial<Record<ProgramTranslationField, ProgramTranslationRecord>>
 const locales = new Set<string>(TRANSLATION_LOCALES)
@@ -109,10 +110,21 @@ export async function getProgramTranslations(record: Pick<ThirdPartyProgram, 'fi
   if (!enabled() || !isProgramTranslationLocale(locale)) return {}
   const result: ProgramTranslations = {}
   await Promise.all(TRANSLATION_FIELDS.map(async field => {
-    const source = record.fields[field]
+    const source = programTranslationSource(record, field, locale)
     if (typeof source !== 'string' || !source.trim() || Buffer.byteLength(source) > maximumBytes) return
     const translated = await translation(source, locale, translationScope(record, field))
     if (translated) result[field] = translated
   }))
   return result
+}
+
+export async function getProgramTitleTranslation(row: TranslationInput, locale: string) {
+  if (!enabled() || locale !== 'en') return null
+  const source = programTranslationSource(row, 'title', locale)
+  return source ? translation(source, locale, translationScope(row, 'title')) : null
+}
+
+export async function getOfficialTitleTranslation(program: Program, school: University, locale: string) {
+  const row = officialTitleSource(program, school)
+  return row ? getProgramTitleTranslation(row, locale) : null
 }

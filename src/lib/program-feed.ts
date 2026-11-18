@@ -107,9 +107,24 @@ function sourceRecord(value: unknown): ThirdPartyProgram {
     if (typeof row.fields[key] !== 'string' || row.fields[key]!.length > 500_000) throw new Error('program_feed_field_invalid')
     fields[key] = row.fields[key]
   }
+  const evidenceRow = row as ThirdPartyProgram & { archiveSha256?: string; fieldEvidence?: Record<string, {
+    sourceUrl?: string; fetchedAt?: string; selector?: string; text?: string; evidenceHash?: string; archiveSha256?: string }> }
+  const fieldSources: NonNullable<ThirdPartyProgram['fieldSources']> = {}
+  for (const key of allowedFields) {
+    const fact = evidenceRow.fieldEvidence?.[key]
+    if (!fields[key] || !fact || typeof fact.text !== 'string' || !fact.text.includes(fields[key]!)
+      || typeof fact.selector !== 'string' || fact.selector.length > 2000) continue
+    const location = new URL(fact.sourceUrl ?? url.href)
+    const collectedAt = fact.fetchedAt ?? row.fetchedAt
+    if (location.origin !== url.origin || location.username || location.password || !collectedAt || !Number.isFinite(Date.parse(collectedAt))) continue
+    const hash = fact.evidenceHash ?? row.evidenceHash
+    fieldSources[key] = { url: location.href, collectedAt, locator: fact.selector,
+      archived: !!hash && (fact.archiveSha256 ?? evidenceRow.archiveSha256) === hash }
+  }
   return { id: row.id, name: row.name, schoolId: row.schoolId, schoolName: row.schoolName, provider: row.provider,
     sourceId: row.sourceId, sourceUrl: url.href, status: 'extracted', official: false, admissionYear: null,
-    fetchedAt: row.fetchedAt, sourceUpdatedAt: row.sourceUpdatedAt, evidenceHash: row.evidenceHash, fields }
+    fetchedAt: row.fetchedAt, sourceUpdatedAt: row.sourceUpdatedAt, evidenceHash: row.evidenceHash, fields,
+    ...(Object.keys(fieldSources).length ? { fieldSources } : {}) }
 }
 
 async function refreshIndex(path = 'manifest.json'): Promise<ProgramFeedIndex> {

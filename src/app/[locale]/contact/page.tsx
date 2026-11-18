@@ -1,6 +1,6 @@
 import { resolveUnifiedProgram } from '@/lib/unified-programs'
 import { getTodayDate } from '@/lib/data/freshness'
-import { localize } from '@/lib/data/format'
+import { collectedDisplayName, officialDisplayName } from '@/lib/program-display-name'
 import { consultationLabels } from '@/i18n/program-consultation'
 import { notFound } from 'next/navigation'
 import { Card, PageHero } from '@/components/ui'
@@ -21,8 +21,8 @@ export default async function ContactPage({ params, searchParams }: {
     if (typeof ref !== 'string' || !/^[a-z0-9][a-z0-9:_-]{0,199}$/.test(ref)) notFound()
     const result = await resolveUnifiedProgram(ref, getTodayDate())
     if (!result) notFound()
-    program = 'collected' in result.item ? { id: result.item.collected.id, name: result.item.collected.name }
-      : { id: result.item.program.id, name: localize(result.item.program.name, locale) }
+    program = 'collected' in result.item ? { id: result.item.collected.id, name: await collectedDisplayName(result.item.collected, locale) }
+      : { id: result.item.program.id, name: await officialDisplayName(result.item.program, result.item.university, locale) }
   }
   return <>
     <PageHero variant="compact" eyebrow={messages.nav.contact} title={program ? consultationLabels[locale] : messages.contact.title}

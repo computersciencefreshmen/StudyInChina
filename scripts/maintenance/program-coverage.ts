@@ -2,13 +2,13 @@ import { createHash } from 'node:crypto'
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs'
 import { resolve, join, dirname } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import type { AdmissionCycle, AuditMeta, DataBundle, Program, Scholarship } from '../../src/lib/data/types'
-import { selectDiscoveryData, type DiscoveryMeta } from '../../src/lib/data/discovery'
+import type { DataBundle } from '../../src/lib/data/types'
+import { selectDiscoveryData } from '../../src/lib/data/discovery'
 import { readIdentityAcceptances } from '../../src/lib/data/identity-acceptance-store'
 import { readFieldVerifications } from '../../src/lib/data/field-verification-store'
 import type { IdentityAcceptance } from '../../src/lib/data/identity-acceptance'
 import type { FieldVerification } from '../../src/lib/data/field-verification'
-import { isCurrentAdmissionYear } from '../../src/lib/data/cycle-scope'
+import { selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { maintenanceScopeSchema, scopeContentSha256, canonicalJson, type MaintenanceScope } from './contracts'
 import { maintenanceClientFromEnvironment, type MaintenanceClient } from '../automation/catalog-maintenance-client'
@@ -17,74 +17,17 @@ import { catalogSha256, loadMaintenanceBundle } from './build-scope'
 import { coverageBand, coverageSnapshotSchema, type CoverageSnapshot } from '../../workers/catalog-maintenance/src/coverage'
 import { EXISTING_SCHOOLS_V2_SHA256 } from '../../workers/catalog-maintenance/src/scope-config'
 
-import { concreteProgramKeys, distinctPrograms } from '../../src/lib/data/concrete-majors'
+import { distinctPrograms } from '../../src/lib/data/concrete-majors'
 export { concreteProgramKeys } from '../../src/lib/data/concrete-majors'
 
-type WithDiscovery = AuditMeta & { discovery?: DiscoveryMeta }
-/** A whole-current record or a fresh leaf can prove a value. Explicit unknown
- * overrides whole-record freshness; only a real not-applicable receipt grants
- * an exemption, never an absent/empty field by itself. */
-function supportsField(record: WithDiscovery, path: string, meaningful: boolean, today: string, allowExemption = false): boolean {
-  const meta = record.discovery
-  const current = meta ? meta.currentFacts : record.status === 'verified' && record.verifiedAt <= today && record.reviewAfter >= today
-  if (!current && !meta?.currentFieldPaths.includes(path)) return false
-  const state = meta?.fieldStates?.[path]
-  if (state === 'not_applicable') return allowExemption
-  if (state !== undefined && state !== 'known') return false
-  return meaningful
-}
-const hasList = (value: unknown): boolean => Array.isArray(value) && value.length > 0
-function applicationRoute(value: unknown): boolean {
-  if (typeof value !== 'string') return false
-  try { const url = new URL(value); return ['http:', 'https:'].includes(url.protocol) && !url.username && !url.password }
-  catch { return false }
-}
-function completeScholarship(award: Scholarship & { discovery: DiscoveryMeta }, today: string): boolean {
-  const known = (path: string, meaningful: boolean, exemption = false) => supportsField(award, path, meaningful, today, exemption)
-  const deadline = typeof award.deadline === 'string' && /^\d{4}-\d{2}-\d{2}$/u.test(award.deadline) && award.deadline >= today
-  return known('deadline', deadline, award.deadline === null) && known('applicationUrl', applicationRoute(award.applicationUrl))
-    && known('eligibility', hasList(award.eligibility), true)
-    && known('coverage.tuition', ['full', 'partial', 'none'].includes(award.coverage.tuition))
-    && known('coverage.accommodation', ['full', 'partial', 'none'].includes(award.coverage.accommodation))
-    && known('coverage.insurance', typeof award.coverage.insurance === 'boolean')
-    && known('coverage.stipendCnyPerMonth', typeof award.coverage.stipendCnyPerMonth === 'number' && award.coverage.stipendCnyPerMonth >= 0, award.coverage.stipendCnyPerMonth === null)
-}
+import { completeScholarship } from '../../src/lib/data/decision-evidence'
 
 export async function buildProgramCoverage(bundle: DataBundle, scope: MaintenanceScope, today: string, identities: IdentityAcceptance[] = [], fields: FieldVerification[] = []): Promise<CoverageSnapshot> {
   const directory = selectDiscoveryData(bundle, today, identities, fields)
-  const projectedPrograms = directory.programs as Array<Program & { discovery: DiscoveryMeta }>
-  const projectedAwards = directory.scholarships as Array<Scholarship & { discovery: DiscoveryMeta }>
-  const projectedCycles = directory.admissionCycles as Array<AdmissionCycle & { discovery?: DiscoveryMeta }>
-  const complete = projectedPrograms.filter(program => {
-    const known = (path: string, meaningful: boolean, exemption = false) => supportsField(program, path, meaningful, today, exemption)
-    const usableCycle = projectedCycles.some(cycle => {
-      if (cycle.programId !== program.id || !isCurrentAdmissionYear(cycle.academicYear, today) || cycle.dateStatus === 'previous-cycle-reference' || cycle.closesOn && cycle.closesOn < today) return false
-      const cycleField = (path: string, meaningful: boolean, exemption = false) => supportsField(cycle, path, meaningful, today, exemption)
-      const schedule = cycleField('dateStatus', cycle.dateStatus === 'rolling')
-        || cycle.dateStatus === 'published' && cycleField('dateStatus', true)
-          && cycleField('closesOn', typeof cycle.closesOn === 'string' && cycle.closesOn >= today)
-      if (!schedule) return false
-      // Without common-applicability evidence, a language/round-specific route
-      // and conditions must come from that exact annual scope.
-      const scoped = Boolean(cycle.teachingLanguage || cycle.applicationRound) || program.teachingLanguages.length > 1
-      const hasAnnualRoute = Object.hasOwn(cycle, 'applyUrl') || cycle.discovery?.currentFieldPaths.includes('applyUrl')
-      const route = hasAnnualRoute ? cycleField('applyUrl', applicationRoute(cycle.applyUrl))
-        : !scoped && known('applyUrl', applicationRoute(program.applyUrl))
-      const annualRequirements = cycleField('languageRequirements', hasList(cycle.languageRequirements), true)
-        && cycleField('eligibility', hasList(cycle.eligibility), true)
-      const hasAnnualConditions = ['languageRequirements', 'eligibility'].some(path => Object.hasOwn(cycle, path)
-        || cycle.discovery?.currentFieldPaths.includes(path))
-      const legacyRequirements = !scoped && !hasAnnualConditions
-        && known('languageRequirements', hasList(program.languageRequirements), true)
-        && (known('details.eligibility', hasList(program.details?.eligibility ?? program.supplementaryDetails?.eligibility), true)
-          || known('supplementaryDetails.eligibility', hasList(program.supplementaryDetails?.eligibility), true))
-      return route && (annualRequirements || legacyRequirements)
-    })
-    return usableCycle && concreteProgramKeys(program).length > 0
-      && known('teachingLanguages', program.teachingLanguages.length > 0)
-      && known('durationMonths', program.durationMonths !== null)
-  })
-  const completeAwards = projectedAwards.filter(award => completeScholarship(award, today))
+  const published = selectDetailedPublicPrograms(directory, today, bundle)
+  const complete = published.programs
+  const projectedAwards = directory.scholarships
+  const completeAwards = published.scholarships.filter(award => completeScholarship(award, today))
   const content = {
     format: 'studyinchina.school-program-coverage' as const, version: 1 as const, scopeRegistrySha256: scope.sha256,
     inputCatalogSha256: await catalogSha256(bundle), evaluatedOn: today,

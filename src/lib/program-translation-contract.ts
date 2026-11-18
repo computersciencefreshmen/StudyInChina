@@ -2,9 +2,15 @@ import { createHash } from 'node:crypto'
 
 export const TRANSLATION_VERSION = 'v1' as const
 export const TRANSLATION_LOCALES = ['zh', 'en', 'ru', 'de', 'fr', 'es'] as const
-export const TRANSLATION_FIELDS = ['requirements', 'materials', 'description'] as const
+export const TRANSLATION_FIELDS = ['title', 'requirements', 'materials', 'description'] as const
 export type ProgramTranslationLocale = typeof TRANSLATION_LOCALES[number]
 export type ProgramTranslationField = typeof TRANSLATION_FIELDS[number]
+type SourceInput = { name?: string; fields: Partial<Record<Exclude<ProgramTranslationField, 'title'>, string>> }
+
+export function programTranslationSource(row: SourceInput, field: ProgramTranslationField, locale: ProgramTranslationLocale) {
+  if (field !== 'title') return row.fields[field]
+  return locale === 'en' && row.name && /\p{Script=Han}/u.test(row.name) ? row.name : undefined
+}
 export type ProgramTranslationRecord = {
   schemaVersion: 1
   version: typeof TRANSLATION_VERSION

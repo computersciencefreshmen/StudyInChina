@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import styles from './PublicMiniMaxDashboard.module.css'
 
 type Summary = { observedAt: string; publicPrograms: number; captured: number; decisionReadyMajors: number;
-  openCycles: number; bands: number[]; archived: number | null; missingDegree: number | null;
+  fundedSchools: number; currentScholarshipOpportunities: number; openCycles: number; bands: number[]; archived: number | null; missingDegree: number | null;
   revision: string; stall: { eligibleWindowsWithoutGrowth: number; reason: string | null } | null;
   lastReadback: { verifiedAt: string; revision: string } | null;
   lastTranslationReview: { updatedAt: string; review: { approved: number; revise: number; blocked: number } } | null }
@@ -35,7 +35,7 @@ export function ProgrammeCoveragePanel() {
       <p className={styles.note}>网站观测于北京时间 {when(data.observedAt)}</p>
       <div className={styles.metrics}>{[
         ['已采集详情', data.captured], ['公开项目条目', data.publicPrograms], ['当期条件齐备的专业', data.decisionReadyMajors],
-        ['接受申请的批次', data.openCycles], ['已归档原件的详情', data.archived], ['采集详情缺学位', data.missingDegree],
+        ['接受申请的批次', data.openCycles], ['有有效奖学金的目录学校', data.fundedSchools], ['已归档原件的详情', data.archived], ['采集详情缺学位', data.missingDegree],
       ].map(([label, value]) => <div className={styles.metric} key={String(label)}><span>{label}</span><strong>{number(value as number | null)}</strong></div>)}</div>
       <p>按条件齐备专业数统计学校：0 个 {data.bands[0]} 所，1 个 {data.bands[1]} 所，2–4 个 {data.bands[2]} 所，至少 5 个 {data.bands[3]} 所。</p>
       <p>{data.lastTranslationReview ? `最近一次译后审核（${when(data.lastTranslationReview.updatedAt)}）通过 ${data.lastTranslationReview.review.approved} 段，退修 ${data.lastTranslationReview.review.revise} 段，隔离 ${data.lastTranslationReview.review.blocked} 段。` : '尚无独立译后审核批次回执。'}</p>

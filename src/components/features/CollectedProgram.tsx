@@ -4,6 +4,8 @@ import type { Messages } from '@/i18n/messages'
 import type { CollectedProgramItem } from '@/lib/unified-programs'
 import type { ThirdPartyProgram } from '@/lib/third-party-programs'
 import { getProgramTranslations } from '@/lib/program-translations'
+import { collectedDisplayName } from '@/lib/program-display-name'
+import { containsHan, localize, localizeProgramText } from '@/lib/data/format'
 import { Badge, Card, LinkButton, PageHero } from '@/components/ui'
 import { degreeLabels } from '@/lib/data/labels'
 import { FavoriteButton } from './FavoriteButton'
@@ -81,15 +83,16 @@ export function programSourceText(locale: LaunchLocale) {
   return sourceText[locale]
 }
 
-export function CollectedProgramCard({ item, locale, messages }: { item: CollectedProgramItem; locale: LaunchLocale; messages: Messages }) {
+export async function CollectedProgramCard({ item, locale, messages }: { item: CollectedProgramItem; locale: LaunchLocale; messages: Messages }) {
   const record = item.collected, t = programSourceText(locale)
+  const title = await collectedDisplayName(record, locale)
   const facts = [[t.language, record.fields.language], [t.duration, record.fields.duration], [t.tuition, record.fields.tuition]].filter(([, value]) => value)
   return <Card className={`record-card ${cardStyles.card} ${cardStyles.programCard}`} data-program-preview data-source-status="source-collected">
     <div className={cardStyles.identityRow}>
       {record.fields.degree ? <Badge tone="vermilion">{item.degree && item.degree !== 'other' ? degreeLabels(locale)[item.degree] : record.fields.degree}</Badge> : null}
       <Badge tone="blue">{t.collected}</Badge>
     </div>
-    <div className={cardStyles.programIdentity}><h3 className={`record-card__title ${cardStyles.programTitle}`}>{record.name}</h3><p className="record-card__place">{record.schoolName}</p></div>
+    <div className={cardStyles.programIdentity}><h3 className={`record-card__title ${cardStyles.programTitle}`}>{title}</h3><p className="record-card__place">{item.university ? localize(item.university.name, locale) : record.schoolName}</p></div>
     <dl className={`record-facts ${cardStyles.supportingFacts}`}>
       {facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
     </dl>
@@ -105,11 +108,11 @@ export function CollectedProgramCard({ item, locale, messages }: { item: Collect
 export async function CollectedProgramDetail({ item, locale }: { item: CollectedProgramItem; locale: LaunchLocale }) {
   const record = item.collected, t = programSourceText(locale)
   const messages = getMessages(locale)
-  const translations = await getProgramTranslations(record, locale)
+  const [translations, title] = await Promise.all([getProgramTranslations(record, locale), collectedDisplayName(record, locale)])
   const facts = ['degree', 'language', 'duration', 'startDate', 'deadline', 'tuition', 'applicationFee', 'providerServiceFee'] as const
   const sections = ['description', 'requirements', 'materials', 'fees'] as const
   return <>
-    <PageHero variant="compact" title={record.name} description={record.schoolName}
+    <PageHero variant="compact" title={title} description={item.university ? localize(item.university.name, locale) : record.schoolName}
       eyebrow={record.fields.degree || undefined}
       meta={<><Badge tone="blue">{t.collected}</Badge><span>{record.provider}</span></>}
       actions={<><FavoriteButton programId={record.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
@@ -119,21 +122,27 @@ export async function CollectedProgramDetail({ item, locale }: { item: Collected
       <div className={styles.detailLayout}>
         <div className={styles.detailMain}>
           <section className={styles.detailSection}><h2>{t.overview}</h2><dl className={styles.detailFacts}>
-            {facts.map(key => <div key={key}><dt>{t[key]}</dt><dd>{record.fields[key] || t.unknown}</dd></div>)}
+            {facts.map(key => <div key={key}><dt>{t[key]}</dt><dd>{record.fields[key] || t.unknown}
+              {record.fieldSources?.[key] && <small> · <a href={record.fieldSources[key].url} target="_blank" rel="noreferrer">{t.source} · {record.fieldSources[key].collectedAt.slice(0, 10)}</a></small>}
+            </dd></div>)}
           </dl></section>
           {sections.filter(key => record.fields[key]).map(key => {
             const translated = key === 'fees' ? undefined : translations[key]
             return <section key={key} className={styles.detailSection} data-program-section={key}
               data-translation-status={key === 'fees' ? 'source' : translated?.method || 'pending'}>
               <h2>{t[key]}</h2>
+              {record.fieldSources?.[key] && <small><a href={record.fieldSources[key].url} target="_blank" rel="noreferrer">{t.source} · {record.fieldSources[key].collectedAt.slice(0, 10)}</a></small>}
               {translated ? <>
                 <p><small>{translated.method === 'minimax' ? t.translated : t.sourceText} · {t.translatedOn}: {translated.translatedAt.slice(0, 10)}</small></p>
                 {translated.method === 'minimax' ? <p><small>{t.translationNote}</small></p> : null}
                 <p className={styles.sourceText} lang={locale}>{translated.text}</p>
                 <details><summary>{t.original}</summary><p className={styles.sourceText}>{record.fields[key]}</p></details>
+              </> : locale === 'en' && containsHan(localizeProgramText(record.fields[key]!, locale)) ? <>
+                <p><small>English translation awaiting review.</small></p>
+                <details><summary>{t.original}</summary><p className={styles.sourceText}>{record.fields[key]}</p></details>
               </> : <>
-                {key !== 'fees' ? <p><small>{t.pending}</small></p> : null}
-                <p className={styles.sourceText}>{record.fields[key]}</p>
+                {locale !== 'en' && key !== 'fees' && <p><small>{t.pending}</small></p>}
+                <p className={styles.sourceText}>{localizeProgramText(record.fields[key]!, locale)}</p>
               </>}
             </section>
           })}
@@ -143,6 +152,7 @@ export async function CollectedProgramDetail({ item, locale }: { item: Collected
             {record.sourceUpdatedAt ? <div><dt>{t.updated}</dt><dd>{record.sourceUpdatedAt}</dd></div> : null}</dl>
           {publicSourceHref(record.sourceUrl) ? <a className="text-link" href={record.sourceUrl} target="_blank" rel="noopener noreferrer">{t.source} ↗</a> : null}
           <p>{t.notice}</p>
+          {title !== record.name && <details><summary>{t.original}</summary><p>{record.name}</p></details>}
           {item.sources.filter(source => source.id !== record.id).map(source => <p key={source.id}><a className="text-link" href={source.sourceUrl} target="_blank" rel="noopener noreferrer">{source.provider} ↗</a>{source.fetchedAt ? ` · ${source.fetchedAt.slice(0, 10)}` : ''}</p>)}
         </aside>
       </div>

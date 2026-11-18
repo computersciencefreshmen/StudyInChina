@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { canonicalJson } from '../ingestion/program-catalog-feed.mjs'
-import { TRANSLATION_FIELDS, TRANSLATION_LOCALES, translationKey, translationPath, validateTranslationRecord } from '../../src/lib/program-translation-contract.ts'
+import { TRANSLATION_FIELDS, TRANSLATION_LOCALES, programTranslationSource, translationKey, translationPath, validateTranslationRecord } from '../../src/lib/program-translation-contract.ts'
 import { publicationPath, reviewBinding, translationConflict, translationScope, validatePublishedTranslation, REVIEW_MODEL, REVIEW_POLICY } from '../../src/lib/program-translation-review.ts'
 import { readTranslationQuota, reviewTranslation } from './minimax-translation-provider.ts'
 
@@ -13,8 +13,8 @@ const write = (path, data) => {
 // An unreadable journal is a storage failure, never a fresh billing opportunity.
 const read = path => existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null
 
-function* reviewJobs(root, records) {
-  for (const locale of TRANSLATION_LOCALES) {
+function* reviewJobs(root, records, locales, fields) {
+  for (const locale of locales) {
     const indexed = new Set()
     for (const dir of ['translations/v1', 'translations/candidates/v1']) {
       const address = join(root, dir, locale)
@@ -22,8 +22,8 @@ function* reviewJobs(root, records) {
     }
     if (!indexed.size) continue
     const seen = new Set()
-    for (const field of TRANSLATION_FIELDS) for (const row of records) {
-      const source = row.fields?.[field]
+    for (const field of fields) for (const row of records) {
+      const source = programTranslationSource(row, field, locale)
       if (row.status !== 'extracted' || !row.schoolId || !row.id || typeof source !== 'string' || !source.trim()
         || !indexed.has(translationKey(source, locale) + '.json')) continue
       const old = read(join(root, translationPath(source, locale)))
@@ -43,18 +43,20 @@ function* reviewJobs(root, records) {
       const publicRecord = validatePublishedTranslation(read(publicPath), source, locale, scope)
       if (publicRecord?.text === candidate.text) continue
       const journal = join(root, 'translations/review-reservations', REVIEW_POLICY, locale, binding + '.json')
-      yield { source, candidate, binding, journal, publicPath, locale, scope }
+      yield { source, candidate, binding, journal, publicPath, locale, scope,
+        referenceTitle: field === 'title' ? row.referenceEnglishTitle : null }
     }
   }
 }
 
 export async function reviewTranslationBacklog({ root, records, maxCalls, concurrency, deadline, checkpoint,
-  key = process.env.MINIMAX_SUBSCRIPTION_KEY, now = Date.now, quota = readTranslationQuota, review = reviewTranslation }) {
+  key = process.env.MINIMAX_SUBSCRIPTION_KEY, now = Date.now, quota = readTranslationQuota, review = reviewTranslation,
+  locales = TRANSLATION_LOCALES, fields = TRANSLATION_FIELDS, writeStatus = true }) {
   if (!Number.isSafeInteger(maxCalls) || maxCalls < 1 || maxCalls > 240 || !Number.isSafeInteger(concurrency) || concurrency < 1 || concurrency > 8 || !Number.isFinite(deadline))
     throw new Error('translation_batch_bounds_invalid')
   const stamp = () => new Date(now()).toISOString()
   const summary = { startedAt: stamp(), state: 'complete', modelCalls: 0, approved: 0, revise: 0, blocked: 0, unknown: 0, inputTokens: 0, outputTokens: 0 }
-  const jobs = reviewJobs(root, records)
+  const jobs = reviewJobs(root, records, locales, fields)
   for (;;) {
     if (summary.modelCalls >= maxCalls || now() + 95_000 >= deadline) { summary.state = 'review_checkpoint'; break }
     const waiting = []
@@ -68,7 +70,8 @@ export async function reviewTranslationBacklog({ root, records, maxCalls, concur
         if (prior.state === 'reserved' || prior.state === 'unknown') summary.unknown++
         continue
       }
-      const conflict = translationConflict(job.source, job.candidate.text, job.locale)
+      const conflict = job.referenceTitle && job.candidate.text.trim() !== job.referenceTitle
+        ? 'official_title_mismatch' : translationConflict(job.source, job.candidate.text, job.locale, job.scope.field)
       if (conflict) {
         write(job.journal, { binding: job.binding, state: 'REVISE', code: conflict, checkedAt: stamp() })
         summary.revise++; continue
@@ -126,7 +129,7 @@ export async function reviewTranslationBacklog({ root, records, maxCalls, concur
     // A lower quota wave left unsent work; retain its place for the next tick.
     if (wave.length < waiting.length) { summary.state = 'review_checkpoint'; break }
   }
-  write(join(root, 'translations/review-status.json'), summary)
+  if (writeStatus) write(join(root, 'translations/review-status.json'), summary)
   await checkpoint(root)
   return summary
 }

@@ -1,7 +1,7 @@
+import { LocalizedProgramCard } from '@/components/features/LocalizedProgramCard'
 import { notFound } from 'next/navigation'
 import { connection } from 'next/server'
 import { Badge, Card, LinkButton, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
-import { ProgramCard } from '@/components/features/RecordCards'
 import { UniversityRankingLinks } from '@/components/features/RankingFilterFields'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
@@ -97,7 +97,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
           {unifiedPrograms.items.length ? <div className="content-grid content-grid--two">
             {unifiedPrograms.items.slice(0, 8).map(item => 'collected' in item
               ? <CollectedProgramCard key={item.collected.id} item={item} locale={locale} messages={messages} />
-              : <ProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} locale={locale} messages={messages} today={today} />)}
+              : <LocalizedProgramCard key={item.program.id} program={item.program} university={item.university} cycle={item.cycle} locale={locale} messages={messages} today={today} />)}
           </div> : <UniversityProgramsPending locale={locale} universityName={localize(university.name, locale)} officialUrl={university.admissionsUrl || university.officialUrl} />}
           {unifiedPrograms.total > 8 ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/programs?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({unifiedPrograms.total}) →</LinkButton></div> : null}
         </div>

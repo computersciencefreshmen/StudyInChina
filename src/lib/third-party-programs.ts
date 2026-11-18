@@ -17,6 +17,7 @@ export type ThirdPartyProgram = {
   official: false
   admissionYear: null
   evidenceHash?: string
+  fieldSources?: Partial<Record<keyof ThirdPartyProgram['fields'], { url: string; collectedAt: string; locator: string; archived: boolean }>>
   fields: Partial<Record<'degree' | 'language' | 'duration' | 'startDate' | 'deadline' | 'tuition' | 'applicationFee' | 'providerServiceFee' | 'requirements' | 'materials' | 'description' | 'fees', string>>
 }
 
