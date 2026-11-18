@@ -15,7 +15,7 @@ afterEach(() => {
 
 describe('catalog API routes', () => {
   it('binds the scheduling digest to the normal live deployment and exposes only coverage hashes', async () => {
-    const normal = await (await getCurrentRelease()).json()
+    const normal = await (await getCurrentRelease(new Request('https://example.test/api/v1/releases/current'))).json()
     const response = await getCurrentRelease(new Request('https://example.test/api/v1/releases/current?view=school-coverage'))
     const { data } = await response.json()
     expect(response.status).toBe(200)
@@ -113,7 +113,7 @@ describe('catalog API routes', () => {
     const repository = createCatalogRepository()
     const raw = await repository.getBundle()
     const publicBundle = selectDetailedPublicPrograms(selectCatalogApiData(raw, getTodayDate()), getTodayDate(), raw)
-    const response = await getCurrentRelease()
+    const response = await getCurrentRelease(new Request('https://example.test/api/v1/releases/current'))
     const body = await response.json()
 
     expect(response.status).toBe(200)
@@ -133,7 +133,7 @@ describe('catalog API routes', () => {
     const sha = 'b'.repeat(40)
     process.env.VERCEL_GIT_COMMIT_SHA = sha
     try {
-      const response = await getCurrentRelease()
+      const response = await getCurrentRelease(new Request('https://example.test/api/v1/releases/current'))
       const body = await response.json()
       expect(response.status).toBe(200)
       expect(body.data.deploymentSha).toBe(sha)
