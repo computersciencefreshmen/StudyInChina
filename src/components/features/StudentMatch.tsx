@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { studentMatchCopy } from '@/i18n/student-match'
@@ -9,14 +9,20 @@ import { consultationLabels, programConsultationHref } from '@/i18n/program-cons
 import { degreeLabels, languageLabel } from '@/lib/data/labels'
 import { cvSuggestions, shortlist, type MatchOpportunity, type StudentProfile } from '@/lib/student-matching'
 import { getTodayDate } from '@/lib/data/freshness'
+import type { CVReadErrorCode } from '@/lib/cv-document'
 import { Button, Card } from '@/components/ui'
 import { FavoriteButton } from './FavoriteButton'
 
 const initial: StudentProfile = { education: '', budget: '', language: '', intake: '' }
 export function StudentMatch({ locale, rows, evaluatedOn }: { locale: LaunchLocale; rows: MatchOpportunity[]; evaluatedOn: string }) {
   const m = getMessages(locale), t = studentMatchCopy(locale), degree = degreeLabels(locale)
-  const [profile, setProfile] = useState(initial), [confirmed, setConfirmed] = useState<StudentProfile | null>(null)
+  const [suggestions, setSuggestions] = useState<Partial<StudentProfile>>({})
+  const [edits, setEdits] = useState<Partial<StudentProfile>>({})
+  const profile = { ...initial, ...suggestions, ...edits }
+  const [confirmed, setConfirmed] = useState<StudentProfile | null>(null)
   const [notice, setNotice] = useState(''), [date, setDate] = useState(evaluatedOn)
+  const [reading, setReading] = useState(false)
+  const readVersion = useRef(0)
   useEffect(() => {
     const refresh = () => setDate(getTodayDate())
     refresh()
@@ -24,15 +30,27 @@ export function StudentMatch({ locale, rows, evaluatedOn }: { locale: LaunchLoca
     window.addEventListener('focus', refresh)
     return () => { clearInterval(timer); window.removeEventListener('focus', refresh) }
   }, [])
-  const select = (field: keyof StudentProfile, value: string) => { setConfirmed(null); setProfile(p => ({ ...p, [field]: value })) }
+  const select = (field: keyof StudentProfile, value: string) => { setConfirmed(null); setEdits(p => ({ ...p, [field]: value })) }
   async function readCV(file?: File) {
     if (!file) return
+    const version = ++readVersion.current
     setConfirmed(null)
-    if (!/\.txt$/i.test(file.name) || file.size >= 256 * 1024) { setNotice(t.fileError); return }
+    setSuggestions({})
+    setNotice('')
+    setReading(true)
     try {
-      const suggested = cvSuggestions(new TextDecoder('utf-8', { fatal: true }).decode(await file.arrayBuffer()))
-      setProfile(p => ({ ...p, ...suggested })); setNotice(Object.keys(suggested).length ? '' : t.noFields)
-    } catch { setNotice(t.fileError) }
+      const { readCVDocument } = await import('@/lib/cv-document')
+      const suggested = cvSuggestions(await readCVDocument(file))
+      if (version !== readVersion.current) return
+      setSuggestions(suggested)
+      setNotice(Object.keys(suggested).length ? t.prefilled : t.noFields)
+    } catch (error) {
+      if (version !== readVersion.current) return
+      const code = (error as { code?: CVReadErrorCode })?.code
+      setNotice(code && Object.hasOwn(t.fileErrors, code) ? t.fileErrors[code] : t.fileErrors.unreadable)
+    } finally {
+      if (version === readVersion.current) setReading(false)
+    }
   }
   const options = {
     education: [['secondary', t.secondary], ['bachelor', degree.bachelor], ['master', degree.master], ['doctorate', degree.doctorate]],
@@ -45,16 +63,16 @@ export function StudentMatch({ locale, rows, evaluatedOn }: { locale: LaunchLoca
   const conflicts = confirmed && date === evaluatedOn ? shortlist(confirmed, rows, true) : []
   return <div className="atlas-stack">
     <form className="form-stack" onSubmit={event => { event.preventDefault(); setConfirmed({ ...profile }); setDate(getTodayDate()) }}>
-      <label>{t.cv}<input type="file" accept=".txt,text/plain" onChange={e => {
+      <label>{t.cv}<input type="file" accept=".pdf,.docx,.doc,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" onChange={e => {
         const file = e.target.files?.[0]; e.target.value = ''; void readCV(file)
       }} /></label>
-      {notice && <p role="status">{notice}</p>}
+      {(reading || notice) && <p role="status">{reading ? t.reading : notice}</p>}
       {(Object.keys(options) as Array<keyof typeof options>).map(key => <label className="field" key={key}>{labels[key]}
         <select value={profile[key]} onChange={e => select(key, e.target.value)}><option value="">{m.common.all}</option>
           {options[key].map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>)}
       <label className="field">{t.budget}<input inputMode="numeric" pattern="[0-9]{1,9}" maxLength={9}
         value={profile.budget} onChange={e => select('budget', e.target.value)} /></label>
-      <Button type="submit" disabled={!Object.values(profile).some(Boolean)}>{t.submit}</Button>
+      <Button type="submit" disabled={reading || !Object.values(profile).some(Boolean)}>{t.submit}</Button>
     </form>
     {confirmed && date !== evaluatedOn && <a className="text-link" href={`/${locale}/match`}>{m.common.stale} ↻</a>}
     {matches && !matches.length && <p role="status">{t.empty}</p>}
