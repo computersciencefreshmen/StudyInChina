@@ -8,7 +8,18 @@ const privateMarker = 'cv-local-fixture-76ea124a'
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(({ key, id }) => localStorage.setItem(key, id),
     { key: RELEASE_ANNOUNCEMENT_STORAGE_KEY, id: LATEST_RELEASE_ANNOUNCEMENT_ID })
-  await page.goto('/en/match', { waitUntil: 'networkidle' })
+  await page.goto('/en/match', { waitUntil: 'domcontentloaded' })
+  const form = page.locator('form').filter({ has: page.locator('input[type=file]') })
+  const budget = form.getByLabel('Annual tuition budget (CNY)')
+  const confirm = form.getByRole('button', { name: 'Confirm choices and find programs' })
+  // Exercise the hydrated form before selecting a file. Other page requests can still be in flight.
+  await expect(async () => {
+    await budget.fill('')
+    await budget.fill('1')
+    await expect(confirm).toBeEnabled({ timeout: 500 })
+  }).toPass({ timeout: 15000 })
+  await budget.fill('')
+  await expect(confirm).toBeDisabled()
 })
 
 for (const document of ['text-layer.pdf', 'education-table.docx']) {
