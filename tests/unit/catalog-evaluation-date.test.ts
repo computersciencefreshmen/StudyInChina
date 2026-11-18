@@ -22,7 +22,7 @@ describe('JSON runtime release evaluation dates', () => {
     const comparison = await (await comparePrograms(new Request(
       `https://example.test/api/v1/programs/compare?ids=${encodeURIComponent(expiredProgramId)}`,
     ))).json()
-    const current = await (await getCurrentRelease()).json()
+    const current = await (await getCurrentRelease(new Request('https://example.test/api/v1/releases/current'))).json()
 
     expect(snapshotRelease.dataDate).not.toBe(evaluationDate)
     for (const envelope of [list, comparison, current]) {

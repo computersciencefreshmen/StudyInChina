@@ -27,6 +27,22 @@ describe('evidence-bound profile matching', () => {
     expect(cvSuggestions('Highest completed degree: Bachelor\nPreferred teaching language: Chinese\nSalary CNY 60000')).toEqual({ education: 'bachelor', language: 'Chinese' })
     expect(cvSuggestions('I advised a PhD candidate. IELTS 6.5. Person@example.com')).toEqual({})
   })
+  it('recognizes completed credentials within ordinary English and Chinese education entries', () => {
+    expect(cvSuggestions('EDUCATION\nB.Eng., Mechanical Engineering, Example University\nGraduated June 2024', 2026)).toEqual({ education: 'bachelor' })
+    expect(cvSuggestions('教育背景：\n2019.09–2023.06 示例大学 信息工程 本科\n2025–至今 示例大学 硕士在读', 2026)).toEqual({ education: 'bachelor' })
+    expect(cvSuggestions("Academic Qualifications\nBachelor of Science | 2015–2019\nMaster’s in Biology | awarded July 2022", 2026)).toEqual({ education: 'master' })
+    expect(cvSuggestions('Education\nMSc Data Science\nExpected graduation, 2027\nBSc Mathematics | Awarded 2024', 2026)).toEqual({ education: 'bachelor' })
+  })
+  it('leaves unfinished, unbound, conflicting and future credentials unfilled', () => {
+    for (const text of [
+      'Highest degree: PhD candidate (expected 2028)', '最高学历：硕士在读',
+      'Education\nPhD in Biology\nExpected December 2026', '教育背景\n2019年至2023年 示例大学 学士 肄业',
+      'Education\nMSc Statistics | Graduated 2029', 'Education\nMSc Statistics | did not graduate, 2019–2024',
+      'Education\nGPA 3.9\nResearch Experience\nAdvised PhD students 2019–2023',
+      'Career Objective\nSeeking MBA admission\nExpected 2028', 'Education\nMBA or PhD | awarded 2024',
+      'Highest degree: Master\n最高学历：本科',
+    ]) expect(cvSuggestions(text, 2026)).toEqual({})
+  })
   it('program inquiries require explicit consent, the real record context and a reply email', () => {
     const inquiry = { category: 'program-inquiry', message: 'Which materials do I need?', pageUrl: 'https://example.test/en/contact',
       replyEmail: 'student@example.com', consent: true, recordId: row.id, turnstileToken: 'test' }
