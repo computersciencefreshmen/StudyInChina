@@ -1,0 +1,9 @@
+Five new Chinese-taught science bachelor identities from the official 2027 SHUTCM guide CNB20279001: 康复治疗学专业、康复物理治疗专业、康复作业治疗专业、听力与言语康复学专业、护理学专业. Page 1 directly lists each as four years and 理学士; page 2 requires Science Chinese, Mathematics and Physics for these other science degrees. The literature-major Professional Chinese exemption does not apply.
+
+The guide supplies HSK Level 4 at least 180 within two years, nationality and passport requirements, the literal general age clause and source-specific medical restrictions. It gives the 1 December 2026–30 June 2027 application window, September 2027 entry, CNY 28,000 annual tuition and CNY 450 application fee. Scholarship-only materials remain conditional. The exact enrollment day, age reference date, CSCA numerical threshold/paper language, full-time designation and English titles are not inferred.
+
+Only official Chinese names acquire identity display authority. No existing SHUTCM record is refreshed; all three old objects and the full 2,371-program base remain intact. The branch starts from exact PR #133 head 4a542b6958a3a90f9fbd0060542dcceeb110725a, preserving the first batch.
+
+Codex AI performed official-source/tool and native PDF visual review of pages 1, 2 and 4; this is not Henry’s personal sign-off and no external model was called. The root release-coordinator separately archived and downloaded the guide and HTTPS portal, comparing bytes and SHA-256. The archive receipt’s timestamps are local downloaded-file metadata, not provider upload times. The source-review agent performed no cloud write, push or deployment.
+
+The guide prints https://apply.shutcm.edu.cn. Its standard same-host HTTPS login/register destination was captured with HTTP 200 and archived. Earlier DNS/connect timeouts remain private attempt history; they were not used to declare the official URL invalid. The failed index capture is unnecessary to the guide’s direct annual/identity evidence.

@@ -6,6 +6,7 @@ import { translationKey, type ProgramTranslationLocale, type ProgramTranslationR
 import { publicationPath, reviewBinding, translationScope, REVIEW_MODEL, REVIEW_POLICY } from '@/lib/program-translation-review'
 import type { ThirdPartyProgram } from '@/lib/third-party-programs'
 import type { CollectedProgramItem } from '@/lib/unified-programs'
+import proseRegressions from '../fixtures/program-translation-prose-regressions.json'
 
 const mocked = vi.hoisted(() => ({ resolve: vi.fn(), legacy: vi.fn() }))
 vi.mock('@/lib/unified-programs', () => ({
@@ -208,6 +209,32 @@ describe('source-bound programme translation reader', () => {
 })
 
 describe('translated detail presentation and locale API overlay', () => {
+  it.each(proseRegressions.cases)('keeps original wording in the reader, detail and API for the scoped bad PASS $id', async entry => {
+    const subject = item(), scope = entry.scope
+    subject.collected = { ...subject.collected, id: scope.program, schoolId: scope.school, name: scope.name, schoolName: scope.schoolName,
+      provider: 'SICAS', sourceId: scope.program.replace('sicas-', ''), sourceUrl: entry.sourceUrl,
+      fields: { ...subject.collected.fields, requirements: entry.source, materials: undefined, description: undefined,
+        degree: scope.degree ?? undefined, language: scope.track ?? undefined, startDate: scope.start ?? undefined, deadline: scope.deadline ?? undefined } }
+    const originalFields = structuredClone(subject.collected.fields)
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json(entry.approval)))
+    const { getProgramTranslations } = await import('@/lib/program-translations')
+    expect(await getProgramTranslations(subject.collected, 'zh')).toEqual({})
+    const { CollectedProgramDetail } = await import('@/components/features/CollectedProgram')
+    const container = document.createElement('div')
+    container.innerHTML = renderToStaticMarkup(await CollectedProgramDetail({ item: subject, locale: 'zh' }))
+    const section = container.querySelector('[data-program-section="requirements"]')!
+    expect(section.getAttribute('data-translation-status')).toBe('pending')
+    expect(section.textContent).toContain(entry.source)
+    expect(section.textContent).not.toContain(entry.approval.text)
+    mocked.resolve.mockResolvedValue({ item: subject, canonical: scope.program })
+    const { GET } = await import('@/app/api/v1/programs/[slug]/route')
+    const payload = await (await GET(new Request(`https://example.test/api/v1/programs/${scope.program}?view=all&locale=zh`),
+      { params: Promise.resolve({ slug: scope.program }) })).json()
+    expect(payload.data.fields).toEqual(originalFields)
+    expect(payload.translations?.fields?.requirements).toBeUndefined()
+    expect(subject.collected.fields).toEqual(originalFields)
+  })
+
   it('falls back to source when a cached PASS still contains Non-Chinese in Chinese admission prose', async () => {
     const original = 'Entry Requirements Non-Chinese citizens with a valid passport.'
     const leaked = '入学要求 Non-Chinese 公民持有效护照。'
