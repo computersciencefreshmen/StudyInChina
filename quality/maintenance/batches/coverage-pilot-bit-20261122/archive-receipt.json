@@ -1,0 +1,42 @@
+{
+  "format": "studyinchina.official-source-archive-readback",
+  "formatVersion": 1,
+  "batchId": "coverage-pilot-bit-20261122",
+  "verificationActor": "root release-coordinator agent; R2 upload and actual GET byte/hash comparison",
+  "source": "Parent-agent operational readback confirmation, independently separated from the source-review agent. The source-review agent performed no cloud writes.",
+  "timestampMeaning": "readbackFileLastWriteTimeUtc values are local downloaded-file timestamps supplied by the root agent, not provider upload timestamps. No ETag or provider creation time is claimed.",
+  "objects": [
+    {
+      "key": "official/coverage-pilot-bit-20261122/86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d.html",
+      "sourceUrl": "https://isc.bit.edu.cn/aboutbit/faq/b112085.htm",
+      "originalSha256": "86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d",
+      "readbackSha256": "86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d",
+      "originalBytes": 100814,
+      "readbackBytes": 100814,
+      "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:25.1958844Z",
+      "status": "readback_verified"
+    },
+    {
+      "key": "official/coverage-pilot-bit-20261122/f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390.pdf",
+      "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+      "originalSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+      "readbackSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+      "originalBytes": 1152239,
+      "readbackBytes": 1152239,
+      "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:26.6200461Z",
+      "status": "readback_verified"
+    },
+    {
+      "key": "official/coverage-pilot-bit-20261122/e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21.html",
+      "sourceUrl": "https://apply.isc.bit.edu.cn/",
+      "originalSha256": "e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21",
+      "readbackSha256": "e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21",
+      "originalBytes": 35889,
+      "readbackBytes": 35889,
+      "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:26.5173758Z",
+      "status": "readback_verified"
+    }
+  ],
+  "secretsIncluded": false,
+  "sha256": "a7ad8472ff070071312c2da9b6e94ea10c87cd71ee5a1e59483ab13a6555dc44"
+}

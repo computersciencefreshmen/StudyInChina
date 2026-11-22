@@ -1,0 +1,224 @@
+{
+  "format": "studyinchina.official-multischool-review",
+  "version": 1,
+  "evaluatedAt": "2026-11-22T14:01:28.140Z",
+  "reviewer": "codex-ai-independent-official-source-review:coverage-pilot-bit-20261122",
+  "reviewMethod": "Codex AI/tool review of official bilingual source plus rendered PDF pages; not a Henry personal sign-off and no external model call",
+  "baseline": {
+    "gitCommit": "8f5b705895549d551c53b6b1b28c2cb93e152371",
+    "publicFeedRevision": "a506a462d8f070de385a2f7d001dc6cf2a1041f360d70a4ef89968838d27027e",
+    "counts": {
+      "uni-beijing-institute-of-technology": 0
+    },
+    "rawPrograms": 2360,
+    "directoryPrograms": 38,
+    "currentPrograms": 33,
+    "directoryCycles": 49,
+    "currentCycles": 44,
+    "preservedExistingBitRecordHashes": {
+      "program-beijing-institute-of-technology-computer-science-and-technology-master": "fce960cc9c29255c3193f0ed5e81a83d9e5d2589ddacfeaafa44031773430e94",
+      "program-beijing-institute-of-technology-mechanical-engineering-master": "e68392ccbec6b4b88215152c831187088f1956954a9f1e75cbec1c98e82a52b8",
+      "prog-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor": "5918046a4c51da667e35fb4dc3374602690c518959bbf5a1cad176154c6fe618",
+      "prog-gap-wave8-bit-automation-bachelor": "88cd46f54be5a0336b9eaf408cdb824f567676d72fa8648cf095cc6905ecd876",
+      "prog-gap-wave8-bit-electronic-science-technology-bachelor": "b513bc0c19f5d6777037f5dd937742a02267d82a1bd0c0469005f56cd7e4cd38",
+      "prog-gap-wave8-bit-international-economics-trade-bachelor": "a4027b22942ea4fb86f14b5f70713a6f6d11131b4bf0237adaca7b3af331a018",
+      "prog-gap-wave8-bit-mechatronics-engineering-bachelor": "97559923205e6daf3b696fc725b99d2f6020f066b526c54ca0269c17037a8e41",
+      "program-8d419ae2120ddc8d49436198": "240fe90fd02f523649c226aaf2760b82514e7446bf41609e2ec4b613c2c4f36b"
+    }
+  },
+  "inputCatalogSha256": "3762851881feb82e741b1a52f90900fd124b3bdd8ee5392607e147553dd7afde",
+  "outputCatalogSha256": "769a54edd0140424896b2d59585413636c7d21dde81b2d13f9e4d48bfccc9463",
+  "sources": {
+    "bit2027-faq": {
+      "sourceId": "src-pilot-bit2027-faq-20261122",
+      "url": "https://isc.bit.edu.cn/aboutbit/faq/b112085.htm",
+      "accessedAt": "2026-11-22T13:55:10.349Z",
+      "rawBytes": 100814,
+      "rawSha256": "86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d",
+      "objectKey": "official/coverage-pilot-bit-20261122/86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d.html"
+    },
+    "bit2027-bilingual-guide": {
+      "sourceId": "src-pilot-bit2027-bilingual-guide-20261122",
+      "url": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+      "accessedAt": "2026-11-22T13:55:24.853Z",
+      "rawBytes": 1152239,
+      "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+      "objectKey": "official/coverage-pilot-bit-20261122/f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390.pdf"
+    },
+    "bit2027-portal": {
+      "sourceId": "src-pilot-bit2027-portal-20261122",
+      "url": "https://apply.isc.bit.edu.cn/",
+      "accessedAt": "2026-11-22T13:55:25.301Z",
+      "rawBytes": 35889,
+      "rawSha256": "e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21",
+      "objectKey": "official/coverage-pilot-bit-20261122/e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21.html"
+    }
+  },
+  "privateArchive": {
+    "status": "readback_verified",
+    "objects": [
+      {
+        "key": "official/coverage-pilot-bit-20261122/86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d.html",
+        "sha256": "86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d",
+        "bytes": 100814,
+        "localFile": "raw/guide.html",
+        "cloudWritePerformed": true,
+        "readbackSha256": "86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d",
+        "readbackBytes": 100814,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:25.1958844Z",
+        "verifiedBy": "root release-coordinator agent"
+      },
+      {
+        "key": "official/coverage-pilot-bit-20261122/f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390.pdf",
+        "sha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "bytes": 1152239,
+        "localFile": "raw/guide.pdf",
+        "cloudWritePerformed": true,
+        "readbackSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "readbackBytes": 1152239,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:26.6200461Z",
+        "verifiedBy": "root release-coordinator agent"
+      },
+      {
+        "key": "official/coverage-pilot-bit-20261122/e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21.html",
+        "sha256": "e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21",
+        "bytes": 35889,
+        "localFile": "raw/portal.html",
+        "cloudWritePerformed": true,
+        "readbackSha256": "e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21",
+        "readbackBytes": 35889,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:26.5173758Z",
+        "verifiedBy": "root release-coordinator agent"
+      }
+    ],
+    "note": "Following the local source review, the root agent archived all three originals to project R2, downloaded them and confirmed exact byte counts and SHA-256. Local download timestamps are retained separately; no provider upload timestamp or ETag is inferred. The source-review agent made no cloud writes.",
+    "archiveReceiptPath": "quality/maintenance/batches/coverage-pilot-bit-20261122/archive-receipt.json",
+    "archiveReceiptSha256": "a7ad8472ff070071312c2da9b6e94ea10c87cd71ee5a1e59483ab13a6555dc44",
+    "initialStateAtSourceReview": "private-local-only; planned-not-uploaded"
+  },
+  "programmeEvidence": {
+    "program-beijing-institute-of-technology-mechanical-engineering-bachelor-english-beijing": {
+      "identity": {
+        "page": 6,
+        "locator": "pdf-page:6;normalized-utf16:0:350",
+        "quote": "II.ENGLISH TAUGHT PROGRAMS （1）Beijing campus Program List CSCA Required subjects Aeronautical and Astronautical Engineering Mechatronics Engineering Mechanical Engineering Electronics Science and Technology Mathematics+Physics Automation Computer Science and Technology Materials Science and Engineering International Economics and Trade Mathematics",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "f65fd3a1b2dd922567707dfe61d863916d3ae32d8816353c1948face2d648266"
+      },
+      "chineseName": {
+        "page": 3,
+        "locator": "pdf-page:3;normalized-utf16:106:136",
+        "quote": "机械工程（中/英文）、工业工程、车辆工程、 机械与车辆学院",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "09b297741310ec96f55cdf9f196ab73364f0a87794d96c72990c5fac4809ac35"
+      },
+      "duration": {
+        "page": 7,
+        "locator": "pdf-page:7;normalized-utf16:383:660",
+        "quote": "VII.DURATION & FEES Duration: 4 years Application fee: CNY600 Insurance fee: CNY800-1,800/year Residence permit: CNY400/year Chinese taught program tuition: CNY23,000/year; English taught program tuition: CNY30,000/year BIT-BMSTU Double degree program (Zhuhai): CNY57,000/year",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "95ebcc2da8e3628bf8c1e28fa4803528329f596d3df67f8a482c5f47c5817807"
+      },
+      "language": {
+        "page": 6,
+        "locator": "pdf-page:6;normalized-utf16:1426:1670",
+        "quote": "*(4) The Valid Report of Chinese or English Language Proficiency Tests. (For Chinese Medium: HSK5≥180, For English Medium: IELTS≥6.0/ TOEFL≥85/ Duolingo≥110 or other language certificate recognized by BIT. English native speakers are exempted)",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "e3873bbb41e7e71b638121fec30065164ca33968f48d4b15e1a756944fe80e04"
+      },
+      "annualYear": {
+        "page": 1,
+        "locator": "pdf-page:1;normalized-utf16:0:39",
+        "quote": "2027 BIT UNDERGRADUATE PROGRAM 本科生 项目介绍",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "e84db03b347bdbc63e0fd637ec485dbee88e485fa507c4283c7c4d40b29f51f3"
+      },
+      "deadline": {
+        "page": 7,
+        "locator": "pdf-page:7;normalized-utf16:0:383",
+        "quote": "VI.APPLICATION PROCEDURE Step 1: Register at http://apply.isc.bit.edu.cn Step 2: Pay application fee (CNY600) after passing preliminary examination Step 3: Online interview/ Video review Step 4: Pre-admission Step 5: Pay tuition fee (deposit) Step 6: Admitted Please check your email and application system constantly after submitting application. Application Deadline: June 1, 2027",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "04b6f952f09585394fae8b68234ce85864fb736aa173183474b7f2f64f5cafe1"
+      },
+      "eligibility": {
+        "page": 6,
+        "locator": "pdf-page:6;normalized-utf16:606:1084",
+        "quote": "III. QUALIFICATION (1) High school graduate or above who is qualified to apply for university; non-Chinese citizens with valid foreign passport and in good health; observe Chinese laws and regulations of Beijing Institute of Technology. (2) Aged between 18 and 25; Applicants under 18 should provide certificate of guardian who has Beijing residency. (3) Applicants must comply with the regulations (JW〔2020〕No.12) issued by Ministry of Education of People’s Republic of China.",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "96d4c7aedf19771d45f29e04fda514ab86e0d36ded6b9989aa89d24c68a5cc00"
+      },
+      "csca": {
+        "page": 6,
+        "locator": "pdf-page:6;normalized-utf16:1670:1956",
+        "quote": "*(5) China Scholastic competency Assessment (CSCA) transcript (Those who have not yet obtained the transcript shall provide proof of exam registration. The official CSCA transcript must be uploaded prior to the issuance of the pre-admission notice. Official CSCA website: www.csca.cn).",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "3a6103daaaaee784883f36d785997bb17d029e9469c2f120e89b00c25b2956a7"
+      },
+      "materials": {
+        "page": 6,
+        "locator": "pdf-page:6;normalized-utf16:1129:2841",
+        "quote": "V. APPLICATION MATERIALS (* IS REQUIRED) *(1) The Photocopy of Passport (Photo Page) and China Visa Page (If you have) *(2) The Certified/Notarized Copy of High School Transcripts (Chinese or English version ) *(3) The Certified/Notarized Copy of High School Diploma (Chinese or English version ) *(4) The Valid Report of Chinese or English Language Proficiency Tests. (For Chinese Medium: HSK5≥180, For English Medium: IELTS≥6.0/ TOEFL≥85/ Duolingo≥110 or other language certificate recognized by BIT. English native speakers are exempted) *(5) China Scholastic competency Assessment (CSCA) transcript (Those who have not yet obtained the transcript shall provide proof of exam registration. The official CSCA transcript must be uploaded prior to the issuance of the pre-admission notice. Official CSCA website: www.csca.cn). *(6) Personal Statement/Study Plan (Download BIT International Student Personal Statement Template from https://isc.bit.edu.cn/→Resources→Download, and upload it in the application system after filling out) *(7) A video of self introduction (8) Scholarship Application Form (For scholarship applicants) (9) Applications under 18 must upload all materials required in Application Materials for Student under 18 from “Download” Zone shown above (10) Physical Examination Record for Foreigner (please go to hospital for a physical examination as required in Physical Examination Record for Foreigner from “Download” zone shown above and upload it in the application system) (11) Financial Guarantee Letter (The certificate of bank saving) (12) Non-criminal Record (Issued by the local police station) (13) Other documents (Students in design major should provide no less than 2 art works)",
+        "rawSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "sourceUrl": "https://isc.bit.edu.cn/docs//2026-11/efa1fc5f10d9400da6f18ca877ad6239.pdf",
+        "quoteSha256": "8265b5da6489a75bb1a5efe3528ce2ba77092bb147b0f9bdcfc706287674d7cb"
+      }
+    }
+  },
+  "scopeDecisions": {
+    "explicitAcademicYear": "2027",
+    "campus": "Beijing",
+    "teachingLanguage": "English",
+    "degreeLevel": "bachelor",
+    "noExistingCompatibleBachelorId": true,
+    "existingMechanicalEngineeringMasterPreserved": true,
+    "opensOn": {
+      "status": "unknown-exact-day",
+      "value": null,
+      "literal": "2026年10月底"
+    },
+    "intake": {
+      "status": "unknown-season",
+      "value": "other"
+    },
+    "studyMode": {
+      "status": "unknown-not-inferred"
+    },
+    "exactDegreeAwardTitle": {
+      "status": "unknown-not-inferred"
+    },
+    "chineseHSKConditionAppliedToEnglish": false,
+    "cscaSubjects": [
+      "Mathematics",
+      "Physics"
+    ],
+    "cscaPaperLanguage": "unknown",
+    "cscaPassThreshold": "unknown",
+    "scholarshipDeadlineImported": false,
+    "ageReferenceDate": "unknown",
+    "under18ExceptionPreserved": true,
+    "englishNativeExemptionPreserved": true,
+    "minimum15ClassCaveatPreserved": true,
+    "englishCscaUploadDeadline": "before issuance of pre-admission notice",
+    "chineseCscaWording": "upload transcript after obtaining it",
+    "noConflictingThresholdFoundInBilingualTrack": true,
+    "routeHttpsVerifiedSeparatelyFromPrintedHttpHost": true,
+    "notFullCatalogueClaim": true
+  },
+  "preservation": {
+    "previousRecordCount": 2360,
+    "originalRecordObjectsSha256": "3762851881feb82e741b1a52f90900fd124b3bdd8ee5392607e147553dd7afde",
+    "sourcesAdded": 3,
+    "programsAdded": 1,
+    "admissionCyclesAdded": 1,
+    "existingRecordsMutated": 0
+  },
+  "held": []
+}

@@ -14,10 +14,21 @@ const registration = z.object({ release: releaseSchema, coverage: coverageSnapsh
 const publicURL = 'https://studyinchina.vercel.app/api/v1/releases/current?view=school-coverage'
 
 export async function observeCoverageRelease(fetcher: typeof fetch = fetch): Promise<PublicCoverageRelease> {
-  const response = await fetcher(publicURL, { cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(8000) })
-  if (!response.ok || response.redirected || (response.url && response.url !== publicURL)) throw new Error('public_coverage_release_unavailable')
-  const body = await response.json() as {data?: unknown}
-  return releaseSchema.parse(body.data)
+  let response: Response
+  try {
+    // Workers supports manual redirects. Reject the redirect response before using its body.
+    response = await fetcher(publicURL, { cache: 'no-store', redirect: 'manual', signal: AbortSignal.timeout(8000) })
+  } catch {
+    throw new MaintenanceError('public_coverage_release_unavailable')
+  }
+  if (!response.ok || response.redirected || (response.url && response.url !== publicURL))
+    throw new MaintenanceError('public_coverage_release_unavailable')
+  try {
+    const body = await response.json() as {data?: unknown}
+    return releaseSchema.parse(body.data)
+  } catch {
+    throw new MaintenanceError('public_coverage_release_invalid')
+  }
 }
 
 const marker = (scope: string) => `maintenance/coverage/public/v1/${scope}/registered`
@@ -27,7 +38,9 @@ const location = (scope: string, release: PublicCoverageRelease) =>
 // There is one immutable receipt per exact deployed commit, projection and day.
 // A stale writer therefore cannot replace the version used by a newer deployment.
 export async function registerPublicCoverage(env: MaintenanceEnv, value: unknown, now = Date.now(), fetcher: typeof fetch = fetch) {
-  const { release, coverage } = registration.parse(value), today = getTodayDate(new Date(now))
+  const parsed = registration.safeParse(value)
+  if (!parsed.success) throw new MaintenanceError('public_coverage_payload_invalid')
+  const { release, coverage } = parsed.data, today = getTodayDate(new Date(now))
   const cfg = await env.PIPELINE_DB.prepare('SELECT scope_sha256,seed_complete,targets_complete,enabled FROM maintenance_control WHERE singleton=1')
     .first<{ scope_sha256: string; seed_complete: number; targets_complete: number; enabled: number }>()
   if (!cfg?.enabled || !cfg.seed_complete || !cfg.targets_complete || env.MAINTENANCE_ENABLED !== 'true'
@@ -43,13 +56,20 @@ export async function registerPublicCoverage(env: MaintenanceEnv, value: unknown
   await validateCoverageSnapshot(coverage, { scopeRegistrySha256: cfg.scope_sha256, today, inputCatalogSha256: coverage.inputCatalogSha256,
     schoolIds: new Set(schools.map(row => row.university_id)) })
   const key = location(cfg.scope_sha256, live), bytes = canonical({ release, coverage })
-  const prior = await env.SNAPSHOTS_BUCKET.get(key)
-  if (!prior) await env.SNAPSHOTS_BUCKET.put(key, bytes, { onlyIf: { etagDoesNotMatch: '*' }, httpMetadata: {contentType:'application/json'} })
-  const stored = prior ?? await env.SNAPSHOTS_BUCKET.get(key)
-  if (!stored || await stored.text() !== bytes) throw new MaintenanceError('public_coverage_immutable_conflict')
-  if (!await env.SNAPSHOTS_BUCKET.get(marker(cfg.scope_sha256)))
-    await env.SNAPSHOTS_BUCKET.put(marker(cfg.scope_sha256), '1', { onlyIf: { etagDoesNotMatch: '*' } })
-  return { ok: true, reused: Boolean(prior), deploymentSha: live.deploymentSha, directoryRevision: live.directoryRevision,
+  let reused: boolean
+  try {
+    const prior = await env.SNAPSHOTS_BUCKET.get(key)
+    if (!prior) await env.SNAPSHOTS_BUCKET.put(key, bytes, { onlyIf: { etagDoesNotMatch: '*' }, httpMetadata: {contentType:'application/json'} })
+    const stored = prior ?? await env.SNAPSHOTS_BUCKET.get(key)
+    if (!stored || await stored.text() !== bytes) throw new MaintenanceError('public_coverage_immutable_conflict')
+    if (!await env.SNAPSHOTS_BUCKET.get(marker(cfg.scope_sha256)))
+      await env.SNAPSHOTS_BUCKET.put(marker(cfg.scope_sha256), '1', { onlyIf: { etagDoesNotMatch: '*' } })
+    reused = Boolean(prior)
+  } catch (error) {
+    if (error instanceof MaintenanceError) throw error
+    throw new MaintenanceError('public_coverage_storage_unavailable')
+  }
+  return { ok: true, reused, deploymentSha: live.deploymentSha, directoryRevision: live.directoryRevision,
     evaluatedOn: today, coverageSha256: coverage.sha256, inputCatalogSha256: coverage.inputCatalogSha256, schoolCount: schools.length }
 }
 
