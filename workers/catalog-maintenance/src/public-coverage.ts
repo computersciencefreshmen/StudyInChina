@@ -16,7 +16,8 @@ const publicURL = 'https://studyinchina.vercel.app/api/v1/releases/current?view=
 export async function observeCoverageRelease(fetcher: typeof fetch = fetch): Promise<PublicCoverageRelease> {
   let response: Response
   try {
-    response = await fetcher(publicURL, { cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(8000) })
+    // Workers supports manual redirects. Reject the redirect response before using its body.
+    response = await fetcher(publicURL, { cache: 'no-store', redirect: 'manual', signal: AbortSignal.timeout(8000) })
   } catch {
     throw new MaintenanceError('public_coverage_release_unavailable')
   }

@@ -8,7 +8,7 @@ import { loadMaintenanceBundle } from '../../../scripts/maintenance/build-scope'
 import { buildProgramCoverage } from '../../../scripts/maintenance/program-coverage'
 import { refreshPublishedCoverage } from '../../../scripts/maintenance/refresh-published-coverage'
 import { maintenanceClientFromEnvironment } from '../../../scripts/automation/catalog-maintenance-client'
-import { readSchedulingCoverage, registerPublicCoverage, type PublicCoverageRelease } from '../src/public-coverage'
+import { observeCoverageRelease, readSchedulingCoverage, registerPublicCoverage, type PublicCoverageRelease } from '../src/public-coverage'
 import { makeEnv, TEST_CATALOG } from './fixture'
 
 test('the live release attests every school row while the native maintenance ledger remains pinned', async () => {
@@ -21,7 +21,7 @@ test('the live release attests every school row while the native maintenance led
   let live = release
   const fetcher: typeof fetch = async (url,opts) => {
     assert.equal(String(url),'https://studyinchina.vercel.app/api/v1/releases/current?view=school-coverage')
-    assert.equal(opts?.redirect,'error'); assert.equal(opts?.headers,undefined)
+    assert.equal(opts?.redirect,'manual'); assert.equal(opts?.headers,undefined)
     return Response.json({data:live})
   }
   env.SCOPE_REGISTRY_SHA256 = scope.sha256
@@ -55,4 +55,11 @@ test('the live release attests every school row while the native maintenance led
     assert.deepEqual(db.sqlite.prepare('SELECT * FROM maintenance_control').get(),originalControl)
     assert.equal(db.sqlite.prepare('SELECT count(*) total FROM maintenance_events').get()?.total,0)
   } finally { db.sqlite.close() }
+})
+
+test('rejects redirects without asking the Workers fetch implementation to use its unsupported error mode', async () => {
+  await assert.rejects(observeCoverageRelease(async (_url, options) => {
+    assert.equal(options?.redirect, 'manual')
+    return Response.redirect('https://other.example/releases/current')
+  }), /public_coverage_release_unavailable/)
 })
