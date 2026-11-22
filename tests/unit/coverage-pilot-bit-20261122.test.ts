@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
 import review from '../../quality/maintenance/batches/coverage-pilot-bit-20261122/review.json'
+import archive from '../../quality/maintenance/batches/coverage-pilot-bit-20261122/archive-receipt.json'
 import { catalogSha256, loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
 import { validateDirectory } from '../../scripts/quality/validate-directory'
 import { getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
@@ -51,7 +52,7 @@ describe('independently reviewed BIT English bachelor pilot', () => {
     expect(bundle.programs.find(p => p.id === id)?.details).toBeUndefined()
   })
 
-  it('validates all 12 strict leaf bindings without claiming pending R2 objects already exist', async () => {
+  it('validates all 12 strict leaf bindings and the independently confirmed R2 readback hashes', async () => {
     const leaves = readFieldVerifications().filter(l => l.receiptPath === receiptPath)
     expect(leaves).toHaveLength(12)
     for (const leaf of leaves) expect(validateFieldVerification(bundle, leaf, today)).toEqual(leaf)
@@ -63,8 +64,17 @@ describe('independently reviewed BIT English bachelor pilot', () => {
     }
     const invalidSource = { ...annual, sourceUrl: 'https://example.org/unreviewed-mirror' }
     expect(validateFieldVerification(bundle, invalidSource, today)).toBeUndefined()
-    expect(review.privateArchive.status).toBe('planned-not-uploaded')
-    expect(review.privateArchive.objects.every(o => o.cloudWritePerformed === false)).toBe(true)
+    expect(review.privateArchive.status).toBe('readback_verified')
+    expect(review.privateArchive.initialStateAtSourceReview).toMatch(/planned-not-uploaded/u)
+    const { sha256, ...archiveContent } = archive
+    expect(createHash('sha256').update(canonicalIdentityJson(archiveContent)).digest('hex')).toBe(sha256)
+    expect(review.privateArchive.archiveReceiptSha256).toBe(sha256)
+    expect(archive.objects).toHaveLength(3)
+    for (const object of archive.objects) {
+      expect(object.readbackSha256).toBe(object.originalSha256)
+      expect(object.readbackBytes).toBe(object.originalBytes)
+    }
+    for (const leaf of leaves) expect(archive.objects.find(o => o.key === leaf.objectKey)?.readbackSha256).toBe(leaf.snapshotSha256)
     expect((await validateDirectory(process.cwd(), today)).integrityPassed).toBe(true)
   }, 30000)
 

@@ -55,31 +55,46 @@
     }
   },
   "privateArchive": {
-    "status": "planned-not-uploaded",
+    "status": "readback_verified",
     "objects": [
       {
         "key": "official/coverage-pilot-bit-20261122/86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d.html",
         "sha256": "86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d",
         "bytes": 100814,
         "localFile": "raw/guide.html",
-        "cloudWritePerformed": false
+        "cloudWritePerformed": true,
+        "readbackSha256": "86f419a180dedc2c0371135b999917fc7e51ba5dc9590cd5090348cdf36ea41d",
+        "readbackBytes": 100814,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:25.1958844Z",
+        "verifiedBy": "root release-coordinator agent"
       },
       {
         "key": "official/coverage-pilot-bit-20261122/f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390.pdf",
         "sha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
         "bytes": 1152239,
         "localFile": "raw/guide.pdf",
-        "cloudWritePerformed": false
+        "cloudWritePerformed": true,
+        "readbackSha256": "f4c741c2c2cd097ce1ef766f4b5536f458acaa547b9e5e5a5ec5dc8588287390",
+        "readbackBytes": 1152239,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:26.6200461Z",
+        "verifiedBy": "root release-coordinator agent"
       },
       {
         "key": "official/coverage-pilot-bit-20261122/e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21.html",
         "sha256": "e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21",
         "bytes": 35889,
         "localFile": "raw/portal.html",
-        "cloudWritePerformed": false
+        "cloudWritePerformed": true,
+        "readbackSha256": "e1715e6fdeb7043da8b666868e5719513d9a23e24f75f3ef47f2e9aeb699fc21",
+        "readbackBytes": 35889,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T14:04:26.5173758Z",
+        "verifiedBy": "root release-coordinator agent"
       }
     ],
-    "note": "Original bytes are preserved in a private local package. Object keys are reserved plans, not evidence of remote existence; normal evidence archival/readback must be completed separately before production acceptance."
+    "note": "Following the local source review, the root agent archived all three originals to project R2, downloaded them and confirmed exact byte counts and SHA-256. Local download timestamps are retained separately; no provider upload timestamp or ETag is inferred. The source-review agent made no cloud writes.",
+    "archiveReceiptPath": "quality/maintenance/batches/coverage-pilot-bit-20261122/archive-receipt.json",
+    "archiveReceiptSha256": "a7ad8472ff070071312c2da9b6e94ea10c87cd71ee5a1e59483ab13a6555dc44",
+    "initialStateAtSourceReview": "private-local-only; planned-not-uploaded"
   },
   "programmeEvidence": {
     "program-beijing-institute-of-technology-mechanical-engineering-bachelor-english-beijing": {
