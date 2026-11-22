@@ -208,6 +208,31 @@ describe('source-bound programme translation reader', () => {
 })
 
 describe('translated detail presentation and locale API overlay', () => {
+  it('falls back to source when a cached PASS still contains Non-Chinese in Chinese admission prose', async () => {
+    const original = 'Entry Requirements Non-Chinese citizens with a valid passport.'
+    const leaked = '入学要求 Non-Chinese 公民持有效护照。'
+    const subject = item()
+    subject.collected.fields = { ...subject.collected.fields, requirements: original, materials: undefined, description: undefined }
+    const sourceFields = structuredClone(subject.collected.fields)
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json(translated(original, 'zh', { text: leaked }))))
+    const { getProgramTranslations } = await import('@/lib/program-translations')
+    expect(await getProgramTranslations(subject.collected, 'zh')).toEqual({})
+    const { CollectedProgramDetail } = await import('@/components/features/CollectedProgram')
+    const container = document.createElement('div')
+    container.innerHTML = renderToStaticMarkup(await CollectedProgramDetail({ item: subject, locale: 'zh' }))
+    const section = container.querySelector('[data-program-section="requirements"]')!
+    expect(section.getAttribute('data-translation-status')).toBe('pending')
+    expect(section.textContent).toContain(original)
+    expect(section.textContent).not.toContain(leaked)
+    expect(subject.collected.fields).toEqual(sourceFields)
+    mocked.resolve.mockResolvedValue({ item: subject, canonical: profile.id })
+    const { GET } = await import('@/app/api/v1/programs/[slug]/route')
+    const response = await GET(new Request(`https://example.test/api/v1/programs/${profile.id}?view=all&locale=zh`), { params: Promise.resolve({ slug: profile.id }) })
+    const payload = await response.json()
+    expect(payload.data.fields).toEqual(sourceFields)
+    expect(payload.translations?.fields?.requirements).toBeUndefined()
+  })
+
   it('shows translated sections with native expandable originals while all critical overview fields remain raw', async () => {
     vi.stubGlobal('fetch', validFetch())
     const { CollectedProgramDetail } = await import('@/components/features/CollectedProgram')

@@ -84,6 +84,23 @@ test('bilingual counterexamples fail even if an independent reviewer blindly pas
   assert.equal(restoreTranslationText('申请人须提交 __SC_000000__ __SC_000001__ 的证明，或提交因先前使用英语学习而获豁免的证明。', protectedText), text)
 })
 
+test('Chinese admission prose cannot retain the Non-Chinese condition even in a cached PASS record', () => {
+  const original = 'Entry Requirements Non-Chinese citizens with a valid passport.'
+  const leaked = '入学要求 Non-Chinese 公民持有效护照。'
+  for (const field of ['requirements', 'materials']) {
+    const scoped = { ...scope, field }
+    const record = { ...candidate, key: translationKey(original, locale), sourceHash: createHash('sha256').update(original).digest('hex'), text: leaked }
+    const approved = { ...record, review: { policy: REVIEW_POLICY, model: 'MiniMax-M3', verdict: 'PASS', checkedAt: '2026-11-22T15:30:06.610Z',
+      binding: reviewBinding(original, leaked, locale, scoped) } }
+    assert.equal(translationConflict(original, leaked, locale, field), 'untranslated_condition')
+    assert.equal(validatePublishedTranslation(approved, original, locale, scoped), null)
+  }
+  for (const output of ['非中国籍公民须持有效护照。', '申请人须参加 HSK、CSCA、IELTS 考试。',
+    '申请人须提交 University of Nottingham Ningbo China 的证明。', '请访问 https://example.edu/Non-Chinese 或联系 Non-Chinese@example.edu。'])
+    assert.equal(translationConflict(original, output, locale, 'requirements'), null)
+  assert.equal(translationConflict(original, leaked, 'en', 'requirements'), null)
+})
+
 test('review provider receives only original, candidate and scope, and rejects ungrounded issue verdicts', async () => {
   for (const invalid of [true, false]) {
     const call = () => reviewTranslation({ key: 'test-only', locale, scope, source, text, fetcher: async (_url, init) => {
