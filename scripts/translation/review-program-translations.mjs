@@ -12,6 +12,24 @@ const write = (path, data) => {
 }
 // An unreadable journal is a storage failure, never a fresh billing opportunity.
 const read = path => existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null
+const providerCodes = new Set(['subscription_key_invalid', 'translation_review_input_invalid', 'translation_aborted_before_send',
+  'translation_prior_outcome_protected', 'translation_admission_wait', 'translation_timeout_or_aborted', 'translation_transport_unknown',
+  'translation_redirect_rejected', 'translation_rate_limited', 'translation_response_unreadable', 'translation_response_json_invalid',
+  'translation_response_invalid', 'translation_review_response_invalid', 'translation_review_envelope_invalid', 'translation_model_mismatch',
+  'translation_output_truncated', 'translation_review_stop_invalid', 'translation_usage_invalid', 'translation_review_content_invalid',
+  'translation_review_json_invalid', 'translation_review_schema_invalid', 'translation_review_pass_invalid', 'translation_review_issue_invalid',
+  'translation_review_quote_invalid'])
+const providerDiagnostic = error => {
+  // Persist only known codes and bounded counts; never a provider body or error message.
+  const suppliedCode = typeof error?.code === 'string' ? error.code : ''
+  const code = providerCodes.has(suppliedCode) || /^translation_http_[45]\d{2}$/.test(suppliedCode)
+    ? suppliedCode : 'translation_review_provider_error'
+  const outcome = ['not_sent', 'unknown', 'rejected'].includes(error?.outcome) ? error.outcome : 'unknown'
+  const usage = error?.usage
+  const knownUsage = Number.isSafeInteger(usage?.inputTokens) && usage.inputTokens >= 0 && usage.inputTokens <= 1_000_000
+    && Number.isSafeInteger(usage?.outputTokens) && usage.outputTokens >= 0 && usage.outputTokens <= 32_768
+  return { code, outcome, ...(knownUsage ? { usage: { inputTokens: usage.inputTokens, outputTokens: usage.outputTokens } } : {}) }
+}
 
 function* reviewJobs(root, records, locales, fields) {
   for (const locale of locales) {
@@ -97,10 +115,12 @@ export async function reviewTranslationBacklog({ root, records, maxCalls, concur
       try {
         result = await review({ key, locale: job.locale, source: job.source, text: job.candidate.text, scope: job.scope })
       } catch (error) {
+        const diagnostic = providerDiagnostic(error)
+        summary.lastProviderError = diagnostic
         if (error?.code === 'translation_admission_wait' && error?.outcome === 'not_sent') {
           summary.modelCalls--; summary.state = 'provider_wait'
           summary.admissionWait = { reason: error.admissionReason ?? 'admission_response_unrecognized', retryAt: error.retryAfter }
-          write(job.journal, { state: 'admission_wait', binding: job.binding, checkedAt: stamp(), ...summary.admissionWait })
+          write(job.journal, { state: 'admission_wait', binding: job.binding, checkedAt: stamp(), ...summary.admissionWait, ...diagnostic })
           return
         }
         const limited = error?.code === 'translation_rate_limited' && error?.outcome === 'rejected'
@@ -108,8 +128,8 @@ export async function reviewTranslationBacklog({ root, records, maxCalls, concur
         if (state === 'unknown') summary.unknown++
         if (state === 'failed') summary.blocked++
         summary.state = 'provider_wait'
-        summary.inputTokens += error?.usage?.inputTokens ?? 0; summary.outputTokens += error?.usage?.outputTokens ?? 0
-        write(job.journal, { state, binding: job.binding, checkedAt: stamp(),
+        summary.inputTokens += diagnostic.usage?.inputTokens ?? 0; summary.outputTokens += diagnostic.usage?.outputTokens ?? 0
+        write(job.journal, { state, binding: job.binding, checkedAt: stamp(), ...diagnostic,
           ...(limited ? { retryAt: error.retryAfter || new Date(now() + 900_000).toISOString() } : {}) })
         return
       }
