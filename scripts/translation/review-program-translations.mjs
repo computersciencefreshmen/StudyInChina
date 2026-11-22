@@ -21,6 +21,8 @@ const providerCodes = new Set(['subscription_key_invalid', 'translation_review_i
   'translation_output_truncated', 'translation_review_stop_invalid', 'translation_usage_invalid', 'translation_review_content_invalid',
   'translation_review_json_invalid', 'translation_review_schema_invalid', 'translation_review_pass_invalid', 'translation_review_issue_invalid',
   'translation_review_quote_invalid'])
+const isolatedOutputFailures = new Set(['translation_review_json_invalid', 'translation_review_schema_invalid',
+  'translation_review_pass_invalid', 'translation_review_issue_invalid', 'translation_review_quote_invalid'])
 const providerDiagnostic = error => {
   // Persist only known codes and bounded counts; never a provider body or error message.
   const suppliedCode = typeof error?.code === 'string' ? error.code : ''
@@ -152,7 +154,12 @@ export async function reviewTranslationBacklog({ root, records, maxCalls, concur
         const state = limited ? 'rate_limited' : error?.outcome === 'rejected' || error?.outcome === 'not_sent' ? 'failed' : 'unknown'
         if (state === 'unknown') summary.unknown++
         if (state === 'failed') summary.blocked++
-        summary.state = 'provider_wait'
+        // A fully received, accounted-for output failure holds this candidate
+        // permanently. It does not block the next independent review or permit
+        // a replay. Protocol/model, unknown, rate and admission failures stop.
+        const isolated = state === 'failed' && diagnostic.outcome === 'rejected' && diagnostic.usage
+          && isolatedOutputFailures.has(diagnostic.code)
+        if (!isolated) summary.state = 'provider_wait'
         summary.inputTokens += diagnostic.usage?.inputTokens ?? 0; summary.outputTokens += diagnostic.usage?.outputTokens ?? 0
         writeReview(job, { state, binding: job.binding, checkedAt: stamp(), ...diagnostic,
           ...(limited ? { retryAt: error.retryAfter || new Date(now() + 900_000).toISOString() } : {}) })
