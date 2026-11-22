@@ -15,9 +15,12 @@ const coverageFailureCodes = new Set([
   'coverage_snapshot_binding_invalid',
   'public_coverage_control_not_ready',
   'public_coverage_immutable_conflict',
+  'public_coverage_payload_invalid',
   'public_coverage_release_changed',
+  'public_coverage_release_invalid',
   'public_coverage_release_unavailable',
   'public_coverage_scope_incomplete',
+  'public_coverage_storage_unavailable',
 ])
 
 /** Safe transport metadata only. Never retain a Response, body, token or cause. */
