@@ -1069,14 +1069,12 @@ export class CatalogSqlApi {
       addCondition(cycleConditions, cycleValues, `(EXISTS (
           SELECT 1
           FROM cycle_window_states AS window
-          WHERE window.release_id = cycle.release_id
-            AND window.owner_record_id = cycle.program_cycle_id
-            AND window.application_state = ?
+          WHERE window.owner_record_id = cycle.program_cycle_id
+            AND window.matches_state = 1
         ) OR (
           NOT EXISTS (
             SELECT 1 FROM cycle_window_states AS window
-            WHERE window.release_id = cycle.release_id
-              AND window.owner_record_id = cycle.program_cycle_id
+            WHERE window.owner_record_id = cycle.program_cycle_id
           ) AND CASE
             WHEN COALESCE((
               SELECT CAST(json_extract(close_fact.value_json, '$') AS TEXT)
@@ -1117,7 +1115,7 @@ export class CatalogSqlApi {
             ) THEN 'dates-published'
             ELSE 'not_announced'
           END = ?
-        ))`, expectedState, expectedState)
+        ))`, expectedState)
     }
     if (query.tuitionMin !== undefined) {
       addCondition(cycleConditions, cycleValues, `(
@@ -1172,46 +1170,63 @@ export class CatalogSqlApi {
       )`, Math.round(query.tuitionMax * 100), query.tuitionMax)
     }
     if (cycleConditions.length > 0) {
-      // Keep this independent of the outer program row. A correlated EXISTS
-      // repeatedly expands the cycle/route/window visibility views for every
-      // program (and again for counts/facets). IN evaluates the trusted cycle
-      // projection once while preserving exactly the same release/date gates.
-      // The window view already enforces route visibility; the base route join
-      // below only retrieves its owner ID, never unverified application facts.
-      const windowStates = query.applicationState ? `WITH cycle_window_states AS MATERIALIZED (
-          SELECT window.release_id, route.owner_record_id, window.application_state
+      // Evaluate the deep normalized view in its own statement. The outer
+      // list, count and facet queries then share one bounded row per owner.
+      // The normalized view enforces route visibility before the owner join.
+      const windowValues: unknown[] = []
+      let windowStates = ''
+      if (query.applicationState) {
+        const expectedState = query.applicationState === 'not-announced' ? 'not_announced' : query.applicationState
+        const windows = await queryAll<{ owner_record_id: string; matches_state: number }>(this.database, `
+          SELECT route.owner_record_id, MAX(window.application_state = ?) AS matches_state
           FROM current_application_windows AS window
           JOIN application_routes AS route
             ON route.release_id = window.release_id
            AND route.application_route_id = window.application_route_id
+          JOIN program_cycles AS owner
+            ON owner.release_id = route.release_id
+           AND owner.program_cycle_id = route.owner_record_id
           WHERE window.release_id = ?
-        )` : ''
-      const matchingCycle = `program.program_id IN (
-        ${windowStates}
-        SELECT cycle.program_id
-        FROM current_program_cycles AS cycle
-        WHERE cycle.release_id = ?
-          AND ${cycleConditions.join('\n          AND ')}
-      )`
+          GROUP BY route.owner_record_id
+        `, [expectedState, this.release.id])
+        windowValues.push(JSON.stringify(windows.map(row => [row.owner_record_id, row.matches_state])))
+        windowStates = `WITH cycle_window_states AS MATERIALIZED (
+          SELECT json_extract(value, '$[0]') AS owner_record_id,
+            json_extract(value, '$[1]') AS matches_state
+          FROM json_each(?)
+        )`
+      }
       const identityOnlyNotAnnounced = query.applicationState === 'not-announced'
         && query.academicYear === undefined
         && query.intake === undefined
         && query.tuitionMin === undefined
         && query.tuitionMax === undefined
+      // Materialize the eligible IDs once in a separate statement. Compiling
+      // the cycle and list visibility views together exceeds SQLite's planner
+      // cursor budget. Reuse the same result for pagination, totals and facets.
+      const cyclePredicate = cycleConditions.join('\n          AND ')
+      const programs = await queryAll<{ program_id: string; matches_filter: number }>(this.database, identityOnlyNotAnnounced ? `
+        ${windowStates}
+        SELECT cycle.program_id, MAX(CASE WHEN ${cyclePredicate} THEN 1 ELSE 0 END) AS matches_filter
+        FROM current_program_cycles AS cycle
+        WHERE cycle.release_id = ?
+        GROUP BY cycle.program_id
+      ` : `
+        ${windowStates}
+        SELECT DISTINCT cycle.program_id, 1 AS matches_filter
+        FROM current_program_cycles AS cycle
+        WHERE cycle.release_id = ?
+          AND ${cyclePredicate}
+      `, identityOnlyNotAnnounced ? [...windowValues, ...cycleValues, this.release.id] : [...windowValues, this.release.id, ...cycleValues])
+      const filterValue = identityOnlyNotAnnounced ? 0 : 1
+      const programIds = programs.filter(row => row.matches_filter === filterValue).map(row => row.program_id)
       addCondition(
         conditions,
         values,
         identityOnlyNotAnnounced
-          ? `(program.program_id NOT IN (
-              SELECT announced_cycle.program_id
-              FROM current_program_cycles AS announced_cycle
-              WHERE announced_cycle.release_id = ?
-            ) OR ${matchingCycle})`
-          : matchingCycle,
-        ...(identityOnlyNotAnnounced ? [this.release.id] : []),
-        ...(query.applicationState ? [this.release.id] : []),
-        this.release.id,
-        ...cycleValues,
+          ? 'program.program_id NOT IN (SELECT value FROM json_each(?))'
+          : 'program.program_id IN (SELECT value FROM json_each(?))',
+        JSON.stringify(programIds),
       )
     }
     const filteredConditions = [...conditions]

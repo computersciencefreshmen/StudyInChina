@@ -1379,12 +1379,15 @@ describe('Catalog D1 normalized v1 API', () => {
         ), isolatedEnvironment)
         const payload = await matching.json() as ApiEnvelopeDto<ProgramListDto[]>
         expect(matching.status, JSON.stringify(payload)).toBe(200)
+        expect(payload.meta.total).toBe(1)
         const program = payload.data.find((item) => item.id === 'prog-test-current-facts')
         expect(program?.currentCycle?.attributes.application.state).toBe(scenario.expected)
         const unavailable = await worker.fetch(new Request(
           'https://catalog.test/api/v1/programs?q=Synthetic%20Test%20Program&applicationState=not-announced',
         ), isolatedEnvironment)
         const other = await unavailable.json() as ApiEnvelopeDto<ProgramListDto[]>
+        expect(unavailable.status, JSON.stringify(other)).toBe(200)
+        expect(other.meta.total).toBe(0)
         expect(other.data.map((item) => item.id)).not.toContain('prog-test-current-facts')
       }
     } finally {
