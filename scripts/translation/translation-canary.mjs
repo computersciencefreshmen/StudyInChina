@@ -10,15 +10,10 @@ import { publicOfficialTitles } from './official-title-records.ts'
 import { publicationPath, translationScope, validatePublishedTranslation, REVIEW_POLICY } from '../../src/lib/program-translation-review.ts'
 import { checkpointTranslations, runProgramTranslations } from './run-program-translations.mjs'
 import { reviewTranslationBacklog } from './review-program-translations.mjs'
+import { CANARY_REVIEW_CONTRACT, SAMPLES, manualCanaryRetryContext } from './translation-canary-contract.mjs'
+export { SAMPLES } from './translation-canary-contract.mjs'
 
 const hash = text => createHash('sha256').update(text).digest('hex')
-export const SAMPLES = [
-  { id: 'sicas-243', schoolId: 'sicas-220', field: 'requirements', sourceHash: 'a15494bae3247e491bb796630aa34e76da79294d14da6e331e89ff73404bd328' },
-  { id: 'sicas-4074', schoolId: 'sicas-199', field: 'requirements', sourceHash: 'f5cf64c3c03f59978992c354cd8316a6afe2ce66bd980d827959a155396c304d' },
-  { id: 'sicas-28538', schoolId: 'sicas-362', field: 'materials', sourceHash: 'abfd32b16dc8d8bc392e79f9548b4a5f84c8b80e51f16755b6c1f2e84e70b4ad' },
-  { id: 'program-xiamen-university-bachelor-chinese-020302', schoolId: 'uni-xiamen-university', field: 'title', sourceHash: 'a61c807dcd642fce7950deb21b9dac21224bb9ebc9481821999a2dca55b51dc7',
-    referenceEnglishTitle: 'Financial Engineering', referenceUrl: 'https://admissions.xmu.edu.cn/Programs/Chinese_Medium_Bachelor_s.htm', programCode: '020302' },
-]
 
 export function canaryRecords(catalog) {
   const records = new Map(catalog.map(row => [row.id, row]))
@@ -88,18 +83,21 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   assertFeedCheckout(root)
   const { records: catalog, manifest } = loadProgramFeed(root)
   const records = canaryRecords([...catalog, ...publicOfficialTitles()])
+  const retryLegacyFailedCanary = process.env.CANARY_RETRY_LEGACY_FAILED === 'true'
+  if (retryLegacyFailedCanary) manualCanaryRetryContext(process.env)
   const batches = []
   for (const locale of ['en', 'zh']) {
     const selected = records.filter(row => row.canaryLocale === locale)
     const options = { records: selected, locales: [locale], concurrency: 1, writeStatus: false, checkpoint: checkpointTranslations }
     const generation = await runProgramTranslations({ ...options, feedDir: root, maxCalls: 1, maxMinutes: 3 })
-    const review = await reviewTranslationBacklog({ ...options, root, maxCalls: selected.length, deadline: Date.now() + 4.5 * 60_000 })
+    const review = await reviewTranslationBacklog({ ...options, root, maxCalls: selected.length, deadline: Date.now() + 4.5 * 60_000, retryLegacyFailedCanary })
     batches.push({ locale, generation, review })
   }
   const fields = inspectCanary(root, records)
   const receipt = { schemaVersion: 1, policy: REVIEW_POLICY, catalogRevision: manifest.revision, codeCommit: process.env.GITHUB_SHA,
     runId: process.env.GITHUB_RUN_ID, runAttempt: process.env.GITHUB_RUN_ATTEMPT,
-    updatedAt: new Date().toISOString(), batches, fields }
+    updatedAt: new Date().toISOString(), batches, fields,
+    ...(retryLegacyFailedCanary ? { manualRetryContract: CANARY_REVIEW_CONTRACT } : {}) }
   const path = join(root, 'translations/canary', receipt.runId + '-' + receipt.runAttempt + '.json')
   mkdirSync(dirname(path), { recursive: true })
   writeFileSync(path, canonicalJson(receipt) + '\n', { flag: 'wx' })

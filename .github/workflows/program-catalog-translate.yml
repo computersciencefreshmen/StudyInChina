@@ -9,6 +9,10 @@ on:
         description: Review four pinned Chinese and English samples (at most six model calls)
         type: boolean
         default: false
+      retry_failed_canary_reviews:
+        description: Once only, review legacy failed pinned samples under the corrected JSON contract (manual canary only)
+        type: boolean
+        default: false
       max_calls:
         description: Maximum useful model calls in this checkpoint (1-240)
         type: number
@@ -80,6 +84,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.review_canary == true
         working-directory: code
         env:
+          CANARY_RETRY_LEGACY_FAILED: ${{ inputs.retry_failed_canary_reviews == true && 'true' || 'false' }}
           MINIMAX_SUBSCRIPTION_KEY: ${{ secrets.MINIMAX_SUBSCRIPTION_KEY }}
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}

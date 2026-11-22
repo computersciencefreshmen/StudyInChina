@@ -169,6 +169,7 @@ test('review parser identifies the exact rejected contract check and preserves o
     const item = verdict === 'PASS' ? valid : { verdict, issue: 'omission', sourceQuote: 'waiver', targetQuote: '证明' }
     const result = await reviewTranslation({ key: 'test-only', locale, scope, source, text, fetcher: async (_url, init) => {
       const prompt = JSON.parse(init.body).system
+      assert.match(prompt, /^Review response contract: verdict-json-v2\./)
       assert.match(prompt, /Choose exactly one verdict string/)
       assert.match(prompt, /For PASS return exactly \{"verdict":"PASS","issue":null,"sourceQuote":"","targetQuote":""\}/)
       assert.match(prompt, /\{"verdict":"REVISE","issue":"and_or","sourceQuote":"HSK 5 or IELTS 6.5","targetQuote":"HSK 5 和 IELTS 6.5"\}/)
