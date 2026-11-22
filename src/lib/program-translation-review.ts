@@ -42,6 +42,9 @@ export function translationConflict(source: string, text: string, locale: Progra
   if (field === 'title' && locale === 'en' && (/\p{Script=Han}/u.test(text) || !/[A-Za-z]/u.test(text))) return 'untranslated_title'
   if (locale !== 'zh') return null
   const prose = text.replace(/https?:\/\/\S+|[\w.+-]+@[\w.-]+/giu, '')
+  // Nationality conditions are prose; retain official names and exam acronyms.
+  if ((field === 'requirements' || field === 'materials') && /\p{Script=Han}/u.test(prose)
+    && /\bnon-chinese\b/iu.test(prose)) return 'untranslated_condition'
   if (/\p{Script=Han}/u.test(prose) && /\b(?:not|above|under|unless|required|exempt(?:ed)?|at least|at most)\b/iu.test(prose)) return 'untranslated_condition'
   if (/\b(?:not (?:available|open|eligible)|ineligible)\b/iu.test(source) && /可申请|可以申请|符合申请资格|开放/u.test(prose)
     && !/[不无未非免禁拒除]/u.test(prose)) return 'negation'

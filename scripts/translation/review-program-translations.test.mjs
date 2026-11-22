@@ -25,6 +25,14 @@ const fixture = t => {
   return { root, records: [row], maxCalls: 2, concurrency: 1, deadline: Date.now() + 120_000, key: 'test-only',
     checkpoint: () => true, quota: async () => ({ allow: true, remainingPercent: 80 }), review: async () => pass }
 }
+const pairFixture = t => {
+  const options = fixture(t), nextSource = 'High school graduate', nextText = '高中毕业'
+  const nextRow = { ...row, id: 'example-b', fields: { requirements: nextSource, language: 'English' } }
+  const next = { ...candidate, key: translationKey(nextSource, locale), sourceHash: createHash('sha256').update(nextSource).digest('hex'), text: nextText }
+  const path = join(options.root, candidatePath(nextSource, locale))
+  writeFileSync(path, JSON.stringify(next))
+  return { ...options, records: [row, nextRow], maxCalls: 3, nextRow, nextSource, nextText }
+}
 
 test('published model text requires independent review for this source, target, policy and exact programme scope', async t => {
   const options = fixture(t), path = join(options.root, publicationPath(source, locale, scope))
@@ -76,6 +84,23 @@ test('bilingual counterexamples fail even if an independent reviewer blindly pas
   assert.equal(restoreTranslationText('申请人须提交 __SC_000000__ __SC_000001__ 的证明，或提交因先前使用英语学习而获豁免的证明。', protectedText), text)
 })
 
+test('Chinese admission prose cannot retain the Non-Chinese condition even in a cached PASS record', () => {
+  const original = 'Entry Requirements Non-Chinese citizens with a valid passport.'
+  const leaked = '入学要求 Non-Chinese 公民持有效护照。'
+  for (const field of ['requirements', 'materials']) {
+    const scoped = { ...scope, field }
+    const record = { ...candidate, key: translationKey(original, locale), sourceHash: createHash('sha256').update(original).digest('hex'), text: leaked }
+    const approved = { ...record, review: { policy: REVIEW_POLICY, model: 'MiniMax-M3', verdict: 'PASS', checkedAt: '2026-11-22T15:30:06.610Z',
+      binding: reviewBinding(original, leaked, locale, scoped) } }
+    assert.equal(translationConflict(original, leaked, locale, field), 'untranslated_condition')
+    assert.equal(validatePublishedTranslation(approved, original, locale, scoped), null)
+  }
+  for (const output of ['非中国籍公民须持有效护照。', '申请人须参加 HSK、CSCA、IELTS 考试。',
+    '申请人须提交 University of Nottingham Ningbo China 的证明。', '请访问 https://example.edu/Non-Chinese 或联系 Non-Chinese@example.edu。'])
+    assert.equal(translationConflict(original, output, locale, 'requirements'), null)
+  assert.equal(translationConflict(original, leaked, 'en', 'requirements'), null)
+})
+
 test('review provider receives only original, candidate and scope, and rejects ungrounded issue verdicts', async () => {
   for (const invalid of [true, false]) {
     const call = () => reviewTranslation({ key: 'test-only', locale, scope, source, text, fetcher: async (_url, init) => {
@@ -100,7 +125,7 @@ test('received review failures retain safe diagnostics and accounting without be
   const run = () => reviewTranslationBacklog({ ...options, review: async () => { calls++; throw failure } })
   const summary = await run(), saved = JSON.parse(readFileSync(journal))
   assert.deepEqual(summary.lastProviderError, { code: 'translation_review_schema_invalid', outcome: 'rejected', usage: { inputTokens: 375, outputTokens: 24 } })
-  assert.equal(summary.state, 'provider_wait'); assert.equal(summary.approved, 0); assert.equal(summary.revise, 0); assert.equal(summary.blocked, 1)
+  assert.equal(summary.state, 'complete'); assert.equal(summary.approved, 0); assert.equal(summary.revise, 0); assert.equal(summary.blocked, 1)
   assert.equal(summary.inputTokens, 375); assert.equal(summary.outputTokens, 24)
   assert.deepEqual(saved, { binding: reviewBinding(source, text, locale, scope), checkedAt: saved.checkedAt, state: 'failed', ...summary.lastProviderError })
   assert.ok(!JSON.stringify({ summary, saved }).includes(marker))
@@ -120,6 +145,67 @@ test('diagnostics do not expose arbitrary errors or invalid counts, and unknown 
     assert.equal(summary.unknown, 1); assert.equal(summary.blocked, 0); assert.equal(summary.inputTokens, 0); assert.equal(summary.outputTokens, 0)
     assert.ok(!JSON.stringify(summary).includes(marker))
     await run(); assert.equal(calls, 1)
+  }
+})
+
+test('accounted received output failures hold only their candidate and later valid independent reviews still publish', async t => {
+  for (const code of ['translation_review_json_invalid', 'translation_review_schema_invalid', 'translation_review_pass_invalid',
+    'translation_review_issue_invalid', 'translation_review_quote_invalid']) {
+    const options = pairFixture(t), seen = []
+    const review = async input => {
+      seen.push(input.source)
+      if (input.source === source) throw new TranslationProviderError(code, 'rejected', null, false, { inputTokens: 519, outputTokens: 32 })
+      return pass
+    }
+    const result = await reviewTranslationBacklog({ ...options, review })
+    assert.deepEqual(seen, [source, options.nextSource]); assert.equal(result.modelCalls, 2); assert.equal(result.state, 'complete')
+    assert.equal(result.approved, 1); assert.equal(result.blocked, 1); assert.equal(result.unknown, 0)
+    assert.equal(result.inputTokens, 579); assert.equal(result.outputTokens, 47)
+    const held = JSON.parse(readFileSync(join(options.root, 'translations/review-reservations', REVIEW_POLICY, locale,
+      reviewBinding(source, text, locale, scope) + '.json')))
+    assert.equal(held.state, 'failed'); assert.equal(held.code, code); assert.equal(held.outcome, 'rejected')
+    assert.equal(existsSync(join(options.root, publicationPath(source, locale, scope))), false)
+    const approved = JSON.parse(readFileSync(join(options.root, publicationPath(options.nextSource, locale, translationScope(options.nextRow, 'requirements')))))
+    assert.ok(validatePublishedTranslation(approved, options.nextSource, locale, translationScope(options.nextRow, 'requirements')))
+    assert.equal((await reviewTranslationBacklog({ ...options, review })).modelCalls, 0)
+    assert.deepEqual(seen, [source, options.nextSource])
+  }
+})
+
+test('the isolated output path preserves call and deadline bounds', async t => {
+  for (const bound of ['calls', 'deadline']) {
+    const options = pairFixture(t), started = Date.now()
+    let clock = started, calls = 0
+    const result = await reviewTranslationBacklog({ ...options, maxCalls: bound === 'calls' ? 1 : 3,
+      now: () => clock, deadline: started + 120000, review: async () => {
+        calls++; clock += 40000
+        throw new TranslationProviderError('translation_review_quote_invalid', 'rejected', null, false, { inputTokens: 10, outputTokens: 5 })
+      } })
+    assert.equal(calls, 1); assert.equal(result.modelCalls, 1); assert.equal(result.state, 'review_checkpoint')
+    assert.equal(result.approved, 0)
+    assert.equal(existsSync(join(options.root, publicationPath(options.nextSource, locale, translationScope(options.nextRow, 'requirements')))), false)
+  }
+})
+
+test('unaccounted, not-sent, unknown, protocol, model, rate and admission failures still stop before later candidates', async t => {
+  const usage = { inputTokens: 519, outputTokens: 32 }
+  for (const [code, outcome, measured] of [
+    ['translation_review_quote_invalid', 'rejected', undefined],
+    ['translation_review_quote_invalid', 'rejected', { inputTokens: 1000001, outputTokens: 32 }],
+    ['translation_review_quote_invalid', 'unknown', usage],
+    ['translation_review_quote_invalid', 'not_sent', usage],
+    ['translation_rate_limited', 'rejected', usage], ['translation_transport_unknown', 'unknown', usage],
+    ['translation_http_503', 'unknown', usage], ['translation_model_mismatch', 'rejected', usage],
+    ['translation_review_content_invalid', 'rejected', usage], ['translation_review_stop_invalid', 'rejected', usage],
+    ['translation_usage_invalid', 'rejected', undefined], ['translation_admission_wait', 'not_sent', undefined],
+  ]) {
+    const options = pairFixture(t), seen = []
+    const result = await reviewTranslationBacklog({ ...options, review: async input => {
+      seen.push(input.source); throw new TranslationProviderError(code, outcome, '2026-11-23T00:00:00Z', false, measured)
+    } })
+    assert.deepEqual(seen, [source]); assert.equal(result.state, 'provider_wait'); assert.equal(result.approved, 0)
+    assert.equal(result.modelCalls, code === 'translation_admission_wait' ? 0 : 1)
+    assert.equal(existsSync(join(options.root, publicationPath(options.nextSource, locale, translationScope(options.nextRow, 'requirements')))), false)
   }
 })
 

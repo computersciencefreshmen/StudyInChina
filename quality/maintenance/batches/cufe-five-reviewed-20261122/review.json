@@ -1,0 +1,380 @@
+{
+  "format": "studyinchina.official-multischool-review",
+  "version": 1,
+  "evaluatedAt": "2026-11-22T15:55:10.446Z",
+  "reviewer": "codex-ai-independent-official-source-review:cufe-five-reviewed-20261122",
+  "reviewMethod": "Codex AI official-primary-source/tool and HTML table-row audit; not Henry personal sign-off; no external model call",
+  "baseline": {
+    "gitCommit": "bf2ea857acab412c4cc1ca3fc068c606727739f7",
+    "publicFeedRevision": "0ad657fcf683ac896abd2af1194b66b7719b1a25687e31a5ae482aa14a5d2999",
+    "counts": {
+      "uni-central-university-of-finance-and-economics": 0
+    },
+    "rawPrograms": 2361,
+    "directoryPrograms": 39,
+    "currentPrograms": 34,
+    "directoryCycles": 50,
+    "currentCycles": 45,
+    "preservedExistingSchoolRecordHashes": {
+      "program-central-university-of-finance-and-economics-finance-master": "7c45ffa33b9cb24901dcdc43e4dd75ee4bb78b6320a86b701ed815717042c32b",
+      "program-central-university-of-finance-and-economics-international-law-master": "098eef6969e97da30342eb578ced56887008aa9e7243aeff1f668b2a9df81d15",
+      "program-central-university-of-finance-and-economics-investment-master": "a612eb1f38390e78a5cd27fcd305e8751767d728886a0a6c4b9f997ed6dc1bce"
+    },
+    "collectionLengths": {
+      "sources": 3025,
+      "cities": 65,
+      "universities": 305,
+      "programs": 2361,
+      "admissionCycles": 1735,
+      "scholarships": 415
+    }
+  },
+  "inputCatalogSha256": "769a54edd0140424896b2d59585413636c7d21dde81b2d13f9e4d48bfccc9463",
+  "outputCatalogSha256": "862a0018a371171c75e6cd205072b56ccad33c339d950f65b0d0b7bb5dd64fe1",
+  "sources": {
+    "cufe2027-guide": {
+      "sourceId": "src-cufe2027-guide-20261122",
+      "url": "https://sice.cufe.edu.cn/info/1045/4374.htm",
+      "accessedAt": "2026-11-22T15:51:49.586Z",
+      "rawBytes": 173318,
+      "rawSha256": "2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f",
+      "objectKey": "official/cufe-five-reviewed-20261122/2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f.html",
+      "normalizedTextSha256": "3664af9b1914d3c0d36883f423cac5cf0156516f15b8887b9ae651179ff939f9",
+      "normalizer": "JSDOM static DOM textContent; script/style removed; Unicode whitespace collapsed to one ASCII space; trimmed; no scripts or network executed"
+    },
+    "cufe2027-index": {
+      "sourceId": "src-cufe2027-index-20261122",
+      "url": "https://sice.cufe.edu.cn/zsxx/xlxm_Degree_programs/bk_Undergraduate_Programs.htm",
+      "accessedAt": "2026-11-22T15:51:49.647Z",
+      "rawBytes": 33898,
+      "rawSha256": "5a770aec40b6e0453f1ccb1a7bcfe5145c0d7e9a87ac88b73d1aa53e60f7085c",
+      "objectKey": "official/cufe-five-reviewed-20261122/5a770aec40b6e0453f1ccb1a7bcfe5145c0d7e9a87ac88b73d1aa53e60f7085c.html"
+    },
+    "cufe-application-portal": {
+      "sourceId": "src-cufe-application-portal-20261122",
+      "url": "https://cufe.17gz.org/",
+      "accessedAt": "2026-11-22T15:51:49.906Z",
+      "rawBytes": 34862,
+      "rawSha256": "d1872015663f79a347ad2703810b94d6ebef67f367cad1040ae2b432915e63fd",
+      "objectKey": "official/cufe-five-reviewed-20261122/d1872015663f79a347ad2703810b94d6ebef67f367cad1040ae2b432915e63fd.html"
+    }
+  },
+  "privateArchive": {
+    "status": "readback_verified",
+    "archiveReceiptPath": "quality/maintenance/batches/cufe-five-reviewed-20261122/archive-receipt.json",
+    "archiveReceiptSha256": "32ceeef4bce18a03f4182facc6682924432525c79b6f5e04a4e7a770037138d7",
+    "initialStateAtSourceReview": "private-local-only; planned-not-uploaded",
+    "objects": [
+      {
+        "key": "official/cufe-five-reviewed-20261122/2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f.html",
+        "sha256": "2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f",
+        "bytes": 173318,
+        "localFile": "raw/guide.html",
+        "cloudWritePerformed": true,
+        "readbackSha256": "2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f",
+        "readbackBytes": 173318,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T15:57:03.5113872Z",
+        "verifiedBy": "root release-coordinator agent"
+      },
+      {
+        "key": "official/cufe-five-reviewed-20261122/5a770aec40b6e0453f1ccb1a7bcfe5145c0d7e9a87ac88b73d1aa53e60f7085c.html",
+        "sha256": "5a770aec40b6e0453f1ccb1a7bcfe5145c0d7e9a87ac88b73d1aa53e60f7085c",
+        "bytes": 33898,
+        "localFile": "raw/undergraduate-index.html",
+        "cloudWritePerformed": true,
+        "readbackSha256": "5a770aec40b6e0453f1ccb1a7bcfe5145c0d7e9a87ac88b73d1aa53e60f7085c",
+        "readbackBytes": 33898,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T15:57:02.6807440Z",
+        "verifiedBy": "root release-coordinator agent"
+      },
+      {
+        "key": "official/cufe-five-reviewed-20261122/d1872015663f79a347ad2703810b94d6ebef67f367cad1040ae2b432915e63fd.html",
+        "sha256": "d1872015663f79a347ad2703810b94d6ebef67f367cad1040ae2b432915e63fd",
+        "bytes": 34862,
+        "localFile": "raw/portal.html",
+        "cloudWritePerformed": true,
+        "readbackSha256": "d1872015663f79a347ad2703810b94d6ebef67f367cad1040ae2b432915e63fd",
+        "readbackBytes": 34862,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T15:57:02.5674826Z",
+        "verifiedBy": "root release-coordinator agent"
+      }
+    ],
+    "note": "The root agent subsequently archived, downloaded and compared all three original files. Times are local readback-file metadata, not provider upload times. No cloud write was performed by the source-review agent."
+  },
+  "programmeEvidence": {
+    "program-cufe-public-finance-bachelor-chinese": {
+      "locator": "html-table:1;row:3;cells:5;normalized-utf16:9867:9892",
+      "quote": "Public Finance 4 25,000 /",
+      "tableIndex": 0,
+      "rowIndex": 2,
+      "cells": [
+        "School of Public Finance and Taxation",
+        "Public Finance",
+        "4",
+        "25,000",
+        "/"
+      ],
+      "faculty": "School of Public Finance and Taxation",
+      "facultyInheritedFromRow": null,
+      "header": {
+        "locator": "normalized-utf16:9584:9772",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE College Program Duration (Years) Tuition (RMB/person/year)Chinese-taught Tuition (RMB/person/year)English-taught",
+        "quoteSha256": "0da8596d75010f89c95337c5326cc4b690a7eb160daf0953fbf0f41632e8e884"
+      },
+      "annualYear": {
+        "locator": "normalized-utf16:9584:9659",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE",
+        "quoteSha256": "1a1920c896008d2aba2f6e8ef16434196b13c7fa2b9148ed99339469d4a97fcd"
+      },
+      "eligibility": {
+        "locator": "normalized-utf16:3133:3885",
+        "quote": "Eligibility 1. Non-Chinese citizens who are in good physical and mental health, hold a high school diploma or above, and possess a valid foreign passport. Undergraduate applicants should generally be no more than 25 years old, master’s applicants generally no more than 35, and doctoral applicants generally no more than 40. Applicants under the age of 18 must provide notarized materials on their guardians in Beijing, China. For details, please refer to the materials required for applicants under 18 (https://sice.cufe.edu.cn/info/1088/7371.htm). 2. The University, in accordance with the document [2020] No. 12 issued by the Ministry of Education of China, requires applicants who mentioned in the document to provide relevant supporting materials.",
+        "quoteSha256": "fae98e36cf2a7be319ddbac30957adc014b2f21dfbe3e2b561ed880694b42966"
+      },
+      "language": {
+        "locator": "normalized-utf16:5338:5482",
+        "quote": "5. Chinese-taught programs: Undergraduates: HSK Level 5 (score of 180 or above), and CSCA* score reports for humanities Chinese and mathematics.",
+        "quoteSha256": "1bfb6e350d775100f2c62eab34bfc2d6d385e23913be00fb128d02d08abfebee"
+      },
+      "dates": {
+        "locator": "normalized-utf16:3886:3986",
+        "quote": "Application Period Phase 1: November 1, 2026 – March 24, 2027 Phase 2: April 1, 2027 – June 16, 2027",
+        "quoteSha256": "713b66a27d4d91f5753ad2840538251d8ae1ed3214a14cbdf2d9456dbd0c911a"
+      },
+      "intake": {
+        "locator": "normalized-utf16:7897:8429",
+        "quote": "Registration 1. All international students must purchase medical insurance before entering China. For details, please refer to the Insurance Payment Guide (https://sice.cufe.edu.cn/info/1088/7369.htm). 2. All international students must register according to the time notified in the “Registration Notice Email”. Those who fail to register on time without a written explanation of justified reasons will be treated as having given up. The fall semester starts in early September 2027 (the specific date is subject to actual notice).",
+        "quoteSha256": "89769ca5b804221848d471c2a9d0c3abf3fa009e23c5b11840f6837c5d7d78d4"
+      },
+      "sourceUrl": "https://sice.cufe.edu.cn/info/1045/4374.htm",
+      "rawSha256": "2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f"
+    },
+    "program-cufe-finance-bachelor-chinese": {
+      "locator": "html-table:1;row:4;cells:5;normalized-utf16:9874:9892",
+      "quote": "Finance 4 25,000 /",
+      "tableIndex": 0,
+      "rowIndex": 3,
+      "cells": [
+        "School of Finance",
+        "Finance",
+        "4",
+        "25,000",
+        "/"
+      ],
+      "faculty": "School of Finance",
+      "facultyInheritedFromRow": null,
+      "header": {
+        "locator": "normalized-utf16:9584:9772",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE College Program Duration (Years) Tuition (RMB/person/year)Chinese-taught Tuition (RMB/person/year)English-taught",
+        "quoteSha256": "0da8596d75010f89c95337c5326cc4b690a7eb160daf0953fbf0f41632e8e884"
+      },
+      "annualYear": {
+        "locator": "normalized-utf16:9584:9659",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE",
+        "quoteSha256": "1a1920c896008d2aba2f6e8ef16434196b13c7fa2b9148ed99339469d4a97fcd"
+      },
+      "eligibility": {
+        "locator": "normalized-utf16:3133:3885",
+        "quote": "Eligibility 1. Non-Chinese citizens who are in good physical and mental health, hold a high school diploma or above, and possess a valid foreign passport. Undergraduate applicants should generally be no more than 25 years old, master’s applicants generally no more than 35, and doctoral applicants generally no more than 40. Applicants under the age of 18 must provide notarized materials on their guardians in Beijing, China. For details, please refer to the materials required for applicants under 18 (https://sice.cufe.edu.cn/info/1088/7371.htm). 2. The University, in accordance with the document [2020] No. 12 issued by the Ministry of Education of China, requires applicants who mentioned in the document to provide relevant supporting materials.",
+        "quoteSha256": "fae98e36cf2a7be319ddbac30957adc014b2f21dfbe3e2b561ed880694b42966"
+      },
+      "language": {
+        "locator": "normalized-utf16:5338:5482",
+        "quote": "5. Chinese-taught programs: Undergraduates: HSK Level 5 (score of 180 or above), and CSCA* score reports for humanities Chinese and mathematics.",
+        "quoteSha256": "1bfb6e350d775100f2c62eab34bfc2d6d385e23913be00fb128d02d08abfebee"
+      },
+      "dates": {
+        "locator": "normalized-utf16:3886:3986",
+        "quote": "Application Period Phase 1: November 1, 2026 – March 24, 2027 Phase 2: April 1, 2027 – June 16, 2027",
+        "quoteSha256": "713b66a27d4d91f5753ad2840538251d8ae1ed3214a14cbdf2d9456dbd0c911a"
+      },
+      "intake": {
+        "locator": "normalized-utf16:7897:8429",
+        "quote": "Registration 1. All international students must purchase medical insurance before entering China. For details, please refer to the Insurance Payment Guide (https://sice.cufe.edu.cn/info/1088/7369.htm). 2. All international students must register according to the time notified in the “Registration Notice Email”. Those who fail to register on time without a written explanation of justified reasons will be treated as having given up. The fall semester starts in early September 2027 (the specific date is subject to actual notice).",
+        "quoteSha256": "89769ca5b804221848d471c2a9d0c3abf3fa009e23c5b11840f6837c5d7d78d4"
+      },
+      "sourceUrl": "https://sice.cufe.edu.cn/info/1045/4374.htm",
+      "rawSha256": "2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f"
+    },
+    "program-cufe-accounting-bachelor-chinese": {
+      "locator": "html-table:1;row:5;cells:5;normalized-utf16:9952:9973",
+      "quote": "Accounting 4 25,000 /",
+      "tableIndex": 0,
+      "rowIndex": 4,
+      "cells": [
+        "School of Accountancy",
+        "Accounting",
+        "4",
+        "25,000",
+        "/"
+      ],
+      "faculty": "School of Accountancy",
+      "facultyInheritedFromRow": null,
+      "header": {
+        "locator": "normalized-utf16:9584:9772",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE College Program Duration (Years) Tuition (RMB/person/year)Chinese-taught Tuition (RMB/person/year)English-taught",
+        "quoteSha256": "0da8596d75010f89c95337c5326cc4b690a7eb160daf0953fbf0f41632e8e884"
+      },
+      "annualYear": {
+        "locator": "normalized-utf16:9584:9659",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE",
+        "quoteSha256": "1a1920c896008d2aba2f6e8ef16434196b13c7fa2b9148ed99339469d4a97fcd"
+      },
+      "eligibility": {
+        "locator": "normalized-utf16:3133:3885",
+        "quote": "Eligibility 1. Non-Chinese citizens who are in good physical and mental health, hold a high school diploma or above, and possess a valid foreign passport. Undergraduate applicants should generally be no more than 25 years old, master’s applicants generally no more than 35, and doctoral applicants generally no more than 40. Applicants under the age of 18 must provide notarized materials on their guardians in Beijing, China. For details, please refer to the materials required for applicants under 18 (https://sice.cufe.edu.cn/info/1088/7371.htm). 2. The University, in accordance with the document [2020] No. 12 issued by the Ministry of Education of China, requires applicants who mentioned in the document to provide relevant supporting materials.",
+        "quoteSha256": "fae98e36cf2a7be319ddbac30957adc014b2f21dfbe3e2b561ed880694b42966"
+      },
+      "language": {
+        "locator": "normalized-utf16:5338:5482",
+        "quote": "5. Chinese-taught programs: Undergraduates: HSK Level 5 (score of 180 or above), and CSCA* score reports for humanities Chinese and mathematics.",
+        "quoteSha256": "1bfb6e350d775100f2c62eab34bfc2d6d385e23913be00fb128d02d08abfebee"
+      },
+      "dates": {
+        "locator": "normalized-utf16:3886:3986",
+        "quote": "Application Period Phase 1: November 1, 2026 – March 24, 2027 Phase 2: April 1, 2027 – June 16, 2027",
+        "quoteSha256": "713b66a27d4d91f5753ad2840538251d8ae1ed3214a14cbdf2d9456dbd0c911a"
+      },
+      "intake": {
+        "locator": "normalized-utf16:7897:8429",
+        "quote": "Registration 1. All international students must purchase medical insurance before entering China. For details, please refer to the Insurance Payment Guide (https://sice.cufe.edu.cn/info/1088/7369.htm). 2. All international students must register according to the time notified in the “Registration Notice Email”. Those who fail to register on time without a written explanation of justified reasons will be treated as having given up. The fall semester starts in early September 2027 (the specific date is subject to actual notice).",
+        "quoteSha256": "89769ca5b804221848d471c2a9d0c3abf3fa009e23c5b11840f6837c5d7d78d4"
+      },
+      "sourceUrl": "https://sice.cufe.edu.cn/info/1045/4374.htm",
+      "rawSha256": "2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f"
+    },
+    "program-cufe-financial-management-bachelor-chinese": {
+      "locator": "html-table:1;row:6;cells:4;normalized-utf16:9974:10005",
+      "quote": "Financial Management 4 25,000 /",
+      "tableIndex": 0,
+      "rowIndex": 5,
+      "cells": [
+        "Financial Management",
+        "4",
+        "25,000",
+        "/"
+      ],
+      "faculty": "School of Accountancy",
+      "facultyInheritedFromRow": 4,
+      "header": {
+        "locator": "normalized-utf16:9584:9772",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE College Program Duration (Years) Tuition (RMB/person/year)Chinese-taught Tuition (RMB/person/year)English-taught",
+        "quoteSha256": "0da8596d75010f89c95337c5326cc4b690a7eb160daf0953fbf0f41632e8e884"
+      },
+      "annualYear": {
+        "locator": "normalized-utf16:9584:9659",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE",
+        "quoteSha256": "1a1920c896008d2aba2f6e8ef16434196b13c7fa2b9148ed99339469d4a97fcd"
+      },
+      "eligibility": {
+        "locator": "normalized-utf16:3133:3885",
+        "quote": "Eligibility 1. Non-Chinese citizens who are in good physical and mental health, hold a high school diploma or above, and possess a valid foreign passport. Undergraduate applicants should generally be no more than 25 years old, master’s applicants generally no more than 35, and doctoral applicants generally no more than 40. Applicants under the age of 18 must provide notarized materials on their guardians in Beijing, China. For details, please refer to the materials required for applicants under 18 (https://sice.cufe.edu.cn/info/1088/7371.htm). 2. The University, in accordance with the document [2020] No. 12 issued by the Ministry of Education of China, requires applicants who mentioned in the document to provide relevant supporting materials.",
+        "quoteSha256": "fae98e36cf2a7be319ddbac30957adc014b2f21dfbe3e2b561ed880694b42966"
+      },
+      "language": {
+        "locator": "normalized-utf16:5338:5482",
+        "quote": "5. Chinese-taught programs: Undergraduates: HSK Level 5 (score of 180 or above), and CSCA* score reports for humanities Chinese and mathematics.",
+        "quoteSha256": "1bfb6e350d775100f2c62eab34bfc2d6d385e23913be00fb128d02d08abfebee"
+      },
+      "dates": {
+        "locator": "normalized-utf16:3886:3986",
+        "quote": "Application Period Phase 1: November 1, 2026 – March 24, 2027 Phase 2: April 1, 2027 – June 16, 2027",
+        "quoteSha256": "713b66a27d4d91f5753ad2840538251d8ae1ed3214a14cbdf2d9456dbd0c911a"
+      },
+      "intake": {
+        "locator": "normalized-utf16:7897:8429",
+        "quote": "Registration 1. All international students must purchase medical insurance before entering China. For details, please refer to the Insurance Payment Guide (https://sice.cufe.edu.cn/info/1088/7369.htm). 2. All international students must register according to the time notified in the “Registration Notice Email”. Those who fail to register on time without a written explanation of justified reasons will be treated as having given up. The fall semester starts in early September 2027 (the specific date is subject to actual notice).",
+        "quoteSha256": "89769ca5b804221848d471c2a9d0c3abf3fa009e23c5b11840f6837c5d7d78d4"
+      },
+      "sourceUrl": "https://sice.cufe.edu.cn/info/1045/4374.htm",
+      "rawSha256": "2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f"
+    },
+    "program-cufe-auditing-bachelor-chinese": {
+      "locator": "html-table:1;row:7;cells:4;normalized-utf16:10006:10025",
+      "quote": "Auditing 4 25,000 /",
+      "tableIndex": 0,
+      "rowIndex": 6,
+      "cells": [
+        "Auditing",
+        "4",
+        "25,000",
+        "/"
+      ],
+      "faculty": "School of Accountancy",
+      "facultyInheritedFromRow": 4,
+      "header": {
+        "locator": "normalized-utf16:9584:9772",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE College Program Duration (Years) Tuition (RMB/person/year)Chinese-taught Tuition (RMB/person/year)English-taught",
+        "quoteSha256": "0da8596d75010f89c95337c5326cc4b690a7eb160daf0953fbf0f41632e8e884"
+      },
+      "annualYear": {
+        "locator": "normalized-utf16:9584:9659",
+        "quote": "2027 Catalogue of Undergraduate Programs for International Students of CUFE",
+        "quoteSha256": "1a1920c896008d2aba2f6e8ef16434196b13c7fa2b9148ed99339469d4a97fcd"
+      },
+      "eligibility": {
+        "locator": "normalized-utf16:3133:3885",
+        "quote": "Eligibility 1. Non-Chinese citizens who are in good physical and mental health, hold a high school diploma or above, and possess a valid foreign passport. Undergraduate applicants should generally be no more than 25 years old, master’s applicants generally no more than 35, and doctoral applicants generally no more than 40. Applicants under the age of 18 must provide notarized materials on their guardians in Beijing, China. For details, please refer to the materials required for applicants under 18 (https://sice.cufe.edu.cn/info/1088/7371.htm). 2. The University, in accordance with the document [2020] No. 12 issued by the Ministry of Education of China, requires applicants who mentioned in the document to provide relevant supporting materials.",
+        "quoteSha256": "fae98e36cf2a7be319ddbac30957adc014b2f21dfbe3e2b561ed880694b42966"
+      },
+      "language": {
+        "locator": "normalized-utf16:5338:5482",
+        "quote": "5. Chinese-taught programs: Undergraduates: HSK Level 5 (score of 180 or above), and CSCA* score reports for humanities Chinese and mathematics.",
+        "quoteSha256": "1bfb6e350d775100f2c62eab34bfc2d6d385e23913be00fb128d02d08abfebee"
+      },
+      "dates": {
+        "locator": "normalized-utf16:3886:3986",
+        "quote": "Application Period Phase 1: November 1, 2026 – March 24, 2027 Phase 2: April 1, 2027 – June 16, 2027",
+        "quoteSha256": "713b66a27d4d91f5753ad2840538251d8ae1ed3214a14cbdf2d9456dbd0c911a"
+      },
+      "intake": {
+        "locator": "normalized-utf16:7897:8429",
+        "quote": "Registration 1. All international students must purchase medical insurance before entering China. For details, please refer to the Insurance Payment Guide (https://sice.cufe.edu.cn/info/1088/7369.htm). 2. All international students must register according to the time notified in the “Registration Notice Email”. Those who fail to register on time without a written explanation of justified reasons will be treated as having given up. The fall semester starts in early September 2027 (the specific date is subject to actual notice).",
+        "quoteSha256": "89769ca5b804221848d471c2a9d0c3abf3fa009e23c5b11840f6837c5d7d78d4"
+      },
+      "sourceUrl": "https://sice.cufe.edu.cn/info/1045/4374.htm",
+      "rawSha256": "2712f1e4457988e6a6c6507507f955b565170b88100305f1b0c1439028661a4f"
+    }
+  },
+  "scopeDecisions": {
+    "fiveDistinctChineseBachelors": true,
+    "officialNamesAccepted": [
+      "en"
+    ],
+    "chineseNamesNotInvented": true,
+    "sourceLanguage": "English",
+    "sameYearChineseGeneralCounterpartLocated": false,
+    "knownCrossLanguageThresholdConflict": false,
+    "englishFinanceSpecificGuideNotApplicableToSelectedChineseTrack": true,
+    "phaseCount": 2,
+    "academicYear": "2027",
+    "intake": "autumn",
+    "fullTimeDesignation": "unknown",
+    "specificAwardTitle": "unknown",
+    "ageReferenceDate": "unknown",
+    "generalAgeQualificationPreserved": true,
+    "noUnstatedLanguageWaiver": true,
+    "cscaSubjects": [
+      "humanities Chinese",
+      "mathematics"
+    ],
+    "cscaPaperLanguage": "unknown",
+    "cscaNumericalPassMark": "unknown",
+    "notCompleteUniversityCatalogue": true,
+    "under18LinkedPage": {
+      "url": "https://sice.cufe.edu.cn/info/1088/7371.htm",
+      "observedHttpStatus": 301,
+      "redirectNotFollowed": true,
+      "extraTemplateTermsNotInferred": true
+    }
+  },
+  "preservation": {
+    "previousRecordCount": 2361,
+    "originalRecordObjectsSha256": "769a54edd0140424896b2d59585413636c7d21dde81b2d13f9e4d48bfccc9463",
+    "programsAdded": 5,
+    "admissionCyclesAdded": 10,
+    "sourcesAdded": 3,
+    "existingRecordsMutated": 0
+  },
+  "held": []
+}
