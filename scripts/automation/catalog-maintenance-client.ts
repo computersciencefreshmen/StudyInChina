@@ -4,6 +4,7 @@ import { dirname, resolve, relative, isAbsolute } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { maintenanceCandidateExportSchema, exportContentSha256, canonicalJson, type CandidateExport } from '../maintenance/contracts'
 import type { CanonicalMaintenanceReceipt } from './prepare-maintenance-catalog'
+import { verifyPublisherBaselineBridgeReceipt } from '../maintenance/publisher-baseline-bridge'
 
 export type MaintenanceClient = {
   json(path: string, method?: 'GET' | 'POST', body?: unknown): Promise<unknown>
@@ -142,6 +143,7 @@ export async function recoverPendingMaintenancePublication(client: MaintenanceCl
     || canonicalJson([...receipt.acceptedProposalIds].sort()) !== canonicalJson(ack.acceptedProposalIds)
     || canonicalJson(receipt.held.map(entry => entry.proposalId).sort()) !== canonicalJson(ack.heldProposalIds)
     || canonicalJson([...(receipt.unchangedProposalIds ?? [])].sort()) !== canonicalJson(ack.unchangedProposalIds ?? [])) throw new Error('maintenance_publication_receipt_changed')
+  verifyPublisherBaselineBridgeReceipt(root, receipt)
   return { batchId: pending.batchId, sourceCommit: ack.sourceCommit, receiptPath }
 }
 

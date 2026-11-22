@@ -9,6 +9,7 @@ import { readFieldVerifications } from '../../src/lib/data/field-verification-st
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { maintenanceClientFromEnvironment } from './catalog-maintenance-client'
 import type { CanonicalMaintenanceReceipt } from './prepare-maintenance-catalog'
+import { verifyPublisherBaselineBridgeReceipt } from '../maintenance/publisher-baseline-bridge'
 import { canonicalJson } from '../maintenance/contracts'
 import { directoryRevision } from '../../src/lib/catalog/directory-revision'
 import { PUBLIC_PROGRAM_QUALITY_POLICY, selectDetailedPublicPrograms } from '../../src/lib/data/public-program-quality'
@@ -24,6 +25,7 @@ async function boundedJson(response: Response) {
   return JSON.parse(Buffer.concat(chunks).toString('utf8'))
 }
 export async function verifyMaintenancePublication(options: { root: string; sourceCommit: string; receipt: CanonicalMaintenanceReceipt; vercelToken: string; fetcher?: typeof fetch }) {
+  verifyPublisherBaselineBridgeReceipt(options.root, options.receipt)
   if (!/^[a-f0-9]{40}$/u.test(options.sourceCommit) || !options.vercelToken || /[\r\n]/u.test(options.vercelToken)) throw new Error('publication_configuration_invalid')
   const fetcher = options.fetcher ?? fetch
   const provider = async (path: string) => boundedJson(await fetcher(`https://api.vercel.com${path}?teamId=${OWNER}`, {
