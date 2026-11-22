@@ -42,9 +42,14 @@ export function translationConflict(source: string, text: string, locale: Progra
   if (field === 'title' && locale === 'en' && (/\p{Script=Han}/u.test(text) || !/[A-Za-z]/u.test(text))) return 'untranslated_title'
   if (locale !== 'zh') return null
   const prose = text.replace(/https?:\/\/\S+|[\w.+-]+@[\w.-]+/giu, '')
-  // Nationality conditions are prose; retain official names and exam acronyms.
-  if ((field === 'requirements' || field === 'materials') && /\p{Script=Han}/u.test(prose)
-    && /\bnon-chinese\b/iu.test(prose)) return 'untranslated_condition'
+  if ((field === 'requirements' || field === 'materials') && /\p{Script=Han}/u.test(prose)) {
+    // Condition words are prose. Names such as Chinese University of Hong Kong
+    // and official exam names/acronyms are not matched by these local contexts.
+    if (/\bnon-chinese\b/iu.test(prose)
+      || /(?:的|学习|就读|修读|攻读)\s*Chinese\b(?=\s*(?:[。；.!?;]|$))|\bChinese\s*(?:熟练|水平|能力|语言|证书|考试|授课|课程|预科|培训)/iu.test(prose)) return 'untranslated_condition'
+    // This observed rendering attaches the applicant's health to a diploma.
+    if (prose.includes('持有成绩优异、身体健康的硕士学位毕业证书')) return 'scope'
+  }
   if (/\p{Script=Han}/u.test(prose) && /\b(?:not|above|under|unless|required|exempt(?:ed)?|at least|at most)\b/iu.test(prose)) return 'untranslated_condition'
   if (/\b(?:not (?:available|open|eligible)|ineligible)\b/iu.test(source) && /可申请|可以申请|符合申请资格|开放/u.test(prose)
     && !/[不无未非免禁拒除]/u.test(prose)) return 'negation'

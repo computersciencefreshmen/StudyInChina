@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path'
 import { test } from 'node:test'
 import { candidatePath, reviewTranslationBacklog } from './review-program-translations.mjs'
 import { reviewTranslation, TranslationProviderError } from './minimax-translation-provider.ts'
-import { translationKey, restoreTranslationText, protectTranslationText } from '../../src/lib/program-translation-contract.ts'
+import { translationKey, restoreTranslationText, protectTranslationText, validateTranslationRecord } from '../../src/lib/program-translation-contract.ts'
 import { publicationPath, reviewBinding, translationConflict, translationScope, validatePublishedTranslation, REVIEW_POLICY } from '../../src/lib/program-translation-review.ts'
 
 const source = 'Applicants must provide proof of IELTS 6.5 or a waiver for prior English study.'
@@ -17,6 +17,7 @@ const candidate = { schemaVersion: 1, version: 'v1', key: translationKey(source,
   sourceHash: createHash('sha256').update(source).digest('hex'), targetLocale: locale, text, model: 'MiniMax-M3',
   method: 'minimax', factPolicy: 'literal-v2', validation: 'passed', translatedAt: '2026-11-18T00:00:00.000Z' }
 const pass = { verdict: 'PASS', model: 'MiniMax-M3', issue: null, sourceQuote: '', targetQuote: '', usage: { inputTokens: 60, outputTokens: 15 } }
+const proseRegressions = JSON.parse(readFileSync(new URL('../../tests/fixtures/program-translation-prose-regressions.json', import.meta.url), 'utf8'))
 const fixture = t => {
   const root = mkdtempSync(join(tmpdir(), 'translation-review-'))
   t.after(() => rmSync(root, { recursive: true, force: true }))
@@ -99,6 +100,44 @@ test('Chinese admission prose cannot retain the Non-Chinese condition even in a 
     '申请人须提交 University of Nottingham Ningbo China 的证明。', '请访问 https://example.edu/Non-Chinese 或联系 Non-Chinese@example.edu。'])
     assert.equal(translationConflict(original, output, locale, 'requirements'), null)
   assert.equal(translationConflict(original, leaked, 'en', 'requirements'), null)
+})
+
+test('six observed scope-bound PASS receipts cannot publish untranslated language qualifiers or the diploma-health modifier', () => {
+  assert.equal(proseRegressions.cases.length, 6)
+  for (const item of proseRegressions.cases) {
+    assert.ok(validateTranslationRecord(item.approval, item.source, item.locale), item.id)
+    assert.equal(reviewBinding(item.source, item.approval.text, item.locale, item.scope), item.approval.review.binding)
+    assert.equal(translationConflict(item.source, item.approval.text, item.locale, item.field), item.reason)
+    assert.equal(validatePublishedTranslation(item.approval, item.source, item.locale, item.scope), null)
+    const repaired = item.reason === 'scope'
+      ? '申请人应拥有硕士学位毕业证书，学业表现优异且身体健康，并持有有效外国护照。'
+      : '没有 HSK 报告者，若其他材料齐全，可先在 BSU 学习中文。取得相应汉语水平证书后，可在 BSU 就读。'
+    const nextRecord = { ...item.approval, text: repaired, factPolicy: 'literal-v2', review: { ...item.approval.review,
+      binding: reviewBinding(item.source, repaired, item.locale, item.scope) } }
+    assert.ok(validatePublishedTranslation(nextRecord, item.source, item.locale, item.scope), 'a faithful newly reviewed replacement remains eligible')
+  }
+  for (const valid of ['没有 HSK 报告者，若其他材料齐全，可先在 BSU 学习中文。取得相应汉语水平证书后，可在 BSU 就读。',
+    '申请人应拥有硕士学位毕业证书，学业表现优异且身体健康，并持有有效外国护照。',
+    '可在 Chinese University of Hong Kong 学习，须提交 HSK 与 IELTS 成绩。',
+    '提交 Chinese Academy of Sciences 的证明及 CSCA 成绩单。',
+    'Chinese Government Scholarship 申请材料须以中文提交。',
+    'CSCA Chinese Proficiency in Science Subjects 成绩单。',
+    'HSK、CSCA、IELTS、TOEFL 成绩应按学校要求提交。',
+    '请阅读 https://example.edu/Chinese熟练水平 或联系 Chinese@example.edu。'])
+    for (const field of ['requirements', 'materials']) assert.equal(translationConflict('Programme requirements', valid, 'zh', field), null, valid)
+})
+
+test('the six concrete bad candidates are rejected locally before quota or reviewer calls', async t => {
+  for (const item of proseRegressions.cases) {
+    const options = fixture(t), s = item.scope
+    const actualRow = { id: s.program, schoolId: s.school, name: s.name, schoolName: s.schoolName, admissionYear: s.year,
+      status: 'extracted', fields: { requirements: item.source, degree: s.degree, language: s.track, startDate: s.start, deadline: s.deadline } }
+    const unreviewed = { ...item.approval }; delete unreviewed.review
+    writeFileSync(join(options.root, candidatePath(item.source, 'zh')), JSON.stringify(unreviewed))
+    const result = await reviewTranslationBacklog({ ...options, records: [actualRow], fields: ['requirements'],
+      quota: () => assert.fail('a known bad candidate must not probe quota'), review: () => assert.fail('a known bad candidate must not buy review') })
+    assert.equal(result.modelCalls, 0); assert.equal(result.revise, 1); assert.equal(result.approved, 0)
+  }
 })
 
 test('review provider receives only original, candidate and scope, and rejects ungrounded issue verdicts', async () => {
