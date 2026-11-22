@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { test } from 'node:test'
 import { candidatePath, reviewTranslationBacklog } from './review-program-translations.mjs'
-import { reviewTranslation } from './minimax-translation-provider.ts'
+import { reviewTranslation, TranslationProviderError } from './minimax-translation-provider.ts'
 import { translationKey, restoreTranslationText, protectTranslationText } from '../../src/lib/program-translation-contract.ts'
 import { publicationPath, reviewBinding, translationConflict, translationScope, validatePublishedTranslation, REVIEW_POLICY } from '../../src/lib/program-translation-review.ts'
 
@@ -86,7 +86,97 @@ test('review provider receives only original, candidate and scope, and rejects u
       return Response.json({ model: 'MiniMax-M3', type: 'message', stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(verdict) }],
         usage: { input_tokens: 15, output_tokens: 5 } })
     } })
-    if (invalid) await assert.rejects(call(), /translation_review_response_invalid/)
+    if (invalid) await assert.rejects(call(), /translation_review_quote_invalid/)
     else assert.equal((await call()).verdict, 'REVISE')
+  }
+})
+
+test('received review failures retain safe diagnostics and accounting without becoming a semantic verdict or replay', async t => {
+  const options = fixture(t), marker = 'private-provider-body-and-credential'
+  const journal = join(options.root, 'translations/review-reservations', REVIEW_POLICY, locale, reviewBinding(source, text, locale, scope) + '.json')
+  let calls = 0
+  const failure = Object.assign(new TranslationProviderError('translation_review_schema_invalid', 'rejected', null, false,
+    { inputTokens: 375, outputTokens: 24 }), { providerBody: marker, cause: marker })
+  const run = () => reviewTranslationBacklog({ ...options, review: async () => { calls++; throw failure } })
+  const summary = await run(), saved = JSON.parse(readFileSync(journal))
+  assert.deepEqual(summary.lastProviderError, { code: 'translation_review_schema_invalid', outcome: 'rejected', usage: { inputTokens: 375, outputTokens: 24 } })
+  assert.equal(summary.state, 'provider_wait'); assert.equal(summary.approved, 0); assert.equal(summary.revise, 0); assert.equal(summary.blocked, 1)
+  assert.equal(summary.inputTokens, 375); assert.equal(summary.outputTokens, 24)
+  assert.deepEqual(saved, { binding: reviewBinding(source, text, locale, scope), checkedAt: saved.checkedAt, state: 'failed', ...summary.lastProviderError })
+  assert.ok(!JSON.stringify({ summary, saved }).includes(marker))
+  assert.equal(existsSync(join(options.root, publicationPath(source, locale, scope))), false)
+  await run(); assert.equal(calls, 1)
+})
+
+test('diagnostics do not expose arbitrary errors or invalid counts, and unknown outcomes stay protected', async t => {
+  for (const outcome of ['unknown', 'unexpected-private-outcome']) {
+    const options = fixture(t), marker = 'translation_private_body'
+    let calls = 0
+    const run = () => reviewTranslationBacklog({ ...options, review: async () => {
+      calls++; throw Object.assign(new Error(marker), { code: marker, outcome, usage: { inputTokens: -1, outputTokens: Infinity } })
+    } })
+    const summary = await run()
+    assert.deepEqual(summary.lastProviderError, { code: 'translation_review_provider_error', outcome: 'unknown' })
+    assert.equal(summary.unknown, 1); assert.equal(summary.blocked, 0); assert.equal(summary.inputTokens, 0); assert.equal(summary.outputTokens, 0)
+    assert.ok(!JSON.stringify(summary).includes(marker))
+    await run(); assert.equal(calls, 1)
+  }
+})
+
+test('existing terminal and unresolved journals remain byte-identical and cannot be retried by the clearer prompt', async t => {
+  for (const state of ['failed', 'unknown', 'reserved', 'REVISE', 'BLOCK']) {
+    const options = fixture(t), path = join(options.root, 'translations/review-reservations', REVIEW_POLICY, locale, reviewBinding(source, text, locale, scope) + '.json')
+    const original = JSON.stringify({ state, binding: reviewBinding(source, text, locale, scope), checkedAt: '2026-11-18T04:32:07.222Z' }) + '\n'
+    mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, original)
+    const result = await reviewTranslationBacklog({ ...options, review: async () => { assert.fail('protected prior review was sent') } })
+    assert.equal(result.modelCalls, 0); assert.equal(readFileSync(path, 'utf8'), original)
+    assert.equal(existsSync(join(options.root, publicationPath(source, locale, scope))), false)
+  }
+})
+
+test('review parser identifies the exact rejected contract check and preserves only known usage', async () => {
+  const valid = { verdict: 'PASS', issue: null, sourceQuote: '', targetQuote: '' }
+  const message = item => ({ model: 'MiniMax-M3', type: 'message', stop_reason: 'end_turn',
+    content: [{ type: 'text', text: JSON.stringify(item) }], usage: { input_tokens: 375, output_tokens: 24 } })
+  const cases = [
+    [{ ...message(valid), type: 'other' }, 'translation_review_envelope_invalid', false],
+    [{ ...message(valid), model: 'fallback-model' }, 'translation_model_mismatch', true],
+    [{ ...message(valid), stop_reason: 'max_tokens' }, 'translation_output_truncated', true],
+    [{ ...message(valid), stop_reason: 'tool_use' }, 'translation_review_stop_invalid', true],
+    [{ ...message(valid), usage: { input_tokens: -1, output_tokens: 24 } }, 'translation_usage_invalid', false],
+    [{ ...message(valid), content: [{ type: 'thinking', thinking: 'private' }] }, 'translation_review_content_invalid', true],
+    [{ ...message(valid), content: [...message(valid).content, ...message(valid).content] }, 'translation_review_content_invalid', true],
+    [{ ...message(valid), content: [{ type: 'text', text: '```json\n{}\n```' }] }, 'translation_review_json_invalid', true],
+    [message({ ...valid, extra: true }), 'translation_review_schema_invalid', true],
+    [message({ ...valid, verdict: 'PASS|REVISE|BLOCK' }), 'translation_review_schema_invalid', true],
+    [message({ ...valid, verdict: ['PASS'] }), 'translation_review_schema_invalid', true],
+    [message({ ...valid, sourceQuote: 'Applicants' }), 'translation_review_pass_invalid', true],
+    [message({ verdict: 'REVISE', issue: 'invented', sourceQuote: 'waiver', targetQuote: '证明' }), 'translation_review_issue_invalid', true],
+    [message({ verdict: 'BLOCK', issue: 'omission', sourceQuote: 'waiver', targetQuote: 'invented' }), 'translation_review_quote_invalid', true],
+  ]
+  for (const [response, code, hasUsage] of cases) {
+    let calls = 0
+    await assert.rejects(() => reviewTranslation({ key: 'test-only', locale, scope, source, text, fetcher: async () => {
+      calls++; return Response.json(response)
+    } }), error => {
+      assert.ok(error instanceof TranslationProviderError); assert.equal(error.code, code); assert.equal(error.outcome, 'rejected')
+      assert.deepEqual(error.usage, hasUsage ? { inputTokens: 375, outputTokens: 24 } : undefined)
+      return true
+    })
+    assert.equal(calls, 1)
+  }
+  for (const verdict of ['PASS', 'REVISE', 'BLOCK']) {
+    const item = verdict === 'PASS' ? valid : { verdict, issue: 'omission', sourceQuote: 'waiver', targetQuote: '证明' }
+    const result = await reviewTranslation({ key: 'test-only', locale, scope, source, text, fetcher: async (_url, init) => {
+      const prompt = JSON.parse(init.body).system
+      assert.match(prompt, /^Review response contract: verdict-json-v2\./)
+      assert.match(prompt, /Choose exactly one verdict string/)
+      assert.match(prompt, /For PASS return exactly \{"verdict":"PASS","issue":null,"sourceQuote":"","targetQuote":""\}/)
+      assert.match(prompt, /\{"verdict":"REVISE","issue":"and_or","sourceQuote":"HSK 5 or IELTS 6.5","targetQuote":"HSK 5 和 IELTS 6.5"\}/)
+      assert.match(prompt, /use excerpts from the actual inputs only/)
+      assert.ok(!prompt.includes('PASS|REVISE|BLOCK'))
+      return Response.json(message(item))
+    } })
+    assert.equal(result.verdict, verdict)
   }
 })
