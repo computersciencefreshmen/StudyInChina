@@ -44,6 +44,19 @@ describe('maintenance bridge HTTP boundary', () => {
       }
     }
   })
+  it('exposes fixed coverage registration error codes without logging the response payload', async () => {
+    const code = 'public_coverage_release_changed'
+    const fetcher = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(Response.json({ ok: false, error: code, details: token }, { status: 409 }))
+      .mockResolvedValueOnce(Response.json({ ok: false, error: token }, { status: 409 }))
+    const client = maintenanceClientFromEnvironment(environment, fetcher)
+    await expect(client.json('/coverage/published', 'POST', {})).rejects.toMatchObject({
+      httpStatus: 409, coverageCode: code, backendUnavailable: false, message: 'maintenance_request_failed',
+    })
+    await expect(client.json('/coverage/published', 'POST', {})).rejects.toMatchObject({
+      httpStatus: 409, coverageCode: undefined, backendUnavailable: false, message: 'maintenance_request_failed',
+    })
+  })
   it('keeps normal quota and seed waits quiet while refusing an unknown backend failure', async () => {
     const client = { json: vi.fn(), artifact: vi.fn() }
     client.json.mockResolvedValue({ format: 'studyinchina.cloud-maintenance-status', backend: { state: 'quota_wait' }, control: null })

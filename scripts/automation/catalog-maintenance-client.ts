@@ -10,12 +10,25 @@ export type MaintenanceClient = {
   artifact(key: string): Promise<Uint8Array>
 }
 
+const coverageFailureCodes = new Set([
+  'budget_wait',
+  'coverage_snapshot_binding_invalid',
+  'public_coverage_control_not_ready',
+  'public_coverage_immutable_conflict',
+  'public_coverage_release_changed',
+  'public_coverage_release_unavailable',
+  'public_coverage_scope_incomplete',
+])
+
 /** Safe transport metadata only. Never retain a Response, body, token or cause. */
 export class MaintenanceHttpError extends Error {
-  constructor(readonly httpStatus: number, readonly backendUnavailable = false) { super('maintenance_request_failed') }
+  constructor(readonly httpStatus: number, readonly backendUnavailable = false, readonly coverageCode?: string) {
+    super('maintenance_request_failed')
+  }
 }
 export async function maintenanceHttpFailure(response: Response): Promise<MaintenanceHttpError> {
   let backendUnavailable = false
+  let coverageCode: string | undefined
   // Only this fixed Worker error can be a backend candidate. A CAS/operator
   // conflict remains a failure even if a later status request reports quota.
   if ([409, 429].includes(response.status) || response.status >= 500) {
@@ -27,14 +40,19 @@ export async function maintenanceHttpFailure(response: Response): Promise<Mainte
           if (size > 1024) { await reader.cancel(); break }; chunks.push(next.value) }
         if (size <= 1024) {
           const value: unknown = JSON.parse(Buffer.concat(chunks).toString('utf8'))
-          backendUnavailable = Boolean(value && typeof value === 'object' && !Array.isArray(value)
-            && (value as Record<string, unknown>).ok === false && (value as Record<string, unknown>).error === 'request_invalid_or_backend_unavailable')
+          if (value && typeof value === 'object' && !Array.isArray(value)) {
+            const body = value as Record<string, unknown>
+            if (body.ok === false && typeof body.error === 'string') {
+              backendUnavailable = body.error === 'request_invalid_or_backend_unavailable'
+              if (coverageFailureCodes.has(body.error)) coverageCode = body.error
+            }
+          }
         }
       } catch { /* Unrecognized or malformed errors are never quota evidence. */ }
       finally { reader.releaseLock() }
     }
   }
-  return new MaintenanceHttpError(response.status, backendUnavailable)
+  return new MaintenanceHttpError(response.status, backendUnavailable, coverageCode)
 }
 
 /** A known shared-quota or initial-seed wait is normal, not a failed export. */
