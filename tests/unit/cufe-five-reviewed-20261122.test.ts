@@ -83,7 +83,7 @@ describe('five official CUFE Chinese undergraduate programmes in 2027', () => {
       expect(validateFieldVerification(changed, first, day)).toBeUndefined()
     }
     expect(validateFieldVerification(bundle, { ...first, sourceUrl: 'https://example.org/mirror' }, day)).toBeUndefined()
-    expect((await validateDirectory(process.cwd(), day)).integrityPassed).toBe(true)
+    expect((await validateDirectory(process.cwd())).integrityPassed).toBe(true)
   }, 30000)
 
   it('holds a contradicted qualification and missing annual route instead of counting an unresolved programme', () => {

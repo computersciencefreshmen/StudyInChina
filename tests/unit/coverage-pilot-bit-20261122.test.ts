@@ -77,7 +77,7 @@ describe('independently reviewed BIT English bachelor pilot', () => {
       expect(object.readbackBytes).toBe(object.originalBytes)
     }
     for (const leaf of leaves) expect(archive.objects.find(o => o.key === leaf.objectKey)?.readbackSha256).toBe(leaf.snapshotSha256)
-    expect((await validateDirectory(process.cwd(), today)).integrityPassed).toBe(true)
+    expect((await validateDirectory(process.cwd())).integrityPassed).toBe(true)
   }, 30000)
 
   it('withholds unresolved conditions and unusable routes rather than admitting a nonempty parent', () => {
