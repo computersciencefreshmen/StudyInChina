@@ -1,0 +1,241 @@
+{
+  "format": "studyinchina.official-multischool-review",
+  "version": 1,
+  "evaluatedAt": "2026-11-22T16:20:29.201Z",
+  "reviewer": "codex-ai-independent-official-source-review:shutcm-five-reviewed-20261123",
+  "reviewMethod": "Codex AI/tool official-source and native PDF visual review; not Henry personal sign-off; no external model call",
+  "baseline": {
+    "gitCommit": "4a542b6958a3a90f9fbd0060542dcceeb110725a",
+    "publicFeedRevision": "9774e16d7cba3ffdc33b176a90abe092d67e801ad2234592cc6cbe4d64f59473",
+    "counts": {
+      "uni-shanghai-university-of-traditional-chinese-medicine": 0
+    },
+    "collectionLengths": {
+      "sources": 3031,
+      "cities": 65,
+      "universities": 305,
+      "programs": 2371,
+      "admissionCycles": 1750,
+      "scholarships": 415
+    },
+    "rawPrograms": 2371,
+    "directoryPrograms": 49,
+    "currentPrograms": 44,
+    "directoryCycles": 65,
+    "currentCycles": 60,
+    "preservedExistingSchoolRecordHashes": {
+      "program-shanghai-university-of-traditional-chinese-medicine-traditional-chinese-": "1b7253ad716aeef7622bc46b5cb84abe35e5b7119b61b55137601018268daf25",
+      "program-shanghai-university-of-traditional-chinese-medicine-chinese-materia-medi": "2f767226310bf817bc8a2da3c87d49389f8e5373bb9c8904b61bc5fd84718d80",
+      "program-shutcm-iclt-one-semester-spring-2027": "90c90786028c577d3eb361a9bb79bfab2f8582aca65e2ddaf6bc3bcef7139160"
+    }
+  },
+  "inputCatalogSha256": "0a9e70e55235858e0f791487aee7590dfbdf68ece9d20ec14dcb42331cd21499",
+  "outputCatalogSha256": "e6e08dd3be0ac3c9c1e8c91032012ef88d9afbadf7ad4399de8994e526301de6",
+  "sources": {
+    "shutcm2027-guide": {
+      "sourceId": "src-shutcm-2027-undergraduate-cn-20261123",
+      "url": "https://iec.shutcm.edu.cn/_upload/article/files/07/b1/39376d5e4d5086533aacc66a8624/50ac528d-b318-4a5c-8f61-1c7d5e9d366f.pdf",
+      "accessedAt": "2026-11-22T16:11:43.4310903Z",
+      "rawBytes": 825062,
+      "rawSha256": "1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6",
+      "objectKey": "official/shutcm-five-reviewed-20261123/1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6.pdf"
+    },
+    "shutcm-portal": {
+      "sourceId": "src-shutcm-application-portal-20261123",
+      "url": "https://apply.shutcm.edu.cn/c.asp?action=student_sign",
+      "accessedAt": "2026-11-22T16:17:35.8837279Z",
+      "rawBytes": 6446,
+      "rawSha256": "e54d5a2aed3e642fbc7f0246fcc083395efb8ac5fc1c09c1791f584c132eaa07",
+      "objectKey": "official/shutcm-five-reviewed-20261123/e54d5a2aed3e642fbc7f0246fcc083395efb8ac5fc1c09c1791f584c132eaa07.html"
+    }
+  },
+  "privateArchive": {
+    "status": "readback_verified",
+    "archiveReceiptPath": "quality/maintenance/batches/shutcm-five-reviewed-20261123/archive-receipt.json",
+    "archiveReceiptSha256": "e67805942229f83ff9b12da9464b2f0ee79266d4646457e7ac1a42bd578bb6ec",
+    "objects": [
+      {
+        "id": "guide",
+        "key": "official/shutcm-five-reviewed-20261123/1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6.pdf",
+        "sourceUrl": "https://iec.shutcm.edu.cn/_upload/article/files/07/b1/39376d5e4d5086533aacc66a8624/50ac528d-b318-4a5c-8f61-1c7d5e9d366f.pdf",
+        "originalSha256": "1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6",
+        "readbackSha256": "1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6",
+        "originalBytes": 825062,
+        "readbackBytes": 825062,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T16:17:20.6656938Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "portal",
+        "key": "official/shutcm-five-reviewed-20261123/e54d5a2aed3e642fbc7f0246fcc083395efb8ac5fc1c09c1791f584c132eaa07.html",
+        "sourceUrl": "https://apply.shutcm.edu.cn/c.asp?action=student_sign",
+        "originalSha256": "e54d5a2aed3e642fbc7f0246fcc083395efb8ac5fc1c09c1791f584c132eaa07",
+        "readbackSha256": "e54d5a2aed3e642fbc7f0246fcc083395efb8ac5fc1c09c1791f584c132eaa07",
+        "originalBytes": 6446,
+        "readbackBytes": 6446,
+        "readbackFileLastWriteTimeUtc": "2026-11-22T16:18:27.2382796Z",
+        "status": "readback_verified"
+      }
+    ],
+    "note": "Source-review agent made no cloud writes. Root agent separately archived and read back both originals."
+  },
+  "programmeEvidence": {
+    "program-shutcm-rehabilitation-therapy-bachelor-chinese": {
+      "officialNameZh": "康复治疗学专业",
+      "tableSerial": 4,
+      "sourceUrl": "https://iec.shutcm.edu.cn/_upload/article/files/07/b1/39376d5e4d5086533aacc66a8624/50ac528d-b318-4a5c-8f61-1c7d5e9d366f.pdf",
+      "rawSha256": "1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6",
+      "row": {
+        "locator": "pdf-page:1;normalized-utf16:176:208",
+        "quote": "4 康复治疗学专业 康复医学院 4年 理学士 生班级 并入中国学",
+        "quoteSha256": "2a8973a8716c43616dcf0a622b2285df8aad0cccb0ecf8ce1484a384b6faa3d6"
+      },
+      "degreeAwardLiteral": "理学士",
+      "teachingLanguage": "Chinese",
+      "durationYears": 4,
+      "cscaBasis": {
+        "locator": "pdf-page:2;normalized-utf16:2:201",
+        "quote": "其他理科学位相关专业考试科目为理科中文、数学和物理；  色弱、色盲者不宜申请我校；任何一眼的矫正视力（戴上眼镜或者角膜 塑形镜之后）到 4.8 镜片度数大于800 度者，一眼失明另一眼矫正到 4.8 镜片度数大于 400 度者，两耳听力均在 3 米以内，或一耳听力在 5 米另 一耳全聋者，斜视、嗅觉迟钝、口吃者，不宜申请我校；如患有不确定 是否可以入学的慢性疾病，请在申请材料提交前和校方确认。",
+        "quoteSha256": "5fd398d6c8f1bdb88bf252f1f5d460a04d2e2068c2e3cc461fa31c325d9e9cf5"
+      },
+      "fees": {
+        "locator": "pdf-page:4;normalized-utf16:0:308",
+        "quote": "8.入学时间： 2027 年9 月，具体时间以《录取通知书》和《报到须知》为准。 9.费用标准：  申请费 人民币 450 元/人（实际到账金额）；  学费 汉语言专业人民币 20,000 元/年； 其他专业人民币 28,000 元/年；  保险费 人民币 800 元/年；  教材由学生按需购买；  住宿费 （1）请参考《国际学生校内住宿情况一览》（附件 1）（现行住宿费标 准，仅供参考）。入学时的宿舍安排根据学校整体宿舍安排情况， 于 2027 年 7 月中旬通知学生。住宿费收费标准如有变动，按 2027 年的标准执行； （2）校外住宿经学生申请，校方同意后，学生可在校外自行住宿，住宿 费用自理。",
+        "quoteSha256": "eaa18cc38dc07a39953ee75f195ccfb452d969d5306442cbfeb97613d6e1ffbc"
+      }
+    },
+    "program-shutcm-physical-therapy-bachelor-chinese": {
+      "officialNameZh": "康复物理治疗专业",
+      "tableSerial": 5,
+      "sourceUrl": "https://iec.shutcm.edu.cn/_upload/article/files/07/b1/39376d5e4d5086533aacc66a8624/50ac528d-b318-4a5c-8f61-1c7d5e9d366f.pdf",
+      "rawSha256": "1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6",
+      "row": {
+        "locator": "pdf-page:1;normalized-utf16:209:242",
+        "quote": "5 康复物理治疗专业 康复医学院 4年 理学士 生班级 并入中国学",
+        "quoteSha256": "10ec7e0ebd47588d376360c494b40a7c52fc219d7f8271fab688dec78e4f8e55"
+      },
+      "degreeAwardLiteral": "理学士",
+      "teachingLanguage": "Chinese",
+      "durationYears": 4,
+      "cscaBasis": {
+        "locator": "pdf-page:2;normalized-utf16:2:201",
+        "quote": "其他理科学位相关专业考试科目为理科中文、数学和物理；  色弱、色盲者不宜申请我校；任何一眼的矫正视力（戴上眼镜或者角膜 塑形镜之后）到 4.8 镜片度数大于800 度者，一眼失明另一眼矫正到 4.8 镜片度数大于 400 度者，两耳听力均在 3 米以内，或一耳听力在 5 米另 一耳全聋者，斜视、嗅觉迟钝、口吃者，不宜申请我校；如患有不确定 是否可以入学的慢性疾病，请在申请材料提交前和校方确认。",
+        "quoteSha256": "5fd398d6c8f1bdb88bf252f1f5d460a04d2e2068c2e3cc461fa31c325d9e9cf5"
+      },
+      "fees": {
+        "locator": "pdf-page:4;normalized-utf16:0:308",
+        "quote": "8.入学时间： 2027 年9 月，具体时间以《录取通知书》和《报到须知》为准。 9.费用标准：  申请费 人民币 450 元/人（实际到账金额）；  学费 汉语言专业人民币 20,000 元/年； 其他专业人民币 28,000 元/年；  保险费 人民币 800 元/年；  教材由学生按需购买；  住宿费 （1）请参考《国际学生校内住宿情况一览》（附件 1）（现行住宿费标 准，仅供参考）。入学时的宿舍安排根据学校整体宿舍安排情况， 于 2027 年 7 月中旬通知学生。住宿费收费标准如有变动，按 2027 年的标准执行； （2）校外住宿经学生申请，校方同意后，学生可在校外自行住宿，住宿 费用自理。",
+        "quoteSha256": "eaa18cc38dc07a39953ee75f195ccfb452d969d5306442cbfeb97613d6e1ffbc"
+      }
+    },
+    "program-shutcm-occupational-therapy-bachelor-chinese": {
+      "officialNameZh": "康复作业治疗专业",
+      "tableSerial": 6,
+      "sourceUrl": "https://iec.shutcm.edu.cn/_upload/article/files/07/b1/39376d5e4d5086533aacc66a8624/50ac528d-b318-4a5c-8f61-1c7d5e9d366f.pdf",
+      "rawSha256": "1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6",
+      "row": {
+        "locator": "pdf-page:1;normalized-utf16:243:276",
+        "quote": "6 康复作业治疗专业 康复医学院 4年 理学士 生班级 并入中国学",
+        "quoteSha256": "94d438b5d42210058c107127ed559c1cc230ee8f645d92dabb1f38f58c3d071d"
+      },
+      "degreeAwardLiteral": "理学士",
+      "teachingLanguage": "Chinese",
+      "durationYears": 4,
+      "cscaBasis": {
+        "locator": "pdf-page:2;normalized-utf16:2:201",
+        "quote": "其他理科学位相关专业考试科目为理科中文、数学和物理；  色弱、色盲者不宜申请我校；任何一眼的矫正视力（戴上眼镜或者角膜 塑形镜之后）到 4.8 镜片度数大于800 度者，一眼失明另一眼矫正到 4.8 镜片度数大于 400 度者，两耳听力均在 3 米以内，或一耳听力在 5 米另 一耳全聋者，斜视、嗅觉迟钝、口吃者，不宜申请我校；如患有不确定 是否可以入学的慢性疾病，请在申请材料提交前和校方确认。",
+        "quoteSha256": "5fd398d6c8f1bdb88bf252f1f5d460a04d2e2068c2e3cc461fa31c325d9e9cf5"
+      },
+      "fees": {
+        "locator": "pdf-page:4;normalized-utf16:0:308",
+        "quote": "8.入学时间： 2027 年9 月，具体时间以《录取通知书》和《报到须知》为准。 9.费用标准：  申请费 人民币 450 元/人（实际到账金额）；  学费 汉语言专业人民币 20,000 元/年； 其他专业人民币 28,000 元/年；  保险费 人民币 800 元/年；  教材由学生按需购买；  住宿费 （1）请参考《国际学生校内住宿情况一览》（附件 1）（现行住宿费标 准，仅供参考）。入学时的宿舍安排根据学校整体宿舍安排情况， 于 2027 年 7 月中旬通知学生。住宿费收费标准如有变动，按 2027 年的标准执行； （2）校外住宿经学生申请，校方同意后，学生可在校外自行住宿，住宿 费用自理。",
+        "quoteSha256": "eaa18cc38dc07a39953ee75f195ccfb452d969d5306442cbfeb97613d6e1ffbc"
+      }
+    },
+    "program-shutcm-hearing-and-speech-rehabilitation-bachelor-chinese": {
+      "officialNameZh": "听力与言语康复学专业",
+      "tableSerial": 7,
+      "sourceUrl": "https://iec.shutcm.edu.cn/_upload/article/files/07/b1/39376d5e4d5086533aacc66a8624/50ac528d-b318-4a5c-8f61-1c7d5e9d366f.pdf",
+      "rawSha256": "1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6",
+      "row": {
+        "locator": "pdf-page:1;normalized-utf16:277:312",
+        "quote": "7 听力与言语康复学专业 康复医学院 4年 理学士 生班级 并入中国学",
+        "quoteSha256": "14f2e6a61f8f53afa57f0d27445da2dcf2e924aef2d1b522f07ca31448fb283b"
+      },
+      "degreeAwardLiteral": "理学士",
+      "teachingLanguage": "Chinese",
+      "durationYears": 4,
+      "cscaBasis": {
+        "locator": "pdf-page:2;normalized-utf16:2:201",
+        "quote": "其他理科学位相关专业考试科目为理科中文、数学和物理；  色弱、色盲者不宜申请我校；任何一眼的矫正视力（戴上眼镜或者角膜 塑形镜之后）到 4.8 镜片度数大于800 度者，一眼失明另一眼矫正到 4.8 镜片度数大于 400 度者，两耳听力均在 3 米以内，或一耳听力在 5 米另 一耳全聋者，斜视、嗅觉迟钝、口吃者，不宜申请我校；如患有不确定 是否可以入学的慢性疾病，请在申请材料提交前和校方确认。",
+        "quoteSha256": "5fd398d6c8f1bdb88bf252f1f5d460a04d2e2068c2e3cc461fa31c325d9e9cf5"
+      },
+      "fees": {
+        "locator": "pdf-page:4;normalized-utf16:0:308",
+        "quote": "8.入学时间： 2027 年9 月，具体时间以《录取通知书》和《报到须知》为准。 9.费用标准：  申请费 人民币 450 元/人（实际到账金额）；  学费 汉语言专业人民币 20,000 元/年； 其他专业人民币 28,000 元/年；  保险费 人民币 800 元/年；  教材由学生按需购买；  住宿费 （1）请参考《国际学生校内住宿情况一览》（附件 1）（现行住宿费标 准，仅供参考）。入学时的宿舍安排根据学校整体宿舍安排情况， 于 2027 年 7 月中旬通知学生。住宿费收费标准如有变动，按 2027 年的标准执行； （2）校外住宿经学生申请，校方同意后，学生可在校外自行住宿，住宿 费用自理。",
+        "quoteSha256": "eaa18cc38dc07a39953ee75f195ccfb452d969d5306442cbfeb97613d6e1ffbc"
+      }
+    },
+    "program-shutcm-nursing-bachelor-chinese": {
+      "officialNameZh": "护理学专业",
+      "tableSerial": 9,
+      "sourceUrl": "https://iec.shutcm.edu.cn/_upload/article/files/07/b1/39376d5e4d5086533aacc66a8624/50ac528d-b318-4a5c-8f61-1c7d5e9d366f.pdf",
+      "rawSha256": "1c00729312d37e0a5c085ad8bd2db54ccfbfaa86b43f565cb41d223b9ba808e6",
+      "row": {
+        "locator": "pdf-page:1;normalized-utf16:350:373",
+        "quote": "9 护理学专业 护理学院 4年 理学士 生班级",
+        "quoteSha256": "ff5e4d292ef513883f957dc6629017d5e90a0b5f47fcc253ff729e8b92d63661"
+      },
+      "degreeAwardLiteral": "理学士",
+      "teachingLanguage": "Chinese",
+      "durationYears": 4,
+      "cscaBasis": {
+        "locator": "pdf-page:2;normalized-utf16:2:201",
+        "quote": "其他理科学位相关专业考试科目为理科中文、数学和物理；  色弱、色盲者不宜申请我校；任何一眼的矫正视力（戴上眼镜或者角膜 塑形镜之后）到 4.8 镜片度数大于800 度者，一眼失明另一眼矫正到 4.8 镜片度数大于 400 度者，两耳听力均在 3 米以内，或一耳听力在 5 米另 一耳全聋者，斜视、嗅觉迟钝、口吃者，不宜申请我校；如患有不确定 是否可以入学的慢性疾病，请在申请材料提交前和校方确认。",
+        "quoteSha256": "5fd398d6c8f1bdb88bf252f1f5d460a04d2e2068c2e3cc461fa31c325d9e9cf5"
+      },
+      "fees": {
+        "locator": "pdf-page:4;normalized-utf16:0:308",
+        "quote": "8.入学时间： 2027 年9 月，具体时间以《录取通知书》和《报到须知》为准。 9.费用标准：  申请费 人民币 450 元/人（实际到账金额）；  学费 汉语言专业人民币 20,000 元/年； 其他专业人民币 28,000 元/年；  保险费 人民币 800 元/年；  教材由学生按需购买；  住宿费 （1）请参考《国际学生校内住宿情况一览》（附件 1）（现行住宿费标 准，仅供参考）。入学时的宿舍安排根据学校整体宿舍安排情况， 于 2027 年 7 月中旬通知学生。住宿费收费标准如有变动，按 2027 年的标准执行； （2）校外住宿经学生申请，校方同意后，学生可在校外自行住宿，住宿 费用自理。",
+        "quoteSha256": "eaa18cc38dc07a39953ee75f195ccfb452d969d5306442cbfeb97613d6e1ffbc"
+      }
+    }
+  },
+  "scopeDecisions": {
+    "academicYearLiteral": "2027",
+    "officialNamesAccepted": [
+      "zh"
+    ],
+    "englishNamesUnreviewedAndAbsent": true,
+    "selectedFiveAllScienceDegrees": true,
+    "cscaSubjects": [
+      "理科中文",
+      "数学",
+      "物理"
+    ],
+    "literatureChineseExemptionApplied": false,
+    "cscaNumericalPassMark": "unknown",
+    "cscaPaperLanguage": "unknown",
+    "ageReferenceDate": "unknown",
+    "ageClauseLiteral": "年龄一般为18周岁以上，50周岁以下",
+    "ageBoundariesNotConvertedToStructuredNumbers": true,
+    "fullTimeDesignation": "unknown",
+    "sameChineseTrackEnglishCounterpartLocated": false,
+    "englishTaughtTcmAcupunctureGuideNotApplicable": true,
+    "under18GuardianExceptionNotInvented": true,
+    "medicalRestrictionParagraphPreserved": true,
+    "applicationRoutePrintedInPdf": "https://apply.shutcm.edu.cn",
+    "functionalRouteReadback": "https://apply.shutcm.edu.cn/c.asp?action=student_sign",
+    "portalHttpStatus": 200,
+    "scholarshipRequiredMaterialsKeptConditional": true,
+    "scholarshipEntitlementNotInferred": true
+  },
+  "preservation": {
+    "previousRecordCount": 2371,
+    "existingRecordsMutated": 0,
+    "programsAdded": 5,
+    "admissionCyclesAdded": 5,
+    "sourcesAdded": 2
+  },
+  "held": []
+}
