@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type FormEvent, type KeyboardEvent } from 'react'
 import Link from 'next/link'
 import { RoundedSelect } from '@/components/ui/RoundedSelect'
 import { CraftBrandMark } from '@/components/ui/CraftBrandMark'
@@ -75,7 +75,15 @@ function StartVerification({ onClose, onStart, configuredModel }: { onClose: () 
     {error ? <p className={styles.error} role="alert">{error}</p> : null}<div className={styles.modalActions}><button className={styles.primaryButton} type="submit" disabled={busy}><WorkbenchIcon name="play" size={16} />{busy ? '正在提交…' : '创建并开始核验'}</button></div>
   </form></div></div>
 }
+function subscribeToVisibility(update: () => void) {
+  document.addEventListener('visibilitychange', update)
+  return () => document.removeEventListener('visibilitychange', update)
+}
+const pageIsVisible = () => !document.hidden
+const serverIsVisible = () => false
+
 export function AdminWorkbench() {
+  const visible = useSyncExternalStore(subscribeToVisibility, pageIsVisible, serverIsVisible)
   const [session, setSession] = useState<AdminSession | null>(null)
   const [snapshot, setSnapshot] = useState<AdminSnapshot | null>(null)
   const [connection, setConnection] = useState<'connecting' | 'live' | 'polling' | 'offline'>('connecting')
@@ -140,7 +148,7 @@ export function AdminWorkbench() {
     } finally { if (refreshController.current === controller) { refreshController.current = null; setRefreshing(false) } }
   }, [acceptSnapshot, expireSession])
   useEffect(() => {
-    if (!session?.authenticated) return
+    if (!session?.authenticated || !visible) return
     let stopped = false
     let streamLive = false
     let pollingInFlight = false
@@ -211,12 +219,12 @@ export function AdminWorkbench() {
       else { setConnection('offline'); fallback() }
     })
     return () => { dispose(); if (transportCleanup.current === dispose) transportCleanup.current = null }
-  }, [session?.authenticated, acceptSnapshot, expireSession])
+  }, [session?.authenticated, visible, acceptSnapshot, expireSession])
   // A never-claimed expiry or lost lease is recorded in the private queue rather
   // than the local executor's latest receipt. Read that exact outcome; time alone
   // never authorizes retrying a command whose execution remains uncertain.
   useEffect(() => {
-    if (!session?.authenticated || !automationCommandId || snapshot?.capabilities.localMonitoring !== false) return
+    if (!session?.authenticated || !visible || !automationCommandId || snapshot?.capabilities.localMonitoring !== false) return
     const commandId = automationCommandId
     const controller = new AbortController()
     commandLookupController.current = controller
@@ -242,7 +250,7 @@ export function AdminWorkbench() {
     }
     polling = setTimeout(pollCommand, 1200)
     return () => { controller.abort(); if (polling) clearTimeout(polling); if (commandLookupController.current === controller) commandLookupController.current = null }
-  }, [session?.authenticated, automationCommandId, snapshot?.capabilities.localMonitoring, expireSession])
+  }, [session?.authenticated, visible, automationCommandId, snapshot?.capabilities.localMonitoring, expireSession])
   async function startVerification(request: VerificationRequest) {
     setVerificationReceipt('')
     try {

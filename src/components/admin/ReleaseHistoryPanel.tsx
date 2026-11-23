@@ -44,10 +44,24 @@ export function ReleaseHistoryPanel({ onSessionExpired }: { onSessionExpired?: (
   }, [onSessionExpired])
   useEffect(() => {
     mounted.current = true
-    const controller = new AbortController()
-    const initial = setTimeout(() => { void refresh(controller.signal) }, 0)
-    const polling = setInterval(() => { void refresh(controller.signal) }, 10_000)
-    return () => { mounted.current = false; controller.abort(); clearTimeout(initial); clearInterval(polling) }
+    let controller: AbortController | undefined
+    function update() {
+      if (document.hidden) { controller?.abort(); return }
+      if (controller && !controller.signal.aborted) return
+      const request = new AbortController()
+      controller = request
+      void refresh(request.signal).finally(() => { if (controller === request) controller = undefined })
+    }
+    const initial = setTimeout(update, 0)
+    const polling = setInterval(update, 10_000)
+    document.addEventListener('visibilitychange', update)
+    return () => {
+      mounted.current = false
+      controller?.abort()
+      clearTimeout(initial)
+      clearInterval(polling)
+      document.removeEventListener('visibilitychange', update)
+    }
   }, [refresh])
   const selectedCatalog = selection?.kind === 'catalog' ? history?.catalog.versions.find(item => item.id === selection.id) : null
   const selectedDeployment = selection?.kind === 'deployment' ? history?.interface.versions.find(item => item.id === selection.id) : null

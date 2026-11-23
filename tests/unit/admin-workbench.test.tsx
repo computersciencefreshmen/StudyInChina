@@ -53,6 +53,28 @@ describe('administrator workbench transport and session', () => {
     expect(screen.getByText('实时连接')).toBeVisible()
   })
 
+  it('closes the stream while the tab is hidden and reconnects when visible', async () => {
+    const hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(false)
+    const fetchMock = vi.fn(async (path: string) => response(path === '/api/admin/session' ? adminSession : adminSnapshot()))
+    vi.stubGlobal('fetch', fetchMock)
+    try {
+      render(<AdminWorkbench />)
+      await screen.findByRole('heading', { name: '让每一条数据，更可信。' })
+      const first = FakeEventSource.instances[0]
+      hidden.mockReturnValue(true)
+      act(() => document.dispatchEvent(new Event('visibilitychange')))
+      expect(first.close).toHaveBeenCalledOnce()
+      expect(FakeEventSource.instances).toHaveLength(1)
+      const beforeResume = fetchMock.mock.calls.length
+      act(() => first.onerror?.())
+      expect(fetchMock.mock.calls.length).toBe(beforeResume)
+      hidden.mockReturnValue(false)
+      await act(async () => { document.dispatchEvent(new Event('visibilitychange')) })
+      expect(FakeEventSource.instances).toHaveLength(2)
+      expect(fetchMock.mock.calls.length).toBeGreaterThan(beforeResume)
+    } finally { hidden.mockRestore() }
+  })
+
   it('falls back to polling after a stream error and stops the stream on a 401 response', async () => {
     vi.stubGlobal('fetch', vi.fn(async (path: string) => response(path === '/api/admin/session' ? adminSession : adminSnapshot())))
     render(<AdminWorkbench />)
