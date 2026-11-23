@@ -1,0 +1,117 @@
+{
+  "format": "studyinchina.publisher-baseline-bridge",
+  "version": 1,
+  "baseCommit": "4df39be361aa398c78c4038d0e3ff24076942606",
+  "liveCommit": "2f150c3d9881a337da8557fab97a6efab814a6d3",
+  "baseCatalogSha256": "44593eb0875776a0931f5be67444683825cbee44c842e8512673720f1a506215",
+  "liveCatalogSha256": "f2c196f5191fd4ee4f72a3c6dbda48b2cd6e440aa9cf913552e12c21cefcee49",
+  "sourceBatchId": "maintenance-c19e13e1-5d7e-4aa9-bb91-b7312a525446",
+  "sourceBatchSha256": "fdcf43909c7e7cdf1a44793f9faa597d2d36164676a6bd5603ca9053941e2e10",
+  "validationBatchSha256": "2eaf5de70c32d2f79b89904485112bd13935446a78bd8902479bb7c6a2e78c8d",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "delta": {
+    "sources": {
+      "added": [
+        "src-sufe-guide-cn-20261123",
+        "src-sufe-guide-en-20261123",
+        "src-sufe-index-cn-20261123",
+        "src-sufe-portal-20261123"
+      ],
+      "changed": []
+    },
+    "cities": {
+      "added": [],
+      "changed": []
+    },
+    "universities": {
+      "added": [],
+      "changed": []
+    },
+    "programs": {
+      "added": [
+        "program-sufe-applied-statistics-master-chinese",
+        "program-sufe-digital-economics-master-chinese",
+        "program-sufe-finance-master-chinese",
+        "program-sufe-international-business-master-chinese",
+        "program-sufe-international-chinese-education-master-chinese"
+      ],
+      "changed": []
+    },
+    "admissionCycles": {
+      "added": [
+        "cycle-sufe-applied-statistics-master-chinese-2027-general-admission",
+        "cycle-sufe-digital-economics-master-chinese-2027-general-admission",
+        "cycle-sufe-finance-master-chinese-2027-general-admission",
+        "cycle-sufe-international-business-master-chinese-2027-general-admission",
+        "cycle-sufe-international-chinese-education-master-chinese-2027-general-admission"
+      ],
+      "changed": []
+    },
+    "scholarships": {
+      "added": [],
+      "changed": []
+    }
+  },
+  "eligible": [
+    {
+      "proposalId": "maintenance-scholarship-858e52cac59447dd91a466b0305bae097050e9f339c7dca4565dcb7e67950317",
+      "dependencies": [
+        "cities:city-haikou",
+        "programs:prog-gap-clw-sw-hainanu-chinese-culture-semester",
+        "programs:program-82ff27d28ed6741b8439ec52",
+        "programs:program-hainan-university-crop-science-master",
+        "programs:program-hainan-university-hotel-management-bachelor",
+        "scholarships:sch-gap-clw-sw-hainanu-overseas-chinese-teachers-scholarship",
+        "sources:src-gap-program-clw-sw-hainanu-chinese-culture-semester",
+        "sources:src-gap-scholarship-clw-sw-hainanu-overseas-chinese-teachers-scholarship",
+        "sources:src-maintenance-identity-54bc19d89a4086b1c969822f",
+        "sources:src-program-review-54bc19d89a40",
+        "sources:src-uni-hainan-university",
+        "universities:uni-hainan-university"
+      ],
+      "auditSha256": "d35976e222bd0fbff62cd49f10653b9ec34e273ee785d39b0502b606c16866c5"
+    },
+    {
+      "proposalId": "maintenance-0d74a9b93617552da63617f541f83cb7f7b1de83d1a48c0dc7ecb96a75bcc63b",
+      "dependencies": [
+        "cities:city-guangzhou",
+        "programs:program-guangdong-university-of-technology-chinese-language-training-one-semester-language",
+        "programs:program-guangdong-university-of-technology-civil-engineering-chinese-international-student-class-bachelor",
+        "programs:program-guangdong-university-of-technology-computer-science-and-technology-bachelor",
+        "programs:program-guangdong-university-of-technology-e-commerce-bachelor",
+        "programs:program-guangdong-university-of-technology-international-economics-and-trade-bachelor",
+        "sources:src-city-guangzhou",
+        "sources:src-gdut-2026-international-admissions",
+        "sources:src-uni-guangdong-university-of-technology",
+        "universities:uni-guangdong-university-of-technology"
+      ],
+      "auditSha256": "603db7c72fd8bd3e7b261cb015ad4e660ab4a87ee764ce0c7fa19fa045a2d670"
+    },
+    {
+      "proposalId": "maintenance-scholarship-e359ad58a3286646735a28142359f802938e00018c2e776e761d28dbf2c6db58",
+      "dependencies": [
+        "cities:city-guangzhou",
+        "programs:prog-gap-mve-ecma-gafa-art-studies-doctorate",
+        "programs:prog-gap-mve-ecma-gafa-chinese-painting-bachelor",
+        "programs:prog-gap-mve-ecma-gafa-visual-communication-bachelor",
+        "scholarships:sch-gap-mve-ecma-gafa-guangdong-government-scholarship",
+        "sources:src-city-guangzhou",
+        "sources:src-gap-program-mve-ecma-gafa-art-studies-doctorate",
+        "sources:src-gap-program-mve-ecma-gafa-chinese-painting-bachelor",
+        "sources:src-gap-program-mve-ecma-gafa-visual-communication-bachelor",
+        "sources:src-gap-scholarship-mve-ecma-gafa-guangdong-government-scholarship",
+        "sources:src-maintenance-identity-6edd72b47cbf78434269b174",
+        "sources:src-mve-ecma-university-guangzhou-academy-of-fine-arts",
+        "universities:uni-guangzhou-academy-of-fine-arts"
+      ],
+      "auditSha256": "aaaccf3665df01a367f336c8653be997858926731ccd6f54cae7c334c11240af"
+    }
+  ],
+  "held": [],
+  "acceptanceAuthorized": false,
+  "originalExportModified": false,
+  "gitBindingVerified": true,
+  "hasEligibleProposals": true,
+  "canApply": true,
+  "sha256": "daac7a394870ee0bd7e7def1647853ad77fb4b056dc8e3ae903f809187ae97f6"
+}
