@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, readdirSync, existsSync, rmSync, mkdirSync, 
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { test } from 'node:test'
-import { buildTranslationUnits, runProgramTranslations, splitTranslationSource } from './run-program-translations.mjs'
+import { buildTranslationUnits, runProgramTranslations, runTranslationCheckpoint, splitTranslationSource } from './run-program-translations.mjs'
 import { translationKey } from '../../src/lib/program-translation-contract.ts'
 import { candidatePath as translationPath } from './review-program-translations.mjs'
 
@@ -29,6 +29,30 @@ const writeJournal = (root, original, value) => {
 }
 const clock = Date.parse('2026-11-17T09:00:00.000Z')
 const pair = [records[0], { ...records[0], id: 'sicas-2', fields: { requirements: 'Please provide the application documents and your personal statement. TOEFL 80 is required.' } }]
+
+test('reserves a bounded generation phase even with a large independent review backlog', async () => {
+  const phases = []
+  const result = await runTranslationCheckpoint({ root: 'unused', titleRecords: [], records, maxCalls: 120,
+    maxMinutes: 12, concurrency: 2, now: () => clock,
+    reviewBatch: async input => {
+      const title = input.fields.includes('title')
+      phases.push(title ? 'review titles' : 'review details')
+      assert.equal(input.deadline, clock + 12 * 60_000)
+      const modelCalls = title ? 0 : input.maxCalls
+      return { startedAt: new Date(clock).toISOString(), state: 'review_checkpoint', modelCalls, approved: modelCalls,
+        revise: 0, blocked: 0, unknown: 0, skippedCopy: 0, skippedSameLanguage: 0, inputTokens: modelCalls, outputTokens: modelCalls }
+    }, generateBatch: async input => {
+      const title = input.fields.includes('title')
+      phases.push(title ? 'generate titles' : 'generate missing detail translations')
+      assert.equal(input.maxCalls, title ? 1 : 30)
+      if (!title) assert.equal(input.maxMinutes, 4)
+      return { state: 'checkpoint_complete', modelCalls: title ? 0 : 10, inputTokens: title ? 0 : 12, outputTokens: title ? 0 : 8 }
+    } })
+  assert.deepEqual(phases, ['review titles', 'generate titles', 'generate missing detail translations', 'review details'])
+  assert.equal(result.modelCalls, 120)
+  assert.equal(result.review.approved, 110)
+  assert.equal(result.inputTokens, 122)
+})
 
 test('shared text deduplicates across schools and languages have distinct keys', () => {
   const units = buildTranslationUnits([...records, { ...records[0], id: 'sicas-2', schoolId: 'sicas-2' }])

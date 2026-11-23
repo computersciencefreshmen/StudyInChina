@@ -22,7 +22,7 @@ on:
         description: Concurrent translation requests (1-8)
         type: number
         required: false
-        default: 1
+        default: 2
 
 permissions:
   contents: write
@@ -71,7 +71,7 @@ jobs:
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
           MAX_CALLS: ${{ inputs.max_calls || '120' }}
-          MODEL_CONCURRENCY: ${{ inputs.concurrency || '1' }}
+          MODEL_CONCURRENCY: ${{ inputs.concurrency || '2' }}
         run: >-
           node --import tsx scripts/translation/run-program-translations.mjs
           --execute --feed-dir ../feed --max-minutes 12
