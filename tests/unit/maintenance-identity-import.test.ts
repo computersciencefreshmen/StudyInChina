@@ -98,6 +98,7 @@ describe('fixed school scope and reviewed identity importing', () => {
   it.each([
     { zh: '博士项目' },
     { en: 'Doctoral Programme', zh: '博士项目' },
+    { en: '全英授课本科专业', zh: '全英授课本科专业' },
   ])('holds a fully evidenced generic degree heading before creating records: %j', async name => {
     const { run } = await fixture({ degree: 'doctorate', name })
     const result = await run()

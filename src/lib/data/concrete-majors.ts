@@ -3,8 +3,9 @@ import type { Program } from './types'
 /** Language tracks and admission rounds do not create another concrete major. */
 export function concreteProgramKeys(program: Program): string[] {
   const names = [program.name.zh, program.name.en].filter((name): name is string => Boolean(name))
-  const generic = /^(?:(?:international\s+)?(?:undergraduate|graduate|postgraduate|bachelor(?:'?s)?|master(?:'?s)?|doctoral|degree)\s+(?:program(?:me)?s?|admissions?)(?:\s+guide)?|(?:国际学生|留学生)?(?:本科|硕士|博士|研究生|学历)(?:招生|项目|专业|目录|指南)(?:简章|目录|指南)?)$/iu
-  if (!names.length || names.every(name => generic.test(name.trim()))) return []
+  const genericEnglish = /^(?:international\s+)?(?:(?:english|chinese)[- ](?:taught|medium)\s+)?(?:undergraduate|graduate|postgraduate|bachelor(?:'?s)?|master(?:'?s)?|doctoral|degree)\s+(?:program(?:me)?s?|admissions?)(?:\s+guide)?$/iu
+  const genericChinese = /^(?:国际学生|留学生)?(?:(?:全?[英中]|英文|英语|中文|汉语)授课)?(?:本科|硕士|博士|研究生|学历)(?:招生|项目|专业|目录|指南)(?:简章|目录|指南)?$/u
+  if (!names.length || names.every(name => genericEnglish.test(name.trim()) || genericChinese.test(name.trim()))) return []
   const normalize = (name: string) => name.normalize('NFKC').toLowerCase()
     .replace(/\((?:english|chinese)(?:[- ](?:taught|medium))?\)|(?:english|chinese)[- ](?:taught|medium)|[（(](?:中文|英文|汉语|英语)(?:授课|教学)?[）)]/gu, '')
     .replace(/[^\p{L}\p{N}]+/gu, '')

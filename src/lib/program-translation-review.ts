@@ -49,6 +49,11 @@ export function translationConflict(source: string, text: string, locale: Progra
       || /(?:的|学习|就读|修读|攻读)\s*Chinese\b(?=\s*(?:[。；.!?;]|$))|\bChinese\s*(?:熟练|水平|能力|语言|证书|考试|授课|课程|预科|培训)/iu.test(prose)) return 'untranslated_condition'
     // This observed rendering attaches the applicant's health to a diploma.
     if (prose.includes('持有成绩优异、身体健康的硕士学位毕业证书')) return 'scope'
+    if (/\bassociate(?:['’]s)? degree graduate\b/iu.test(source) && /专升本/u.test(prose)
+      && !/\b(?:top[- ]?up|upgrad\w*|bridg\w*)\b/iu.test(source)) return 'scope'
+    // Some harvested prose concatenates a sentence and the next numbered item.
+    const hskListBoundary = source.match(/\bHSK\s+(?:band|level)\s+([1-9])\.(\d{1,2})\.\s*\p{L}/iu)
+    if (hskListBoundary && new RegExp(`HSK[^\\d]{0,8}${hskListBoundary[1]}[.．]${hskListBoundary[2]}(?!\\d)`, 'iu').test(prose)) return 'boundary'
   }
   if (/\p{Script=Han}/u.test(prose) && /\b(?:not|above|under|unless|required|exempt(?:ed)?|at least|at most)\b/iu.test(prose)) return 'untranslated_condition'
   if (/\b(?:not (?:available|open|eligible)|ineligible)\b/iu.test(source) && /可申请|可以申请|符合申请资格|开放/u.test(prose)

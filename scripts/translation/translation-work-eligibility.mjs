@@ -5,13 +5,14 @@ const englishWords = new Set(`a an and are as at be been by can could for from h
   degree duration fee granted programme programs qualified requirements semester students study university year`.split(/\s+/u))
 const latinLanguageSignals = [
   'aufenthalt bewerber bewerbung bewerbungsunterlagen bitte einreichen gebühren müssen nachweis sind studiengang studiengebühren unterlagen und',
-  'admis bourse candidature doivent dossier diplômés enseignement études frais les pièces soumettre veuillez',
+  'admis bourse candidature doivent dossier diplômés enseignement études frais les licence physique pièces soumettre veuillez',
   'admisión becas cursar deben del enseñanza estudios matrícula precisan presentar requisitos solicitud solicitantes',
 ].map(words => new Set(words.split(' ')))
 const distinctiveLatinWords = new Set(`abitur aufnahme bachelorabschluss bewerbungsfrist deutschkenntnisse hochschulabschluss
-  maschinenbau schulabschluss studiengebühr zulassung baccalauréat diplôme français informatique ingénierie physique
+  maschinenbau schulabschluss studiengebühr zulassung baccalauréat diplôme français informatique ingénierie
   bachillerato ciudadanía español física ingeniería licenciatura título`.split(/\s+/u))
 const shortEnglishAdmissions = /\b(?:high school (?:graduate|graduation|education|diploma)|non[- ]chinese (?:citizen|national|resident)|bachelor(?:'s)? degree|english proficien(?:cy|t)|application (?:procedure|deadline)|with age \d+ through \d+)\b/iu
+const attachmentName = /\p{Script=Han}+(?:[ \t]+[a-z][a-z\d' -]{0,96})?\.(?:pdf|docx?|xlsx?|pptx?|zip)(?=$|[\s.,;!?()]|\d+\))/giu
 
 // This is a conservative fallback for short English admissions prose that the
 // shared language heuristic misses. Leave other scripts and ambiguous prose to
@@ -31,7 +32,8 @@ export function originalAlreadyInLocale(source, locale) {
 // Short Latin-script titles and requirements are often already English. Keep
 // the source as the fallback when nothing positively identifies another language.
 export function needsEnglishTranslation(source) {
-  const prose = source.replace(/(?:https?:\/\/|www\.)\S+|[^\s@]+@[^\s@]+\.[^\s@]+/giu, ' ')
+  // Preserve link destinations and the exact names of downloadable forms.
+  const prose = source.replace(/(?:https?:\/\/|www\.)\S+|[^\s@]+@[^\s@]+\.[^\s@]+/giu, ' ').replace(attachmentName, ' ')
   if (/\p{Script=Han}/u.test(prose)) return true
   const letters = prose.match(/\p{L}/gu) ?? []
   if (letters.filter(letter => !/\p{Script=Latin}/u.test(letter)).length >= 2) return true
@@ -43,6 +45,7 @@ export function needsEnglishTranslation(source) {
 export function isUnchangedTranslation(source, candidate, locale) {
   if (candidate === source) return true
   if (locale !== 'en') return false
-  const asText = text => text.normalize('NFKC').toLowerCase().replace(/\s+/gu, ' ').trim()
+  // An English candidate that only re-punctuates the original adds no translation.
+  const asText = text => text.normalize('NFKC').toLowerCase().replace(/[\p{P}\s]+/gu, ' ').trim()
   return asText(source) === asText(candidate)
 }

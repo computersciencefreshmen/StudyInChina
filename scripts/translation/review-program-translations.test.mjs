@@ -62,9 +62,11 @@ test('skips repeated English editing and source copies before reserving calls fo
   const rows = Array.from({ length: 50 }, (_, i) => ({ ...row, id: `term-${i}`, fields: { requirements: english } }))
   rows.push({ ...row, id: 'copy', fields: { requirements: 'Mathematics' } },
     { ...row, id: 'formatting', fields: { requirements: 'Software engineering' } },
+    { ...row, id: 'punctuation', fields: { requirements: 'Applicants must submit original documents (声明公证).' } },
     { ...row, id: 'short', fields: { requirements: 'Evening classes only' } }, row)
   for (const [original, translated] of [[english, english.replace('start at September', 'begin in September')],
     ['Mathematics', 'Mathematics'], ['Software engineering', 'Software Engineering'],
+    ['Applicants must submit original documents (声明公证).', 'Applicants must submit original documents: 声明公证.'],
     ['Evening classes only', 'Classes take place in the evening']]) {
     const path = join(options.root, candidatePath(original, 'en'))
     mkdirSync(dirname(path), { recursive: true })
@@ -78,7 +80,7 @@ test('skips repeated English editing and source copies before reserving calls fo
   assert.equal(result.approved, 1)
   assert.equal(result.skippedSameLanguage, 50)
   assert.equal(result.skippedUnprovenEnglish, 1)
-  assert.equal(result.skippedCopy, 2)
+  assert.equal(result.skippedCopy, 3)
   assert.equal(existsSync(join(options.root, publicationPath(english, 'en', translationScope(rows[0], 'requirements')))), false)
 })
 
@@ -126,6 +128,15 @@ test('Chinese admission prose cannot retain the Non-Chinese condition even in a 
     '申请人须提交 University of Nottingham Ningbo China 的证明。', '请访问 https://example.edu/Non-Chinese 或联系 Non-Chinese@example.edu。'])
     assert.equal(translationConflict(original, output, locale, 'requirements'), null)
   assert.equal(translationConflict(original, leaked, 'en', 'requirements'), null)
+})
+
+test('Chinese qualification and HSK list boundaries survive independent review', () => {
+  const degree = 'An associate degree graduate may apply.'
+  assert.equal(translationConflict(degree, '专升本毕业生可以申请。', 'zh', 'requirements'), 'scope')
+  assert.equal(translationConflict(degree, '大专或副学士学位毕业生可以申请。', 'zh', 'requirements'), null)
+  const level = '1. HSK Band 4.2. Separated Class with English instruction.'
+  assert.equal(translationConflict(level, '1. HSK 级 4.2。独立英文班。', 'zh', 'requirements'), 'boundary')
+  assert.equal(translationConflict(level, '1. HSK 4 级。2. 独立英语授课班。', 'zh', 'requirements'), null)
 })
 
 test('six observed scope-bound PASS receipts cannot publish untranslated language qualifiers or the diploma-health modifier', () => {

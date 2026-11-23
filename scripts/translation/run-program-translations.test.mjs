@@ -65,7 +65,11 @@ test('an English target only queues source with evidence of another language', (
     'Non-Chinese citizen.',
     'High school graduate',
     'Official site: https://example.test/申请',
+    'Applicants should maintain a healthy physique.',
+    'Download and complete the form 留学生信息表.doc.',
+    'See 英语为母语的国家信息 English as Native Language List.pdf2) Submit the remaining documents.',
     '申请人须提交学历证明。',
+    '请提交留学生信息表.doc，并确认材料齐全。',
     'Подайте документы для поступления.',
     'Veuillez soumettre votre dossier de candidature.',
     'Bewerber müssen die Unterlagen einreichen.',
@@ -84,7 +88,7 @@ test('an English target only queues source with evidence of another language', (
     ...records[0], id: `sample-${index}`, fields: { requirements },
   }))
   const units = buildTranslationUnits(rows, ['en'], ['requirements'])
-  assert.deepEqual(units.map(unit => unit.source), originals.slice(3))
+  assert.deepEqual(units.map(unit => unit.source), originals.slice(6))
 })
 
 test('a mixed source translates the Chinese chunk and keeps its English portion verbatim', async t => {

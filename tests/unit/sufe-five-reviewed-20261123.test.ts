@@ -21,14 +21,16 @@ const receiptPath = 'quality/maintenance/batches/sufe-five-reviewed-20261123/fie
 describe('five Chinese-taught 2027 international master programmes at SUFE', () => {
   it('adds five distinct degrees from a zero-qualified baseline and preserves every prior record', async () => {
     const original = reviewedCatalogueAt(review.baseline.gitCommit)
+    const released = reviewedCatalogueAt('814783081e1d050565fc7be7697bebc474e8be16')
     expect(await catalogSha256(original)).toBe(review.inputCatalogSha256)
+    expect(await catalogSha256(released)).toBe(review.outputCatalogSha256)
     expect(review.baseline.coverage.currentProgramCount).toBe(0)
     for (const collection of ['universities', 'programs', 'admissionCycles', 'scholarships', 'sources'] as const) {
-      expect(bundle[collection].slice(0, original[collection].length)).toEqual(original[collection])
+      expect(released[collection].slice(0, original[collection].length)).toEqual(original[collection])
     }
-    expect(bundle.programs.length - original.programs.length).toBe(5)
-    expect(bundle.admissionCycles.length - original.admissionCycles.length).toBe(5)
-    expect(bundle.sources.length - original.sources.length).toBe(4)
+    expect(released.programs.length - original.programs.length).toBe(5)
+    expect(released.admissionCycles.length - original.admissionCycles.length).toBe(5)
+    expect(released.sources.length - original.sources.length).toBe(4)
     expect(ids.every(id => original.programs.every(program => program.id !== id))).toBe(true)
     for (const [id, hash] of Object.entries(review.baseline.preservedExistingSchoolRecordHashes)) {
       expect(createHash('sha256').update(canonicalIdentityJson(bundle.programs.find(p => p.id === id))).digest('hex')).toBe(hash)
@@ -40,7 +42,7 @@ describe('five Chinese-taught 2027 international master programmes at SUFE', () 
     }
     const coverage = await buildProgramCoverage(bundle, readMaintenanceScope(process.cwd()), day,
       readIdentityAcceptances(undefined, { strictProjection: true }), readFieldVerifications())
-    expect(coverage.schools.find(row => row.universityId === school)).toMatchObject({ currentProgramCount: 5, gap: 0 })
+    expect(coverage.schools.find(row => row.universityId === school)).toMatchObject({ gap: 0, countedProgramIds: expect.arrayContaining(ids) })
   })
 
   it('keeps the exact 2027 Chinese track, semester tuition, HSK exemption and separate payment dates', () => {
