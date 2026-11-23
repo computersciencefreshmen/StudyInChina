@@ -17,6 +17,14 @@ export type CollectedProgramItem = { collected: ThirdPartyProgram; university?: 
 export type ReviewedProgramItem = ProgramCatalogItem & { sources?: ThirdPartyProgram[] }
 export type UnifiedProgramItem = ReviewedProgramItem | CollectedProgramItem
 export type UnifiedProgramResult = Omit<ProgramCatalogResult, 'items'> & { items: UnifiedProgramItem[]; revision: string; sourceConditionsUnknown: number }
+type ProgramProjection = { items: UnifiedProgramItem[]; aliases: Map<string, string>; bySlug: Map<string, UnifiedProgramItem> }
+
+// The feed replaces its array only after validating a complete new snapshot.
+// Keep just the latest generation/day per immutable directory, never a global
+// fallback. Mutable injected catalogues deliberately recompute on every call.
+const projections = new WeakMap<DataBundle, {
+  captured: ThirdPartyProgram[]; today: string; revision: string | undefined; value: ProgramProjection
+}>()
 
 const directoryHashes = new WeakMap<DataBundle, string>()
 export function unifiedCatalogRevision(data: DataBundle, feedRevision: string, today: string) {
@@ -91,7 +99,11 @@ function title(item: UnifiedProgramItem) { return 'collected' in item ? item.col
 function schoolName(item: UnifiedProgramItem) { return 'collected' in item ? item.collected.schoolName : item.university.name.en || '' }
 
 /** Only exact identities AND fully known equal offering dimensions combine sources. Unknowns retain distinct offerings. */
-export function combineProgramRecords(data: DataBundle, captured: ThirdPartyProgram[], today: string) {
+export function combineProgramRecords(data: DataBundle, captured: ThirdPartyProgram[], today: string, revision?: string): ProgramProjection {
+  const cacheable = data !== null && typeof data === 'object' && Object.isFrozen(data)
+  const cached = cacheable ? projections.get(data) : undefined
+  if (cached && cached.captured === captured && cached.today === today
+    && (revision === undefined || cached.revision === revision)) return cached.value
   const items: UnifiedProgramItem[] = selectProgramCatalogItems(data, parseProgramCatalogFilters({}), today).map(item => ({ ...item }))
   const keys = new Map<string, UnifiedProgramItem[]>(), aliases = new Map<string, string>()
   const schools = universityNameIndex(data.universities)
@@ -116,13 +128,26 @@ export function combineProgramRecords(data: DataBundle, captured: ThirdPartyProg
     aliases.set(record.id, record.id)
     if (key) keys.set(key, [...keys.get(key) || [], item])
   }
-  return { items, aliases }
+  const bySlug = new Map<string, UnifiedProgramItem>()
+  for (const item of items) {
+    const slug = unifiedProgramSlug(item)
+    if (!bySlug.has(slug)) bySlug.set(slug, item)
+  }
+  const value = { items, aliases, bySlug }
+  if (cacheable) {
+    // Consumers may filter/sort their own result arrays, but must not alter the
+    // shared projection's membership or merged source lists.
+    for (const item of items) { if (item.sources) Object.freeze(item.sources); Object.freeze(item) }
+    Object.freeze(items)
+    projections.set(data, { captured, today, revision, value })
+  }
+  return value
 }
 
 /** Counts the same canonical offerings as university details and Programs filters. */
-export function countUnifiedUniversityPrograms(data: DataBundle, captured: ThirdPartyProgram[], today: string): Map<string, number> {
+export function countUnifiedUniversityPrograms(data: DataBundle, captured: ThirdPartyProgram[], today: string, revision?: string): Map<string, number> {
   const counts = new Map(data.universities.map(university => [university.id, 0]))
-  for (const item of combineProgramRecords(data, captured, today).items) {
+  for (const item of combineProgramRecords(data, captured, today, revision).items) {
     if (item.university) counts.set(item.university.id, (counts.get(item.university.id) || 0) + 1)
   }
   return counts
@@ -130,15 +155,17 @@ export function countUnifiedUniversityPrograms(data: DataBundle, captured: Third
 
 export async function getUnifiedUniversityProgramCounts(today = getTodayDate(), catalogData?: DataBundle): Promise<Map<string, number>> {
   const [data, feed] = await Promise.all([catalogData ?? getCatalogData(), getProgramFeedIndex()])
-  return countUnifiedUniversityPrograms(data, feed.programs, today)
+  return countUnifiedUniversityPrograms(data, feed.programs, today, unifiedCatalogRevision(data, feed.revision, today))
 }
 
-function matchesCollected(item: CollectedProgramItem, filters: ProgramCatalogFilters, data: DataBundle, today: string) {
+function matchesCollected(item: CollectedProgramItem, filters: ProgramCatalogFilters, data: DataBundle, today: string, queryTokens: string[]) {
   const record = item.collected, university = item.university
   const city = university ? data.cities.find(candidate => candidate.id === university.cityId) : undefined
-  const search = normalizeProgramIdentity([record.name, findReviewedProgramTranslation(record.name, 'en'), record.schoolName, record.fields.degree, record.fields.language,
-    university?.name.en, university?.name.zh, city?.name.en, city?.name.zh].filter(Boolean).join(' '))
-  if (normalizeProgramIdentity(filters.query).split(' ').filter(Boolean).some(token => !search.includes(token))) return false
+  if (queryTokens.length) {
+    const search = normalizeProgramIdentity([record.name, findReviewedProgramTranslation(record.name, 'en'), record.schoolName, record.fields.degree, record.fields.language,
+      university?.name.en, university?.name.zh, city?.name.en, city?.name.zh].filter(Boolean).join(' '))
+    if (queryTokens.some(token => !search.includes(token))) return false
+  }
   let unknown = Boolean(filters.degree && !item.degree || filters.language && !item.languages.length)
   if (filters.degree && item.degree && item.degree !== filters.degree) return false
   if (filters.language && item.languages.length && !(filters.language === 'Bilingual' ? item.languages.length > 1 : item.languages.includes(filters.language))) return false
@@ -154,8 +181,8 @@ function matchesCollected(item: CollectedProgramItem, filters: ProgramCatalogFil
   return unknown ? 'unknown' : true
 }
 
-export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyProgram[], filters: ProgramCatalogFilters, today: string, revision: string): UnifiedProgramResult {
-  const combined = combineProgramRecords(data, captured, today)
+export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyProgram[], filters: ProgramCatalogFilters, today: string, revision: string,
+  combined = combineProgramRecords(data, captured, today, revision)): UnifiedProgramResult {
   const sourceSchool = captured.find(record => record.status === 'extracted' && record.schoolId === filters.institution)
   const sourceUniversity = sourceSchool ? universityNameIndex(data.universities).get(universityNameKey(sourceSchool.schoolName)) : undefined
   const effectiveFilters = sourceSchool ? { ...filters, institution: sourceUniversity?.slug || normalizeProgramIdentity(sourceSchool.schoolName) } : filters
@@ -166,9 +193,10 @@ export function queryUnifiedProgramData(data: DataBundle, captured: ThirdPartyPr
   } : data
   const reviewedMatches = new Set(selectProgramCatalogItems(reviewedData, effectiveFilters, today).map(item => item.program.id))
   let sourceConditionsUnknown = 0
+  const queryTokens = normalizeProgramIdentity(effectiveFilters.query).split(' ').filter(Boolean)
   const matching = combined.items.filter(item => {
     if (!('collected' in item)) return reviewedMatches.has(item.program.id)
-    const result = matchesCollected(item, effectiveFilters, data, today)
+    const result = matchesCollected(item, effectiveFilters, data, today, queryTokens)
     if (result === 'unknown') sourceConditionsUnknown++
     return result === true
   })
@@ -208,10 +236,10 @@ export async function queryUnifiedPrograms(filters: ProgramCatalogFilters, today
 }
 export async function resolveUnifiedProgram(slug: string, today: string, catalogData?: DataBundle) {
   const [data, feed] = await Promise.all([catalogData ?? getCatalogData(), getProgramFeedIndex()])
-  const combined = combineProgramRecords(data, feed.programs, today)
-  const canonical = combined.aliases.get(slug) || slug
   const revision = unifiedCatalogRevision(data, feed.revision, today)
-  const item = combined.items.find(item => unifiedProgramSlug(item) === canonical)
+  const combined = combineProgramRecords(data, feed.programs, today, revision)
+  const canonical = combined.aliases.get(slug) || slug
+  const item = combined.bySlug.get(canonical)
   if (!item) return undefined
   if ('collected' in item) {
     const record = await getProgramFeedRecord(item.collected.id)

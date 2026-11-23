@@ -98,7 +98,7 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
   environment = process.env, now = Date.now, quota = readTranslationQuota, translate = translateMaskedBatch,
   checkpoint = checkpointTranslations, factPolicy = 'literal-v2', locales = TRANSLATION_LOCALES, fields = TRANSLATION_FIELDS, writeStatus = true } = {}) {
   if (!Number.isSafeInteger(maxCalls) || maxCalls < 1 || maxCalls > 240 || !Number.isSafeInteger(concurrency)
-    || concurrency < 1 || concurrency > 8 || !Number.isFinite(maxMinutes) || maxMinutes < 0.1 || maxMinutes > 9) throw new Error('translation_batch_bounds_invalid')
+    || concurrency < 1 || concurrency > 8 || !Number.isFinite(maxMinutes) || maxMinutes < 0.1 || maxMinutes > 12) throw new Error('translation_batch_bounds_invalid')
   const root = resolve(feedDir), startedAt = new Date(now()).toISOString(), deadlineAt = now() + maxMinutes * 60_000
   if (!records) { assertFeedCheckout(root); records = loadProgramFeed(root).records }
   const units = buildTranslationUnits(records, locales, fields), completed = new Map(), queued = [], rejectedAssemblies = new Set()
@@ -279,7 +279,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (!args.includes('--execute') || !option('--feed-dir')) throw new Error('translation_execute_and_feed_dir_required')
   const root = resolve(option('--feed-dir')), maxCalls = Number(option('--max-calls') || 120)
   const maxMinutes = Number(option('--max-minutes') || 8), concurrency = Number(option('--concurrency') || 8)
-  if (!Number.isFinite(maxMinutes) || maxMinutes < 0.1 || maxMinutes > 9 || !Number.isSafeInteger(maxCalls)
+  if (!Number.isFinite(maxMinutes) || maxMinutes < 0.1 || maxMinutes > 12 || !Number.isSafeInteger(maxCalls)
     || maxCalls < 1 || maxCalls > 240 || !Number.isSafeInteger(concurrency) || concurrency < 1 || concurrency > 8)
     throw new Error('translation_batch_bounds_invalid')
   assertFeedCheckout(root)

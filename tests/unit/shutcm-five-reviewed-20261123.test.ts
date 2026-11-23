@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
+import { reviewedCatalogueAt } from './reviewed-release-snapshot'
 import review from '../../quality/maintenance/batches/shutcm-five-reviewed-20261123/review.json'
 import archive from '../../quality/maintenance/batches/shutcm-five-reviewed-20261123/archive-receipt.json'
 import { catalogSha256, loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
@@ -18,8 +19,9 @@ const receiptPath = 'quality/maintenance/batches/shutcm-five-reviewed-20261123/f
 describe('SHUTCM 2027 Chinese science bachelor source review', () => {
   it('preserves all 2371 prior programmes and the complete pre-batch catalogue', async () => {
     const c = review.baseline.collectionLengths
-    const original = { ...bundle, programs: bundle.programs.slice(0, c.programs), admissionCycles: bundle.admissionCycles.slice(0, c.admissionCycles),
-      sources: bundle.sources.slice(0, c.sources), cities: bundle.cities.slice(0, c.cities), universities: bundle.universities.slice(0, c.universities), scholarships: bundle.scholarships.slice(0, c.scholarships) }
+    const released = reviewedCatalogueAt('6bd945e22c0e9c1091cf9fe8b21e58bfb948ea86')
+    const original = { ...released, programs: released.programs.slice(0, c.programs), admissionCycles: released.admissionCycles.slice(0, c.admissionCycles),
+      sources: released.sources.slice(0, c.sources), cities: released.cities.slice(0, c.cities), universities: released.universities.slice(0, c.universities), scholarships: released.scholarships.slice(0, c.scholarships) }
     expect(original.programs).toHaveLength(2371)
     expect(await catalogSha256(original)).toBe(review.inputCatalogSha256)
     expect(review.baseline.counts[school]).toBe(0)

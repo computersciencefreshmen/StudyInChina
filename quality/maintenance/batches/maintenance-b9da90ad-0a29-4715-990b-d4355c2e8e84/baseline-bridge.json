@@ -1,0 +1,161 @@
+{
+  "format": "studyinchina.publisher-baseline-bridge",
+  "version": 1,
+  "baseCommit": "b5b3d0fbc7066d918f22ea149cad74f0cde8499d",
+  "liveCommit": "f53c664c8673032e3541dcfcb3c3971b35bc5409",
+  "baseCatalogSha256": "d7824ed1f293fd0f18ec9d225ba389f235e21251930cc82f48a73c5763afec7b",
+  "liveCatalogSha256": "ad1c45ff6638295f47575d00208aa4f5045ddf81191701ddd2dd27c3949fb343",
+  "sourceBatchId": "maintenance-b9da90ad-0a29-4715-990b-d4355c2e8e84",
+  "sourceBatchSha256": "613d03e380a192f5a01053195f2e0b24385355905f5535e6ff31d00f80f637fd",
+  "validationBatchSha256": "ab826dca9aec7a321f79283b81667b06407805d6c0c636d63c502ac70d8a5c6f",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "delta": {
+    "sources": {
+      "added": [
+        "src-hqu-2027-foreign-graduate-guide-20261123",
+        "src-hqu-2027-international-graduate-catalogue-20261123",
+        "src-zjut-portal-20261123",
+        "src-zjut2027-guidance-20261123",
+        "src-zjut2027-master-page-20261123",
+        "src-zjut2027-masters-cn-20261123",
+        "src-zjut2027-masters-en-20261123"
+      ],
+      "changed": []
+    },
+    "cities": {
+      "added": [],
+      "changed": []
+    },
+    "universities": {
+      "added": [],
+      "changed": []
+    },
+    "programs": {
+      "added": [
+        "program-huaqiao-university-applied-economics-master-chinese",
+        "program-huaqiao-university-applied-ethics-master-chinese",
+        "program-huaqiao-university-digital-economics-master-chinese",
+        "program-huaqiao-university-finance-master-chinese",
+        "program-huaqiao-university-philosophy-master-chinese",
+        "program-zjut-business-administration-master-english",
+        "program-zjut-chemical-engineering-and-technology-master-english",
+        "program-zjut-chemistry-master-english",
+        "program-zjut-food-science-and-engineering-master-english",
+        "program-zjut-pharmacy-master-english"
+      ],
+      "changed": []
+    },
+    "admissionCycles": {
+      "added": [
+        "cycle-hqu-applied-economics-master-chinese-2027-batch-1",
+        "cycle-hqu-applied-economics-master-chinese-2027-batch-2",
+        "cycle-hqu-applied-ethics-master-chinese-2027-batch-1",
+        "cycle-hqu-applied-ethics-master-chinese-2027-batch-2",
+        "cycle-hqu-digital-economics-master-chinese-2027-batch-1",
+        "cycle-hqu-digital-economics-master-chinese-2027-batch-2",
+        "cycle-hqu-finance-master-chinese-2027-batch-1",
+        "cycle-hqu-finance-master-chinese-2027-batch-2",
+        "cycle-hqu-philosophy-master-chinese-2027-batch-1",
+        "cycle-hqu-philosophy-master-chinese-2027-batch-2",
+        "cycle-zjut-business-administration-master-english-2027",
+        "cycle-zjut-chemical-engineering-and-technology-master-english-2027",
+        "cycle-zjut-chemistry-master-english-2027",
+        "cycle-zjut-food-science-and-engineering-master-english-2027",
+        "cycle-zjut-pharmacy-master-english-2027"
+      ],
+      "changed": []
+    },
+    "scholarships": {
+      "added": [],
+      "changed": []
+    }
+  },
+  "eligible": [
+    {
+      "proposalId": "maintenance-c125aeead6233723dedf92cda38635c582636a76886b25467f4baacc989487bb",
+      "dependencies": [
+        "cities:city-dalian",
+        "programs:prog-gap-local-dmu-b-clinical-medicine-cn",
+        "programs:prog-gap-local-dmu-b-mbbs",
+        "programs:prog-gap-local-dmu-b-stomatology",
+        "programs:prog-gap-local-dmu-pre-medical",
+        "programs:program-7a18f7e74d1846445339925a",
+        "programs:program-ba540359a1f36e4c66febec0",
+        "programs:program-e4c5de152b14a7a980fb15ea",
+        "programs:program-fb902c46f2f682046cba5241",
+        "sources:src-gap-program-local-dmu-b-clinical-medicine-cn",
+        "sources:src-gap-program-local-dmu-b-mbbs",
+        "sources:src-gap-program-local-dmu-b-mbbs-support-1",
+        "sources:src-gap-program-local-dmu-b-stomatology",
+        "sources:src-gap-program-local-dmu-pre-medical",
+        "sources:src-gap-program-local-dmu-pre-medical-support-1",
+        "sources:src-institution-20260729-dalian-medical-university",
+        "sources:src-maintenance-identity-46ee0fd373e00b6816778895",
+        "sources:src-maintenance-identity-a064eb95f4a1f583932f726d",
+        "sources:src-uni-dalian-university-of-technology",
+        "universities:uni-dalian-medical-university"
+      ],
+      "auditSha256": "669f2400d8246b8417c4732d126a0cb17582a471a67e44c17cb9bee95918e5c3"
+    },
+    {
+      "proposalId": "maintenance-field-af6493d45b25fbc0a6bd304c954e7678416f5e7d8434d4c021dd6d28ac309a55",
+      "dependencies": [
+        "cities:city-shanghai",
+        "programs:program-4131010856-bachelor-69719a006cffb4723324",
+        "sources:src-city-shanghai",
+        "sources:src-maintenance-field-26374454be87f9d9ce7b3c23",
+        "sources:src-moe-4131010856-international-entry",
+        "sources:src-moe-4131010856-official-home",
+        "sources:src-moe-4131010856-official-name",
+        "sources:src-new-school-program-26374454be87f9d9ce7b3c23",
+        "universities:uni-moe-4131010856"
+      ],
+      "auditSha256": "a925bb54aaa05531f1d67d525bb7f0bac97f65754a6ded3264ec54ab03213675"
+    },
+    {
+      "proposalId": "maintenance-8b190443db566c0b2cfed7bb34931da0598cb1bc8e5758ae492d4b845cd4b050",
+      "dependencies": [
+        "cities:city-harbin",
+        "programs:prog-gap-wave8-hit-global-summer-school",
+        "programs:prog-gap-wave8-hit-long-term-chinese-language",
+        "programs:prog-gap-wave8-hit-pre-university-program",
+        "programs:prog-gap-wave8-hit-winter-short-term-chinese-2026",
+        "programs:program-harbin-institute-of-technology-civil-engineering-master",
+        "programs:program-harbin-institute-of-technology-mechanical-engineering-master",
+        "programs:program-harbin-institute-of-technology-pre-university-chinese-18-week-foundation",
+        "programs:program-harbin-institute-of-technology-pre-university-english-18-week-foundation",
+        "sources:source-hit-2026-master-admissions",
+        "sources:src-city-harbin",
+        "sources:src-gap-program-wave8-hit-global-summer-school",
+        "sources:src-gap-program-wave8-hit-long-term-chinese-language",
+        "sources:src-gap-program-wave8-hit-pre-university-program",
+        "sources:src-gap-program-wave8-hit-winter-short-term-chinese-2026",
+        "sources:src-uni-harbin-institute-of-technology",
+        "universities:uni-harbin-institute-of-technology"
+      ],
+      "auditSha256": "8ce0ec762c191ff61c79222e63955f6489a4fe269231c6801f7d55e7f77955e9"
+    },
+    {
+      "proposalId": "maintenance-field-4cf9a4f878c71613ba3095affbe03b402ee97ab60879ef037dab4e213060044f",
+      "dependencies": [
+        "cities:city-ningbo",
+        "programs:program-4133010876-language-ed92040d9370c23bbd6d",
+        "sources:src-city-profile-20260729-ningbo",
+        "sources:src-moe-4133010876-international-entry",
+        "sources:src-moe-4133010876-official-home",
+        "sources:src-moe-4133010876-official-name",
+        "sources:src-new-school-program-2e2a6c3a275f5834f51bc7c1",
+        "sources:src-new-school-program-73c2f52ccaae315ff85f9cfa",
+        "universities:uni-moe-4133010876"
+      ],
+      "auditSha256": "c68f1989c049d2c51d5959e127179488f12aa5cf263ed54c0ecc3f0e34cff020"
+    }
+  ],
+  "held": [],
+  "acceptanceAuthorized": false,
+  "originalExportModified": false,
+  "gitBindingVerified": true,
+  "hasEligibleProposals": true,
+  "canApply": true,
+  "sha256": "3b6ce5d77ec5e79b49bc040718c530fc18c10b6d70af5eead5930748a23bdbf5"
+}

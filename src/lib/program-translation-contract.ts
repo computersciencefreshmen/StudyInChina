@@ -8,7 +8,12 @@ export type ProgramTranslationField = typeof TRANSLATION_FIELDS[number]
 type SourceInput = { name?: string; fields: Partial<Record<Exclude<ProgramTranslationField, 'title'>, string>> }
 
 export function programTranslationSource(row: SourceInput, field: ProgramTranslationField, locale: ProgramTranslationLocale) {
-  if (field !== 'title') return row.fields[field]
+  if (field !== 'title') {
+    const source = row.fields[field]
+    // Whole-field placeholders contain no admissions facts to translate or review.
+    if (source && /^(?:updating|to be updated|正在更新|更新中|待更新)[.。!！\s]*$/iu.test(source.normalize('NFKC').trim())) return undefined
+    return source
+  }
   return locale === 'en' && row.name && /\p{Script=Han}/u.test(row.name) ? row.name : undefined
 }
 export type ProgramTranslationRecord = {

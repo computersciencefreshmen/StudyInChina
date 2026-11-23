@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
-import { protectTranslationText, restoreTranslationText, sourceIsTargetLanguage, translationKey, translationPath,
+import { programTranslationSource, protectTranslationText, restoreTranslationText, sourceIsTargetLanguage, translationKey, translationPath,
   validateTranslationRecord, type ProgramTranslationLocale, type ProgramTranslationRecord } from '@/lib/program-translation-contract'
 
 const hash = (text: string) => createHash('sha256').update(text).digest('hex')
@@ -17,6 +17,14 @@ describe('content-addressed programme translations and protected admissions fact
     expect(translationKey(source, 'zh')).not.toBe(translationKey(source, 'en'))
     expect(() => translationKey(source, '../private' as ProgramTranslationLocale)).toThrow('translation_locale_invalid')
     expect(() => translationKey('', 'zh')).toThrow('translation_source_invalid')
+  })
+
+  it('skips standalone placeholders and retains actual admissions wording', () => {
+    for (const value of ['Updating...', ' Updating… ', '更新中。', 'To be updated']) {
+      expect(programTranslationSource({ fields: { requirements: value } }, 'requirements', 'en')).toBeUndefined()
+    }
+    expect(programTranslationSource({ fields: { requirements: 'No age limit.' } }, 'requirements', 'en')).toBe('No age limit.')
+    expect(programTranslationSource({ fields: { requirements: 'Requirements are updating. IELTS 6 is required.' } }, 'requirements', 'en')).toBe('Requirements are updating. IELTS 6 is required.')
   })
 
   it('translates real admissions prose while preserving atomic ages, scores and their bound qualifiers', () => {

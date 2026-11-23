@@ -41,7 +41,7 @@ jobs:
       (vars.PROGRAM_CATALOG_TRANSLATE_ENABLED == 'true' ||
       (github.event_name == 'workflow_dispatch' && inputs.review_canary == true))
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ inputs.review_canary == true && 18 || 12 }}
+    timeout-minutes: ${{ inputs.review_canary == true && 18 || 16 }}
     steps:
       - name: Check out reviewed translation code
         uses: actions/checkout@v6
@@ -74,7 +74,7 @@ jobs:
           MODEL_CONCURRENCY: ${{ inputs.concurrency || '1' }}
         run: >-
           node --import tsx scripts/translation/run-program-translations.mjs
-          --execute --feed-dir ../feed --max-minutes 8
+          --execute --feed-dir ../feed --max-minutes 12
           --max-calls "$MAX_CALLS" --concurrency "$MODEL_CONCURRENCY"
       - name: Check semantic regressions before the bounded review
         if: github.event_name == 'workflow_dispatch' && inputs.review_canary == true

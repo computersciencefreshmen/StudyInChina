@@ -40,7 +40,7 @@ describe('password-free public MiniMax dashboard', () => {
     expect(screen.getByText(/不是实际 HTTP 并行数/)).toBeVisible()
     expect(screen.getByText('结果未知 · 不重发')).toBeVisible()
     expect(document.body).not.toHaveTextContent('PRIVATE_ID')
-    expect(fetcher.mock.calls[0]).toEqual(['/api/minimax/status', expect.objectContaining({ method: 'GET', credentials: 'omit', cache: 'no-store' })])
+    expect(fetcher.mock.calls[0]).toEqual(['/api/minimax/status', { method: 'GET', credentials: 'omit', signal: expect.any(AbortSignal) }])
     expect(screen.queryByRole('button')).toBeNull()
   })
 

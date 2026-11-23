@@ -35,8 +35,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   await connection()
   const [data, feed] = await Promise.all([getCatalogData(), getProgramFeedIndex()])
   const today = getTodayDate(), messages = getMessages(locale), experience = getHomeExperienceCopy(locale)
-  const programs = queryUnifiedProgramData(data, feed.programs, parseProgramCatalogFilters({}), today, unifiedCatalogRevision(data, feed.revision, today))
-  const allPrograms = combineProgramRecords(data, feed.programs, today).items
+  const revision = unifiedCatalogRevision(data, feed.revision, today)
+  const projection = combineProgramRecords(data, feed.programs, today, revision)
+  const programs = queryUnifiedProgramData(data, feed.programs, parseProgramCatalogFilters({}), today, revision, projection)
+  const allPrograms = projection.items
   const previews = programs.items.slice(0, 6)
   const featured = data.universities.filter(item => item.featured).slice(0, 6)
   const fields = programFieldTaxonomy(locale)

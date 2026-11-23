@@ -20,18 +20,35 @@ export function PublicMiniMaxDashboard({ catalogue }: { catalogue?: React.ReactN
   useEffect(() => {
     let stopped = false, timer: ReturnType<typeof setTimeout> | undefined
     const controller = new AbortController()
-    const tick = setInterval(() => setNow(Date.now()), 15_000)
+    const tick = setInterval(() => { if (!document.hidden) setNow(Date.now()) }, 15_000)
+    let reading = false
     async function update() {
+      if (stopped || document.hidden || reading) return
+      reading = true
       try {
-        const response = await fetch('/api/minimax/status', { method: 'GET', credentials: 'omit', cache: 'no-store', signal: AbortSignal.any([controller.signal, AbortSignal.timeout(12_000)]) })
+        const response = await fetch('/api/minimax/status', { method: 'GET', credentials: 'omit', signal: AbortSignal.any([controller.signal, AbortSignal.timeout(12_000)]) })
         if (!response.ok) throw Error('unavailable')
         const next = publicMiniMaxStatusSchema.parse(await response.json())
         if (!stopped) { setValue(next); setNow(Date.now()); setUnavailable(false); setObservations(previous => appendSessionObservation(previous, next, Date.now())) }
       } catch { if (!stopped) { setUnavailable(true); setNow(Date.now()) } }
-      finally { if (!stopped) timer = setTimeout(update, PUBLIC_MONITOR_REFRESH_MS) }
+      finally {
+        reading = false
+        if (!stopped && !document.hidden) timer = setTimeout(update, PUBLIC_MONITOR_REFRESH_MS)
+      }
     }
+    function onVisibilityChange() {
+      if (timer) clearTimeout(timer)
+      if (!document.hidden) void update()
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
     void update()
-    return () => { stopped = true; controller.abort(); clearInterval(tick); if (timer) clearTimeout(timer) }
+    return () => {
+      stopped = true
+      controller.abort()
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+      clearInterval(tick)
+      if (timer) clearTimeout(timer)
+    }
   }, [])
   const ledgerFresh = Boolean(value?.state === 'fresh' && !unavailable && now !== null && fresh(value.observedAt, now))
   const quotaFresh = Boolean(value?.quota.state === 'fresh' && !unavailable && now !== null && fresh(value.quota.observedAt, now)

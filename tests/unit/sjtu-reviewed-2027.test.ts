@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { reviewedCatalogueAt, reviewedDataAt } from './reviewed-release-snapshot'
 import { describe, expect, it } from 'vitest'
 import review from '../../quality/maintenance/batches/reviewed-sjtu-2027-20261117/review.json'
 import identityReceipt from '../../quality/maintenance/batches/reviewed-sjtu-2027-20261117/identity-receipt.json'
@@ -24,7 +24,7 @@ const cycles = review.reviewedAdmissionCycles.map(row => admissionCycleSchema.pa
 const ids = new Set(programs.map(row => row.id)), cycleIds = new Set(cycles.map(row => row.id))
 const sourceIds = new Set(review.sources.map(row => row.id))
 const raw = () => loadMaintenanceBundle(process.cwd())
-const read = (name: string) => JSON.parse(readFileSync(`content/data/${name}.json`, 'utf8'))
+const sjtuRelease = 'afe96955e48e608889c759aff5293133fc4f94c4'
 
 describe('SJTU reviewed 2027 direct Chinese bachelor core', () => {
   it('binds the immutable AI-assisted review and standard scoped receipts through strict directory validation', async () => {
@@ -124,13 +124,12 @@ describe('SJTU reviewed 2027 direct Chinese bachelor core', () => {
   it('preserves every historical raw object and ledger entry, including all old SJTU and public-core records', () => {
     const removeNew: Record<string, Set<string>> = { programs: ids, 'admission-cycles': cycleIds, sources: sourceIds }
     for (const [file, baseline] of Object.entries(review.preservation)) {
-      const value = read(file)
+      const value = reviewedDataAt(sjtuRelease, file)
       const rows = Array.isArray(value) ? value.filter(row => !removeNew[file]?.has(row.id))
         : value.entries.filter((row: { recordId: string }) => !ids.has(row.recordId) && !cycleIds.has(row.recordId))
-      // Later batches append independently reviewed entries after this historical prefix.
       expect(hash(rows.slice(0, baseline.beforeCount))).toBe(baseline.beforeCanonicalSha256)
     }
-    const bundle = raw(), snapshot = getPublicCatalogSnapshot(bundle, TODAY)
+    const bundle = reviewedCatalogueAt(sjtuRelease), snapshot = getPublicCatalogSnapshot(bundle, TODAY)
     expect(bundle.programs.filter(row => row.universityId === UNIVERSITY && !ids.has(row.id))).toHaveLength(6)
     for (const [id, expected] of Object.entries(review.beforePublicProgrammeSha256)) expect(hash(bundle.programs.find(row => row.id === id))).toBe(expected)
     for (const [id, expected] of Object.entries(review.beforePublicAdmissionCycleSha256)) expect(hash(bundle.admissionCycles.find(row => row.id === id))).toBe(expected)

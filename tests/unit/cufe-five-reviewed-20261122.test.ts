@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
+import { reviewedCatalogueAt } from './reviewed-release-snapshot'
 import review from '../../quality/maintenance/batches/cufe-five-reviewed-20261122/review.json'
 import archive from '../../quality/maintenance/batches/cufe-five-reviewed-20261122/archive-receipt.json'
 import { catalogSha256, loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
@@ -18,9 +19,10 @@ const receiptPath = 'quality/maintenance/batches/cufe-five-reviewed-20261122/fie
 describe('five official CUFE Chinese undergraduate programmes in 2027', () => {
   it('adds five distinct degrees while preserving the complete original catalogue and three old masters', async () => {
     const counts = review.baseline.collectionLengths
-    const original = { ...bundle, programs: bundle.programs.slice(0, counts.programs),
-      admissionCycles: bundle.admissionCycles.slice(0, counts.admissionCycles), sources: bundle.sources.slice(0, counts.sources),
-      cities: bundle.cities.slice(0, counts.cities), universities: bundle.universities.slice(0, counts.universities), scholarships: bundle.scholarships.slice(0, counts.scholarships) }
+    const released = reviewedCatalogueAt('bbe425227329dcf5c1b305f751b0a1617c778c6e')
+    const original = { ...released, programs: released.programs.slice(0, counts.programs),
+      admissionCycles: released.admissionCycles.slice(0, counts.admissionCycles), sources: released.sources.slice(0, counts.sources),
+      cities: released.cities.slice(0, counts.cities), universities: released.universities.slice(0, counts.universities), scholarships: released.scholarships.slice(0, counts.scholarships) }
     expect(original.programs).toHaveLength(2361)
     expect(await catalogSha256(original)).toBe(review.inputCatalogSha256)
     expect(review.baseline.counts[school]).toBe(0)
