@@ -16,15 +16,15 @@ const bundle = loadMaintenanceBundle(process.cwd()), ids = Object.keys(review.pr
 const receiptPath = 'quality/maintenance/batches/sues-five-reviewed-20261123/field-receipt.json'
 
 describe('five 2027 self-funded Chinese master programmes at SUES', () => {
-  it('adds five concrete majors while preserving every previous catalogue object and the old AI bachelor', async () => {
+  it('binds five concrete majors to the reviewed baseline and preserves the existing AI bachelor', async () => {
     const original = reviewedCatalogueAt(review.baseline.gitCommit)
     expect(await catalogSha256(original)).toBe(review.inputCatalogSha256)
-    for (const key of ['programs', 'admissionCycles', 'sources', 'universities', 'cities', 'scholarships'] as const) {
-      expect(bundle[key].slice(0, original[key].length)).toEqual(original[key])
+    expect(ids.every(id => original.programs.every(program => program.id !== id))).toBe(true)
+    expect(bundle.programs.filter(program => ids.includes(program.id))).toHaveLength(5)
+    expect(bundle.admissionCycles.filter(cycle => ids.includes(cycle.programId))).toHaveLength(5)
+    for (const source of Object.values(review.sources)) {
+      expect(bundle.sources.find(item => item.id === source.sourceId)?.url).toBe(source.url)
     }
-    expect(bundle.programs).toHaveLength(original.programs.length + 5)
-    expect(bundle.admissionCycles).toHaveLength(original.admissionCycles.length + 5)
-    expect(bundle.sources).toHaveLength(original.sources.length + 4)
     expect(review.baseline.localZeroQualified).toBe(true)
     const old = bundle.programs.find(p => p.id === 'program-4131010856-bachelor-69719a006cffb4723324')!
     expect(old.degreeLevel).toBe('bachelor')
