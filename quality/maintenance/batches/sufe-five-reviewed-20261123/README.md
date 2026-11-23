@@ -1,0 +1,15 @@
+# SUFE 2027 Chinese-taught international master's programmes
+
+Five concrete master's programmes are added from the current official bilingual 2027 admission guide: Digital Economics, Finance, Applied Statistics, International Business and International Chinese Education. The maintenance cohort records zero qualified SUFE majors before this batch; its existing bachelor and non-degree records remain unchanged.
+
+All five are two-year full-time Chinese-taught programmes, with four semesters and September 2027 enrollment. Applications open 1 December 2026 and close 31 May 2027, Beijing time. The separate 20 June acceptance-confirmation and 15 July tuition-payment deadlines are retained as notes. Tuition is CNY57,000 per semester for Digital Economics and CNY25,000 per semester for each other selected programme. No annual conversion is inferred. The CNY830 application fee and the conditional exemption for current SUFE students graduating in the admission year are both preserved.
+
+The annual language requirement is HSK5 / 180, two-year test validity, with the stated university-issued Chinese-taught bachelor's certificate alternative. English-track tests, undergraduate CSCA and scholarship-only conditions are not made general requirements. The physical examination is conditional on applying for a scholarship.
+
+Both guides agree on ages 18–45 inclusive, nationality/passport requirements and a bachelor's degree obtained before enrollment for upcoming graduates. The English guide additionally says "or its equivalent"; the annual notes retain that formulation and require university confirmation for equivalency cases, without automatically passing or excluding applicants. Study-plan length is preserved as Chinese `800–1000字` and English `800–1,000 words`; no cross-language conversion is inferred. A passport must remain valid beyond 31 January 2028. No age-calculation date is invented.
+
+`review.json` binds the exact baseline commit, catalogue hashes, programme identities and scope decisions. Five identity acceptances and 65 field verifications bind the current literal 2027 / Chinese / autumn scope. The field receipt uses complete verification-content hashes, preserving the strict validator. `archive-receipt.json` binds four source originals to actual coordinator R2 PUT/GET byte-length and SHA-256 readback receipts. Raw HTML, normalized text and exact original-text quote coordinates remain private; no source original or credential is added to the repository.
+
+Reviewer attribution is Codex AI/tool review with a separate coordinator source cross-check, not Henry's personal sign-off. No external model was called. This batch changes no existing catalogue object, legacy admission year, schema, public gate, translation configuration or deployment control.
+
+Validation: focused SUFE and SUES tests cover additive preservation, the zero-to-five coverage change, exact annual/fee/language values, all strict leaf/archive bindings, rejection of wrong-year/track/source evidence, and withholding when annual core facts are missing. Strict directory validation and directory-safe-expiry data validation also apply.
