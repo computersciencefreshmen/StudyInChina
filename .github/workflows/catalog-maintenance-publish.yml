@@ -69,10 +69,16 @@ jobs:
       - name: Prepare and locally stage only independently accepted changes
         id: candidate
         if: steps.recovery.outputs.ready == 'true' && steps.download.outputs.has_export == 'true'
-        run: >-
-          npm run maintenance:prepare --
-          --download "$RUNNER_TEMP/maintenance-download"
-          --output "$RUNNER_TEMP/maintenance-candidate" --apply
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--download "$RUNNER_TEMP/maintenance-download" --output "$RUNNER_TEMP/maintenance-candidate" --apply)
+          # A reviewed Git data batch can advance main between cloud exports.
+          # The importer uses this ancestor only if it matches the export's
+          # exact input hash and all dependencies of an eligible item agree.
+          baseline="$(git log -1 --format=%H -- ':(glob)quality/maintenance/batches/*/canonical-receipt.json')"
+          if [[ -n "$baseline" ]]; then args+=(--baseline-base-commit "$baseline"); fi
+          npm run maintenance:prepare -- "${args[@]}"
       - name: Acknowledge unchanged or held candidates without rebuilding unchanged facts
         if: steps.recovery.outputs.ready == 'true' && steps.download.outputs.has_export == 'true' && steps.candidate.outputs.changed == 'false' && steps.candidate.outputs.accepted_count == '0'
         env:
