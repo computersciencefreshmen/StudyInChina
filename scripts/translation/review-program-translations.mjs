@@ -6,7 +6,7 @@ import { TRANSLATION_FIELDS, TRANSLATION_LOCALES, programTranslationSource, tran
 import { publicationPath, reviewBinding, translationConflict, translationScope, validatePublishedTranslation, REVIEW_MODEL, REVIEW_POLICY } from '../../src/lib/program-translation-review.ts'
 import { readTranslationQuota, reviewTranslation } from './minimax-translation-provider.ts'
 import { CANARY_REVIEW_CONTRACT, SAMPLES, manualCanaryRetryContext } from './translation-canary-contract.mjs'
-import { isUnchangedTranslation, originalAlreadyInLocale } from './translation-work-eligibility.mjs'
+import { isUnchangedTranslation, needsEnglishTranslation, originalAlreadyInLocale } from './translation-work-eligibility.mjs'
 
 export const candidatePath = (source, locale) => `translations/candidates/v1/${locale}/${translationKey(source, locale)}.json`
 const write = (path, data) => {
@@ -66,6 +66,7 @@ function* reviewJobs(root, records, locales, fields, summary) {
       if (!candidate || candidate.method !== 'minimax') continue
       if (isUnchangedTranslation(source, candidate.text, locale)) { summary.skippedCopy++; continue }
       if (originalAlreadyInLocale(source, locale)) { summary.skippedSameLanguage++; continue }
+      if (locale === 'en' && !needsEnglishTranslation(source)) { summary.skippedUnprovenEnglish++; continue }
       const scope = translationScope(row, field), publicPath = join(root, publicationPath(source, locale, scope))
       if (publicPath === join(root, translationPath(source, locale))) continue
       const binding = reviewBinding(source, candidate.text, locale, scope)
@@ -88,7 +89,7 @@ export async function reviewTranslationBacklog({ root, records, maxCalls, concur
   const stamp = () => new Date(now()).toISOString()
   const retryContext = retryLegacyFailedCanary ? manualCanaryRetryContext(environment) : null
   const summary = { startedAt: stamp(), state: 'complete', modelCalls: 0, approved: 0, revise: 0, blocked: 0, unknown: 0,
-    skippedCopy: 0, skippedSameLanguage: 0, inputTokens: 0, outputTokens: 0 }
+    skippedCopy: 0, skippedSameLanguage: 0, skippedUnprovenEnglish: 0, inputTokens: 0, outputTokens: 0 }
   const jobs = reviewJobs(root, records, locales, fields, summary)
   for (;;) {
     if (summary.modelCalls >= maxCalls || now() + 95_000 >= deadline) { summary.state = 'review_checkpoint'; break }

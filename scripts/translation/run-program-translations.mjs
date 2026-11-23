@@ -12,7 +12,7 @@ import { pushCatalogCheckpoint } from '../ingestion/push-catalog-checkpoint.mjs'
 import { reviewTranslationBacklog, candidatePath } from './review-program-translations.mjs'
 import { needsEnglishTitle, publicOfficialTitles } from './official-title-records.ts'
 import { programWithdrawalReason } from '../../src/lib/program-publication-policy.mjs'
-import { originalAlreadyInLocale } from './translation-work-eligibility.mjs'
+import { needsEnglishTranslation, originalAlreadyInLocale } from './translation-work-eligibility.mjs'
 
 const hash = text => createHash('sha256').update(text).digest('hex')
 const read = path => { try { return JSON.parse(readFileSync(path, 'utf8')) } catch { return null } }
@@ -70,7 +70,7 @@ export function buildTranslationUnits(records, locales = TRANSLATION_LOCALES, fi
     for (const field of fields) for (const row of ordered) {
       for (const locale of phase.filter(locale => locales.includes(locale))) {
         const source = programTranslationSource(row, field, locale)
-        if (typeof source !== 'string' || !source.trim()) continue
+        if (typeof source !== 'string' || !source.trim() || (locale === 'en' && !needsEnglishTranslation(source))) continue
         const chunks = splitTranslationSource(source)
         const children = chunks.length > 1 ? chunks.map(chunk => add(chunk, locale, field, row.schoolId)) : null
         add(source, locale, field, row.schoolId, children)
@@ -141,6 +141,14 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
     }
   }
   for (const unit of units) {
+    if (!unit.children && unit.locale === 'en' && !needsEnglishTranslation(unit.source)) {
+      // Keep English or ambiguous chunks verbatim even if an old model edit exists.
+      // This chunk belongs to a longer source that does need translation.
+      completed.set(unit.key, record(unit, unit.source, 'source', null))
+      summary.completedByLocale.en++
+      summary.copiedSource++
+      continue
+    }
     const legacy = read(entry(unit))
     if (legacy?.validation === 'quarantined') { summary.failedUnits++; continue }
     const prior = validateTranslationRecord(legacy, unit.source, unit.locale)
@@ -296,7 +304,9 @@ export async function runTranslationCheckpoint({ root, records, titleRecords, ma
   const detailReview = canProcessDetails && available > 0 && (!generate || mayContinue(generate.state))
     ? await reviewBatch({ root, records, fields, maxCalls: available, deadline, concurrency, checkpoint, now }) : null
   const review = { ...titleReview, state: detailReview?.state ?? generate?.state ?? titleGeneration?.state ?? titleReview.state }
-  for (const metric of ['modelCalls', 'approved', 'revise', 'blocked', 'unknown', 'skippedCopy', 'skippedSameLanguage', 'inputTokens', 'outputTokens']) review[metric] += detailReview?.[metric] || 0
+  for (const metric of ['modelCalls', 'approved', 'revise', 'blocked', 'unknown', 'skippedCopy', 'skippedSameLanguage', 'skippedUnprovenEnglish', 'inputTokens', 'outputTokens']) {
+    review[metric] = (review[metric] || 0) + (detailReview?.[metric] || 0)
+  }
   const state = review.state === 'complete' && generate?.state === 'checkpoint_complete' ? generate.state : review.state
   return { ...generate, state, review, englishTitles: { review: titleReview, generation: titleGeneration },
     startedAt: review.startedAt, updatedAt: new Date(now()).toISOString(),
@@ -324,6 +334,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   console.log(JSON.stringify(result))
   const { review } = result
   if (process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY,
-    `Translation checkpoint: ${review.approved} reviews approved, ${review.skippedCopy} copies and ${review.skippedSameLanguage} same-language edits skipped, ${review.revise} revisions, ${review.blocked} blocked, ${result.modelCalls} model calls. State ${result.state}.\n`, { flag: 'a' })
+    `Translation checkpoint: ${review.approved} reviews approved, ${review.skippedCopy} copies, ${review.skippedSameLanguage} same-language edits and ${review.skippedUnprovenEnglish} without evidence of a non-English source skipped, ${review.revise} revisions, ${review.blocked} blocked, ${result.modelCalls} model calls. State ${result.state}.\n`, { flag: 'a' })
   if (result.state === 'missing_subscription_key') process.exitCode = 1
 }

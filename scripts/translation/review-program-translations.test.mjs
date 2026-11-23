@@ -61,9 +61,11 @@ test('skips repeated English editing and source copies before reserving calls fo
   const english = 'Degree programs start at September, and the university accepts transfer students, so you could begin to study at Spring term.'
   const rows = Array.from({ length: 50 }, (_, i) => ({ ...row, id: `term-${i}`, fields: { requirements: english } }))
   rows.push({ ...row, id: 'copy', fields: { requirements: 'Mathematics' } },
-    { ...row, id: 'formatting', fields: { requirements: 'Software engineering' } }, row)
+    { ...row, id: 'formatting', fields: { requirements: 'Software engineering' } },
+    { ...row, id: 'short', fields: { requirements: 'High school graduate' } }, row)
   for (const [original, translated] of [[english, english.replace('start at September', 'begin in September')],
-    ['Mathematics', 'Mathematics'], ['Software engineering', 'Software Engineering']]) {
+    ['Mathematics', 'Mathematics'], ['Software engineering', 'Software Engineering'],
+    ['High school graduate', 'Graduated from high school']]) {
     const path = join(options.root, candidatePath(original, 'en'))
     mkdirSync(dirname(path), { recursive: true })
     writeFileSync(path, JSON.stringify({ ...candidate, key: translationKey(original, 'en'),
@@ -75,6 +77,7 @@ test('skips repeated English editing and source copies before reserving calls fo
   assert.equal(result.modelCalls, 1)
   assert.equal(result.approved, 1)
   assert.equal(result.skippedSameLanguage, 50)
+  assert.equal(result.skippedUnprovenEnglish, 1)
   assert.equal(result.skippedCopy, 2)
   assert.equal(existsSync(join(options.root, publicationPath(english, 'en', translationScope(rows[0], 'requirements')))), false)
 })
