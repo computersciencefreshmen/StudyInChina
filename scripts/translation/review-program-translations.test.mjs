@@ -130,6 +130,15 @@ test('Chinese admission prose cannot retain the Non-Chinese condition even in a 
   assert.equal(translationConflict(original, leaked, 'en', 'requirements'), null)
 })
 
+test('Chinese qualification and HSK list boundaries survive independent review', () => {
+  const degree = 'An associate degree graduate may apply.'
+  assert.equal(translationConflict(degree, '专升本毕业生可以申请。', 'zh', 'requirements'), 'scope')
+  assert.equal(translationConflict(degree, '大专或副学士学位毕业生可以申请。', 'zh', 'requirements'), null)
+  const level = '1. HSK Band 4.2. Separated Class with English instruction.'
+  assert.equal(translationConflict(level, '1. HSK 级 4.2。独立英文班。', 'zh', 'requirements'), 'boundary')
+  assert.equal(translationConflict(level, '1. HSK 4 级。2. 独立英语授课班。', 'zh', 'requirements'), null)
+})
+
 test('six observed scope-bound PASS receipts cannot publish untranslated language qualifiers or the diploma-health modifier', () => {
   assert.equal(proseRegressions.cases.length, 6)
   for (const item of proseRegressions.cases) {
