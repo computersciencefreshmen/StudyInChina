@@ -12,6 +12,7 @@ const distinctiveLatinWords = new Set(`abitur aufnahme bachelorabschluss bewerbu
   maschinenbau schulabschluss studiengebühr zulassung baccalauréat diplôme français informatique ingénierie
   bachillerato ciudadanía español física ingeniería licenciatura título`.split(/\s+/u))
 const shortEnglishAdmissions = /\b(?:high school (?:graduate|graduation|education|diploma)|non[- ]chinese (?:citizen|national|resident)|bachelor(?:'s)? degree|english proficien(?:cy|t)|application (?:procedure|deadline)|with age \d+ through \d+)\b/iu
+const attachmentName = /\p{Script=Han}+(?:[ \t]+[a-z][a-z\d' -]{0,96})?\.(?:pdf|docx?|xlsx?|pptx?|zip)(?=$|[\s.,;!?()]|\d+\))/giu
 
 // This is a conservative fallback for short English admissions prose that the
 // shared language heuristic misses. Leave other scripts and ambiguous prose to
@@ -31,7 +32,8 @@ export function originalAlreadyInLocale(source, locale) {
 // Short Latin-script titles and requirements are often already English. Keep
 // the source as the fallback when nothing positively identifies another language.
 export function needsEnglishTranslation(source) {
-  const prose = source.replace(/(?:https?:\/\/|www\.)\S+|[^\s@]+@[^\s@]+\.[^\s@]+/giu, ' ')
+  // Preserve link destinations and the exact names of downloadable forms.
+  const prose = source.replace(/(?:https?:\/\/|www\.)\S+|[^\s@]+@[^\s@]+\.[^\s@]+/giu, ' ').replace(attachmentName, ' ')
   if (/\p{Script=Han}/u.test(prose)) return true
   const letters = prose.match(/\p{L}/gu) ?? []
   if (letters.filter(letter => !/\p{Script=Latin}/u.test(letter)).length >= 2) return true
