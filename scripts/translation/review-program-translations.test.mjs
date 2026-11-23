@@ -62,9 +62,11 @@ test('skips repeated English editing and source copies before reserving calls fo
   const rows = Array.from({ length: 50 }, (_, i) => ({ ...row, id: `term-${i}`, fields: { requirements: english } }))
   rows.push({ ...row, id: 'copy', fields: { requirements: 'Mathematics' } },
     { ...row, id: 'formatting', fields: { requirements: 'Software engineering' } },
+    { ...row, id: 'punctuation', fields: { requirements: 'Applicants must submit original documents (声明公证).' } },
     { ...row, id: 'short', fields: { requirements: 'Evening classes only' } }, row)
   for (const [original, translated] of [[english, english.replace('start at September', 'begin in September')],
     ['Mathematics', 'Mathematics'], ['Software engineering', 'Software Engineering'],
+    ['Applicants must submit original documents (声明公证).', 'Applicants must submit original documents: 声明公证.'],
     ['Evening classes only', 'Classes take place in the evening']]) {
     const path = join(options.root, candidatePath(original, 'en'))
     mkdirSync(dirname(path), { recursive: true })
@@ -78,7 +80,7 @@ test('skips repeated English editing and source copies before reserving calls fo
   assert.equal(result.approved, 1)
   assert.equal(result.skippedSameLanguage, 50)
   assert.equal(result.skippedUnprovenEnglish, 1)
-  assert.equal(result.skippedCopy, 2)
+  assert.equal(result.skippedCopy, 3)
   assert.equal(existsSync(join(options.root, publicationPath(english, 'en', translationScope(rows[0], 'requirements')))), false)
 })
 

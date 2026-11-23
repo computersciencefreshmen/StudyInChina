@@ -5,11 +5,11 @@ const englishWords = new Set(`a an and are as at be been by can could for from h
   degree duration fee granted programme programs qualified requirements semester students study university year`.split(/\s+/u))
 const latinLanguageSignals = [
   'aufenthalt bewerber bewerbung bewerbungsunterlagen bitte einreichen gebühren müssen nachweis sind studiengang studiengebühren unterlagen und',
-  'admis bourse candidature doivent dossier diplômés enseignement études frais les pièces soumettre veuillez',
+  'admis bourse candidature doivent dossier diplômés enseignement études frais les licence physique pièces soumettre veuillez',
   'admisión becas cursar deben del enseñanza estudios matrícula precisan presentar requisitos solicitud solicitantes',
 ].map(words => new Set(words.split(' ')))
 const distinctiveLatinWords = new Set(`abitur aufnahme bachelorabschluss bewerbungsfrist deutschkenntnisse hochschulabschluss
-  maschinenbau schulabschluss studiengebühr zulassung baccalauréat diplôme français informatique ingénierie physique
+  maschinenbau schulabschluss studiengebühr zulassung baccalauréat diplôme français informatique ingénierie
   bachillerato ciudadanía español física ingeniería licenciatura título`.split(/\s+/u))
 const shortEnglishAdmissions = /\b(?:high school (?:graduate|graduation|education|diploma)|non[- ]chinese (?:citizen|national|resident)|bachelor(?:'s)? degree|english proficien(?:cy|t)|application (?:procedure|deadline)|with age \d+ through \d+)\b/iu
 
@@ -43,6 +43,7 @@ export function needsEnglishTranslation(source) {
 export function isUnchangedTranslation(source, candidate, locale) {
   if (candidate === source) return true
   if (locale !== 'en') return false
-  const asText = text => text.normalize('NFKC').toLowerCase().replace(/\s+/gu, ' ').trim()
+  // An English candidate that only re-punctuates the original adds no translation.
+  const asText = text => text.normalize('NFKC').toLowerCase().replace(/[\p{P}\s]+/gu, ' ').trim()
   return asText(source) === asText(candidate)
 }
