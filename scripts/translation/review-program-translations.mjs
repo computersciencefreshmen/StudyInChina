@@ -6,6 +6,7 @@ import { TRANSLATION_FIELDS, TRANSLATION_LOCALES, programTranslationSource, tran
 import { publicationPath, reviewBinding, translationConflict, translationScope, validatePublishedTranslation, REVIEW_MODEL, REVIEW_POLICY } from '../../src/lib/program-translation-review.ts'
 import { readTranslationQuota, reviewTranslation } from './minimax-translation-provider.ts'
 import { CANARY_REVIEW_CONTRACT, SAMPLES, manualCanaryRetryContext } from './translation-canary-contract.mjs'
+import { isUnchangedTranslation, originalAlreadyInLocale } from './translation-work-eligibility.mjs'
 
 export const candidatePath = (source, locale) => `translations/candidates/v1/${locale}/${translationKey(source, locale)}.json`
 const write = (path, data) => {
@@ -14,6 +15,7 @@ const write = (path, data) => {
 }
 // An unreadable journal is a storage failure, never a fresh billing opportunity.
 const read = path => existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null
+const reviewLocales = ['zh', 'en', ...TRANSLATION_LOCALES.filter(locale => locale !== 'zh' && locale !== 'en')]
 const providerCodes = new Set(['subscription_key_invalid', 'translation_review_input_invalid', 'translation_aborted_before_send',
   'translation_prior_outcome_protected', 'translation_admission_wait', 'translation_timeout_or_aborted', 'translation_transport_unknown',
   'translation_redirect_rejected', 'translation_rate_limited', 'translation_response_unreadable', 'translation_response_json_invalid',
@@ -45,7 +47,7 @@ function legacyCanaryRetry(job, prior, root, context) {
     canaryRetry: { ...context, legacyBinding: job.binding, legacyJournalSha256: createHash('sha256').update(readFileSync(job.journal)).digest('hex') } }
 }
 
-function* reviewJobs(root, records, locales, fields) {
+function* reviewJobs(root, records, locales, fields, summary) {
   for (const locale of locales) {
     const indexed = new Set()
     for (const dir of ['translations/v1', 'translations/candidates/v1']) {
@@ -62,12 +64,9 @@ function* reviewJobs(root, records, locales, fields) {
       if (old?.validation === 'quarantined' || old?.method === 'source') continue
       const candidate = validateTranslationRecord(read(join(root, candidatePath(source, locale))) ?? old, source, locale)
       if (!candidate || candidate.method !== 'minimax') continue
+      if (isUnchangedTranslation(source, candidate.text, locale)) { summary.skippedCopy++; continue }
+      if (originalAlreadyInLocale(source, locale)) { summary.skippedSameLanguage++; continue }
       const scope = translationScope(row, field), publicPath = join(root, publicationPath(source, locale, scope))
-      // When the original is already in the requested language the literal is sufficient.
-      if (publicPath === join(root, translationPath(source, locale)) && candidate.text === source) {
-        yield { sourceCopy: { ...candidate, model: null, method: 'source' }, publicPath }
-        continue
-      }
       if (publicPath === join(root, translationPath(source, locale))) continue
       const binding = reviewBinding(source, candidate.text, locale, scope)
       if (seen.has(binding)) continue
@@ -83,13 +82,14 @@ function* reviewJobs(root, records, locales, fields) {
 
 export async function reviewTranslationBacklog({ root, records, maxCalls, concurrency, deadline, checkpoint,
   key = process.env.MINIMAX_SUBSCRIPTION_KEY, now = Date.now, quota = readTranslationQuota, review = reviewTranslation,
-  locales = TRANSLATION_LOCALES, fields = TRANSLATION_FIELDS, writeStatus = true, retryLegacyFailedCanary = false, environment = process.env }) {
+  locales = reviewLocales, fields = TRANSLATION_FIELDS, writeStatus = true, retryLegacyFailedCanary = false, environment = process.env }) {
   if (!Number.isSafeInteger(maxCalls) || maxCalls < 1 || maxCalls > 240 || !Number.isSafeInteger(concurrency) || concurrency < 1 || concurrency > 8 || !Number.isFinite(deadline))
     throw new Error('translation_batch_bounds_invalid')
   const stamp = () => new Date(now()).toISOString()
   const retryContext = retryLegacyFailedCanary ? manualCanaryRetryContext(environment) : null
-  const summary = { startedAt: stamp(), state: 'complete', modelCalls: 0, approved: 0, revise: 0, blocked: 0, unknown: 0, inputTokens: 0, outputTokens: 0 }
-  const jobs = reviewJobs(root, records, locales, fields)
+  const summary = { startedAt: stamp(), state: 'complete', modelCalls: 0, approved: 0, revise: 0, blocked: 0, unknown: 0,
+    skippedCopy: 0, skippedSameLanguage: 0, inputTokens: 0, outputTokens: 0 }
+  const jobs = reviewJobs(root, records, locales, fields, summary)
   for (;;) {
     if (summary.modelCalls >= maxCalls || now() + 95_000 >= deadline) { summary.state = 'review_checkpoint'; break }
     const waiting = []
@@ -97,7 +97,6 @@ export async function reviewTranslationBacklog({ root, records, maxCalls, concur
       const next = jobs.next()
       if (next.done) break
       let job = next.value
-      if (job.sourceCopy) { write(job.publicPath, job.sourceCopy); continue }
       let prior = read(job.journal)
       const retry = legacyCanaryRetry(job, prior, root, retryContext)
       if (retry) {

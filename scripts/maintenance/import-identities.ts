@@ -4,6 +4,7 @@ import { isAbsolute, relative, resolve, sep } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { JSDOM } from 'jsdom'
 import type { DataBundle, Program, Scholarship, Source } from '../../src/lib/data/types'
+import { concreteProgramKeys } from '../../src/lib/data/concrete-majors'
 import { bundleSchema } from '../../src/lib/data/schema'
 import { htmlToText, normalizeEvidenceText } from '../../workers/ingestion/src/rules'
 import { hasProgramInternationalScopeEvidence } from '../../workers/catalog-maintenance/src/program-international-scope'
@@ -314,6 +315,12 @@ export async function importIdentityCandidates(options: {
           applyUrl: null, languageRequirements: [], verificationScope: 'identity', sourceIds: [sourceId],
           verifiedAt: date, reviewAfter: date, status: 'verified',
         }
+        // Independent evidence can establish a heading without establishing a
+        // specific degree programme. Apply the existing concrete-major policy
+        // only to new degree identities; retain existing records and genuine
+        // foundation/language routes without changing their acceptance history.
+        if (['bachelor', 'master', 'doctorate'].includes(record.degreeLevel) && !concreteProgramKeys(record).length)
+          throw new Error('new_degree_identity_requires_concrete_program')
         if (bundle.programs.some(program => program.id === record?.id || program.slug === record?.slug)) throw new Error('generated_program_identity_collision')
         bundle.programs.push(record)
       }

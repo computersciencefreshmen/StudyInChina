@@ -56,6 +56,29 @@ test('published model text requires independent review for this source, target, 
   assert.equal((await reviewTranslationBacklog(options)).modelCalls, 0)
 })
 
+test('skips repeated English editing and source copies before reserving calls for an actual translation', async t => {
+  const options = fixture(t)
+  const english = 'Degree programs start at September, and the university accepts transfer students, so you could begin to study at Spring term.'
+  const rows = Array.from({ length: 50 }, (_, i) => ({ ...row, id: `term-${i}`, fields: { requirements: english } }))
+  rows.push({ ...row, id: 'copy', fields: { requirements: 'Mathematics' } },
+    { ...row, id: 'formatting', fields: { requirements: 'Software engineering' } }, row)
+  for (const [original, translated] of [[english, english.replace('start at September', 'begin in September')],
+    ['Mathematics', 'Mathematics'], ['Software engineering', 'Software Engineering']]) {
+    const path = join(options.root, candidatePath(original, 'en'))
+    mkdirSync(dirname(path), { recursive: true })
+    writeFileSync(path, JSON.stringify({ ...candidate, key: translationKey(original, 'en'),
+      sourceHash: createHash('sha256').update(original).digest('hex'), targetLocale: 'en', text: translated }))
+  }
+  const result = await reviewTranslationBacklog({ ...options, records: rows, locales: ['en', 'zh'], fields: ['requirements'], review: async job => {
+    assert.equal(job.locale, 'zh'); assert.equal(job.source, source); return pass
+  } })
+  assert.equal(result.modelCalls, 1)
+  assert.equal(result.approved, 1)
+  assert.equal(result.skippedSameLanguage, 50)
+  assert.equal(result.skippedCopy, 2)
+  assert.equal(existsSync(join(options.root, publicationPath(english, 'en', translationScope(rows[0], 'requirements')))), false)
+})
+
 test('REVISE, BLOCK and unknown never publish, unknown never replays, a lost reservation checkpoint sends nothing', async t => {
   for (const state of ['REVISE', 'BLOCK', 'unknown', 'push_failure']) {
     const options = fixture(t)

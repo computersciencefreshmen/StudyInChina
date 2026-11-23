@@ -6,7 +6,7 @@ import {
   type MaintenanceProposal, type MaintenanceScope,
 } from '../../scripts/maintenance/contracts'
 import { canonicalProgramIdentityKey, importIdentityCandidates } from '../../scripts/maintenance/import-identities'
-import type { DataBundle } from '../../src/lib/data/types'
+import type { DataBundle, Program } from '../../src/lib/data/types'
 
 const acceptedAt = '2026-10-24T02:00:00.000Z'
 const capturedAt = '2026-10-24T00:00:00.000Z'
@@ -20,13 +20,13 @@ beforeAll(async () => {
   scope = await buildMaintenanceScope(bundle, { scopeId: 'test-fixed-272', createdAt: capturedAt })
 })
 
-async function fixture(options: { existing?: boolean; degree?: 'bachelor' | 'master'; batchId?: string } = {}) {
+async function fixture(options: { existing?: boolean; degree?: Program['degreeLevel']; name?: Program['name']; batchId?: string } = {}) {
   const school = scope.schools.find(school => school.originalStatus === 'verified')!
   const existing = bundle.programs.find(program => program.universityId === school.universityId && program.status === 'stale')!
-  const name = options.existing ? { en: existing.name.en!, zh: existing.name.zh! }
-    : { en: 'Evidence Bound Computing', zh: '证据约束计算' }
+  const name = options.name ?? (options.existing ? { en: existing.name.en!, zh: existing.name.zh! }
+    : { en: 'Evidence Bound Computing', zh: '证据约束计算' })
   const degreeLevel = options.existing ? existing.degreeLevel : options.degree ?? 'master'
-  const text = `International students are eligible for individual application. ${degreeLevel} ${name.en} ${name.zh} official code EBC-001.`
+  const text = `International students are eligible for individual application. ${degreeLevel} ${Object.values(name).join(' ')} official code EBC-001.`
   const bytes = new TextEncoder().encode(text)
   const snapshotSha256 = hash(bytes)
   const url = `https://${school.officialHosts[0]}/maintenance-catalogue-test.txt`
@@ -38,7 +38,7 @@ async function fixture(options: { existing?: boolean; degree?: 'bachelor' | 'mas
       officialProgramCode: 'EBC-001', programUrl: options.existing ? existing.programUrl : url, internationalAdmissionsEvidence: evidence },
     source: { id: 'fixture-source', url, snapshotSha256, objectKey: evidence.objectKey, checkedAt: capturedAt,
       contentType: 'text/plain', locator: 'text:1', quote: text },
-    fieldEvidence: ['name.en', 'name.zh', 'degreeLevel', 'officialProgramCode'].map(fieldPath => ({ ...evidence, fieldPath })),
+    fieldEvidence: [...Object.keys(name).map(locale => `name.${locale}`), 'degreeLevel', 'officialProgramCode'].map(fieldPath => ({ ...evidence, fieldPath })),
     scope: { year: null, intake: null },
   }
   proposal.review = { decision: 'approved', reviewerId: 'human:test-reviewer', method: 'human', reviewedAt: capturedAt,
@@ -93,6 +93,32 @@ describe('fixed school scope and reviewed identity importing', () => {
     expect(record).toMatchObject({ verificationScope: 'identity', teachingLanguages: [], durationMonths: null, applyUrl: null, languageRequirements: [] })
     expect(result.acceptances.entries[0].recordId).toBe(record.id)
     expect(result.acceptances.entries[0].receiptSha256).toBe(result.receipt.sha256)
+  })
+
+  it.each([
+    { zh: '博士项目' },
+    { en: 'Doctoral Programme', zh: '博士项目' },
+  ])('holds a fully evidenced generic degree heading before creating records: %j', async name => {
+    const { run } = await fixture({ degree: 'doctorate', name })
+    const result = await run()
+    expect(result.receipt.accepted).toEqual([])
+    expect(result.receipt.held).toEqual([{ proposalId: 'proposal-001', reason: 'new_degree_identity_requires_concrete_program' }])
+    expect(result.bundle).toEqual(bundle)
+    expect(result.acceptances.entries).toEqual([])
+    expect(result.bindings.entries).toEqual([])
+  })
+
+  it.each([
+    { degree: 'doctorate' as const, name: { en: 'Electrical Engineering' } },
+    { degree: 'foundation' as const, name: { zh: '本科预科生项目' } },
+    { degree: 'language' as const, name: { en: 'Chinese Language Programme' } },
+  ])('retains specific majors and legitimate non-degree routes: %j', async options => {
+    const { run } = await fixture(options)
+    const result = await run()
+    expect(result.receipt.held).toEqual([])
+    expect(result.receipt.accepted).toHaveLength(1)
+    expect(result.bundle.programs.at(-1)?.name).toEqual(options.name)
+    expect(result.bundle.programs.slice(0, bundle.programs.length)).toEqual(bundle.programs)
   })
 
   it('accepts an existing stale identity without renewing raw audit dates or dynamic facts', async () => {
