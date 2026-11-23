@@ -141,9 +141,8 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
     }
   }
   for (const unit of units) {
-    if (!unit.children && unit.locale === 'en' && !needsEnglishTranslation(unit.source)) {
-      // Keep English or ambiguous chunks verbatim even if an old model edit exists.
-      // This chunk belongs to a longer source that does need translation.
+    if (!unit.children && unit.locale === 'en' && originalAlreadyInLocale(unit.source, 'en') && !needsEnglishTranslation(unit.source)) {
+      // Keep known English chunks verbatim even if an old model edit exists.
       completed.set(unit.key, record(unit, unit.source, 'source', null))
       summary.completedByLocale.en++
       summary.copiedSource++
@@ -155,7 +154,7 @@ export async function runProgramTranslations({ feedDir, records, maxCalls = 120,
       || validateTranslationRecord(read(resolve(root, candidatePath(unit.source, unit.locale))), unit.source, unit.locale)
     if (prior) { accept(unit, prior, false); continue }
     if (unit.children) continue
-    if (originalAlreadyInLocale(unit.source, unit.locale)) { accept(unit, record(unit, unit.source, 'source', null)); summary.copiedSource++; continue }
+    if (unit.locale !== 'en' && originalAlreadyInLocale(unit.source, unit.locale)) { accept(unit, record(unit, unit.source, 'source', null)); summary.copiedSource++; continue }
     const protection = protectTranslationText(unit.source, factPolicy || undefined)
     // All-critical clauses stay verbatim; there is no useful model work to buy.
     if (!protection.text.replace(/__SC_\d{6}__/g, '').replace(/[^\p{L}]/gu, '')) { accept(unit, record(unit, unit.source, 'source', null)); summary.copiedSource++; continue }

@@ -65,8 +65,12 @@ function* reviewJobs(root, records, locales, fields, summary) {
       const candidate = validateTranslationRecord(read(join(root, candidatePath(source, locale))) ?? old, source, locale)
       if (!candidate || candidate.method !== 'minimax') continue
       if (isUnchangedTranslation(source, candidate.text, locale)) { summary.skippedCopy++; continue }
-      if (originalAlreadyInLocale(source, locale)) { summary.skippedSameLanguage++; continue }
-      if (locale === 'en' && !needsEnglishTranslation(source)) { summary.skippedUnprovenEnglish++; continue }
+      const alreadyInLocale = originalAlreadyInLocale(source, locale)
+      if (locale === 'en' ? !needsEnglishTranslation(source) : alreadyInLocale) {
+        if (alreadyInLocale) summary.skippedSameLanguage++
+        else summary.skippedUnprovenEnglish++
+        continue
+      }
       const scope = translationScope(row, field), publicPath = join(root, publicationPath(source, locale, scope))
       if (publicPath === join(root, translationPath(source, locale))) continue
       const binding = reviewBinding(source, candidate.text, locale, scope)

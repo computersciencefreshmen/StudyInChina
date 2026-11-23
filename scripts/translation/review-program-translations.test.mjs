@@ -62,10 +62,10 @@ test('skips repeated English editing and source copies before reserving calls fo
   const rows = Array.from({ length: 50 }, (_, i) => ({ ...row, id: `term-${i}`, fields: { requirements: english } }))
   rows.push({ ...row, id: 'copy', fields: { requirements: 'Mathematics' } },
     { ...row, id: 'formatting', fields: { requirements: 'Software engineering' } },
-    { ...row, id: 'short', fields: { requirements: 'High school graduate' } }, row)
+    { ...row, id: 'short', fields: { requirements: 'Evening classes only' } }, row)
   for (const [original, translated] of [[english, english.replace('start at September', 'begin in September')],
     ['Mathematics', 'Mathematics'], ['Software engineering', 'Software Engineering'],
-    ['High school graduate', 'Graduated from high school']]) {
+    ['Evening classes only', 'Classes take place in the evening']]) {
     const path = join(options.root, candidatePath(original, 'en'))
     mkdirSync(dirname(path), { recursive: true })
     writeFileSync(path, JSON.stringify({ ...candidate, key: translationKey(original, 'en'),

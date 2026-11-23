@@ -70,6 +70,15 @@ test('an English target only queues source with evidence of another language', (
     'Veuillez soumettre votre dossier de candidature.',
     'Bewerber müssen die Unterlagen einreichen.',
     'Los solicitantes deben presentar los requisitos.',
+    'Licence en physique',
+    'Diplôme de licence',
+    'Master en informatique',
+    'Maschinenbau',
+    'Deutschkenntnisse erforderlich',
+    'Abitur oder gleichwertiger Abschluss',
+    'Certificado de bachillerato',
+    'Título universitario',
+    'Licenciatura en Fisica',
   ]
   const rows = originals.map((requirements, index) => ({
     ...records[0], id: `sample-${index}`, fields: { requirements },
