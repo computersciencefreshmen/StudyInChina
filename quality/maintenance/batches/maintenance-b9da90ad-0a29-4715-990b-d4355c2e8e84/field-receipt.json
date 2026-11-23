@@ -1,0 +1,22 @@
+{
+  "format": "studyinchina.field-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-b9da90ad-0a29-4715-990b-d4355c2e8e84",
+  "batchSha256": "ab826dca9aec7a321f79283b81667b06407805d6c0c636d63c502ac70d8a5c6f",
+  "inputCatalogSha256": "ad1c45ff6638295f47575d00208aa4f5045ddf81191701ddd2dd27c3949fb343",
+  "outputCatalogSha256": "42aeb5fd71739fff392aefe088f4bee34f056af0fbad312689b059eeaff5d256",
+  "acceptedAt": "2026-11-23T04:14:27.808Z",
+  "accepted": [],
+  "fieldBindings": [],
+  "held": [
+    {
+      "proposalId": "maintenance-field-af6493d45b25fbc0a6bd304c954e7678416f5e7d8434d4c021dd6d28ac309a55",
+      "reason": "field_existing_same_value_preserved:durationMonths"
+    },
+    {
+      "proposalId": "maintenance-field-4cf9a4f878c71613ba3095affbe03b402ee97ab60879ef037dab4e213060044f",
+      "reason": "[\n  {\n    \"code\": \"custom\",\n    \"message\": \"Maximum duration must be at least the minimum duration\",\n    \"path\": [\n      \"programs\",\n      2079\n    ]\n  }\n]"
+    }
+  ],
+  "sha256": "70fc483ad095a0eba12507e64ad906b5e2bf1f5c4e57ddf30a30984320ee985f"
+}

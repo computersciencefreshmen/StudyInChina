@@ -9,6 +9,7 @@ import { canonicalIdentityJson } from '@/lib/data/identity-acceptance'
 import { readFieldVerifications } from '@/lib/data/field-verification-store'
 import { applyFreshFieldVerifications, fieldValueSha256, validateFieldVerification } from '@/lib/data/field-verification'
 import { hasDetailedPublicProgram } from '@/lib/data/public-program-quality'
+import { reviewedCatalogueAt } from './reviewed-release-snapshot'
 
 const day = '2026-11-23', school = 'uni-zhejiang-university-of-technology'
 const bundle = loadMaintenanceBundle(process.cwd()), ids = Object.keys(review.programmeEvidence)
@@ -16,9 +17,7 @@ const receiptPath = 'quality/maintenance/batches/zjut-five-reviewed-20261123/fie
 
 describe('five exact 2027 English master programmes at ZJUT', () => {
   it('preserves the entire 2377-program base, including all six old ZJUT bachelor records', async () => {
-    const c = review.baseline.collectionLengths
-    const original = { ...bundle, programs: bundle.programs.slice(0, c.programs), admissionCycles: bundle.admissionCycles.slice(0, c.admissionCycles),
-      sources: bundle.sources.slice(0, c.sources), cities: bundle.cities.slice(0, c.cities), universities: bundle.universities.slice(0, c.universities), scholarships: bundle.scholarships.slice(0, c.scholarships) }
+    const original = reviewedCatalogueAt(review.baseline.gitCommit)
     expect(original.programs).toHaveLength(2377)
     expect(await catalogSha256(original)).toBe(review.inputCatalogSha256)
     expect(review.baseline.liveZeroQualified).toBe(true)
