@@ -1,0 +1,44 @@
+{
+  "format": "studyinchina.identity-import-receipt",
+  "formatVersion": 1,
+  "batchId": "maintenance-b9da90ad-0a29-4715-990b-d4355c2e8e84",
+  "batchSha256": "613d03e380a192f5a01053195f2e0b24385355905f5535e6ff31d00f80f637fd",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "inputCatalogSha256": "d7824ed1f293fd0f18ec9d225ba389f235e21251930cc82f48a73c5763afec7b",
+  "outputCatalogSha256": "785cc2e9a6f07eb2c5deb06b009fafe22cb1fd63619438c80b0b34651a848d9c",
+  "acceptedAt": "2026-11-23T00:40:50.296Z",
+  "accepted": [
+    {
+      "proposalId": "maintenance-c125aeead6233723dedf92cda38635c582636a76886b25467f4baacc989487bb",
+      "recordId": "program-fb902c46f2f682046cba5241",
+      "canonicalKey": "uni-dalian-medical-university|bachelor|degree|name:大连医科大学留学生临床医学专业五年制人才培养方案",
+      "action": "identity_accepted",
+      "verifiedName": {
+        "zh": "大连医科大学留学生临床医学专业五年制人才培养方案"
+      },
+      "verifiedSourceUrl": "https://gjy.dmu.edu.cn/info/1113/1033.htm"
+    },
+    {
+      "proposalId": "maintenance-8b190443db566c0b2cfed7bb34931da0598cb1bc8e5758ae492d4b845cd4b050",
+      "recordId": "prog-gap-wave8-hit-long-term-chinese-language",
+      "canonicalKey": "uni-harbin-institute-of-technology|language|language|name:longtermchineselanguageprogram",
+      "action": "identity_accepted",
+      "verifiedName": {
+        "en": "Long-term Chinese Language Program"
+      },
+      "verifiedSourceUrl": "https://en.hit.edu.cn/2025/0710/c11960a238526/page.htm"
+    }
+  ],
+  "unchanged": [],
+  "held": [
+    {
+      "proposalId": "maintenance-field-af6493d45b25fbc0a6bd304c954e7678416f5e7d8434d4c021dd6d28ac309a55",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    },
+    {
+      "proposalId": "maintenance-field-4cf9a4f878c71613ba3095affbe03b402ee97ab60879ef037dab4e213060044f",
+      "reason": "[\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"name\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"bachelor\",\n      \"master\",\n      \"doctorate\",\n      \"language\",\n      \"foundation\",\n      \"other\"\n    ],\n    \"path\": [\n      \"degreeLevel\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"bachelor\\\"|\\\"master\\\"|\\\"doctorate\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"other\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"degree\",\n      \"language\",\n      \"foundation\",\n      \"exchange\",\n      \"visiting\",\n      \"short_term\",\n      \"other\"\n    ],\n    \"path\": [\n      \"programType\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"degree\\\"|\\\"language\\\"|\\\"foundation\\\"|\\\"exchange\\\"|\\\"visiting\\\"|\\\"short_term\\\"|\\\"other\\\"\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"programUrl\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"object\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"internationalAdmissionsEvidence\"\n    ],\n    \"message\": \"Invalid input: expected object, received undefined\"\n  },\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"patches\",\n      \"recordScopeSha256\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized keys: \\\"patches\\\", \\\"recordScopeSha256\\\"\"\n  }\n]"
+    }
+  ],
+  "sha256": "9e02849b5ea75ab5cad7c013ea88d599cff895107da71f29acb62bf2fd149bf9"
+}
