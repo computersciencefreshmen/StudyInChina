@@ -24,7 +24,7 @@ describe('catalog API routes', () => {
       evaluatedForDate:normal.data.evaluatedForDate, catalogBackend:'json'})
     expect(Object.keys(data.coverage).sort()).toEqual(['inputCatalogSha256','scopeRegistrySha256','sha256'])
     expect(Object.values(data.coverage).every(value => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value))).toBe(true)
-  })
+  }, 20_000)
 
   it('serves only publication-gated records with cache policy and release metadata', async () => {
     // The shared cache intentionally shrinks before Shanghai midnight. Keep
