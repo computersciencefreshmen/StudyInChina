@@ -2,5 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "npm ci",
-  "buildCommand": "next build --webpack"
+  "buildCommand": "next build --webpack",
+  "git": {
+    "deploymentEnabled": {
+      "codex/cloud-catalog-*": false,
+      "catalog-program-feed": false
+    }
+  }
 }
