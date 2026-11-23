@@ -56,9 +56,57 @@ test('reserves a bounded generation phase even with a large independent review b
 
 test('shared text deduplicates across schools and languages have distinct keys', () => {
   const units = buildTranslationUnits([...records, { ...records[0], id: 'sicas-2', schoolId: 'sicas-2' }])
-  assert.equal(units.length, 6)
-  assert.equal(new Set(units.map(unit => unit.key)).size, 6)
-  assert.deepEqual(units.slice(0, 2).map(unit => unit.locale), ['zh', 'en'])
+  assert.deepEqual(units.map(unit => unit.locale), ['zh', 'ru', 'de', 'fr', 'es'])
+  assert.equal(new Set(units.map(unit => unit.key)).size, 5)
+})
+
+test('an English target only queues source with evidence of another language', () => {
+  const originals = [
+    'Non-Chinese citizen.',
+    'High school graduate',
+    'Official site: https://example.test/申请',
+    '申请人须提交学历证明。',
+    'Подайте документы для поступления.',
+    'Veuillez soumettre votre dossier de candidature.',
+    'Bewerber müssen die Unterlagen einreichen.',
+    'Los solicitantes deben presentar los requisitos.',
+    'Licence en physique',
+    'Diplôme de licence',
+    'Master en informatique',
+    'Maschinenbau',
+    'Deutschkenntnisse erforderlich',
+    'Abitur oder gleichwertiger Abschluss',
+    'Certificado de bachillerato',
+    'Título universitario',
+    'Licenciatura en Fisica',
+  ]
+  const rows = originals.map((requirements, index) => ({
+    ...records[0], id: `sample-${index}`, fields: { requirements },
+  }))
+  const units = buildTranslationUnits(rows, ['en'], ['requirements'])
+  assert.deepEqual(units.map(unit => unit.source), originals.slice(3))
+})
+
+test('a mixed source translates the Chinese chunk and keeps its English portion verbatim', async t => {
+  const root = fixture(t)
+  const intro = 'High school graduate.\n'.repeat(270).trimEnd()
+  const english = intro.padEnd(5999) + '\n'
+  const chinese = '申请人须提交学历证明和具备完整签名的文件。'.repeat(6)
+  const original = english + chinese
+  const [first, second] = splitTranslationSource(original)
+  assert.ok(first === english && second === chinese)
+  const translated = 'Submit proof of education and fully signed documentation.'.repeat(6)
+  const result = await runProgramTranslations({
+    ...options(root),
+    records: [{ ...records[0], fields: { requirements: original } }],
+    locales: ['en'], fields: ['requirements'],
+    translate: async ({ items }) => {
+      assert.deepEqual(items.map(item => item.text), [chinese])
+      return { model: 'MiniMax-M3', usage: { inputTokens: 60, outputTokens: 50 }, items: [{ key: items[0].key, text: translated }] }
+    },
+  })
+  assert.equal(result.modelCalls, 1)
+  assert.equal(read(join(root, translationPath(original, 'en'))).text, english + translated)
 })
 test('long prose chunks preserve exact source bytes', () => {
   const text = ('Ordinary introduction.\nIELTS 6.0 is required.\n' + 'A second paragraph.\n').repeat(80)
