@@ -1,0 +1,367 @@
+{
+  "format": "studyinchina.publisher-baseline-bridge",
+  "version": 1,
+  "baseCommit": "6c12d085e88b3db7da69450698da2b0d6215edc6",
+  "liveCommit": "aac186b1969204cbe499a32dd8138b1fb5950a5b",
+  "baseCatalogSha256": "06db9c2395b8dbe0e09204e2b1339eb3fdc049222d067c993ef2bf37ce7c7f21",
+  "liveCatalogSha256": "d8cb69750f3422b81d41e6e2684829e729ae1d1d1e7da63348302ac6375d8b69",
+  "sourceBatchId": "maintenance-8b797e66-dc4e-4c02-aa24-5a8de1788a14",
+  "sourceBatchSha256": "9fcf51e328d3b7c44eb7560e26af8c35eb56f1814b52b354eaf0511c49444d1f",
+  "validationBatchSha256": "f15298a8ee76a3618deaebd4f46862821a25e4eb5ca13920f4a5ddf698691a09",
+  "scopeRegistrySha256": "1481aee8a203ca4819eb3ccca17b6a76824f2d1521d6afdb98aaf2075e4710a4",
+  "delta": {
+    "sources": {
+      "added": [
+        "src-xjtu-master-2027-guide-cn-20261126",
+        "src-xjtu-master-2027-guide-en-20261126",
+        "src-xjtu-master-2027-portal-20261126"
+      ],
+      "changed": []
+    },
+    "cities": {
+      "added": [],
+      "changed": []
+    },
+    "universities": {
+      "added": [],
+      "changed": []
+    },
+    "programs": {
+      "added": [
+        "program-xjtu-electrical-engineering-master-english",
+        "program-xjtu-environmental-science-and-engineering-master-english",
+        "program-xjtu-mechanical-engineering-master-english",
+        "program-xjtu-nuclear-science-and-technology-master-english",
+        "program-xjtu-power-engineering-and-engineering-thermophysics-master-english"
+      ],
+      "changed": []
+    },
+    "admissionCycles": {
+      "added": [
+        "cycle-xjtu-electrical-engineering-master-english-2027-self-funded",
+        "cycle-xjtu-environmental-science-and-engineering-master-english-2027-self-funded",
+        "cycle-xjtu-mechanical-engineering-master-english-2027-self-funded",
+        "cycle-xjtu-nuclear-science-and-technology-master-english-2027-self-funded",
+        "cycle-xjtu-power-engineering-and-engineering-thermophysics-master-english-2027-self-funded"
+      ],
+      "changed": []
+    },
+    "scholarships": {
+      "added": [],
+      "changed": []
+    }
+  },
+  "eligible": [
+    {
+      "proposalId": "maintenance-05745ac1020b5f6906b341c62b7103fdc59501131c20e69b978a395e343143de",
+      "dependencies": [
+        "cities:city-kaifeng",
+        "programs:prog-gap-mew-csw-henu-finance-master",
+        "programs:prog-gap-mew-csw-henu-mathematics-doctorate",
+        "programs:prog-gap-mew-csw-henu-software-engineering-master",
+        "programs:prog-gap-mew-csw-henu-traditional-chinese-sports-doctorate",
+        "programs:program-37461d61f81877bfa3975f71",
+        "programs:program-henan-university-chinese-language-bachelor",
+        "programs:program-henan-university-international-economics-and-trade-bachelor",
+        "sources:src-gap-program-mew-csw-henu-finance-master",
+        "sources:src-gap-program-mew-csw-henu-finance-master-support-1",
+        "sources:src-gap-program-mew-csw-henu-mathematics-doctorate",
+        "sources:src-gap-program-mew-csw-henu-mathematics-doctorate-support-1",
+        "sources:src-gap-program-mew-csw-henu-software-engineering-master",
+        "sources:src-gap-program-mew-csw-henu-software-engineering-master-support-1",
+        "sources:src-gap-program-mew-csw-henu-traditional-chinese-sports-doctorate",
+        "sources:src-gap-program-mew-csw-henu-traditional-chinese-sports-doctorate-support-1",
+        "sources:src-maintenance-identity-b6621e20be094d96a8eb125a",
+        "sources:src-program-review-d85f5f614697",
+        "sources:src-uni-henan-university",
+        "universities:uni-henan-university"
+      ],
+      "auditSha256": "10dd1783e076f294b4c5996f4c59460bfe7c9573884072037d1e8fe68950ac13"
+    },
+    {
+      "proposalId": "maintenance-field-c3b0fba45d043047356f0fff21131931af1410ca4340d155d63759dd80fc1a1a",
+      "dependencies": [
+        "cities:city-hohhot",
+        "programs:prog-gap-prog-mew-ne-imu-chinese-one-semester-spring",
+        "programs:prog-gap-prog-mew-ne-imu-chinese-one-year",
+        "programs:program-9e7dec6a75f1a3c874afc996",
+        "programs:program-inner-mongolia-university-one-semester-study-program-chinese-medicine-an",
+        "programs:program-inner-mongolia-university-one-semester-study-program-international-chine",
+        "scholarships:sch-gap-sch-mew-ne-imu-autonomous-region-postgraduate",
+        "scholarships:sch-gap-sch-mew-ne-imu-international-chinese-teacher",
+        "sources:src-gap-program-prog-mew-ne-imu-chinese-one-semester-spring",
+        "sources:src-gap-program-prog-mew-ne-imu-chinese-one-year",
+        "sources:src-gap-scholarship-sch-mew-ne-imu-autonomous-region-postgraduate",
+        "sources:src-gap-scholarship-sch-mew-ne-imu-international-chinese-teacher",
+        "sources:src-maintenance-field-e1b2886b6b5548b3100d6c3b",
+        "sources:src-maintenance-identity-2a509dfebc072f934c73937f",
+        "sources:src-program-review-83b1cd51265d",
+        "sources:src-uni-inner-mongolia-university",
+        "universities:uni-inner-mongolia-university"
+      ],
+      "auditSha256": "9185c0b1f8865973ce68fc0ff6dbda257d8b8649c31d13171d9390643f942ef4"
+    },
+    {
+      "proposalId": "maintenance-field-f1839be83d3387dd7eedadb4a508c23b3b6959fc871a1cf8c89946a47b51302a",
+      "dependencies": [
+        "cities:city-shenyang",
+        "programs:prog-gap-wave3-sau-b-aeronautical-engineering",
+        "sources:src-gap-program-wave3-sau-b-aeronautical-engineering",
+        "sources:src-gap-program-wave3-sau-b-aeronautical-engineering-support-1",
+        "sources:src-maintenance-field-6bc15c1e6fd61b42674632eb",
+        "sources:src-uni-liaoning-university",
+        "sources:src-wave3-university-shenyang-aerospace-university",
+        "universities:uni-shenyang-aerospace-university"
+      ],
+      "auditSha256": "e2c7ac4ecf753c1c6235af357f51a0c0cb5aebc66de1d824fb566426b18dc0f3"
+    },
+    {
+      "proposalId": "maintenance-9f4b7937a683708bad28302ce0144e9fe50b6099fa416e11517689609185a4da",
+      "dependencies": [
+        "cities:city-guiyang",
+        "programs:prog-gap-wave5-west-gzu-data-science-big-data-bachelor",
+        "programs:prog-gap-wave5-west-gzu-international-economics-trade-bachelor",
+        "programs:prog-gap-wave5-west-gzu-tea-science-bachelor",
+        "programs:program-8e72d5b0fa676889e96155c9",
+        "programs:program-gzu-iclt-one-semester-spring-2027",
+        "sources:src-city-guiyang",
+        "sources:src-clec-iclt-2026-standard",
+        "sources:src-gap-program-wave5-west-gzu-data-science-big-data-bachelor",
+        "sources:src-gap-program-wave5-west-gzu-data-science-big-data-bachelor-support-1",
+        "sources:src-gap-program-wave5-west-gzu-international-economics-trade-bachelor",
+        "sources:src-gap-program-wave5-west-gzu-international-economics-trade-bachelor-support-1",
+        "sources:src-gap-program-wave5-west-gzu-tea-science-bachelor",
+        "sources:src-gap-program-wave5-west-gzu-tea-science-bachelor-support-1",
+        "sources:src-gzu-iclt-2026",
+        "sources:src-gzu-iclt-2026-pdf",
+        "sources:src-maintenance-identity-f8caec5a7f042bddb39367ae",
+        "universities:uni-guizhou-university"
+      ],
+      "auditSha256": "89c5240bc509c4c72ba3a0c67ff7a1a2415952fb2a5de16c9ab46ecaa7e57a0a"
+    },
+    {
+      "proposalId": "maintenance-b6acd40c956346af779f5a2fea358e4bc50418bb5d7791fe1a4dedea989362df",
+      "dependencies": [
+        "cities:city-guiyang",
+        "programs:prog-gap-wave5-west-gzu-data-science-big-data-bachelor",
+        "programs:prog-gap-wave5-west-gzu-international-economics-trade-bachelor",
+        "programs:prog-gap-wave5-west-gzu-tea-science-bachelor",
+        "programs:program-8e72d5b0fa676889e96155c9",
+        "programs:program-gzu-iclt-one-semester-spring-2027",
+        "sources:src-city-guiyang",
+        "sources:src-clec-iclt-2026-standard",
+        "sources:src-gap-program-wave5-west-gzu-data-science-big-data-bachelor",
+        "sources:src-gap-program-wave5-west-gzu-data-science-big-data-bachelor-support-1",
+        "sources:src-gap-program-wave5-west-gzu-international-economics-trade-bachelor",
+        "sources:src-gap-program-wave5-west-gzu-international-economics-trade-bachelor-support-1",
+        "sources:src-gap-program-wave5-west-gzu-tea-science-bachelor",
+        "sources:src-gap-program-wave5-west-gzu-tea-science-bachelor-support-1",
+        "sources:src-gzu-iclt-2026",
+        "sources:src-gzu-iclt-2026-pdf",
+        "sources:src-maintenance-identity-f8caec5a7f042bddb39367ae",
+        "universities:uni-guizhou-university"
+      ],
+      "auditSha256": "89c5240bc509c4c72ba3a0c67ff7a1a2415952fb2a5de16c9ab46ecaa7e57a0a"
+    },
+    {
+      "proposalId": "maintenance-305244bd9caf7a87ec98fd407dfeef6fda2754d84c866746fcd901039f6ae582",
+      "dependencies": [
+        "cities:city-shanghai",
+        "programs:prog-gap-chinese-degree-fudan-chinese-language-foreign-bachelor",
+        "programs:prog-gap-chinese-degree-fudan-international-chinese-education-master",
+        "programs:program-fudan-university-chinese-economy-and-business-program-language",
+        "programs:program-fudan-university-chinese-language-program-language",
+        "programs:program-fudan-university-fudan-international-winter-session-2026-other",
+        "programs:program-fudan-university-international-chinese-language-teachers-scholarship-one",
+        "sources:fudan-cebp-2026",
+        "sources:fudan-icl-language-2026",
+        "sources:fudan-icl-master-2026",
+        "sources:source-fdu-ices-index-official-20261018",
+        "sources:source-fdu-iso-index-official-20261018",
+        "sources:source-fdu-spring-2027-en-official-20261018",
+        "sources:source-fdu-spring-2027-zh-official-20261018",
+        "sources:src-city-shanghai",
+        "sources:src-gap-program-chinese-degree-fudan-chinese-language-foreign-bachelor",
+        "sources:src-gap-program-chinese-degree-fudan-international-chinese-education-master",
+        "sources:src-program-review-00734e75ed5e",
+        "sources:src-program-review-14da1477a841",
+        "sources:src-program-review-bb96b24dcc05",
+        "sources:src-uni-fudan-university",
+        "universities:uni-fudan-university"
+      ],
+      "auditSha256": "23e1ecd40ce58504d25a19a2a9dfac75ac91881c31a5781539787337edd57fc6"
+    },
+    {
+      "proposalId": "maintenance-8f64706c23da50aa4af1fd6d7236751a3fc8152380a480ceff263e458bb33aef",
+      "dependencies": [
+        "cities:city-shanghai",
+        "programs:prog-gap-shu-2026-bachelor-icle",
+        "programs:prog-gap-shu-2026-master-icle",
+        "programs:program-shanghai-university-one-semester-business-chinese-program-language",
+        "programs:program-shanghai-university-one-semester-intensive-chinese-language-program-lang",
+        "programs:program-shanghai-university-one-year-intensive-chinese-language-program-language",
+        "programs:program-shu-iclt-one-semester-spring-2027",
+        "programs:program-shu-international-foundation-one-semester-spring-2027",
+        "programs:program-vm-shu-drama-film-professional-master",
+        "sources:shu-business-chinese-2026",
+        "sources:shu-icl-scholarship-2026",
+        "sources:shu-one-year-chinese-2026",
+        "sources:source-shu-foundation-2027-spring-official-20261017",
+        "sources:src-city-shanghai",
+        "sources:src-clec-iclt-2026-standard",
+        "sources:src-gap-program-shu-2026-bachelor-icle",
+        "sources:src-gap-program-shu-2026-master-icle",
+        "sources:src-program-review-512621438a07",
+        "sources:src-program-review-ab7de1ce70b4",
+        "sources:src-program-review-fe9463e02f54",
+        "sources:src-shu-iclt-2026",
+        "sources:src-uni-shanghai-university",
+        "sources:src-vm-ad4d09bf37f78a",
+        "universities:uni-shanghai-university"
+      ],
+      "auditSha256": "c1a0f9e2ef813e76899de493e362f40829c041dd8b0ad240287f5c4386f9e22a"
+    },
+    {
+      "proposalId": "maintenance-e2b74742077694b7a9efc8caebaad457badada1768572c5fac1570079cafb66f",
+      "dependencies": [
+        "cities:city-shanghai",
+        "programs:prog-gap-chinese-degree-fudan-chinese-language-foreign-bachelor",
+        "programs:prog-gap-chinese-degree-fudan-international-chinese-education-master",
+        "programs:program-fudan-university-chinese-economy-and-business-program-language",
+        "programs:program-fudan-university-chinese-language-program-language",
+        "programs:program-fudan-university-fudan-international-winter-session-2026-other",
+        "programs:program-fudan-university-international-chinese-language-teachers-scholarship-one",
+        "sources:fudan-cebp-2026",
+        "sources:fudan-icl-language-2026",
+        "sources:fudan-icl-master-2026",
+        "sources:source-fdu-ices-index-official-20261018",
+        "sources:source-fdu-iso-index-official-20261018",
+        "sources:source-fdu-spring-2027-en-official-20261018",
+        "sources:source-fdu-spring-2027-zh-official-20261018",
+        "sources:src-city-shanghai",
+        "sources:src-gap-program-chinese-degree-fudan-chinese-language-foreign-bachelor",
+        "sources:src-gap-program-chinese-degree-fudan-international-chinese-education-master",
+        "sources:src-program-review-00734e75ed5e",
+        "sources:src-program-review-14da1477a841",
+        "sources:src-program-review-bb96b24dcc05",
+        "sources:src-uni-fudan-university",
+        "universities:uni-fudan-university"
+      ],
+      "auditSha256": "23e1ecd40ce58504d25a19a2a9dfac75ac91881c31a5781539787337edd57fc6"
+    },
+    {
+      "proposalId": "maintenance-field-0a240e25a39ae1068f2d494fca1517a4972ac8021b886daa6913433cd55d3f0b",
+      "dependencies": [
+        "cities:city-jinan",
+        "programs:program-shandong-university-clinical-medicine-bachelor",
+        "sources:src-maintenance-field-6cd3610b782899e000dbfed7",
+        "sources:src-program-review-6cd3610b7828",
+        "sources:src-uni-shandong-university",
+        "universities:uni-shandong-university"
+      ],
+      "auditSha256": "4ba6ae7156b4dbca0737aed55b077a1f3b963ca6a0da694e4defafe4d8d31c83"
+    },
+    {
+      "proposalId": "maintenance-field-7dbd36e1aa51d38dc88bcedb1a8359e8356e8a2b10f940aab68c3fae59964d76",
+      "dependencies": [
+        "cities:city-jinan",
+        "programs:program-shandong-university-stomatology-bachelor",
+        "sources:src-maintenance-field-6cd3610b782899e000dbfed7",
+        "sources:src-program-review-6cd3610b7828",
+        "sources:src-uni-shandong-university",
+        "universities:uni-shandong-university"
+      ],
+      "auditSha256": "ade1b64b6aeee3bed8f3e4d08bf6b0ca32dd58434381383ffdbe4e98554b5be4"
+    },
+    {
+      "proposalId": "maintenance-field-17b86e29de7f9db987af0fa72ac59aa56b78f7113602e1bb49558d9092bffde0",
+      "dependencies": [
+        "cities:city-harbin",
+        "programs:program-harbin-engineering-university-civil-engineering-double-degree-bachelor",
+        "sources:src-city-harbin",
+        "sources:src-maintenance-field-d751e53345579411ec8f3598",
+        "sources:src-program-review-d751e5334557",
+        "sources:src-uni-harbin-engineering-university",
+        "universities:uni-harbin-engineering-university"
+      ],
+      "auditSha256": "f4157fb3a1f9d384e26db3bcd447c635190914cc0e6fbc541dae117a7472439a"
+    },
+    {
+      "proposalId": "maintenance-field-784f1746870441d9ff133bf28cc9bf4aa0ed0da30c88b21cfd2f94b7369f30b6",
+      "dependencies": [
+        "cities:city-harbin",
+        "programs:program-harbin-engineering-university-computer-science-and-technology-bachelor",
+        "sources:src-city-harbin",
+        "sources:src-maintenance-field-d751e53345579411ec8f3598",
+        "sources:src-program-review-d751e5334557",
+        "sources:src-uni-harbin-engineering-university",
+        "universities:uni-harbin-engineering-university"
+      ],
+      "auditSha256": "db6864282361ecc3d7d7a866e556608c697e4d1c3e486b015a417fe6699cd8e5"
+    },
+    {
+      "proposalId": "maintenance-field-796f9242a370c22a3d9cd55b6d331c5cdbdebed95ac6df202c8ce55a2ea38c86",
+      "dependencies": [
+        "cities:city-harbin",
+        "programs:program-harbin-engineering-university-artificial-intelligence-bachelor",
+        "sources:src-city-harbin",
+        "sources:src-maintenance-field-d751e53345579411ec8f3598",
+        "sources:src-program-review-d751e5334557",
+        "sources:src-uni-harbin-engineering-university",
+        "universities:uni-harbin-engineering-university"
+      ],
+      "auditSha256": "56b2b32ae05a816255c643a5b4a14d8f85699e23e6942354f50a1987e565032c"
+    },
+    {
+      "proposalId": "maintenance-field-bcfe91d09cb2b4b3121cdd235d535c503b18dc62dcf90ec4bacbb39f4a889054",
+      "dependencies": [
+        "cities:city-beijing",
+        "programs:program-china-foreign-affairs-university-international-relations-master",
+        "sources:src-city-beijing",
+        "sources:src-maintenance-field-207b3c0a67e594234b2878e4",
+        "sources:src-maintenance-identity-b70664ee39ade4a88a6d581f",
+        "sources:src-program-review-207b3c0a67e5",
+        "sources:src-uni-china-foreign-affairs-university",
+        "universities:uni-china-foreign-affairs-university"
+      ],
+      "auditSha256": "8d8d15459bc6da1ac8c1c723d09e3dd67d95e062a6a1e407b16ff8688738f782"
+    },
+    {
+      "proposalId": "maintenance-field-c6c49c78baf0c0bf93f909aa773a349a218e21cfe518f6e878e591ae338970cb",
+      "dependencies": [
+        "cities:city-hangzhou",
+        "programs:program-china-academy-of-art-design-master",
+        "sources:src-city-hangzhou",
+        "sources:src-program-review-5bd0f0d418fe",
+        "sources:src-uni-china-academy-of-art",
+        "universities:uni-china-academy-of-art"
+      ],
+      "auditSha256": "4f57a3e17a44070e225eb7ee33ddbb4ebaff3a1367062770153b1b7c9df92a28"
+    },
+    {
+      "proposalId": "maintenance-scholarship-0826e6e9e5fae5d97bb64f94ae0c7d8b81856784a3ecfe418210b3a2bb5d55c1",
+      "dependencies": [
+        "cities:city-haikou",
+        "programs:prog-gap-clw-sw-hainanu-chinese-culture-semester",
+        "programs:program-82ff27d28ed6741b8439ec52",
+        "programs:program-hainan-university-crop-science-master",
+        "programs:program-hainan-university-hotel-management-bachelor",
+        "scholarships:sch-gap-clw-sw-hainanu-overseas-chinese-teachers-scholarship",
+        "sources:src-gap-program-clw-sw-hainanu-chinese-culture-semester",
+        "sources:src-gap-scholarship-clw-sw-hainanu-overseas-chinese-teachers-scholarship",
+        "sources:src-maintenance-identity-54bc19d89a4086b1c969822f",
+        "sources:src-program-review-54bc19d89a40",
+        "sources:src-uni-hainan-university",
+        "universities:uni-hainan-university"
+      ],
+      "auditSha256": "d35976e222bd0fbff62cd49f10653b9ec34e273ee785d39b0502b606c16866c5"
+    }
+  ],
+  "held": [],
+  "acceptanceAuthorized": false,
+  "originalExportModified": false,
+  "gitBindingVerified": true,
+  "hasEligibleProposals": true,
+  "canApply": true,
+  "sha256": "a7e629bac430df8fe43d0836e69a777f25e1a47c75a0a2ac67bdc841f9897834"
+}
