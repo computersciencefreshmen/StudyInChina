@@ -77,7 +77,7 @@ describe('five exact 2027 English master programmes at ZJUT', () => {
       expect(validateFieldVerification(changed, first, day)).toBeUndefined()
     }
     expect(validateFieldVerification(bundle, { ...first, sourceUrl: 'https://example.org/mirror' }, day)).toBeUndefined()
-    expect((await validateDirectory(process.cwd(), day)).integrityPassed).toBe(true)
+    expect((await validateDirectory(process.cwd())).integrityPassed).toBe(true)
   }, 30000)
 
   it('withholds missing or disputed annual conditions rather than upgrading the raw parent', () => {

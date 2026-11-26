@@ -78,7 +78,7 @@ describe('five 2027 self-funded Chinese master programmes at SUES', () => {
       expect(validateFieldVerification(changed, first, day)).toBeUndefined()
     }
     expect(validateFieldVerification(bundle, { ...first, sourceUrl: 'https://example.org/copy' }, day)).toBeUndefined()
-    expect((await validateDirectory(process.cwd(), day)).integrityPassed).toBe(true)
+    expect((await validateDirectory(process.cwd())).integrityPassed).toBe(true)
   }, 30000)
 
   it('does not retain current-complete eligibility if the annual language, eligibility or route is missing', () => {
