@@ -1,0 +1,813 @@
+{
+  "format": "studyinchina.official-multischool-review",
+  "version": 1,
+  "evaluatedAt": "2026-11-26T13:09:02.435Z",
+  "reviewer": "codex-ai-independent-official-source-review:xjtu-master-five-reviewed-20261126",
+  "reviewMethod": "Codex AI/tool independent original bilingual HTML table, merged-cell and public HTTPS portal review; not Henry personal sign-off; no external model calls",
+  "baseline": {
+    "gitCommit": "528460410653e5935c39197a611cd56e98cea704",
+    "coverage": {
+      "universityId": "uni-xian-jiaotong-university",
+      "rawProgramCount": 7,
+      "directoryProgramCount": 2,
+      "currentProgramCount": 0,
+      "minimumProgramCount": 5,
+      "gap": 5,
+      "coverageBand": "zero",
+      "countedProgramIds": [],
+      "directoryScholarshipCount": 0,
+      "currentScholarshipCount": 0,
+      "reviewAfter": null
+    },
+    "liveProbePerformed": false,
+    "preservedExistingSchoolRecordHashes": {
+      "program-xian-jiaotong-university-electrical-engineering-and-automation-bachelor": "7e7df5983a20d944ab3d814302a5249040e3554faa88e20cacd28f2fefc3dee0",
+      "program-xian-jiaotong-university-energy-and-power-engineering-bachelor": "a55094464e0e9039d66f92b0e238d80463fb39f733e381fa606f223da380457e",
+      "program-xian-jiaotong-university-intelligent-manufacturing-engineering-bachelor": "d84a5c1171b7ed3b308d5d89594d7c521edc809e9049b5bb24e89614d20dc9c6",
+      "program-xian-jiaotong-university-materials-science-and-engineering-bachelor": "2f12739e7eb8b8e3446721118bc07f117fd9e0937a1eb1e91b8c55f1fa1d37d9",
+      "program-xian-jiaotong-university-clinical-medicine-mbbs-bachelor": "82319a0aeb60fb393ee8a30e17da7763df3292ff162e0003edaa3d60346ec88e",
+      "program-xjtu-ifp-advanced-chinese-taught-18-weeks": "cbffb596adfcc22da21bcfc2717e4097dbb59626a46314b7f534c320ef3484c8",
+      "program-xjtu-ifp-intensive-chinese-taught-11-weeks": "c25676e9c78226aff56f80edeb0ba60ee515c2725a66df668cbaad901c7a4fe4"
+    },
+    "collectionLengths": {
+      "sources": 3081,
+      "cities": 65,
+      "universities": 305,
+      "programs": 2418,
+      "admissionCycles": 1795,
+      "scholarships": 425
+    }
+  },
+  "inputCatalogSha256": "30660c54add619adeeabe27c69f16a056b6c1561d73f51812ce5841ea5b9e548",
+  "outputCatalogSha256": "24733a12f9da75d90b6ce895a53f76c4bd6f072b899edda69417a37ccd8759a9",
+  "sources": [
+    {
+      "id": "guide-en",
+      "url": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "finalUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "file": "raw/guide-en.html",
+      "bytes": 544509,
+      "sha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "fetchedAt": "2026-11-26T13:04:11.479Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original HTML entity preserved",
+      "objectKey": "official/xjtu-master-five-reviewed-20261126/d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704.html",
+      "title": "Xi’an Jiaotong University International Postgraduate Programs 2027-国际教育学院",
+      "outcome": "captured"
+    },
+    {
+      "id": "guide-cn",
+      "url": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "finalUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "file": "raw/guide-cn.html",
+      "bytes": 520798,
+      "sha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+      "fetchedAt": "2026-11-26T13:04:27.234Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original HTML entity preserved",
+      "objectKey": "official/xjtu-master-five-reviewed-20261126/a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed.html",
+      "title": "2027西安交通大学硕博研究生国际学生招生简章-国际教育学院",
+      "outcome": "captured"
+    },
+    {
+      "id": "portal",
+      "url": "https://isso.xjtu.edu.cn/recruit/login",
+      "finalUrl": "https://isso.xjtu.edu.cn/recruit/login",
+      "file": "raw/portal.html",
+      "bytes": 50712,
+      "sha256": "046e571b5612b668039bbc4d295bd3c45a3e67a2dba1a3c12245b07effdb0cba",
+      "fetchedAt": "2026-11-26T10:29:40.877Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "response entity body",
+      "objectKey": "official/xjtu-master-five-reviewed-20261126/046e571b5612b668039bbc4d295bd3c45a3e67a2dba1a3c12245b07effdb0cba.html",
+      "title": "西安交通大学-国际学生申请与招生系统",
+      "outcome": "captured"
+    }
+  ],
+  "programmeEvidence": {
+    "program-xjtu-power-engineering-and-engineering-thermophysics-master-english": {
+      "name": {
+        "en": "Power Engineering and Engineering Thermophysics",
+        "zh": "动力工程及工程热物理"
+      },
+      "programmeCode": "080700",
+      "enTableIndex": 2,
+      "cnTableIndex": 2,
+      "row": 2,
+      "enCells": [
+        "1",
+        "School of Energy and Power Engineering",
+        "Power Engineering and Engineering Thermophysics",
+        "080700",
+        "English",
+        "2",
+        "Master of Engineering",
+        "Academic",
+        "Yes"
+      ],
+      "cnCells": [
+        "1",
+        "能源与动力工程学院",
+        "动力工程及工程热物理",
+        "080700",
+        "英文",
+        "2",
+        "工学硕士",
+        "学术型",
+        "是"
+      ],
+      "enRowProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:2",
+        "quote": "1 School of Energy and Power Engineering Power Engineering and Engineering Thermophysics 080700 English 2 Master of Engineering Academic Yes"
+      },
+      "facultyProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:2",
+        "quote": "1 School of Energy and Power Engineering Power Engineering and Engineering Thermophysics 080700 English 2 Master of Engineering Academic Yes"
+      },
+      "inheritedCells": [
+        {
+          "text": "1",
+          "originRow": 2,
+          "rowspan": 3
+        },
+        {
+          "text": "School of Energy and Power Engineering",
+          "originRow": 2,
+          "rowspan": 3
+        },
+        {
+          "text": "Power Engineering and Engineering Thermophysics",
+          "originRow": 2,
+          "rowspan": 1
+        },
+        {
+          "text": "080700",
+          "originRow": 2,
+          "rowspan": 1
+        },
+        {
+          "text": "English",
+          "originRow": 2,
+          "rowspan": 1
+        },
+        {
+          "text": "2",
+          "originRow": 2,
+          "rowspan": 1
+        },
+        {
+          "text": "Master of Engineering",
+          "originRow": 2,
+          "rowspan": 1
+        },
+        {
+          "text": "Academic",
+          "originRow": 2,
+          "rowspan": 1
+        },
+        {
+          "text": "Yes",
+          "originRow": 2,
+          "rowspan": 1
+        }
+      ],
+      "degree": "master",
+      "degreeAward": {
+        "en": "Master of Engineering",
+        "zh": "工学硕士"
+      },
+      "durationMonths": 24,
+      "teachingLanguage": "English",
+      "supervisorAcceptanceRequired": true
+    },
+    "program-xjtu-nuclear-science-and-technology-master-english": {
+      "name": {
+        "en": "Nuclear Science and Technology",
+        "zh": "核科学与技术"
+      },
+      "programmeCode": "082700",
+      "enTableIndex": 2,
+      "cnTableIndex": 2,
+      "row": 3,
+      "enCells": [
+        "1",
+        "School of Energy and Power Engineering",
+        "Nuclear Science and Technology",
+        "082700",
+        "English",
+        "2",
+        "Master of Engineering",
+        "Academic",
+        "Yes"
+      ],
+      "cnCells": [
+        "1",
+        "能源与动力工程学院",
+        "核科学与技术",
+        "082700",
+        "英文",
+        "2",
+        "工学硕士",
+        "学术型",
+        "是"
+      ],
+      "enRowProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:3",
+        "quote": "Nuclear Science and Technology 082700 English 2 Master of Engineering Academic Yes"
+      },
+      "facultyProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:2",
+        "quote": "1 School of Energy and Power Engineering Power Engineering and Engineering Thermophysics 080700 English 2 Master of Engineering Academic Yes"
+      },
+      "inheritedCells": [
+        {
+          "text": "1",
+          "originRow": 2,
+          "rowspan": 3
+        },
+        {
+          "text": "School of Energy and Power Engineering",
+          "originRow": 2,
+          "rowspan": 3
+        },
+        {
+          "text": "Nuclear Science and Technology",
+          "originRow": 3,
+          "rowspan": 1
+        },
+        {
+          "text": "082700",
+          "originRow": 3,
+          "rowspan": 1
+        },
+        {
+          "text": "English",
+          "originRow": 3,
+          "rowspan": 1
+        },
+        {
+          "text": "2",
+          "originRow": 3,
+          "rowspan": 1
+        },
+        {
+          "text": "Master of Engineering",
+          "originRow": 3,
+          "rowspan": 1
+        },
+        {
+          "text": "Academic",
+          "originRow": 3,
+          "rowspan": 1
+        },
+        {
+          "text": "Yes",
+          "originRow": 3,
+          "rowspan": 1
+        }
+      ],
+      "degree": "master",
+      "degreeAward": {
+        "en": "Master of Engineering",
+        "zh": "工学硕士"
+      },
+      "durationMonths": 24,
+      "teachingLanguage": "English",
+      "supervisorAcceptanceRequired": true
+    },
+    "program-xjtu-environmental-science-and-engineering-master-english": {
+      "name": {
+        "en": "Environmental Science and Engineering",
+        "zh": "环境科学与工程"
+      },
+      "programmeCode": "083000",
+      "enTableIndex": 2,
+      "cnTableIndex": 2,
+      "row": 4,
+      "enCells": [
+        "1",
+        "School of Energy and Power Engineering",
+        "Environmental Science and Engineering",
+        "083000",
+        "English",
+        "2",
+        "Master of Engineering",
+        "Academic",
+        "Yes"
+      ],
+      "cnCells": [
+        "1",
+        "能源与动力工程学院",
+        "环境科学与工程",
+        "083000",
+        "英文",
+        "2",
+        "工学硕士",
+        "学术型",
+        "是"
+      ],
+      "enRowProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:4",
+        "quote": "Environmental Science and Engineering 083000 English 2 Master of Engineering Academic Yes"
+      },
+      "facultyProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:2",
+        "quote": "1 School of Energy and Power Engineering Power Engineering and Engineering Thermophysics 080700 English 2 Master of Engineering Academic Yes"
+      },
+      "inheritedCells": [
+        {
+          "text": "1",
+          "originRow": 2,
+          "rowspan": 3
+        },
+        {
+          "text": "School of Energy and Power Engineering",
+          "originRow": 2,
+          "rowspan": 3
+        },
+        {
+          "text": "Environmental Science and Engineering",
+          "originRow": 4,
+          "rowspan": 1
+        },
+        {
+          "text": "083000",
+          "originRow": 4,
+          "rowspan": 1
+        },
+        {
+          "text": "English",
+          "originRow": 4,
+          "rowspan": 1
+        },
+        {
+          "text": "2",
+          "originRow": 4,
+          "rowspan": 1
+        },
+        {
+          "text": "Master of Engineering",
+          "originRow": 4,
+          "rowspan": 1
+        },
+        {
+          "text": "Academic",
+          "originRow": 4,
+          "rowspan": 1
+        },
+        {
+          "text": "Yes",
+          "originRow": 4,
+          "rowspan": 1
+        }
+      ],
+      "degree": "master",
+      "degreeAward": {
+        "en": "Master of Engineering",
+        "zh": "工学硕士"
+      },
+      "durationMonths": 24,
+      "teachingLanguage": "English",
+      "supervisorAcceptanceRequired": true
+    },
+    "program-xjtu-electrical-engineering-master-english": {
+      "name": {
+        "en": "Electrical Engineering",
+        "zh": "电气工程"
+      },
+      "programmeCode": "080800",
+      "enTableIndex": 2,
+      "cnTableIndex": 2,
+      "row": 5,
+      "enCells": [
+        "2",
+        "School of Electrical Engineering",
+        "Electrical Engineering",
+        "080800",
+        "English",
+        "2",
+        "Master of Engineering",
+        "Academic",
+        "Yes"
+      ],
+      "cnCells": [
+        "2",
+        "电气工程学院",
+        "电气工程",
+        "080800",
+        "英文",
+        "2",
+        "工学硕士",
+        "学术型",
+        "是"
+      ],
+      "enRowProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:5",
+        "quote": "2 School of Electrical Engineering Electrical Engineering 080800 English 2 Master of Engineering Academic Yes"
+      },
+      "facultyProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:5",
+        "quote": "2 School of Electrical Engineering Electrical Engineering 080800 English 2 Master of Engineering Academic Yes"
+      },
+      "inheritedCells": [
+        {
+          "text": "2",
+          "originRow": 5,
+          "rowspan": 1
+        },
+        {
+          "text": "School of Electrical Engineering",
+          "originRow": 5,
+          "rowspan": 1
+        },
+        {
+          "text": "Electrical Engineering",
+          "originRow": 5,
+          "rowspan": 1
+        },
+        {
+          "text": "080800",
+          "originRow": 5,
+          "rowspan": 1
+        },
+        {
+          "text": "English",
+          "originRow": 5,
+          "rowspan": 1
+        },
+        {
+          "text": "2",
+          "originRow": 5,
+          "rowspan": 1
+        },
+        {
+          "text": "Master of Engineering",
+          "originRow": 5,
+          "rowspan": 1
+        },
+        {
+          "text": "Academic",
+          "originRow": 5,
+          "rowspan": 1
+        },
+        {
+          "text": "Yes",
+          "originRow": 5,
+          "rowspan": 1
+        }
+      ],
+      "degree": "master",
+      "degreeAward": {
+        "en": "Master of Engineering",
+        "zh": "工学硕士"
+      },
+      "durationMonths": 24,
+      "teachingLanguage": "English",
+      "supervisorAcceptanceRequired": true
+    },
+    "program-xjtu-mechanical-engineering-master-english": {
+      "name": {
+        "en": "Mechanical Engineering",
+        "zh": "机械工程"
+      },
+      "programmeCode": "080200",
+      "enTableIndex": 2,
+      "cnTableIndex": 2,
+      "row": 6,
+      "enCells": [
+        "3",
+        "School of Mechanical Engineering",
+        "Mechanical Engineering",
+        "080200",
+        "English",
+        "2",
+        "Master of Engineering",
+        "Academic",
+        "Yes"
+      ],
+      "cnCells": [
+        "3",
+        "机械工程学院",
+        "机械工程",
+        "080200",
+        "英文",
+        "2",
+        "工学硕士",
+        "学术型",
+        "是"
+      ],
+      "enRowProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:6",
+        "quote": "3 School of Mechanical Engineering Mechanical Engineering 080200 English 2 Master of Engineering Academic Yes"
+      },
+      "facultyProof": {
+        "sourceId": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "locator": "html-table:2:row:6",
+        "quote": "3 School of Mechanical Engineering Mechanical Engineering 080200 English 2 Master of Engineering Academic Yes"
+      },
+      "inheritedCells": [
+        {
+          "text": "3",
+          "originRow": 6,
+          "rowspan": 1
+        },
+        {
+          "text": "School of Mechanical Engineering",
+          "originRow": 6,
+          "rowspan": 1
+        },
+        {
+          "text": "Mechanical Engineering",
+          "originRow": 6,
+          "rowspan": 1
+        },
+        {
+          "text": "080200",
+          "originRow": 6,
+          "rowspan": 1
+        },
+        {
+          "text": "English",
+          "originRow": 6,
+          "rowspan": 1
+        },
+        {
+          "text": "2",
+          "originRow": 6,
+          "rowspan": 1
+        },
+        {
+          "text": "Master of Engineering",
+          "originRow": 6,
+          "rowspan": 1
+        },
+        {
+          "text": "Academic",
+          "originRow": 6,
+          "rowspan": 1
+        },
+        {
+          "text": "Yes",
+          "originRow": 6,
+          "rowspan": 1
+        }
+      ],
+      "degree": "master",
+      "degreeAward": {
+        "en": "Master of Engineering",
+        "zh": "工学硕士"
+      },
+      "durationMonths": 24,
+      "teachingLanguage": "English",
+      "supervisorAcceptanceRequired": true
+    }
+  },
+  "annualYearEvidence": {
+    "sourceId": "guide-en",
+    "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+    "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+    "locator": "normalized-utf16:21756:21839",
+    "quote": "Xi'an Jiaotong University 2027 International Student Admission Program List（Master)",
+    "quoteSha256": "a42a65eed89bba21485f0df0a18898e7829021b2277e7dc1e8b8a1e85a3cc99a"
+  },
+  "commonEvidence": {
+    "year": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "locator": "normalized-utf16:21756:21839",
+      "quote": "Xi'an Jiaotong University 2027 International Student Admission Program List（Master)",
+      "quoteSha256": "a42a65eed89bba21485f0df0a18898e7829021b2277e7dc1e8b8a1e85a3cc99a"
+    },
+    "yearCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "rawSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+      "locator": "normalized-utf16:7342:7365",
+      "quote": "西安交通大学2027年国际学生招生目录（硕士）",
+      "quoteSha256": "65a9eda6dfd9fcd49bc1145efeeef3b15fce620e5c20c20166138275dfc240a3"
+    },
+    "eligibility": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "locator": "normalized-utf16:958:1334",
+      "quote": "I. Eligibility 1. Applicants must be non-Chinese citizens with valid ordinary passports; 2. Applicants must be in good health; 3. Applicants for a Master's degree must have a Bachelor's degree and be under 35 years of age. Applicants for a Doctoral degree must have a Master's degree and be under 40 years of age; 4. Applicants may not receive any other types of scholarship. ",
+      "quoteSha256": "5b9d89adc8df0631948dd8df80cdc226c274a2d0bcb5f96ec069f771d7cca095"
+    },
+    "eligibilityCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "rawSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+      "locator": "normalized-utf16:223:327",
+      "quote": "一、申请资格 1. 非中国籍公民，身体健康； 2. 学位和年龄要求 来华攻读硕士学位者，须具有学士学位，年龄不超过35周岁； 来华攻读博士学位者，须具有硕士学位，年龄不超过40周岁。 3.非其他奖学金获得者 ",
+      "quoteSha256": "b93b756c1fe35a07065ca63e9c6311106d7a23bbb42d509898a7c843d51db27f"
+    },
+    "deadline": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "locator": "normalized-utf16:1334:1500",
+      "quote": "II. Application Time Scholarship Program: From now until 17:00 March 31, 2027 (Beijing Time); Self-funded Program: From now until 17:00 May 15, 2027 (Beijing Time) . ",
+      "quoteSha256": "4cb0832906a3a6f0ecc35ed55431eecc99b88d5675c9bd26a4c664dd04e647bf"
+    },
+    "deadlineCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "rawSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+      "locator": "normalized-utf16:327:401",
+      "quote": "二、申请时间 奖学金批次：即日起-2027年3月31日 17:00（北京时间）； 自费批次： 即日起-2027年5月15日17:00（北京时间）。 ",
+      "quoteSha256": "378fa5e9c2053a17ff8981eda7020569d2975defe89a77b29c4661cb791f9354"
+    },
+    "route": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "locator": "normalized-utf16:1826:1966",
+      "quote": "Step 2. Online application at Xi’an Jiaotong University’s International Student Application System at http://isso.xjtu.edu.cn/recruit/login ",
+      "quoteSha256": "723c490a9a3800d391c61ca7879955912b92f8e54f326253060265846e2df83f"
+    },
+    "materials": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "locator": "normalized-utf16:2524:7680",
+      "quote": "IV. Application Documents All documents must be complete, true, and correct in either Chinese or English. 1. Application Form for Chinese Government Scholarship (Students applying CSC program) Downloaded after online application in CSC system. 2. XJTU Application Form for International Students Automatically formed after online application in XJTU system. 3. Completed Original Physical Examination Record for Foreigners and Blood Test Report The physical examination must cover ALL the items listed in the form. (Download at https://sie.xjtu.edu.cn/en/2.pdf and fill in Chinese or English.) The forms with incomplete records or without the suggestion and signature of the attending physician, an official cross-edge stamp of the hospital or a sealed photograph of the applicant are invalid. Please select the appropriate time to take a physical examination as the result is valid for only 6 months. 4. Original Non-criminal Record within the validity period 5. Original Highest Diploma and Its Notarized Copies (Prospective diploma winners must submit an official certificate from their current university.) Doctoral applicants must submit original and notarized undergraduate and master’s degree certificates together. 6. Original and notarized copies of transcripts since undergraduate period The transcript should include the grades of undergraduate, Master’s (if any), Doctoral (if any) period of study up to the most recent semester. The transcript should be issued and stamped by the Academic Affairs Office, Graduate School or the relevant student administration department of the school. 7. Recommendation Letters Two original recommendation letters written by professors or associate professors. If applicants have already received provisional acceptance from professors at XJTU, please provide Xi’an Jiaotong University Recommendation Letter from a Potential Supervisor as one of the two recommendation letters. The format can be downloaded at https://sie.xjtu.edu.cn/en/Application_Guide/Data_Download.htm Some schools require Recommendation Letter from Potential Supervisor. Please check the list online and the information of professors. Master program: https://sie.xjtu.edu.cn/en/Programs/Degree_Program/Master_Program.htm Doctoral Programs: https://sie.xjtu.edu.cn/en/Programs/Degree_Program/Doctoral_Program.htm Professors information: https://sie.xjtu.edu.cn/en/ADMISSION/Know_about_Professors.htm 8. A Study Plan or Research Proposal Applicants must submit a written study plan or research proposal in English or Chinese, with a minimum of 1000 words for a Master’s degree and 1500 words for a Doctoral degree. Special Attention for PhD applicants: You are required to use the format of Xi’an Jiaotong University Study Plan for Doctoral Degree Program which can be downloaded at https://sie.xjtu.edu.cn/en/Application_Guide/Data_Download.htm 9. Original Research Achievements and Notarized Copies Applicants may submit published research papers, award certificates or other documents to prove their achievement and ability in academic research if any. 10. Certificate of Language Proficiency English-taught programs: Transcript of IELTS 6.0 and above, TOEFL 80 and above, Duolingo 110 and above. Other language proficiency certificates are also acceptable upon approval by XJTU. * Please note that priority will be given to applicants for the Business Administration program with an IELTS score of 7.0 or above. Chinese-taught programs: Report of a valid HSK4 180 points and above. Other language proficiency certificates are also acceptable upon approval by XJTU. Those who have taken Chinese-taught courses to obtain a Chinese university degree are exempt from the HSK certificate. * Please note that applicants for the International Chinese Language Education program at the School of Foreign Languages must have the report of a valid HSK5 180 points and above. To apply for the English-taught professional degree of Clinical Medicine master's program (including Stomatological Medicine), you must also provide a valid Chinese proficiency certificate in addition to the English proficiency certificate mentioned above. The university may decide to add a one-year Chinese language study prior to the academic study according to the applicant's Chinese language proficiency. Only students who pass HSK4 could enter major study. 11. Photocopy of a Valid Ordinary Passport. The passport should be valid later than March 2028. If you do not meet the requirements, please renew your passport in time. Passport information cannot be modified after admission until registration has been completed. NOTES: a) The materials uploaded in the system should be clear, true and valid. It is recommended that the applicant use professional equipment to scan the relevant documents to be submitted, and the consequences caused by unclear or unidentifiable materials shall be taken by the applicant. b) Incomplete applications will be rejected. c) No application documents mentioned above will be returned whether the application is successful or not. d) Notarized Chinese/English versions are required for documents in languages other than the two. ",
+      "quoteSha256": "76f39b4b870bcc5bb253b740ca85eba2c0e4847c8da3c12c4bbc316493245302"
+    },
+    "materialsCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "rawSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+      "locator": "normalized-utf16:802:2425",
+      "quote": "四、申请材料 在我校申请系统中，申请人必须如实用中文或英文填写并在线提交以下申请材料： 1.《中国政府奖学金申请表》（申请CSC学生需提供） 在CSC申请系统中完成在线申请后下载。 2.《西安交通大学外国留学生入学申请表》 在西安交通大学留学生申请系统中在线填写完成即可。 3.《外国人体格检查记录》和血液检查报告单原件 申请人应严格按照《外国人体格检查记录》中要求的项目进行检查，用英文或中文填写。（此表由中国卫生检疫部门统一印制，可点击http://sie.xjtu.edu.cn/en/2.pdf 下载）缺项、未贴有本人照片或照片上未盖骑缝章、无医师和医院签字盖章的《外国人体格检查记录》无效。鉴于检查结果有效期为6个月，请申请人据此确定本人进行体检的时间。 4.有效期内的无犯罪记录证明原件 5.最高学历学位证明原件及公证件（应届毕业生须提交学校官方出具的预毕业证明）。申请博士研究生者，需同时上传本科阶段和硕士研究生阶段的学位证明原件及公证件。 6.自本科阶段起的学习成绩单原件及公证件 成绩单扫描件应包括本科、硕士（如有）、博士（如有）学习阶段，直至最近一学期的成绩。成绩单应由就读学校教务处、研究生院或有关学生管理部门开具并盖章。 7.推荐信 两封，由教授或副教授出具。如果申请人已与我校导师建立意向，请申请人联系该导师出具《西安交通大学留学生导师推荐函》作为两封推荐信之一。 《导师推荐函》模板下载：https://sie.xjtu.edu.cn/en/Application_Guide/Data_Download.htm 部分学院要求申请者需提前与意向导师联系，获得《导师推荐函》。需要《导师推荐函》的学院名单及导师信息请查看： 博士招生目录：http://sie.xjtu.edu.cn/zsxm/xlxm/bs.htm 硕士招生目录：https://sie.xjtu.edu.cn/zsxm/xlxm/ss.htm 导师信息：https://sie.xjtu.edu.cn/yxxx/dsxx.htm 8.来华学习或研究计划 申请人须提交用中文或英文书写的来华学习或研究计划。（硕士不少于1000字，博士不少于1500字） 博士申请者需使用西安交通大学指定模板《西安交通大学博士学位研究生 学习计划》，模板下载：https://sie.xjtu.edu.cn/en/Application_Guide/Data_Download.htm 9.研究成果 已发表的论文、获奖证书、发明专利等证明自己学业成就和研究能力的资料。 10.语言水平证明 申请英语授课项目，需提交英语水平证明。雅思6.0分或托福80分或多邻国110分及以上，或其他经我校认定的同等英语水平证明。* 请注意，申请“工商管理学”专业者，雅思达到7.0及以上者优先考虑。 申请汉语授课项目，需提交有效的汉语水平证明。HSK4级180分以上或其他经我校认定的同等汉语水平证明。曾以中文为教学语言获得中国高校学位的，可免于提供HSK证书。* 请注意，申请外国语学院的“国际中文教育”专业的学生，汉语水平必须达到HSK5级180分以上。 申请英语授课临床医学类（含口腔医学）硕士专业学位项目，除提交上述英语水平证明外，还需提供符合上述要求的汉语水平证明。 学校可根据申请者汉语水平，增加一年汉语学习，汉语学习结束后须达到HSK4级水平，不达标者不可进入专业学习。 11.有效普通护照复印件 护照有效期应晚于2028年3月。如不符合要求，请及时换发新护照。一经录取，直至入学报到完成前，护照信息不可更改。 注： a.通过系统上传的材料需清晰、真实、有效。建议申请人使用专业设备扫描需提交的有关文件，因材料不清晰或无法识别造成的后果由申请人承担。 b.材料不符合要求，不予受理； c.无论录取与否，以上材料恕不退还； d.中英文以外文本须提交经公证的中文或英文译本。 ",
+      "quoteSha256": "a7e6de3500a65d116d4303d7d2fe1581d81f5a2f7852a287afd10bcb80c78b2b"
+    },
+    "language": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "locator": "normalized-utf16:5597:6874",
+      "quote": "10. Certificate of Language Proficiency English-taught programs: Transcript of IELTS 6.0 and above, TOEFL 80 and above, Duolingo 110 and above. Other language proficiency certificates are also acceptable upon approval by XJTU. * Please note that priority will be given to applicants for the Business Administration program with an IELTS score of 7.0 or above. Chinese-taught programs: Report of a valid HSK4 180 points and above. Other language proficiency certificates are also acceptable upon approval by XJTU. Those who have taken Chinese-taught courses to obtain a Chinese university degree are exempt from the HSK certificate. * Please note that applicants for the International Chinese Language Education program at the School of Foreign Languages must have the report of a valid HSK5 180 points and above. To apply for the English-taught professional degree of Clinical Medicine master's program (including Stomatological Medicine), you must also provide a valid Chinese proficiency certificate in addition to the English proficiency certificate mentioned above. The university may decide to add a one-year Chinese language study prior to the academic study according to the applicant's Chinese language proficiency. Only students who pass HSK4 could enter major study. ",
+      "quoteSha256": "393bca310efef669824a843c3f3d28a7b00472ddb4722c559c720300e7aebd5a"
+    },
+    "languageCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "rawSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+      "locator": "normalized-utf16:1875:2225",
+      "quote": "10.语言水平证明 申请英语授课项目，需提交英语水平证明。雅思6.0分或托福80分或多邻国110分及以上，或其他经我校认定的同等英语水平证明。* 请注意，申请“工商管理学”专业者，雅思达到7.0及以上者优先考虑。 申请汉语授课项目，需提交有效的汉语水平证明。HSK4级180分以上或其他经我校认定的同等汉语水平证明。曾以中文为教学语言获得中国高校学位的，可免于提供HSK证书。* 请注意，申请外国语学院的“国际中文教育”专业的学生，汉语水平必须达到HSK5级180分以上。 申请英语授课临床医学类（含口腔医学）硕士专业学位项目，除提交上述英语水平证明外，还需提供符合上述要求的汉语水平证明。 学校可根据申请者汉语水平，增加一年汉语学习，汉语学习结束后须达到HSK4级水平，不达标者不可进入专业学习。 ",
+      "quoteSha256": "8855df6e173245fb3615482f5bbe079b8bf23cc361156d14256d03b0be502ab1"
+    },
+    "fees": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "locator": "normalized-utf16:7680:8723",
+      "quote": "V. Fee Standard 1. Tuition fee (RMB/Year) Teaching Language Science & Engineering Business\\Economics\\Humanities Arts\\Medical Dentistry Pharmacy Master's Program English-taught 39,000 30,000 50,000 50,000 30,000 Chinese-taught 34,000 30,000 50,000 N/A N/A Doctoral Program English-taught 44,000 34,000 50,000 50,000 30,000 Chinese-taught 40,000 34,000 50,000 N/A N/A 2. Accommodation fee Accommodation for international students is divided into three campuses: Xingqing, Yanta, and iHarbour, Accommodation will be uniformly arranged by the university according to the current policy annually. Students are required to book rooms online. The accommodation fee varies from RMB 8,000 to 19,000 every year. For more information: http://sie.xjtu.edu.cn/ 3. Application fee Self-sponsored Program: RMB 500 Scholarship Program: RMB 800 * The application fee is non-refundable regardless of admission results. 4. Registration Fee: RMB 400 (Payment shall be made together with the tuition fee.) Refund Policy: https://sie.xjtu.edu.cn/info/1021/5554.htm ",
+      "quoteSha256": "fa0025e49441303f1f49bb2296dbad2d1f1301226c3da7e538905c5583536f67"
+    },
+    "feesCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "rawSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+      "locator": "normalized-utf16:2425:2890",
+      "quote": "五、费用标准 1.学费（人民币/学年） 授课语言 理工类 人文经管类 艺术、医学类 口腔类 药学类 硕士研究生 英文授课 39,000 30,000 50,000 50,000 30,000 中文授课 34,000 30,000 50,000 无此项目 无此项目 博士研究生 英文授课 44,000 34,000 50,000 50,000 30,000 中文授课 40,000 34,000 50,000 无此项目 无此项目 2. 住宿费 留学生住宿分兴庆、雁塔、创新港三个校区。校区由学校根据当年度学校政 策统一安排。学生需在线自主预订房间。费用一般在每学年8000-19000人民币之间。具体请查看国际教育学院官网：http://sie.xjtu.edu.cn/ 3. 报名费 申请奖学金项目：800元人民币 申请自费项目：500元人民币 注：无论录取与否，报名费不予退还。 4. 注册费 400元人民币（缴纳学费时一并支付） 退费政策：https://sie.xjtu.edu.cn/info/1021/5554.htm ",
+      "quoteSha256": "6d0738d985d7ef3590b42598454aa115ee4e7c4d6bf8e59d28d548d67ca6de68"
+    },
+    "registration": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+      "rawSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+      "locator": "normalized-utf16:11068:11398",
+      "quote": "5. Admitted applicants should register at XJTU strictly in accordance with the date, and place prescribed by the School of International Education , usually in September, and the specific time depends on the notice of that year. Failure to do so within two weeks will result in the admission and scholarship status being invalid. ",
+      "quoteSha256": "f3d2b8158cf5cede6242ddf0dddd02ea58deb24a232ad03766619b58a8287290"
+    },
+    "registrationCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+      "rawSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+      "locator": "normalized-utf16:3572:3663",
+      "quote": "5. 被录取的学生须严格按照国际教育学院规定的时间、地点和要求来校报到，一般为9月初，具体以当年度通知为准。超过规定入学时间两周以上未办理入学注册手续者，入学和奖学金资格将被取消。 ",
+      "quoteSha256": "a4e167cf5db0b33c0b2131025b73107d38f582c13c028b97a9215d13b99508fe"
+    },
+    "portal": {
+      "sourceId": "portal",
+      "sourceUrl": "https://isso.xjtu.edu.cn/recruit/login",
+      "rawSha256": "046e571b5612b668039bbc4d295bd3c45a3e67a2dba1a3c12245b07effdb0cba",
+      "locator": "normalized-utf16:0:69",
+      "quote": "国际学生申请与招生系统 Application & Admission System for International Student ",
+      "quoteSha256": "f581412835a64e88a27fc6e17664e042d403eb4e3e83c3ee5af404d7edef7d6f"
+    }
+  },
+  "scopeDecisions": {
+    "academicYearLiteral": "2027",
+    "yearNotInferredFromDeadline": true,
+    "sourceYearScope": "Both distinct master table headers explicitly say 2027; doctorate table is excluded.",
+    "applicationTrack": "Self-funded Program",
+    "teachingLanguage": "English",
+    "opensOn": null,
+    "openingDateStatus": "unknown; from now is not an exact calendar date",
+    "closesOn": "2027-05-15",
+    "closingTime": "17:00 Beijing time",
+    "intake": "September in the annual guide; exact registration date unknown",
+    "ageBoundaryStatus": "manual confirmation only; CN not over35 vs EN under35; neither placed in known eligibility",
+    "ageAutomaticMatching": false,
+    "studyPlanCountStatus": "CN1000字 vs EN1000words preserved literally in notes, no conversion",
+    "officialSourcePriority": "not established",
+    "fullTimeStatus": "not established",
+    "englishExemptionStatus": "none established in these annual guides for selected engineering programmes",
+    "medicalHskRulesImported": false,
+    "undergraduateCscaImported": false,
+    "scholarshipDeadlineOrFeeImported": false,
+    "portalTLSStatus": "HTTP200 standard TLS at exact official host, public bilingual login/sign-up components present; no authentication or submission"
+  },
+  "preservation": {
+    "programsAdded": 5,
+    "cyclesAdded": 5,
+    "sourcesAdded": 3,
+    "fieldLeavesAdded": 70,
+    "existingRecordsMutated": 0
+  },
+  "held": [
+    {
+      "scope": "definitive age boundary and uniform study-plan count",
+      "reason": "Same-scope bilingual source difference; retained as manual confirmation in notes, excluded from deterministic eligibility."
+    }
+  ],
+  "privateArchive": {
+    "status": "readback_verified",
+    "archiveReceiptPath": "quality/maintenance/batches/xjtu-master-five-reviewed-20261126/archive-receipt.json",
+    "archiveReceiptSha256": "cd1fc457835d6c6a9d7195db6748b8cfc298938769bf1122b0daa5ee351b505b",
+    "objects": [
+      {
+        "id": "guide-en",
+        "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "finalUrl": "https://sie.xjtu.edu.cn/en/info/1224/3281.htm",
+        "key": "official/xjtu-master-five-reviewed-20261126/d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704.html",
+        "originalSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "readbackSha256": "d65c5696015fe3158291f3ce30e9ed8d0221706a344a0d07575a080032a66704",
+        "originalBytes": 544509,
+        "readbackBytes": 544509,
+        "readbackAt": "2026-11-26T13:06:39.9476025Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "guide-cn",
+        "sourceUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+        "finalUrl": "https://sie.xjtu.edu.cn/info/1224/5682.htm",
+        "key": "official/xjtu-master-five-reviewed-20261126/a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed.html",
+        "originalSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+        "readbackSha256": "a5c7012e890ebc7b25cdb4947b714960e85f3b07044fdfdeab98cd1c93cb8bed",
+        "originalBytes": 520798,
+        "readbackBytes": 520798,
+        "readbackAt": "2026-11-26T13:06:46.7214870Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "portal",
+        "sourceUrl": "https://isso.xjtu.edu.cn/recruit/login",
+        "finalUrl": "https://isso.xjtu.edu.cn/recruit/login",
+        "key": "official/xjtu-master-five-reviewed-20261126/046e571b5612b668039bbc4d295bd3c45a3e67a2dba1a3c12245b07effdb0cba.html",
+        "originalSha256": "046e571b5612b668039bbc4d295bd3c45a3e67a2dba1a3c12245b07effdb0cba",
+        "readbackSha256": "046e571b5612b668039bbc4d295bd3c45a3e67a2dba1a3c12245b07effdb0cba",
+        "originalBytes": 50712,
+        "readbackBytes": 50712,
+        "readbackAt": "2026-11-26T13:06:52.2161747Z",
+        "status": "readback_verified"
+      }
+    ]
+  }
+}
