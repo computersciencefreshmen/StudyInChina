@@ -1,0 +1,651 @@
+{
+  "format": "studyinchina.official-multischool-review",
+  "version": 1,
+  "evaluatedAt": "2026-11-26T14:13:08.243Z",
+  "reviewer": "codex-ai-independent-official-source-review:cupb-five-reviewed-20261126",
+  "reviewMethod": "Codex AI/tool independent original bilingual2027 HTML, native EnglishPDF text and visually transcribed Chinese officialPDF, with independent e2e_core_views source peer; not Henry personal sign-off; no external model calls",
+  "baseline": {
+    "gitCommit": "aac186b1969204cbe499a32dd8138b1fb5950a5b",
+    "coverage": {
+      "universityId": "uni-china-university-of-petroleum-beijing",
+      "rawProgramCount": 5,
+      "directoryProgramCount": 1,
+      "currentProgramCount": 0,
+      "minimumProgramCount": 5,
+      "gap": 5,
+      "coverageBand": "zero",
+      "countedProgramIds": [],
+      "directoryScholarshipCount": 0,
+      "currentScholarshipCount": 0,
+      "reviewAfter": null
+    },
+    "liveProbePerformed": false,
+    "preservedExistingSchoolRecordHashes": {
+      "program-cupb-iclt-one-semester-spring-2027": "b0b4a4332c397d46ea682dd952a6b285d02198ff4d9bf95464a735c37dc5ff6e",
+      "prog-gap-wave5-depth-cupb-chinese-language-one-year-2026": "716dfdeee6cdd4de41c4be4d8ceb8ce1c5b403f7614500aaa8ebe5d6958d832e",
+      "prog-gap-wave5-depth-cupb-computer-science-bachelor-english": "28498f2a2192e822d0f87d250859b5e57ffd578fbc0b847b5b3d97563859430d",
+      "prog-gap-wave5-depth-cupb-petroleum-engineering-bachelor-english": "8fa30df2095ea4789aaf62e5ff68ec6b5dc09b2a8a7abcb0136d7950cd1a021d",
+      "program-4d6ec83c4a843b21dd50c6de": "30120c4ddb94d2b373210b2523f601fb72e7295c1a6c238d9d240b4d994c56bd"
+    },
+    "collectionLengths": {
+      "sources": 3114,
+      "cities": 65,
+      "universities": 305,
+      "programs": 2447,
+      "admissionCycles": 1800,
+      "scholarships": 435
+    }
+  },
+  "inputCatalogSha256": "d8cb69750f3422b81d41e6e2684829e729ae1d1d1e7da63348302ac6375d8b69",
+  "outputCatalogSha256": "328626616f9640a275deb8feb07efbeabcf1535a1de629b1b11aa2e6a13c166e",
+  "sources": [
+    {
+      "id": "guide-en",
+      "url": "https://www.cup.edu.cn/overseas/admission/xm/yjssq/index.htm",
+      "finalUrl": "https://www.cup.edu.cn/overseas/admission/xm/yjssq/index.htm",
+      "file": "raw/guide-en.html",
+      "bytes": 24792,
+      "sha256": "df3d6dc8c4015b63979b85356f47918f6ea3891ffac65df1ad4fa5d81ec6673f",
+      "fetchedAt": "2026-11-26T13:55:02.471Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original entity preserved",
+      "objectKey": "official/cupb-five-reviewed-20261126/df3d6dc8c4015b63979b85356f47918f6ea3891ffac65df1ad4fa5d81ec6673f.html",
+      "title": "Master's & PhD Admission-China University of Petroleum (Beijing) International Student Admissions Website",
+      "outcome": "captured"
+    },
+    {
+      "id": "guide-cn",
+      "url": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+      "finalUrl": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+      "file": "raw/guide-cn.html",
+      "bytes": 22775,
+      "sha256": "f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e",
+      "fetchedAt": "2026-11-26T13:56:51.957Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original entity preserved",
+      "objectKey": "official/cupb-five-reviewed-20261126/f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e.html",
+      "title": "研究生申请-中国石油大学（北京）来华留学生招生网",
+      "outcome": "captured"
+    },
+    {
+      "id": "catalogue-index-en",
+      "url": "https://www.cup.edu.cn/overseas/admission/xm/yjsxm/index.htm",
+      "finalUrl": "https://www.cup.edu.cn/overseas/admission/xm/yjsxm/index.htm",
+      "file": "raw/catalogue-index-en.html",
+      "bytes": 17644,
+      "sha256": "474ff61155600c10ca7f4a83ce03d79ed68c86b35e41bc168214f019ffebd4b1",
+      "fetchedAt": "2026-11-26T13:57:32.020Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original entity preserved",
+      "objectKey": "official/cupb-five-reviewed-20261126/474ff61155600c10ca7f4a83ce03d79ed68c86b35e41bc168214f019ffebd4b1.html",
+      "title": "Master's & PhD Program-China University of Petroleum (Beijing) International Student Admissions Website",
+      "outcome": "captured"
+    },
+    {
+      "id": "downloads-cn",
+      "url": "https://www.cup.edu.cn/overseas/admission/cn/wdyxz/index.htm",
+      "finalUrl": "https://www.cup.edu.cn/overseas/admission/cn/wdyxz/index.htm",
+      "file": "raw/downloads-cn.html",
+      "bytes": 28926,
+      "sha256": "3f4dbabb7dce62afbadd71574f2d6b4012ce144283bce0b9787157693b586cc8",
+      "fetchedAt": "2026-11-26T13:57:33.399Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original entity preserved",
+      "objectKey": "official/cupb-five-reviewed-20261126/3f4dbabb7dce62afbadd71574f2d6b4012ce144283bce0b9787157693b586cc8.html",
+      "title": "问答与下载-中国石油大学（北京）来华留学生招生网",
+      "outcome": "captured"
+    },
+    {
+      "id": "majors-en",
+      "url": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+      "finalUrl": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+      "file": "raw/majors-current-en.pdf",
+      "bytes": 619742,
+      "sha256": "877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807",
+      "fetchedAt": "2026-11-26T13:58:03.606Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original entity preserved",
+      "objectKey": "official/cupb-five-reviewed-20261126/877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807.pdf",
+      "title": "Msc&Ph.D-Programs-2027, actual current English index anchor",
+      "outcome": "captured"
+    },
+    {
+      "id": "brochure-cn",
+      "url": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+      "finalUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+      "file": "raw/master-brochure-cn.pdf",
+      "bytes": 2446142,
+      "sha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+      "fetchedAt": "2026-11-26T13:58:34.415Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original entity preserved",
+      "objectKey": "official/cupb-five-reviewed-20261126/f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76.pdf",
+      "title": "2027国际学生硕士项目招生简章",
+      "outcome": "captured"
+    },
+    {
+      "id": "portal",
+      "url": "https://admission.cup.edu.cn/",
+      "finalUrl": "https://admission.cup.edu.cn/",
+      "file": "raw/portal.html",
+      "bytes": 25469,
+      "sha256": "248dc6f792db45e740f72746c5eeb5290ea616472f2de73e3d388637bf136a16",
+      "fetchedAt": "2026-11-26T13:55:31.397Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original entity preserved",
+      "objectKey": "official/cupb-five-reviewed-20261126/248dc6f792db45e740f72746c5eeb5290ea616472f2de73e3d388637bf136a16.html",
+      "title": "中国石油大学（北京）",
+      "outcome": "captured"
+    }
+  ],
+  "programmeEvidence": {
+    "program-cupb-geology-master-chinese": {
+      "name": {
+        "en": "Geology",
+        "zh": "地质学"
+      },
+      "nativeEnglishPdfPage": 1,
+      "nativeEnglishSection": "Master Programs (Taught In Chinese)",
+      "row": 1,
+      "enRowProof": {
+        "sourceId": "majors-en",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+        "rawSha256": "877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807",
+        "locator": "normalized-utf16:0:103",
+        "quote": "Master Programs (Taught In Chinese) Programme Name Duration(Year) Tuition Fee(RMB/Year) Geology 3 29000",
+        "quoteSha256": "fe4345074634f2c115d2f6e059a0a6ee070934b26e934ec54f24b5ca2134a8c2"
+      },
+      "cnNameAndMergedLanguageDurationProof": {
+        "sourceId": "brochure-cn",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+        "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+        "locator": "pdf-page:2:native-render:manual-transcription:master-chinese-row-1",
+        "quote": "地质学 中文 3",
+        "quoteSha256": "c51b19834299770877295a0a57254cb42db106a4d1678191ccac762253816502",
+        "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+        "renderedPageFiles": [
+          {
+            "file": "brochure-cn-2.png",
+            "sha256": "53e290879ae2d90cb6d009ee09a846bd6cd906e88e786b37d08faa0ce7696d10"
+          }
+        ]
+      },
+      "nativeChinesePdfPage": 2,
+      "catalogueScope": "CN brochure p2 first Chinese master rows, shared Chinese/3-year cells; EN current catalogue p1 left upper master section. Doctorate and English-master sections excluded.",
+      "durationMonths": 36,
+      "tuitionCny": 29000,
+      "tuitionPeriod": "academic-year",
+      "teachingLanguage": "Chinese",
+      "degree": "master"
+    },
+    "program-cupb-geological-resources-and-geological-engineering-master-chinese": {
+      "name": {
+        "en": "Geological Resources and Geological Engineering",
+        "zh": "地质资源与地质工程"
+      },
+      "nativeEnglishPdfPage": 1,
+      "nativeEnglishSection": "Master Programs (Taught In Chinese)",
+      "row": 2,
+      "enRowProof": {
+        "sourceId": "majors-en",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+        "rawSha256": "877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807",
+        "locator": "normalized-utf16:0:159",
+        "quote": "Master Programs (Taught In Chinese) Programme Name Duration(Year) Tuition Fee(RMB/Year) Geology 3 29000 Geological Resources and Geological Engineering 3 29000",
+        "quoteSha256": "27fedda03e6e36f8f1ede3f099309fda0e213d9dc188f2f7fe27009931a744d9"
+      },
+      "cnNameAndMergedLanguageDurationProof": {
+        "sourceId": "brochure-cn",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+        "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+        "locator": "pdf-page:2:native-render:manual-transcription:master-chinese-row-2",
+        "quote": "地质资源与地质工程 中文 3",
+        "quoteSha256": "186038f4637c7c6e5fbde7238f1976f15bf6597024e334e75946feed79ffef72",
+        "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+        "renderedPageFiles": [
+          {
+            "file": "brochure-cn-2.png",
+            "sha256": "53e290879ae2d90cb6d009ee09a846bd6cd906e88e786b37d08faa0ce7696d10"
+          }
+        ]
+      },
+      "nativeChinesePdfPage": 2,
+      "catalogueScope": "CN brochure p2 first Chinese master rows, shared Chinese/3-year cells; EN current catalogue p1 left upper master section. Doctorate and English-master sections excluded.",
+      "durationMonths": 36,
+      "tuitionCny": 29000,
+      "tuitionPeriod": "academic-year",
+      "teachingLanguage": "Chinese",
+      "degree": "master"
+    },
+    "program-cupb-petroleum-and-natural-gas-engineering-master-chinese": {
+      "name": {
+        "en": "Petroleum and Natural Gas Engineering",
+        "zh": "石油与天然气工程"
+      },
+      "nativeEnglishPdfPage": 1,
+      "nativeEnglishSection": "Master Programs (Taught In Chinese)",
+      "row": 3,
+      "enRowProof": {
+        "sourceId": "majors-en",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+        "rawSha256": "877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807",
+        "locator": "normalized-utf16:0:205",
+        "quote": "Master Programs (Taught In Chinese) Programme Name Duration(Year) Tuition Fee(RMB/Year) Geology 3 29000 Geological Resources and Geological Engineering 3 29000 Petroleum and Natural Gas Engineering 3 29000",
+        "quoteSha256": "8cb4848be187ea6abbcda6be6b8873abe2c329f6f282f5548996552289bd7f58"
+      },
+      "cnNameAndMergedLanguageDurationProof": {
+        "sourceId": "brochure-cn",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+        "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+        "locator": "pdf-page:2:native-render:manual-transcription:master-chinese-row-3",
+        "quote": "石油与天然气工程 中文 3",
+        "quoteSha256": "c57f5ac23cad4f1082fd39fbb64b0080c0e703a1d43c912bdcdb98c75dff6460",
+        "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+        "renderedPageFiles": [
+          {
+            "file": "brochure-cn-2.png",
+            "sha256": "53e290879ae2d90cb6d009ee09a846bd6cd906e88e786b37d08faa0ce7696d10"
+          }
+        ]
+      },
+      "nativeChinesePdfPage": 2,
+      "catalogueScope": "CN brochure p2 first Chinese master rows, shared Chinese/3-year cells; EN current catalogue p1 left upper master section. Doctorate and English-master sections excluded.",
+      "durationMonths": 36,
+      "tuitionCny": 29000,
+      "tuitionPeriod": "academic-year",
+      "teachingLanguage": "Chinese",
+      "degree": "master"
+    },
+    "program-cupb-chemical-engineering-and-technology-master-chinese": {
+      "name": {
+        "en": "Chemical Engineering and Technology",
+        "zh": "化学工程与技术"
+      },
+      "nativeEnglishPdfPage": 1,
+      "nativeEnglishSection": "Master Programs (Taught In Chinese)",
+      "row": 4,
+      "enRowProof": {
+        "sourceId": "majors-en",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+        "rawSha256": "877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807",
+        "locator": "normalized-utf16:0:249",
+        "quote": "Master Programs (Taught In Chinese) Programme Name Duration(Year) Tuition Fee(RMB/Year) Geology 3 29000 Geological Resources and Geological Engineering 3 29000 Petroleum and Natural Gas Engineering 3 29000 Chemical Engineering and Technology 3 29000",
+        "quoteSha256": "bc8b30e92c1b1b0f488ecf5810decd94c78e855fe9d53a5b21ba49813a1122ea"
+      },
+      "cnNameAndMergedLanguageDurationProof": {
+        "sourceId": "brochure-cn",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+        "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+        "locator": "pdf-page:2:native-render:manual-transcription:master-chinese-row-4",
+        "quote": "化学工程与技术 中文 3",
+        "quoteSha256": "8f5dc0efb23c76ff3ec333ce32ebec6bd203e4ad3730c409d52de909a3a4a079",
+        "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+        "renderedPageFiles": [
+          {
+            "file": "brochure-cn-2.png",
+            "sha256": "53e290879ae2d90cb6d009ee09a846bd6cd906e88e786b37d08faa0ce7696d10"
+          }
+        ]
+      },
+      "nativeChinesePdfPage": 2,
+      "catalogueScope": "CN brochure p2 first Chinese master rows, shared Chinese/3-year cells; EN current catalogue p1 left upper master section. Doctorate and English-master sections excluded.",
+      "durationMonths": 36,
+      "tuitionCny": 29000,
+      "tuitionPeriod": "academic-year",
+      "teachingLanguage": "Chinese",
+      "degree": "master"
+    },
+    "program-cupb-environmental-science-and-engineering-master-chinese": {
+      "name": {
+        "en": "Environmental Science and Engineering",
+        "zh": "环境科学与工程"
+      },
+      "nativeEnglishPdfPage": 1,
+      "nativeEnglishSection": "Master Programs (Taught In Chinese)",
+      "row": 5,
+      "enRowProof": {
+        "sourceId": "majors-en",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+        "rawSha256": "877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807",
+        "locator": "normalized-utf16:0:295",
+        "quote": "Master Programs (Taught In Chinese) Programme Name Duration(Year) Tuition Fee(RMB/Year) Geology 3 29000 Geological Resources and Geological Engineering 3 29000 Petroleum and Natural Gas Engineering 3 29000 Chemical Engineering and Technology 3 29000 Environmental Science and Engineering 3 29000",
+        "quoteSha256": "df170a14411eb85aa6ab9a5002ce110d732d2a39c033e3eadf4432e401c298fe"
+      },
+      "cnNameAndMergedLanguageDurationProof": {
+        "sourceId": "brochure-cn",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+        "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+        "locator": "pdf-page:2:native-render:manual-transcription:master-chinese-row-5",
+        "quote": "环境科学与工程 中文 3",
+        "quoteSha256": "c0c3c6d695dd09dae5e6be265a475f426dae8c4df617c09419efb34ea1b9004e",
+        "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+        "renderedPageFiles": [
+          {
+            "file": "brochure-cn-2.png",
+            "sha256": "53e290879ae2d90cb6d009ee09a846bd6cd906e88e786b37d08faa0ce7696d10"
+          }
+        ]
+      },
+      "nativeChinesePdfPage": 2,
+      "catalogueScope": "CN brochure p2 first Chinese master rows, shared Chinese/3-year cells; EN current catalogue p1 left upper master section. Doctorate and English-master sections excluded.",
+      "durationMonths": 36,
+      "tuitionCny": 29000,
+      "tuitionPeriod": "academic-year",
+      "teachingLanguage": "Chinese",
+      "degree": "master"
+    }
+  },
+  "annualYearEvidence": {
+    "sourceId": "brochure-cn",
+    "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+    "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+    "locator": "pdf-page:1:native-render:manual-transcription:annual-title",
+    "quote": "2027 国际学生硕士项目 招生简章",
+    "quoteSha256": "6279bdd3713489c88d83f840a30969fa8ccefb36f8fa9de669ae4610ec7dbb3a",
+    "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+    "renderedPageFiles": [
+      {
+        "file": "brochure-cn-1.png",
+        "sha256": "7df9d7c7310232e49daa4c1a1eac5c262dc9cfd9415f3fee71b4479ea1480115"
+      }
+    ]
+  },
+  "commonEvidence": {
+    "year": {
+      "sourceId": "brochure-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+      "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+      "locator": "pdf-page:1:native-render:manual-transcription:annual-title",
+      "quote": "2027 国际学生硕士项目 招生简章",
+      "quoteSha256": "6279bdd3713489c88d83f840a30969fa8ccefb36f8fa9de669ae4610ec7dbb3a",
+      "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+      "renderedPageFiles": [
+        {
+          "file": "brochure-cn-1.png",
+          "sha256": "7df9d7c7310232e49daa4c1a1eac5c262dc9cfd9415f3fee71b4479ea1480115"
+        }
+      ]
+    },
+    "yearGuide": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+      "rawSha256": "f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e",
+      "locator": "normalized-utf16:286:297",
+      "quote": "2027-28 申请季",
+      "quoteSha256": "fd52e8664a228d72cbd7d78585f72cb9ff73ae150254984555e4a4acc655021c"
+    },
+    "eligibility": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+      "rawSha256": "f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e",
+      "locator": "normalized-utf16:396:2348",
+      "quote": "申请资格 硕士申请者 非中国籍、身心健康、无犯罪记录 学士学位 · 年龄 ≤35 周岁 英授：IELTS（学术类）6.5 / 托福 iBT 80 / PTE Academic 65 · 中授：HSK5 ≥180 —— 用英语完整学习过学历项目并获毕业（学位）证书，或英语为母语／所在国官方语言者可免交英语成绩 学业要求：前置学历平均成绩不低于 70%（或 GPA 不低于 3.0/5.0）——未达标者可提交 GRE（语文＋数学 ≥300，写作 ≥3.0）或 GMAT（≥600，仅限经济管理类硕士）等效替代，学业成绩与测试成绩满足其一即可申请；GRE、GMAT 成绩亦可作为学术能力补充证明提交。 跨专业申请者须提供导师接收函 博士申请者 非中国籍、身心健康、无犯罪记录 硕士学位 · 年龄 ≤40 周岁（按项目要求） 英授：IELTS（学术类）6.5 / 托福 iBT 80 / PTE Academic 65 · 中授：HSK5 ≥180 —— 用英语完整学习过学历项目并获毕业（学位）证书，或英语为母语／所在国官方语言者可免交英语成绩 学业要求：前置学历平均成绩不低于 70%（或 GPA 不低于 3.0/5.0）——未达标者可提交 GRE（语文＋数学 ≥300，写作 ≥3.0）或 GMAT（≥600，仅限经济管理类硕士）等效替代，满足其一即可申请；GRE、GMAT 成绩亦可作为学术能力补充证明提交。 必须提供导师接收函与研究计划 「成绩—测试互补」机制 —— 满足其一，即具备申请资格 通道 A · 前置学业成绩 平均分 ≥70%，或 GPA ≥3.0/5.0 通道 B · 标准化测试等效替代 本科：SAT ≥1200 或 GED 四科均 ≥165 · 硕博：GRE（语文＋数学 ≥300，写作 ≥3.0）或 GMAT ≥600（仅限经济管理类硕士） 具备申请资格 本科申请人仍须参加 CSCA 考试。同时持有 CSCA 成绩与 SAT ≥1200 或 GED（四科均 ≥165）成绩者，在奖学金评审中同等条件下优先。 申请时间线 ROUND · MAIN 申请截止May 30, 2027 2027 年 9 月入学 · 仅线上提交 进行中 REVIEW 学院审核与面试2027 年 3–6 月 各学院审核资格并组织面试 RESULT 发放录取2027 年 5–7 月 分批发放通知书与 JW201/ JW202 申请步骤 1注册线上注册账号 2提交申请信息＋材料 3缴费在线支付 ¥400/$70 4审核学院审核＋面试 5录取通知书＋JW201/JW202 6报到签证、抵达、注册 申请材料9 项通用材料＋研究生附加项 1 · 护照首页及签证页护照有效期应晚于入学时间；请提供所有来华签证页和中国出入境记录的扫描件。已在境内的人员另需提交住宿登记证明。 2 · 最高学位/学历证书最高学历或学位证书的原件以及经公证的中文/英文翻译件，尚未毕业的学生须提交由当前就读学校出具的预毕业证明。 3 · 学习成绩单（自本科阶段起）成绩单扫描件应包括本科、硕士（如有）、博士（如有）学习阶段，直至最近一学期的成绩。成绩单应由就读学校教务处、研究生院或有关学生管理部门开具并盖章。可提供中/英文成绩单，如为英语以外语种，需另提供英文翻译件并公证 4 · 语言成绩：HSK 或雅思 / 托福 iBT / PTE中文授课：HSK五级180分及以上；英文授课：雅思（学术类）6.5、托福iBT 80、PTE 65。成绩须在申请截止日前两年内取得；不认可托福 Essentials 与多邻国英语测试。 5 · 外国人体格检查表《外国人体格检查表》须用中文或英文填写（原件由申请人保留）。该表格由中国检疫部门设计，可从派遣机构获取。体检必须涵盖《外国人体格检查表》中列出的所有项目。记录不完整或缺主治医师签字、医院公章或申请人照片未加盖医院公章的，均视为无效。体检结果须为2026年10月15日后出具。体检结果有效期仅为6个月。 6 · 学习计划（研究计划）需使用我校模板，内容1000字以上；博士申请须由中国境内导师签字。 7 · 两封推荐信提交两名教授或副教授的推荐信，内容应重点包含对申请人来华学习目标要求，中方院校或者中方导师与国外导师的合作情况或者校际交流情况，以及对学生综合能力，未来发展的评价，只可用中文或英文书写； 8 · 导师接收函博士必须；硕士跨专业申请者亦须提供。 9 · 无犯罪记录证明申请人须提交由所在地公安机关出具的有效期内的无犯罪记录证明，通常应为提交申请之日前 6 个月以内的证明文件。 10 · 其他材料申请所需的其他补充材料及具体要求，请查阅下载专区中对应项目的招生简章。 ",
+      "quoteSha256": "f8c28ce3e548bfa8b93a5aad36bf04182765fd6521da113820e28bfc8598aa3e"
+    },
+    "eligibilityEN": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/xm/yjssq/index.htm",
+      "rawSha256": "df3d6dc8c4015b63979b85356f47918f6ea3891ffac65df1ad4fa5d81ec6673f",
+      "locator": "normalized-utf16:1236:2030",
+      "quote": "Master's applicants Non-Chinese citizen, in good health, no criminal record Bachelor's degree · age ≤35 EN-taught: IELTS (Academic) 6.5 / TOEFL iBT 80 / PTE Academic 65 · CN-taught: HSK5 ≥180 — exemption applies if the previous degree was completed entirely in English (with certificate) or English is the native / official language Academic record: average ≥70% (or GPA ≥3.0/5.0) in the previous degree — applicants below this threshold may substitute a GRE (Verbal + Quantitative ≥300, AW ≥3.0) or GMAT (≥600, economics and management master's only) result; either the academic record or the test result qualifies an application. GRE / GMAT results may also be submitted as supplementary evidence of academic ability. Supervisor acceptance letter required if applying to a non-matching major ",
+      "quoteSha256": "8eb31dc54705c13b593023e3d67d8a5c378d668502942039d960ac7e408b91dd"
+    },
+    "deadline": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/xm/yjssq/index.htm",
+      "rawSha256": "df3d6dc8c4015b63979b85356f47918f6ea3891ffac65df1ad4fa5d81ec6673f",
+      "locator": "normalized-utf16:3359:3416",
+      "quote": "Application deadlineMay 30, 2027 For September 2027 entry",
+      "quoteSha256": "5023691222cbc61ffb36d04eefdb2d35b7a05dc61464db03c4918d2faeb77918"
+    },
+    "deadlineCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+      "rawSha256": "f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e",
+      "locator": "normalized-utf16:1282:1311",
+      "quote": "申请截止May 30, 2027 2027 年 9 月入学",
+      "quoteSha256": "3bcc039be3d37949c0a5fc7f9e9478b78230b0449c34f186db2c0f7f5801c893"
+    },
+    "recurringWindow": {
+      "sourceId": "brochure-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+      "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+      "locator": "pdf-page:3:native-render:manual-transcription:self-funded-recurring-window",
+      "quote": "中国石油大学（北京）奖学金及自费生申请注意事项 （1）请在中国石油大学（北京）申请网站（https://admission.cup.edu.cn）提交申请。（2）通过申请系统提交所有申请材料，不接收纸质邮寄报名和邮件报名。※一个电子邮件地址只能注册一个申请账号。每年10月25-次年5月30日",
+      "quoteSha256": "d6eb598b64fe86cf6d7bec29fc2098f5b4bf70b38e65909ea6bcef6f98f492c5",
+      "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+      "renderedPageFiles": [
+        {
+          "file": "brochure-cn-3.png",
+          "sha256": "43b81c9cd7caf0344d28f385f67974f3d10fa6b5f70d3059c5a9dfe7fa5fe3fc"
+        }
+      ]
+    },
+    "language": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+      "rawSha256": "f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e",
+      "locator": "normalized-utf16:1771:1895",
+      "quote": "4 · 语言成绩：HSK 或雅思 / 托福 iBT / PTE中文授课：HSK五级180分及以上；英文授课：雅思（学术类）6.5、托福iBT 80、PTE 65。成绩须在申请截止日前两年内取得；不认可托福 Essentials 与多邻国英语测试。 ",
+      "quoteSha256": "e0e0dd5a9fec088a6426ccce5e3a32f09200ee8782aafd636f0aaf05efe47eb7"
+    },
+    "tuition": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+      "rawSha256": "f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e",
+      "locator": "normalized-utf16:2348:2423",
+      "quote": "费用与奖学金速览 硕士 · 中授¥29,000 / 年 硕士 · 英授¥31,000 / 年 博士¥36,000 / 年 报名费¥400 / $70 ",
+      "quoteSha256": "f99fc9aafdd1739f9caa471e189c41af30f64158a4dd14e51d9f4c1da7dd159d"
+    },
+    "portal": {
+      "sourceId": "portal",
+      "sourceUrl": "https://admission.cup.edu.cn/",
+      "rawSha256": "248dc6f792db45e740f72746c5eeb5290ea616472f2de73e3d388637bf136a16",
+      "locator": "normalized-utf16:44:135",
+      "quote": "Online Application USER MANUAL Accommodation Reservation Pick-up Service Tracking Progress ",
+      "quoteSha256": "b4d64bc94199037d630525c8decc8b52cba117542d39640f8cf476f6f4f8c517"
+    },
+    "materials": {
+      "sourceId": "brochure-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+      "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+      "locator": "pdf-page:3-4:native-render:manual-transcription:complete-materials-and-credit-proof",
+      "quote": "中国石油大学（北京）奖学金及自费生申请注意事项：（1）请在中国石油大学（北京）申请网站（https://admission.cup.edu.cn）提交申请。（2）通过申请系统提交所有申请材料，不接收纸质邮寄报名和邮件报名。申请材料：1 护照首页，护照有效期应晚于入学时间。2 护照签证页，所有来华签证页和中国出入境记录页的扫描件。3 本科毕业证原件和中/英文翻译件，如果你还没有毕业，请出具“预毕业证明”。4 本科成绩单原件和中/英文翻译件，参照申请人基本报名要求。5 语言水平证明，参照申请人基本报名要求。6 无犯罪记录证明，由当地主管部门出具。7 两封推荐信，提交两名教授或副教授的推荐信，内容应重点包含对申请人来华学习目标要求、中方院校或者中方导师与国外导师的合作情况或者校际交流情况，以及对学生综合能力、未来发展的评价，只可用中文或者英文书写。8 导师接收函，建议提交；跨专业申请者须提交。9 外国人体格检查表，须用中文或英文填写，并附全部化验和X光检查报告；体检结果须为2026年10月15日后出具。10 学习或研究计划，学习计划（研究计划）需使用我校模板，内容1000字以上。11 GRE、GMAT等成绩，可选，作为学术能力补充证明。12 资信证明，根据备注要求提供。资信证明：资金要求按其所申请项目对应的每年所需基本费用（学费、住宿、生活费、保险等）进行计算。要求其本人账户存款存入相应金额至少1个月以上，如果他人账户，需提供申请人与账户所有人关系证明，经当地公证后到当地中国驻外使领馆进行认证后同时提交。资信证明总额度要求：中文授课项目53000元，英文授课项目55000元。非中英文文本的申请材料须附经公证的中文或英文译文；申请人对所提交材料的真实性负责，提供虚假材料的，取消申请或者录取资格。",
+      "quoteSha256": "da2b0e8ac53e8ecc54b7c323dfb25615073b13702d6ce1f09fb60743e1845be7",
+      "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+      "renderedPageFiles": [
+        {
+          "file": "brochure-cn-3.png",
+          "sha256": "43b81c9cd7caf0344d28f385f67974f3d10fa6b5f70d3059c5a9dfe7fa5fe3fc"
+        },
+        {
+          "file": "brochure-cn-4.png",
+          "sha256": "a3a05a57a3239d265977e61e6c1b1f4b812901f443a12489d05692e89ec2aae4"
+        }
+      ]
+    },
+    "statementCN": {
+      "sourceId": "brochure-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+      "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+      "locator": "pdf-page:4:native-render:manual-transcription:statement-count",
+      "quote": "学习计划（研究计划）需使用我校模板，内容1000字以上",
+      "quoteSha256": "a9d10ad90d1c6d53663785053291336e6230ef8f7dda31c00fef4017504b360e",
+      "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+      "renderedPageFiles": [
+        {
+          "file": "brochure-cn-4.png",
+          "sha256": "a3a05a57a3239d265977e61e6c1b1f4b812901f443a12489d05692e89ec2aae4"
+        }
+      ]
+    },
+    "ageCN": {
+      "sourceId": "brochure-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+      "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+      "locator": "pdf-page:2:native-render:manual-transcription:age-literal",
+      "quote": "申请人年龄需要在35周岁以下。",
+      "quoteSha256": "e68c43250286aef02da62f33bd82b365fc6ac56368ac53a3419e3d31c977531d",
+      "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+      "renderedPageFiles": [
+        {
+          "file": "brochure-cn-2.png",
+          "sha256": "53e290879ae2d90cb6d009ee09a846bd6cd906e88e786b37d08faa0ce7696d10"
+        }
+      ]
+    },
+    "creditCN": {
+      "sourceId": "brochure-cn",
+      "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+      "rawSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+      "locator": "pdf-page:4:native-render:manual-transcription:credit-proof",
+      "quote": "要求其本人账户存款存入相应金额至少1个月以上，如果他人账户，需提供申请人与账户所有人关系证明，经当地公证后到当地中国驻外使领馆进行认证后同时提交。资信证明总额度要求：中文授课项目53000元，英文授课项目55000元。",
+      "quoteSha256": "2679ab24e5b46369f2494ccfc75aee4fd7c61e308910ef50200f3514a04fae11",
+      "verificationMethod": "Codex visual transcription from native Poppler-rendered official PDF; independently checked by e2e_core_views, not OCR/model output",
+      "renderedPageFiles": [
+        {
+          "file": "brochure-cn-4.png",
+          "sha256": "a3a05a57a3239d265977e61e6c1b1f4b812901f443a12489d05692e89ec2aae4"
+        }
+      ]
+    }
+  },
+  "scopeDecisions": {
+    "academicYearLiteral": "2027",
+    "originalYearLabels": [
+      "2027 on master-brochure cover",
+      "2027-28 on Chinese/English HTML guide"
+    ],
+    "yearNotInferredFromDeadline": true,
+    "applicationTrack": "Self-funded Chinese master admission",
+    "teachingLanguage": "Chinese",
+    "opensOn": null,
+    "openingDateStatus": "generic annual October25 rule retained without inferring a dated opening",
+    "closesOn": "2027-05-30",
+    "intake": "September2027 explicitly in the ordinary MAIN timeline, not borrowed from CSC",
+    "durationMonths": 36,
+    "ageBoundaryStatus": "HTML≤35 versus brochure35周岁以下 retained for manual confirmation only",
+    "ageAutomaticMatching": false,
+    "studyPlanCountStatus": "CN1000字以上 versus ENatleast1000words retained without conversion",
+    "financialProof": "ChineseCNY53000; at least1month deposit; other-person account relationship/local notarization/Chinese consular authentication",
+    "hsk": "HSK5≥180 obtained within2years beforedeadline; no English waiver transferred to HSK",
+    "supervisor": "cross-major master required, otherwise recommended",
+    "gmatApplies": false,
+    "greAlternative": "Verbal+Quantitative≥300 AND AW≥3",
+    "undergraduateCscaImported": false,
+    "fullTimeStatus": "unknown",
+    "namedSpecificMasterAward": "unknown beyond master degree",
+    "portalTLSStatus": "HTTP200 standard TLS, public login/signup/tracking controls; no authentication/captcha/post-login workflow"
+  },
+  "preservation": {
+    "programsAdded": 5,
+    "cyclesAdded": 5,
+    "sourcesAdded": 7,
+    "fieldLeavesAdded": 65,
+    "existingRecordsMutated": 0
+  },
+  "held": [
+    {
+      "scope": "definitive age boundary and unified study-plan count",
+      "reason": "Official source boundary/unit differences preserved in notes and excluded from deterministic eligibility; no priority invented."
+    }
+  ],
+  "privateArchive": {
+    "status": "readback_verified",
+    "archiveReceiptPath": "quality/maintenance/batches/cupb-five-reviewed-20261126/archive-receipt.json",
+    "archiveReceiptSha256": "2ea086e701b7156fe72ecea6204708e311f4cb4c202fde7cba69753eecd5db4d",
+    "objects": [
+      {
+        "id": "guide-en",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/xm/yjssq/index.htm",
+        "finalUrl": "https://www.cup.edu.cn/overseas/admission/xm/yjssq/index.htm",
+        "key": "official/cupb-five-reviewed-20261126/df3d6dc8c4015b63979b85356f47918f6ea3891ffac65df1ad4fa5d81ec6673f.html",
+        "originalSha256": "df3d6dc8c4015b63979b85356f47918f6ea3891ffac65df1ad4fa5d81ec6673f",
+        "readbackSha256": "df3d6dc8c4015b63979b85356f47918f6ea3891ffac65df1ad4fa5d81ec6673f",
+        "originalBytes": 24792,
+        "readbackBytes": 24792,
+        "readbackAt": "2026-11-26T14:12:16.4932919Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "guide-cn",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+        "finalUrl": "https://www.cup.edu.cn/overseas/admission/cn/xm/yjssq/index.htm",
+        "key": "official/cupb-five-reviewed-20261126/f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e.html",
+        "originalSha256": "f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e",
+        "readbackSha256": "f95781ed9e22b59b3c5673721f1e3c12bfa79b21007a1192199bef4228de7a5e",
+        "originalBytes": 22775,
+        "readbackBytes": 22775,
+        "readbackAt": "2026-11-26T14:12:22.1585202Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "catalogue-index-en",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/xm/yjsxm/index.htm",
+        "finalUrl": "https://www.cup.edu.cn/overseas/admission/xm/yjsxm/index.htm",
+        "key": "official/cupb-five-reviewed-20261126/474ff61155600c10ca7f4a83ce03d79ed68c86b35e41bc168214f019ffebd4b1.html",
+        "originalSha256": "474ff61155600c10ca7f4a83ce03d79ed68c86b35e41bc168214f019ffebd4b1",
+        "readbackSha256": "474ff61155600c10ca7f4a83ce03d79ed68c86b35e41bc168214f019ffebd4b1",
+        "originalBytes": 17644,
+        "readbackBytes": 17644,
+        "readbackAt": "2026-11-26T14:12:27.9350077Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "downloads-cn",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/wdyxz/index.htm",
+        "finalUrl": "https://www.cup.edu.cn/overseas/admission/cn/wdyxz/index.htm",
+        "key": "official/cupb-five-reviewed-20261126/3f4dbabb7dce62afbadd71574f2d6b4012ce144283bce0b9787157693b586cc8.html",
+        "originalSha256": "3f4dbabb7dce62afbadd71574f2d6b4012ce144283bce0b9787157693b586cc8",
+        "readbackSha256": "3f4dbabb7dce62afbadd71574f2d6b4012ce144283bce0b9787157693b586cc8",
+        "originalBytes": 28926,
+        "readbackBytes": 28926,
+        "readbackAt": "2026-11-26T14:12:34.7854662Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "majors-en",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+        "finalUrl": "https://www.cup.edu.cn/overseas/admission/docs//2026-10/c2b0dac8aa714cc4879893079cdb5839.pdf",
+        "key": "official/cupb-five-reviewed-20261126/877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807.pdf",
+        "originalSha256": "877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807",
+        "readbackSha256": "877d47d6b6df605ca6c6f58d87e65b6434a1856962cfc09feb1d99a6ef2d0807",
+        "originalBytes": 619742,
+        "readbackBytes": 619742,
+        "readbackAt": "2026-11-26T14:12:42.1808245Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "brochure-cn",
+        "sourceUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+        "finalUrl": "https://www.cup.edu.cn/overseas/admission/cn/docs//2026-11/2c2e6a0361b04efd9ca449a69c835265.pdf",
+        "key": "official/cupb-five-reviewed-20261126/f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76.pdf",
+        "originalSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+        "readbackSha256": "f19b7f07f60e1b2fd6a8b6f4d0b80ba5870fd11919d4d3afd0c272610cc7ff76",
+        "originalBytes": 2446142,
+        "readbackBytes": 2446142,
+        "readbackAt": "2026-11-26T14:12:48.9194418Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "portal",
+        "sourceUrl": "https://admission.cup.edu.cn/",
+        "finalUrl": "https://admission.cup.edu.cn/",
+        "key": "official/cupb-five-reviewed-20261126/248dc6f792db45e740f72746c5eeb5290ea616472f2de73e3d388637bf136a16.html",
+        "originalSha256": "248dc6f792db45e740f72746c5eeb5290ea616472f2de73e3d388637bf136a16",
+        "readbackSha256": "248dc6f792db45e740f72746c5eeb5290ea616472f2de73e3d388637bf136a16",
+        "originalBytes": 25469,
+        "readbackBytes": 25469,
+        "readbackAt": "2026-11-26T14:12:54.5825344Z",
+        "status": "readback_verified"
+      }
+    ]
+  }
+}
