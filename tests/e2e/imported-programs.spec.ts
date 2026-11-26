@@ -11,7 +11,13 @@ test('one Programs catalogue shows collected records, canonical details and sour
   const result = await response.json()
   expect(result.data.length).toBeGreaterThan(0)
   expect(result.data.length).toBeLessThanOrEqual(24)
-  const captured = result.data.find((item: { status: string }) => item.status === 'source-collected')
+  // Deadline sorting keeps collected entries after reviewed application dates.
+  // The default first page varies as verified school coverage grows.
+  const lastPage = await request.get(`/api/v1/programs?view=all&sort=deadline&page=${result.meta.pageCount}&revision=${encodeURIComponent(result.meta.revision)}`)
+  expect(lastPage.ok()).toBe(true)
+  const collected = await lastPage.json()
+  expect(collected.meta.page).toBe(result.meta.pageCount)
+  const captured = collected.data.find((item: { status: string }) => item.status === 'source-collected')
   expect(captured).toBeTruthy()
   expect(captured.official).toBe(false)
   expect(captured.admissionYear).toBeNull()
