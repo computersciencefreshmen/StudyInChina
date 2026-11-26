@@ -5,7 +5,6 @@ import { gunzipSync } from 'node:zlib'
 import { describe, expect, it } from 'vitest'
 import universities from '../../content/data/universities.json'
 import programs from '../../content/data/programs.json'
-import scholarships from '../../content/data/scholarships.json'
 import ledger from '../../content/data/identity-acceptances.json'
 import originalScope from '../../content/maintenance/scope-272.v1.json'
 import registry from '../../content/targets/national-university-registry.json'
@@ -17,9 +16,10 @@ import { selectDiscoveryData, type DiscoveryRecord } from '../../src/lib/data/di
 import type { Program } from '../../src/lib/data/types'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { identityAcceptanceLedgerSchema } from '../../src/lib/data/identity-acceptance'
-import { loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
+import { reviewedCatalogueAt, reviewedDataAt } from './reviewed-release-snapshot'
 
 const hash=(value:string|Uint8Array)=>createHash('sha256').update(value).digest('hex')
+const initialProgrammeRelease = '743bdc92a80b1fb9dfb9601927e056acc31c43f3'
 describe('23 new official school identities',()=>{
   it('keeps newly discovered schools outside the original cohort and requires programmes before publication',()=>{
     expect(receipt.addedSchoolCount).toBe(23)
@@ -27,8 +27,9 @@ describe('23 new official school identities',()=>{
     const addedIds=new Set(receipt.identities.map(proof=>proof.recordId))
     expect(addedIds.size).toBe(23)
     for(const id of addedIds){expect(originalIds.has(id)).toBe(false);expect(universities.some(school=>school.id===id)).toBe(true)}
-    const bundle=loadMaintenanceBundle(process.cwd())
-    const directory=selectDiscoveryData(bundle,'2026-10-27',identityAcceptanceLedgerSchema.parse(ledger).entries,[])
+    const bundle=reviewedCatalogueAt(initialProgrammeRelease)
+    const initialLedger=identityAcceptanceLedgerSchema.parse(reviewedDataAt(initialProgrammeRelease,'identity-acceptances'))
+    const directory=selectDiscoveryData(bundle,'2026-10-27',initialLedger.entries,[])
     expect(directory.universities.filter(school=>addedIds.has(school.id))).toHaveLength(23)
     for(const id of addedIds){
       const visible=directory.programs.filter(program=>program.universityId===id)
@@ -43,7 +44,7 @@ describe('23 new official school identities',()=>{
       }
     }
     expect(selectPublishedData(bundle,'2026-10-27').programs.some(program=>addedIds.has(program.universityId))).toBe(false)
-    expect(scholarships.some(award=>award.universityIds.some(id=>addedIds.has(id)))).toBe(false)
+    expect(bundle.scholarships.some(award=>award.universityIds.some(id=>addedIds.has(id)))).toBe(false)
   })
   it('binds every school to the exact ministry name, city, identity and archived official bytes',()=>{
     const{sha256,...content}=receipt
