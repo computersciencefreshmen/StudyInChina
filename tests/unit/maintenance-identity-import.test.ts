@@ -122,6 +122,35 @@ describe('fixed school scope and reviewed identity importing', () => {
     expect(result.bundle.programs.slice(0, bundle.programs.length)).toEqual(bundle.programs)
   })
 
+  it.each([
+    { en: 'Enrollment Information for 2024 MOFCOM Master of Audit Program', zh: '2024级审计硕士项目(南京审计大学)英文' },
+    { en: 'Bachelor Program (Taught in English)', zh: '河海大学全英文留学本科生培养方案' },
+  ])('holds a source heading even when the proposal carries a positive review: %j', async name => {
+    const { run } = await fixture({ name })
+    const result = await run()
+    expect(result.receipt.held).toEqual([{ proposalId: 'proposal-001', reason: 'announcement_or_catalogue_heading_is_not_program' }])
+    expect(result.bundle).toEqual(bundle)
+  })
+
+  it('holds a degree-label variant for explicit review without creating or merging a record', async () => {
+    const baseName = 'Bachelor of Evidence Bound Computing for International Students'
+    const first = await fixture({ degree: 'bachelor', name: { en: baseName } })
+    const accepted = await first.run()
+    expect(accepted.receipt.accepted).toHaveLength(1)
+    const school = bundle.universities.find(record => record.id === first.proposal.universityId)!
+    const variant = await fixture({ degree: 'bachelor', name: { en: school.name.en + ' ' + baseName } })
+    delete variant.proposal.fields.officialProgramCode
+    variant.batch.inputCatalogSha256 = accepted.receipt.outputCatalogSha256
+    await reseal(variant.batch, true)
+    const result = await importIdentityCandidates({
+      bundle: accepted.bundle, scope, batch: variant.batch, acceptedAt, receiptPath: 'receipts/variants.json',
+      acceptances: accepted.acceptances, bindings: accepted.bindings,
+      readArtifact: async key => variant.artifacts.get(key)!,
+    })
+    expect(result.receipt.held).toEqual([{ proposalId: 'proposal-001', reason: 'possible_existing_program_title_variant_requires_review' }])
+    expect(result.bundle).toEqual(accepted.bundle)
+  })
+
   it('accepts an existing stale identity without renewing raw audit dates or dynamic facts', async () => {
     const { run, existing } = await fixture({ existing: true })
     const result = await run()
