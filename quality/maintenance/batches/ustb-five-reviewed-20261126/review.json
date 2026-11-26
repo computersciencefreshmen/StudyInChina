@@ -1,0 +1,583 @@
+{
+  "format": "studyinchina.official-multischool-review",
+  "version": 1,
+  "evaluatedAt": "2026-11-26T13:40:28.819Z",
+  "reviewer": "codex-ai-independent-official-source-review:ustb-five-reviewed-20261126",
+  "reviewMethod": "Codex AI/tool independent original bilingual 2027 HTML guide, concrete catalogue paragraphs and public HTTPS portal review; not Henry personal sign-off; no external model calls",
+  "baseline": {
+    "gitCommit": "6c12d085e88b3db7da69450698da2b0d6215edc6",
+    "coverage": {
+      "universityId": "uni-university-of-science-and-technology-beijing",
+      "rawProgramCount": 4,
+      "directoryProgramCount": 1,
+      "currentProgramCount": 0,
+      "minimumProgramCount": 5,
+      "gap": 5,
+      "coverageBand": "zero",
+      "countedProgramIds": [],
+      "directoryScholarshipCount": 0,
+      "currentScholarshipCount": 0,
+      "reviewAfter": null
+    },
+    "liveProbePerformed": false,
+    "preservedExistingSchoolRecordHashes": {
+      "program-university-of-science-and-technology-beijing-computer-science-and-techno": "d12a9b7c85f21d10678534b946400bd3dc7b2356c13f30effd03063128a35639",
+      "program-university-of-science-and-technology-beijing-environmental-engineering-b": "15a18e5a90e9e504c600c59a6073daebbcbfe1347568682c7e09b8293cc65707",
+      "program-university-of-science-and-technology-beijing-materials-science-and-engin": "2240b84646c6be2bbafc17e9aaff2831faf3d2292911965c6d0f622b626beaf5",
+      "program-3005c11823218f5c89a7d1cc": "8a0e7f702a1bdf0ef8f172267b3bb249a74dd4f1832c082401501881efcff806"
+    },
+    "collectionLengths": {
+      "sources": 3111,
+      "cities": 65,
+      "universities": 305,
+      "programs": 2442,
+      "admissionCycles": 1795,
+      "scholarships": 435
+    }
+  },
+  "inputCatalogSha256": "06db9c2395b8dbe0e09204e2b1339eb3fdc049222d067c993ef2bf37ce7c7f21",
+  "outputCatalogSha256": "1324bf9837b22cc281784cbd0c4f56ea2e314a4048f903da41a8dcadfd17caac",
+  "sources": [
+    {
+      "id": "guide-cn",
+      "url": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "finalUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "file": "raw/guide-cn-confirmed.html",
+      "bytes": 34553,
+      "sha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "fetchedAt": "2026-11-26T13:35:38.109Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original HTML entity preserved",
+      "objectKey": "official/ustb-five-reviewed-20261126/7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950.html",
+      "title": "北京科技大学国际学生中心",
+      "outcome": "captured"
+    },
+    {
+      "id": "guide-en",
+      "url": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+      "finalUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+      "file": "raw/guide-en-confirmed.html",
+      "bytes": 50862,
+      "sha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+      "fetchedAt": "2026-11-26T13:35:38.332Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original HTML entity preserved",
+      "objectKey": "official/ustb-five-reviewed-20261126/e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31.html",
+      "title": "Beijing University of science and technology International Student Center",
+      "outcome": "captured"
+    },
+    {
+      "id": "catalogue-cn",
+      "url": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+      "finalUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+      "file": "raw/catalogue-cn.html",
+      "bytes": 32745,
+      "sha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+      "fetchedAt": "2026-11-26T13:34:22.936Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original HTML entity preserved",
+      "objectKey": "official/ustb-five-reviewed-20261126/578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75.html",
+      "title": "北京科技大学国际学生中心",
+      "outcome": "captured"
+    },
+    {
+      "id": "prospectus-en",
+      "url": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+      "finalUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+      "file": "raw/prospectus-en.html",
+      "bytes": 89565,
+      "sha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+      "fetchedAt": "2026-11-26T13:34:23.661Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original HTML entity preserved",
+      "objectKey": "official/ustb-five-reviewed-20261126/5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811.html",
+      "title": "Beijing University of science and technology International Student Center",
+      "outcome": "captured"
+    },
+    {
+      "id": "portal",
+      "url": "https://onlineapply.ustb.edu.cn/",
+      "finalUrl": "https://onlineapply.ustb.edu.cn/",
+      "file": "raw/portal-confirmed.html",
+      "bytes": 5654,
+      "sha256": "bc47fe94ac11ab7937430a7e814bbf831d2cf63cb66c2753b4e3fb6fcb824c6d",
+      "fetchedAt": "2026-11-26T13:35:11.573Z",
+      "httpStatus": 200,
+      "standardTLS": true,
+      "bodyRepresentation": "curl --compressed decoded response entity body; original HTML entity preserved",
+      "objectKey": "official/ustb-five-reviewed-20261126/bc47fe94ac11ab7937430a7e814bbf831d2cf63cb66c2753b4e3fb6fcb824c6d.html",
+      "title": "北京科技大学",
+      "outcome": "captured"
+    }
+  ],
+  "programmeEvidence": {
+    "program-ustb-safety-science-and-engineering-master-chinese": {
+      "name": {
+        "en": "Safety Science and Engineering",
+        "zh": "安全科学与工程"
+      },
+      "catalogueTableIndex": 0,
+      "row": 1,
+      "majorParagraph": 2,
+      "faculty": "资源与安全工程学院",
+      "literal": "安全科学与工程（中文、英文授课项目）",
+      "nameProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "normalized-utf16:852:870",
+        "quote": "安全科学与工程（中文、英文授课项目）",
+        "quoteSha256": "27256c8ec1668af0c09d2ecbb54d32050e06da84c8965adb9e6ccc322002e917"
+      },
+      "englishNameProof": {
+        "sourceId": "prospectus-en",
+        "sourceUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+        "rawSha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+        "locator": "normalized-utf16:3911:4217",
+        "quote": "Master: Metallurgical Engineering, Safety Science and Engineering, Environmental Science and Engineering, Information and Communications Engineering, Enterprise Management, Management Science and Engineering, International Trade, Public Administration (Educational Economics and Administration), Sociology ",
+        "quoteSha256": "d3e9e20acac22ac16cdde2cdd5d21dc75c899dde7b74bdc49b0c181e71cf9108"
+      },
+      "rowProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "html-table:0:row:1",
+        "quote": "资源与安全工程学院 采矿工程地质学安全科学与工程（中文、英文授课项目）矿物加工工程力学（工学）"
+      },
+      "catalogueNameDecomposition": "The exact Chinese degree name is followed by an explicit bilingual-teaching annotation. The annotation establishes the offered language routes; only the Chinese route is selected here.",
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationMonths": 24,
+      "durationMonthsMax": 36,
+      "durationScope": "General 2027 master guide, not an individually assigned exact duration",
+      "specialProgrammeConditionsFound": false
+    },
+    "program-ustb-environmental-science-and-engineering-master-chinese": {
+      "name": {
+        "en": "Environmental Science and Engineering",
+        "zh": "环境科学与工程"
+      },
+      "catalogueTableIndex": 0,
+      "row": 3,
+      "majorParagraph": 0,
+      "faculty": "能源与环境工程学院",
+      "literal": "环境科学与工程（中文、英文授课项目）",
+      "nameProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "normalized-utf16:919:937",
+        "quote": "环境科学与工程（中文、英文授课项目）",
+        "quoteSha256": "a611a8eab7c382c021c8b9aaea985d1402432d39c39c273ed2df2025c9ea3ab2"
+      },
+      "englishNameProof": {
+        "sourceId": "prospectus-en",
+        "sourceUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+        "rawSha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+        "locator": "normalized-utf16:3911:4217",
+        "quote": "Master: Metallurgical Engineering, Safety Science and Engineering, Environmental Science and Engineering, Information and Communications Engineering, Enterprise Management, Management Science and Engineering, International Trade, Public Administration (Educational Economics and Administration), Sociology ",
+        "quoteSha256": "d3e9e20acac22ac16cdde2cdd5d21dc75c899dde7b74bdc49b0c181e71cf9108"
+      },
+      "rowProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "html-table:0:row:3",
+        "quote": "能源与环境工程学院 环境科学与工程（中文、英文授课项目）动力工程及工程热物理"
+      },
+      "catalogueNameDecomposition": "The exact Chinese degree name is followed by an explicit bilingual-teaching annotation. The annotation establishes the offered language routes; only the Chinese route is selected here.",
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationMonths": 24,
+      "durationMonthsMax": 36,
+      "durationScope": "General 2027 master guide, not an individually assigned exact duration",
+      "specialProgrammeConditionsFound": false
+    },
+    "program-ustb-metallurgical-engineering-master-chinese": {
+      "name": {
+        "en": "Metallurgical Engineering",
+        "zh": "冶金工程"
+      },
+      "catalogueTableIndex": 0,
+      "row": 4,
+      "majorParagraph": 0,
+      "faculty": "冶金与生态工程学院",
+      "literal": "冶金工程（中文、英文授课项目）",
+      "nameProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "normalized-utf16:958:973",
+        "quote": "冶金工程（中文、英文授课项目）",
+        "quoteSha256": "4e78857e00018971c9249151fbb2d6f72e57511b5b04e8af2f3f443f23a6b2c8"
+      },
+      "englishNameProof": {
+        "sourceId": "prospectus-en",
+        "sourceUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+        "rawSha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+        "locator": "normalized-utf16:3911:4217",
+        "quote": "Master: Metallurgical Engineering, Safety Science and Engineering, Environmental Science and Engineering, Information and Communications Engineering, Enterprise Management, Management Science and Engineering, International Trade, Public Administration (Educational Economics and Administration), Sociology ",
+        "quoteSha256": "d3e9e20acac22ac16cdde2cdd5d21dc75c899dde7b74bdc49b0c181e71cf9108"
+      },
+      "rowProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "html-table:0:row:4",
+        "quote": "冶金与生态工程学院 冶金工程（中文、英文授课项目）储能化学与物理"
+      },
+      "catalogueNameDecomposition": "The exact Chinese degree name is followed by an explicit bilingual-teaching annotation. The annotation establishes the offered language routes; only the Chinese route is selected here.",
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationMonths": 24,
+      "durationMonthsMax": 36,
+      "durationScope": "General 2027 master guide, not an individually assigned exact duration",
+      "specialProgrammeConditionsFound": false
+    },
+    "program-ustb-information-and-communications-engineering-master-chinese": {
+      "name": {
+        "en": "Information and Communications Engineering",
+        "zh": "信息与通信工程"
+      },
+      "catalogueTableIndex": 0,
+      "row": 9,
+      "majorParagraph": 0,
+      "faculty": "计算机与通信工程学院",
+      "literal": "信息与通信工程（中文、英文授课项目）",
+      "nameProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "normalized-utf16:1067:1085",
+        "quote": "信息与通信工程（中文、英文授课项目）",
+        "quoteSha256": "8447d518f0fd3a2b58080a3361c1dbc0f36f889bdc96f453587f90d1d455f54a"
+      },
+      "englishNameProof": {
+        "sourceId": "prospectus-en",
+        "sourceUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+        "rawSha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+        "locator": "normalized-utf16:3911:4217",
+        "quote": "Master: Metallurgical Engineering, Safety Science and Engineering, Environmental Science and Engineering, Information and Communications Engineering, Enterprise Management, Management Science and Engineering, International Trade, Public Administration (Educational Economics and Administration), Sociology ",
+        "quoteSha256": "d3e9e20acac22ac16cdde2cdd5d21dc75c899dde7b74bdc49b0c181e71cf9108"
+      },
+      "rowProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "html-table:0:row:9",
+        "quote": "计算机与通信工程学院 信息与通信工程（中文、英文授课项目）计算机科学与技术"
+      },
+      "catalogueNameDecomposition": "The exact Chinese degree name is followed by an explicit bilingual-teaching annotation. The annotation establishes the offered language routes; only the Chinese route is selected here.",
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationMonths": 24,
+      "durationMonthsMax": 36,
+      "durationScope": "General 2027 master guide, not an individually assigned exact duration",
+      "specialProgrammeConditionsFound": false
+    },
+    "program-ustb-management-science-and-engineering-master-chinese": {
+      "name": {
+        "en": "Management Science and Engineering",
+        "zh": "管理科学与工程"
+      },
+      "catalogueTableIndex": 0,
+      "row": 12,
+      "majorParagraph": 4,
+      "faculty": "经济管理学院",
+      "literal": "管理科学与工程（中文、英文授课项目）",
+      "nameProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "normalized-utf16:1191:1209",
+        "quote": "管理科学与工程（中文、英文授课项目）",
+        "quoteSha256": "11a55ae96905ad69d2364f8b57f5970baec158a63d2f9b88c1fb2b318f264902"
+      },
+      "englishNameProof": {
+        "sourceId": "prospectus-en",
+        "sourceUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+        "rawSha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+        "locator": "normalized-utf16:3911:4217",
+        "quote": "Master: Metallurgical Engineering, Safety Science and Engineering, Environmental Science and Engineering, Information and Communications Engineering, Enterprise Management, Management Science and Engineering, International Trade, Public Administration (Educational Economics and Administration), Sociology ",
+        "quoteSha256": "d3e9e20acac22ac16cdde2cdd5d21dc75c899dde7b74bdc49b0c181e71cf9108"
+      },
+      "rowProof": {
+        "sourceId": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "locator": "html-table:0:row:12",
+        "quote": "经济管理学院 企业管理（中文、英文授课项目）应用经济学国际贸易学（英文授课项目）技术经济及管理管理科学与工程（中文、英文授课项目）会计学"
+      },
+      "catalogueNameDecomposition": "The exact Chinese degree name is followed by an explicit bilingual-teaching annotation. The annotation establishes the offered language routes; only the Chinese route is selected here.",
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationMonths": 24,
+      "durationMonthsMax": 36,
+      "durationScope": "General 2027 master guide, not an individually assigned exact duration",
+      "specialProgrammeConditionsFound": false
+    }
+  },
+  "annualYearEvidence": {
+    "sourceId": "catalogue-cn",
+    "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+    "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+    "locator": "normalized-utf16:340:356",
+    "quote": "2027年国际硕士研究生专业目录",
+    "quoteSha256": "4a75d4f5c9cde0bbeef01d711fe8d95f04c8c283f0104bbb03f541024e74122e"
+  },
+  "commonEvidence": {
+    "year": {
+      "sourceId": "catalogue-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+      "rawSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+      "locator": "normalized-utf16:340:356",
+      "quote": "2027年国际硕士研究生专业目录",
+      "quoteSha256": "4a75d4f5c9cde0bbeef01d711fe8d95f04c8c283f0104bbb03f541024e74122e"
+    },
+    "yearCN": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:340:368",
+      "quote": "2027年国际学生研究生申请方式及申请材料（硕士、博士）",
+      "quoteSha256": "4f345e5826354e8a56473ad3420d44122f1810f51c0689ea733951b611964d23"
+    },
+    "duration": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:871:948",
+      "quote": "2.硕士学位的学习时间一般为2-3年；博士学位的学习时间一般为3-5年。研究生修业期满，成绩合格并通过论文答辩者颁发毕业证书，并授予硕士学位或博士学位。 ",
+      "quoteSha256": "1c94c8dc6a6c2b910cdbfa41c63cbb37c6d8a7655840aa087206f5cf2147675d"
+    },
+    "durationEN": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+      "rawSha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+      "locator": "normalized-utf16:1560:1866",
+      "quote": "2.The standard study duration is 2-3 years for master’s programs and 3-5 years for doctoral programs. Upon completing the required study period, achieving qualified academic results, and passing the dissertation defense, students will be awarded a Graduation Certificate and a Master’s or Doctoral Degree. ",
+      "quoteSha256": "9a1d16dadf0615d42422826356f555ca11ee49a95c76ae34aa74e67e593cb3fa"
+    },
+    "eligibility": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:948:2185",
+      "quote": "一、申请资格 1.申请者应身心健康、品行端正、具有相应学历、汉语水平，持外国护照的非中国籍居民； 2.申请硕士研究生, 一般40周岁（含）以下，具有与中国大学学士学位相当的学位，中文授课项目须通过HSK五级； 3.申请博士研究生,一般45周岁（含）以下，具有与中国大学硕士学位相当的学位，中文授课项目须通过HSK六级。 注：申请奖学金的年龄要求以奖学金申请条件为准。 二、申请时间 2026年11月1日至2027年6月15日。奖学金申请时间以各奖学金要求为准。 三、费用（人民币元） 类别 授课语言 学费 报名费 宿舍 保险 硕士 中文 31600/年 600 双人间：1500/月/床四人间：750/月/床 800/年400/学期 英文 37600/年 博士 中文 41600/年 英文 47600/年 注： 1.由于校内国际学生公寓房间数量有限，未入住成功的学生，须自行联系校外住宿； 2.中国教育部规定，来华留学生必须购买中国境内的医疗保险。学生可于报到注册当天，在线购买。否则，学校将不予办理注册。 四、申请方式 网上申请，并提交报名费（600元人民币）。 onlineapply.ustb.edu.cn 注：无论是否录取，报名费不退还。 五、申请材料 1.报名表，登录报名系统，填写信息，交纳报名费； 申请网址：onlineapply.ustb.edu.cn 2.（本科、硕士）学位证书，须为中文或英文的公证原件； 注：应届毕业生在申请时提供预毕业证明或在学证明，被录取后须补交学位证书方可获得入学资格； 3.（本科、硕士）成绩单，包括所有课程及成绩标准，须为中文或英文的公证原件； 4.个人陈述（含研究计划），硕士1000字以上，博士1500字以上，用中文或英文撰写； 模板下载：https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 5.两封教授或副教授的推荐信，至少一位熟悉目前学习的专业； 6.语言成绩： a) 采用中文学习：需通过HSK五级； b) 采用英语学习（英语非官方语言）：IELTS 6分，或TOEFL 80分，或其他官方英文水平证明； 7.护照复印件（必须是有效的普通护照）； 8.健康证明； 模板下载：https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 9.经济担保函； 模板下载：https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 10.无犯罪记录证明； 11.导师接收函（可选）； 模板下载：https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 备注：研究生指导教师查看，可以点击该链接https://isc.ustb.edu.cn/bmsq/e489188cb423427d9b7644fdd659e0f2.htm 12.已发表的学术文章目录及摘要，其他原创性工作成果（可选）。 ",
+      "quoteSha256": "3e50d1e1cd07d15283d79a13021852e7bb3228920f688986ecb15bf4c334660e"
+    },
+    "eligibilityEN": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+      "rawSha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+      "locator": "normalized-utf16:1866:2585",
+      "quote": "I. Eligibility Requirements 1.Applicants must be non-Chinese citizens holding a valid foreign passport, in good physical and mental health, with good conduct, appropriate academic qualifications, and proficiency in the required language. 2.For master’s programs: Applicants should generally be 40 years old or younger, hold a degree equivalent to a Chinese bachelor’s degree, and pass HSK Level 5 for Chinese-taught programs. 3.For doctoral programs: Applicants should generally be 45 years old or younger, hold a degree equivalent to a Chinese master’s degree, and pass HSK Level 6 for Chinese-taught programs. Note: Age requirements for scholarship applications shall be subject to the specific scholarship criteria. ",
+      "quoteSha256": "e19dcff8cd1f592e9363eaa08b904817594079fb7c35fab98fec4504dd475ae0"
+    },
+    "ageProspectus": {
+      "sourceId": "prospectus-en",
+      "sourceUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+      "rawSha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+      "locator": "normalized-utf16:7658:7677",
+      "quote": "Under the age of 40",
+      "quoteSha256": "c173b680d8e23b7b80047d80b0d25ff9a65f75b20e6cba37be7b2e94d1a2b8ae"
+    },
+    "deadline": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:1132:1179",
+      "quote": "二、申请时间 2026年11月1日至2027年6月15日。奖学金申请时间以各奖学金要求为准。 ",
+      "quoteSha256": "1c0ac485acc6ea86ca2947d3280cc2bfae0b290ae831a8fd00259778d679a517"
+    },
+    "deadlineEN": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+      "rawSha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+      "locator": "normalized-utf16:2585:2738",
+      "quote": "II. Application Period November 1, 2026 – June 15, 2027. Scholarship application periods are subject to the requirements of each respective scholarship. ",
+      "quoteSha256": "347fd1b4b58881f2d70c8e0ada5caca6a9b72d509d10c8c36f276c6d7a4b9c90"
+    },
+    "fees": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:1179:1402",
+      "quote": "三、费用（人民币元） 类别 授课语言 学费 报名费 宿舍 保险 硕士 中文 31600/年 600 双人间：1500/月/床四人间：750/月/床 800/年400/学期 英文 37600/年 博士 中文 41600/年 英文 47600/年 注： 1.由于校内国际学生公寓房间数量有限，未入住成功的学生，须自行联系校外住宿； 2.中国教育部规定，来华留学生必须购买中国境内的医疗保险。学生可于报到注册当天，在线购买。否则，学校将不予办理注册。 ",
+      "quoteSha256": "5fbd46798747dbfc5b1e44eea6f544ecf12d6f704b2003f212eeffd68e42e782"
+    },
+    "feesEN": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+      "rawSha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+      "locator": "normalized-utf16:2738:3470",
+      "quote": "III. Fees (in RMB) Category Medium of Instruction Tuition Fee Application Fee Accommodation Insurance Master Chinese 31600/Year 600 2-person room: 1,500/month/bed4-person room: 750/month/bed 800/year or 400/semester English 37600/Year Doctorate Chinese 41600/Year English 47600/Year Notes: 1.Due to limited availability of on-campus international student dormitories, students who fail to secure on-campus accommodation must arrange off-campus housing independently. 2.According to Chinese Ministry of Education regulations, all international students in China must purchase medical insurance within China. Students can buy it online on the day of registration; otherwise, the university will not complete the registration process. ",
+      "quoteSha256": "c894165937478dcc4d84f42e14ab7be09b1b08f6bc101dd4b76d12f80bb35e87"
+    },
+    "route": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:1402:1472",
+      "quote": "四、申请方式 网上申请，并提交报名费（600元人民币）。 onlineapply.ustb.edu.cn 注：无论是否录取，报名费不退还。 ",
+      "quoteSha256": "cd371abc677e1c462031f52ad0743acf30c3f6e8888e6211fb947f4d39da90cb"
+    },
+    "portal": {
+      "sourceId": "portal",
+      "sourceUrl": "https://onlineapply.ustb.edu.cn/",
+      "rawSha256": "bc47fe94ac11ab7937430a7e814bbf831d2cf63cb66c2753b4e3fb6fcb824c6d",
+      "locator": "normalized-utf16:5:61",
+      "quote": "在线申请 Online Application 申请跟进 Pick-up Services 通知 NOTICE ",
+      "quoteSha256": "cdb4512e796ab48b5440b3de4fecd90692d2fcafe61272de9a2084bcd34504cc"
+    },
+    "materials": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:1402:2185",
+      "quote": "四、申请方式 网上申请，并提交报名费（600元人民币）。 onlineapply.ustb.edu.cn 注：无论是否录取，报名费不退还。 五、申请材料 1.报名表，登录报名系统，填写信息，交纳报名费； 申请网址：onlineapply.ustb.edu.cn 2.（本科、硕士）学位证书，须为中文或英文的公证原件； 注：应届毕业生在申请时提供预毕业证明或在学证明，被录取后须补交学位证书方可获得入学资格； 3.（本科、硕士）成绩单，包括所有课程及成绩标准，须为中文或英文的公证原件； 4.个人陈述（含研究计划），硕士1000字以上，博士1500字以上，用中文或英文撰写； 模板下载：https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 5.两封教授或副教授的推荐信，至少一位熟悉目前学习的专业； 6.语言成绩： a) 采用中文学习：需通过HSK五级； b) 采用英语学习（英语非官方语言）：IELTS 6分，或TOEFL 80分，或其他官方英文水平证明； 7.护照复印件（必须是有效的普通护照）； 8.健康证明； 模板下载：https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 9.经济担保函； 模板下载：https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 10.无犯罪记录证明； 11.导师接收函（可选）； 模板下载：https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 备注：研究生指导教师查看，可以点击该链接https://isc.ustb.edu.cn/bmsq/e489188cb423427d9b7644fdd659e0f2.htm 12.已发表的学术文章目录及摘要，其他原创性工作成果（可选）。 ",
+      "quoteSha256": "52dfb337c9029d810cbaca3d0e7c6bbd259fd1b29d1e571c5763a3f51123a6dc"
+    },
+    "materialsEN": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+      "rawSha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+      "locator": "normalized-utf16:3677:5702",
+      "quote": "V. Required Application Materials 1.Application form: Log in to the online application system (onlineapply.ustb.edu.cn) to fill in personal information and pay the application fee. 2.Degree certificate(s) (bachelor’s for master’s applicants; bachelor’s and master’s for doctoral applicants): Original notarized copy in Chinese or English. Note: Final-year students may submit a pre-graduation certificate or proof of enrollment during application. Admitted students must supplement the official degree certificate to obtain enrollment eligibility. 3.Academic transcript(s) (bachelor’s for master’s applicants; bachelor’s and master’s for doctoral applicants): Original notarized copy in Chinese or English, including all courses and grading standards. 4.Personal statement (including research proposal): At least 1,000 words for master’s applicants and 1,500 words for doctoral applicants, written in Chinese or English. Template download: https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 5.Two recommendation letters: From professors or associate professors, with at least one familiar with the applicant’s current field of study. 6.Language proficiency certificate: a) For Chinese-taught programs: HSK Level 5 (master’s) or HSK Level 6 (doctoral). b) For English-taught programs (if English is not the applicant’s official language): IELTS 6.0, TOEFL 80, or other official English proficiency certificates. 7.Copy of a valid ordinary passport. 8.Health certificate. Template download: https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 9.Letter of financial guarantee. Template download: https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm 10.Police clearance certificate (no criminal record). 11.Supervisor acceptance letter (optional). Template download: https://isc.ustb.edu.cn/cyxz/sqclmb/index.htm Note:Graduate supervisors may click this link to view: https://iscen.ustb.edu.cn/Admissions/af52e840b7c3437c846f10c82168f0c1.htm 12.List and abstracts of published academic papers, and other original research achievements (optional). ",
+      "quoteSha256": "326aae4fa791c675c26938648067e877d987d5b704d9425444fca74a0fc9f154"
+    },
+    "language": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:1770:1797",
+      "quote": "6.语言成绩： a) 采用中文学习：需通过HSK五级；",
+      "quoteSha256": "18655476b170392459ee0c61a9eccf5f51fa421062cba9f0b9aba8a97dd7f90e"
+    },
+    "intake": {
+      "sourceId": "guide-cn",
+      "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+      "rawSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+      "locator": "normalized-utf16:2307:2438",
+      "quote": "七、入学时间 1.每年9月初，具体时间以《录取通知书》及官方邮件（admission@ustb.edu.cn）通知为准。录取的学生须严格按照录取通知书规定的时间到北京科技大学办理入学、注册手续。 2.录取新生来校报到，需携带学位证毕业证原件，进行入学资格复审。 ",
+      "quoteSha256": "43324019d3e1214327ff1c6bf9cc43475b54f129c8629640aad943bd0b1bb83d"
+    },
+    "intakeEN": {
+      "sourceId": "guide-en",
+      "sourceUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+      "rawSha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+      "locator": "normalized-utf16:6143:6662",
+      "quote": "VII. Enrollment Time 1.Generally, early September each year. Specific dates are subject to the Admission Notice and official email notifications (admission@ustb.edu.cn). Admitted students must complete enrollment and registration procedures at the University of Science and Technology Beijing (USTB) strictly according to the time specified in the Admission Notice. 2.Newly admitted students must present the original degree and graduation certificates for re-verification of admission eligibility during registration. ",
+      "quoteSha256": "8df6efdb16200f08072ddb050b2307e59b6d10d834c98d6cb0001729ad67d7db"
+    }
+  },
+  "scopeDecisions": {
+    "academicYearLiteral": "2027",
+    "yearNotInferredFromDeadline": true,
+    "sourceYearScope": "The concrete master catalogue and both general graduate guides explicitly say 2027.",
+    "applicationTrack": "General graduate admission; scholarship windows excluded",
+    "teachingLanguage": "Chinese",
+    "opensOn": "2026-11-01",
+    "closesOn": "2027-06-15",
+    "intake": "Early September in the same annual guide; exact registration date unknown",
+    "durationMonths": 24,
+    "durationMonthsMax": 36,
+    "durationScope": "Both annual graduate guides state generally/standard 2–3 years; no major-specific exact duration is asserted",
+    "ageBoundaryStatus": "manual confirmation only: graduate CN/EN generally≤40 versus prospectus EN under40",
+    "ageAutomaticMatching": false,
+    "studyPlanCountStatus": "CN1000字以上 versus EN at least1000words and prospectus above1000words; no unified converted count",
+    "officialSourcePriority": "not established",
+    "fullTimeStatus": "not established",
+    "namedSpecificMasterAward": "not established beyond a master degree",
+    "hskScoreOrValidityOrExemption": "not established; pass HSK5 only",
+    "supervisorAcceptance": "optional in both annual graduate guides",
+    "undergraduateCscaImported": false,
+    "englishTrackTestsImported": false,
+    "scholarshipDeadlineOrAgeImported": false,
+    "portalTLSStatus": "HTTP200 standard TLS, bilingual Online Application/Pick-up Services and 2027 notice present; no authentication or submission"
+  },
+  "preservation": {
+    "programsAdded": 5,
+    "cyclesAdded": 5,
+    "sourcesAdded": 5,
+    "fieldLeavesAdded": 85,
+    "existingRecordsMutated": 0
+  },
+  "held": [
+    {
+      "scope": "definitive age boundary and uniform statement-length threshold",
+      "reason": "Same-2027 official source differences preserved literally in notes and excluded from deterministic eligibility; no priority invented."
+    }
+  ],
+  "privateArchive": {
+    "status": "readback_verified",
+    "archiveReceiptPath": "quality/maintenance/batches/ustb-five-reviewed-20261126/archive-receipt.json",
+    "archiveReceiptSha256": "a034ab53feda5d6b6ad71bd813271457f5db0c27d8aa9df09a7de4eee9aba0c3",
+    "objects": [
+      {
+        "id": "guide-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+        "finalUrl": "https://isc.ustb.edu.cn/bmsq/04a1f5c14a474d95a6a6d780e6978e95.htm",
+        "key": "official/ustb-five-reviewed-20261126/7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950.html",
+        "originalSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+        "readbackSha256": "7a9c0f571db9b6310a067ed57b821e82882cdffabf25ad4364eebc57086ba950",
+        "originalBytes": 34553,
+        "readbackBytes": 34553,
+        "readbackAt": "2026-11-26T13:37:08.3348250Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "guide-en",
+        "sourceUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+        "finalUrl": "https://iscen.ustb.edu.cn/Admissions/6a362321ddfe4dd9ab8edb6d1822fd07.htm",
+        "key": "official/ustb-five-reviewed-20261126/e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31.html",
+        "originalSha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+        "readbackSha256": "e3ff8efc72d247ddacb34be70695b6117f1de5eafff52e326494bc585f10ef31",
+        "originalBytes": 50862,
+        "readbackBytes": 50862,
+        "readbackAt": "2026-11-26T13:37:14.3909573Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "catalogue-cn",
+        "sourceUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "finalUrl": "https://isc.ustb.edu.cn/bmsq/8cf92e6a69584578a3c355b329c4605b.htm",
+        "key": "official/ustb-five-reviewed-20261126/578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75.html",
+        "originalSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "readbackSha256": "578426c88f7207ce07aa3f17963a6d719204dc7035a26533a053615558655d75",
+        "originalBytes": 32745,
+        "readbackBytes": 32745,
+        "readbackAt": "2026-11-26T13:37:19.9077702Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "prospectus-en",
+        "sourceUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+        "finalUrl": "https://iscen.ustb.edu.cn/Notices/0c28dfc7841a41c19cd975258f62efd0.htm",
+        "key": "official/ustb-five-reviewed-20261126/5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811.html",
+        "originalSha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+        "readbackSha256": "5b830f010cededd6af3b69f273841877eaccb4579e36516037ca79f086d37811",
+        "originalBytes": 89565,
+        "readbackBytes": 89565,
+        "readbackAt": "2026-11-26T13:37:25.9534758Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "portal",
+        "sourceUrl": "https://onlineapply.ustb.edu.cn/",
+        "finalUrl": "https://onlineapply.ustb.edu.cn/",
+        "key": "official/ustb-five-reviewed-20261126/bc47fe94ac11ab7937430a7e814bbf831d2cf63cb66c2753b4e3fb6fcb824c6d.html",
+        "originalSha256": "bc47fe94ac11ab7937430a7e814bbf831d2cf63cb66c2753b4e3fb6fcb824c6d",
+        "readbackSha256": "bc47fe94ac11ab7937430a7e814bbf831d2cf63cb66c2753b4e3fb6fcb824c6d",
+        "originalBytes": 5654,
+        "readbackBytes": 5654,
+        "readbackAt": "2026-11-26T13:37:31.5238561Z",
+        "status": "readback_verified"
+      }
+    ]
+  }
+}

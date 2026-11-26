@@ -17,12 +17,12 @@ on:
         description: Maximum useful model calls in this checkpoint (1-240)
         type: number
         required: false
-        default: 120
+        default: 180
       concurrency:
         description: Concurrent translation requests (1-8)
         type: number
         required: false
-        default: 2
+        default: 4
 
 permissions:
   contents: write
@@ -70,8 +70,9 @@ jobs:
           MINIMAX_SUBSCRIPTION_KEY: ${{ secrets.MINIMAX_SUBSCRIPTION_KEY }}
           CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
           CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
-          MAX_CALLS: ${{ inputs.max_calls || '120' }}
-          MODEL_CONCURRENCY: ${{ inputs.concurrency || '2' }}
+          # The runner reduces each wave to the current subscription capacity.
+          MAX_CALLS: ${{ inputs.max_calls || '180' }}
+          MODEL_CONCURRENCY: ${{ inputs.concurrency || '4' }}
         run: >-
           node --import tsx scripts/translation/run-program-translations.mjs
           --execute --feed-dir ../feed --max-minutes 12
