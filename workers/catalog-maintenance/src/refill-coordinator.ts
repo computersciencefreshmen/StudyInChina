@@ -132,6 +132,9 @@ export class CatalogRefillCoordinator {
   private async schedule(saved: Saved, at: number) {
     const now = this.deps.now(), next = Math.max(now + REFILL_INTERVAL_MS, at)
     if (saved.nextRefillAt !== null && saved.nextRefillAt <= next && saved.nextRefillAt > now) {
+      // Keeping an earlier alarm must still persist newly requested work, such
+      // as the watchdog's capture-planning intent, before returning to its caller.
+      await this.save(saved)
       if (!this.state.storage.getAlarm || await this.state.storage.getAlarm() !== saved.nextRefillAt) await this.state.storage.setAlarm(saved.nextRefillAt)
       return
     }

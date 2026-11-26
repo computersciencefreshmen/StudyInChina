@@ -421,6 +421,45 @@ test('the watchdog plans new capture/followup jobs once per window; completion n
   assert.equal(plans, 2)
 })
 
+test('watchdog capture planning survives an earlier alarm and restart without replaying protected model work', async () => {
+  const f = fixture({ models: 1, captures: 0 }), select = f.deps.select
+  let plans = 0
+  f.deps.select = async (...args) => ({ ...await select(...args), scanRetryAt: new Date(f.now() + 10_000).toISOString() })
+  f.deps.plan = async () => { plans++; f.add(1001, 'capture') }
+  f.restart(); await f.start()
+  const modelId = hash(1), model = f.rows.get(modelId)!
+  await f.call('/acquire', f.metadata(modelId))
+  model.status = 'unknown'; model.protectedModel = true
+  const original = (await f.storage.get<{ outstanding: Record<string, Record<string, unknown>> }>('refill-v1'))!.outstanding[modelId]
+  const earlierAlarm = f.storage.alarm!
+  f.advance(1000)
+  await f.call('/wake', { reason: 'watchdog', planCaptures: true })
+  assert.equal(f.storage.alarm, earlierAlarm)
+  f.restart(); await f.alarm(earlierAlarm - f.now())
+  assert.equal(plans, 1)
+  assert.deepEqual(f.dispatches.flatMap(batch => batch.ids), [modelId, hash(1001)])
+  const retained = (await f.storage.get<{ outstanding: Record<string, Record<string, unknown>> }>('refill-v1'))!.outstanding[modelId]
+  for (const key of ['candidate', 'dispatchToken', 'epochSha256', 'permit']) assert.deepEqual(retained[key], original[key])
+  assert.equal(model.status, 'unknown'); assert.equal(model.protectedModel, true)
+})
+
+test('repeated watchdogs sharing an earlier alarm plan captures only once in the same window', async () => {
+  const f = fixture({ models: 0, captures: 0 })
+  let plans = 0
+  f.deps.plan = async () => { plans++ }
+  f.deps.select = async () => ({ fence: { ...f.fence }, candidates: [], scanRetryAt: new Date(f.now() + 10_000).toISOString() })
+  f.restart(); await f.start()
+  for (let turn = 0; turn < 3; turn++) {
+    const earlierAlarm = f.storage.alarm!
+    await f.call('/wake', { reason: 'watchdog', planCaptures: true })
+    await f.call('/wake', { reason: 'watchdog', planCaptures: true })
+    assert.equal(f.storage.alarm, earlierAlarm)
+    f.restart(); await f.alarm(earlierAlarm - f.now())
+    assert.equal(plans, 1)
+  }
+  assert.equal(f.dispatches.length, 0)
+})
+
 test('extended dispatch fences compare by current scope/catalog/revision/canary only', async () => {
   const f = fixture(), select = f.deps.select
   f.deps.select = async (...args) => { const plan = await select(...args); return { ...plan, fence: { ...plan.fence!, selectedAt: new Date(f.now()).toISOString(), fairness: { revision: 0 } } } }
