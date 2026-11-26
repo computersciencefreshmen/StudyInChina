@@ -1,0 +1,420 @@
+{
+  "format": "studyinchina.official-multischool-review",
+  "version": 1,
+  "evaluatedAt": "2026-11-26T08:25:30.835Z",
+  "reviewer": "codex-ai-independent-official-source-review:nuist-five-reviewed-20261126",
+  "reviewMethod": "Codex AI/tool independent bilingual official HTML and native PDF row visual review, with separate root source cross-check; not Henry personal sign-off; no external model call",
+  "baseline": {
+    "gitCommit": "89ea5a9ef989bea6fbc3243d30a6b6e606d514cc",
+    "liveProbePerformed": false,
+    "localZeroQualified": true,
+    "counts": {
+      "uni-nanjing-university-of-information-science-and-technology": 0
+    },
+    "coverage": {
+      "universityId": "uni-nanjing-university-of-information-science-and-technology",
+      "rawProgramCount": 6,
+      "directoryProgramCount": 1,
+      "currentProgramCount": 0,
+      "minimumProgramCount": 5,
+      "gap": 5,
+      "coverageBand": "zero",
+      "countedProgramIds": [],
+      "directoryScholarshipCount": 1,
+      "currentScholarshipCount": 0,
+      "reviewAfter": null
+    },
+    "collectionLengths": {
+      "sources": 3066,
+      "cities": 65,
+      "universities": 305,
+      "programs": 2407,
+      "admissionCycles": 1785,
+      "scholarships": 423
+    },
+    "rawPrograms": 2407,
+    "directoryPrograms": 79,
+    "currentPrograms": 74,
+    "directoryCycles": 100,
+    "currentCycles": 95,
+    "preservedExistingSchoolRecordHashes": {
+      "program-nanjing-university-of-information-science-and-technology-atmospheric-sci": "b5f2f9ce8a6915af614ecfad6672c8e5f2198249d0e562fa3a83c7326314f043",
+      "program-nanjing-university-of-information-science-and-technology-computer-scienc": "86a70a0a328485ac6bd2c0d9f22e693b167e12b9bd04e1d21aa62d817a4d639c",
+      "prog-gap-mve-jzh-nuist-chinese-literature-bachelor": "40bd572d5d2237e4d1618cb390f70bde369a95fafcc575b0a1f619b1f5765f49",
+      "prog-gap-mve-jzh-nuist-iclt-semester": "e027d8f9d0d4f0646846bc5b218dc835a124639691a4711b4bffe7ca52303e82",
+      "prog-gap-mve-jzh-nuist-iclt-one-year": "cde7566c449580ba4f1939fe86d70c6af3415bdc9e0cfda19009c7b19561edba",
+      "prog-gap-mve-jzh-nuist-iclt-master": "362e53256c6d4b88f3634b19b1acf1b1520e7c149c4ee8edcc4f5e12e1a01358"
+    }
+  },
+  "inputCatalogSha256": "c0494bc8075f504923a60c93e5f1ded519edd2063b964d7b17c6949aa5541f2b",
+  "outputCatalogSha256": "5b60a8ab8dbf48247afa60bae02e3ba89913fb5e90058073aefa184004c83779",
+  "sources": {
+    "master-index": {
+      "sourceId": "src-nuist-master-index-20261126",
+      "url": "https://gjy.nuist.edu.cn/english/MasterPrograms/list.htm",
+      "accessedAt": "2026-11-26T08:15:50.535Z",
+      "rawBytes": 32249,
+      "rawSha256": "7b6c5920587690ea0ff834f666173c523184d22703b621d4ca773ea468f56b8b",
+      "objectKey": "official/nuist-five-reviewed-20261126/7b6c5920587690ea0ff834f666173c523184d22703b621d4ca773ea468f56b8b.html"
+    },
+    "guide-primary": {
+      "sourceId": "src-nuist-guide-primary-20261126",
+      "url": "https://gjy.nuist.edu.cn/_upload/article/files/b8/45/43f9f18441f49e1f4698d12f6702/9c7c7b40-503b-43a0-bdd7-01708145dfa6.pdf",
+      "accessedAt": "2026-11-26T08:18:41.757Z",
+      "rawBytes": 182950,
+      "rawSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920",
+      "objectKey": "official/nuist-five-reviewed-20261126/6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920.pdf"
+    },
+    "entry-cn": {
+      "sourceId": "src-nuist-entry-cn-20261126",
+      "url": "https://gjy.nuist.edu.cn/2830/list.htm",
+      "accessedAt": "2026-11-26T08:18:52.093Z",
+      "rawBytes": 52274,
+      "rawSha256": "855db67f3ab55ef30bdfbe7227d492ac0e822f31e1dedaf0e149f50d16d75487",
+      "objectKey": "official/nuist-five-reviewed-20261126/855db67f3ab55ef30bdfbe7227d492ac0e822f31e1dedaf0e149f50d16d75487.html"
+    },
+    "entry-en": {
+      "sourceId": "src-nuist-entry-en-20261126",
+      "url": "https://gjy.nuist.edu.cn/english/EntryRequirements/list.htm",
+      "accessedAt": "2026-11-26T08:19:00.900Z",
+      "rawBytes": 48316,
+      "rawSha256": "f5c53383f4c8f847b254391442bc49de709a13f1952624511fcca6e8f29df2dd",
+      "objectKey": "official/nuist-five-reviewed-20261126/f5c53383f4c8f847b254391442bc49de709a13f1952624511fcca6e8f29df2dd.html"
+    },
+    "calendar-en": {
+      "sourceId": "src-nuist-calendar-en-20261126",
+      "url": "https://gjy.nuist.edu.cn/english/ApplicationProcedures/listm.htm",
+      "accessedAt": "2026-11-26T08:19:05.447Z",
+      "rawBytes": 37829,
+      "rawSha256": "aac4713886c7a5bafd1880e60e47d19365d27b9c3da7eebd1f3c9f8b23223dc8",
+      "objectKey": "official/nuist-five-reviewed-20261126/aac4713886c7a5bafd1880e60e47d19365d27b9c3da7eebd1f3c9f8b23223dc8.html"
+    },
+    "fees-en": {
+      "sourceId": "src-nuist-fees-en-20261126",
+      "url": "https://gjy.nuist.edu.cn/english/FeeswPayment/list.htm",
+      "accessedAt": "2026-11-26T08:19:08.469Z",
+      "rawBytes": 46627,
+      "rawSha256": "114ab7ddad2d1b81146cc3fb3d482311acaa6dc25cf262d5d8689a8329fc5e95",
+      "objectKey": "official/nuist-five-reviewed-20261126/114ab7ddad2d1b81146cc3fb3d482311acaa6dc25cf262d5d8689a8329fc5e95.html"
+    },
+    "portal": {
+      "sourceId": "src-nuist-portal-20261126",
+      "url": "https://nuist.17gz.org/member/login.do",
+      "accessedAt": "2026-11-26T08:15:57.383Z",
+      "rawBytes": 28613,
+      "rawSha256": "9ceebdfb82b76f48d999e538b1a704bd49d7602907fd0bb218bc5a5d55ec1cb8",
+      "objectKey": "official/nuist-five-reviewed-20261126/9ceebdfb82b76f48d999e538b1a704bd49d7602907fd0bb218bc5a5d55ec1cb8.html"
+    }
+  },
+  "privateArchive": {
+    "status": "readback_verified",
+    "archiveReceiptPath": "quality/maintenance/batches/nuist-five-reviewed-20261126/archive-receipt.json",
+    "archiveReceiptSha256": "9b3724621b699b5464ed319882753e9b39838b8e223a2f32cd15b9d561a438bb",
+    "objects": [
+      {
+        "id": "master-index",
+        "key": "official/nuist-five-reviewed-20261126/7b6c5920587690ea0ff834f666173c523184d22703b621d4ca773ea468f56b8b.html",
+        "sourceUrl": "https://gjy.nuist.edu.cn/english/MasterPrograms/list.htm",
+        "originalSha256": "7b6c5920587690ea0ff834f666173c523184d22703b621d4ca773ea468f56b8b",
+        "readbackSha256": "7b6c5920587690ea0ff834f666173c523184d22703b621d4ca773ea468f56b8b",
+        "originalBytes": 32249,
+        "readbackBytes": 32249,
+        "readbackAt": "2026-11-26T08:22:34.7883038Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "guide-primary",
+        "key": "official/nuist-five-reviewed-20261126/6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920.pdf",
+        "sourceUrl": "https://gjy.nuist.edu.cn/_upload/article/files/b8/45/43f9f18441f49e1f4698d12f6702/9c7c7b40-503b-43a0-bdd7-01708145dfa6.pdf",
+        "originalSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920",
+        "readbackSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920",
+        "originalBytes": 182950,
+        "readbackBytes": 182950,
+        "readbackAt": "2026-11-26T08:22:36.8508227Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "entry-cn",
+        "key": "official/nuist-five-reviewed-20261126/855db67f3ab55ef30bdfbe7227d492ac0e822f31e1dedaf0e149f50d16d75487.html",
+        "sourceUrl": "https://gjy.nuist.edu.cn/2830/list.htm",
+        "originalSha256": "855db67f3ab55ef30bdfbe7227d492ac0e822f31e1dedaf0e149f50d16d75487",
+        "readbackSha256": "855db67f3ab55ef30bdfbe7227d492ac0e822f31e1dedaf0e149f50d16d75487",
+        "originalBytes": 52274,
+        "readbackBytes": 52274,
+        "readbackAt": "2026-11-26T08:22:34.9016396Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "entry-en",
+        "key": "official/nuist-five-reviewed-20261126/f5c53383f4c8f847b254391442bc49de709a13f1952624511fcca6e8f29df2dd.html",
+        "sourceUrl": "https://gjy.nuist.edu.cn/english/EntryRequirements/list.htm",
+        "originalSha256": "f5c53383f4c8f847b254391442bc49de709a13f1952624511fcca6e8f29df2dd",
+        "readbackSha256": "f5c53383f4c8f847b254391442bc49de709a13f1952624511fcca6e8f29df2dd",
+        "originalBytes": 48316,
+        "readbackBytes": 48316,
+        "readbackAt": "2026-11-26T08:22:42.0630597Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "calendar-en",
+        "key": "official/nuist-five-reviewed-20261126/aac4713886c7a5bafd1880e60e47d19365d27b9c3da7eebd1f3c9f8b23223dc8.html",
+        "sourceUrl": "https://gjy.nuist.edu.cn/english/ApplicationProcedures/listm.htm",
+        "originalSha256": "aac4713886c7a5bafd1880e60e47d19365d27b9c3da7eebd1f3c9f8b23223dc8",
+        "readbackSha256": "aac4713886c7a5bafd1880e60e47d19365d27b9c3da7eebd1f3c9f8b23223dc8",
+        "originalBytes": 37829,
+        "readbackBytes": 37829,
+        "readbackAt": "2026-11-26T08:22:42.2308245Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "fees-en",
+        "key": "official/nuist-five-reviewed-20261126/114ab7ddad2d1b81146cc3fb3d482311acaa6dc25cf262d5d8689a8329fc5e95.html",
+        "sourceUrl": "https://gjy.nuist.edu.cn/english/FeeswPayment/list.htm",
+        "originalSha256": "114ab7ddad2d1b81146cc3fb3d482311acaa6dc25cf262d5d8689a8329fc5e95",
+        "readbackSha256": "114ab7ddad2d1b81146cc3fb3d482311acaa6dc25cf262d5d8689a8329fc5e95",
+        "originalBytes": 46627,
+        "readbackBytes": 46627,
+        "readbackAt": "2026-11-26T08:22:43.9186071Z",
+        "status": "readback_verified"
+      },
+      {
+        "id": "portal",
+        "key": "official/nuist-five-reviewed-20261126/9ceebdfb82b76f48d999e538b1a704bd49d7602907fd0bb218bc5a5d55ec1cb8.html",
+        "sourceUrl": "https://nuist.17gz.org/member/login.do",
+        "originalSha256": "9ceebdfb82b76f48d999e538b1a704bd49d7602907fd0bb218bc5a5d55ec1cb8",
+        "readbackSha256": "9ceebdfb82b76f48d999e538b1a704bd49d7602907fd0bb218bc5a5d55ec1cb8",
+        "originalBytes": 28613,
+        "readbackBytes": 28613,
+        "readbackAt": "2026-11-26T08:22:49.4091742Z",
+        "status": "readback_verified"
+      }
+    ]
+  },
+  "programmeEvidence": {
+    "program-nuist-control-science-and-engineering-master-chinese": {
+      "officialName": {
+        "en": "Control Science and Engineering"
+      },
+      "reviewedDisplayName": {
+        "en": "Control Science and Engineering",
+        "zh": "控制科学与工程"
+      },
+      "chineseNameMethod": "Codex-reviewed conventional translation of the official English programme name; not a Chinese-source quotation",
+      "page": 4,
+      "tableIndex": 0,
+      "tableRow": 6,
+      "tableCells": [
+        "School of\nAutomation",
+        "Control Science and\nEngineering",
+        "01 Big Data Analysis and Pattern Recognition",
+        "September",
+        "3",
+        "Chinese",
+        "20000"
+      ],
+      "quoteProof": {
+        "sourceId": "guide-primary",
+        "sourceUrl": "https://gjy.nuist.edu.cn/_upload/article/files/b8/45/43f9f18441f49e1f4698d12f6702/9c7c7b40-503b-43a0-bdd7-01708145dfa6.pdf",
+        "rawSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920",
+        "locator": "page:4",
+        "quote": "Control Science and Engineering 01 Big Data Analysis and Pattern Recognition September 3 Chinese 20000",
+        "quoteSha256": "e7295ac2e8414bb657d66facb10414c711843724d7295e2c7e7ab421026db8f3"
+      },
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationYears": 3,
+      "intakeMonth": "September",
+      "tuitionCnyPerYear": 20000,
+      "asterisk": false
+    },
+    "program-nuist-electronic-science-and-technology-master-chinese": {
+      "officialName": {
+        "en": "Electronic Science and Technology"
+      },
+      "reviewedDisplayName": {
+        "en": "Electronic Science and Technology",
+        "zh": "电子科学与技术"
+      },
+      "chineseNameMethod": "Codex-reviewed conventional translation of the official English programme name; not a Chinese-source quotation",
+      "page": 5,
+      "tableIndex": 0,
+      "tableRow": 7,
+      "tableCells": [
+        null,
+        "Electronic Science\nand Technology",
+        "01 Microelectronics",
+        "September",
+        "3",
+        "Chinese",
+        "20000"
+      ],
+      "quoteProof": {
+        "sourceId": "guide-primary",
+        "sourceUrl": "https://gjy.nuist.edu.cn/_upload/article/files/b8/45/43f9f18441f49e1f4698d12f6702/9c7c7b40-503b-43a0-bdd7-01708145dfa6.pdf",
+        "rawSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920",
+        "locator": "page:5",
+        "quote": "Electronic Science and Technology 01 Microelectronics September 3 Chinese 20000",
+        "quoteSha256": "5c4cfbfd481fe885a275c783605f30e8d5b0a3b519c291be28494a1109849e32"
+      },
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationYears": 3,
+      "intakeMonth": "September",
+      "tuitionCnyPerYear": 20000,
+      "asterisk": false
+    },
+    "program-nuist-integrated-circuit-science-and-engineering-master-chinese": {
+      "officialName": {
+        "en": "Integrated Circuit Science and Engineering"
+      },
+      "reviewedDisplayName": {
+        "en": "Integrated Circuit Science and Engineering",
+        "zh": "集成电路科学与工程"
+      },
+      "chineseNameMethod": "Codex-reviewed conventional translation of the official English programme name; not a Chinese-source quotation",
+      "page": 5,
+      "tableIndex": 0,
+      "tableRow": 11,
+      "tableCells": [
+        "School of\nIntegrated\nCircuitsSchool of\nIntegrated Circuits",
+        "Integrated Circuit\nScience and\nEngineering",
+        "01 Integrated Nanoelectronics Science",
+        "September",
+        "3",
+        "Chinese",
+        "20000"
+      ],
+      "quoteProof": {
+        "sourceId": "guide-primary",
+        "sourceUrl": "https://gjy.nuist.edu.cn/_upload/article/files/b8/45/43f9f18441f49e1f4698d12f6702/9c7c7b40-503b-43a0-bdd7-01708145dfa6.pdf",
+        "rawSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920",
+        "locator": "page:5",
+        "quote": "Integrated Circuit Science and Engineering 01 Integrated Nanoelectronics Science September 3 Chinese 20000",
+        "quoteSha256": "6dd19fcb3871e20880bbec61b5ecfd24cd815f35bbb62be00afd22c3f01df740"
+      },
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationYears": 3,
+      "intakeMonth": "September",
+      "tuitionCnyPerYear": 20000,
+      "asterisk": false
+    },
+    "program-nuist-cyberspace-security-master-chinese": {
+      "officialName": {
+        "en": "Cyberspace Security"
+      },
+      "reviewedDisplayName": {
+        "en": "Cyberspace Security",
+        "zh": "网络空间安全"
+      },
+      "chineseNameMethod": "Codex-reviewed conventional translation of the official English programme name; not a Chinese-source quotation",
+      "page": 6,
+      "tableIndex": 0,
+      "tableRow": 1,
+      "tableCells": [
+        "School of\nCyber Science\nand Engineering",
+        "Cyberspace Security",
+        "01 Media Content Security",
+        "September",
+        "3",
+        "Chinese",
+        "20000"
+      ],
+      "quoteProof": {
+        "sourceId": "guide-primary",
+        "sourceUrl": "https://gjy.nuist.edu.cn/_upload/article/files/b8/45/43f9f18441f49e1f4698d12f6702/9c7c7b40-503b-43a0-bdd7-01708145dfa6.pdf",
+        "rawSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920",
+        "locator": "page:6",
+        "quote": "Cyberspace Security 01 Media Content Security September 3 Chinese 20000",
+        "quoteSha256": "40494890fcee60808842e97d67918c39d0ff9d8174124a01a8588c01a61ee10e"
+      },
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationYears": 3,
+      "intakeMonth": "September",
+      "tuitionCnyPerYear": 20000,
+      "asterisk": false
+    },
+    "program-nuist-optical-engineering-master-chinese": {
+      "officialName": {
+        "en": "Optical Engineering"
+      },
+      "reviewedDisplayName": {
+        "en": "Optical Engineering",
+        "zh": "光学工程"
+      },
+      "chineseNameMethod": "Codex-reviewed conventional translation of the official English programme name; not a Chinese-source quotation",
+      "page": 6,
+      "tableIndex": 0,
+      "tableRow": 6,
+      "tableCells": [
+        "School of\nPhysics and\nOptoelectronic\nEngineering",
+        "Optical Engineering",
+        "01 Photoelectric Information Universal Sensing and Interconnection",
+        "September",
+        "3",
+        "Chinese",
+        "20000"
+      ],
+      "quoteProof": {
+        "sourceId": "guide-primary",
+        "sourceUrl": "https://gjy.nuist.edu.cn/_upload/article/files/b8/45/43f9f18441f49e1f4698d12f6702/9c7c7b40-503b-43a0-bdd7-01708145dfa6.pdf",
+        "rawSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920",
+        "locator": "page:6",
+        "quote": "Optical Engineering 01 Photoelectric Information Universal Sensing and Interconnection September 3 Chinese 20000",
+        "quoteSha256": "ab402188278014e5518bb14bfe10e62e1efdbdf9923b987743434c241e37df33"
+      },
+      "degree": "master",
+      "teachingLanguage": "Chinese",
+      "durationYears": 3,
+      "intakeMonth": "September",
+      "tuitionCnyPerYear": 20000,
+      "asterisk": false
+    }
+  },
+  "annualYearEvidence": {
+    "sourceId": "master-index",
+    "sourceUrl": "https://gjy.nuist.edu.cn/english/MasterPrograms/list.htm",
+    "rawSha256": "7b6c5920587690ea0ff834f666173c523184d22703b621d4ca773ea468f56b8b",
+    "locator": "normalized-utf16:1351:1437",
+    "quote": "2027 Master's Degree Programs Click to download: 2027 Master's Degree Program List.pdf",
+    "quoteSha256": "227ed29a0f376fe68a49af701cdd3cfc2740967459168deb5e1047c1f1f51d34"
+  },
+  "scopeDecisions": {
+    "academicYearLiteral": "2027",
+    "yearNotInferredFromDeadline": true,
+    "yearBinding": "Official master-index labels 2027 Master’s Degree Programs and directly links the captured programme PDF; calendar independently states the 2027 self-sponsored deadline.",
+    "applicationTrack": "self-funded general master admission",
+    "teachingLanguage": "Chinese",
+    "opensOn": null,
+    "openingDate": "unknown; no known-null receipt fabricated",
+    "closesOn": "2027-04-30",
+    "mayCloseEarlyWhenFull": true,
+    "coreConditions": "current recurring Chinese-taught master rules bound independently to this annual/language scope",
+    "hskLevel": "5 or above",
+    "hskScore": "unknown",
+    "hskValidity": "unknown",
+    "hskExemption": "not established",
+    "age": "under 35; 中文35周岁以下; calculation date unknown",
+    "degree": "bachelor or official pre-graduation certificate; supplement certificate after admission; exact supplement date unknown",
+    "intake": "September from each selected 2027 catalogue row",
+    "duration": "3 years from each single Chinese-only row; no 3/2 mapping inferred",
+    "tuition": "20000 CNY/year; official fee rule bills in first week of new academic year",
+    "applicationFee": "500 CNY non-refundable, paid through system",
+    "studyMode": "unknown",
+    "specificDegreeAward": "unknown",
+    "longshanScholarshipRulesNotImported": true,
+    "englishTrackExemptionBoundaryNotImported": true,
+    "undergraduateCscaNotImported": true,
+    "chineseDisplayNames": "independently vetted conventional translations of the official English row names",
+    "matchingEmbeddedPdfSha256": "6300e386cbc40f15b6f4fe7556849525b2009545eb86af9d7b698727e3fd5920"
+  },
+  "preservation": {
+    "programsAdded": 5,
+    "cyclesAdded": 5,
+    "sourcesAdded": 7,
+    "fieldLeavesAdded": 60,
+    "existingRecordsMutated": 0
+  },
+  "held": []
+}

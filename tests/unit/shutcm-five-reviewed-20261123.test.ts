@@ -81,7 +81,7 @@ describe('SHUTCM 2027 Chinese science bachelor source review', () => {
       expect(validateFieldVerification(wrong, first, day)).toBeUndefined()
     }
     expect(validateFieldVerification(bundle, { ...first, sourceUrl: 'https://example.org/mirror' }, day)).toBeUndefined()
-    expect((await validateDirectory(process.cwd(), day)).integrityPassed).toBe(true)
+    expect((await validateDirectory(process.cwd())).integrityPassed).toBe(true)
   }, 30000)
 
   it('does not admit missing or disputed annual conditions merely because the raw parent is fresh', () => {

@@ -90,7 +90,7 @@ describe('five Chinese-taught 2027 international master programmes at SUFE', () 
     }
     expect(validateFieldVerification(bundle, { ...first, sourceUrl: 'https://example.org/copy' }, day)).toBeUndefined()
     expect(validateFieldVerification(bundle, { ...first, verifiedAt: '2026-11-24T00:00:00Z' }, day)).toBeUndefined()
-    expect((await validateDirectory(process.cwd(), day)).integrityPassed).toBe(true)
+    expect((await validateDirectory(process.cwd())).integrityPassed).toBe(true)
   }, 30000)
 
   it('holds core eligibility if annual language, qualification, application route or deadline is missing', () => {
