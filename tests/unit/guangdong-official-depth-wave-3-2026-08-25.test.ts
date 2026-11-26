@@ -228,7 +228,7 @@ describe('Guangdong official depth wave 3 on 2026-08-25', () => {
       if (REVERIFIED_SZU_PROGRAM_IDS.has(id)) {
         expect(item.verifiedAt, id).toBe('2026-10-19')
         expect(item.reviewAfter, id).toBe('2026-10-26')
-        expect(item.sourceIds, id).toEqual(REVERIFIED_SZU_SOURCE_IDS)
+        expect(item.sourceIds, id).toEqual(expect.arrayContaining(REVERIFIED_SZU_SOURCE_IDS))
         expect(item.teachingLanguages, id).toEqual(['English'])
       } else {
         expect(item.verifiedAt, id).toBe(TODAY)

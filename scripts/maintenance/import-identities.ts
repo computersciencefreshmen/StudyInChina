@@ -33,6 +33,21 @@ export type IdentityImportReceipt = {
 const sha256 = (value: Uint8Array | string): string => createHash('sha256').update(value).digest('hex')
 const normalizeName = (value: string): string => value.normalize('NFKC').toLowerCase().replace(/[\p{P}\p{S}\s]+/gu, '')
 const normalizedText = (value: string): string => value.normalize('NFKC').replace(/\s+/gu, ' ').trim()
+const admissionHeading = /^(?:enrollment|enrolment|admissions?|application|recruitment)\s+(?:information|notice|guide|announcement|instructions)(?:\b|$)|(?:招生简章|招生公告|招生指南|申请指南)(?:[（(].*[）)])?$/iu
+const programmeDirectoryHeading = /^(?:bachelor(?:'s)?|master(?:'s)?|doctoral|phd)\s+(?:degree\s+)?program(?:me)?s?\s*\((?:taught\s+in\s+(?:english|chinese)|(?:english|chinese)[ -](?:taught|medium))\)$/iu
+
+function comparableProgramName(name: string, schoolName: { en?: string; zh?: string }): string {
+  let label = normalizedText(name)
+  const english = schoolName.en ? normalizedText(schoolName.en) : ''
+  const chinese = schoolName.zh ? normalizedText(schoolName.zh) : ''
+  if (english && label.toLowerCase().startsWith(english.toLowerCase() + ' ')) label = label.slice(english.length).trim()
+  if (chinese && label.startsWith(chinese)) label = label.slice(chinese.length).trim()
+  return normalizeName(label
+    .replace(/\s+for international students?$/iu, '')
+    .replace(/\s*\([A-Z][A-Z0-9]{1,7}\)\s*$/u, '')
+    .replace(/\s+(?:degree\s+)?program(?:me)?$|(?:专业|项目)$/iu, ''))
+}
+
 const schoolDay = (timestamp: string): string => new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit',
 }).format(new Date(timestamp))
@@ -255,6 +270,10 @@ export async function importIdentityCandidates(options: {
       const university = bundle.universities.find(university => university.id === school.universityId)
       if (!university) throw new Error('school_missing_from_catalogue')
       const fields = programIdentityFieldsSchema.parse(proposal.fields)
+      if (Object.values(fields.name).some(name => admissionHeading.test(normalizedText(name))
+        || (fields.programType === 'degree' && programmeDirectoryHeading.test(normalizedText(name))))) {
+        throw new Error('announcement_or_catalogue_heading_is_not_program')
+      }
       if (proposal.scope.year !== null || proposal.scope.intake !== null) throw new Error('identity_must_not_claim_a_cycle')
       if (new Date(proposal.source.checkedAt) > acceptedAt || new Date(proposal.review?.reviewedAt ?? '') > acceptedAt) throw new Error('future_evidence_or_review')
       const ocrRecord = proposal.source.textArtifact?.parser === WINDOWS_OCR_PARSER
@@ -289,6 +308,15 @@ export async function importIdentityCandidates(options: {
         && binding.canonicalKey.includes('|code:') && binding.canonicalKey !== key)) throw new Error('official_code_conflicts_with_existing_binding')
       const action = record ? 'identity_accepted' as const : 'created' as const
       if (!record && fields.programUrl !== proposal.source.url) throw new Error('new_identity_program_url_requires_matching_source')
+      if (!record && fields.programType === 'degree') {
+        // Compare common title variants only to hold ambiguous creates. The
+        // existing binding and reviewed-alias paths still decide re-use.
+        const possibleNames = new Set(Object.values(fields.name).map(name => comparableProgramName(name, university.name)).filter(Boolean))
+        if (bundle.programs.some(program => program.universityId === university.id && program.degreeLevel === fields.degreeLevel
+          && Object.values(program.name).some(name => name && possibleNames.has(comparableProgramName(name, university.name))))) {
+          throw new Error('possible_existing_program_title_variant_requires_review')
+        }
+      }
       // These pages have independently reviewed, closed identity sets. A new
       // spelling cannot silently create another neighbour; exact/bound/reviewed
       // mappings above still retain their original IDs and evidence checks.
