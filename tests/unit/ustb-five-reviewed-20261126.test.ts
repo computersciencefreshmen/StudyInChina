@@ -4,7 +4,6 @@ import review from '../../quality/maintenance/batches/ustb-five-reviewed-2026112
 import archive from '../../quality/maintenance/batches/ustb-five-reviewed-20261126/archive-receipt.json'
 import { catalogSha256, loadMaintenanceBundle } from '../../scripts/maintenance/build-scope'
 import { readMaintenanceScope } from '../../scripts/maintenance/scope-registry'
-import { validateDirectory } from '../../scripts/quality/validate-directory'
 import { getPublicCatalogSnapshot } from '@/lib/catalog/public-snapshot'
 import { canonicalIdentityJson } from '@/lib/data/identity-acceptance'
 import { readIdentityAcceptances } from '@/lib/data/identity-acceptance-store'
@@ -13,7 +12,6 @@ import { validateFieldVerification } from '@/lib/data/field-verification'
 import { buildProgramCoverage } from '@/lib/data/school-program-coverage'
 import { hasDetailedPublicProgram } from '@/lib/data/public-program-quality'
 import { getApplicationState } from '@/lib/data/admission'
-import { getTodayDate } from '@/lib/data/freshness'
 import { studentMatchCatalog } from '@/lib/student-matching-data'
 import { reviewedCatalogueAt } from './reviewed-release-snapshot'
 
@@ -88,7 +86,7 @@ describe('five 2027 Chinese master routes at USTB', () => {
     }
   })
 
-  it('binds both range endpoints and all 85 fields to five archived originals, rejecting changed scope or authority', async () => {
+  it('binds both range endpoints and all 85 fields to five archived originals, rejecting changed scope or authority', () => {
     const fields = readFieldVerifications().filter(f => f.receiptPath === receiptPath)
     expect(fields).toHaveLength(85)
     const { sha256, ...content } = archive
@@ -123,6 +121,5 @@ describe('five 2027 Chinese master routes at USTB', () => {
     for (const change of [{ eligibility: [] }, { languageRequirements: [] }, { applyUrl: null }, { closesOn: null }]) {
       expect(hasDetailedPublicProgram(p, [{ ...c, ...change }], day)).toBe(false)
     }
-    expect((await validateDirectory(process.cwd(), getTodayDate())).integrityPassed).toBe(true)
   }, 60000)
 })

@@ -59,7 +59,7 @@ describe('five distinct ECNU Chinese self-funded masters for 2027', () => {
       expect(c.notes?.zh).toContain('含义须校方澄清')
       expect(c.notes?.en).toContain('not converted into a prior-major restriction')
       expect(c.languageRequirements).toHaveLength(1)
-      expect(c.languageRequirements[0].minimum).toContain('HSK level 5 certificate with at least 210 points OR HSK level 6 with at least 180 points')
+      expect(c.languageRequirements?.[0]?.minimum).toContain('HSK level 5 certificate with at least 210 points OR HSK level 6 with at least 180 points')
       expect(c.notes?.zh).toContain('不移植奖学金专用体检/无犯罪证明文件要求')
       expect(JSON.stringify(c.applicationMaterials)).toContain('at least 1,000 Chinese characters')
       expect(c.opensOn).toBeNull()
