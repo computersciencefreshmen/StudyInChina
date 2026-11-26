@@ -37,7 +37,7 @@ describe('official expansion semantic audit', () => {
       'prog-gap-wave8-final-nau-chinese-language-nondegree',
       'program-nanjing-audit-university-master-of-auditing',
     ]))
-    expect(nauPrograms.some(program => Object.values(program.name).some(name => name
+    expect(nauPrograms.some(program => Object.values(program.name).some(name => typeof name === 'string'
       && /enrollment information for .*\bMOFCOM\b|2024级审计硕士项目.*英文/iu.test(name)))).toBe(false)
     expect(
       scholarships.find(
